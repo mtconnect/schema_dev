@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'src/schema'
+
+schema = Schema.new File.read(ARGV[0])
+doc = schema.generate_xsd
+out = ARGV[1] || "#{File.basename(ARGV[0], 'msd')}xsd"
+File.open(out, 'w') { |f| doc.write(f, 2) }
