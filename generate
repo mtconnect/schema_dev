@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+$: << 'src'
 require 'src/schema'
 
 schema = Schema.new File.read(ARGV[0])
