@@ -1,11 +1,11 @@
 
-self.urn = 'urn:mtconnect.com:MTConnectError:1.0'
+self.urn = 'urn:mtconnect.com:MTConnectError:1.1'
 self.namespace = 'mt'
 self.top = :MTConnectError
 
 load 'common'
 
-package :MTConnectError, 'MTC Top Level Package' do
+package :MTConnectError, 'MTConnect Top Level Error Package' do
   type :Header, 'Message header for protocol information' do
     member :Version, 'The document version'
     member :CreationTime, 'The date and time the document was created'
@@ -17,7 +17,14 @@ package :MTConnectError, 'MTC Top Level Package' do
   
   type :MTConnectError, 'The root node for MTConnect' do
     member :Header, 'Protocol dependent information'
-    member :Error, 'An error result'
+    choice do 
+      member :Error, 'Only for backward compatibility with 1.0'
+      member :Errors, 'A collection of errors'
+    end
+  end
+  
+  type :Errors, 'A collection of errors' do 
+    member :Error, 'An error result', 1..INF    
   end
 end
 
