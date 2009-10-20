@@ -1,7 +1,7 @@
 package :Axes, 'The axes package' do
-  type :Axes, 'The machines axes. There are currently four types of axes available', :Component
+  type :Axes, 'The machines axes. There are currently four types of axes available', :CommonComponent
 
-  type :Axis, 'A abstract machine axis', :Component do
+  type :Axis, 'A abstract machine axis', :CommonComponent do
     abstract
     standards :OPC => 'Channel', :OMAC => 'axis'
   end
