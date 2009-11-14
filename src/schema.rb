@@ -438,14 +438,8 @@ class Schema
     end
 
     def generate_xsd
-      # Check the data type and see if it prefers to be an attribute,
-      # unless it has the name value in which case it is the text
-      # portion of a simple type.
-      if attribute?
-        generate_attribute
-      else
-        generate_element
-      end
+      # At the top level, just generate the member. 
+      generate_element
     end
   end
 

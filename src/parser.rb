@@ -121,7 +121,7 @@ class Schema
     end
 
     def facet(value)
-      @facet = facet
+      @facet = value
     end
 
     def pattern(value)
@@ -316,7 +316,7 @@ class Schema
     end
 
     def attribute?
-      if !defined? @attribute
+      if !defined?(@attribute)
         type = @schema.type(@type)
         @attribute = (@name != :Value and (type.nil? or type.attr))
       end

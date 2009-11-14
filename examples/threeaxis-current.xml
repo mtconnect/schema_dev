@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectStreams xmlns="urn:mtconnect.com:MTConnectStreams:1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.com:MTConnectStreams:1.0 ../MTConnectStreams.xsd">
+	<Header bufferSize="130000" instanceId="1" lastSequence="100" nextSequence="100" creationTime="2009-11-13T08:00:00" firstSequence="1" sender="localhost" version="1.1"/>
+	<Streams>
+		<DeviceStream uuid="HM1" name="HMC_3Axis">
+			<ComponentStream component="Device" name="HMC_3Axis" componentId="d1" >
+				<Events>
+					<Alarm dataItemId="d1a" code="ESTOP" sequence="22" timestamp="2009-11-13T08:00:00" state="CLEARED" severity="CRITICAL" name="alarm" nativeCode="ESTOP">ESTOP was cleared</Alarm>
+				</Events>
+			</ComponentStream>
+			<ComponentStream component="Linear" name="Y" componentId="y">
+				<Samples>
+					<Position dataItemId="yp" name="Yact" subType="ACTUAL" sequence="23" timestamp="2009-11-13T08:00:00">213.1232</Position> 
+				</Samples>
+			</ComponentStream>
+			<ComponentStream component="Linear" name="X" componentId="x">
+				<Samples>
+					<Position dataItemId="xp" name="Xact" subType="ACTUAL" sequence="24" timestamp="2009-11-13T08:00:00">10.203</Position> 
+				</Samples>
+			</ComponentStream>
+			<ComponentStream component="Linear" name="Z" componentId="z">
+				<Samples>
+					<Position dataItemId="zp" name="Zact" subType="ACTUAL" sequence="25" timestamp="2009-11-13T08:00:00">77.5098</Position> 
+				</Samples>
+			</ComponentStream>
+			<ComponentStream component="Path" name="path" componentId="path">
+				<Samples>
+					<PathPosition dataItemId="pp" sequence="26" timestamp="2009-11-13T08:00:00" name="Ppos">20.122 33.4323 11.1234</PathPosition>
+					<PathFeedrate dataItemId="pf" sequence="28" timestamp="2009-11-13T08:00:00" name="F" subType="ACTUAL">121.11</PathFeedrate>
+					<PathFeedrate dataItemId="pfo" sequence="29" timestamp="2009-11-13T08:00:00" name="Fovr" subType="OVERRIDE">100</PathFeedrate>
+				</Samples>
+				<Events>
+					<ActiveAxes dataItemId="aa" sequence="27" timestamp="2009-11-13T08:00:00" name="active_axes">X Y Z C</ActiveAxes>
+				</Events>
+			</ComponentStream>
+		</DeviceStream>
+	</Streams>
+</MTConnectStreams>

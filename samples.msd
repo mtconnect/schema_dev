@@ -1,23 +1,26 @@
 
 package :Samlpes, 'The samples' do
+  float = '[+-]?\d+(\.\d+)?(E[+-]?\d+)?'
+  
   basic_type :SampleValue, 'An events data'
-  basic_type(:PositionValue, 'The value for the position') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:DisplacementValue, 'The value for the displacement') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:FrequencyValue, 'The value for the frequency') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:AmperageValue, 'The amperage') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:VoltageValue, 'The voltage') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:WattValue, 'The watts') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:PressureValue, 'The pressure') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:AccelerationValue, 'The value for the acceleration') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:AngleValue, 'The angle') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:TemperatureValue, 'The temperature') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:VelocityValue, 'The temperature') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:FeedrateValue, 'The feedrate') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:VibrationValue, 'The vibration') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:SpindleSpeedValue, 'The spindle speed') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:LoadValue, 'A component load') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:TorqueValue, 'A component\'s torque') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
-  basic_type(:GlobalPositionValue, 'A value given in 3-space as x,y,z') { pattern '[+-]?\d+(\.\d+)?(E[+-]?\d+)?,[+-]?\d+(\.\d+)?(E[+-]?\d+)?,[+-]?\d+(\.\d+)?(E[+-]?\d+)?' }
+  basic_type(:PositionValue, 'The value for the position') { pattern float }
+  basic_type(:DisplacementValue, 'The value for the displacement') { pattern float }
+  basic_type(:FrequencyValue, 'The value for the frequency') { pattern float }
+  basic_type(:AmperageValue, 'The amperage') { pattern float }
+  basic_type(:VoltageValue, 'The voltage') { pattern float }
+  basic_type(:WattValue, 'The watts') { pattern float }
+  basic_type(:PressureValue, 'The pressure') { pattern float }
+  basic_type(:AccelerationValue, 'The value for the acceleration') { pattern float }
+  basic_type(:AngleValue, 'The angle') { pattern float }
+  basic_type(:TemperatureValue, 'The temperature') { pattern float }
+  basic_type(:VelocityValue, 'The temperature') { pattern float }
+  basic_type(:FeedrateValue, 'The feedrate') { pattern float }
+  basic_type(:VibrationValue, 'The vibration') { pattern float }
+  basic_type(:SpindleSpeedValue, 'The spindle speed') { pattern float }
+  basic_type(:LoadValue, 'A component load') { pattern float }
+  basic_type(:TorqueValue, 'A component\'s torque') { pattern float }
+  basic_type(:GlobalPositionValue, 'DEPRECATED: A value given in 3-space as x,y,z') { pattern "#{float},#{float},#{float}" }
+  basic_type(:ThreeDimensionalValue, 'A three dimensional value \'X Y Z\' or \'A B C\'') { pattern "#{float} #{float} #{float}" }
   
   type :Sample, 'An abstract sample', :Result do
     abstract
@@ -98,4 +101,13 @@ package :Samlpes, 'The samples' do
   type :Torque, 'The torque', :Sample do
     member :Value, 'The torque', :TorqueValue
   end
+  
+  type :PathPosition, 'The 3 dimensional position for tool tip in the path (X Y Z)', :Sample do
+    member :Value, 'The position', :ThreeDimensionalValue
+  end
+  
+  type :PathRotation, 'The 3 dimensional rotation angles of tool tip in the path (A B C)', :Sample do
+    member :Value, 'The rotational angles', :ThreeDimensionalValue
+  end
+  
 end

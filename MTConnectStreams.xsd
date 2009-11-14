@@ -104,14 +104,6 @@
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:simpleType name='PathType'>
-    <xs:annotation>
-      <xs:documentation>
-        An XML path
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:simpleType name='IDType'>
     <xs:annotation>
       <xs:documentation>
@@ -136,6 +128,7 @@
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:enumeration value='ACCELERATION'/>
+      <xs:enumeration value='ACTIVE_AXES'/>
       <xs:enumeration value='ALARM'/>
       <xs:enumeration value='AMPERAGE'/>
       <xs:enumeration value='ANGLE'/>
@@ -145,9 +138,12 @@
       <xs:enumeration value='CODE'/>
       <xs:enumeration value='DISPLACEMENT'/>
       <xs:enumeration value='DIRECTION'/>
+      <xs:enumeration value='DOOR_STATUS'/>
       <xs:enumeration value='EXECUTION'/>
       <xs:enumeration value='FREQUENCY'/>
       <xs:enumeration value='PATH_FEEDRATE'/>
+      <xs:enumeration value='PATH_POSITION'/>
+      <xs:enumeration value='PATH_ROTATION'/>
       <xs:enumeration value='AXIS_FEEDRATE'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
@@ -157,14 +153,17 @@
       <xs:enumeration value='POWER_STATUS'/>
       <xs:enumeration value='PRESSURE'/>
       <xs:enumeration value='PROGRAM'/>
+      <xs:enumeration value='ROTARY_FUNCTION'/>
       <xs:enumeration value='SPINDLE_SPEED'/>
       <xs:enumeration value='STATUS'/>
       <xs:enumeration value='TEMPERATURE'/>
       <xs:enumeration value='TORQUE'/>
+      <xs:enumeration value='TOOL_ID'/>
       <xs:enumeration value='VELOCITY'/>
       <xs:enumeration value='VIBRATION'/>
       <xs:enumeration value='VOLTAGE'/>
       <xs:enumeration value='WATTS'/>
+      <xs:enumeration value='WORKHOLDING_ID'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -253,7 +252,7 @@
         The item&apos;s unique ID that references the data item id from probe
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:IDREF'/>
+    <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
   <xs:simpleType name='ComponentIdType'>
     <xs:annotation>
@@ -538,11 +537,21 @@
   <xs:simpleType name='GlobalPositionValueType'>
     <xs:annotation>
       <xs:documentation>
-        A value given in 3-space as x,y,z
+        DEPRECATED: A value given in 3-space as x,y,z
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?,[+-]?\d+(\.\d+)?(E[+-]?\d+)?,[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ThreeDimensionalValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        A three dimensional value &apos;X Y Z&apos; or &apos;A B C&apos;
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='SampleType' abstract='true'>
@@ -921,6 +930,44 @@
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='PathPositionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The 3 dimensional position for tool tip in the path (X Y Z)
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PathPosition' substitutionGroup='Sample' type='PathPositionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The 3 dimensional position for tool tip in the path (X Y Z)
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PathRotationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The 3 dimensional rotation angles of tool tip in the path (A B C)
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PathRotation' substitutionGroup='Sample' type='PathRotationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The 3 dimensional rotation angles of tool tip in the path (A B C)
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:simpleType name='PartCountValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -969,6 +1016,32 @@
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
+  <xs:simpleType name='ToolIdValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='WorkholdingIdValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The workholding identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ActiveAxesValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        A space delimited list of values
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name='DirectionValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -1014,6 +1087,29 @@
       <xs:enumeration value='AUTOMATIC'/>
       <xs:enumeration value='MANUAL'/>
       <xs:enumeration value='MANUAL_DATA_INPUT'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DoorStatusValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The status of a door
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='OPEN'/>
+      <xs:enumeration value='CLOSED'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='RotaryFunctionValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The rotary functions
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='SPIN'/>
+      <xs:enumeration value='INDEX'/>
+      <xs:enumeration value='CONTOUR'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='EventType' abstract='true'>
@@ -1198,6 +1294,100 @@
     <xs:annotation>
       <xs:documentation>
         CNC mode state
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ToolIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The current Tool Identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ToolId' substitutionGroup='Event' type='ToolIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The current Tool Identifier
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DoorStatusType'>
+    <xs:annotation>
+      <xs:documentation>
+        The status of the door
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='OPEN'/>
+        <xs:enumeration value='CLOSED'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='DoorStatus' substitutionGroup='Event' type='DoorStatusType'>
+    <xs:annotation>
+      <xs:documentation>
+        The status of the door
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='WorkholdingIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The current workholding Identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='WorkholdingId' substitutionGroup='Event' type='WorkholdingIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The current workholding Identifier
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='RotaryFunctionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The function of the rotary axis
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='SPIN'/>
+        <xs:enumeration value='INDEX'/>
+        <xs:enumeration value='CONTOUR'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='RotaryFunction' substitutionGroup='Event' type='RotaryFunctionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The function of the rotary axis
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ActiveAxesType'>
+    <xs:annotation>
+      <xs:documentation>
+        The list of axes in use
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:pattern value='[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ActiveAxes' substitutionGroup='Event' type='ActiveAxesType'>
+    <xs:annotation>
+      <xs:documentation>
+        The list of axes in use
       </xs:documentation>
     </xs:annotation>
   </xs:element>

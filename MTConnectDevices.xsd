@@ -104,14 +104,6 @@
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:simpleType name='PathType'>
-    <xs:annotation>
-      <xs:documentation>
-        An XML path
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:simpleType name='IDType'>
     <xs:annotation>
       <xs:documentation>
@@ -136,6 +128,7 @@
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:enumeration value='ACCELERATION'/>
+      <xs:enumeration value='ACTIVE_AXES'/>
       <xs:enumeration value='ALARM'/>
       <xs:enumeration value='AMPERAGE'/>
       <xs:enumeration value='ANGLE'/>
@@ -145,9 +138,12 @@
       <xs:enumeration value='CODE'/>
       <xs:enumeration value='DISPLACEMENT'/>
       <xs:enumeration value='DIRECTION'/>
+      <xs:enumeration value='DOOR_STATUS'/>
       <xs:enumeration value='EXECUTION'/>
       <xs:enumeration value='FREQUENCY'/>
       <xs:enumeration value='PATH_FEEDRATE'/>
+      <xs:enumeration value='PATH_POSITION'/>
+      <xs:enumeration value='PATH_ROTATION'/>
       <xs:enumeration value='AXIS_FEEDRATE'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
@@ -157,14 +153,17 @@
       <xs:enumeration value='POWER_STATUS'/>
       <xs:enumeration value='PRESSURE'/>
       <xs:enumeration value='PROGRAM'/>
+      <xs:enumeration value='ROTARY_FUNCTION'/>
       <xs:enumeration value='SPINDLE_SPEED'/>
       <xs:enumeration value='STATUS'/>
       <xs:enumeration value='TEMPERATURE'/>
       <xs:enumeration value='TORQUE'/>
+      <xs:enumeration value='TOOL_ID'/>
       <xs:enumeration value='VELOCITY'/>
       <xs:enumeration value='VIBRATION'/>
       <xs:enumeration value='VOLTAGE'/>
       <xs:enumeration value='WATTS'/>
+      <xs:enumeration value='WORKHOLDING_ID'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -274,6 +273,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Capabilities' maxOccurs='1' minOccurs='0' type='CapabilitiesType'>
+        <xs:annotation>
+          <xs:documentation>
+            The component&apos;s capabilities
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='DataItems' maxOccurs='1' minOccurs='0' type='DataItemsType'>
         <xs:annotation>
           <xs:documentation>
@@ -342,6 +348,22 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element maxOccurs='unbounded' minOccurs='1' ref='Component'/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='CapabilitiesType'>
+    <xs:annotation>
+      <xs:documentation>
+        A list of the capabilities of a component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Capability' maxOccurs='unbounded' minOccurs='1' type='CapabilityType'>
+        <xs:annotation>
+          <xs:documentation>
+            A capability
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name='DeviceType'>
@@ -449,10 +471,38 @@
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='PathType'>
+    <xs:annotation>
+      <xs:documentation>
+        A path component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Path' substitutionGroup='CommonComponent' type='PathType'>
+    <xs:annotation>
+      <xs:documentation>
+        A path component
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='orientationType'>
+    <xs:annotation>
+      <xs:documentation>
+        Orientation of an axis
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='HORIZONTAL'/>
+      <xs:enumeration value='VERTICAL'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='AxesType'>
     <xs:annotation>
       <xs:documentation>
-        The machines axes. There are currently four types of axes available
+        A logical group of Axes representing a structural base
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -462,7 +512,7 @@
   <xs:element name='Axes' substitutionGroup='CommonComponent' type='AxesType'>
     <xs:annotation>
       <xs:documentation>
-        The machines axes. There are currently four types of axes available
+        A logical group of Axes representing a structural base
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -473,7 +523,9 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
+      <xs:extension base='CommonComponentType'>
+        <xs:attribute name='orientation' type='orientationType' use='optional'/>
+      </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name='Axis' abstract='true' substitutionGroup='CommonComponent' type='AxisType'>
@@ -520,7 +572,7 @@
   <xs:complexType name='SpindleType'>
     <xs:annotation>
       <xs:documentation>
-        A spindle axis that spins
+        DEPRECATED: A spindle axis that spins
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -530,7 +582,7 @@
   <xs:element name='Spindle' substitutionGroup='Axis' type='SpindleType'>
     <xs:annotation>
       <xs:documentation>
-        A spindle axis that spins
+        DEPRECATED: A spindle axis that spins
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -698,6 +750,108 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='ItemSourceType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='WorkholdingType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component that holds a workpiece
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Workholding' substitutionGroup='CommonComponent' type='WorkholdingType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component that holds a workpiece
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ToolType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component that holds a tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Tool' substitutionGroup='CommonComponent' type='ToolType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component that holds a tool
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DoorType'>
+    <xs:annotation>
+      <xs:documentation>
+        A door on the machine
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Door' substitutionGroup='CommonComponent' type='DoorType'>
+    <xs:annotation>
+      <xs:documentation>
+        A door on the machine
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='TableType'>
+    <xs:annotation>
+      <xs:documentation>
+        A table on which material can be placed
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Table' substitutionGroup='CommonComponent' type='TableType'>
+    <xs:annotation>
+      <xs:documentation>
+        A table on which material can be placed
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='CapabilityEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        Capabilities for a component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ROTARY_FUNCTION'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='CapabilityValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The values of the capability
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='INDEX'/>
+      <xs:enumeration value='SPIN'/>
+      <xs:enumeration value='CONTOUR'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='CapabilityType'>
+    <xs:annotation>
+      <xs:documentation>
+        A components capability
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CapabilityValueType'>
+        <xs:attribute name='type' type='CapabilityEnumType' use='required'/>
+      </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
 </xs:schema>

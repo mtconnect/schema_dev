@@ -14,13 +14,13 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :SerialNumber, 'A serial number for a piece of equipment'
   attr :ItemSource, 'The measurement source'
   attr :Rate, 'A sample rate in milliseconds per sample', :float
-  attr :Path, 'An XML path'
   attr :ID, 'An identifier', :ID
 
   basic_type :DescriptionText, 'A description'
     
   enum :DataItemEnum, 'The types of measurements available' do
     value :ACCELERATION, 'The accelleration of the component'
+    value :ACTIVE_AXES, 'The list of axes currently in use in this path'
     value :ALARM, 'An alarm measurement.'
     value :AMPERAGE, 'The electrical current'
     value :ANGLE, 'The position as given in degrees'
@@ -30,9 +30,12 @@ package :common, 'Common attributes and elements for all schemas' do
     value :CODE, 'The current executing code'
     value :DISPLACEMENT, 'The displacement as measured from zero to peak'
     value :DIRECTION, 'The direction of rotation'
+    value :DOOR_STATUS, 'The open/closed status of the door'
     value :EXECUTION, 'The programs execution state'
     value :FREQUENCY, 'The frequency as measure in cycles per second'
     value :PATH_FEEDRATE, 'The feedrate for the path'
+    value :PATH_POSITION, 'The three space position X, Y, Z'
+    value :PATH_ROTATION, 'The three space rotational vector for the path A, B, C'
     value :AXIS_FEEDRATE, 'The feedrate for the axis'
     value :LINE, 'The line of the program being executed'
     value :CONTROLLER_MODE, 'The CNC\'s mode'
@@ -42,14 +45,17 @@ package :common, 'Common attributes and elements for all schemas' do
     value :POWER_STATUS, 'The power status of the component'
     value :PRESSURE, 'The current pressure'
     value :PROGRAM, 'The name of the program being run'
+    value :ROTARY_FUNCTION, 'The function of the rotary axis'
     value :SPINDLE_SPEED, 'The velocity of the spindle'
     value :STATUS, 'The status indicator'
     value :TEMPERATURE, 'The temperature of the component'
     value :TORQUE, 'The torque - force times distance'
+    value :TOOL_ID, 'The identifier of the tool in use'
     value :VELOCITY, 'The velocity of the component'
     value :VIBRATION, 'The status indicator'
     value :VOLTAGE, 'The voltage'
     value :WATTS, 'The wattage'
+    value :WORKHOLDING_ID, 'The workholding identifier'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do

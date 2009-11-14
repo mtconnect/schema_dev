@@ -6,6 +6,9 @@ package :Events, 'Event Package' do
   basic_type :ProgramValue, 'The program name'
   basic_type :ToolEventValue, 'A tool event'
   basic_type :LineValue, 'The line number', :integer
+  basic_type :ToolIdValue, 'The tool identifier'
+  basic_type :WorkholdingIdValue, 'The workholding identifier'
+  basic_type(:ActiveAxesValue, 'A space delimited list of values') { pattern '[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
   
   enum :DirectionValue, 'Rotation Direction' do
     value :CLOCKWISE, 'Clockwise rotation'
@@ -28,6 +31,17 @@ package :Events, 'Event Package' do
     value :AUTOMATIC, 'The cnc is in automatic mode'
     value :MANUAL, 'The cnc is in manual mode'
     value :MANUAL_DATA_INPUT, 'The cnc is in manual data input mode (MDI)'
+  end
+  
+  enum :DoorStatusValue, 'The status of a door' do
+    value :OPEN, 'The door is open'
+    value :CLOSED, 'The door is closed'
+  end
+  
+  enum :RotaryFunctionValue, 'The rotary functions' do
+    value :SPIN, 'The rotary is spinning at a velocity'
+    value :INDEX, 'The rotary axes is index to specific angles'
+    value :CONTOUR, 'The rotary axes is both spinning and spinning'
   end
 
   type :Event, 'An abstract event', :Result do
@@ -68,5 +82,25 @@ package :Events, 'Event Package' do
   
   type :ControllerMode, 'CNC mode state', :Event do
     member :Value, 'The CNC mode state', :ControllerModeValue
-  end  
+  end
+  
+  type :ToolId, 'The current Tool Identifier', :Event do 
+    member :Value, 'The tool identifier', :ToolIdValue
+  end
+  
+  type :DoorStatus, 'The status of the door', :Event do
+    member :Value, 'The status of the door', :DoorStatusValue
+  end
+  
+  type :WorkholdingId, 'The current workholding Identifier', :Event do 
+    member :Value, 'The workholding identifier', :WorkholdingIdValue
+  end
+  
+  type :RotaryFunction, 'The function of the rotary axis', :Event do
+    member :Value, 'The rotary function', :RotaryFunctionValue
+  end
+  
+  type :ActiveAxes, 'The list of axes in use', :Event do
+    member :Value, 'The list of axes', :ActiveAxesValue
+  end
 end

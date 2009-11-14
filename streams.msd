@@ -1,7 +1,7 @@
 
 package :Streams, 'Event Package' do
   attr :Timestamp, 'The time the sample occurred', :dateTime
-  attr :DataItemId, 'The item\'s unique ID that references the data item id from probe', :IDREF
+  attr :DataItemId, 'The item\'s unique ID that references the data item id from probe', :NMTOKEN
   attr :ComponentId, 'The id of the component (maps to the id from probe)', :ID
 
   type :Streams, 'Event container for all component events' do
