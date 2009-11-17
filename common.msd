@@ -33,6 +33,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :DOOR_STATUS, 'The open/closed status of the door'
     value :EXECUTION, 'The programs execution state'
     value :FREQUENCY, 'The frequency as measure in cycles per second'
+    value :PART_ID, 'The identifier of the part loaded'
     value :PATH_FEEDRATE, 'The feedrate for the path'
     value :PATH_POSITION, 'The three space position X, Y, Z'
     value :PATH_ROTATION, 'The three space rotational vector for the path A, B, C'

@@ -141,6 +141,7 @@
       <xs:enumeration value='DOOR_STATUS'/>
       <xs:enumeration value='EXECUTION'/>
       <xs:enumeration value='FREQUENCY'/>
+      <xs:enumeration value='PART_ID'/>
       <xs:enumeration value='PATH_FEEDRATE'/>
       <xs:enumeration value='PATH_POSITION'/>
       <xs:enumeration value='PATH_ROTATION'/>
@@ -488,6 +489,23 @@
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='DoorType'>
+    <xs:annotation>
+      <xs:documentation>
+        A door on the machine
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Door' substitutionGroup='CommonComponent' type='DoorType'>
+    <xs:annotation>
+      <xs:documentation>
+        A door on the machine
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:simpleType name='orientationType'>
     <xs:annotation>
       <xs:documentation>
@@ -752,74 +770,6 @@
       <xs:extension base='ItemSourceType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='WorkholdingType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component that holds a workpiece
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Workholding' substitutionGroup='CommonComponent' type='WorkholdingType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component that holds a workpiece
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ToolType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component that holds a tool
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Tool' substitutionGroup='CommonComponent' type='ToolType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component that holds a tool
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='DoorType'>
-    <xs:annotation>
-      <xs:documentation>
-        A door on the machine
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Door' substitutionGroup='CommonComponent' type='DoorType'>
-    <xs:annotation>
-      <xs:documentation>
-        A door on the machine
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='TableType'>
-    <xs:annotation>
-      <xs:documentation>
-        A table on which material can be placed
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Table' substitutionGroup='CommonComponent' type='TableType'>
-    <xs:annotation>
-      <xs:documentation>
-        A table on which material can be placed
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:simpleType name='CapabilityEnumType'>
     <xs:annotation>
       <xs:documentation>

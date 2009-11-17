@@ -7,6 +7,7 @@ package :Events, 'Event Package' do
   basic_type :ToolEventValue, 'A tool event'
   basic_type :LineValue, 'The line number', :integer
   basic_type :ToolIdValue, 'The tool identifier'
+  basic_type :PartIdValue, 'The part identifier'
   basic_type :WorkholdingIdValue, 'The workholding identifier'
   basic_type(:ActiveAxesValue, 'A space delimited list of values') { pattern '[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
   
@@ -86,6 +87,10 @@ package :Events, 'Event Package' do
   
   type :ToolId, 'The current Tool Identifier', :Event do 
     member :Value, 'The tool identifier', :ToolIdValue
+  end
+  
+  type :PartId, 'The current Tool Identifier', :Event do 
+    member :Value, 'The tool identifier', :PartIdValue
   end
   
   type :DoorStatus, 'The status of the door', :Event do

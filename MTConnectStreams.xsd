@@ -141,6 +141,7 @@
       <xs:enumeration value='DOOR_STATUS'/>
       <xs:enumeration value='EXECUTION'/>
       <xs:enumeration value='FREQUENCY'/>
+      <xs:enumeration value='PART_ID'/>
       <xs:enumeration value='PATH_FEEDRATE'/>
       <xs:enumeration value='PATH_POSITION'/>
       <xs:enumeration value='PATH_ROTATION'/>
@@ -1024,6 +1025,14 @@
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='PartIdValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The part identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='WorkholdingIdValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -1308,6 +1317,23 @@
     </xs:simpleContent>
   </xs:complexType>
   <xs:element name='ToolId' substitutionGroup='Event' type='ToolIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The current Tool Identifier
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PartIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The current Tool Identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PartId' substitutionGroup='Event' type='PartIdType'>
     <xs:annotation>
       <xs:documentation>
         The current Tool Identifier

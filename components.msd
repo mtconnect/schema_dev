@@ -52,4 +52,6 @@ package :Component, 'Top Level Components Package' do
   type :Thermostat, 'A thermostate', :Sensor
   type :Vibration, 'A sensor for reading the vibration from a component', :Sensor
   type :Path, 'A path component', :CommonComponent
+  
+  type :Door, 'A door on the machine', :CommonComponent  
 end

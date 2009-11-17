@@ -19,18 +19,9 @@
 								<Linear id="x" name="X" orientation="HORIZONTAL">
 									<DataItems>
 										<DataItem type="POSITION" subType="ACTUAL" id="xp" category="SAMPLE" name="Xact" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
+										<DataItem type="WORKHOLDING_ID" id="wid" category="EVENT" name="workholding"/>
+										<DataItem type="PART_ID" id="pid" category="EVENT" name="part" />
 									</DataItems>
-									<Components>
-										<Table id="t" name="table">
-											<Components>
-												<Workholding id="w" name="workholding">
-													<DataItems>
-														<DataItem type="WORKHOLDING_ID" id="wid" category="EVENT" name="workholding"/>
-													</DataItems>
-												</Workholding>
-											</Components>
-										</Table>
-									</Components>
 								</Linear>
 							</Components>
 						</Linear>
@@ -46,14 +37,9 @@
 									<DataItems>
 										<DataItem type="SPINDLE_SPEED" id="cspd" category="SAMPLE" name="Sspeed" subType="ACTUAL" units="REVOLUTION/MINUTE" nativeUnits="REVOLUTION/MINUTE"/>
 										<DataItem type="SPINDLE_SPEED" id="cso" category="SAMPLE" name="Sovr" subType="OVERRIDE" units="PERCENT" nativeUnits="PERCENT"/>
+										<DataItem type="TOOL_ID" id="tid" category="EVENT" name="Tid"/>
+										<DataItem type="ROTARY_FUNCTION" id="rf" category="EVENT" name="rfunc"/>
 									</DataItems>
-									<Components>
-										<Tool id="t1" name="tool">
-											<DataItems>
-												<DataItem type="TOOL_ID" id="tid" category="EVENT" name="Tid"/>
-											</DataItems>
-										</Tool>
-									</Components>
 								</Rotary>
 							</Components>
 						</Linear>
@@ -70,6 +56,8 @@
 								<DataItem type="PATH_FEEDRATE" id="pfo" category="SAMPLE" name="Fovr" units="PERCENT" nativeUnits="PERCENT" subType="OVERRIDE"/>
 								<DataItem type="PATH_POSITION" id="pp" category="SAMPLE" name="Ppos" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="WORK"/>
 								<DataItem type="ACTIVE_AXES" id="aa" category="EVENT" name="active_axes"/>
+								<DataItem type="EXECUTION" id="exec" category="EVENT" name="execution"/>
+								<DataItem type="CONTROLLER_MODE" id="cm" category="EVENT" name="mode" /> 
 							</DataItems>
 						</Path>
 					</Components>
@@ -79,6 +67,11 @@
 						<DataItem type="POWER_STATUS" id="ps" category="EVENT" name="power_status"/>
 					</DataItems>
 				</Power>
+				<Door id="d" name="door">
+					<DataItems>
+						<DataItem id="ds" category="EVENT" name="door_status" type="DOOR_STATUS"/>
+					</DataItems>
+				</Door>
 			</Components>
 		</Device>
 	</Devices>

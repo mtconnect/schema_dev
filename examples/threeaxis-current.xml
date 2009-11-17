@@ -15,12 +15,25 @@
 			</ComponentStream>
 			<ComponentStream component="Linear" name="X" componentId="x">
 				<Samples>
-					<Position dataItemId="xp" name="Xact" subType="ACTUAL" sequence="24" timestamp="2009-11-13T08:00:00">10.203</Position> 
+					<Position dataItemId="xp" name="Xact" subType="ACTUAL" sequence="24" timestamp="2009-11-13T08:00:00">10.203</Position>
 				</Samples>
+				<Events>
+					<PartId dataItemId="pid" name="part" sequence="31" timestamp="2009-11-13T08:00:00">P123242155</PartId>
+					<WorkholdingId dataItemId="wid" name="workholding" sequence="32" timestamp="2009-11-13T08:00:00">W124214555</WorkholdingId>
+				</Events>
 			</ComponentStream>
 			<ComponentStream component="Linear" name="Z" componentId="z">
 				<Samples>
 					<Position dataItemId="zp" name="Zact" subType="ACTUAL" sequence="25" timestamp="2009-11-13T08:00:00">77.5098</Position> 
+				</Samples>
+				<Events>
+					<ToolId dataItemId="tid" name="tool" sequence="33" timestamp="2009-11-13T08:00:00">T1234214</ToolId>
+					<RotaryFunction dataItemId="rf" name="rfunc" sequence="34" timestamp="2009-11-13T08:00:00">SPIN</RotaryFunction>
+				</Events>
+			</ComponentStream>
+			<ComponentStream component="Rotary" name="C" componentId="c">
+				<Samples>
+					<SpindleSpeed dataItemId="zp" name="Zact" subType="ACTUAL" sequence="25" timestamp="2009-11-13T08:00:00">77.5098</SpindleSpeed> 
 				</Samples>
 			</ComponentStream>
 			<ComponentStream component="Path" name="path" componentId="path">
@@ -31,6 +44,16 @@
 				</Samples>
 				<Events>
 					<ActiveAxes dataItemId="aa" sequence="27" timestamp="2009-11-13T08:00:00" name="active_axes">X Y Z C</ActiveAxes>
+					<Line dataItemId="ln" sequence="36" name="line" timestamp="2009-11-13T08:00:00">123</Line>
+					<Block dataItemId="blk" sequence="37" name="block" timestamp="2009-11-13T08:00:00">G01X123</Block>
+					<Program dataItemId="pgm" sequence="38" name="program" timestamp="2009-11-13T08:00:00">chop.txt</Program>
+					<Execution dataItemId="exec" name="execution" sequence="40" timestamp="2009-11-13T08:00:00">ACTIVE</Execution>
+					<ControllerMode dataItemId="mode" name="mode" sequence="41" timestamp="2009-11-13T08:00:00">AUTOMATIC</ControllerMode>
+				</Events>
+			</ComponentStream>
+			<ComponentStream component="Door" componentId="d" name="door">
+				<Events>
+					<DoorStatus dataItemId="ds" name="door_status" sequence="39" timestamp="2009-11-13T08:00:00">CLOSED</DoorStatus>
 				</Events>
 			</ComponentStream>
 		</DeviceStream>
