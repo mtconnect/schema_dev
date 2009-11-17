@@ -286,7 +286,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='ComponentStream' maxOccurs='unbounded' minOccurs='1' type='ComponentStreamType'>
+      <xs:element name='ComponentStream' maxOccurs='unbounded' minOccurs='0' type='ComponentStreamType'>
         <xs:annotation>
           <xs:documentation>
             The data for each component
