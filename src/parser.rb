@@ -312,7 +312,11 @@ class Schema
     end
 
     def is_value?
-      @name == :Value
+      type = resolve_type
+      @name == :Value and !type.is_a?(Element)
+    rescue
+      puts $!
+      false
     end
 
     def attribute?

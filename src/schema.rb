@@ -94,7 +94,7 @@ class Schema
   class Element
 
     def simple?
-      value = @members.find { |m| m.name == :Value }
+      value = @members.find { |m| m.is_value? }
       return true if value
       return true if @parent.nil? and !abstract?
       resolve_parent.simple? if @parent
