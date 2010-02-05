@@ -29,6 +29,6 @@ end
 load 'streams'
 load 'samples'
 load 'events'
-load 'alarms'
+load 'notifications'
 
 

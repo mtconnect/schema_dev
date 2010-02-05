@@ -154,7 +154,7 @@
       <xs:enumeration value='POWER_STATUS'/>
       <xs:enumeration value='PRESSURE'/>
       <xs:enumeration value='PROGRAM'/>
-      <xs:enumeration value='ROTARY_FUNCTION'/>
+      <xs:enumeration value='ROTARY_MODE'/>
       <xs:enumeration value='SPINDLE_SPEED'/>
       <xs:enumeration value='STATUS'/>
       <xs:enumeration value='TEMPERATURE'/>
@@ -777,10 +777,10 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='ROTARY_FUNCTION'/>
+      <xs:enumeration value='ROTARY_MODE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='CapabilityValueType'>
+  <xs:simpleType name='CapabilityOptionType'>
     <xs:annotation>
       <xs:documentation>
         The values of the capability
@@ -792,16 +792,31 @@
       <xs:enumeration value='CONTOUR'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:complexType name='CapabilityValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        A possible value for the capability
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CapabilityOptionType'/>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='CapabilityType'>
     <xs:annotation>
       <xs:documentation>
         A components capability
       </xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CapabilityValueType'>
-        <xs:attribute name='type' type='CapabilityEnumType' use='required'/>
-      </xs:extension>
-    </xs:simpleContent>
+    <xs:sequence>
+      <xs:element name='Value' type='CapabilityValueType'>
+        <xs:annotation>
+          <xs:documentation>
+            A value for this capability
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='type' type='CapabilityEnumType' use='required'/>
   </xs:complexType>
 </xs:schema>

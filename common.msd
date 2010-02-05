@@ -46,7 +46,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :POWER_STATUS, 'The power status of the component'
     value :PRESSURE, 'The current pressure'
     value :PROGRAM, 'The name of the program being run'
-    value :ROTARY_FUNCTION, 'The function of the rotary axis'
+    value :ROTARY_MODE, 'The function of the rotary axis'
     value :SPINDLE_SPEED, 'The velocity of the spindle'
     value :STATUS, 'The status indicator'
     value :TEMPERATURE, 'The temperature of the component'

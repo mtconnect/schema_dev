@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by William Sobel (System Insights, Inc.) -->
 <MTConnectDevices xmlns="urn:mtconnect.com:MTConnectDevices:1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.com:MTConnectDevices:1.1 ../MTConnectDevices.xsd">
-	<Header bufferSize="130000" instanceId="1" creationTime="2009-11-13T02:31:40" sender="local" version="1.1"/>
-	<Devices>
-		<Device id="d1" uuid="HM1" name="HMC_3Axis" iso841Class="6">
-			<Description>3 Axis Mill</Description>
-			<DataItems>
-				<DataItem type="ALARM" id="d1a" category="EVENT" name="alarm"/>
-			</DataItems>
-			<Components>
-				<Axes id="a" name="base">
-					<Components>
-						<Linear id="y" name="Y" orientation="HORIZONTAL">
-							<DataItems>
-								<DataItem type="POSITION" id="yp" category="SAMPLE" name="Yact" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
-							</DataItems>
-							<Components>
-								<Linear id="x" name="X" orientation="HORIZONTAL">
-									<DataItems>
-										<DataItem type="POSITION" subType="ACTUAL" id="xp" category="SAMPLE" name="Xact" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
-										<DataItem type="WORKHOLDING_ID" id="wid" category="EVENT" name="workholding"/>
-										<DataItem type="PART_ID" id="pid" category="EVENT" name="part" />
-									</DataItems>
-								</Linear>
-							</Components>
-						</Linear>
+  <Header bufferSize="130000" instanceId="1" creationTime="2009-11-13T02:31:40" sender="local" version="1.1"/>
+  <Devices>
+    <Device id="d1" uuid="HM1" name="HMC_3Axis" iso841Class="6">
+      <Description>3 Axis Mill</Description>
+      <DataItems>
+        <DataItem type="ALARM" id="d1a" category="EVENT" name="alarm"/>
+      </DataItems>
+      <Components>
+        <Axes id="a" name="base">
+          <Components>
+            <Linear id="y" name="Y" orientation="HORIZONTAL">
+              <DataItems>
+                <DataItem type="POSITION" id="yp" category="SAMPLE" name="Yact" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
+              </DataItems>
+              <Components>
+                <Linear id="x" name="X" orientation="HORIZONTAL">
+                  <DataItems>
+                    <DataItem type="POSITION" subType="ACTUAL" id="xp" category="SAMPLE" name="Xact" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
+                    <DataItem type="WORKHOLDING_ID" id="wid" category="EVENT" name="workholding"/>
+                    <DataItem type="PART_ID" id="pid" category="EVENT" name="part" />
+                  </DataItems>
+                </Linear>
+              </Components>
+            </Linear>
 						<Linear id="z" name="Z" orientation="VERTICAL">
 							<DataItems>
 								<DataItem type="POSITION" id="zp" category="SAMPLE" name="Zact" subType="ACTUAL" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>

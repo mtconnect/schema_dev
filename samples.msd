@@ -63,7 +63,7 @@ package :Samlpes, 'The samples' do
   end
 
   type :SpindleSpeed, 'The spindle speed of the component', :Sample do
-    member :Value, 'The spindle speed', :SpindleSpeed
+    member :Value, 'The spindle speed', :SpindleSpeedValue
   end
 
   type :Angle, 'The angle of the component', :Sample do

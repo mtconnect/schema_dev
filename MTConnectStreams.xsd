@@ -154,7 +154,7 @@
       <xs:enumeration value='POWER_STATUS'/>
       <xs:enumeration value='PRESSURE'/>
       <xs:enumeration value='PROGRAM'/>
-      <xs:enumeration value='ROTARY_FUNCTION'/>
+      <xs:enumeration value='ROTARY_MODE'/>
       <xs:enumeration value='SPINDLE_SPEED'/>
       <xs:enumeration value='STATUS'/>
       <xs:enumeration value='TEMPERATURE'/>
@@ -286,7 +286,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='ComponentStream' maxOccurs='unbounded' minOccurs='1' type='ComponentStreamType'>
+      <xs:element name='ComponentStream' maxOccurs='unbounded' minOccurs='0' type='ComponentStreamType'>
         <xs:annotation>
           <xs:documentation>
             The data for each component
@@ -750,7 +750,9 @@
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:restriction base='SampleType'/>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
   <xs:element name='SpindleSpeed' substitutionGroup='Sample' type='SpindleSpeedType'>
@@ -1417,26 +1419,26 @@
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name='AlarmDescriptionType'>
+  <xs:simpleType name='NotifcationDescriptionType'>
     <xs:annotation>
       <xs:documentation>
-        The description of the alarm
+        The description of the Notifcation
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='NativeAlarmCodeType'>
+  <xs:simpleType name='NativeNotifcationCodeType'>
     <xs:annotation>
       <xs:documentation>
-        An alarm code as defined by the component
+        An Notifcation code as defined by the component
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='AlarmCodeType'>
+  <xs:simpleType name='NotifcationCodeType'>
     <xs:annotation>
       <xs:documentation>
-        Types of alarms
+        Types of Notifcations
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -1451,50 +1453,74 @@
       <xs:enumeration value='OTHER'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='AlarmStateType'>
+  <xs:complexType name='NotificationType'>
     <xs:annotation>
       <xs:documentation>
-        The state of the alarm
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='ACTIVE'/>
-      <xs:enumeration value='CLEARED'/>
-      <xs:enumeration value='INSTANT'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='SeverityType'>
-    <xs:annotation>
-      <xs:documentation>
-        The alarms severity
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='CRITICAL'/>
-      <xs:enumeration value='ERROR'/>
-      <xs:enumeration value='WARNING'/>
-      <xs:enumeration value='INFO'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name='AlarmType'>
-    <xs:annotation>
-      <xs:documentation>
-        An alarm event
+        An Notifcation event
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='EventType'>
-        <xs:attribute name='code' type='AlarmCodeType' use='required'/>
-        <xs:attribute name='severity' type='SeverityType' use='required'/>
-        <xs:attribute name='nativeCode' type='NativeAlarmCodeType' use='required'/>
-        <xs:attribute name='state' type='AlarmStateType' use='required'/>
+        <xs:attribute name='code' type='NotifcationCodeType' use='required'/>
+        <xs:attribute name='nativeCode' type='NativeNotifcationCodeType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Alarm' substitutionGroup='Event' type='AlarmType'>
+  <xs:element name='Notification' substitutionGroup='Event' type='NotificationType'>
     <xs:annotation>
       <xs:documentation>
-        An alarm event
+        An Notifcation event
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ErrorType'>
+    <xs:annotation>
+      <xs:documentation>
+        A status message
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='NotificationType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Error' substitutionGroup='Notification' type='ErrorType'>
+    <xs:annotation>
+      <xs:documentation>
+        A status message
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='WarningType'>
+    <xs:annotation>
+      <xs:documentation>
+        A status message
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='NotificationType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Warning' substitutionGroup='Notification' type='WarningType'>
+    <xs:annotation>
+      <xs:documentation>
+        A status message
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='MessageType'>
+    <xs:annotation>
+      <xs:documentation>
+        A status message
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='NotificationType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Message' substitutionGroup='Notification' type='MessageType'>
+    <xs:annotation>
+      <xs:documentation>
+        A status message
       </xs:documentation>
     </xs:annotation>
   </xs:element>
