@@ -24,6 +24,5 @@ end
 load 'components'
 load 'axes'
 load 'data_items'
-load 'capability'
 
 

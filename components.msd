@@ -13,7 +13,6 @@ package :Component, 'Top Level Components Package' do
     member :Name, 'The components name'
     member :SampleRate, 'The rate at which the data is sampled from the component', 0..1
     member :Description, 'The descriptive information about this component', 0..1, :ComponentDescription
-    member :Capabilities, 'The component\'s capabilities', 0..1
     member :DataItems, 'The component\'s Data Items', 0..1
     member :Components, 'The sub components', 0..1
   end
@@ -31,10 +30,6 @@ package :Component, 'Top Level Components Package' do
 
   type :Components, 'A list of generic components' do
     member :Component, 'Any component', 1..INF
-  end
-  
-  type :Capabilities, 'A list of the capabilities of a component' do
-    member :Capability, 'A capability', 1..INF
   end
   
   type :Device, 'The top level component managed by the agent', :Component do

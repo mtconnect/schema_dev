@@ -274,13 +274,6 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Capabilities' maxOccurs='1' minOccurs='0' type='CapabilitiesType'>
-        <xs:annotation>
-          <xs:documentation>
-            The component&apos;s capabilities
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
       <xs:element name='DataItems' maxOccurs='1' minOccurs='0' type='DataItemsType'>
         <xs:annotation>
           <xs:documentation>
@@ -349,22 +342,6 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element maxOccurs='unbounded' minOccurs='1' ref='Component'/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name='CapabilitiesType'>
-    <xs:annotation>
-      <xs:documentation>
-        A list of the capabilities of a component
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Capability' maxOccurs='unbounded' minOccurs='1' type='CapabilityType'>
-        <xs:annotation>
-          <xs:documentation>
-            A capability
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name='DeviceType'>
@@ -612,6 +589,14 @@
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
+  <xs:simpleType name='DataItemValueOptionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The constrained value for this data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='CategoryType'>
     <xs:annotation>
       <xs:documentation>
@@ -749,6 +734,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Values' maxOccurs='1' minOccurs='0' type='DataItemValuesType'>
+        <xs:annotation>
+          <xs:documentation>
+            Possible values for this data item
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='name' type='NameType' use='required'/>
     <xs:attribute name='id' type='IDType' use='required'/>
@@ -760,6 +752,33 @@
     <xs:attribute name='category' type='CategoryType' use='required'/>
     <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'/>
   </xs:complexType>
+  <xs:complexType name='DataItemValuesType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of values for a data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Value' maxOccurs='unbounded' minOccurs='1' type='DataItemValueType'>
+        <xs:annotation>
+          <xs:documentation>
+            A data item value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='DataItemValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        A possible value for this data item. Limits the possible options for a
+        data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='DataItemValueOptionType'/>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='SourceType'>
     <xs:annotation>
       <xs:documentation>
@@ -769,54 +788,5 @@
     <xs:simpleContent>
       <xs:extension base='ItemSourceType'/>
     </xs:simpleContent>
-  </xs:complexType>
-  <xs:simpleType name='CapabilityEnumType'>
-    <xs:annotation>
-      <xs:documentation>
-        Capabilities for a component
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='ROTARY_MODE'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='CapabilityOptionType'>
-    <xs:annotation>
-      <xs:documentation>
-        The values of the capability
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='INDEX'/>
-      <xs:enumeration value='SPIN'/>
-      <xs:enumeration value='CONTOUR'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name='CapabilityValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        A possible value for the capability
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CapabilityOptionType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name='CapabilityType'>
-    <xs:annotation>
-      <xs:documentation>
-        A components capability
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Value' type='CapabilityValueType'>
-        <xs:annotation>
-          <xs:documentation>
-            A value for this capability
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-    <xs:attribute name='type' type='CapabilityEnumType' use='required'/>
   </xs:complexType>
 </xs:schema>
