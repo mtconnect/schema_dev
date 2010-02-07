@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<xs:schema targetNamespace='urn:mtconnect.com:MTConnectStreams:1.0' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.com:MTConnectStreams:1.0' xmlns='urn:mtconnect.com:MTConnectStreams:1.0'>
+<xs:schema targetNamespace='urn:mtconnect.com:MTConnectStreams:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.com:MTConnectStreams:1.2' xmlns='urn:mtconnect.com:MTConnectStreams:1.2'>
   <xs:element name='MTConnectStreams' type='MTConnectStreamsType'>
     <xs:annotation>
       <xs:documentation>
@@ -382,7 +382,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DisplacementValueType'>
@@ -392,7 +392,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='FrequencyValueType'>
@@ -402,7 +402,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='AmperageValueType'>
@@ -412,7 +412,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='VoltageValueType'>
@@ -422,7 +422,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='WattValueType'>
@@ -432,7 +432,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='PressureValueType'>
@@ -442,7 +442,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='AccelerationValueType'>
@@ -452,7 +452,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='AngleValueType'>
@@ -462,7 +462,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='TemperatureValueType'>
@@ -472,7 +472,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='VelocityValueType'>
@@ -482,7 +482,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='FeedrateValueType'>
@@ -492,7 +492,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='VibrationValueType'>
@@ -502,7 +502,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='SpindleSpeedValueType'>
@@ -512,7 +512,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='LoadValueType'>
@@ -522,7 +522,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='TorqueValueType'>
@@ -532,17 +532,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='GlobalPositionValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED: A value given in 3-space as x,y,z
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?,[+-]?\d+(\.\d+)?(E[+-]?\d+)?,[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ThreeDimensionalValueType'>
@@ -552,7 +542,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='SampleType' abstract='true'>
@@ -580,7 +570,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -594,19 +584,19 @@
   <xs:complexType name='GlobalPositionType'>
     <xs:annotation>
       <xs:documentation>
-        The three space position of the component
+        DEPRECATED: The three space position of the component
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?,[+-]?\d+(\.\d+)?(E[+-]?\d+)?,[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
   <xs:element name='GlobalPosition' substitutionGroup='Sample' type='GlobalPositionType'>
     <xs:annotation>
       <xs:documentation>
-        The three space position of the component
+        DEPRECATED: The three space position of the component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -618,7 +608,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -637,7 +627,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -656,7 +646,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -675,7 +665,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -694,7 +684,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -713,7 +703,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -732,7 +722,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -751,7 +741,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -770,7 +760,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -789,7 +779,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -808,7 +798,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -827,7 +817,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -846,7 +836,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -865,7 +855,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -884,7 +874,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -903,7 +893,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -922,7 +912,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -941,7 +931,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -960,7 +950,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -977,7 +967,9 @@
         The number of parts
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:integer'/>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+|UNAVAILABLE'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='BlockValueType'>
     <xs:annotation>
@@ -1017,7 +1009,9 @@
         The line number
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:integer'/>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+|UNAVAILABLE'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ToolIdValueType'>
     <xs:annotation>
@@ -1043,7 +1037,7 @@
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='ActiveAxesValueType'>
+  <xs:simpleType name='AxesListValueType'>
     <xs:annotation>
       <xs:documentation>
         A space delimited list of values
@@ -1062,6 +1056,7 @@
     <xs:restriction base='xs:string'>
       <xs:enumeration value='CLOCKWISE'/>
       <xs:enumeration value='COUNTER_CLOCKWISE'/>
+      <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='PowerStatusValueType'>
@@ -1073,6 +1068,7 @@
     <xs:restriction base='xs:string'>
       <xs:enumeration value='ON'/>
       <xs:enumeration value='OFF'/>
+      <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ExecutionValueType'>
@@ -1086,6 +1082,7 @@
       <xs:enumeration value='INTERRUPTED'/>
       <xs:enumeration value='ACTIVE'/>
       <xs:enumeration value='STOPPED'/>
+      <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ControllerModeValueType'>
@@ -1098,6 +1095,7 @@
       <xs:enumeration value='AUTOMATIC'/>
       <xs:enumeration value='MANUAL'/>
       <xs:enumeration value='MANUAL_DATA_INPUT'/>
+      <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DoorStatusValueType'>
@@ -1109,6 +1107,7 @@
     <xs:restriction base='xs:string'>
       <xs:enumeration value='OPEN'/>
       <xs:enumeration value='CLOSED'/>
+      <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='RotaryFunctionValueType'>
@@ -1121,6 +1120,7 @@
       <xs:enumeration value='SPIN'/>
       <xs:enumeration value='INDEX'/>
       <xs:enumeration value='CONTOUR'/>
+      <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='EventType' abstract='true'>
@@ -1181,7 +1181,9 @@
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:restriction base='EventType'/>
+      <xs:restriction base='EventType'>
+        <xs:pattern value='[+-]?\d+|UNAVAILABLE'/>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
   <xs:element name='Line' substitutionGroup='Event' type='LineType'>
@@ -1201,6 +1203,7 @@
       <xs:restriction base='EventType'>
         <xs:enumeration value='ON'/>
         <xs:enumeration value='OFF'/>
+        <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1218,7 +1221,9 @@
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:restriction base='EventType'/>
+      <xs:restriction base='EventType'>
+        <xs:pattern value='[+-]?\d+|UNAVAILABLE'/>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
   <xs:element name='PartCount' substitutionGroup='Event' type='PartCountType'>
@@ -1238,6 +1243,7 @@
       <xs:restriction base='EventType'>
         <xs:enumeration value='CLOCKWISE'/>
         <xs:enumeration value='COUNTER_CLOCKWISE'/>
+        <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1277,6 +1283,7 @@
         <xs:enumeration value='INTERRUPTED'/>
         <xs:enumeration value='ACTIVE'/>
         <xs:enumeration value='STOPPED'/>
+        <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1298,6 +1305,7 @@
         <xs:enumeration value='AUTOMATIC'/>
         <xs:enumeration value='MANUAL'/>
         <xs:enumeration value='MANUAL_DATA_INPUT'/>
+        <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1352,6 +1360,7 @@
       <xs:restriction base='EventType'>
         <xs:enumeration value='OPEN'/>
         <xs:enumeration value='CLOSED'/>
+        <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1390,6 +1399,7 @@
         <xs:enumeration value='SPIN'/>
         <xs:enumeration value='INDEX'/>
         <xs:enumeration value='CONTOUR'/>
+        <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1413,6 +1423,25 @@
     </xs:simpleContent>
   </xs:complexType>
   <xs:element name='ActiveAxes' substitutionGroup='Event' type='ActiveAxesType'>
+    <xs:annotation>
+      <xs:documentation>
+        The list of axes in use
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SlaveAxesType'>
+    <xs:annotation>
+      <xs:documentation>
+        The list of axes in use
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:pattern value='[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='SlaveAxes' substitutionGroup='Event' type='SlaveAxesType'>
     <xs:annotation>
       <xs:documentation>
         The list of axes in use
@@ -1453,6 +1482,30 @@
       <xs:enumeration value='OTHER'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='NotificationStateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The active or cleared state of the notification
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTIVE'/>
+      <xs:enumeration value='CLEARED'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='SeverityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The severity of the notification
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='CRITICAL'/>
+      <xs:enumeration value='ERROR'/>
+      <xs:enumeration value='WARNING'/>
+      <xs:enumeration value='INFORMATION'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='NotificationType'>
     <xs:annotation>
       <xs:documentation>
@@ -1462,6 +1515,8 @@
     <xs:simpleContent>
       <xs:extension base='EventType'>
         <xs:attribute name='code' type='NotifcationCodeType' use='required'/>
+        <xs:attribute name='severity' type='SeverityType' use='optional'/>
+        <xs:attribute name='state' type='NotificationStateType' use='optional'/>
         <xs:attribute name='nativeCode' type='NativeNotifcationCodeType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
@@ -1521,6 +1576,23 @@
     <xs:annotation>
       <xs:documentation>
         A status message
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AlarmType'>
+    <xs:annotation>
+      <xs:documentation>
+        An Alarm message
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='NotificationType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Alarm' substitutionGroup='Notification' type='AlarmType'>
+    <xs:annotation>
+      <xs:documentation>
+        An Alarm message
       </xs:documentation>
     </xs:annotation>
   </xs:element>

@@ -1,26 +1,26 @@
 
 package :Samlpes, 'The samples' do
   float = '[+-]?\d+(\.\d+)?(E[+-]?\d+)?'
+  float_value = "#{float}|UNAVAILABLE"
   
   basic_type :SampleValue, 'An events data'
-  basic_type(:PositionValue, 'The value for the position') { pattern float }
-  basic_type(:DisplacementValue, 'The value for the displacement') { pattern float }
-  basic_type(:FrequencyValue, 'The value for the frequency') { pattern float }
-  basic_type(:AmperageValue, 'The amperage') { pattern float }
-  basic_type(:VoltageValue, 'The voltage') { pattern float }
-  basic_type(:WattValue, 'The watts') { pattern float }
-  basic_type(:PressureValue, 'The pressure') { pattern float }
-  basic_type(:AccelerationValue, 'The value for the acceleration') { pattern float }
-  basic_type(:AngleValue, 'The angle') { pattern float }
-  basic_type(:TemperatureValue, 'The temperature') { pattern float }
-  basic_type(:VelocityValue, 'The temperature') { pattern float }
-  basic_type(:FeedrateValue, 'The feedrate') { pattern float }
-  basic_type(:VibrationValue, 'The vibration') { pattern float }
-  basic_type(:SpindleSpeedValue, 'The spindle speed') { pattern float }
-  basic_type(:LoadValue, 'A component load') { pattern float }
-  basic_type(:TorqueValue, 'A component\'s torque') { pattern float }
-  basic_type(:GlobalPositionValue, 'DEPRECATED: A value given in 3-space as x,y,z') { pattern "#{float},#{float},#{float}" }
-  basic_type(:ThreeDimensionalValue, 'A three dimensional value \'X Y Z\' or \'A B C\'') { pattern "#{float} #{float} #{float}" }
+  basic_type(:PositionValue, 'The value for the position') { pattern float_value }
+  basic_type(:DisplacementValue, 'The value for the displacement') { pattern float_value }
+  basic_type(:FrequencyValue, 'The value for the frequency') { pattern float_value }
+  basic_type(:AmperageValue, 'The amperage') { pattern float_value }
+  basic_type(:VoltageValue, 'The voltage') { pattern float_value }
+  basic_type(:WattValue, 'The watts') { pattern float_value }
+  basic_type(:PressureValue, 'The pressure') { pattern float_value }
+  basic_type(:AccelerationValue, 'The value for the acceleration') { pattern float_value }
+  basic_type(:AngleValue, 'The angle') { pattern float_value }
+  basic_type(:TemperatureValue, 'The temperature') { pattern float_value }
+  basic_type(:VelocityValue, 'The temperature') { pattern float_value }
+  basic_type(:FeedrateValue, 'The feedrate') { pattern float_value }
+  basic_type(:VibrationValue, 'The vibration') { pattern float_value }
+  basic_type(:SpindleSpeedValue, 'The spindle speed') { pattern float_value }
+  basic_type(:LoadValue, 'A component load') { pattern float_value }
+  basic_type(:TorqueValue, 'A component\'s torque') { pattern float_value }
+  basic_type(:ThreeDimensionalValue, 'A three dimensional value \'X Y Z\' or \'A B C\'') { pattern "#{float} #{float} #{float}|UNAVAILABLE" }
   
   type :Sample, 'An abstract sample', :Result do
     abstract
@@ -30,8 +30,8 @@ package :Samlpes, 'The samples' do
     member :Value, 'amperage', :AmperageValue
   end
 
-  type :GlobalPosition, 'The three space position of the component', :Sample do
-    member :Value, 'The position', :GlobalPositionValue
+  type :GlobalPosition, 'DEPRECATED: The three space position of the component', :Sample do
+    member :Value, 'The position', :ThreeDimensionalValue
   end
 
   type :Position, 'The position of the component', :Sample do

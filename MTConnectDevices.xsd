@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<xs:schema targetNamespace='urn:mtconnect.com:MTConnectDevices:1.1' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.com:MTConnectDevices:1.1' xmlns='urn:mtconnect.com:MTConnectDevices:1.1'>
+<xs:schema targetNamespace='urn:mtconnect.com:MTConnectDevices:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.com:MTConnectDevices:1.2' xmlns='urn:mtconnect.com:MTConnectDevices:1.2'>
   <xs:element name='MTConnectDevices' type='MTConnectDevicesType'>
     <xs:annotation>
       <xs:documentation>

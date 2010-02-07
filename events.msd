@@ -1,24 +1,28 @@
 
 package :Events, 'Event Package' do
-  basic_type :PartCountValue, 'The number of parts', :integer
+  integer_value = '[+-]?\d+|UNAVAILABLE'
+  
+  basic_type(:PartCountValue, 'The number of parts') { pattern integer_value }
   basic_type :BlockValue, 'Code block value'
   basic_type :CodeValue, 'Value of the program code'
   basic_type :ProgramValue, 'The program name'
   basic_type :ToolEventValue, 'A tool event'
-  basic_type :LineValue, 'The line number', :integer
+  basic_type(:LineValue, 'The line number') { pattern integer_value }
   basic_type :ToolIdValue, 'The tool identifier'
   basic_type :PartIdValue, 'The part identifier'
   basic_type :WorkholdingIdValue, 'The workholding identifier'
-  basic_type(:ActiveAxesValue, 'A space delimited list of values') { pattern '[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
+  basic_type(:AxesListValue, 'A space delimited list of values') { pattern '[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
   
   enum :DirectionValue, 'Rotation Direction' do
     value :CLOCKWISE, 'Clockwise rotation'
     value :COUNTER_CLOCKWISE, 'Counter clockwise rotation'
+    value :UNAVAILABLE, 'The value is indeterminate'
   end
 
   enum :PowerStatusValue, 'A power status' do
     value :ON, 'The power is on'
     value :OFF, 'The power is off'
+    value :UNAVAILABLE, 'The value is indeterminate'
   end
 
   enum :ExecutionValue, 'The execution value' do
@@ -26,23 +30,27 @@ package :Events, 'Event Package' do
     value :INTERRUPTED, 'The program has been paused'
     value :ACTIVE, 'The program is actively running'
     value :STOPPED, 'The program has been stopped'
+    value :UNAVAILABLE, 'The value is indeterminate'
   end
   
   enum :ControllerModeValue, 'The cnc mode value' do
     value :AUTOMATIC, 'The cnc is in automatic mode'
     value :MANUAL, 'The cnc is in manual mode'
     value :MANUAL_DATA_INPUT, 'The cnc is in manual data input mode (MDI)'
+    value :UNAVAILABLE, 'The value is indeterminate'
   end
   
   enum :DoorStatusValue, 'The status of a door' do
     value :OPEN, 'The door is open'
     value :CLOSED, 'The door is closed'
+    value :UNAVAILABLE, 'The value is indeterminate'
   end
   
   enum :RotaryFunctionValue, 'The rotary functions' do
     value :SPIN, 'The rotary is spinning at a velocity'
     value :INDEX, 'The rotary axes is index to specific angles'
     value :CONTOUR, 'The rotary axes is both spinning and spinning'
+    value :UNAVAILABLE, 'The value is indeterminate'
   end
 
   type :Event, 'An abstract event', :Result do
@@ -106,6 +114,10 @@ package :Events, 'Event Package' do
   end
   
   type :ActiveAxes, 'The list of axes in use', :Event do
-    member :Value, 'The list of axes', :ActiveAxesValue
+    member :Value, 'The list of axes', :AxesListValue
+  end
+
+  type :SlaveAxes, 'The list of axes in use', :Event do
+    member :Value, 'The list of axes', :AxesListValue
   end
 end
