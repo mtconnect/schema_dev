@@ -144,7 +144,6 @@
       <xs:enumeration value='PART_ID'/>
       <xs:enumeration value='PATH_FEEDRATE'/>
       <xs:enumeration value='PATH_POSITION'/>
-      <xs:enumeration value='PATH_ROTATION'/>
       <xs:enumeration value='AXIS_FEEDRATE'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
@@ -352,7 +351,7 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='ComponentType'>
-        <xs:attribute name='iso841Class' type='Iso841ClassType' use='required'/>
+        <xs:attribute name='iso841Class' type='Iso841ClassType' use='optional'/>
         <xs:attribute name='uuid' type='UuidType' use='required'/>
       </xs:extension>
     </xs:complexContent>
@@ -483,17 +482,6 @@
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name='orientationType'>
-    <xs:annotation>
-      <xs:documentation>
-        Orientation of an axis
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='HORIZONTAL'/>
-      <xs:enumeration value='VERTICAL'/>
-    </xs:restriction>
-  </xs:simpleType>
   <xs:complexType name='AxesType'>
     <xs:annotation>
       <xs:documentation>
@@ -518,9 +506,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='CommonComponentType'>
-        <xs:attribute name='orientation' type='orientationType' use='optional'/>
-      </xs:extension>
+      <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name='Axis' abstract='true' substitutionGroup='CommonComponent' type='AxisType'>

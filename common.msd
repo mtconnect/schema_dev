@@ -36,7 +36,6 @@ package :common, 'Common attributes and elements for all schemas' do
     value :PART_ID, 'The identifier of the part loaded'
     value :PATH_FEEDRATE, 'The feedrate for the path'
     value :PATH_POSITION, 'The three space position X, Y, Z'
-    value :PATH_ROTATION, 'The three space rotational vector for the path A, B, C'
     value :AXIS_FEEDRATE, 'The feedrate for the axis'
     value :LINE, 'The line of the program being executed'
     value :CONTROLLER_MODE, 'The CNC\'s mode'
