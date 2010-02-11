@@ -88,27 +88,15 @@ package :DataItems, 'Data Items Package' do
   type :DataItemLimits, 'A set of limits for a data item' do
     choice do
       set do
-        member :Limit, 'A data item value', 1..INF, :DataItemLimit
+        member :Limit, 'An possible value for this data item. Used for controlled vocabularies.', 1..INF, :DataItemLimitOption
       end
       set do
-        member :Maximum, 'A maximum data item value', :DataItemMaximum
-        member :Minimum, 'A minimum data item value', :DataItemMinimum
+        member :Minimum, 'A minimum value for this data item.', :DataItemLimitValue
+        member :Maximum, 'A maximum value for this data item.', :DataItemLimitValue
       end
     end
   end
   
-  type :DataItemLimit, 'A possible value for this data item. Limits the possible options for a data item' do
-    member :Value, 'The possible value', :DataItemLimitOption
-  end
-
-  type :DataItemMaximum, 'A possible value for this data item. Limits the possible options for a data item' do
-    member :Value, 'The uppoer bound limit', :DataItemLimitValue
-  end
-
-  type :DataItemMinimum, 'A possible value for this data item. Limits the possible options for a data item' do
-    member :Value, 'The lower bound limit', :DataItemLimitValue
-  end
-
   type :Source, 'A native data source' do
     member :Value, 'The source', :ItemSource
   end
