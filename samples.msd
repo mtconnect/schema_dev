@@ -106,8 +106,4 @@ package :Samlpes, 'The samples' do
     member :Value, 'The position', :ThreeDimensionalValue
   end
   
-  type :PathRotation, 'The 3 dimensional rotation angles of tool tip in the path (A B C)', :Sample do
-    member :Value, 'The rotational angles', :ThreeDimensionalValue
-  end
-  
 end

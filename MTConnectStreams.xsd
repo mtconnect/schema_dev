@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<xs:schema targetNamespace='urn:mtconnect.com:MTConnectStreams:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.com:MTConnectStreams:1.2' xmlns='urn:mtconnect.com:MTConnectStreams:1.2'>
+<xs:schema targetNamespace='urn:mtconnect.com:MTConnectStreams:1.1' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.com:MTConnectStreams:1.1' xmlns='urn:mtconnect.com:MTConnectStreams:1.1'>
   <xs:element name='MTConnectStreams' type='MTConnectStreamsType'>
     <xs:annotation>
       <xs:documentation>
@@ -144,7 +144,6 @@
       <xs:enumeration value='PART_ID'/>
       <xs:enumeration value='PATH_FEEDRATE'/>
       <xs:enumeration value='PATH_POSITION'/>
-      <xs:enumeration value='PATH_ROTATION'/>
       <xs:enumeration value='AXIS_FEEDRATE'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
@@ -942,25 +941,6 @@
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='PathRotationType'>
-    <xs:annotation>
-      <xs:documentation>
-        The 3 dimensional rotation angles of tool tip in the path (A B C)
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
-      </xs:restriction>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='PathRotation' substitutionGroup='Sample' type='PathRotationType'>
-    <xs:annotation>
-      <xs:documentation>
-        The 3 dimensional rotation angles of tool tip in the path (A B C)
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:simpleType name='PartCountValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -1117,7 +1097,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='SPIN'/>
+      <xs:enumeration value='SPINDLE'/>
       <xs:enumeration value='INDEX'/>
       <xs:enumeration value='CONTOUR'/>
       <xs:enumeration value='UNAVAILABLE'/>
@@ -1396,7 +1376,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='EventType'>
-        <xs:enumeration value='SPIN'/>
+        <xs:enumeration value='SPINDLE'/>
         <xs:enumeration value='INDEX'/>
         <xs:enumeration value='CONTOUR'/>
         <xs:enumeration value='UNAVAILABLE'/>
