@@ -1,7 +1,8 @@
 
 package :DataItems, 'Data Items Package' do
   attr :SampleRate, 'The rate a measurement is sampled', :float
-  attr :DataItemValueOption, 'The constrained value for this data item'
+  attr :DataItemLimitOption, 'The constrained value for this data item'
+  attr :DataItemLimitValue, 'The constrained value for this data item'
   
   # Measurement types
   enum :Category, 'The measurement sampling type' do
@@ -81,15 +82,31 @@ package :DataItems, 'Data Items Package' do
     member :Category, 'The category of the data item'
     member :Source, 'The measurement\'s source. This is the native machine identifier for this measurement. The source will be used to identify the correct incoming value with the measurement.', 0..1
     member :CoordinateSystem, 'The coordinate system used for the positions', 0..1
-    member :Values, 'Possible values for this data item', 0..1, :DataItemValues
+    member :Limits, 'Limits on the set of possible values', 0..1, :DataItemLimits
   end
 
-  type :DataItemValues, 'A set of values for a data item' do
-    member :Value, 'A data item value', 1..INF, :DataItemValue
+  type :DataItemLimits, 'A set of limits for a data item' do
+    choice do
+      set do
+        member :Limit, 'A data item value', 1..INF, :DataItemLimit
+      end
+      set do
+        member :Maximum, 'A maximum data item value', :DataItemMaximum
+        member :Minimum, 'A minimum data item value', :DataItemMinimum
+      end
+    end
   end
   
-  type :DataItemValue, 'A possible value for this data item. Limits the possible options for a data item' do
-    member :Value, 'The possible value', :DataItemValueOption
+  type :DataItemLimit, 'A possible value for this data item. Limits the possible options for a data item' do
+    member :Value, 'The possible value', :DataItemLimitOption
+  end
+
+  type :DataItemMaximum, 'A possible value for this data item. Limits the possible options for a data item' do
+    member :Value, 'The uppoer bound limit', :DataItemLimitValue
+  end
+
+  type :DataItemMinimum, 'A possible value for this data item. Limits the possible options for a data item' do
+    member :Value, 'The lower bound limit', :DataItemLimitValue
   end
 
   type :Source, 'A native data source' do

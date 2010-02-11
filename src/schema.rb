@@ -246,7 +246,7 @@ class Schema
       # Add the elements to the sequence.
       sequence = REXML::Element.new('xs:sequence')
       @elems.each do |element|
-        sequence << element.generate_element
+        sequence << element.generate_xsd
       end
       (extension || complex_type) << sequence
 
@@ -383,7 +383,7 @@ class Schema
       end
     end
 
-    def generate_element
+    def generate_xsd
       # Create the element.
       element = REXML::Element.new('xs:element')
       
@@ -436,11 +436,6 @@ class Schema
       # add directly tot he complex type.
       element.add_element('xs:attribute', attrs)
     end
-
-    def generate_xsd
-      # At the top level, just generate the member. 
-      generate_element
-    end
   end
 
   class Choice
@@ -454,7 +449,19 @@ class Schema
 
       choice
     end
-    alias generate_element generate_xsd
+  end
+  
+  class ChoiceSet
+    def generate_xsd
+      choice = REXML::Element.new('xs:sequence')
+      add_occurrence(choice)
+
+      @members.each do |mem|
+        choice << mem.generate_xsd
+      end
+
+      choice
+    end
   end
   
   class ControlledVocabulary

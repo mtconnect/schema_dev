@@ -348,7 +348,33 @@ class Schema
       type, occurrence = occurrence, nil if Symbol === occurrence
       @members << Member.new(@schema, name, annotation, occurrence, type, &block)
     end
+    
+    def set(occurrence = 1, &block)
+      @members << ChoiceSet.new(@schema, occurrence, &block)
+    end
 
+    def attribute?
+      false
+    end
+
+    def resolve_type
+      nil
+    end
+  end
+  
+  class ChoiceSet < Member
+    attr_reader :members
+    
+    def initialize(schema, occurrence = 1, &block)
+      @members = []
+      super(schema, 'sequence', 'sequence', occurrence)
+    end
+    
+    def member(name, annotation, occurrence = nil, type = nil, &block)
+      type, occurrence = occurrence, nil if Symbol === occurrence
+      @members << Member.new(@schema, name, annotation, occurrence, type, &block)
+    end
+    
     def attribute?
       false
     end

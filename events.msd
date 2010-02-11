@@ -47,7 +47,7 @@ package :Events, 'Event Package' do
   end
   
   enum :RotaryFunctionValue, 'The rotary functions' do
-    value :SPIN, 'The rotary is spinning at a velocity'
+    value :SPINDLE, 'The rotary is spinning at a velocity'
     value :INDEX, 'The rotary axes is index to specific angles'
     value :CONTOUR, 'The rotary axes is both spinning and spinning'
     value :UNAVAILABLE, 'The value is indeterminate'

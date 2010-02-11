@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<xs:schema targetNamespace='urn:mtconnect.com:MTConnectDevices:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.com:MTConnectDevices:1.2' xmlns='urn:mtconnect.com:MTConnectDevices:1.2'>
+<xs:schema targetNamespace='urn:mtconnect.com:MTConnectDevices:1.1' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.com:MTConnectDevices:1.1' xmlns='urn:mtconnect.com:MTConnectDevices:1.1'>
   <xs:element name='MTConnectDevices' type='MTConnectDevicesType'>
     <xs:annotation>
       <xs:documentation>
@@ -589,7 +589,15 @@
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:simpleType name='DataItemValueOptionType'>
+  <xs:simpleType name='DataItemLimitOptionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The constrained value for this data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemLimitValueType'>
     <xs:annotation>
       <xs:documentation>
         The constrained value for this data item
@@ -734,10 +742,10 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Values' maxOccurs='1' minOccurs='0' type='DataItemValuesType'>
+      <xs:element name='Limits' maxOccurs='1' minOccurs='0' type='DataItemLimitsType'>
         <xs:annotation>
           <xs:documentation>
-            Possible values for this data item
+            Limits on the set of possible values
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -752,23 +760,41 @@
     <xs:attribute name='category' type='CategoryType' use='required'/>
     <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'/>
   </xs:complexType>
-  <xs:complexType name='DataItemValuesType'>
+  <xs:complexType name='DataItemLimitsType'>
     <xs:annotation>
       <xs:documentation>
-        A set of values for a data item
+        A set of limits for a data item
       </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Value' maxOccurs='unbounded' minOccurs='1' type='DataItemValueType'>
-        <xs:annotation>
-          <xs:documentation>
-            A data item value
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
+    <xs:choice minOccurs='1'>
+      <xs:sequence minOccurs='1'>
+        <xs:element name='Limit' maxOccurs='unbounded' minOccurs='1' type='DataItemLimitType'>
+          <xs:annotation>
+            <xs:documentation>
+              A data item value
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:sequence minOccurs='1'>
+        <xs:element name='Maximum' type='DataItemMaximumType'>
+          <xs:annotation>
+            <xs:documentation>
+              A maximum data item value
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name='Minimum' type='DataItemMinimumType'>
+          <xs:annotation>
+            <xs:documentation>
+              A minimum data item value
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:choice>
   </xs:complexType>
-  <xs:complexType name='DataItemValueType'>
+  <xs:complexType name='DataItemLimitType'>
     <xs:annotation>
       <xs:documentation>
         A possible value for this data item. Limits the possible options for a
@@ -776,7 +802,29 @@
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='DataItemValueOptionType'/>
+      <xs:extension base='DataItemLimitOptionType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='DataItemMaximumType'>
+    <xs:annotation>
+      <xs:documentation>
+        A possible value for this data item. Limits the possible options for a
+        data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='DataItemLimitValueType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='DataItemMinimumType'>
+    <xs:annotation>
+      <xs:documentation>
+        A possible value for this data item. Limits the possible options for a
+        data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='DataItemLimitValueType'/>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name='SourceType'>
