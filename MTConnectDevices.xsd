@@ -575,7 +575,7 @@
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:simpleType name='DataItemLimitOptionType'>
+  <xs:simpleType name='DataItemOptionType'>
     <xs:annotation>
       <xs:documentation>
         The constrained value for this data item
@@ -583,13 +583,21 @@
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='DataItemLimitValueType'>
+  <xs:simpleType name='DataItemValueType'>
     <xs:annotation>
       <xs:documentation>
         The constrained value for this data item
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='SignificantDigitsValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number significant digits
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
   </xs:simpleType>
   <xs:simpleType name='CategoryType'>
     <xs:annotation>
@@ -619,7 +627,9 @@
     <xs:restriction base='xs:string'>
       <xs:enumeration value='STATUS'/>
       <xs:enumeration value='MILLIMETER'/>
+      <xs:enumeration value='MILLIMETER_3D'/>
       <xs:enumeration value='DEGREE'/>
+      <xs:enumeration value='DEGREE_3D'/>
       <xs:enumeration value='MILLIMETER/SECOND'/>
       <xs:enumeration value='DEGREE/SECOND'/>
       <xs:enumeration value='MILLIMETER/SECOND^2'/>
@@ -648,7 +658,9 @@
     <xs:restriction base='xs:string'>
       <xs:enumeration value='STATUS'/>
       <xs:enumeration value='MILLIMETER'/>
+      <xs:enumeration value='MILLIMETER_3D'/>
       <xs:enumeration value='DEGREE'/>
+      <xs:enumeration value='DEGREE_3D'/>
       <xs:enumeration value='MILLIMETER/SECOND'/>
       <xs:enumeration value='DEGREE/SECOND'/>
       <xs:enumeration value='MILLIMETER/SECOND^2'/>
@@ -669,13 +681,17 @@
       <xs:enumeration value='INCH/MINUTE'/>
       <xs:enumeration value='INCH/SECOND'/>
       <xs:enumeration value='INCH/SECOND^2'/>
+      <xs:enumeration value='INCH'/>
+      <xs:enumeration value='INCH_3D'/>
       <xs:enumeration value='FOOT'/>
       <xs:enumeration value='FOOT/MINUTE'/>
       <xs:enumeration value='FOOT/SECOND'/>
       <xs:enumeration value='FOOT/SECOND^2'/>
+      <xs:enumeration value='FOOT_3D'/>
       <xs:enumeration value='POUND'/>
       <xs:enumeration value='FAHRENHEIT'/>
       <xs:enumeration value='RADIAN'/>
+      <xs:enumeration value='RADIAN_3D'/>
       <xs:enumeration value='RADIAN/SECOND'/>
       <xs:enumeration value='RADIAN/SECOND^2'/>
       <xs:enumeration value='RADIAN/MINUTE'/>
@@ -728,7 +744,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Limits' maxOccurs='1' minOccurs='0' type='DataItemLimitsType'>
+      <xs:element name='Constraints' maxOccurs='1' minOccurs='0' type='DataItemLimitsType'>
         <xs:annotation>
           <xs:documentation>
             Limits on the set of possible values
@@ -745,6 +761,7 @@
     <xs:attribute name='nativeScale' type='NativeScaleType' use='optional'/>
     <xs:attribute name='category' type='CategoryType' use='required'/>
     <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'/>
+    <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='DataItemLimitsType'>
     <xs:annotation>
@@ -754,7 +771,7 @@
     </xs:annotation>
     <xs:choice minOccurs='1'>
       <xs:sequence minOccurs='1'>
-        <xs:element name='Limit' maxOccurs='unbounded' minOccurs='1' type='DataItemLimitOptionType'>
+        <xs:element name='Value' maxOccurs='unbounded' minOccurs='1' type='DataItemValueElementType'>
           <xs:annotation>
             <xs:documentation>
               An possible value for this data item. Used for controlled
@@ -764,14 +781,14 @@
         </xs:element>
       </xs:sequence>
       <xs:sequence minOccurs='1'>
-        <xs:element name='Minimum' type='DataItemLimitValueType'>
+        <xs:element name='Minimum' type='DataItemValueType'>
           <xs:annotation>
             <xs:documentation>
               A minimum value for this data item.
             </xs:documentation>
           </xs:annotation>
         </xs:element>
-        <xs:element name='Maximum' type='DataItemLimitValueType'>
+        <xs:element name='Maximum' type='DataItemValueType'>
           <xs:annotation>
             <xs:documentation>
               A maximum value for this data item.
@@ -780,6 +797,16 @@
         </xs:element>
       </xs:sequence>
     </xs:choice>
+  </xs:complexType>
+  <xs:complexType name='DataItemValueElementType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value element
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='DataItemOptionType'/>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name='SourceType'>
     <xs:annotation>

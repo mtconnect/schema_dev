@@ -1,8 +1,10 @@
 
 package :DataItems, 'Data Items Package' do
   attr :SampleRate, 'The rate a measurement is sampled', :float
-  attr :DataItemLimitOption, 'The constrained value for this data item'
-  attr :DataItemLimitValue, 'The constrained value for this data item'
+  attr :DataItemOption, 'The constrained value for this data item'
+  attr :DataItemValue, 'The constrained value for this data item'
+  attr :SignificantDigitsValue, 'The number significant digits', :integer
+  
   
   # Measurement types
   enum :Category, 'The measurement sampling type' do
@@ -17,7 +19,9 @@ package :DataItems, 'Data Items Package' do
   enum :Units, 'The units supported' do
     value :STATUS, 'A status value'
     value :MILLIMETER, 'Millimeters'
+    value :MILLIMETER_3D, '3D Millimeters'
     value :DEGREE, 'Angle in degrees'
+    value :DEGREE_3D, '3D Angle in degrees'
     value :'MILLIMETER/SECOND', 'Millimeters per second'
     value :'DEGREE/SECOND', 'Degrees per  second'
     value :'MILLIMETER/SECOND^2', 'Acceleration at millimeters per second squared'
@@ -42,13 +46,17 @@ package :DataItems, 'Data Items Package' do
     value :'INCH/MINUTE', 'Inches per minute'
     value :'INCH/SECOND', 'Inches per second'
     value :'INCH/SECOND^2', 'Inches per second'
+    value :INCH, 'Inches'
+    value :INCH_3D, '3D Inches'
     value :FOOT, 'Feet'
     value :'FOOT/MINUTE', 'Feet per minute'
     value :'FOOT/SECOND', 'Feet per second'
     value :'FOOT/SECOND^2', 'Feet per second'
+    value :FOOT_3D, '3D Foot'
     value :POUND, 'Pounds'
     value :FAHRENHEIT, 'Degrees Fahrenheit'
     value :RADIAN, 'Radians'
+    value :RADIAN_3D, '3D Radians'
     value :'RADIAN/SECOND', 'Radians per second'
     value :'RADIAN/SECOND^2', 'Radians per second'
     value :'RADIAN/MINUTE', 'Radians per minute'
@@ -82,19 +90,24 @@ package :DataItems, 'Data Items Package' do
     member :Category, 'The category of the data item'
     member :Source, 'The measurement\'s source. This is the native machine identifier for this measurement. The source will be used to identify the correct incoming value with the measurement.', 0..1
     member :CoordinateSystem, 'The coordinate system used for the positions', 0..1
-    member :Limits, 'Limits on the set of possible values', 0..1, :DataItemLimits
+    member :SignificantDigits, 'The number of significant digits for this data item', 0..1, :SignificantDigitsValue
+    member :Constraints, 'Limits on the set of possible values', 0..1, :DataItemLimits
   end
 
   type :DataItemLimits, 'A set of limits for a data item' do
     choice do
       set do
-        member :Limit, 'An possible value for this data item. Used for controlled vocabularies.', 1..INF, :DataItemLimitOption
+        member :Value, 'An possible value for this data item. Used for controlled vocabularies.', 1..INF, :DataItemValueElement
       end
       set do
-        member :Minimum, 'A minimum value for this data item.', :DataItemLimitValue
-        member :Maximum, 'A maximum value for this data item.', :DataItemLimitValue
+        member :Minimum, 'A minimum value for this data item.', :DataItemValue
+        member :Maximum, 'A maximum value for this data item.', :DataItemValue
       end
     end
+  end
+  
+  type :DataItemValueElement, 'The value element' do
+    member :Value, 'A possible value for this data item', :DataItemOption
   end
   
   type :Source, 'A native data source' do
