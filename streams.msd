@@ -3,6 +3,7 @@ package :Streams, 'Event Package' do
   attr :Timestamp, 'The time the sample occurred', :dateTime
   attr :DataItemId, 'The item\'s unique ID that references the data item id from probe', :NMTOKEN
   attr :ComponentId, 'The id of the component (maps to the id from probe)', :ID
+  attr :NativeCode, 'An Condition code as defined by the component'
 
   type :Streams, 'Event container for all component events' do
     member :DeviceStream, 'The data from a device', 1..INF
@@ -16,11 +17,12 @@ package :Streams, 'Event Package' do
 
   type :ComponentStream, 'The stream of data for a component' do
     member :ComponentId, 'The id of the component (maps to the id from probe)'
-    member :Name, 'The component name'
+    member :Name, 'The component name', 0..1
     member :Component, 'The type of the component', :Name
     member :Uuid, 'The unque identifier for this component', 0..1
     member :Samples, 'A collection of samples', 0..1
-    member :Events, 'A collection of events and alarms', 0..1
+    member :Events, 'A collection of events', 0..1
+    member :Condition, 'The representation of the devices condition', 0..1, :ConditionList
   end
 
   type :Samples, 'A collection of samples for this component' do
@@ -30,6 +32,10 @@ package :Streams, 'Event Package' do
   type :Events, 'A collection of events and alarms for this component' do
     member :Event, 'A subtype of event', 1..INF
   end
+  
+  type :ConditionList, 'The condition of the device' do
+    member :Condition, 'A subtype of a condition', 1..INF 
+  end
 
   type :Result, 'An abstract event' do
     standards :OMAC => 'Value'
@@ -38,7 +44,7 @@ package :Streams, 'Event Package' do
     member :Value, 'Abstract event data', :SampleValue
     member :SubType, 'The event subtype corresponding to the measurement subtype', 0..1, :DataItemSubEnum
     member :Timestamp, 'The time the event occurred'
-    member :Name, 'The name of the event corresponding to the measurement'
+    member :Name, 'The name of the event corresponding to the measurement', 0..1
     member :DataItemId, 'The unique identifier of the item being produced'
   end
 end

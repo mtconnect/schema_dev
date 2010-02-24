@@ -11,6 +11,7 @@ package :Events, 'Event Package' do
   basic_type :ToolIdValue, 'The tool identifier'
   basic_type :PartIdValue, 'The part identifier'
   basic_type :WorkholdingIdValue, 'The workholding identifier'
+  basic_type :MessageValue, 'A message'
   basic_type(:AxesListValue, 'A space delimited list of values') { pattern '[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
   
   enum :DirectionValue, 'Rotation Direction' do
@@ -19,7 +20,7 @@ package :Events, 'Event Package' do
     value :UNAVAILABLE, 'The value is indeterminate'
   end
 
-  enum :PowerStatusValue, 'A power status' do
+  enum :PowerStateValue, 'A power status' do
     value :ON, 'The power is on'
     value :OFF, 'The power is off'
     value :UNAVAILABLE, 'The value is indeterminate'
@@ -40,7 +41,7 @@ package :Events, 'Event Package' do
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
-  enum :DoorStatusValue, 'The status of a door' do
+  enum :DoorStateValue, 'The status of a door' do
     value :OPEN, 'The door is open'
     value :CLOSED, 'The door is closed'
     value :UNAVAILABLE, 'The value is indeterminate'
@@ -69,8 +70,8 @@ package :Events, 'Event Package' do
     member :Value, 'Line number', :LineValue
   end
 
-  type :PowerStatus, 'The components power status', :Event do
-    member :Value, 'The on or off status of component', :PowerStatusValue
+  type :PowerState, 'The components power status', :Event do
+    member :Value, 'The on or off status of component', :PowerStateValue
   end
   
   type :PartCount, 'An event that indicates the number of parts', :Event do
@@ -101,8 +102,8 @@ package :Events, 'Event Package' do
     member :Value, 'The tool identifier', :PartIdValue
   end
   
-  type :DoorStatus, 'The status of the door', :Event do
-    member :Value, 'The status of the door', :DoorStatusValue
+  type :DoorState, 'The status of the door', :Event do
+    member :Value, 'The status of the door', :DoorStateValue
   end
   
   type :WorkholdingId, 'The current workholding Identifier', :Event do 
@@ -119,5 +120,10 @@ package :Events, 'Event Package' do
 
   type :SlaveAxes, 'The list of axes in use', :Event do
     member :Value, 'The list of axes', :AxesListValue
+  end
+  
+  type :Message, 'A generic message', :Event do
+    member :NativeCode, 'The component specific Notifcation code', 0..1
+    member :Value, 'A device message', :MessageValue
   end
 end

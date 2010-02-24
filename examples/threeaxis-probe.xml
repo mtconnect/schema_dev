@@ -1,73 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by William Sobel (System Insights, Inc.) -->
 <MTConnectDevices xmlns="urn:mtconnect.com:MTConnectDevices:1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.com:MTConnectDevices:1.1 ../MTConnectDevices.xsd">
-	<Header bufferSize="130000" instanceId="1" creationTime="2009-11-13T02:31:40" sender="local" version="1.1"/>
-	<Devices>
-		<Device id="d1" uuid="HM1" name="HMC_3Axis">
-			<Description>3 Axis Mill</Description>
-			<DataItems>
-				<DataItem type="ALARM" id="d1a" category="EVENT" name="alarm"/>
-			</DataItems>
-			<Components>
-				<Axes id="a" name="base">
-					<Components>
-						<Linear id="y" name="Y">
-							<DataItems>
-								<DataItem type="POSITION" subType="ACTUAL" id="yp" category="SAMPLE" name="Yact" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
-							</DataItems>
-						</Linear>
-						<Linear id="x" name="X">
-							<DataItems>
-								<DataItem type="POSITION" subType="ACTUAL" id="xp" category="SAMPLE" name="Xact" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
-							</DataItems>
-						</Linear>
-						<Linear id="z" name="Z">
-							<DataItems>
-								<DataItem type="POSITION" id="zp" category="SAMPLE" name="Zact" subType="ACTUAL" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
-							</DataItems>
-						</Linear>
-						<Rotary id="c" name="C">
-							<DataItems>
-								<DataItem type="SPINDLE_SPEED" id="cspd" category="SAMPLE" name="Sspeed" subType="ACTUAL" units="REVOLUTION/MINUTE" nativeUnits="REVOLUTION/MINUTE"/>
-								<DataItem type="SPINDLE_SPEED" id="cso" category="SAMPLE" name="Sovr" subType="OVERRIDE" units="PERCENT" nativeUnits="PERCENT"/>
-								<DataItem type="ROTARY_MODE" id="rf" category="EVENT" name="rfunc">
-									<Limits>
-										<Limit>SPINDLE</Limit>
-									</Limits>
-								</DataItem>
-							</DataItems>
-						</Rotary>
-					</Components>
-				</Axes>
-				<Controller id="cont" name="controller">
-					<Components>
-						<Path id="path" name="path">
-							<DataItems>
-								<DataItem type="PROGRAM" id="pgm" category="EVENT" name="program"/>
-								<DataItem type="BLOCK" id="blk" category="EVENT" name="block"/>
-								<DataItem type="LINE" id="ln" category="EVENT" name="line"/>
-								<DataItem type="PATH_FEEDRATE" id="pf" category="SAMPLE" name="Fact" units="MILLIMETER/SECOND" nativeUnits="FOOT/MINUTE" subType="ACTUAL" coordinateSystem="WORK"/>
-								<DataItem type="PATH_FEEDRATE" id="pfo" category="SAMPLE" name="Fovr" units="PERCENT" nativeUnits="PERCENT" subType="OVERRIDE"/>
-								<DataItem type="PATH_POSITION" id="pp" category="SAMPLE" name="Ppos" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="WORK"/>
-								<DataItem type="TOOL_ID" id="tid" category="EVENT" name="Tid"/>
-								<DataItem type="PART_ID" id="pid" category="EVENT" name="Pid"/>
-								<DataItem type="EXECUTION" id="exec" category="EVENT" name="execution"/>
-								<DataItem type="CONTROLLER_MODE" id="cm" category="EVENT" name="mode"/>
-							</DataItems>
-						</Path>
-					</Components>
-				</Controller>
-				<Power id="power" name="power">
-					<DataItems>
-						<DataItem type="POWER_STATUS" id="ps" category="EVENT" name="power_status"/>
-					</DataItems>
-				</Power>
-				<Door id="d" name="door">
-					<DataItems>
-						<DataItem id="ds" category="EVENT" name="door_status" type="DOOR_STATUS"/>
-					</DataItems>
-				</Door>
-			</Components>
-		</Device>
-	</Devices>
+  <Header bufferSize="130000" instanceId="1" creationTime="2009-11-13T02:31:40" sender="local" version="1.1"/>
+  <Devices>
+    <Device id="d1" uuid="HM1" name="HMC_3Axis">
+      <Description>3 Axis Mill</Description>
+      <Components>
+        <Axes id="a" name="base">
+          <Components>
+            <Linear id="y" name="Y">
+              <DataItems>
+                <DataItem type="POSITION" subType="ACTUAL" id="yp" category="SAMPLE" name="Yact" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
+              </DataItems>
+            </Linear>
+            <Linear id="x" name="X">
+              <DataItems>
+                <DataItem type="POSITION" subType="ACTUAL" id="xp" category="SAMPLE" name="Xact" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
+              </DataItems>
+            </Linear>
+            <Linear id="z" name="Z">
+              <DataItems>
+                <DataItem type="POSITION" id="zp" category="SAMPLE" name="Zact" subType="ACTUAL" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
+              </DataItems>
+            </Linear>
+            <Rotary id="c" name="C">
+              <DataItems>
+                <DataItem type="SPINDLE_SPEED" id="cspd" category="SAMPLE" name="Sspeed" subType="ACTUAL" units="REVOLUTION/MINUTE" nativeUnits="REVOLUTION/MINUTE"/>
+                <DataItem type="SPINDLE_SPEED" id="cso" category="SAMPLE" name="Sovr" subType="OVERRIDE" units="PERCENT" nativeUnits="PERCENT"/>
+                <DataItem type="ROTARY_MODE" id="rf" category="EVENT" name="rfunc">
+                  <Constraints>
+                    <Value>SPINDLE</Value>
+                  </Constraints>
+                </DataItem>
+              </DataItems>
+            </Rotary>
+          </Components>
+        </Axes>
+        <Controller id="cont" name="controller">
+          <Components>
+            <Path id="path" name="path">
+              <DataItems>
+                <DataItem type="PROGRAM" id="pgm" category="EVENT" name="program"/>
+                <DataItem type="BLOCK" id="blk" category="EVENT" name="block"/>
+                <DataItem type="LINE" id="ln" category="EVENT" name="line"/>
+                <DataItem type="PATH_FEEDRATE" id="pf" category="SAMPLE" name="Fact" units="MILLIMETER/SECOND" nativeUnits="FOOT/MINUTE" subType="ACTUAL" coordinateSystem="WORK"/>
+                <DataItem type="PATH_FEEDRATE" id="pfo" category="SAMPLE" name="Fovr" units="PERCENT" nativeUnits="PERCENT" subType="OVERRIDE"/>
+                <DataItem type="PATH_POSITION" id="pp" category="SAMPLE" name="Ppos" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="WORK"/>
+                <DataItem type="TOOL_ID" id="tid" category="EVENT" name="Tid"/>
+                <DataItem type="PART_ID" id="pid" category="EVENT" name="Pid"/>
+                <DataItem type="EXECUTION" id="exec" category="EVENT" name="execution"/>
+                <DataItem type="CONTROLLER_MODE" id="cm" category="EVENT" name="mode"/>
+              </DataItems>
+            </Path>
+          </Components>
+        </Controller>
+        <Power id="power" name="power">
+          <DataItems>
+            <DataItem type="POWER_STATE" id="ps" category="EVENT" name="power_status"/>
+          </DataItems>
+        </Power>
+        <Door id="d" name="door">
+          <DataItems>
+            <DataItem id="ds" category="EVENT" name="door_status" type="DOOR_STATE"/>
+          </DataItems>
+        </Door>
+      </Components>
+    </Device>
+  </Devices>
 </MTConnectDevices>

@@ -26,7 +26,7 @@ class Schema
   end
   
   attr_reader :packages, :derived
-  attr_accessor :top, :namespace, :urn
+  attr_accessor :top, :namespace, :urn, :license
   
   def initialize(script)
     @packages = []
@@ -35,6 +35,7 @@ class Schema
     @type_map = { }
     @derived = Set.new
     @top = nil
+    @license = nil
     @namespace = 'ns'
     @standards = Set.new
     instance_eval script, 'Top'

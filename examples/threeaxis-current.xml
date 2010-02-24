@@ -53,8 +53,8 @@
 			</ComponentStream>
 			<ComponentStream component="Door" componentId="d" name="door">
 				<Events>
-					<DoorStatus dataItemId="ds" name="door_status" sequence="39" timestamp="2009-11-13T08:00:00">CLOSED</DoorStatus>
-					<DoorStatus dataItemId="ds" name="door_status" sequence="39" timestamp="2009-11-13T08:00:00">UNAVAILABLE</DoorStatus>
+					<DoorState dataItemId="ds" name="door_status" sequence="39" timestamp="2009-11-13T08:00:00">CLOSED</DoorState>
+					<DoorState dataItemId="ds" name="door_status" sequence="39" timestamp="2009-11-13T08:00:00">UNAVAILABLE</DoorState>
 				</Events>
 			</ComponentStream>
 		</DeviceStream>

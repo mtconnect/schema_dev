@@ -30,7 +30,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :CODE, 'The current executing code'
     value :DISPLACEMENT, 'The displacement as measured from zero to peak'
     value :DIRECTION, 'The direction of rotation'
-    value :DOOR_STATUS, 'The open/closed status of the door'
+    value :DOOR_STATE, 'The open/closed state of the door'
     value :EXECUTION, 'The programs execution state'
     value :FREQUENCY, 'The frequency as measure in cycles per second'
     value :PART_ID, 'The identifier of the part loaded'
@@ -43,6 +43,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :OTHER, 'An extension point'
     value :POSITION, 'The position as given in mm'
     value :POWER_STATUS, 'The power status of the component'
+    value :POWER_STATE, 'The power state of the component'
     value :PRESSURE, 'The current pressure'
     value :PROGRAM, 'The name of the program being run'
     value :ROTARY_MODE, 'The function of the rotary axis'
@@ -56,15 +57,20 @@ package :common, 'Common attributes and elements for all schemas' do
     value :VOLTAGE, 'The voltage'
     value :WATTS, 'The wattage'
     value :WORKHOLDING_ID, 'The workholding identifier'
+    
+    
+    # Condition types
+    value :COMMUNICATIONS, 'The communications system'
+    value :LOGIC_PROGRAM, 'The logic program'
+    value :MOTION_PROGRAM, 'The motion program'
+    value :HARDWARE, 'The computer hardware has failed'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
     value :ACTUAL, 'The actual position with absolute coordinates'
     value :COMMANDED, 'The expected value from the controller'
-    value :DISTANCE, 'The distance to go'
     value :MAXIMUM, 'The maximum value for this measurement'
-    value :MAX_OVERRIDE, 'The max override for the measurement'
-    value :MINIMUM, 'The maximum value for this measurement'
+    value :MINIMUM, 'The minimum value for this measurement'
     value :OTHER, 'An extension point'
     value :OVERRIDE, 'The override for the measurement'
     value :TARGET, 'The target position'

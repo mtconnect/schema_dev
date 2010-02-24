@@ -46,6 +46,10 @@ package :Component, 'Top Level Components Package' do
   type :Sensor, 'A sensor, this is not abstract to allow for easy extensibility.', :CommonComponent
   type :Thermostat, 'A thermostate', :Sensor
   type :Vibration, 'A sensor for reading the vibration from a component', :Sensor
+  type :PneumaticSystem, 'A component representing the pneumatic system', :CommonComponent
+  type :HydrolicSystem, 'A component representing the hydrolic system', :CommonComponent
+  type :LubricationSystem, 'A component representing the lubrication system', :CommonComponent
+  type :CoolantSystem, 'A component representing the coolant system', :CommonComponent
   type :Path, 'A path component', :CommonComponent
   
   type :Door, 'A door on the machine', :CommonComponent  

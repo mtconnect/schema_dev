@@ -2,6 +2,7 @@
 self.urn = 'urn:mtconnect.com:MTConnectStreams:1.1'
 self.namespace = 'mt'
 self.top = :MTConnectStreams
+self.license = File.read('license.txt')
 
 load 'common'
 
@@ -29,6 +30,6 @@ end
 load 'streams'
 load 'samples'
 load 'events'
-load 'notifications'
-
+load 'condition'
+load 'alarm'
 

@@ -54,6 +54,7 @@ class Schema
   def generate_xsd
     doc = REXML::Document.new
     doc << REXML::XMLDecl.new("1.0", "UTF-8")
+    doc << REXML::Comment.new(@license) if @license
     
     # Root schema node.
     root = REXML::Element.new('xs:schema')

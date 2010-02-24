@@ -10,6 +10,7 @@ package :DataItems, 'Data Items Package' do
   enum :Category, 'The measurement sampling type' do
     value :EVENT, 'An event represents a change in state occurs at a point in time. Note: An event does not occur at predefined frequencies.'
     value :SAMPLE, 'A sample is a data point for continuous data items, that is, the value of a data item at a point in time.'
+    value :CONDITION, 'The condition of the device'
   end
 
   attr :NativeScale, 'The multiplier for the native value. Conversion divides by this value', :float
@@ -78,9 +79,7 @@ package :DataItems, 'Data Items Package' do
   end
 
   type :DataItem, 'A abstract measurement' do
-    member :Name, 'The name of the measurement. ' do
-      standards :OMAC => 'label'
-    end
+    member :Name, 'The optional implementors name of the measurement.', 0..1
     member :id, 'The data item identifier', :ID
     member :Type, 'The type of measurement', :DataItemEnum
     member :SubType, 'The sub type for the measurement', 0..1, :DataItemSubEnum
