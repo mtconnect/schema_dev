@@ -47,6 +47,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :PRESSURE, 'The current pressure'
     value :PROGRAM, 'The name of the program being run'
     value :ROTARY_MODE, 'The function of the rotary axis'
+    value :SLAVE_TO_AXIS, 'The axis to which this axis is a slave'
     value :SPINDLE_SPEED, 'The velocity of the spindle'
     value :STATUS, 'The status indicator'
     value :TEMPERATURE, 'The temperature of the component'
@@ -64,6 +65,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :LOGIC_PROGRAM, 'The logic program'
     value :MOTION_PROGRAM, 'The motion program'
     value :HARDWARE, 'The computer hardware has failed'
+    value :SYSTEM, 'A system level condition'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
@@ -77,5 +79,9 @@ package :common, 'Common attributes and elements for all schemas' do
     value :GOOD, 'The good count'
     value :BAD, 'The bad count'
     value :ALL, 'Inclusive of all items'
+    
+    # Conditions
+    value :HIGH, 'The value is too high'
+    value :LOW, 'The value is too low'
   end
 end

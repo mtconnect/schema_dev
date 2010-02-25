@@ -26,7 +26,7 @@ class Schema
   end
   
   attr_reader :packages, :derived
-  attr_accessor :top, :namespace, :urn, :license
+  attr_accessor :top, :namespace, :urn, :license, :version
   
   def initialize(script)
     @packages = []

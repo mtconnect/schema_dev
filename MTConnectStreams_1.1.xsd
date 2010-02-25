@@ -187,6 +187,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PRESSURE'/>
       <xs:enumeration value='PROGRAM'/>
       <xs:enumeration value='ROTARY_MODE'/>
+      <xs:enumeration value='SLAVE_TO_AXIS'/>
       <xs:enumeration value='SPINDLE_SPEED'/>
       <xs:enumeration value='STATUS'/>
       <xs:enumeration value='TEMPERATURE'/>
@@ -201,6 +202,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
       <xs:enumeration value='HARDWARE'/>
+      <xs:enumeration value='SYSTEM'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -220,6 +222,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='GOOD'/>
       <xs:enumeration value='BAD'/>
       <xs:enumeration value='ALL'/>
+      <xs:enumeration value='HIGH'/>
+      <xs:enumeration value='LOW'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='StationType'>
@@ -369,7 +373,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
     <xs:attribute name='componentId' type='ComponentIdType' use='required'/>
-    <xs:attribute name='name' type='NameType' use='optional'/>
+    <xs:attribute name='name' type='NameType' use='required'/>
+    <xs:attribute name='nativeName' type='NameType' use='optional'/>
     <xs:attribute name='component' type='NameType' use='required'/>
     <xs:attribute name='uuid' type='UuidType' use='optional'/>
   </xs:complexType>

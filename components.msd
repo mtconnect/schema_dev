@@ -11,6 +11,7 @@ package :Component, 'Top Level Components Package' do
     abstract
     member :id, 'The data item identifier', :ID
     member :Name, 'The components name'
+    member :NativeName, 'The device manufacturer component name', 0..1, :Name
     member :SampleRate, 'The rate at which the data is sampled from the component', 0..1
     member :Description, 'The descriptive information about this component', 0..1, :ComponentDescription
     member :DataItems, 'The component\'s Data Items', 0..1
