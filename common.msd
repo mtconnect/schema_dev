@@ -40,6 +40,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :LINE, 'The line of the program being executed'
     value :CONTROLLER_MODE, 'The CNC\'s mode'
     value :LOAD, 'The load on the component'
+    value :MESSAGE, 'A uninterpreted message'
     value :OTHER, 'An extension point'
     value :POSITION, 'The position as given in mm'
     value :POWER_STATUS, 'The power status of the component'
