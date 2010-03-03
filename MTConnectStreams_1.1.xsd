@@ -189,7 +189,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PRESSURE'/>
       <xs:enumeration value='PROGRAM'/>
       <xs:enumeration value='ROTARY_MODE'/>
-      <xs:enumeration value='SLAVE_TO_AXIS'/>
+      <xs:enumeration value='COUPLED_AXES'/>
+      <xs:enumeration value='AXIS_COUPLING'/>
       <xs:enumeration value='SPINDLE_SPEED'/>
       <xs:enumeration value='STATUS'/>
       <xs:enumeration value='TEMPERATURE'/>
@@ -1149,6 +1150,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='AUTOMATIC'/>
       <xs:enumeration value='MANUAL'/>
       <xs:enumeration value='MANUAL_DATA_INPUT'/>
+      <xs:enumeration value='SEMI_AUTOMATIC'/>
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
@@ -1186,6 +1188,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:restriction base='xs:string'>
       <xs:enumeration value='ACTIVE'/>
       <xs:enumeration value='CLEARED'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='AxesCouplingValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The method for axes coupling
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='TANDEM'/>
+      <xs:enumeration value='SYCHRONOUS'/>
+      <xs:enumeration value='MASTER'/>
+      <xs:enumeration value='SLAVE'/>
+      <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='EventType' abstract='true'>
@@ -1370,6 +1386,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:enumeration value='AUTOMATIC'/>
         <xs:enumeration value='MANUAL'/>
         <xs:enumeration value='MANUAL_DATA_INPUT'/>
+        <xs:enumeration value='SEMI_AUTOMATIC'/>
         <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
@@ -1494,10 +1511,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='SlaveAxesType'>
+  <xs:complexType name='CoupledAxesType'>
     <xs:annotation>
       <xs:documentation>
-        The list of axes in use
+        The list of associated axes
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -1506,10 +1523,33 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='SlaveAxes' substitutionGroup='Event' type='SlaveAxesType'>
+  <xs:element name='CoupledAxes' substitutionGroup='Event' type='CoupledAxesType'>
     <xs:annotation>
       <xs:documentation>
-        The list of axes in use
+        The list of associated axes
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AxesCouplingType'>
+    <xs:annotation>
+      <xs:documentation>
+        The way the axes are associated
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='TANDEM'/>
+        <xs:enumeration value='SYCHRONOUS'/>
+        <xs:enumeration value='MASTER'/>
+        <xs:enumeration value='SLAVE'/>
+        <xs:enumeration value='UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AxesCoupling' substitutionGroup='Event' type='AxesCouplingType'>
+    <xs:annotation>
+      <xs:documentation>
+        The way the axes are associated
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -1589,6 +1629,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         An abstract indicator of the device&apos;s condition
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='UnavailableType'>
+    <xs:annotation>
+      <xs:documentation>
+        The conditon can not be determined.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConditionType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Unavailable' substitutionGroup='Condition' type='UnavailableType'>
+    <xs:annotation>
+      <xs:documentation>
+        The conditon can not be determined.
       </xs:documentation>
     </xs:annotation>
   </xs:element>

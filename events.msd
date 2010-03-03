@@ -38,6 +38,7 @@ package :Events, 'Event Package' do
     value :AUTOMATIC, 'The cnc is in automatic mode'
     value :MANUAL, 'The cnc is in manual mode'
     value :MANUAL_DATA_INPUT, 'The cnc is in manual data input mode (MDI)'
+    value :SEMI_AUTOMATIC, 'The controller is operating in a single cycle, single block mode'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
@@ -57,6 +58,14 @@ package :Events, 'Event Package' do
   enum :ESTOPValue, 'ESTOP values' do
     value :ACTIVE, 'The device is in emergency stop'
     value :CLEARED, 'ESTOP is not active'
+  end
+
+  enum :AxesCouplingValue, 'The method for axes coupling' do
+    value :TANDEM, "The axes are physically associated"
+    value :SYCHRONOUS, "The axes are operating in a peer synchronous manor"
+    value :MASTER, "The axes in coupled axes are masters of this axis"
+    value :SLAVE, "The axes in the coupled axes are slaves of this axes"
+    value :UNAVAILABLE, 'The value is indeterminate'
   end
 
   type :Event, 'An abstract event', :Result do
@@ -123,8 +132,12 @@ package :Events, 'Event Package' do
     member :Value, 'The list of axes', :AxesListValue
   end
 
-  type :SlaveAxes, 'The list of axes in use', :Event do
+  type :CoupledAxes, 'The list of associated axes', :Event do
     member :Value, 'The list of axes', :AxesListValue
+  end
+  
+  type :AxesCoupling, 'The way the axes are associated', :Event do
+    member :Value, 'The association method', :AxesCouplingValue
   end
   
   type :Message, 'A generic message', :Event do

@@ -189,7 +189,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PRESSURE'/>
       <xs:enumeration value='PROGRAM'/>
       <xs:enumeration value='ROTARY_MODE'/>
-      <xs:enumeration value='SLAVE_TO_AXIS'/>
+      <xs:enumeration value='COUPLED_AXES'/>
+      <xs:enumeration value='AXIS_COUPLING'/>
       <xs:enumeration value='SPINDLE_SPEED'/>
       <xs:enumeration value='STATUS'/>
       <xs:enumeration value='TEMPERATURE'/>
@@ -489,74 +490,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='PneumaticSystemType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the pneumatic system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='PneumaticSystem' substitutionGroup='CommonComponent' type='PneumaticSystemType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the pneumatic system
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='HydrolicSystemType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the hydrolic system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='HydrolicSystem' substitutionGroup='CommonComponent' type='HydrolicSystemType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the hydrolic system
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='LubricationSystemType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the lubrication system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='LubricationSystem' substitutionGroup='CommonComponent' type='LubricationSystemType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the lubrication system
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='CoolantSystemType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the coolant system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='CoolantSystem' substitutionGroup='CommonComponent' type='CoolantSystemType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the coolant system
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:complexType name='PathType'>
     <xs:annotation>
       <xs:documentation>
@@ -574,6 +507,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='ActuatorType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component that causes motion
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'/>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='DoorType'>
     <xs:annotation>
       <xs:documentation>
@@ -673,6 +616,91 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: A spindle axis that spins
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SystemType'>
+    <xs:annotation>
+      <xs:documentation>
+        A logical group of Axes representing a structural base
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='System' substitutionGroup='CommonComponent' type='SystemType'>
+    <xs:annotation>
+      <xs:documentation>
+        A logical group of Axes representing a structural base
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PneumaticType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component representing the pneumatic system
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Pneumatic' substitutionGroup='System' type='PneumaticType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component representing the pneumatic system
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='HydrolicType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component representing the hydrolic system
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Hydrolic' substitutionGroup='System' type='HydrolicType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component representing the hydrolic system
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LubricationType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component representing the lubrication system
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Lubrication' substitutionGroup='System' type='LubricationType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component representing the lubrication system
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='CoolantType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component representing the coolant system
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Coolant' substitutionGroup='System' type='CoolantType'>
+    <xs:annotation>
+      <xs:documentation>
+        A component representing the coolant system
       </xs:documentation>
     </xs:annotation>
   </xs:element>

@@ -15,6 +15,7 @@ package :Condition, 'The condition of the device' do
     member :Value, 'The description of the condition', :ConditionDescription
   end
   
+  type :Unavailable, 'The conditon can not be determined.', :Condition
   type :Normal, 'The item being monitored is operating normally and no action is required. Also indicates a cleared condition.', :Condition
   type :Warning, 'he item being monitored is moving into the abnormal range and should be observed. No action required at this time.', :Condition
   type :Fault, 'The item has failed an intervention is required to return to a normal condition. Transition to a normal condition indicates that the Fault has been cleared. Something that needs to be acknowledged. Sometimes noted as an alarm.', :Condition
