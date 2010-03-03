@@ -54,6 +54,11 @@ package :Events, 'Event Package' do
     value :UNAVAILABLE, 'The value is indeterminate'
   end
 
+  enum :ESTOPValue, 'ESTOP values' do
+    value :ACTIVE, 'The device is in emergency stop'
+    value :CLEARED, 'ESTOP is not active'
+  end
+
   type :Event, 'An abstract event', :Result do
     abstract
   end
@@ -125,5 +130,9 @@ package :Events, 'Event Package' do
   type :Message, 'A generic message', :Event do
     member :NativeCode, 'The component specific Notifcation code', 0..1
     member :Value, 'A device message', :MessageValue
+  end
+
+  type :ESTOP, 'ESTOP status', :EVent do
+    member :Value, 'ESTOP value', :ESTOPValue
   end
 end
