@@ -132,7 +132,7 @@ package :Events, 'Event Package' do
     member :Value, 'A device message', :MessageValue
   end
 
-  type :ESTOP, 'ESTOP status', :EVent do
+  type :ESTOP, 'ESTOP status', :Event do
     member :Value, 'ESTOP value', :ESTOPValue
   end
 end
