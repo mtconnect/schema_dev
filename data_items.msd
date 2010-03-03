@@ -27,6 +27,7 @@ package :DataItems, 'Data Items Package' do
     value :'DEGREE/SECOND', 'Degrees per  second'
     value :'MILLIMETER/SECOND^2', 'Acceleration at millimeters per second squared'
     value :'DEGREE/SECOND^2', 'Degrees per second squared'
+    value :HERTZ, 'Cycles per second'
     value :LITER, 'Liters'
     value :KILOGRAM, 'Kilograms'
     value :NEWTON, 'Force in Newtons'

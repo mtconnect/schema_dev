@@ -171,6 +171,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DISPLACEMENT'/>
       <xs:enumeration value='DIRECTION'/>
       <xs:enumeration value='DOOR_STATE'/>
+      <xs:enumeration value='ESTOP'/>
       <xs:enumeration value='EXECUTION'/>
       <xs:enumeration value='FREQUENCY'/>
       <xs:enumeration value='PART_ID'/>
@@ -180,6 +181,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
       <xs:enumeration value='LOAD'/>
+      <xs:enumeration value='MESSAGE'/>
       <xs:enumeration value='OTHER'/>
       <xs:enumeration value='POSITION'/>
       <xs:enumeration value='POWER_STATUS'/>
@@ -203,6 +205,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MOTION_PROGRAM'/>
       <xs:enumeration value='HARDWARE'/>
       <xs:enumeration value='SYSTEM'/>
+      <xs:enumeration value='LEVEL'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -222,8 +225,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='GOOD'/>
       <xs:enumeration value='BAD'/>
       <xs:enumeration value='ALL'/>
-      <xs:enumeration value='HIGH'/>
-      <xs:enumeration value='LOW'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='HeaderType'>
@@ -743,6 +744,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DEGREE/SECOND'/>
       <xs:enumeration value='MILLIMETER/SECOND^2'/>
       <xs:enumeration value='DEGREE/SECOND^2'/>
+      <xs:enumeration value='HERTZ'/>
       <xs:enumeration value='LITER'/>
       <xs:enumeration value='KILOGRAM'/>
       <xs:enumeration value='NEWTON'/>
@@ -774,6 +776,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DEGREE/SECOND'/>
       <xs:enumeration value='MILLIMETER/SECOND^2'/>
       <xs:enumeration value='DEGREE/SECOND^2'/>
+      <xs:enumeration value='HERTZ'/>
       <xs:enumeration value='LITER'/>
       <xs:enumeration value='KILOGRAM'/>
       <xs:enumeration value='NEWTON'/>

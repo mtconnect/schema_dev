@@ -31,6 +31,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :DISPLACEMENT, 'The displacement as measured from zero to peak'
     value :DIRECTION, 'The direction of rotation'
     value :DOOR_STATE, 'The open/closed state of the door'
+    value :ESTOP, 'The state of the ESTOP'
     value :EXECUTION, 'The programs execution state'
     value :FREQUENCY, 'The frequency as measure in cycles per second'
     value :PART_ID, 'The identifier of the part loaded'
@@ -67,6 +68,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :MOTION_PROGRAM, 'The motion program'
     value :HARDWARE, 'The computer hardware has failed'
     value :SYSTEM, 'A system level condition'
+    value :LEVEL, 'The level of a resource'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
@@ -80,9 +82,5 @@ package :common, 'Common attributes and elements for all schemas' do
     value :GOOD, 'The good count'
     value :BAD, 'The bad count'
     value :ALL, 'Inclusive of all items'
-    
-    # Conditions
-    value :HIGH, 'The value is too high'
-    value :LOW, 'The value is too low'
   end
 end

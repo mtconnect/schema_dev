@@ -180,6 +180,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
       <xs:enumeration value='LOAD'/>
+      <xs:enumeration value='MESSAGE'/>
       <xs:enumeration value='OTHER'/>
       <xs:enumeration value='POSITION'/>
       <xs:enumeration value='POWER_STATUS'/>
@@ -203,6 +204,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MOTION_PROGRAM'/>
       <xs:enumeration value='HARDWARE'/>
       <xs:enumeration value='SYSTEM'/>
+      <xs:enumeration value='LEVEL'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -222,8 +224,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='GOOD'/>
       <xs:enumeration value='BAD'/>
       <xs:enumeration value='ALL'/>
-      <xs:enumeration value='HIGH'/>
-      <xs:enumeration value='LOW'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='HeaderType'>

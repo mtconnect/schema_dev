@@ -171,6 +171,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DISPLACEMENT'/>
       <xs:enumeration value='DIRECTION'/>
       <xs:enumeration value='DOOR_STATE'/>
+      <xs:enumeration value='ESTOP'/>
       <xs:enumeration value='EXECUTION'/>
       <xs:enumeration value='FREQUENCY'/>
       <xs:enumeration value='PART_ID'/>
@@ -180,6 +181,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
       <xs:enumeration value='LOAD'/>
+      <xs:enumeration value='MESSAGE'/>
       <xs:enumeration value='OTHER'/>
       <xs:enumeration value='POSITION'/>
       <xs:enumeration value='POWER_STATUS'/>
@@ -203,6 +205,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MOTION_PROGRAM'/>
       <xs:enumeration value='HARDWARE'/>
       <xs:enumeration value='SYSTEM'/>
+      <xs:enumeration value='LEVEL'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -222,8 +225,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='GOOD'/>
       <xs:enumeration value='BAD'/>
       <xs:enumeration value='ALL'/>
-      <xs:enumeration value='HIGH'/>
-      <xs:enumeration value='LOW'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='StationType'>
@@ -1528,13 +1529,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='ConditionSubType'>
+  <xs:simpleType name='QualifierType'>
     <xs:annotation>
       <xs:documentation>
-        The condition&apos;s sub-classification 
+        A qualifier for the condition
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:NMTOKEN'/>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='HIGH'/>
+      <xs:enumeration value='LOW'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='ConditionType' abstract='true'>
     <xs:annotation>
@@ -1546,6 +1550,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ResultType'>
         <xs:attribute name='type' type='DataItemEnumType' use='required'/>
         <xs:attribute name='nativeCode' type='NativeCodeType' use='optional'/>
+        <xs:attribute name='qualifier' type='QualifierType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
