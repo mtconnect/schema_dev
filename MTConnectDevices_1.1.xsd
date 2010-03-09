@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema targetNamespace='urn:mtconnect.com:MTConnectDevices:1.1' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.com:MTConnectDevices:1.1' xmlns='urn:mtconnect.com:MTConnectDevices:1.1'>
+<xs:schema targetNamespace='urn:mtconnect.org:MTConnectDevices:1.1' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.1' xmlns='urn:mtconnect.org:MTConnectDevices:1.1'>
   <xs:element name='MTConnectDevices' type='MTConnectDevicesType'>
     <xs:annotation>
       <xs:documentation>
@@ -171,7 +171,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DISPLACEMENT'/>
       <xs:enumeration value='DIRECTION'/>
       <xs:enumeration value='DOOR_STATE'/>
-      <xs:enumeration value='ESTOP'/>
+      <xs:enumeration value='EMERGENCY_STOP'/>
       <xs:enumeration value='EXECUTION'/>
       <xs:enumeration value='FREQUENCY'/>
       <xs:enumeration value='PART_ID'/>
@@ -182,7 +182,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CONTROLLER_MODE'/>
       <xs:enumeration value='LOAD'/>
       <xs:enumeration value='MESSAGE'/>
-      <xs:enumeration value='OTHER'/>
       <xs:enumeration value='POSITION'/>
       <xs:enumeration value='POWER_STATUS'/>
       <xs:enumeration value='POWER_STATE'/>
@@ -192,7 +191,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='COUPLED_AXES'/>
       <xs:enumeration value='AXIS_COUPLING'/>
       <xs:enumeration value='SPINDLE_SPEED'/>
-      <xs:enumeration value='STATUS'/>
       <xs:enumeration value='TEMPERATURE'/>
       <xs:enumeration value='TORQUE'/>
       <xs:enumeration value='TOOL_ID'/>
@@ -619,10 +617,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='SystemsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A grouping of all the systems of the device
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Systems' substitutionGroup='CommonComponent' type='SystemsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A grouping of all the systems of the device
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='SystemType'>
     <xs:annotation>
       <xs:documentation>
-        A logical group of Axes representing a structural base
+        A logical group of parts representing sub-system of the device
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -632,7 +647,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='System' substitutionGroup='CommonComponent' type='SystemType'>
     <xs:annotation>
       <xs:documentation>
-        A logical group of Axes representing a structural base
+        A logical group of parts representing sub-system of the device
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -653,20 +668,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='HydrolicType'>
+  <xs:complexType name='HydraulicType'>
     <xs:annotation>
       <xs:documentation>
-        A component representing the hydrolic system
+        A component representing the hydraulic system
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='SystemType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Hydrolic' substitutionGroup='System' type='HydrolicType'>
+  <xs:element name='Hydraulic' substitutionGroup='System' type='HydraulicType'>
     <xs:annotation>
       <xs:documentation>
-        A component representing the hydrolic system
+        A component representing the hydraulic system
       </xs:documentation>
     </xs:annotation>
   </xs:element>

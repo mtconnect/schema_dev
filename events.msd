@@ -48,16 +48,17 @@ package :Events, 'Event Package' do
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
-  enum :RotaryFunctionValue, 'The rotary functions' do
+  enum :RotaryModeValue, 'The rotary functions' do
     value :SPINDLE, 'The rotary is spinning at a velocity'
     value :INDEX, 'The rotary axes is index to specific angles'
     value :CONTOUR, 'The rotary axes is both spinning and spinning'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
 
-  enum :ESTOPValue, 'ESTOP values' do
+  enum :EmergencyStopValue, 'ESTOP values' do
     value :ACTIVE, 'The device is in emergency stop'
-    value :CLEARED, 'ESTOP is not active'
+    value :RESET, 'ESTOP is reset'
+    value :UNAVAILABLE, 'The value is indeterminate'
   end
 
   enum :AxesCouplingValue, 'The method for axes coupling' do
@@ -84,7 +85,11 @@ package :Events, 'Event Package' do
     member :Value, 'Line number', :LineValue
   end
 
-  type :PowerState, 'The components power status', :Event do
+  type :PowerStatus, 'DEPRECATED: The components power status', :Event do
+    member :Value, 'The on or off status of component', :PowerStateValue
+  end
+
+  type :PowerState, 'The components power state', :Event do
     member :Value, 'The on or off status of component', :PowerStateValue
   end
   
@@ -124,8 +129,8 @@ package :Events, 'Event Package' do
     member :Value, 'The workholding identifier', :WorkholdingIdValue
   end
   
-  type :RotaryFunction, 'The function of the rotary axis', :Event do
-    member :Value, 'The rotary function', :RotaryFunctionValue
+  type :RotaryMode, 'The function of the rotary axis', :Event do
+    member :Value, 'The rotary function', :RotaryModeValue
   end
   
   type :ActiveAxes, 'The list of axes in use', :Event do
@@ -145,7 +150,7 @@ package :Events, 'Event Package' do
     member :Value, 'A device message', :MessageValue
   end
 
-  type :ESTOP, 'ESTOP status', :Event do
-    member :Value, 'ESTOP value', :ESTOPValue
+  type :EmergencyStop, 'Emergency Stop status', :Event do
+    member :Value, 'Emergency Stop value', :EmergencyStopValue
   end
 end

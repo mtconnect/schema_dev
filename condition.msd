@@ -1,6 +1,7 @@
 
 package :Condition, 'The condition of the device' do
   basic_type :ConditionDescription, 'The description of the Condition'
+  attr :NativeSeverity, 'The device\'s severity'
   enum :Qualifier, 'A qualifier for the condition' do
     # Conditions
     value :HIGH, 'The value is too high'
@@ -11,6 +12,7 @@ package :Condition, 'The condition of the device' do
     abstract
     member :type, 'The type of condition', :DataItemEnum
     member :NativeCode, 'The component specific Notifcation code', 0..1
+    member :NativeSeverity, 'The component specific Notifcation code', 0..1
     member :Qualifier, 'An optional attribute that helps qualify the condition', 0..1
     member :Value, 'The description of the condition', :ConditionDescription
   end

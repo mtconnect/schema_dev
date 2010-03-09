@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema targetNamespace='urn:mtconnect.com:MTConnectStreams:1.1' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.com:MTConnectStreams:1.1' xmlns='urn:mtconnect.com:MTConnectStreams:1.1'>
+<xs:schema targetNamespace='urn:mtconnect.org:MTConnectStreams:1.1' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.org:MTConnectStreams:1.1' xmlns='urn:mtconnect.org:MTConnectStreams:1.1'>
   <xs:element name='MTConnectStreams' type='MTConnectStreamsType'>
     <xs:annotation>
       <xs:documentation>
@@ -171,7 +171,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DISPLACEMENT'/>
       <xs:enumeration value='DIRECTION'/>
       <xs:enumeration value='DOOR_STATE'/>
-      <xs:enumeration value='ESTOP'/>
+      <xs:enumeration value='EMERGENCY_STOP'/>
       <xs:enumeration value='EXECUTION'/>
       <xs:enumeration value='FREQUENCY'/>
       <xs:enumeration value='PART_ID'/>
@@ -182,7 +182,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CONTROLLER_MODE'/>
       <xs:enumeration value='LOAD'/>
       <xs:enumeration value='MESSAGE'/>
-      <xs:enumeration value='OTHER'/>
       <xs:enumeration value='POSITION'/>
       <xs:enumeration value='POWER_STATUS'/>
       <xs:enumeration value='POWER_STATE'/>
@@ -192,7 +191,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='COUPLED_AXES'/>
       <xs:enumeration value='AXIS_COUPLING'/>
       <xs:enumeration value='SPINDLE_SPEED'/>
-      <xs:enumeration value='STATUS'/>
       <xs:enumeration value='TEMPERATURE'/>
       <xs:enumeration value='TORQUE'/>
       <xs:enumeration value='TOOL_ID'/>
@@ -1166,7 +1164,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='RotaryFunctionValueType'>
+  <xs:simpleType name='RotaryModeValueType'>
     <xs:annotation>
       <xs:documentation>
         The rotary functions
@@ -1179,7 +1177,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='ESTOPValueType'>
+  <xs:simpleType name='EmergencyStopValueType'>
     <xs:annotation>
       <xs:documentation>
         ESTOP values
@@ -1187,7 +1185,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:enumeration value='ACTIVE'/>
-      <xs:enumeration value='CLEARED'/>
+      <xs:enumeration value='RESET'/>
+      <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='AxesCouplingValueType'>
@@ -1274,10 +1273,31 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='PowerStatusType'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED: The components power status
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='ON'/>
+        <xs:enumeration value='OFF'/>
+        <xs:enumeration value='UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PowerStatus' substitutionGroup='Event' type='PowerStatusType'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED: The components power status
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='PowerStateType'>
     <xs:annotation>
       <xs:documentation>
-        The components power status
+        The components power state
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -1291,7 +1311,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='PowerState' substitutionGroup='Event' type='PowerStateType'>
     <xs:annotation>
       <xs:documentation>
-        The components power status
+        The components power state
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -1470,7 +1490,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='RotaryFunctionType'>
+  <xs:complexType name='RotaryModeType'>
     <xs:annotation>
       <xs:documentation>
         The function of the rotary axis
@@ -1485,7 +1505,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='RotaryFunction' substitutionGroup='Event' type='RotaryFunctionType'>
+  <xs:element name='RotaryMode' substitutionGroup='Event' type='RotaryModeType'>
     <xs:annotation>
       <xs:documentation>
         The function of the rotary axis
@@ -1572,23 +1592,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ESTOPType'>
+  <xs:complexType name='EmergencyStopType'>
     <xs:annotation>
       <xs:documentation>
-        ESTOP status
+        Emergency Stop status
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='EventType'>
         <xs:enumeration value='ACTIVE'/>
-        <xs:enumeration value='CLEARED'/>
+        <xs:enumeration value='RESET'/>
+        <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ESTOP' substitutionGroup='Event' type='ESTOPType'>
+  <xs:element name='EmergencyStop' substitutionGroup='Event' type='EmergencyStopType'>
     <xs:annotation>
       <xs:documentation>
-        ESTOP status
+        Emergency Stop status
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -1596,6 +1617,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The description of the Condition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='NativeSeverityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The device&apos;s severity
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -1621,6 +1650,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ResultType'>
         <xs:attribute name='type' type='DataItemEnumType' use='required'/>
         <xs:attribute name='nativeCode' type='NativeCodeType' use='optional'/>
+        <xs:attribute name='nativeSeverity' type='NativeSeverityType' use='optional'/>
         <xs:attribute name='qualifier' type='QualifierType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
