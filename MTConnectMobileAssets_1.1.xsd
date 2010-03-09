@@ -31,8 +31,8 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema targetNamespace='urn:mtconnect.org:MTConnectError:1.1' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.org:MTConnectError:1.1' xmlns='urn:mtconnect.org:MTConnectError:1.1'>
-  <xs:element name='MTConnectError' type='MTConnectErrorType'>
+<xs:schema targetNamespace='urn:mtconnect.org:MTConnectMobileAssets:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.org:MTConnectMobileAssets:1.2' xmlns='urn:mtconnect.org:MTConnectMobileAssets:1.2'>
+  <xs:element name='MTConnectMobileAssets' type='MTConnectMobileAssetsType'>
     <xs:annotation>
       <xs:documentation>
         The root node for MTConnect
@@ -243,7 +243,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='MTConnectErrorType'>
+  <xs:complexType name='MTConnectMobileAssetsType'>
     <xs:annotation>
       <xs:documentation>
         The root node for MTConnect
@@ -257,76 +257,337 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:choice minOccurs='1'>
-        <xs:element name='Error' type='ErrorType'>
-          <xs:annotation>
-            <xs:documentation>
-              Only for backward compatibility with 1.0
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element name='Errors' type='ErrorsType'>
-          <xs:annotation>
-            <xs:documentation>
-              A collection of errors
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-      </xs:choice>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name='ErrorsType'>
-    <xs:annotation>
-      <xs:documentation>
-        A collection of errors
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Error' maxOccurs='unbounded' minOccurs='1' type='ErrorType'>
+      <xs:element name='MobileAssets' type='MobileAssetsType'>
         <xs:annotation>
           <xs:documentation>
-            An error result
+            The assets
           </xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:simpleType name='ErrorDescriptionType'>
+  <xs:simpleType name='DescriptionType'>
     <xs:annotation>
       <xs:documentation>
-        The text description of the error
+        A description
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='ErrorCodeType'>
+  <xs:simpleType name='PotCountType'>
     <xs:annotation>
       <xs:documentation>
-        The error code
+        The number of pots (Is this term confusing?)
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='InsertIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        An identifier for the insert
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='MeasurementValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        A measurement value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
+  <xs:simpleType name='MaximumType'>
+    <xs:annotation>
+      <xs:documentation>
+        A maximum value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
+  <xs:simpleType name='MinimumType'>
+    <xs:annotation>
+      <xs:documentation>
+        A minimum value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
+  <xs:simpleType name='ToolStateValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The state of the tool
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='UNAUTHORIZED'/>
-      <xs:enumeration value='NO_DEVICE'/>
-      <xs:enumeration value='OUT_OF_RANGE'/>
-      <xs:enumeration value='TOO_MANY'/>
-      <xs:enumeration value='INVALID_URI'/>
-      <xs:enumeration value='INVALID_REQUEST'/>
-      <xs:enumeration value='INTERNAL_ERROR'/>
-      <xs:enumeration value='INVALID_PATH'/>
-      <xs:enumeration value='UNSUPPORTED'/>
+      <xs:enumeration value='FRESH'/>
+      <xs:enumeration value='EXPIRED'/>
+      <xs:enumeration value='NOT_REGISTERED'/>
+      <xs:enumeration value='IN_USE'/>
+      <xs:enumeration value='BROKEN'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name='ErrorType'>
+  <xs:simpleType name='MeasurementType'>
     <xs:annotation>
       <xs:documentation>
-        An error description
+        The type of measurement
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='NOMINAL'/>
+      <xs:enumeration value='MEASURED'/>
+      <xs:enumeration value='OFFSET'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='ToolStateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool state
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='ErrorDescriptionType'>
-        <xs:attribute name='errorCode' type='ErrorCodeType' use='required'/>
+      <xs:extension base='ToolStateValueType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='AssetType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract mobile asset
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Description' maxOccurs='1' minOccurs='0' type='DescriptionType'>
+        <xs:annotation>
+          <xs:documentation>
+            The description of the asset (freeform)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='name' type='NameType' use='required'/>
+    <xs:attribute name='serialNumber' type='SerialNumberType' use='required'/>
+  </xs:complexType>
+  <xs:element name='Asset' abstract='true' type='AssetType'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract mobile asset
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='MobileAssetsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The collection of mobile assets
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice maxOccurs='unbounded' minOccurs='1'>
+      <xs:element name='ToolAssembly' type='ToolAssemblyType'>
+        <xs:annotation>
+          <xs:documentation>
+            A tool assembly
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Workholding' type='WorkholdingType'>
+        <xs:annotation>
+          <xs:documentation>
+            A workholding definition (TBD)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name='WorkholdingType'>
+    <xs:annotation>
+      <xs:documentation>
+        Currently just a place holder
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Workholding' substitutionGroup='Asset' type='WorkholdingType'>
+    <xs:annotation>
+      <xs:documentation>
+        Currently just a place holder
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ToolAssemblyType'>
+    <xs:annotation>
+      <xs:documentation>
+        A defintion of a cutting implement
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetType'>
+        <xs:sequence>
+          <xs:element name='ToolState' type='ToolStateType'>
+            <xs:annotation>
+              <xs:documentation>
+                The state of the tool assembly
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='PotCount' maxOccurs='1' minOccurs='0' default='1' type='PotCountType'>
+            <xs:annotation>
+              <xs:documentation>
+                The number of pots this tool will consume due to interference.
+                If not given, assume 1
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Inserts' type='InsertsType'>
+            <xs:annotation>
+              <xs:documentation>
+                A list of inserts for this assembly
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ToolAssembly' substitutionGroup='Asset' type='ToolAssemblyType'>
+    <xs:annotation>
+      <xs:documentation>
+        A defintion of a cutting implement
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='InsertsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A list of inserts
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Insert' maxOccurs='unbounded' minOccurs='1' type='InsertType'>
+        <xs:annotation>
+          <xs:documentation>
+            An insert
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='InsertType'>
+    <xs:annotation>
+      <xs:documentation>
+        An insert into a tool assembly
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs='unbounded' minOccurs='1' ref='InsertMeasurement'/>
+    </xs:sequence>
+    <xs:attribute name='insertId' type='InsertIdType' use='required'/>
+  </xs:complexType>
+  <xs:complexType name='InsertMeasurementType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract type for insert measurements
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='MeasurementValueType'>
+        <xs:attribute name='type' type='MeasurementType' use='required'/>
+        <xs:attribute name='maximum' type='MaximumType' use='optional'/>
+        <xs:attribute name='minimum' type='MinimumType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:element name='InsertMeasurement' abstract='true' type='InsertMeasurementType'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract type for insert measurements
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LengthType'>
+    <xs:annotation>
+      <xs:documentation>
+        A length
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InsertMeasurementType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Length' substitutionGroup='InsertMeasurement' type='LengthType'>
+    <xs:annotation>
+      <xs:documentation>
+        A length
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DiameterType'>
+    <xs:annotation>
+      <xs:documentation>
+        A diameter
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InsertMeasurementType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Diameter' substitutionGroup='InsertMeasurement' type='DiameterType'>
+    <xs:annotation>
+      <xs:documentation>
+        A diameter
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='TipAngleType'>
+    <xs:annotation>
+      <xs:documentation>
+        A tip angle
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InsertMeasurementType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='TipAngle' substitutionGroup='InsertMeasurement' type='TipAngleType'>
+    <xs:annotation>
+      <xs:documentation>
+        A tip angle
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='CornerRadiusType'>
+    <xs:annotation>
+      <xs:documentation>
+        A corner radius
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InsertMeasurementType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='CornerRadius' substitutionGroup='InsertMeasurement' type='CornerRadiusType'>
+    <xs:annotation>
+      <xs:documentation>
+        A corner radius
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LifeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A life
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InsertMeasurementType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Life' substitutionGroup='InsertMeasurement' type='LifeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A life
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
 </xs:schema>

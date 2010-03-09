@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MTConnectStreams xmlns="urn:mtconnect.com:MTConnectStreams:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.com:MTConnectStreams:1.2 ../MTConnectStreams.xsd">
+<MTConnectStreams xmlns="urn:mtconnect.com:MTConnectStreams:1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.com:MTConnectStreams:1.1 ../MTConnectStreams_1.1.xsd">
 	<Header bufferSize="130000" instanceId="1" lastSequence="100" nextSequence="100" creationTime="2009-11-13T08:00:00" firstSequence="1" sender="localhost" version="1.1"/>
 	<Streams>
 		<DeviceStream uuid="HM1" name="HMC_3Axis">
@@ -26,7 +26,7 @@
 				</Samples>
 				<Events>
 					<ToolId dataItemId="tid" name="tool" sequence="33" timestamp="2009-11-13T08:00:00">T1234214</ToolId>
-					<RotaryFunction dataItemId="rf" name="rfunc" sequence="34" timestamp="2009-11-13T08:00:00">SPIN</RotaryFunction>
+					<RotaryFunction dataItemId="rf" name="rfunc" sequence="34" timestamp="2009-11-13T08:00:00">SPINDLE</RotaryFunction>
 				</Events>
 			</ComponentStream>
 			<ComponentStream component="Rotary" name="C" componentId="c">

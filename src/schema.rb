@@ -68,6 +68,7 @@ class Schema
             
     element = REXML::Element.new('xs:element')
     top = @type_map[@top]
+    raise "Cannot find top level element: #{@top}" unless top
     element.add_attribute('name', top.name.to_s)
     element.add_attribute('type', "#{top.name_as_xsd_type}")
     anno = REXML::Element.new('xs:annotation')
