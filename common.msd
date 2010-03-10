@@ -77,6 +77,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :MINIMUM, 'The minimum value for this measurement'
     value :OTHER, 'An extension point'
     value :OVERRIDE, 'The override for the measurement'
+    value :PROBE, 'The position given by a probe'
     value :TARGET, 'The target position'
     value :GOOD, 'The good count'
     value :BAD, 'The bad count'

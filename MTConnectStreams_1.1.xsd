@@ -220,6 +220,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MINIMUM'/>
       <xs:enumeration value='OTHER'/>
       <xs:enumeration value='OVERRIDE'/>
+      <xs:enumeration value='PROBE'/>
       <xs:enumeration value='TARGET'/>
       <xs:enumeration value='GOOD'/>
       <xs:enumeration value='BAD'/>
