@@ -8,4 +8,5 @@ package :Systems, 'The systems package' do
   type :Hydraulic, 'A component representing the hydraulic system', :System
   type :Lubrication, 'A component representing the lubrication system', :System
   type :Coolant, 'A component representing the coolant system', :System
+  type :Electric, 'A component representing the coolant system', :System
 end

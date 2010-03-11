@@ -43,7 +43,7 @@ package :Component, 'Top Level Components Package' do
     standards :OMAC => 'CNC'
   end
 
-  type :Power, 'A power measuring component', :CommonComponent
+  type :Power, 'DEPRECATED: A power measuring component', :CommonComponent
   type :Sensor, 'A sensor, this is not abstract to allow for easy extensibility.', :CommonComponent
   type :Thermostat, 'A thermostate', :Sensor
   type :Vibration, 'A sensor for reading the vibration from a component', :Sensor

@@ -166,6 +166,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ANGLE'/>
       <xs:enumeration value='ANGULAR_ACCELERATION'/>
       <xs:enumeration value='ANGULAR_VELOCITY'/>
+      <xs:enumeration value='AVAILABILITY'/>
       <xs:enumeration value='BLOCK'/>
       <xs:enumeration value='CODE'/>
       <xs:enumeration value='DISPLACEMENT'/>
@@ -225,6 +226,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='GOOD'/>
       <xs:enumeration value='BAD'/>
       <xs:enumeration value='ALL'/>
+      <xs:enumeration value='LINE'/>
+      <xs:enumeration value='CONTROL'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='HeaderType'>

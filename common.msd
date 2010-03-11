@@ -26,6 +26,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :ANGLE, 'The position as given in degrees'
     value :ANGULAR_ACCELERATION, 'The accelleration of the component'
     value :ANGULAR_VELOCITY, 'The velocity of the component'
+    value :AVAILABILITY, 'The components availability'
     value :BLOCK, 'The current executing block'
     value :CODE, 'The current executing code'
     value :DISPLACEMENT, 'The displacement as measured from zero to peak'
@@ -43,7 +44,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :LOAD, 'The load on the component'
     value :MESSAGE, 'A uninterpreted message'
     value :POSITION, 'The position as given in mm'
-    value :POWER_STATUS, 'The power status of the component'
+    value :POWER_STATUS, 'DEPRECATED: The power status of the component'
     value :POWER_STATE, 'The power state of the component'
     value :PRESSURE, 'The current pressure'
     value :PROGRAM, 'The name of the program being run'
@@ -82,5 +83,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :GOOD, 'The good count'
     value :BAD, 'The bad count'
     value :ALL, 'Inclusive of all items'
+    value :LINE, 'The high voltage subtype for power state'
+    value :CONTROL, 'The low voltage subtype for power state'
   end
 end
