@@ -206,6 +206,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='HARDWARE'/>
       <xs:enumeration value='SYSTEM'/>
       <xs:enumeration value='LEVEL'/>
+      <xs:enumeration value='SERVO'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>

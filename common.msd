@@ -69,6 +69,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :HARDWARE, 'The computer hardware has failed'
     value :SYSTEM, 'A system level condition'
     value :LEVEL, 'The level of a resource'
+    value :ACTUATOR, 'An actuator related condition'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
