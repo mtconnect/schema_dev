@@ -40,6 +40,10 @@ package :DataItems, 'Data Items Package' do
     value :PASCAL, 'Pressure in Newtons per square meter'
     value :PERCENT, 'A percentage'
     value :NEWTON_METER, 'A unit for force times distance. The SI units will be used in Newton meters.'
+    value :'LITER/SECOND', 'Liters per second'
+    value :'JOULE', 'A measure of energy'
+    value :PH, 'pH is a measure of hydrogen ion concentration; a measure of the acidity or alkalinity of a solution.'
+    
   end
 
   enum :NativeUnits, 'The units supported for the source equipment that can be converted into MTC Units.', :Units do
@@ -65,6 +69,9 @@ package :DataItems, 'Data Items Package' do
     value :'MILLIMETER/MINUTE', 'Feedrate in millimeters per minute'
     value :'DEGREE/MINUTE', 'Feedrate in degrees per minute'
     value :'REVOLUTION/SECOND', 'Spindle speed in revolutions per Second'
+    value :'GALLON/MINUTE', 'Gallons per minute'
+    value :'KILOWATT_HOUR', 'kilowatt hours'
+    value :'POUND/INCH^2', 'Pressure in pounds per square inch'
     value :OTHER, 'Other units (Cannot be converted)'
   end
   

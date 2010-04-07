@@ -8,8 +8,12 @@ package :Condition, 'The condition of the device' do
     value :LOW, 'The value is too low'
   end
   
-  type :Condition, 'An abstract indicator of the device\'s condition', :Result do
+  type :Condition, 'An abstract indicator of the device\'s condition' do
     abstract
+    member :Sequence, 'The events sequence number'
+    member :Timestamp, 'The time the event occurred'
+    member :Name, 'The name of the event corresponding to the measurement', 0..1
+    member :DataItemId, 'The unique identifier of the item being produced'
     member :type, 'The type of condition', :DataItemEnum
     member :NativeCode, 'The component specific Notifcation code', 0..1
     member :NativeSeverity, 'The component specific Notifcation code', 0..1
