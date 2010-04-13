@@ -43,7 +43,7 @@ package :DataItems, 'Data Items Package' do
     value :'LITER/SECOND', 'Liters per second'
     value :'JOULE', 'A measure of energy'
     value :PH, 'pH is a measure of hydrogen ion concentration; a measure of the acidity or alkalinity of a solution.'
-    
+    value :SECOND, 'Seconds'
   end
 
   enum :NativeUnits, 'The units supported for the source equipment that can be converted into MTC Units.', :Units do

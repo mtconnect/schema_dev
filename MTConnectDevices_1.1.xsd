@@ -825,6 +825,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LITER/SECOND'/>
       <xs:enumeration value='JOULE'/>
       <xs:enumeration value='PH'/>
+      <xs:enumeration value='SECOND'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='NativeUnitsType'>
@@ -860,6 +861,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LITER/SECOND'/>
       <xs:enumeration value='JOULE'/>
       <xs:enumeration value='PH'/>
+      <xs:enumeration value='SECOND'/>
       <xs:enumeration value='INCH'/>
       <xs:enumeration value='INCH/MINUTE'/>
       <xs:enumeration value='INCH/SECOND'/>
