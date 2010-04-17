@@ -78,7 +78,7 @@ package :Events, 'Event Package' do
     abstract
   end
 
-  type :Code, 'The program code', :Event do
+  type :Code, 'DEPRECATED: The program code', :Event do
     member :Value, 'Program code', :CodeValue
   end
   

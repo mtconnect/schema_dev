@@ -1239,7 +1239,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CodeType'>
     <xs:annotation>
       <xs:documentation>
-        The program code
+        DEPRECATED: The program code
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -1249,7 +1249,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Code' substitutionGroup='Event' type='CodeType'>
     <xs:annotation>
       <xs:documentation>
-        The program code
+        DEPRECATED: The program code
       </xs:documentation>
     </xs:annotation>
   </xs:element>
