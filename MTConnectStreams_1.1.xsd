@@ -1189,7 +1189,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='TRIGGERED'/>
+      <xs:enumeration value='ENGAGED'/>
       <xs:enumeration value='RESET'/>
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
@@ -1616,7 +1616,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='EventType'>
-        <xs:enumeration value='TRIGGERED'/>
+        <xs:enumeration value='ENGAGED'/>
         <xs:enumeration value='RESET'/>
         <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
