@@ -77,7 +77,7 @@ class Schema
     anno << docs
     element << anno
     root << element
-    
+
     @types.each { |type| type.build_hierarchy }
     @types.each { |type| type.resolve }
     @types.each do |type|
@@ -476,9 +476,14 @@ class Schema
 
     def generate_xsd
       # Enumerated values are always NMTOKEN value restricted by the
-      # values. 
+      # values.
+      elements = []
+      
+      ele_name = name_as_xsd_type
+      ele_name = "#{ele_name}Enum" if @extensible
+      
       simple_type = REXML::Element.new('xs:simpleType')
-      simple_type.add_attribute('name', name_as_xsd_type)
+      simple_type.add_attribute('name', ele_name)
       anno = REXML::Element.new('xs:annotation')
       docs = REXML::Element.new('xs:documentation')
       docs.text = @annotation
@@ -505,8 +510,26 @@ class Schema
       # Add the enumerations.
       add_enumeration(restriction)
       simple_type << restriction
+
+      elements << simple_type
+
+      if @extensible
+        simple_type = REXML::Element.new('xs:simpleType')
+        simple_type.add_attribute('name', name_as_xsd_type)
+        anno = REXML::Element.new('xs:annotation')
+        docs = REXML::Element.new('xs:documentation')
+        docs.text = @annotation
+        anno << docs
+        simple_type << anno
+
+        union = REXML::Element.new('xs:union')
+        union.add_attribute('memberTypes', "#{ele_name} #{@extensible}Type")
+        simple_type << union
+        
+        elements << simple_type
+      end
       
-      [simple_type]
+      elements
     end
   end
 end

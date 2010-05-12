@@ -17,8 +17,13 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :ID, 'An identifier', :ID
 
   basic_type :DescriptionText, 'A description'
-    
+  basic_type(:DataItemExt, 'An extension point for data item types') do
+    pattern 'x:[A-Z_0-9]+'
+  end
+  
   enum :DataItemEnum, 'The types of measurements available' do
+    extensible :DataItemExt
+    
     value :ACCELERATION, 'The accelleration of the component'
     value :ACTIVE_AXES, 'The list of axes currently in use in this path'
     value :ALARM, 'An alarm measurement.'
@@ -58,7 +63,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :VELOCITY, 'The velocity of the component'
     value :VIBRATION, 'The status indicator'
     value :VOLTAGE, 'The voltage'
-    value :WATTS, 'The wattage'
+    value :WATTAGE, 'The wattage'
     value :WORKHOLDING_ID, 'The workholding identifier'
     
     
@@ -73,6 +78,8 @@ package :common, 'Common attributes and elements for all schemas' do
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
+    extensible :DataItemExt
+    
     value :ACTUAL, 'The actual position with absolute coordinates'
     value :COMMANDED, 'The expected value from the controller'
     value :MAXIMUM, 'The maximum value for this measurement'

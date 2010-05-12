@@ -152,7 +152,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='DataItemEnumType'>
+  <xs:simpleType name='DataItemExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for data item types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='x:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemEnumTypeEnum'>
     <xs:annotation>
       <xs:documentation>
         The types of measurements available
@@ -198,7 +208,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VELOCITY'/>
       <xs:enumeration value='VIBRATION'/>
       <xs:enumeration value='VOLTAGE'/>
-      <xs:enumeration value='WATTS'/>
+      <xs:enumeration value='WATTAGE'/>
       <xs:enumeration value='WORKHOLDING_ID'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
@@ -209,7 +219,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ACTUATOR'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='DataItemSubEnumType'>
+  <xs:simpleType name='DataItemEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The types of measurements available
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='DataItemEnumTypeEnum DataItemExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemSubEnumTypeEnum'>
     <xs:annotation>
       <xs:documentation>
         The sub-types for a measurement
@@ -230,6 +248,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROL'/>
     </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemSubEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The sub-types for a measurement
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='DataItemSubEnumTypeEnum DataItemExtType'/>
   </xs:simpleType>
   <xs:complexType name='HeaderType'>
     <xs:annotation>

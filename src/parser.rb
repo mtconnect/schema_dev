@@ -131,7 +131,7 @@ class Schema
   end
 
   class ControlledVocabulary < Type
-    attr_reader :values, :attr
+    attr_reader :values, :attr, :extensible
     
     class Value
       attr_reader :name, :annotation
@@ -148,7 +148,12 @@ class Schema
       super(schema, name, annotation, parent)
       @name, @annotation, @parent, @attr = name, annotation, parent, attr
       @values = []
+      @extensible = false
       instance_eval &block
+    end
+
+    def extensible(type)
+      @extensible = type
     end
 
     def value(name, annotation, &block)

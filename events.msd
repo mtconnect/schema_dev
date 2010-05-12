@@ -56,8 +56,8 @@ package :Events, 'Event Package' do
   end
 
   enum :EmergencyStopValue, 'ESTOP values' do
-    value :ENGAGED, 'The device is in emergency stop'
-    value :RESET, 'ESTOP is reset'
+    value :TRIGGERED, 'The device is in emergency stop'
+    value :ARMED, 'ESTOP is ARMED'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
 
