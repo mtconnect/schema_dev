@@ -819,7 +819,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:simpleType name='UnitsType'>
+  <xs:simpleType name='UnitsExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for data item types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='x:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='UnitsTypeEnum'>
     <xs:annotation>
       <xs:documentation>
         The units supported
@@ -852,7 +862,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WATT'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='NativeUnitsType'>
+  <xs:simpleType name='UnitsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The units supported
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='UnitsTypeEnum UnitsExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='NativeUnitsTypeEnum'>
     <xs:annotation>
       <xs:documentation>
         The units supported for the source equipment that can be converted into
@@ -909,6 +927,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='RADIAN/SECOND^2'/>
       <xs:enumeration value='REVOLUTION/SECOND'/>
     </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='NativeUnitsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The units supported for the source equipment that can be converted into
+        MTC Units.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='NativeUnitsTypeEnum UnitsExtType'/>
   </xs:simpleType>
   <xs:simpleType name='CoordinateSystemType'>
     <xs:annotation>

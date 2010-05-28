@@ -16,8 +16,14 @@ package :DataItems, 'Data Items Package' do
   attr :NativeScale, 'The multiplier for the native value. Conversion divides by this value', :float
 
   # Data item types and sub types have been moved to common.
+  
+  basic_type(:UnitsExt, 'An extension point for data item types') do
+    pattern 'x:[A-Z_0-9]+'
+  end
 
   enum :Units, 'The units supported' do
+    extensible :UnitsExt
+    
     value :AMPERE, 'The electrical current'
     value :CELSIUS, 'Degrees Celcius'
     value :COUNT, 'A counted event'
@@ -46,6 +52,8 @@ package :DataItems, 'Data Items Package' do
 
   enum :NativeUnits, 'The units supported for the source equipment that can be converted into MTC Units.', :Units do
     # Alternate types for the source system.
+    extensible :UnitsExt
+    
     value :'DEGREE/MINUTE', 'Feedrate in degrees per minute'
     value :FAHRENHEIT, 'Degrees Fahrenheit'
     value :FOOT, 'Feet'
