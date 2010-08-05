@@ -40,6 +40,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :EMERGENCY_STOP, 'The state of the ESTOP button'
     value :EXECUTION, 'The programs execution state'
     value :FREQUENCY, 'The frequency as measure in cycles per second'
+    value :PART_COUNT, 'A count of the parts'
     value :PART_ID, 'The identifier of the part loaded'
     value :PATH_FEEDRATE, 'The feedrate for the path'
     value :PATH_POSITION, 'The three space position X, Y, Z'

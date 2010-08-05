@@ -185,6 +185,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='EMERGENCY_STOP'/>
       <xs:enumeration value='EXECUTION'/>
       <xs:enumeration value='FREQUENCY'/>
+      <xs:enumeration value='PART_COUNT'/>
       <xs:enumeration value='PART_ID'/>
       <xs:enumeration value='PATH_FEEDRATE'/>
       <xs:enumeration value='PATH_POSITION'/>
