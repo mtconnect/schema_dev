@@ -18,7 +18,7 @@ package :common, 'Common attributes and elements for all schemas' do
 
   basic_type :DescriptionText, 'A description'
   basic_type(:DataItemExt, 'An extension point for data item types') do
-    pattern 'x:[A-Z_0-9]+'
+    pattern '[a-ln-z]:[A-Z_0-9]+'
   end
   
   enum :DataItemEnum, 'The types of measurements available' do
