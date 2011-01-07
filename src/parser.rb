@@ -25,13 +25,15 @@ class Schema
     end
   end
   
-  attr_reader :packages, :derived
-  attr_accessor :top, :namespace, :urn, :license, :version
+  attr_reader :packages, :derived, :importing
+  attr_accessor :top, :namespace, :urn, :license, :version, :importing
   
   def initialize(script)
+    @importing = false
     @packages = []
     @urn = ''
     @types = []
+    @imports = []
     @type_map = { }
     @derived = Set.new
     @top = nil
@@ -65,6 +67,11 @@ class Schema
   def package(name, annotation, &block)
     @packages << Package.new(self, name, annotation, &block)
   end
+  
+  # Import another schema
+  def import(name, location)
+    @imports << ImportedSchema.new(self, name, location)
+  end
 
   def add_type(name, type)
     @types << type
@@ -90,8 +97,33 @@ class Schema
     @standards << stand
   end
   
+  class ImportedSchema
+    attr_accessor :namespace, :urn, :license, :version, :top
+    attr_reader :location
+    
+    undef :load
+    undef :type
+    
+    def initialize(schema, file, location)
+      old_importing, schema.importing = schema.importing, self
+      @schema = schema
+      @location = location
+      file = file + '.msd' unless file =~ /\.[a-z]+$/
+      puts "Importing file: #{file}"
+      Dir.chdir(File.dirname(file)) do
+        instance_eval(File.read(File.basename(file)), file)
+      end
+      schema.importing = old_importing
+    end
+        
+    # Forward all other methods accept for the settings to schema
+    def method_missing(method, *args, &block)
+      @schema.send(method, *args, &block)
+    end
+  end
+  
   class Type
-    attr_reader :name, :parent
+    attr_reader :name, :parent, :imported
     attr_reader :annotation, :attr
     attr_accessor :version
 
@@ -103,6 +135,7 @@ class Schema
       @attr = false
       @standards = { }
       @schema.add_type(name, self)
+      @imported = schema.importing
     end
     
     def resolve
@@ -131,7 +164,7 @@ class Schema
   end
 
   class ControlledVocabulary < Type
-    attr_reader :values, :attr
+    attr_reader :values, :attr, :extensible
     
     class Value
       attr_reader :name, :annotation
@@ -148,7 +181,12 @@ class Schema
       super(schema, name, annotation, parent)
       @name, @annotation, @parent, @attr = name, annotation, parent, attr
       @values = []
+      @extensible = false
       instance_eval &block
+    end
+
+    def extensible(type)
+      @extensible = type
     end
 
     def value(name, annotation, &block)
@@ -167,6 +205,7 @@ class Schema
       @elements = []
       @basic_types = []
       @enums = []
+      @imported = schema.importing
       @standards = { }
       instance_eval &block
     end
@@ -297,6 +336,7 @@ class Schema
       @occurrence = occurrence
       @type = @name unless @type
       @standards = { }
+      @imported = schema.importing
       instance_eval &block if block
     end
 

@@ -17,8 +17,13 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :ID, 'An identifier', :ID
 
   basic_type :DescriptionText, 'A description'
-    
+  basic_type(:DataItemExt, 'An extension point for data item types') do
+    pattern '[a-ln-z]:[A-Z_0-9]+'
+  end
+  
   enum :DataItemEnum, 'The types of measurements available' do
+    extensible :DataItemExt
+    
     value :ACCELERATION, 'The accelleration of the component'
     value :ACTIVE_AXES, 'The list of axes currently in use in this path'
     value :ALARM, 'An alarm measurement.'
@@ -26,6 +31,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :ANGLE, 'The position as given in degrees'
     value :ANGULAR_ACCELERATION, 'The accelleration of the component'
     value :ANGULAR_VELOCITY, 'The velocity of the component'
+    value :AVAILABILITY, 'The components availability'
     value :BLOCK, 'The current executing block'
     value :CODE, 'The current executing code'
     value :DISPLACEMENT, 'The displacement as measured from zero to peak'
@@ -34,6 +40,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :EMERGENCY_STOP, 'The state of the ESTOP button'
     value :EXECUTION, 'The programs execution state'
     value :FREQUENCY, 'The frequency as measure in cycles per second'
+    value :PART_COUNT, 'A count of the parts'
     value :PART_ID, 'The identifier of the part loaded'
     value :PATH_FEEDRATE, 'The feedrate for the path'
     value :PATH_POSITION, 'The three space position X, Y, Z'
@@ -43,7 +50,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :LOAD, 'The load on the component'
     value :MESSAGE, 'A uninterpreted message'
     value :POSITION, 'The position as given in mm'
-    value :POWER_STATUS, 'The power status of the component'
+    value :POWER_STATUS, 'DEPRECATED: The power status of the component'
     value :POWER_STATE, 'The power state of the component'
     value :PRESSURE, 'The current pressure'
     value :PROGRAM, 'The name of the program being run'
@@ -57,7 +64,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :VELOCITY, 'The velocity of the component'
     value :VIBRATION, 'The status indicator'
     value :VOLTAGE, 'The voltage'
-    value :WATTS, 'The wattage'
+    value :WATTAGE, 'The wattage'
     value :WORKHOLDING_ID, 'The workholding identifier'
     
     
@@ -68,18 +75,24 @@ package :common, 'Common attributes and elements for all schemas' do
     value :HARDWARE, 'The computer hardware has failed'
     value :SYSTEM, 'A system level condition'
     value :LEVEL, 'The level of a resource'
+    value :ACTUATOR, 'An actuator related condition'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
+    extensible :DataItemExt
+    
     value :ACTUAL, 'The actual position with absolute coordinates'
     value :COMMANDED, 'The expected value from the controller'
     value :MAXIMUM, 'The maximum value for this measurement'
     value :MINIMUM, 'The minimum value for this measurement'
     value :OTHER, 'An extension point'
     value :OVERRIDE, 'The override for the measurement'
+    value :PROBE, 'The position given by a probe'
     value :TARGET, 'The target position'
     value :GOOD, 'The good count'
     value :BAD, 'The bad count'
     value :ALL, 'Inclusive of all items'
+    value :LINE, 'The high voltage subtype for power state'
+    value :CONTROL, 'The low voltage subtype for power state'
   end
 end

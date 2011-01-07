@@ -46,7 +46,9 @@ module CamelName
   end
 
   def parent_as_xsd_type(withNs = false)
-    type_name(@parent.to_s, withNs)
+    name = type_name(@parent.to_s, withNs)
+    par = @schema.type(@parent)
+    name = "#{par.imported.namespace}:#{name}" if par.imported
   end
 end
 
@@ -64,20 +66,34 @@ class Schema
     root.add_attribute('targetNamespace',@urn)
     root.add_attribute('elementFormDefault', "qualified")
     root.add_attribute('attributeFormDefault', "unqualified")
+    
+    @imports.each do |imp|
+      root.add_namespace(imp.namespace, imp.urn)
+    end
+    
     doc << root
             
-    element = REXML::Element.new('xs:element')
+    @imports.each do |imp|
+      element = REXML::Element.new('xs:import')
+      element.add_attribute('namespace', imp.urn);
+      element.add_attribute('schemaLocation', imp.location);
+      root << element
+    end
+    
     top = @type_map[@top]
     raise "Cannot find top level element: #{@top}" unless top
-    element.add_attribute('name', top.name.to_s)
-    element.add_attribute('type', "#{top.name_as_xsd_type}")
-    anno = REXML::Element.new('xs:annotation')
-    docs = REXML::Element.new('xs:documentation')
-    docs.text = top.annotation
-    anno << docs
-    element << anno
-    root << element
-    
+    unless top.imported
+      element = REXML::Element.new('xs:element')
+      element.add_attribute('name', top.name.to_s)
+      element.add_attribute('type', "#{top.name_as_xsd_type}")
+      anno = REXML::Element.new('xs:annotation')
+      docs = REXML::Element.new('xs:documentation')
+      docs.text = top.annotation
+      anno << docs
+      element << anno
+      root << element
+    end
+
     @types.each { |type| type.build_hierarchy }
     @types.each { |type| type.resolve }
     @types.each do |type|
@@ -87,7 +103,6 @@ class Schema
 
     doc
   end
-
   
   class Type
     include CamelName
@@ -271,7 +286,10 @@ class Schema
       element.add_attribute('name', @name.to_s)
       element.add_attribute('type', name_as_xsd_type(true))
       if subtype? and abstract_parent?
-        element.add_attribute('substitutionGroup', "#{@parent}")
+        name = @parent
+        par = @schema.type(@parent)
+        name = "#{par.imported.namespace}:#{name}" if par.imported
+        element.add_attribute('substitutionGroup', name)
       end
       
       # Annotate again for XML Spy documentation.
@@ -285,6 +303,8 @@ class Schema
     end
     
     def generate_xsd
+      return [] if @imported
+      
       collect_members
       # puts "#{@name}: #{@elems.length} #{@attrs.length}"
       complex_type = if @elems.length == 0
@@ -346,6 +366,8 @@ class Schema
     end
 
     def generate_xsd
+      return [] if @imported
+      
       # Basic types are all simple types.
       simple_type = REXML::Element.new('xs:simpleType')
       simple_type.add_attribute('name', name_as_xsd_type)
@@ -454,7 +476,7 @@ class Schema
   end
   
   class ChoiceSet
-    def generate_xsd
+    def generate_xsd      
       choice = REXML::Element.new('xs:sequence')
       add_occurrence(choice)
 
@@ -475,10 +497,17 @@ class Schema
     end
 
     def generate_xsd
+      return [] if @imported
+      
       # Enumerated values are always NMTOKEN value restricted by the
-      # values. 
+      # values.
+      elements = []
+      
+      ele_name = name_as_xsd_type
+      ele_name = "#{ele_name}Enum" if @extensible
+      
       simple_type = REXML::Element.new('xs:simpleType')
-      simple_type.add_attribute('name', name_as_xsd_type)
+      simple_type.add_attribute('name', ele_name)
       anno = REXML::Element.new('xs:annotation')
       docs = REXML::Element.new('xs:documentation')
       docs.text = @annotation
@@ -505,8 +534,26 @@ class Schema
       # Add the enumerations.
       add_enumeration(restriction)
       simple_type << restriction
+
+      elements << simple_type
+
+      if @extensible
+        simple_type = REXML::Element.new('xs:simpleType')
+        simple_type.add_attribute('name', name_as_xsd_type)
+        anno = REXML::Element.new('xs:annotation')
+        docs = REXML::Element.new('xs:documentation')
+        docs.text = @annotation
+        anno << docs
+        simple_type << anno
+
+        union = REXML::Element.new('xs:union')
+        union.add_attribute('memberTypes', "#{ele_name} #{@extensible}Type")
+        simple_type << union
+        
+        elements << simple_type
+      end
       
-      [simple_type]
+      elements
     end
   end
 end

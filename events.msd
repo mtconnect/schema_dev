@@ -56,8 +56,8 @@ package :Events, 'Event Package' do
   end
 
   enum :EmergencyStopValue, 'ESTOP values' do
-    value :ACTIVE, 'The device is in emergency stop'
-    value :RESET, 'ESTOP is reset'
+    value :TRIGGERED, 'The device is in emergency stop'
+    value :ARMED, 'ESTOP is ARMED'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
 
@@ -68,12 +68,17 @@ package :Events, 'Event Package' do
     value :SLAVE, "The axes in the coupled axes are slaves of this axes"
     value :UNAVAILABLE, 'The value is indeterminate'
   end
+  
+  enum :AvailabilityValue, 'Possible values for availability data item' do
+    value :AVAILABLE, 'The component is available'
+    value :UNAVAILABLE, 'The component is unavailable'
+  end
 
   type :Event, 'An abstract event', :Result do
     abstract
   end
 
-  type :Code, 'The program code', :Event do
+  type :Code, 'DEPRECATED: The program code', :Event do
     member :Value, 'Program code', :CodeValue
   end
   
@@ -153,4 +158,11 @@ package :Events, 'Event Package' do
   type :EmergencyStop, 'Emergency Stop status', :Event do
     member :Value, 'Emergency Stop value', :EmergencyStopValue
   end
+  
+  type :Availability, 'The availability of the component', :Event do
+    member :Value, 'The availability', :AvailabilityValue
+  end
+  
+  type :LinePowerState, 'The state of the line power', :PowerState
+  type :ControlPowerState, 'The state of the line power', :PowerState
 end
