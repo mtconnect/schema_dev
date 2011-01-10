@@ -31,8 +31,8 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema targetNamespace='urn:mtconnect.org:MTConnectMobileAssets:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.org:MTConnectMobileAssets:1.2' xmlns='urn:mtconnect.org:MTConnectMobileAssets:1.2'>
-  <xs:element name='MTConnectMobileAssets' type='MTConnectMobileAssetsType'>
+<xs:schema targetNamespace='urn:mtconnect.org:MTConnectAssets:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.2' xmlns='urn:mtconnect.org:MTConnectAssets:1.2'>
+  <xs:element name='MTConnectAssets' type='MTConnectAssetsType'>
     <xs:annotation>
       <xs:documentation>
         The root node for MTConnect
@@ -86,6 +86,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='TimestampType'>
+    <xs:annotation>
+      <xs:documentation>
+        The time the sample occurred
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:dateTime'/>
   </xs:simpleType>
   <xs:simpleType name='VersionType'>
     <xs:annotation>
@@ -144,6 +152,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:ID'/>
   </xs:simpleType>
+  <xs:simpleType name='AssetIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The unique id of the asset
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='DescriptionTextType'>
     <xs:annotation>
       <xs:documentation>
@@ -152,7 +168,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='DataItemEnumType'>
+  <xs:simpleType name='DataItemExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for data item types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemEnumTypeEnum'>
     <xs:annotation>
       <xs:documentation>
         The types of measurements available
@@ -166,6 +192,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ANGLE'/>
       <xs:enumeration value='ANGULAR_ACCELERATION'/>
       <xs:enumeration value='ANGULAR_VELOCITY'/>
+      <xs:enumeration value='ASSET_ADDED'/>
+      <xs:enumeration value='ASSET_CHANGED'/>
+      <xs:enumeration value='AVAILABILITY'/>
       <xs:enumeration value='BLOCK'/>
       <xs:enumeration value='CODE'/>
       <xs:enumeration value='DISPLACEMENT'/>
@@ -174,6 +203,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='EMERGENCY_STOP'/>
       <xs:enumeration value='EXECUTION'/>
       <xs:enumeration value='FREQUENCY'/>
+      <xs:enumeration value='PART_COUNT'/>
       <xs:enumeration value='PART_ID'/>
       <xs:enumeration value='PATH_FEEDRATE'/>
       <xs:enumeration value='PATH_POSITION'/>
@@ -197,7 +227,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VELOCITY'/>
       <xs:enumeration value='VIBRATION'/>
       <xs:enumeration value='VOLTAGE'/>
-      <xs:enumeration value='WATTS'/>
+      <xs:enumeration value='WATTAGE'/>
       <xs:enumeration value='WORKHOLDING_ID'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
@@ -205,9 +235,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='HARDWARE'/>
       <xs:enumeration value='SYSTEM'/>
       <xs:enumeration value='LEVEL'/>
+      <xs:enumeration value='ACTUATOR'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='DataItemSubEnumType'>
+  <xs:simpleType name='DataItemEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The types of measurements available
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='DataItemEnumTypeEnum DataItemExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemSubEnumTypeEnum'>
     <xs:annotation>
       <xs:documentation>
         The sub-types for a measurement
@@ -220,11 +259,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MINIMUM'/>
       <xs:enumeration value='OTHER'/>
       <xs:enumeration value='OVERRIDE'/>
+      <xs:enumeration value='PROBE'/>
       <xs:enumeration value='TARGET'/>
       <xs:enumeration value='GOOD'/>
       <xs:enumeration value='BAD'/>
       <xs:enumeration value='ALL'/>
+      <xs:enumeration value='LINE'/>
+      <xs:enumeration value='CONTROL'/>
     </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemSubEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The sub-types for a measurement
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='DataItemSubEnumTypeEnum DataItemExtType'/>
   </xs:simpleType>
   <xs:complexType name='HeaderType'>
     <xs:annotation>
@@ -243,7 +293,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='MTConnectMobileAssetsType'>
+  <xs:complexType name='MTConnectAssetsType'>
     <xs:annotation>
       <xs:documentation>
         The root node for MTConnect
@@ -257,7 +307,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='MobileAssets' type='MobileAssetsType'>
+      <xs:element name='Assets' type='AssetsType'>
         <xs:annotation>
           <xs:documentation>
             The assets
@@ -274,7 +324,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='PotCountType'>
+  <xs:simpleType name='SizeType'>
     <xs:annotation>
       <xs:documentation>
         The number of pots (Is this term confusing?)
@@ -282,7 +332,71 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='InsertIdType'>
+  <xs:simpleType name='WeightType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of pots (Is this term confusing?)
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='CuttingEdgesType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of cutting edges
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='PocketIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        An identifier for the insert
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='ConnectionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The connection to the machine tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ProgramToolNumberType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number referenced in the program for this tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='OrientationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The orientation of this tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='SettingGuageType'>
+    <xs:annotation>
+      <xs:documentation>
+        The setting guage
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ToolLifeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The life of the tool in seconds?
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
+  <xs:simpleType name='EdgeIdType'>
     <xs:annotation>
       <xs:documentation>
         An identifier for the insert
@@ -314,7 +428,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:simpleType name='ToolStateValueType'>
+  <xs:simpleType name='ToolStatusValueType'>
     <xs:annotation>
       <xs:documentation>
         The state of the tool
@@ -328,27 +442,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='BROKEN'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='MeasurementType'>
+  <xs:complexType name='AssetsType'>
     <xs:annotation>
       <xs:documentation>
-        The type of measurement
+        The collection of mobile assets
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='NOMINAL'/>
-      <xs:enumeration value='MEASURED'/>
-      <xs:enumeration value='OFFSET'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name='ToolStateType'>
-    <xs:annotation>
-      <xs:documentation>
-        The tool state
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ToolStateValueType'/>
-    </xs:simpleContent>
+    <xs:choice maxOccurs='unbounded' minOccurs='1'>
+      <xs:element ref='Asset'/>
+    </xs:choice>
   </xs:complexType>
   <xs:complexType name='AssetType' abstract='true'>
     <xs:annotation>
@@ -365,53 +467,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='name' type='NameType' use='required'/>
+    <xs:attribute name='assetId' type='AssetIdType' use='required'/>
     <xs:attribute name='serialNumber' type='SerialNumberType' use='required'/>
+    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
   </xs:complexType>
   <xs:element name='Asset' abstract='true' type='AssetType'>
     <xs:annotation>
       <xs:documentation>
         An abstract mobile asset
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='MobileAssetsType'>
-    <xs:annotation>
-      <xs:documentation>
-        The collection of mobile assets
-      </xs:documentation>
-    </xs:annotation>
-    <xs:choice maxOccurs='unbounded' minOccurs='1'>
-      <xs:element name='ToolAssembly' type='ToolAssemblyType'>
-        <xs:annotation>
-          <xs:documentation>
-            A tool assembly
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Workholding' type='WorkholdingType'>
-        <xs:annotation>
-          <xs:documentation>
-            A workholding definition (TBD)
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:choice>
-  </xs:complexType>
-  <xs:complexType name='WorkholdingType'>
-    <xs:annotation>
-      <xs:documentation>
-        Currently just a place holder
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AssetType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Workholding' substitutionGroup='Asset' type='WorkholdingType'>
-    <xs:annotation>
-      <xs:documentation>
-        Currently just a place holder
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -424,14 +487,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetType'>
         <xs:sequence>
-          <xs:element name='ToolState' type='ToolStateType'>
+          <xs:element name='Connection' type='ConnectionType'>
             <xs:annotation>
               <xs:documentation>
-                The state of the tool assembly
+                The connection to the spindle or ...
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='PotCount' maxOccurs='1' minOccurs='0' default='1' type='PotCountType'>
+          <xs:element name='ProgramToolNumber' type='ProgramToolNumberType'>
+            <xs:annotation>
+              <xs:documentation>
+                The number used to identify this tool in the program
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Size' maxOccurs='1' minOccurs='0' default='1' type='SizeType'>
             <xs:annotation>
               <xs:documentation>
                 The number of pots this tool will consume due to interference.
@@ -439,14 +509,57 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Inserts' type='InsertsType'>
+          <xs:element name='Weight' maxOccurs='1' minOccurs='0' type='WeightType'>
             <xs:annotation>
               <xs:documentation>
-                A list of inserts for this assembly
+                The wieght of the tool (Pocket Usage)
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='ToolLife' type='ToolLifeType'>
+            <xs:annotation>
+              <xs:documentation>
+                The life of a tool
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='CuttingEdges' type='CuttingEdgesType'>
+            <xs:annotation>
+              <xs:documentation>
+                The number of cutting edges
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='PocketId' type='PocketIdType'>
+            <xs:annotation>
+              <xs:documentation>
+                The pocket location
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Orientation' type='OrientationType'>
+            <xs:annotation>
+              <xs:documentation>
+                The orientation (need more info)
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='SettingGuage' type='SettingGuageType'>
+            <xs:annotation>
+              <xs:documentation>
+                The setting guage
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Edges' type='EdgesType'>
+            <xs:annotation>
+              <xs:documentation>
+                A list of edges for this assembly
               </xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:sequence>
+        <xs:attribute name='toolStatus' type='ToolStatusValueType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -457,51 +570,63 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='InsertsType'>
+  <xs:complexType name='ToolLifeType'>
     <xs:annotation>
       <xs:documentation>
-        A list of inserts
+        The life of the tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ToolLifeValueType'>
+        <xs:attribute name='maximum' type='ToolLifeValueType' use='optional'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='EdgesType'>
+    <xs:annotation>
+      <xs:documentation>
+        A list of edge
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Insert' maxOccurs='unbounded' minOccurs='1' type='InsertType'>
+      <xs:element name='Edge' maxOccurs='unbounded' minOccurs='1' type='EdgeType'>
         <xs:annotation>
           <xs:documentation>
-            An insert
+            An edge
           </xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name='InsertType'>
+  <xs:complexType name='EdgeType'>
     <xs:annotation>
       <xs:documentation>
-        An insert into a tool assembly
+        An edge into a tool assembly
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs='unbounded' minOccurs='1' ref='InsertMeasurement'/>
+      <xs:element maxOccurs='unbounded' minOccurs='1' ref='EdgeMeasurement'/>
     </xs:sequence>
-    <xs:attribute name='insertId' type='InsertIdType' use='required'/>
+    <xs:attribute name='edgeId' type='EdgeIdType' use='required'/>
   </xs:complexType>
-  <xs:complexType name='InsertMeasurementType' abstract='true'>
+  <xs:complexType name='EdgeMeasurementType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        An abstract type for insert measurements
+        An abstract type for edge measurements
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='MeasurementValueType'>
-        <xs:attribute name='type' type='MeasurementType' use='required'/>
-        <xs:attribute name='maximum' type='MaximumType' use='optional'/>
-        <xs:attribute name='minimum' type='MinimumType' use='optional'/>
+        <xs:attribute name='maximum' type='MeasurementValueType' use='optional'/>
+        <xs:attribute name='minimum' type='MeasurementValueType' use='optional'/>
+        <xs:attribute name='nominal' type='MeasurementValueType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='InsertMeasurement' abstract='true' type='InsertMeasurementType'>
+  <xs:element name='EdgeMeasurement' abstract='true' type='EdgeMeasurementType'>
     <xs:annotation>
       <xs:documentation>
-        An abstract type for insert measurements
+        An abstract type for edge measurements
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -512,10 +637,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='InsertMeasurementType'/>
+      <xs:extension base='EdgeMeasurementType'>
+        <xs:attribute name='wear' type='MeasurementValueType' use='optional'/>
+      </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Length' substitutionGroup='InsertMeasurement' type='LengthType'>
+  <xs:element name='Length' substitutionGroup='EdgeMeasurement' type='LengthType'>
     <xs:annotation>
       <xs:documentation>
         A length
@@ -529,10 +656,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='InsertMeasurementType'/>
+      <xs:extension base='EdgeMeasurementType'>
+        <xs:attribute name='wear' type='MeasurementValueType' use='optional'/>
+      </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Diameter' substitutionGroup='InsertMeasurement' type='DiameterType'>
+  <xs:element name='Diameter' substitutionGroup='EdgeMeasurement' type='DiameterType'>
     <xs:annotation>
       <xs:documentation>
         A diameter
@@ -546,10 +675,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='InsertMeasurementType'/>
+      <xs:extension base='EdgeMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='TipAngle' substitutionGroup='InsertMeasurement' type='TipAngleType'>
+  <xs:element name='TipAngle' substitutionGroup='EdgeMeasurement' type='TipAngleType'>
     <xs:annotation>
       <xs:documentation>
         A tip angle
@@ -563,10 +692,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='InsertMeasurementType'/>
+      <xs:extension base='EdgeMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='CornerRadius' substitutionGroup='InsertMeasurement' type='CornerRadiusType'>
+  <xs:element name='CornerRadius' substitutionGroup='EdgeMeasurement' type='CornerRadiusType'>
     <xs:annotation>
       <xs:documentation>
         A corner radius
@@ -580,10 +709,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='InsertMeasurementType'/>
+      <xs:extension base='EdgeMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Life' substitutionGroup='InsertMeasurement' type='LifeType'>
+  <xs:element name='Life' substitutionGroup='EdgeMeasurement' type='LifeType'>
     <xs:annotation>
       <xs:documentation>
         A life

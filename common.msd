@@ -7,7 +7,8 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :TestIndicator, 'A debugging flag for testing.', :boolean
   attr :InstanceId, 'The instance number of the agent, used for fault tolerance'
   attr :BufferSize, 'The size of the agents buffer', :integer
-
+  
+  attr :Timestamp, 'The time the sample occurred', :dateTime
   attr :Version, 'A version number', :NMTOKEN
   attr :Name, 'A short name for any element'
   attr :Uuid, 'A universally unique id that uniquely identifies the element for it\'s entire life'
@@ -15,6 +16,8 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :ItemSource, 'The measurement source'
   attr :Rate, 'A sample rate in milliseconds per sample', :float
   attr :ID, 'An identifier', :ID
+  
+  attr :AssetId, 'The unique id of the asset'
 
   basic_type :DescriptionText, 'A description'
   basic_type(:DataItemExt, 'An extension point for data item types') do
@@ -31,6 +34,8 @@ package :common, 'Common attributes and elements for all schemas' do
     value :ANGLE, 'The position as given in degrees'
     value :ANGULAR_ACCELERATION, 'The accelleration of the component'
     value :ANGULAR_VELOCITY, 'The velocity of the component'
+    value :ASSET_ADDED, 'A new asset has been added'
+    value :ASSET_CHANGED, 'A new asset has been added'
     value :AVAILABILITY, 'The components availability'
     value :BLOCK, 'The current executing block'
     value :CODE, 'The current executing code'

@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema targetNamespace='urn:mtconnect.org:MTConnectStreams:1.1' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.org:MTConnectStreams:1.1' xmlns='urn:mtconnect.org:MTConnectStreams:1.1'>
+<xs:schema targetNamespace='urn:mtconnect.org:MTConnectStreams:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.org:MTConnectStreams:1.2' xmlns='urn:mtconnect.org:MTConnectStreams:1.2'>
   <xs:element name='MTConnectStreams' type='MTConnectStreamsType'>
     <xs:annotation>
       <xs:documentation>
@@ -144,6 +144,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:ID'/>
   </xs:simpleType>
+  <xs:simpleType name='AssetIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The unique id of the asset
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='DescriptionTextType'>
     <xs:annotation>
       <xs:documentation>
@@ -159,7 +167,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='x:[A-Z_0-9]+'/>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumTypeEnum'>
@@ -176,6 +184,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ANGLE'/>
       <xs:enumeration value='ANGULAR_ACCELERATION'/>
       <xs:enumeration value='ANGULAR_VELOCITY'/>
+      <xs:enumeration value='ASSET_ADDED'/>
+      <xs:enumeration value='ASSET_CHANGED'/>
       <xs:enumeration value='AVAILABILITY'/>
       <xs:enumeration value='BLOCK'/>
       <xs:enumeration value='CODE'/>
@@ -1707,6 +1717,40 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The state of the line power
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AssetAddedType'>
+    <xs:annotation>
+      <xs:documentation>
+        A new asset was added
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AssetAdded' substitutionGroup='Event' type='AssetAddedType'>
+    <xs:annotation>
+      <xs:documentation>
+        A new asset was added
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AssetChangedType'>
+    <xs:annotation>
+      <xs:documentation>
+        An asset was just modified
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AssetChanged' substitutionGroup='Event' type='AssetChangedType'>
+    <xs:annotation>
+      <xs:documentation>
+        An asset was just modified
       </xs:documentation>
     </xs:annotation>
   </xs:element>

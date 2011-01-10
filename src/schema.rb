@@ -49,6 +49,7 @@ module CamelName
     name = type_name(@parent.to_s, withNs)
     par = @schema.type(@parent)
     name = "#{par.imported.namespace}:#{name}" if par.imported
+    name
   end
 end
 
@@ -161,6 +162,7 @@ class Schema
           else
             @attr_elem = extension = REXML::Element.new('xs:extension')
           end
+          # puts "Adding base of #{parent_as_xsd_type(true)} for #{@name}"
           extension.add_attribute('base', parent_as_xsd_type(true))
           
           # Since extension by restriction does not allow us
@@ -255,6 +257,8 @@ class Schema
           extension = REXML::Element.new('xs:extension')
         end
         extension.add_attribute('base', parent_as_xsd_type(true))
+        # puts "Adding base of #{parent_as_xsd_type(true)} for #{@name}"
+        
         @attr_elem = extension
         complex_content << extension
         complex_type << complex_content

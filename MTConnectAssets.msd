@@ -1,9 +1,9 @@
 
-self.urn = 'urn:mtconnect.org:MTConnectMobileAssets:1.2'
+self.urn = 'urn:mtconnect.org:MTConnectAssets:1.2'
 self.namespace = 'mt'
-self.top = :MTConnectMobileAssets
+self.top = :MTConnectAssets
 self.license = File.read('license.txt')
-self.version = '1.1'
+self.version = '1.2'
 
 load 'common'
 
@@ -17,9 +17,9 @@ package :MTC, 'MTC Top Level Package' do
     member :BufferSize, 'The size of the agent\'s buffer.'
   end
 
-  type :MTConnectMobileAssets, 'The root node for MTConnect' do
+  type :MTConnectAssets, 'The root node for MTConnect' do
     member :Header, 'Protocol dependent information'
-    member :MobileAssets, 'The assets'
+    member :Assets, 'The assets'
   end
 end
 

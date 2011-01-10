@@ -165,4 +165,13 @@ package :Events, 'Event Package' do
   
   type :LinePowerState, 'The state of the line power', :PowerState
   type :ControlPowerState, 'The state of the line power', :PowerState
+  
+  # For assets  
+  type :AssetAdded, 'A new asset was added', :Event do
+    member :Value, 'The asset identifier', :AssetId
+  end
+
+  type :AssetChanged, 'An asset was just modified', :Event do
+    member :Value, 'The asset identifier', :AssetId
+  end
 end
