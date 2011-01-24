@@ -340,7 +340,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='CuttingEdgesType'>
+  <xs:simpleType name='EdgeCountType'>
     <xs:annotation>
       <xs:documentation>
         The number of cutting edges
@@ -372,18 +372,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='OrientationType'>
-    <xs:annotation>
-      <xs:documentation>
-        The orientation of this tool
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:simpleType name='SettingGuageType'>
     <xs:annotation>
       <xs:documentation>
         The setting guage
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ToolIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The unique identifier of the tool type
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -435,11 +435,90 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='FRESH'/>
-      <xs:enumeration value='EXPIRED'/>
+      <xs:enumeration value='NEW'/>
       <xs:enumeration value='NOT_REGISTERED'/>
-      <xs:enumeration value='IN_USE'/>
+      <xs:enumeration value='RECONDITIONED'/>
+      <xs:enumeration value='USED'/>
+      <xs:enumeration value='EXPIRED'/>
+      <xs:enumeration value='TAGGED_OUT'/>
       <xs:enumeration value='BROKEN'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='OrientationAssemblyType'>
+    <xs:annotation>
+      <xs:documentation>
+        The orientation of the curring tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='LEFT'/>
+      <xs:enumeration value='RIGHT'/>
+      <xs:enumeration value='BOTH'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='OrientationDeviceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The orientation of the cutting tool relative machine tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='LEFT'/>
+      <xs:enumeration value='RIGHT'/>
+      <xs:enumeration value='BOTH'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ToolLifeDirectionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The direction of tool life count
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='UP'/>
+      <xs:enumeration value='DOWN'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ToolLifeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The direction of tool life count
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='TIME'/>
+      <xs:enumeration value='PART_COUNT'/>
+      <xs:enumeration value='WEAR'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ToolType'>
+    <xs:annotation>
+      <xs:documentation>
+        The type of the tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='SHELL_MILL'/>
+      <xs:enumeration value='END_MILL'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='OperationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The type of the tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='MILLING'/>
+      <xs:enumeration value='END_MILLING'/>
+      <xs:enumeration value='FACE_MILLING'/>
+      <xs:enumeration value='BALL_MILLING'/>
+      <xs:enumeration value='DRILLING'/>
+      <xs:enumeration value='REAMING'/>
+      <xs:enumeration value='TAPPING'/>
+      <xs:enumeration value='BROACHING'/>
+      <xs:enumeration value='LINEAR_BROACHING'/>
+      <xs:enumeration value='CIRCULAR_BROACHING'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='AssetsType'>
@@ -478,7 +557,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ToolAssemblyType'>
+  <xs:complexType name='CuttingToolType'>
     <xs:annotation>
       <xs:documentation>
         A defintion of a cutting implement
@@ -487,14 +566,49 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetType'>
         <xs:sequence>
-          <xs:element name='Connection' type='ConnectionType'>
+          <xs:element name='ToolType' type='ToolType'>
+            <xs:annotation>
+              <xs:documentation>
+                The type of the tool
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='OperationType' type='OperationType'>
+            <xs:annotation>
+              <xs:documentation>
+                The operation type of the tool
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Status' maxOccurs='1' minOccurs='0' type='ToolStatusValueType'>
+            <xs:annotation>
+              <xs:documentation>
+                The state of the tool assembly
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='ToolLife' maxOccurs='3' minOccurs='0' type='LifeType'>
+            <xs:annotation>
+              <xs:documentation>
+                The life of a tool assembly
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='PocketId' maxOccurs='1' minOccurs='0' type='PocketIdType'>
+            <xs:annotation>
+              <xs:documentation>
+                The pocket location
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Connection' maxOccurs='1' minOccurs='0' type='ConnectionType'>
             <xs:annotation>
               <xs:documentation>
                 The connection to the spindle or ...
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='ProgramToolNumber' type='ProgramToolNumberType'>
+          <xs:element name='ProgramToolNumber' maxOccurs='1' minOccurs='0' type='ProgramToolNumberType'>
             <xs:annotation>
               <xs:documentation>
                 The number used to identify this tool in the program
@@ -516,38 +630,45 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='ToolLife' type='ToolLifeType'>
+          <xs:element name='OrientationAssembly' maxOccurs='1' minOccurs='0' type='OrientationAssemblyType'>
             <xs:annotation>
               <xs:documentation>
-                The life of a tool
+                The orientation with respect to the assembly (need more info)
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='CuttingEdges' type='CuttingEdgesType'>
+          <xs:element name='OrientationDevice' maxOccurs='1' minOccurs='0' type='OrientationDeviceType'>
             <xs:annotation>
               <xs:documentation>
-                The number of cutting edges
+                The orientation with respect to the device(need more info)
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='PocketId' type='PocketIdType'>
-            <xs:annotation>
-              <xs:documentation>
-                The pocket location
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Orientation' type='OrientationType'>
-            <xs:annotation>
-              <xs:documentation>
-                The orientation (need more info)
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='SettingGuage' type='SettingGuageType'>
+          <xs:element name='SettingGuage' maxOccurs='1' minOccurs='0' type='SettingGuageType'>
             <xs:annotation>
               <xs:documentation>
                 The setting guage
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Length' maxOccurs='1' minOccurs='0' type='LengthType'>
+            <xs:annotation>
+              <xs:documentation>
+                The length of the tool assembly
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Diameter' maxOccurs='1' minOccurs='0' type='DiameterType'>
+            <xs:annotation>
+              <xs:documentation>
+                The diameter of the tool assembly
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='EdgeCount' type='EdgeCountType'>
+            <xs:annotation>
+              <xs:documentation>
+                The number of cutting edges
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -559,26 +680,29 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:annotation>
           </xs:element>
         </xs:sequence>
-        <xs:attribute name='toolStatus' type='ToolStatusValueType' use='required'/>
+        <xs:attribute name='toolId' type='ToolIdType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='ToolAssembly' substitutionGroup='Asset' type='ToolAssemblyType'>
+  <xs:element name='CuttingTool' substitutionGroup='Asset' type='CuttingToolType'>
     <xs:annotation>
       <xs:documentation>
         A defintion of a cutting implement
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ToolLifeType'>
+  <xs:complexType name='LifeType'>
     <xs:annotation>
       <xs:documentation>
-        The life of the tool
+        Abstract cutter life
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='ToolLifeValueType'>
-        <xs:attribute name='maximum' type='ToolLifeValueType' use='optional'/>
+        <xs:attribute name='type' type='ToolLifeType' use='required'/>
+        <xs:attribute name='direction' type='ToolLifeDirectionType' use='required'/>
+        <xs:attribute name='warning' type='ToolLifeValueType' use='optional'/>
+        <xs:attribute name='maximum' type='ToolLifeValueType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -605,7 +729,41 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs='unbounded' minOccurs='1' ref='EdgeMeasurement'/>
+      <xs:element name='Length' maxOccurs='1' minOccurs='0' type='LengthType'>
+        <xs:annotation>
+          <xs:documentation>
+            The length of the edge
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Diameter' maxOccurs='1' minOccurs='0' type='DiameterType'>
+        <xs:annotation>
+          <xs:documentation>
+            The diameter of the edge
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='TipAngle' maxOccurs='1' minOccurs='0' type='TipAngleType'>
+        <xs:annotation>
+          <xs:documentation>
+            The angle of the tool cutting edge
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='CornerRadius' maxOccurs='1' minOccurs='0' type='CornerRadiusType'>
+        <xs:annotation>
+          <xs:documentation>
+            The angle of the tool cutting edge
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='EdgeLife' maxOccurs='1' minOccurs='0' type='LifeType'>
+        <xs:annotation>
+          <xs:documentation>
+            The life of an edge
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='edgeId' type='EdgeIdType' use='required'/>
   </xs:complexType>
@@ -699,23 +857,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         A corner radius
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='LifeType'>
-    <xs:annotation>
-      <xs:documentation>
-        A life
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='EdgeMeasurementType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Life' substitutionGroup='EdgeMeasurement' type='LifeType'>
-    <xs:annotation>
-      <xs:documentation>
-        A life
       </xs:documentation>
     </xs:annotation>
   </xs:element>
