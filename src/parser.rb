@@ -85,6 +85,10 @@ class Schema
   def type(name)
     @type_map[name]
   end
+  
+  def check_type(name)
+    raise "Cannot resolve type #{name}" unless @type_map[name]
+  end
 
   def standards
     unless defined? @ordered_standards
@@ -257,7 +261,9 @@ class Schema
     end
 
     def resolve_parent
-      @schema.type(@parent)
+      par = @schema.type(@parent)
+      raise "Cannot resolve parent type #{@parent}" unless par
+      par
     end
 
     def has_subtypes?
@@ -278,6 +284,20 @@ class Schema
       @members << Member.new(@schema, name, annotation, occurrence, type, &block)
     end
     
+    def attribute(name, annotation, occurrence = nil, type = nil, &block)
+      type, occurrence = occurrence, nil if Symbol === occurrence
+      mem = Member.new(@schema, name, annotation, occurrence, type, &block)
+      mem.attribute = true
+      @members << mem
+    end
+    
+    def element(name, annotation, occurrence = nil, type = nil, &block)
+      type, occurrence = occurrence, nil if Symbol === occurrence
+      mem = Member.new(@schema, name, annotation, occurrence, type, &block)
+      mem.attribute = false
+      @members << mem
+    end
+
     def all_subtypes(base, occurrence = 0..INF)
       @members << Subtypes.new(@schema, base, occurrence)
     end
@@ -313,7 +333,13 @@ class Schema
     end
     
     def build_hierarchy
-      @schema.type(@parent).add_child(self) if @parent
+      if @parent
+        unless @schema.type(@parent)
+          puts "Cannot find parent '#{@parent.inspect}' for '#{self}'"
+          exit 9
+        end
+        @schema.type(@parent).add_child(self)
+      end
     end
     
     def resolve
@@ -347,7 +373,7 @@ class Schema
     def resolve_type
       res = @schema.type(@type)
       unless res
-        raise "Cannot resolve type #{@type}"
+        raise "Cannot resolve type #{@type} for #{@name}"
       end
       res
     end
@@ -366,6 +392,10 @@ class Schema
         @attribute = (@name != :Value and (type.nil? or type.attr))
       end
       @attribute
+    end
+    
+    def attribute=(a)
+      @attribute = a
     end
 
     def references_abstract?

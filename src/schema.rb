@@ -542,6 +542,8 @@ class Schema
       elements << simple_type
 
       if @extensible
+        @schema.check_type(@extensible)
+        
         simple_type = REXML::Element.new('xs:simpleType')
         simple_type.add_attribute('name', name_as_xsd_type)
         anno = REXML::Element.new('xs:annotation')
