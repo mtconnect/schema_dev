@@ -12,6 +12,7 @@ package :Condition, 'The condition of the device' do
     abstract
     member :Sequence, 'The events sequence number'
     member :Timestamp, 'The time the event occurred'
+    member :OccurrenceTime, 'The time the condition occurred', 0..1
     member :Name, 'The name of the event corresponding to the measurement', 0..1
     member :DataItemId, 'The unique identifier of the item being produced'
     member :type, 'The type of condition', :DataItemEnum

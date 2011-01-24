@@ -8,7 +8,8 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :InstanceId, 'The instance number of the agent, used for fault tolerance'
   attr :BufferSize, 'The size of the agents buffer', :integer
   
-  attr :Timestamp, 'The time the sample occurred', :dateTime
+  attr :Timestamp, 'The time the sample was reported', :dateTime
+  attr :OccurrenceTime, 'The time a sample occurred', :dateTime
   attr :Version, 'A version number', :NMTOKEN
   attr :Name, 'A short name for any element'
   attr :Uuid, 'A universally unique id that uniquely identifies the element for it\'s entire life'
@@ -23,6 +24,11 @@ package :common, 'Common attributes and elements for all schemas' do
   basic_type(:DataItemExt, 'An extension point for data item types') do
     pattern '[a-ln-z]:[A-Z_0-9]+'
   end
+  
+  basic_type(:DataItemStatsExt, 'An extension point for data item statistics types') do
+    pattern '[a-ln-z]:[A-Z_0-9]+'
+  end
+  
   
   enum :DataItemEnum, 'The types of measurements available' do
     extensible :DataItemExt
@@ -58,6 +64,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :POWER_STATUS, 'DEPRECATED: The power status of the component'
     value :POWER_STATE, 'The power state of the component'
     value :PRESSURE, 'The current pressure'
+    value :RESET, 'The statistical reset event'
     value :PROGRAM, 'The name of the program being run'
     value :ROTARY_MODE, 'The function of the rotary axis'
     value :COUPLED_AXES, 'The axes to which this axis is associated'
@@ -99,5 +106,17 @@ package :common, 'Common attributes and elements for all schemas' do
     value :ALL, 'Inclusive of all items'
     value :LINE, 'The high voltage subtype for power state'
     value :CONTROL, 'The low voltage subtype for power state'
+  end
+  
+  enum :DataItemStatistics, 'Statistical operations on data' do
+    extensible :DataItemStatsExt
+    
+    value :MINIMUM, 'The minimum value'
+    value :MAXIMUM, 'The maximum value'
+    value :AVERAGE, 'The average'
+    value :STANDARD_DEVIATION, 'The standard deviation'
+    value :ROOT_MEAN_SQUARE, 'The root mean square'
+    value :MEAN, 'The mean average'
+    value :MODE, 'The mode of the sample'
   end
 end

@@ -43,7 +43,8 @@ package :Streams, 'Event Package' do
     member :Sequence, 'The events sequence number'
     member :Value, 'Abstract event data', :SampleValue
     member :SubType, 'The event subtype corresponding to the measurement subtype', 0..1, :DataItemSubEnum
-    member :Timestamp, 'The time the event occurred'
+    member :Timestamp, 'The time the event was recorded'
+    member :OccurrenceTime, 'The time the condition occurred', 0..1
     member :Name, 'The name of the event corresponding to the measurement', 0..1
     member :DataItemId, 'The unique identifier of the item being produced'
   end

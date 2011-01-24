@@ -24,6 +24,8 @@ package :Samlpes, 'The samples' do
   
   type :Sample, 'An abstract sample', :Result do
     abstract
+    
+    member :Statistic, 'The statistical operation on this data', 0..1, :DataItemStatistics
   end
   
   type :Amperage, 'An current a component is drawing', :Sample do

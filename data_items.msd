@@ -96,6 +96,7 @@ package :DataItems, 'Data Items Package' do
     member :id, 'The data item identifier', :ID
     member :Type, 'The type of measurement', :DataItemEnum
     member :SubType, 'The sub type for the measurement', 0..1, :DataItemSubEnum
+    member :Statistic, 'The statistical operation on this data', 0..1, :DataItemStatistics
     member :Units, 'The units of the measurement', 0..1
     member :NativeUnits, 'The units as expressed by the machine', 0..1
     member :NativeScale, 'The units as expressed by the machine', 0..1

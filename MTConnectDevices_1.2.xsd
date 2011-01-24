@@ -87,6 +87,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
+  <xs:simpleType name='TimestampType'>
+    <xs:annotation>
+      <xs:documentation>
+        The time the sample was reported
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:dateTime'/>
+  </xs:simpleType>
+  <xs:simpleType name='OccurrenceTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The time a sample occurred
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:dateTime'/>
+  </xs:simpleType>
   <xs:simpleType name='VersionType'>
     <xs:annotation>
       <xs:documentation>
@@ -170,6 +186,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='DataItemStatsExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for data item statistics types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name='DataItemEnumTypeEnum'>
     <xs:annotation>
       <xs:documentation>
@@ -208,6 +234,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POWER_STATUS'/>
       <xs:enumeration value='POWER_STATE'/>
       <xs:enumeration value='PRESSURE'/>
+      <xs:enumeration value='RESET'/>
       <xs:enumeration value='PROGRAM'/>
       <xs:enumeration value='ROTARY_MODE'/>
       <xs:enumeration value='COUPLED_AXES'/>
@@ -267,6 +294,30 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:union memberTypes='DataItemSubEnumTypeEnum DataItemExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemStatisticsTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        Statistical operations on data
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='MINIMUM'/>
+      <xs:enumeration value='MAXIMUM'/>
+      <xs:enumeration value='AVERAGE'/>
+      <xs:enumeration value='STANDARD_DEVIATION'/>
+      <xs:enumeration value='ROOT_MEAN_SQUARE'/>
+      <xs:enumeration value='MEAN'/>
+      <xs:enumeration value='MODE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemStatisticsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Statistical operations on data
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='DataItemStatisticsTypeEnum DataItemStatsExtType'/>
   </xs:simpleType>
   <xs:complexType name='HeaderType'>
     <xs:annotation>
@@ -1010,6 +1061,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='id' type='IDType' use='required'/>
     <xs:attribute name='type' type='DataItemEnumType' use='required'/>
     <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'/>
+    <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
     <xs:attribute name='units' type='UnitsType' use='optional'/>
     <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'/>
     <xs:attribute name='nativeScale' type='NativeScaleType' use='optional'/>
