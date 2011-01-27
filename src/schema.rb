@@ -115,7 +115,7 @@ class Schema
       value = @members.find { |m| m.is_value? }
       return true if value
       return true if @parent.nil? and !abstract?
-      resolve_parent.simple? if @parent
+      return resolve_parent.simple? if @parent
       false
     end
 
@@ -221,6 +221,7 @@ class Schema
         simple_content << extension
         complex_type << simple_content
       elsif @parent
+        # puts "Complex type: #{@name}"
         complex_content = REXML::Element.new('xs:complexContent')
         extension = REXML::Element.new('xs:extension')
         extension.add_attribute('base', parent_as_xsd_type(true))
@@ -310,7 +311,7 @@ class Schema
       return [] if @imported
       
       collect_members
-      # puts "#{@name}: #{@elems.length} #{@attrs.length}"
+      puts "#{@name}: #{@elems.length} #{@attrs.length}"
       complex_type = if @elems.length == 0
         create_type_no_elements
       elsif @elems.length == 1

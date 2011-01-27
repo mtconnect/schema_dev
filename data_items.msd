@@ -48,6 +48,13 @@ package :DataItems, 'Data Items Package' do
     value :SECOND, 'Seconds'
     value :VOLT, 'The voltage'
     value :WATT, 'The wattage'
+    
+    # For 1.2
+    value :OHM, 'Electrical resistance'
+    value :DECIBEL, 'Sound pressure'
+    value :'SIEMENS/METER', 'Conductivity'
+    value :'MICRO_RADIAN', 'Angular motion for tilt'
+    value :'PASCAL_SECOND', 'Measure of viscosity'
   end
 
   enum :NativeUnits, 'The units supported for the source equipment that can be converted into MTC Units.', :Units do

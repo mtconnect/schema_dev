@@ -2,6 +2,7 @@
 package :Samlpes, 'The samples' do
   float = '[+-]?\d+(\.\d+)?(E[+-]?\d+)?'
   float_value = "#{float}|UNAVAILABLE"
+  vector_value = "(#{float}( )*)+|UNAVAILABLE"
   
   basic_type :SampleValue, 'An events data'
   basic_type(:PositionValue, 'The value for the position') { pattern float_value }
@@ -17,10 +18,23 @@ package :Samlpes, 'The samples' do
   basic_type(:VelocityValue, 'The temperature') { pattern float_value }
   basic_type(:FeedrateValue, 'The feedrate') { pattern float_value }
   basic_type(:VibrationValue, 'The vibration') { pattern float_value }
-  basic_type(:SpindleSpeedValue, 'The spindle speed') { pattern float_value }
+  basic_type(:RotationalVelocityValue, 'The spindle speed') { pattern float_value }
   basic_type(:LoadValue, 'A component load') { pattern float_value }
   basic_type(:TorqueValue, 'A component\'s torque') { pattern float_value }
   basic_type(:ThreeDimensionalValue, 'A three dimensional value \'X Y Z\' or \'A B C\'') { pattern "#{float} #{float} #{float}|UNAVAILABLE" }
+  basic_type(:TiltValue, 'The value for the position') { pattern float_value }
+  basic_type(:AccumulatedTime, 'An accumulated time') { pattern float_value }
+  basic_type(:PowerFactorValue, 'Power factor') { pattern float_value }
+  basic_type(:StrainValue, 'Strain') { pattern float_value }
+  basic_type(:FlowValue, 'Flow') { pattern float_value }
+  basic_type(:SoundPressureValue, 'Sound pressure level') { pattern float_value }
+  basic_type(:ResistanceValue, 'Electrical resistance') { pattern float_value }
+  basic_type(:ConductivityValue, 'Conductivity') { pattern float_value }
+  basic_type(:ViscosityValue, 'Viscosity') { pattern float_value }
+  basic_type(:ConcentrationValue, 'Concentration') { pattern float_value }
+  basic_type(:WaveformValue, 'A waveform') { pattern vector_value }
+  basic_type(:DurationValue, 'Concentration') { pattern float_value }
+  basic_type(:SampleRate, 'The sampling rate in samples per second') { pattern float_value }
   
   type :Sample, 'An abstract sample', :Result do
     abstract
@@ -65,7 +79,7 @@ package :Samlpes, 'The samples' do
   end
 
   type :SpindleSpeed, 'The spindle speed of the component: DEPRECATED', :Sample do
-    member :Value, 'The spindle speed', :SpindleSpeedValue
+    member :Value, 'The spindle speed', :RotationalVelocityValue
   end
   
   type :RotationalVelocity, 'The rotational velocity of the component in RPM', :Sample do
@@ -84,10 +98,6 @@ package :Samlpes, 'The samples' do
     member :Value, 'The load on the component', :LoadValue
   end
 
-  type :Displacement, 'The displacement as measured from zero to peak', :Sample do
-    member :Value, 'The displacement as measured from zero to peak', :DisplacementValue
-  end
-  
   type :Frequency, 'The frequency in hertz', :Sample do
     member :Value, 'The frequency in hertz', :FrequencyValue
   end
@@ -112,4 +122,61 @@ package :Samlpes, 'The samples' do
     member :Value, 'The position', :ThreeDimensionalValue
   end
   
+  # For 1.2
+  type :Displacement, 'The linear displacement in millimeters', :Sample do
+    member :Value, 'The displacement as measured from zero to peak', :DisplacementValue
+  end
+   
+  type :Tilt, 'The tilt', :Sample do
+    member :Value, 'The tilt', :TiltValue
+  end
+  
+  type :Duration, 'The duration of an event in seconds', :Sample do
+    member :Value, 'The duration', :DurationValue
+  end
+  
+  type :ElapsedTime, 'The accumulated time', :Sample do
+    member :Value, 'accumulated time', :AccumulatedTime
+  end
+  
+  type :PowerFactor, 'The power factor', :Sample do
+    member :Value, 'Power factor', :PowerFactorValue
+  end
+
+  type :Strain, 'The strain', :Sample do
+    member :Value, 'strain', :StrainValue
+  end
+
+  type :Flow, 'The flow', :Sample do
+    member :Value, 'flow', :FlowValue
+  end
+
+  type :SoundPressure, 'The sound pressure', :Sample do
+    member :Value, 'sound pressure', :SoundPressureValue
+  end
+  
+  type :Resistance, 'The Resistance', :Sample do
+    member :Value, 'Resistance', :ResistanceValue
+  end
+  
+  type :Conductivity, 'The Conductivity', :Sample do
+    member :Value, 'Conductivity', :ConductivityValue
+  end
+
+  type :Viscosity, 'The Viscosity', :Sample do
+    member :Value, 'Viscosity', :ViscosityValue
+  end
+  
+  type :Concentration, 'The Concentration', :Sample do
+    member :Value, 'Concentration', :ConcentrationValue
+  end
+  
+  type :AbsWaveform, 'The abstract waveform', :Sample do    
+    attribute :Duration, 'The duration of the sample', :DurationValue
+    attribute :SampleRate, 'The rate the waveform was sampled at'
+  end
+  
+  type :Waveform, 'The waveform', :AbsWaveform do
+    member :Value, 'Waveform', :WaveformValue
+  end
 end

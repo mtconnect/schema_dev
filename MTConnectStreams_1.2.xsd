@@ -248,6 +248,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLTAGE'/>
       <xs:enumeration value='WATTAGE'/>
       <xs:enumeration value='WORKHOLDING_ID'/>
+      <xs:enumeration value='DISPLACEMENT'/>
+      <xs:enumeration value='TILT'/>
+      <xs:enumeration value='ELAPSED_TIME'/>
+      <xs:enumeration value='DURATION'/>
+      <xs:enumeration value='POWER_FACTOR'/>
+      <xs:enumeration value='STRAIN'/>
+      <xs:enumeration value='FLOW'/>
+      <xs:enumeration value='SOUND_PRESSURE'/>
+      <xs:enumeration value='RESISTANCE'/>
+      <xs:enumeration value='CONDUCTIVITY'/>
+      <xs:enumeration value='VISCOSITY'/>
+      <xs:enumeration value='CONCENTRATION'/>
+      <xs:enumeration value='ROTATIONAL_VELOCITY'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -285,6 +298,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALL'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROL'/>
+      <xs:enumeration value='WEIGHT'/>
+      <xs:enumeration value='VOLUME'/>
+      <xs:enumeration value='MOLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -655,7 +671,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='SpindleSpeedValueType'>
+  <xs:simpleType name='RotationalVelocityValueType'>
     <xs:annotation>
       <xs:documentation>
         The spindle speed
@@ -693,6 +709,136 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='TiltValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value for the position
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='AccumulatedTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        An accumulated time
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='PowerFactorValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Power factor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='StrainValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Strain
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='FlowValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Flow
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='SoundPressureValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Sound pressure level
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ResistanceValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Electrical resistance
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ConductivityValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Conductivity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ViscosityValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Viscosity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ConcentrationValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Concentration
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='WaveformValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        A waveform
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='([+-]?\d+(\.\d+)?(E[+-]?\d+)?( )*)+|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DurationValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Concentration
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='SampleRateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The sampling rate
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='SampleType' abstract='true'>
@@ -888,7 +1034,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SpindleSpeedType'>
     <xs:annotation>
       <xs:documentation>
-        The spindle speed of the component
+        The spindle speed of the component: DEPRECATED
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -900,7 +1046,26 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='SpindleSpeed' substitutionGroup='Sample' type='SpindleSpeedType'>
     <xs:annotation>
       <xs:documentation>
-        The spindle speed of the component
+        The spindle speed of the component: DEPRECATED
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='RotationalVelocityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The rotational velocity of the component in RPM
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='RotationalVelocity' substitutionGroup='Sample' type='RotationalVelocityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The rotational velocity of the component in RPM
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -958,25 +1123,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The program code
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='DisplacementType'>
-    <xs:annotation>
-      <xs:documentation>
-        The displacement as measured from zero to peak
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
-      </xs:restriction>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Displacement' substitutionGroup='Sample' type='DisplacementType'>
-    <xs:annotation>
-      <xs:documentation>
-        The displacement as measured from zero to peak
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -1091,6 +1237,273 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The 3 dimensional position for tool tip in the path (X Y Z)
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DisplacementType'>
+    <xs:annotation>
+      <xs:documentation>
+        The linear displacement in millimeters
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Displacement' substitutionGroup='Sample' type='DisplacementType'>
+    <xs:annotation>
+      <xs:documentation>
+        The linear displacement in millimeters
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='TiltType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tilt
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Tilt' substitutionGroup='Sample' type='TiltType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tilt
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DurationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The duration of an event in seconds
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Duration' substitutionGroup='Sample' type='DurationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The duration of an event in seconds
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ElapsedTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The accumulated time
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ElapsedTime' substitutionGroup='Sample' type='ElapsedTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The accumulated time
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PowerFactorType'>
+    <xs:annotation>
+      <xs:documentation>
+        The power factor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PowerFactor' substitutionGroup='Sample' type='PowerFactorType'>
+    <xs:annotation>
+      <xs:documentation>
+        The power factor
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='StrainType'>
+    <xs:annotation>
+      <xs:documentation>
+        The strain
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Strain' substitutionGroup='Sample' type='StrainType'>
+    <xs:annotation>
+      <xs:documentation>
+        The strain
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FlowType'>
+    <xs:annotation>
+      <xs:documentation>
+        The flow
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Flow' substitutionGroup='Sample' type='FlowType'>
+    <xs:annotation>
+      <xs:documentation>
+        The flow
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SoundPressureType'>
+    <xs:annotation>
+      <xs:documentation>
+        The sound pressure
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='SoundPressure' substitutionGroup='Sample' type='SoundPressureType'>
+    <xs:annotation>
+      <xs:documentation>
+        The sound pressure
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ResistanceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The Resistance
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Resistance' substitutionGroup='Sample' type='ResistanceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The Resistance
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ConductivityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The Conductivity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Conductivity' substitutionGroup='Sample' type='ConductivityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The Conductivity
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ViscosityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The Viscosity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Viscosity' substitutionGroup='Sample' type='ViscosityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The Viscosity
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ConcentrationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The Concentration
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Concentration' substitutionGroup='Sample' type='ConcentrationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The Concentration
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AbsWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        The abstract waveform
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='SampleType'>
+        <xs:attribute name='duration' type='DurationValueType' use='required'/>
+        <xs:attribute name='sampleRate' type='SampleRateType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AbsWaveform' substitutionGroup='Sample' type='AbsWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        The abstract waveform
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='WaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        The waveform
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='AbsWaveformType'>
+        <xs:pattern value='([+-]?\d+(\.\d+)?(E[+-]?\d+)?( )*)+|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Waveform' substitutionGroup='AbsWaveform' type='WaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        The waveform
       </xs:documentation>
     </xs:annotation>
   </xs:element>

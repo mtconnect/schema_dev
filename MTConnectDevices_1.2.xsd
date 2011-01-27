@@ -248,6 +248,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLTAGE'/>
       <xs:enumeration value='WATTAGE'/>
       <xs:enumeration value='WORKHOLDING_ID'/>
+      <xs:enumeration value='DISPLACEMENT'/>
+      <xs:enumeration value='TILT'/>
+      <xs:enumeration value='ELAPSED_TIME'/>
+      <xs:enumeration value='DURATION'/>
+      <xs:enumeration value='POWER_FACTOR'/>
+      <xs:enumeration value='STRAIN'/>
+      <xs:enumeration value='FLOW'/>
+      <xs:enumeration value='SOUND_PRESSURE'/>
+      <xs:enumeration value='RESISTANCE'/>
+      <xs:enumeration value='CONDUCTIVITY'/>
+      <xs:enumeration value='VISCOSITY'/>
+      <xs:enumeration value='CONCENTRATION'/>
+      <xs:enumeration value='ROTATIONAL_VELOCITY'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -285,6 +298,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALL'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROL'/>
+      <xs:enumeration value='WEIGHT'/>
+      <xs:enumeration value='VOLUME'/>
+      <xs:enumeration value='MOLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -929,6 +945,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SECOND'/>
       <xs:enumeration value='VOLT'/>
       <xs:enumeration value='WATT'/>
+      <xs:enumeration value='OHM'/>
+      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SIEMENS/METER'/>
+      <xs:enumeration value='MICRO_RADIAN'/>
+      <xs:enumeration value='PASCAL_SECOND'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='UnitsType'>
@@ -971,6 +992,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SECOND'/>
       <xs:enumeration value='VOLT'/>
       <xs:enumeration value='WATT'/>
+      <xs:enumeration value='OHM'/>
+      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SIEMENS/METER'/>
+      <xs:enumeration value='MICRO_RADIAN'/>
+      <xs:enumeration value='PASCAL_SECOND'/>
       <xs:enumeration value='DEGREE/MINUTE'/>
       <xs:enumeration value='FAHRENHEIT'/>
       <xs:enumeration value='FOOT'/>

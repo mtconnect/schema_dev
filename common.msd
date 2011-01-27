@@ -35,7 +35,7 @@ package :common, 'Common attributes and elements for all schemas' do
     
     value :ACCELERATION, 'The accelleration of the component'
     value :ACTIVE_AXES, 'The list of axes currently in use in this path'
-    value :ALARM, 'An alarm measurement.'
+    value :ALARM, 'DEPRECATED: An alarm'
     value :AMPERAGE, 'The electrical current'
     value :ANGLE, 'The position as given in degrees'
     value :ANGULAR_ACCELERATION, 'The accelleration of the component'
@@ -69,7 +69,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :ROTARY_MODE, 'The function of the rotary axis'
     value :COUPLED_AXES, 'The axes to which this axis is associated'
     value :AXIS_COUPLING, 'The method the axes are coupled together'
-    value :SPINDLE_SPEED, 'The velocity of the spindle'
+    value :SPINDLE_SPEED, 'DEPRECATED: The velocity of the spindle'
     value :TEMPERATURE, 'The temperature of the component'
     value :TORQUE, 'The torque - force times distance'
     value :TOOL_ID, 'The identifier of the tool in use'
@@ -79,6 +79,20 @@ package :common, 'Common attributes and elements for all schemas' do
     value :WATTAGE, 'The wattage'
     value :WORKHOLDING_ID, 'The workholding identifier'
     
+    # Types for 1.2
+    value :DISPLACEMENT, 'The linear displacement in mm'
+    value :TILT, 'micrometer/meter (alignment errors of axes or spindle errors)'
+    value :ELAPSED_TIME, 'The accumulated time for a category or classification'
+    value :DURATION, 'The duration of an event or happening'
+    value :POWER_FACTOR, 'The power factor'
+    value :STRAIN, 'Inches / Inch - dimensional change - measured under pressure or tension. micro change in length'
+    value :FLOW, 'The number of liters in a second'
+    value :SOUND_PRESSURE, 'sound pressure level'
+    value :RESISTANCE, 'Electrical resistance'
+    value :CONDUCTIVITY, 'CONDUCTIVITY'
+    value :VISCOSITY, 'viscosity'
+    value :CONCENTRATION, 'Percentage of one component in all components. Subtypes: WEIGHT, VOLUME, MOLE'
+    value :ROTATIONAL_VELOCITY, 'The rotational velocity in revolutions per minute'
     
     # Condition types
     value :COMMUNICATIONS, 'The communications system'
@@ -106,6 +120,11 @@ package :common, 'Common attributes and elements for all schemas' do
     value :ALL, 'Inclusive of all items'
     value :LINE, 'The high voltage subtype for power state'
     value :CONTROL, 'The low voltage subtype for power state'
+    
+    # For 1.2
+    value :WEIGHT, 'Concentration in weight'
+    value :VOLUME, 'Concentration in volume'
+    value :MOLE, 'Concentration in mole'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
