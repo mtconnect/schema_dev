@@ -64,8 +64,12 @@ package :Samlpes, 'The samples' do
     member :Value, 'The feedrate', :FeedrateValue
   end
 
-  type :SpindleSpeed, 'The spindle speed of the component', :Sample do
+  type :SpindleSpeed, 'The spindle speed of the component: DEPRECATED', :Sample do
     member :Value, 'The spindle speed', :SpindleSpeedValue
+  end
+  
+  type :RotationalVelocity, 'The rotational velocity of the component in RPM', :Sample do
+    member :Value, 'The velocity', :VelocityValue
   end
 
   type :Angle, 'The angle of the component', :Sample do

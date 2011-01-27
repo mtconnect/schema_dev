@@ -234,6 +234,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POWER_STATUS'/>
       <xs:enumeration value='POWER_STATE'/>
       <xs:enumeration value='PRESSURE'/>
+      <xs:enumeration value='RESET'/>
       <xs:enumeration value='PROGRAM'/>
       <xs:enumeration value='ROTARY_MODE'/>
       <xs:enumeration value='COUPLED_AXES'/>
@@ -1868,6 +1869,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='nativeCode' type='NativeCodeType' use='optional'/>
         <xs:attribute name='nativeSeverity' type='NativeSeverityType' use='optional'/>
         <xs:attribute name='qualifier' type='QualifierType' use='optional'/>
+        <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

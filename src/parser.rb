@@ -261,8 +261,10 @@ class Schema
     end
 
     def resolve_parent
-      par = @schema.type(@parent)
-      raise "Cannot resolve parent type #{@parent}" unless par
+      if @parent
+        par = @schema.type(@parent)
+        raise "Cannot resolve parent type #{@parent}" unless par
+      end
       par
     end
 

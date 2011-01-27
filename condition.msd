@@ -19,6 +19,7 @@ package :Condition, 'The condition of the device' do
     member :NativeCode, 'The component specific Notifcation code', 0..1
     member :NativeSeverity, 'The component specific Notifcation code', 0..1
     member :Qualifier, 'An optional attribute that helps qualify the condition', 0..1
+    member :Statistic, 'The statistical operation on this data', 0..1, :DataItemStatistics
     member :Value, 'The description of the condition', :ConditionDescription
   end
   
