@@ -33,7 +33,8 @@ package :Samlpes, 'The samples' do
   basic_type(:ViscosityValue, 'Viscosity') { pattern float_value }
   basic_type(:ConcentrationValue, 'Concentration') { pattern float_value }
   basic_type(:WaveformValue, 'A waveform') { pattern vector_value }
-  basic_type(:DurationValue, 'Concentration') { pattern float_value }
+  basic_type(:DurationValue, 'The duration of an event in seconds') { pattern float_value }
+  basic_type(:CountValue, 'The number of values') { pattern float_value }
   basic_type(:SampleRate, 'The sampling rate in samples per second') { pattern float_value }
   
   type :Sample, 'An abstract sample', :Result do
@@ -172,11 +173,23 @@ package :Samlpes, 'The samples' do
   end
   
   type :AbsWaveform, 'The abstract waveform', :Sample do    
-    attribute :Duration, 'The duration of the sample', :DurationValue
-    attribute :SampleRate, 'The rate the waveform was sampled at'
+    abstract
+    
+    attribute :SampleCount, 'The number of samples', :CountValue
+    attribute :SampleRate, 'The rate the waveform was sampled at, default back to the value given in the data item', 0..1
   end
   
-  type :Waveform, 'The waveform', :AbsWaveform do
-    member :Value, 'Waveform', :WaveformValue
+  type :Waveform, 'An abstract waveform with the restriction value', :AbsWaveform do
+    abstract
+    
+    member :Value, 'The waveform representation', :WaveformValue
   end
+    
+  # Create waveforms for all the samples:
+  self.elements.each do |type|
+    if type.parent == :Sample
+      type "#{type.name}Waveform".to_s, "Waveform of #{type.annotation}", :Waveform
+    end
+  end
+  
 end

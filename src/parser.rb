@@ -238,6 +238,7 @@ class Schema
       super(schema, name, annotation, parent)
       @name, @annotation, @parent = name, annotation, parent
       @abstract = false
+      @mixed = false
       @members = []
       @children = []
       @schema.derived << @parent if @parent and @parent != :abstract
@@ -251,9 +252,17 @@ class Schema
     def abstract
       @abstract = true
     end
+    
+    def mixed
+      @mixed = true
+    end
 
     def abstract?
       @abstract
+    end
+    
+    def mixed?
+      @mixed
     end
 
     def subtype?
@@ -373,9 +382,13 @@ class Schema
     end
 
     def resolve_type
-      res = @schema.type(@type)
-      unless res
-        raise "Cannot resolve type #{@type} for #{@name}"
+      if @type == :'xs:any'
+        res = @type 
+      else
+        res = @schema.type(@type)
+        unless res
+          raise "Cannot resolve type #{@type} for #{@name}"
+        end
       end
       res
     end
@@ -391,7 +404,7 @@ class Schema
     def attribute?
       if !defined?(@attribute)
         type = @schema.type(@type)
-        @attribute = (@name != :Value and (type.nil? or type.attr))
+        @attribute = (@name != :Value and @name != :'xs:any' and (type.nil? or type.attr))
       end
       @attribute
     end

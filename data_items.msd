@@ -91,6 +91,11 @@ package :DataItems, 'Data Items Package' do
     value :MACHINE, '	An unchangeable coordinate system that has machine zero as its origin'
     value :WORK, 'The position that acts as the origin for a particular workpiece'
   end
+  
+  enum :Representation, 'The possible representations of a DataItem' do
+    value :VALUE, 'A singluar value or fixed length value is give'
+    value :WAVEFORM, 'A waveform'
+  end
 
   # Measurement types
   
@@ -110,6 +115,8 @@ package :DataItems, 'Data Items Package' do
     member :Category, 'The category of the data item'
     member :Source, 'The measurement\'s source. This is the native machine identifier for this measurement. The source will be used to identify the correct incoming value with the measurement.', 0..1
     member :CoordinateSystem, 'The coordinate system used for the positions', 0..1
+    member :SampleRate, 'Used as the default sample rate for waveforms', 0..1
+    member(:Representation, 'The data item\'s representation', 0..1) { self.default = :VALUE } 
     member :SignificantDigits, 'The number of significant digits for this data item', 0..1, :SignificantDigitsValue
     member :Constraints, 'Limits on the set of possible values', 0..1, :DataItemLimits
   end

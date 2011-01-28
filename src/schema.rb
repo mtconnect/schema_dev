@@ -132,6 +132,7 @@ class Schema
       
       # Check for a pure abstract class.
       complex_type.add_attribute('abstract', 'true') if abstract?
+      complex_type.add_attribute('mixed', 'true') if mixed?
 
       complex_type
     end
@@ -311,7 +312,7 @@ class Schema
       return [] if @imported
       
       collect_members
-      puts "#{@name}: #{@elems.length} #{@attrs.length}"
+      # puts "#{@name}: #{@elems.length} #{@attrs.length}"
       complex_type = if @elems.length == 0
         create_type_no_elements
       elsif @elems.length == 1
@@ -414,31 +415,44 @@ class Schema
 
     def generate_xsd
       # Create the element.
-      element = REXML::Element.new('xs:element')
-      
-      if @default
-        element.add_attribute('default', @default.to_s)
-      end
-      
-      # If this is an abstract object with a parent or if it
-      # has subclasses, we will need to create substitution groups
-      # so add a reference instead of a name and type.
-      type = resolve_type
-      if references_abstract?
-        element.add_attribute('ref', "#{type.name}")
-      else
-        element.add_attribute('name', @name.to_s)
-        element.add_attribute('type', type_as_xsd_type(true))
+      if @name == :'xs:any'
+        element = REXML::Element.new('xs:any')
+        # Need to make this optional
+        element.add_attribute('processContents', 'lax') 
         
-        # Add annotation to make sure the element is documented. This is not
-        # necessary for references.
-        if type
-          #puts "#{name} #{type.name}"
-          anno = REXML::Element.new('xs:annotation')
-          docs = REXML::Element.new('xs:documentation')
-          docs.text = @annotation
-          anno << docs
-          element << anno
+        # Put the documention here as well
+        anno = REXML::Element.new('xs:annotation')
+        docs = REXML::Element.new('xs:documentation')
+        docs.text = @annotation
+        anno << docs
+        element << anno
+      else
+        element = REXML::Element.new('xs:element')
+      
+        if @default
+          element.add_attribute('default', @default.to_s)
+        end
+      
+        # If this is an abstract object with a parent or if it
+        # has subclasses, we will need to create substitution groups
+        # so add a reference instead of a name and type.
+        type = resolve_type
+        if references_abstract?
+          element.add_attribute('ref', "#{type.name}")
+        else
+          element.add_attribute('name', @name.to_s)
+          element.add_attribute('type', type_as_xsd_type(true))
+        
+          # Add annotation to make sure the element is documented. This is not
+          # necessary for references.
+          if type
+            #puts "#{name} #{type.name}"
+            anno = REXML::Element.new('xs:annotation')
+            docs = REXML::Element.new('xs:documentation')
+            docs.text = @annotation
+            anno << docs
+            element << anno
+          end
         end
       end
       

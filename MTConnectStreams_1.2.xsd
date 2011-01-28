@@ -824,7 +824,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='DurationValueType'>
     <xs:annotation>
       <xs:documentation>
-        Concentration
+        The duration of an event in seconds
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='CountValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of values
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -834,7 +844,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='SampleRateType'>
     <xs:annotation>
       <xs:documentation>
-        The sampling rate
+        The sampling rate in samples per second
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -1468,7 +1478,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AbsWaveformType'>
+  <xs:complexType name='AbsWaveformType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
         The abstract waveform
@@ -1476,22 +1486,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='SampleType'>
-        <xs:attribute name='duration' type='DurationValueType' use='required'/>
-        <xs:attribute name='sampleRate' type='SampleRateType' use='required'/>
+        <xs:attribute name='sampleCount' type='CountValueType' use='required'/>
+        <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AbsWaveform' substitutionGroup='Sample' type='AbsWaveformType'>
+  <xs:element name='AbsWaveform' abstract='true' substitutionGroup='Sample' type='AbsWaveformType'>
     <xs:annotation>
       <xs:documentation>
         The abstract waveform
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='WaveformType'>
+  <xs:complexType name='WaveformType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        The waveform
+        An abstract waveform with the restriction value
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -1500,10 +1510,571 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Waveform' substitutionGroup='AbsWaveform' type='WaveformType'>
+  <xs:element name='Waveform' abstract='true' substitutionGroup='AbsWaveform' type='WaveformType'>
     <xs:annotation>
       <xs:documentation>
-        The waveform
+        An abstract waveform with the restriction value
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AmperageWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of An current a component is drawing
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AmperageWaveform' substitutionGroup='Waveform' type='AmperageWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of An current a component is drawing
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='GlobalPositionWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of DEPRECATED: The three space position of the component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='GlobalPositionWaveform' substitutionGroup='Waveform' type='GlobalPositionWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of DEPRECATED: The three space position of the component
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PositionWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The position of the component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PositionWaveform' substitutionGroup='Waveform' type='PositionWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The position of the component
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='VelocityWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The velocity of the component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='VelocityWaveform' substitutionGroup='Waveform' type='VelocityWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The velocity of the component
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AccelerationWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The acceleration of the component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AccelerationWaveform' substitutionGroup='Waveform' type='AccelerationWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The acceleration of the component
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AngularAccelerationWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The angular acceleration of the component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AngularAccelerationWaveform' substitutionGroup='Waveform' type='AngularAccelerationWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The angular acceleration of the component
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AngularVelocityWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The angular velocity of the component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AngularVelocityWaveform' substitutionGroup='Waveform' type='AngularVelocityWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The angular velocity of the component
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PathFeedrateWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The feedrate of the component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PathFeedrateWaveform' substitutionGroup='Waveform' type='PathFeedrateWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The feedrate of the component
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AxisFeedrateWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The feedrate of the component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AxisFeedrateWaveform' substitutionGroup='Waveform' type='AxisFeedrateWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The feedrate of the component
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SpindleSpeedWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The spindle speed of the component: DEPRECATED
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='SpindleSpeedWaveform' substitutionGroup='Waveform' type='SpindleSpeedWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The spindle speed of the component: DEPRECATED
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='RotationalVelocityWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The rotational velocity of the component in RPM
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='RotationalVelocityWaveform' substitutionGroup='Waveform' type='RotationalVelocityWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The rotational velocity of the component in RPM
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AngleWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The angle of the component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AngleWaveform' substitutionGroup='Waveform' type='AngleWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The angle of the component
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='TemperatureWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The temperature
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='TemperatureWaveform' substitutionGroup='Waveform' type='TemperatureWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The temperature
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LoadWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The program code
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='LoadWaveform' substitutionGroup='Waveform' type='LoadWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The program code
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FrequencyWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The frequency in hertz
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='FrequencyWaveform' substitutionGroup='Waveform' type='FrequencyWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The frequency in hertz
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='VoltageWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The voltage
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='VoltageWaveform' substitutionGroup='Waveform' type='VoltageWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The voltage
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='WattsWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The number of Watts
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='WattsWaveform' substitutionGroup='Waveform' type='WattsWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The number of Watts
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PressureWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The pressure
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PressureWaveform' substitutionGroup='Waveform' type='PressureWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The pressure
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='TorqueWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The torque
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='TorqueWaveform' substitutionGroup='Waveform' type='TorqueWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The torque
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PathPositionWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The 3 dimensional position for tool tip in the path (X Y Z)
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PathPositionWaveform' substitutionGroup='Waveform' type='PathPositionWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The 3 dimensional position for tool tip in the path (X Y Z)
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DisplacementWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The linear displacement in millimeters
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='DisplacementWaveform' substitutionGroup='Waveform' type='DisplacementWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The linear displacement in millimeters
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='TiltWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The tilt
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='TiltWaveform' substitutionGroup='Waveform' type='TiltWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The tilt
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DurationWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The duration of an event in seconds
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='DurationWaveform' substitutionGroup='Waveform' type='DurationWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The duration of an event in seconds
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ElapsedTimeWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The accumulated time
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ElapsedTimeWaveform' substitutionGroup='Waveform' type='ElapsedTimeWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The accumulated time
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PowerFactorWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The power factor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PowerFactorWaveform' substitutionGroup='Waveform' type='PowerFactorWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The power factor
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='StrainWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The strain
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='StrainWaveform' substitutionGroup='Waveform' type='StrainWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The strain
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FlowWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The flow
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='FlowWaveform' substitutionGroup='Waveform' type='FlowWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The flow
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SoundPressureWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The sound pressure
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='SoundPressureWaveform' substitutionGroup='Waveform' type='SoundPressureWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The sound pressure
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ResistanceWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The Resistance
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ResistanceWaveform' substitutionGroup='Waveform' type='ResistanceWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The Resistance
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ConductivityWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The Conductivity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ConductivityWaveform' substitutionGroup='Waveform' type='ConductivityWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The Conductivity
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ViscosityWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The Viscosity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ViscosityWaveform' substitutionGroup='Waveform' type='ViscosityWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The Viscosity
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ConcentrationWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The Concentration
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ConcentrationWaveform' substitutionGroup='Waveform' type='ConcentrationWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The Concentration
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AbsWaveformWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The abstract waveform
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='WaveformType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AbsWaveformWaveform' substitutionGroup='Waveform' type='AbsWaveformWaveformType'>
+    <xs:annotation>
+      <xs:documentation>
+        Waveform of The abstract waveform
       </xs:documentation>
     </xs:annotation>
   </xs:element>

@@ -19,10 +19,12 @@ package :Component, 'Top Level Components Package' do
   end
 
   type :ComponentDescription, 'The descriptive information for this component. This can be manufacturer specific' do
-    member :Value, 'A text description of the component, will be replaced later by structed content', :DescriptionText
+    mixed
+    
     member :Manufacturer, 'The manufacturer of this component', 0..1, :Name
     member :SerialNumber, 'The serial number of the component', 0..1
     member :Station, 'The location of this component', 0..1
+    member :'xs:any', 'Any desciptive schema like calibration', 0..INF
   end
   
   type :CommonComponent, "An abstract component that has an optional uuid", :Component do 
