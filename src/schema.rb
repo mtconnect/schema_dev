@@ -415,7 +415,7 @@ class Schema
 
     def generate_xsd
       # Create the element.
-      if @name == :'xs:any'
+      if @name == :any
         element = REXML::Element.new('xs:any')
         # Need to make this optional
         element.add_attribute('processContents', 'lax') 

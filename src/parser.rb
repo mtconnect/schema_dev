@@ -382,7 +382,7 @@ class Schema
     end
 
     def resolve_type
-      if @type == :'xs:any'
+      if @type == :any
         res = @type 
       else
         res = @schema.type(@type)
@@ -404,7 +404,7 @@ class Schema
     def attribute?
       if !defined?(@attribute)
         type = @schema.type(@type)
-        @attribute = (@name != :Value and @name != :'xs:any' and (type.nil? or type.attr))
+        @attribute = (@name != :Value and @name != :any and (type.nil? or type.attr))
       end
       @attribute
     end

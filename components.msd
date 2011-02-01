@@ -24,7 +24,7 @@ package :Component, 'Top Level Components Package' do
     member :Manufacturer, 'The manufacturer of this component', 0..1, :Name
     member :SerialNumber, 'The serial number of the component', 0..1
     member :Station, 'The location of this component', 0..1
-    member :'xs:any', 'Any desciptive schema like calibration', 0..INF
+    member :any, 'Any desciptive schema like calibration', 0..INF
   end
   
   type :CommonComponent, "An abstract component that has an optional uuid", :Component do 

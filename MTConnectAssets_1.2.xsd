@@ -90,7 +90,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='TimestampType'>
     <xs:annotation>
       <xs:documentation>
-        The time the sample occurred
+        The time the sample was reported
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:dateTime'/>
+  </xs:simpleType>
+  <xs:simpleType name='OccurrenceTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The time a sample occurred
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:dateTime'/>
@@ -178,6 +186,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='DataItemStatsExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for data item statistics types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name='DataItemEnumTypeEnum'>
     <xs:annotation>
       <xs:documentation>
@@ -216,6 +234,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POWER_STATUS'/>
       <xs:enumeration value='POWER_STATE'/>
       <xs:enumeration value='PRESSURE'/>
+      <xs:enumeration value='RESET'/>
       <xs:enumeration value='PROGRAM'/>
       <xs:enumeration value='ROTARY_MODE'/>
       <xs:enumeration value='COUPLED_AXES'/>
@@ -229,6 +248,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLTAGE'/>
       <xs:enumeration value='WATTAGE'/>
       <xs:enumeration value='WORKHOLDING_ID'/>
+      <xs:enumeration value='DISPLACEMENT'/>
+      <xs:enumeration value='TILT'/>
+      <xs:enumeration value='ELAPSED_TIME'/>
+      <xs:enumeration value='DURATION'/>
+      <xs:enumeration value='POWER_FACTOR'/>
+      <xs:enumeration value='STRAIN'/>
+      <xs:enumeration value='FLOW'/>
+      <xs:enumeration value='SOUND_PRESSURE'/>
+      <xs:enumeration value='RESISTANCE'/>
+      <xs:enumeration value='CONDUCTIVITY'/>
+      <xs:enumeration value='VISCOSITY'/>
+      <xs:enumeration value='CONCENTRATION'/>
+      <xs:enumeration value='ROTATIONAL_VELOCITY'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -266,6 +298,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALL'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROL'/>
+      <xs:enumeration value='WEIGHT'/>
+      <xs:enumeration value='VOLUME'/>
+      <xs:enumeration value='MOLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -275,6 +310,30 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:union memberTypes='DataItemSubEnumTypeEnum DataItemExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemStatisticsTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        Statistical operations on data
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='MINIMUM'/>
+      <xs:enumeration value='MAXIMUM'/>
+      <xs:enumeration value='AVERAGE'/>
+      <xs:enumeration value='STANDARD_DEVIATION'/>
+      <xs:enumeration value='ROOT_MEAN_SQUARE'/>
+      <xs:enumeration value='MEAN'/>
+      <xs:enumeration value='MODE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemStatisticsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Statistical operations on data
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='DataItemStatisticsTypeEnum DataItemStatsExtType'/>
   </xs:simpleType>
   <xs:complexType name='HeaderType'>
     <xs:annotation>
@@ -340,26 +399,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='EdgeCountType'>
-    <xs:annotation>
-      <xs:documentation>
-        The number of cutting edges
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:integer'/>
-  </xs:simpleType>
   <xs:simpleType name='PocketIdType'>
     <xs:annotation>
       <xs:documentation>
         An identifier for the insert
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:integer'/>
-  </xs:simpleType>
-  <xs:simpleType name='ConnectionType'>
-    <xs:annotation>
-      <xs:documentation>
-        The connection to the machine tool
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -380,6 +423,32 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='OffsetType'>
+    <xs:annotation>
+      <xs:documentation>
+        The offset of the tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
+  <xs:simpleType name='ConnectionFormType'>
+    <xs:annotation>
+      <xs:documentation>
+        The form specification for the connection
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[A-Z/]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ConnectionSizeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The size of the connection as specified by the standard
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
   <xs:simpleType name='ToolIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -387,6 +456,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='EdgeCountType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of cutting edges
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
   </xs:simpleType>
   <xs:simpleType name='ToolLifeValueType'>
     <xs:annotation>
@@ -444,7 +521,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='BROKEN'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='OrientationAssemblyType'>
+  <xs:simpleType name='AssemblyOrientationType'>
     <xs:annotation>
       <xs:documentation>
         The orientation of the curring tool
@@ -456,7 +533,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='BOTH'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='OrientationDeviceType'>
+  <xs:simpleType name='DeviceOrientationType'>
     <xs:annotation>
       <xs:documentation>
         The orientation of the cutting tool relative machine tool
@@ -502,7 +579,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='END_MILL'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='OperationType'>
+  <xs:simpleType name='OperationTypeValueType'>
     <xs:annotation>
       <xs:documentation>
         The type of the tool
@@ -510,17 +587,115 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:enumeration value='MILLING'/>
-      <xs:enumeration value='END_MILLING'/>
-      <xs:enumeration value='FACE_MILLING'/>
-      <xs:enumeration value='BALL_MILLING'/>
       <xs:enumeration value='DRILLING'/>
       <xs:enumeration value='REAMING'/>
       <xs:enumeration value='TAPPING'/>
       <xs:enumeration value='BROACHING'/>
-      <xs:enumeration value='LINEAR_BROACHING'/>
-      <xs:enumeration value='CIRCULAR_BROACHING'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='OperationSubType'>
+    <xs:annotation>
+      <xs:documentation>
+        The type of the tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='LINEAR'/>
+      <xs:enumeration value='CIRCULAR'/>
+      <xs:enumeration value='FACE'/>
+      <xs:enumeration value='END'/>
+      <xs:enumeration value='BALL'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='StyleExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for data item types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='x:[A-Z]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ConnectionStyleTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The style of the connection
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='CV'/>
+      <xs:enumeration value='HSK'/>
+      <xs:enumeration value='DV'/>
+      <xs:enumeration value='BT'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ConnectionStyleType'>
+    <xs:annotation>
+      <xs:documentation>
+        The style of the connection
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='ConnectionStyleTypeEnum StyleExtType'/>
+  </xs:simpleType>
+  <xs:complexType name='ConnectionType'>
+    <xs:annotation>
+      <xs:documentation>
+        A connection
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Style' type='ConnectionStyleType'>
+        <xs:annotation>
+          <xs:documentation>
+            The connection style
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Size' type='ConnectionSizeType'>
+        <xs:annotation>
+          <xs:documentation>
+            The connection size
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Form' type='ConnectionFormType'>
+        <xs:annotation>
+          <xs:documentation>
+            The connection form
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='OperationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The type of operation this tool is used for
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='OperationTypeValueType'>
+        <xs:attribute name='subType' type='OperationSubType' use='optional'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='AssetDescriptionType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        The description of an asset, can be freeform text or elemenrts
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any processContents='lax' maxOccurs='unbounded' minOccurs='0'>
+        <xs:annotation>
+          <xs:documentation>
+            Any elements
+          </xs:documentation>
+        </xs:annotation>
+      </xs:any>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name='AssetsType'>
     <xs:annotation>
       <xs:documentation>
@@ -630,14 +805,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='OrientationAssembly' maxOccurs='1' minOccurs='0' type='OrientationAssemblyType'>
+          <xs:element name='AssemblyOrientation' maxOccurs='1' minOccurs='0' type='AssemblyOrientationType'>
             <xs:annotation>
               <xs:documentation>
                 The orientation with respect to the assembly (need more info)
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='OrientationDevice' maxOccurs='1' minOccurs='0' type='OrientationDeviceType'>
+          <xs:element name='DeviceOrientation' maxOccurs='1' minOccurs='0' type='DeviceOrientationType'>
             <xs:annotation>
               <xs:documentation>
                 The orientation with respect to the device(need more info)
@@ -665,10 +840,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='EdgeCount' type='EdgeCountType'>
+          <xs:element name='Offset' maxOccurs='1' minOccurs='0' type='OffsetType'>
             <xs:annotation>
               <xs:documentation>
-                The number of cutting edges
+                The offset of the tool assembly
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -680,6 +855,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:annotation>
           </xs:element>
         </xs:sequence>
+        <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
         <xs:attribute name='toolId' type='ToolIdType' use='required'/>
       </xs:extension>
     </xs:complexContent>
@@ -721,6 +897,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+    <xs:attribute name='count' type='EdgeCountType' use='required'/>
   </xs:complexType>
   <xs:complexType name='EdgeType'>
     <xs:annotation>
