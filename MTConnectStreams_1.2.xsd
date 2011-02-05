@@ -301,6 +301,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WEIGHT'/>
       <xs:enumeration value='VOLUME'/>
       <xs:enumeration value='MOLE'/>
+      <xs:enumeration value='KINETIC'/>
+      <xs:enumeration value='DYNAMIC'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -811,10 +813,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='WaveformValueType'>
+  <xs:simpleType name='TimeSeriesValueType'>
     <xs:annotation>
       <xs:documentation>
-        A waveform
+        A time series
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -1478,7 +1480,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AbsWaveformType' abstract='true'>
+  <xs:complexType name='AbsTimeSeriesType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
         The abstract waveform
@@ -1491,590 +1493,592 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AbsWaveform' abstract='true' substitutionGroup='Sample' type='AbsWaveformType'>
+  <xs:element name='AbsTimeSeries' abstract='true' substitutionGroup='Sample' type='AbsTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
         The abstract waveform
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='WaveformType' abstract='true'>
+  <xs:complexType name='TimeSeriesType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        An abstract waveform with the restriction value
+        An abstract time series with the restriction value
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:restriction base='AbsWaveformType'>
+      <xs:restriction base='AbsTimeSeriesType'>
         <xs:pattern value='([+-]?\d+(\.\d+)?(E[+-]?\d+)?( )*)+|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Waveform' abstract='true' substitutionGroup='AbsWaveform' type='WaveformType'>
+  <xs:element name='TimeSeries' abstract='true' substitutionGroup='AbsTimeSeries' type='TimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        An abstract waveform with the restriction value
+        An abstract time series with the restriction value
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AmperageWaveformType'>
+  <xs:complexType name='AmperageTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of An current a component is drawing
+        Time series of An current a component is drawing
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AmperageWaveform' substitutionGroup='Waveform' type='AmperageWaveformType'>
+  <xs:element name='AmperageTimeSeries' substitutionGroup='TimeSeries' type='AmperageTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of An current a component is drawing
+        Time series of An current a component is drawing
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='GlobalPositionWaveformType'>
+  <xs:complexType name='GlobalPositionTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of DEPRECATED: The three space position of the component
+        Time series of DEPRECATED: The three space position of the component
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='GlobalPositionWaveform' substitutionGroup='Waveform' type='GlobalPositionWaveformType'>
+  <xs:element name='GlobalPositionTimeSeries' substitutionGroup='TimeSeries' type='GlobalPositionTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of DEPRECATED: The three space position of the component
+        Time series of DEPRECATED: The three space position of the component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='PositionWaveformType'>
+  <xs:complexType name='PositionTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The position of the component
+        Time series of The position of the component
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PositionWaveform' substitutionGroup='Waveform' type='PositionWaveformType'>
+  <xs:element name='PositionTimeSeries' substitutionGroup='TimeSeries' type='PositionTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The position of the component
+        Time series of The position of the component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='VelocityWaveformType'>
+  <xs:complexType name='VelocityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The velocity of the component
+        Time series of The velocity of the component
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='VelocityWaveform' substitutionGroup='Waveform' type='VelocityWaveformType'>
+  <xs:element name='VelocityTimeSeries' substitutionGroup='TimeSeries' type='VelocityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The velocity of the component
+        Time series of The velocity of the component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AccelerationWaveformType'>
+  <xs:complexType name='AccelerationTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The acceleration of the component
+        Time series of The acceleration of the component
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AccelerationWaveform' substitutionGroup='Waveform' type='AccelerationWaveformType'>
+  <xs:element name='AccelerationTimeSeries' substitutionGroup='TimeSeries' type='AccelerationTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The acceleration of the component
+        Time series of The acceleration of the component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AngularAccelerationWaveformType'>
+  <xs:complexType name='AngularAccelerationTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The angular acceleration of the component
+        Time series of The angular acceleration of the component
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AngularAccelerationWaveform' substitutionGroup='Waveform' type='AngularAccelerationWaveformType'>
+  <xs:element name='AngularAccelerationTimeSeries' substitutionGroup='TimeSeries' type='AngularAccelerationTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The angular acceleration of the component
+        Time series of The angular acceleration of the component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AngularVelocityWaveformType'>
+  <xs:complexType name='AngularVelocityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The angular velocity of the component
+        Time series of The angular velocity of the component
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AngularVelocityWaveform' substitutionGroup='Waveform' type='AngularVelocityWaveformType'>
+  <xs:element name='AngularVelocityTimeSeries' substitutionGroup='TimeSeries' type='AngularVelocityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The angular velocity of the component
+        Time series of The angular velocity of the component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='PathFeedrateWaveformType'>
+  <xs:complexType name='PathFeedrateTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The feedrate of the component
+        Time series of The feedrate of the component
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PathFeedrateWaveform' substitutionGroup='Waveform' type='PathFeedrateWaveformType'>
+  <xs:element name='PathFeedrateTimeSeries' substitutionGroup='TimeSeries' type='PathFeedrateTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The feedrate of the component
+        Time series of The feedrate of the component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AxisFeedrateWaveformType'>
+  <xs:complexType name='AxisFeedrateTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The feedrate of the component
+        Time series of The feedrate of the component
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AxisFeedrateWaveform' substitutionGroup='Waveform' type='AxisFeedrateWaveformType'>
+  <xs:element name='AxisFeedrateTimeSeries' substitutionGroup='TimeSeries' type='AxisFeedrateTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The feedrate of the component
+        Time series of The feedrate of the component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='SpindleSpeedWaveformType'>
+  <xs:complexType name='SpindleSpeedTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The spindle speed of the component: DEPRECATED
+        Time series of The spindle speed of the component: DEPRECATED
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='SpindleSpeedWaveform' substitutionGroup='Waveform' type='SpindleSpeedWaveformType'>
+  <xs:element name='SpindleSpeedTimeSeries' substitutionGroup='TimeSeries' type='SpindleSpeedTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The spindle speed of the component: DEPRECATED
+        Time series of The spindle speed of the component: DEPRECATED
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='RotationalVelocityWaveformType'>
+  <xs:complexType name='RotationalVelocityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The rotational velocity of the component in RPM
+        Time series of The rotational velocity of the component in RPM
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='RotationalVelocityWaveform' substitutionGroup='Waveform' type='RotationalVelocityWaveformType'>
+  <xs:element name='RotationalVelocityTimeSeries' substitutionGroup='TimeSeries' type='RotationalVelocityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The rotational velocity of the component in RPM
+        Time series of The rotational velocity of the component in RPM
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AngleWaveformType'>
+  <xs:complexType name='AngleTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The angle of the component
+        Time series of The angle of the component
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AngleWaveform' substitutionGroup='Waveform' type='AngleWaveformType'>
+  <xs:element name='AngleTimeSeries' substitutionGroup='TimeSeries' type='AngleTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The angle of the component
+        Time series of The angle of the component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='TemperatureWaveformType'>
+  <xs:complexType name='TemperatureTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The temperature
+        Time series of The temperature
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='TemperatureWaveform' substitutionGroup='Waveform' type='TemperatureWaveformType'>
+  <xs:element name='TemperatureTimeSeries' substitutionGroup='TimeSeries' type='TemperatureTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The temperature
+        Time series of The temperature
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='LoadWaveformType'>
+  <xs:complexType name='LoadTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The program code
+        Time series of The program code
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='LoadWaveform' substitutionGroup='Waveform' type='LoadWaveformType'>
+  <xs:element name='LoadTimeSeries' substitutionGroup='TimeSeries' type='LoadTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The program code
+        Time series of The program code
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='FrequencyWaveformType'>
+  <xs:complexType name='FrequencyTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The frequency in hertz
+        Time series of The frequency in hertz
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='FrequencyWaveform' substitutionGroup='Waveform' type='FrequencyWaveformType'>
+  <xs:element name='FrequencyTimeSeries' substitutionGroup='TimeSeries' type='FrequencyTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The frequency in hertz
+        Time series of The frequency in hertz
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='VoltageWaveformType'>
+  <xs:complexType name='VoltageTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The voltage
+        Time series of The voltage
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='VoltageWaveform' substitutionGroup='Waveform' type='VoltageWaveformType'>
+  <xs:element name='VoltageTimeSeries' substitutionGroup='TimeSeries' type='VoltageTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The voltage
+        Time series of The voltage
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='WattsWaveformType'>
+  <xs:complexType name='WattsTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The number of Watts
+        Time series of The number of Watts
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='WattsWaveform' substitutionGroup='Waveform' type='WattsWaveformType'>
+  <xs:element name='WattsTimeSeries' substitutionGroup='TimeSeries' type='WattsTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The number of Watts
+        Time series of The number of Watts
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='PressureWaveformType'>
+  <xs:complexType name='PressureTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The pressure
+        Time series of The pressure
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PressureWaveform' substitutionGroup='Waveform' type='PressureWaveformType'>
+  <xs:element name='PressureTimeSeries' substitutionGroup='TimeSeries' type='PressureTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The pressure
+        Time series of The pressure
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='TorqueWaveformType'>
+  <xs:complexType name='TorqueTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The torque
+        Time series of The torque
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='TorqueWaveform' substitutionGroup='Waveform' type='TorqueWaveformType'>
+  <xs:element name='TorqueTimeSeries' substitutionGroup='TimeSeries' type='TorqueTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The torque
+        Time series of The torque
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='PathPositionWaveformType'>
+  <xs:complexType name='PathPositionTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The 3 dimensional position for tool tip in the path (X Y Z)
+        Time series of The 3 dimensional position for tool tip in the path (X Y
+        Z)
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PathPositionWaveform' substitutionGroup='Waveform' type='PathPositionWaveformType'>
+  <xs:element name='PathPositionTimeSeries' substitutionGroup='TimeSeries' type='PathPositionTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The 3 dimensional position for tool tip in the path (X Y Z)
+        Time series of The 3 dimensional position for tool tip in the path (X Y
+        Z)
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='DisplacementWaveformType'>
+  <xs:complexType name='DisplacementTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The linear displacement in millimeters
+        Time series of The linear displacement in millimeters
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='DisplacementWaveform' substitutionGroup='Waveform' type='DisplacementWaveformType'>
+  <xs:element name='DisplacementTimeSeries' substitutionGroup='TimeSeries' type='DisplacementTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The linear displacement in millimeters
+        Time series of The linear displacement in millimeters
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='TiltWaveformType'>
+  <xs:complexType name='TiltTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The tilt
+        Time series of The tilt
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='TiltWaveform' substitutionGroup='Waveform' type='TiltWaveformType'>
+  <xs:element name='TiltTimeSeries' substitutionGroup='TimeSeries' type='TiltTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The tilt
+        Time series of The tilt
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='DurationWaveformType'>
+  <xs:complexType name='DurationTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The duration of an event in seconds
+        Time series of The duration of an event in seconds
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='DurationWaveform' substitutionGroup='Waveform' type='DurationWaveformType'>
+  <xs:element name='DurationTimeSeries' substitutionGroup='TimeSeries' type='DurationTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The duration of an event in seconds
+        Time series of The duration of an event in seconds
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ElapsedTimeWaveformType'>
+  <xs:complexType name='ElapsedTimeTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The accumulated time
+        Time series of The accumulated time
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ElapsedTimeWaveform' substitutionGroup='Waveform' type='ElapsedTimeWaveformType'>
+  <xs:element name='ElapsedTimeTimeSeries' substitutionGroup='TimeSeries' type='ElapsedTimeTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The accumulated time
+        Time series of The accumulated time
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='PowerFactorWaveformType'>
+  <xs:complexType name='PowerFactorTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The power factor
+        Time series of The power factor
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PowerFactorWaveform' substitutionGroup='Waveform' type='PowerFactorWaveformType'>
+  <xs:element name='PowerFactorTimeSeries' substitutionGroup='TimeSeries' type='PowerFactorTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The power factor
+        Time series of The power factor
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='StrainWaveformType'>
+  <xs:complexType name='StrainTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The strain
+        Time series of The strain
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='StrainWaveform' substitutionGroup='Waveform' type='StrainWaveformType'>
+  <xs:element name='StrainTimeSeries' substitutionGroup='TimeSeries' type='StrainTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The strain
+        Time series of The strain
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='FlowWaveformType'>
+  <xs:complexType name='FlowTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The flow
+        Time series of The flow
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='FlowWaveform' substitutionGroup='Waveform' type='FlowWaveformType'>
+  <xs:element name='FlowTimeSeries' substitutionGroup='TimeSeries' type='FlowTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The flow
+        Time series of The flow
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='SoundPressureWaveformType'>
+  <xs:complexType name='SoundPressureTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The sound pressure
+        Time series of The sound pressure
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='SoundPressureWaveform' substitutionGroup='Waveform' type='SoundPressureWaveformType'>
+  <xs:element name='SoundPressureTimeSeries' substitutionGroup='TimeSeries' type='SoundPressureTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The sound pressure
+        Time series of The sound pressure
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ResistanceWaveformType'>
+  <xs:complexType name='ResistanceTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The Resistance
+        Time series of The Resistance
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ResistanceWaveform' substitutionGroup='Waveform' type='ResistanceWaveformType'>
+  <xs:element name='ResistanceTimeSeries' substitutionGroup='TimeSeries' type='ResistanceTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The Resistance
+        Time series of The Resistance
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ConductivityWaveformType'>
+  <xs:complexType name='ConductivityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The Conductivity
+        Time series of The Conductivity
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ConductivityWaveform' substitutionGroup='Waveform' type='ConductivityWaveformType'>
+  <xs:element name='ConductivityTimeSeries' substitutionGroup='TimeSeries' type='ConductivityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The Conductivity
+        Time series of The Conductivity
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ViscosityWaveformType'>
+  <xs:complexType name='ViscosityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The Viscosity
+        Time series of The Viscosity
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ViscosityWaveform' substitutionGroup='Waveform' type='ViscosityWaveformType'>
+  <xs:element name='ViscosityTimeSeries' substitutionGroup='TimeSeries' type='ViscosityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The Viscosity
+        Time series of The Viscosity
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ConcentrationWaveformType'>
+  <xs:complexType name='ConcentrationTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The Concentration
+        Time series of The Concentration
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ConcentrationWaveform' substitutionGroup='Waveform' type='ConcentrationWaveformType'>
+  <xs:element name='ConcentrationTimeSeries' substitutionGroup='TimeSeries' type='ConcentrationTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The Concentration
+        Time series of The Concentration
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AbsWaveformWaveformType'>
+  <xs:complexType name='AbsTimeSeriesTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The abstract waveform
+        Time series of The abstract waveform
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='WaveformType'/>
+      <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AbsWaveformWaveform' substitutionGroup='Waveform' type='AbsWaveformWaveformType'>
+  <xs:element name='AbsTimeSeriesTimeSeries' substitutionGroup='TimeSeries' type='AbsTimeSeriesTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Waveform of The abstract waveform
+        Time series of The abstract waveform
       </xs:documentation>
     </xs:annotation>
   </xs:element>

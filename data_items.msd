@@ -94,7 +94,7 @@ package :DataItems, 'Data Items Package' do
   
   enum :Representation, 'The possible representations of a DataItem' do
     value :VALUE, 'A singluar value or fixed length value is give'
-    value :WAVEFORM, 'A waveform'
+    value :TIME_SERIES, 'A waveform'
   end
 
   # Measurement types

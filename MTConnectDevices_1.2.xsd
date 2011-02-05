@@ -301,6 +301,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WEIGHT'/>
       <xs:enumeration value='VOLUME'/>
       <xs:enumeration value='MOLE'/>
+      <xs:enumeration value='KINETIC'/>
+      <xs:enumeration value='DYNAMIC'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -1056,7 +1058,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:enumeration value='VALUE'/>
-      <xs:enumeration value='WAVEFORM'/>
+      <xs:enumeration value='TIME_SERIES'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='DataItemsType'>

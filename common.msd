@@ -125,6 +125,10 @@ package :common, 'Common attributes and elements for all schemas' do
     value :WEIGHT, 'Concentration in weight'
     value :VOLUME, 'Concentration in volume'
     value :MOLE, 'Concentration in mole'
+    
+    # For 1.2
+    value :KINETIC, 'Kenetic viscosity'
+    value :DYNAMIC, 'Dynamic viscosity'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do

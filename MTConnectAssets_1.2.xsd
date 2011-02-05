@@ -301,6 +301,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WEIGHT'/>
       <xs:enumeration value='VOLUME'/>
       <xs:enumeration value='MOLE'/>
+      <xs:enumeration value='KINETIC'/>
+      <xs:enumeration value='DYNAMIC'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -668,6 +670,54 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:simpleType name='TypeExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        A class extension
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='x:[A-Z_]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ClassTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The high level classification
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='FIXED'/>
+      <xs:enumeration value='ROTATIONAL'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ClassType'>
+    <xs:annotation>
+      <xs:documentation>
+        The high level classification
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='ClassTypeEnum TypeExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='TypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool type, this is the level below the classification
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='FIXED'/>
+      <xs:enumeration value='ROTATIONAL'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='Type'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool type, this is the level below the classification
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='TypeEnum TypeExtType'/>
+  </xs:simpleType>
   <xs:complexType name='OperationType'>
     <xs:annotation>
       <xs:documentation>
