@@ -440,7 +440,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[A-Z/]+'/>
+      <xs:pattern value='[A-Za-z0-9/&amp;]+'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ConnectionSizeType'>
@@ -581,34 +581,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='END_MILL'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='OperationTypeValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The type of the tool
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='MILLING'/>
-      <xs:enumeration value='DRILLING'/>
-      <xs:enumeration value='REAMING'/>
-      <xs:enumeration value='TAPPING'/>
-      <xs:enumeration value='BROACHING'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='OperationSubType'>
-    <xs:annotation>
-      <xs:documentation>
-        The type of the tool
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='LINEAR'/>
-      <xs:enumeration value='CIRCULAR'/>
-      <xs:enumeration value='FACE'/>
-      <xs:enumeration value='END'/>
-      <xs:enumeration value='BALL'/>
-    </xs:restriction>
-  </xs:simpleType>
   <xs:simpleType name='StyleExtType'>
     <xs:annotation>
       <xs:documentation>
@@ -627,9 +599,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:enumeration value='CV'/>
+      <xs:enumeration value='BTKV'/>
+      <xs:enumeration value='CVKV'/>
+      <xs:enumeration value='QC'/>
+      <xs:enumeration value='KM'/>
       <xs:enumeration value='HSK'/>
       <xs:enumeration value='DV'/>
       <xs:enumeration value='BT'/>
+      <xs:enumeration value='KM'/>
+      <xs:enumeration value='VDI'/>
+      <xs:enumeration value='CAPTO'/>
+      <xs:enumeration value='SQUARE'/>
+      <xs:enumeration value='ROUND'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ConnectionStyleType'>
@@ -680,7 +661,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='x:[A-Z_]+'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='ClassTypeEnum'>
+  <xs:simpleType name='CategoryTypeEnum'>
     <xs:annotation>
       <xs:documentation>
         The high level classification
@@ -691,44 +672,139 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ROTATIONAL'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='ClassType'>
+  <xs:simpleType name='CategoryType'>
     <xs:annotation>
       <xs:documentation>
         The high level classification
       </xs:documentation>
     </xs:annotation>
-    <xs:union memberTypes='ClassTypeEnum TypeExtType'/>
+    <xs:union memberTypes='CategoryTypeEnum TypeExtType'/>
   </xs:simpleType>
-  <xs:simpleType name='TypeEnum'>
+  <xs:simpleType name='ToolClassificaitonTypeEnum'>
     <xs:annotation>
       <xs:documentation>
         The tool type, this is the level below the classification
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='FIXED'/>
-      <xs:enumeration value='ROTATIONAL'/>
+      <xs:enumeration value='SHELL_MILL'/>
+      <xs:enumeration value='END_MILL'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='Type'>
+  <xs:simpleType name='ToolClassificaitonType'>
     <xs:annotation>
       <xs:documentation>
         The tool type, this is the level below the classification
       </xs:documentation>
     </xs:annotation>
-    <xs:union memberTypes='TypeEnum TypeExtType'/>
+    <xs:union memberTypes='ToolClassificaitonTypeEnum TypeExtType'/>
   </xs:simpleType>
-  <xs:complexType name='OperationType'>
+  <xs:simpleType name='ToolClassificaitonSubTypeEnum'>
     <xs:annotation>
       <xs:documentation>
-        The type of operation this tool is used for
+        The tool sub-type, this is the level below the classification
       </xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='OperationTypeValueType'>
-        <xs:attribute name='subType' type='OperationSubType' use='optional'/>
-      </xs:extension>
-    </xs:simpleContent>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='SHELL_MILL'/>
+      <xs:enumeration value='END_MILL'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ToolClassificaitonSubType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool sub-type, this is the level below the classification
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='ToolClassificaitonSubTypeEnum TypeExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='OperationTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The type of the tool (Application?)
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='MILLING'/>
+      <xs:enumeration value='DRILLING'/>
+      <xs:enumeration value='REAMING'/>
+      <xs:enumeration value='TAPPING'/>
+      <xs:enumeration value='BROACHING'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='OperationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The type of the tool (Application?)
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='OperationTypeEnum TypeExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='SubOperationTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The sub-type of operation
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='LINEAR'/>
+      <xs:enumeration value='CIRCULAR'/>
+      <xs:enumeration value='FACE'/>
+      <xs:enumeration value='END'/>
+      <xs:enumeration value='BALL'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='SubOperationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The sub-type of operation
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='SubOperationTypeEnum TypeExtType'/>
+  </xs:simpleType>
+  <xs:complexType name='ClassificationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool classification
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Category' type='CategoryType'>
+        <xs:annotation>
+          <xs:documentation>
+            The FIXED or ROTATIONAL family of tools
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Type' type='ToolClassificaitonType'>
+        <xs:annotation>
+          <xs:documentation>
+            The type of tool
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='SubType' type='ToolClassificaitonSubType'>
+        <xs:annotation>
+          <xs:documentation>
+            The sub-type of tool
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Operation' type='OperationType'>
+        <xs:annotation>
+          <xs:documentation>
+            The operation performed by this tool
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='SubOperation' type='SubOperationType'>
+        <xs:annotation>
+          <xs:documentation>
+            The sub-type of operation
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name='AssetDescriptionType' mixed='true'>
     <xs:annotation>
@@ -791,17 +867,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetType'>
         <xs:sequence>
-          <xs:element name='ToolType' type='ToolType'>
+          <xs:element name='Classification' type='ClassificationType'>
             <xs:annotation>
               <xs:documentation>
-                The type of the tool
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='OperationType' type='OperationType'>
-            <xs:annotation>
-              <xs:documentation>
-                The operation type of the tool
+                The tools classification
               </xs:documentation>
             </xs:annotation>
           </xs:element>

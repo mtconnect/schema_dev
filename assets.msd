@@ -8,7 +8,7 @@ package :Assets, 'Mobile Assets' do
   basic_type :ProgramToolNumber, 'The number referenced in the program for this tool', :integer
   basic_type :SettingGuage, 'The setting guage'
   basic_type :Offset, 'The offset of the tool', :float
-  basic_type(:ConnectionForm, 'The form specification for the connection') { pattern '[A-Z/]+' }
+  basic_type(:ConnectionForm, 'The form specification for the connection') { pattern '[A-Za-z0-9/&amp;]+' }
   basic_type :ConnectionSize, 'The size of the connection as specified by the standard', :integer
   
   attr :ToolId, 'The unique identifier of the tool type'
@@ -57,21 +57,6 @@ package :Assets, 'Mobile Assets' do
     value :END_MILL, 'End mill'
   end
 
-  enum :OperationTypeValue, 'The type of the tool' do
-    value :MILLING, 'Milling tool'
-    value :DRILLING, 'Drilling tool'
-    value :REAMING, 'Reaming tool'
-    value :TAPPING, 'Tapping tool'
-    value :BROACHING, 'Broaching tool'
-  end
-
-  enum :OperationSubType, 'The type of the tool' do
-    value :LINEAR, 'Linear broaching tool'
-    value :CIRCULAR, 'Circular broaching tool'
-    value :FACE, 'Face milling'
-    value :END, 'End milling'
-    value :BALL, 'Ball milling'
-  end
   
   basic_type(:StyleExt, 'An extension point for data item types') do
     pattern 'x:[A-Z]+'
@@ -80,10 +65,20 @@ package :Assets, 'Mobile Assets' do
   enum :ConnectionStyle, 'The style of the connection' do
     extensible :StyleExt
     
-    value :CV, 'ANSI standard'
-    value :HSK, 'ISO'
-    value :DV, 'DIN ISO Standard'
-    value :BT, 'JIS Standard'
+    value :CV, ''
+    value :BTKV, ''
+    value :CVKV, '?'
+    value :QC, ''
+    value :KM, ''
+    value :HSK, 'DIN 69893'
+    value :DV, 'DIN 69871'
+    value :BT, 'JIS 6339'
+    value :KM, 'KM Style'
+    value :VDI, 'DIN 69880'
+    value :CAPTO, 'Sandvik'
+    value :SQUARE, 'Square fixed'
+    value :ROUND, 'Round fixed'
+    
   end
   
   type :Connection, 'A connection' do
@@ -96,24 +91,54 @@ package :Assets, 'Mobile Assets' do
     pattern 'x:[A-Z_]+'
   end
   
-  enum :Class, 'The high level classification' do
+  enum :Category, 'The high level classification' do
     extensible :TypeExt
     
     value :FIXED, 'Fixed tool'
     value :ROTATIONAL, 'Rotating tool'
   end
   
-  enum :Type, 'The tool type, this is the level below the classification' do
+  enum :ToolClassificaitonType, 'The tool type, this is the level below the classification' do
     extensible :TypeExt
     
-    value :FIXED, 'Fixed tool'
-    value :ROTATIONAL, 'Rotating tool'
+    value :SHELL_MILL, 'Fixed tool'
+    value :END_MILL, 'Rotating tool'
+  end
+  
+  enum :ToolClassificaitonSubType, 'The tool sub-type, this is the level below the classification' do
+    extensible :TypeExt
+    
+    value :SHELL_MILL, 'Fixed tool'
+    value :END_MILL, 'Rotating tool'
   end
   
   
-  type :OperationType, 'The type of operation this tool is used for' do
-    member :SubType, 'The sub-classification of this operation', 0..1, :OperationSubType
-    member :Value, 'The operation type', :OperationTypeValue
+  enum :Operation, 'The type of the tool (Application?)' do
+    extensible :TypeExt
+    
+    value :MILLING, 'Milling tool'
+    value :DRILLING, 'Drilling tool'
+    value :REAMING, 'Reaming tool'
+    value :TAPPING, 'Tapping tool'
+    value :BROACHING, 'Broaching tool'
+  end
+
+  enum :SubOperation, 'The sub-type of operation' do
+    extensible :TypeExt
+    
+    value :LINEAR, 'Linear broaching tool'
+    value :CIRCULAR, 'Circular broaching tool'
+    value :FACE, 'Face milling'
+    value :END, 'End milling'
+    value :BALL, 'Ball milling'
+  end
+    
+  type :Classification, 'The tool classification' do
+    element :Category, 'The FIXED or ROTATIONAL family of tools'
+    element :Type, 'The type of tool', :ToolClassificaitonType
+    element :SubType, 'The sub-type of tool', :ToolClassificaitonSubType
+    element :Operation, 'The operation performed by this tool'
+    element :SubOperation, 'The sub-type of operation'
   end
 
   type :AssetDescription, 'The description of an asset, can be freeform text or elemenrts' do
@@ -139,8 +164,7 @@ package :Assets, 'Mobile Assets' do
     # Identification
     member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
     member :ToolId, 'The Identifier of the tool type'
-    element :ToolType, 'The type of the tool'
-    element :OperationType, 'The operation type of the tool'
+    member :Classification, 'The tools classification'
     
     # Status
     element :Status, 'The state of the tool assembly', 0..1, :ToolStatusValue
