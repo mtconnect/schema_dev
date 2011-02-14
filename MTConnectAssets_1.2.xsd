@@ -769,13 +769,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Category' type='CategoryType'>
-        <xs:annotation>
-          <xs:documentation>
-            The FIXED or ROTATIONAL family of tools
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
       <xs:element name='Type' type='ToolClassificaitonType'>
         <xs:annotation>
           <xs:documentation>

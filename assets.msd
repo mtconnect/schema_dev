@@ -134,11 +134,10 @@ package :Assets, 'Mobile Assets' do
   end
     
   type :Classification, 'The tool classification' do
-    element :Category, 'The FIXED or ROTATIONAL family of tools'
     element :Type, 'The type of tool', :ToolClassificaitonType
-    element :SubType, 'The sub-type of tool', :ToolClassificaitonSubType
+    element :SubType, 'The sub-type of tool', 0..1, :ToolClassificaitonSubType
     element :Operation, 'The operation performed by this tool'
-    element :SubOperation, 'The sub-type of operation'
+    element :SubOperation, 'The sub-type of operation', 0..1
   end
 
   type :AssetDescription, 'The description of an asset, can be freeform text or elemenrts' do
