@@ -327,6 +327,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ROOT_MEAN_SQUARE'/>
       <xs:enumeration value='MEAN'/>
       <xs:enumeration value='MODE'/>
+      <xs:enumeration value='RANGE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemStatisticsType'>
@@ -522,7 +523,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='sequence' type='SequenceType' use='required'/>
         <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'/>
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
-        <xs:attribute name='occurrenceTime' type='OccurrenceTimeType' use='optional'/>
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
       </xs:extension>
@@ -550,7 +550,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DisplacementValueType'>
@@ -560,7 +560,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='FrequencyValueType'>
@@ -570,7 +570,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='AmperageValueType'>
@@ -580,7 +580,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='VoltageValueType'>
@@ -590,7 +590,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='WattValueType'>
@@ -600,7 +600,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='PressureValueType'>
@@ -610,7 +610,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='AccelerationValueType'>
@@ -620,7 +620,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='AngleValueType'>
@@ -630,7 +630,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='TemperatureValueType'>
@@ -640,7 +640,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='VelocityValueType'>
@@ -650,7 +650,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='FeedrateValueType'>
@@ -660,7 +660,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='VibrationValueType'>
@@ -670,7 +670,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='RotationalVelocityValueType'>
@@ -680,7 +680,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='LoadValueType'>
@@ -690,7 +690,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='TorqueValueType'>
@@ -700,7 +700,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ThreeDimensionalValueType'>
@@ -710,7 +710,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)? [+-]?\d+(\.\d+)?([Ee][+-]?\d+)? [+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='TiltValueType'>
@@ -720,7 +720,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='AccumulatedTimeType'>
@@ -730,7 +730,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='PowerFactorValueType'>
@@ -740,7 +740,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='StrainValueType'>
@@ -750,7 +750,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='FlowValueType'>
@@ -760,7 +760,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='SoundPressureValueType'>
@@ -770,7 +770,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ResistanceValueType'>
@@ -780,7 +780,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ConductivityValueType'>
@@ -790,7 +790,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ViscosityValueType'>
@@ -800,7 +800,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ConcentrationValueType'>
@@ -810,7 +810,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='TimeSeriesValueType'>
@@ -820,7 +820,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='([+-]?\d+(\.\d+)?(E[+-]?\d+)?( )*)+|UNAVAILABLE'/>
+      <xs:pattern value='([+-]?\d+(\.\d+)?([Ee][+-]?\d+)?( )*)+|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DurationValueType'>
@@ -830,7 +830,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='CountValueType'>
@@ -840,7 +840,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='SampleRateType'>
@@ -850,7 +850,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='SampleType' abstract='true'>
@@ -880,7 +880,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -899,7 +899,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)? [+-]?\d+(\.\d+)?([Ee][+-]?\d+)? [+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -918,7 +918,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -937,7 +937,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -956,7 +956,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -975,7 +975,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -994,7 +994,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1013,7 +1013,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1032,7 +1032,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1051,7 +1051,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1070,7 +1070,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1089,7 +1089,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1108,7 +1108,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1127,7 +1127,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1146,7 +1146,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1165,7 +1165,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1184,7 +1184,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1203,7 +1203,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1222,7 +1222,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1241,7 +1241,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)? [+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)? [+-]?\d+(\.\d+)?([Ee][+-]?\d+)? [+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1260,7 +1260,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1279,7 +1279,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1298,7 +1298,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1317,7 +1317,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1336,7 +1336,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1355,7 +1355,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1374,7 +1374,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1393,7 +1393,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1412,7 +1412,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1431,7 +1431,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1450,7 +1450,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1469,7 +1469,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?(E[+-]?\d+)?|UNAVAILABLE'/>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -1508,7 +1508,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='AbsTimeSeriesType'>
-        <xs:pattern value='([+-]?\d+(\.\d+)?(E[+-]?\d+)?( )*)+|UNAVAILABLE'/>
+        <xs:pattern value='([+-]?\d+(\.\d+)?([Ee][+-]?\d+)?( )*)+|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>

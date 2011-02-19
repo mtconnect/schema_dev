@@ -1,6 +1,6 @@
 
 package :Samlpes, 'The samples' do
-  float = '[+-]?\d+(\.\d+)?(E[+-]?\d+)?'
+  float = '[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?'
   float_value = "#{float}|UNAVAILABLE"
   vector_value = "(#{float}( )*)+|UNAVAILABLE"
   
@@ -37,10 +37,13 @@ package :Samlpes, 'The samples' do
   basic_type(:CountValue, 'The number of values') { pattern float_value }
   basic_type(:SampleRate, 'The sampling rate in samples per second') { pattern float_value }
   
+  attr :Duration, 'A length of time in seconds', :float
+  
   type :Sample, 'An abstract sample', :Result do
     abstract
     
     member :Statistic, 'The statistical operation on this data', 0..1, :DataItemStatistics
+    member :Duration, 'The number of seconds since the reset of the statistic'
   end
   
   type :Amperage, 'An current a component is drawing', :Sample do
@@ -103,14 +106,18 @@ package :Samlpes, 'The samples' do
     member :Value, 'The frequency in hertz', :FrequencyValue
   end
   
+  type :Volts, 'DEPRECATED: The voltage', :Sample do
+    member :Value, 'The voltage', :VoltageValue
+  end
+
   type :Voltage, 'The voltage', :Sample do
     member :Value, 'The voltage', :VoltageValue
   end
   
-  type :Watts, 'The number of Watts', :Sample do
+  type :Watts, 'DEPRECATED: The number of Watts', :Sample do
     member :Value, 'The Watts', :WattValue
   end
-  
+    
   type :Pressure, 'The pressure', :Sample do
     member :Value, 'The pressure', :PressureValue
   end
@@ -124,6 +131,10 @@ package :Samlpes, 'The samples' do
   end
   
   # For 1.2
+  type :Wattage, 'The number of Watts', :Sample do
+    member :Value, 'The Watts', :WattValue
+  end
+  
   type :Displacement, 'The linear displacement in millimeters', :Sample do
     member :Value, 'The displacement as measured from zero to peak', :DisplacementValue
   end

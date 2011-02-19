@@ -377,23 +377,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:simpleType name='DescriptionType'>
-    <xs:annotation>
-      <xs:documentation>
-        A description
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:simpleType name='SizeType'>
-    <xs:annotation>
-      <xs:documentation>
-        The number of pots (Is this term confusing?)
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:integer'/>
-  </xs:simpleType>
-  <xs:simpleType name='WeightType'>
     <xs:annotation>
       <xs:documentation>
         The number of pots (Is this term confusing?)
@@ -432,24 +416,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:float'/>
-  </xs:simpleType>
-  <xs:simpleType name='ConnectionFormType'>
-    <xs:annotation>
-      <xs:documentation>
-        The form specification for the connection
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:pattern value='[A-Za-z0-9/&amp;]+'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='ConnectionSizeType'>
-    <xs:annotation>
-      <xs:documentation>
-        The size of the connection as specified by the standard
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:integer'/>
   </xs:simpleType>
   <xs:simpleType name='ToolIdType'>
     <xs:annotation>
@@ -570,236 +536,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WEAR'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='ToolType'>
-    <xs:annotation>
-      <xs:documentation>
-        The type of the tool
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='SHELL_MILL'/>
-      <xs:enumeration value='END_MILL'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='StyleExtType'>
-    <xs:annotation>
-      <xs:documentation>
-        An extension point for data item types
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:pattern value='x:[A-Z]+'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='ConnectionStyleTypeEnum'>
-    <xs:annotation>
-      <xs:documentation>
-        The style of the connection
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='CV'/>
-      <xs:enumeration value='BTKV'/>
-      <xs:enumeration value='CVKV'/>
-      <xs:enumeration value='QC'/>
-      <xs:enumeration value='KM'/>
-      <xs:enumeration value='HSK'/>
-      <xs:enumeration value='DV'/>
-      <xs:enumeration value='BT'/>
-      <xs:enumeration value='KM'/>
-      <xs:enumeration value='VDI'/>
-      <xs:enumeration value='CAPTO'/>
-      <xs:enumeration value='SQUARE'/>
-      <xs:enumeration value='ROUND'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='ConnectionStyleType'>
-    <xs:annotation>
-      <xs:documentation>
-        The style of the connection
-      </xs:documentation>
-    </xs:annotation>
-    <xs:union memberTypes='ConnectionStyleTypeEnum StyleExtType'/>
-  </xs:simpleType>
-  <xs:complexType name='ConnectionType'>
-    <xs:annotation>
-      <xs:documentation>
-        A connection
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Style' type='ConnectionStyleType'>
-        <xs:annotation>
-          <xs:documentation>
-            The connection style
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Size' type='ConnectionSizeType'>
-        <xs:annotation>
-          <xs:documentation>
-            The connection size
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Form' type='ConnectionFormType'>
-        <xs:annotation>
-          <xs:documentation>
-            The connection form
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:simpleType name='TypeExtType'>
-    <xs:annotation>
-      <xs:documentation>
-        A class extension
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:pattern value='x:[A-Z_]+'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='CategoryTypeEnum'>
-    <xs:annotation>
-      <xs:documentation>
-        The high level classification
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='FIXED'/>
-      <xs:enumeration value='ROTATIONAL'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='CategoryType'>
-    <xs:annotation>
-      <xs:documentation>
-        The high level classification
-      </xs:documentation>
-    </xs:annotation>
-    <xs:union memberTypes='CategoryTypeEnum TypeExtType'/>
-  </xs:simpleType>
-  <xs:simpleType name='ToolClassificaitonTypeEnum'>
-    <xs:annotation>
-      <xs:documentation>
-        The tool type, this is the level below the classification
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='SHELL_MILL'/>
-      <xs:enumeration value='END_MILL'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='ToolClassificaitonType'>
-    <xs:annotation>
-      <xs:documentation>
-        The tool type, this is the level below the classification
-      </xs:documentation>
-    </xs:annotation>
-    <xs:union memberTypes='ToolClassificaitonTypeEnum TypeExtType'/>
-  </xs:simpleType>
-  <xs:simpleType name='ToolClassificaitonSubTypeEnum'>
-    <xs:annotation>
-      <xs:documentation>
-        The tool sub-type, this is the level below the classification
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='SHELL_MILL'/>
-      <xs:enumeration value='END_MILL'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='ToolClassificaitonSubType'>
-    <xs:annotation>
-      <xs:documentation>
-        The tool sub-type, this is the level below the classification
-      </xs:documentation>
-    </xs:annotation>
-    <xs:union memberTypes='ToolClassificaitonSubTypeEnum TypeExtType'/>
-  </xs:simpleType>
-  <xs:simpleType name='OperationTypeEnum'>
-    <xs:annotation>
-      <xs:documentation>
-        The type of the tool (Application?)
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='MILLING'/>
-      <xs:enumeration value='DRILLING'/>
-      <xs:enumeration value='REAMING'/>
-      <xs:enumeration value='TAPPING'/>
-      <xs:enumeration value='BROACHING'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='OperationType'>
-    <xs:annotation>
-      <xs:documentation>
-        The type of the tool (Application?)
-      </xs:documentation>
-    </xs:annotation>
-    <xs:union memberTypes='OperationTypeEnum TypeExtType'/>
-  </xs:simpleType>
-  <xs:simpleType name='SubOperationTypeEnum'>
-    <xs:annotation>
-      <xs:documentation>
-        The sub-type of operation
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='LINEAR'/>
-      <xs:enumeration value='CIRCULAR'/>
-      <xs:enumeration value='FACE'/>
-      <xs:enumeration value='END'/>
-      <xs:enumeration value='BALL'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='SubOperationType'>
-    <xs:annotation>
-      <xs:documentation>
-        The sub-type of operation
-      </xs:documentation>
-    </xs:annotation>
-    <xs:union memberTypes='SubOperationTypeEnum TypeExtType'/>
-  </xs:simpleType>
-  <xs:complexType name='ClassificationType'>
-    <xs:annotation>
-      <xs:documentation>
-        The tool classification
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Type' type='ToolClassificaitonType'>
-        <xs:annotation>
-          <xs:documentation>
-            The type of tool
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='SubType' type='ToolClassificaitonSubType'>
-        <xs:annotation>
-          <xs:documentation>
-            The sub-type of tool
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Operation' type='OperationType'>
-        <xs:annotation>
-          <xs:documentation>
-            The operation performed by this tool
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='SubOperation' type='SubOperationType'>
-        <xs:annotation>
-          <xs:documentation>
-            The sub-type of operation
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name='AssetDescriptionType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        The description of an asset, can be freeform text or elemenrts
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any processContents='lax' maxOccurs='unbounded' minOccurs='0'>
+        <xs:annotation>
+          <xs:documentation>
+            Any elements
+          </xs:documentation>
+        </xs:annotation>
+      </xs:any>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='ToolDefinitionType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
         The description of an asset, can be freeform text or elemenrts
@@ -832,7 +585,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Description' maxOccurs='1' minOccurs='0' type='DescriptionType'>
+      <xs:element name='Description' maxOccurs='1' minOccurs='0' type='AssetDescriptionType'>
         <xs:annotation>
           <xs:documentation>
             The description of the asset (freeform)
@@ -854,131 +607,112 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CuttingToolType'>
     <xs:annotation>
       <xs:documentation>
-        A defintion of a cutting implement
+        A cutting tool
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='AssetType'>
         <xs:sequence>
-          <xs:element name='Classification' type='ClassificationType'>
+          <xs:element name='ToolDefinition' type='ToolDefinitionType'>
             <xs:annotation>
               <xs:documentation>
-                The tools classification
+                Description of tool
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Status' maxOccurs='1' minOccurs='0' type='ToolStatusValueType'>
+          <xs:element name='ToolLifeCycle' type='ToolLifeCycleType'>
             <xs:annotation>
               <xs:documentation>
-                The state of the tool assembly
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='ToolLife' maxOccurs='3' minOccurs='0' type='LifeType'>
-            <xs:annotation>
-              <xs:documentation>
-                The life of a tool assembly
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='PocketId' maxOccurs='1' minOccurs='0' type='PocketIdType'>
-            <xs:annotation>
-              <xs:documentation>
-                The pocket location
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Connection' maxOccurs='1' minOccurs='0' type='ConnectionType'>
-            <xs:annotation>
-              <xs:documentation>
-                The connection to the spindle or ...
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='ProgramToolNumber' maxOccurs='1' minOccurs='0' type='ProgramToolNumberType'>
-            <xs:annotation>
-              <xs:documentation>
-                The number used to identify this tool in the program
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Size' maxOccurs='1' minOccurs='0' default='1' type='SizeType'>
-            <xs:annotation>
-              <xs:documentation>
-                The number of pots this tool will consume due to interference.
-                If not given, assume 1
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Weight' maxOccurs='1' minOccurs='0' type='WeightType'>
-            <xs:annotation>
-              <xs:documentation>
-                The wieght of the tool (Pocket Usage)
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='AssemblyOrientation' maxOccurs='1' minOccurs='0' type='AssemblyOrientationType'>
-            <xs:annotation>
-              <xs:documentation>
-                The orientation with respect to the assembly (need more info)
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='DeviceOrientation' maxOccurs='1' minOccurs='0' type='DeviceOrientationType'>
-            <xs:annotation>
-              <xs:documentation>
-                The orientation with respect to the device(need more info)
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='SettingGuage' maxOccurs='1' minOccurs='0' type='SettingGuageType'>
-            <xs:annotation>
-              <xs:documentation>
-                The setting guage
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Length' maxOccurs='1' minOccurs='0' type='LengthType'>
-            <xs:annotation>
-              <xs:documentation>
-                The length of the tool assembly
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Diameter' maxOccurs='1' minOccurs='0' type='DiameterType'>
-            <xs:annotation>
-              <xs:documentation>
-                The diameter of the tool assembly
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Offset' maxOccurs='1' minOccurs='0' type='OffsetType'>
-            <xs:annotation>
-              <xs:documentation>
-                The offset of the tool assembly
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Edges' type='EdgesType'>
-            <xs:annotation>
-              <xs:documentation>
-                A list of edges for this assembly
+                the tool lifecycle
               </xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:sequence>
-        <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
-        <xs:attribute name='toolId' type='ToolIdType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name='CuttingTool' substitutionGroup='Asset' type='CuttingToolType'>
     <xs:annotation>
       <xs:documentation>
-        A defintion of a cutting implement
+        A cutting tool
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='ToolLifeCycleType'>
+    <xs:annotation>
+      <xs:documentation>
+        A defintion of a cutting implement
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Status' maxOccurs='1' minOccurs='0' type='ToolStatusValueType'>
+        <xs:annotation>
+          <xs:documentation>
+            The state of the tool assembly
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ToolLife' maxOccurs='3' minOccurs='0' type='LifeType'>
+        <xs:annotation>
+          <xs:documentation>
+            The life of a tool assembly
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='PocketId' maxOccurs='1' minOccurs='0' type='PocketIdType'>
+        <xs:annotation>
+          <xs:documentation>
+            The pocket location
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProgramToolNumber' maxOccurs='1' minOccurs='0' type='ProgramToolNumberType'>
+        <xs:annotation>
+          <xs:documentation>
+            The number used to identify this tool in the program
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Size' maxOccurs='1' minOccurs='0' default='1' type='SizeType'>
+        <xs:annotation>
+          <xs:documentation>
+            The number of pots this tool will consume due to interference. If
+            not given, assume 1
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Length' maxOccurs='1' minOccurs='0' type='LengthType'>
+        <xs:annotation>
+          <xs:documentation>
+            The length of the tool assembly
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Diameter' maxOccurs='1' minOccurs='0' type='DiameterType'>
+        <xs:annotation>
+          <xs:documentation>
+            The diameter of the tool assembly
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Offset' maxOccurs='1' minOccurs='0' type='OffsetType'>
+        <xs:annotation>
+          <xs:documentation>
+            The offset of the tool assembly
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Edges' type='EdgesType'>
+        <xs:annotation>
+          <xs:documentation>
+            A list of edges for this assembly
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
+    <xs:attribute name='toolId' type='ToolIdType' use='required'/>
+  </xs:complexType>
   <xs:complexType name='LifeType'>
     <xs:annotation>
       <xs:documentation>

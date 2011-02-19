@@ -125,8 +125,6 @@ package :common, 'Common attributes and elements for all schemas' do
     value :WEIGHT, 'Concentration in weight'
     value :VOLUME, 'Concentration in volume'
     value :MOLE, 'Concentration in mole'
-    
-    # For 1.2
     value :KINETIC, 'Kenetic viscosity'
     value :DYNAMIC, 'Dynamic viscosity'
   end
@@ -141,5 +139,6 @@ package :common, 'Common attributes and elements for all schemas' do
     value :ROOT_MEAN_SQUARE, 'The root mean square'
     value :MEAN, 'The mean average'
     value :MODE, 'The mode of the sample'
+    value :RANGE, 'The difference between the maximum and minimum value during the calculated period'
   end
 end

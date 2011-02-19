@@ -327,6 +327,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ROOT_MEAN_SQUARE'/>
       <xs:enumeration value='MEAN'/>
       <xs:enumeration value='MODE'/>
+      <xs:enumeration value='RANGE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemStatisticsType'>
@@ -573,7 +574,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ThermostatType'>
     <xs:annotation>
       <xs:documentation>
-        A thermostate
+        DEPRECATED: A thermostate
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -583,14 +584,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Thermostat' substitutionGroup='Sensor' type='ThermostatType'>
     <xs:annotation>
       <xs:documentation>
-        A thermostate
+        DEPRECATED: A thermostate
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='VibrationType'>
     <xs:annotation>
       <xs:documentation>
-        A sensor for reading the vibration from a component
+        DEPRECATED: A sensor for reading the vibration from a component
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -600,7 +601,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Vibration' substitutionGroup='Sensor' type='VibrationType'>
     <xs:annotation>
       <xs:documentation>
-        A sensor for reading the vibration from a component
+        DEPRECATED: A sensor for reading the vibration from a component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -652,6 +653,57 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         A door on the machine
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AcousticSensorType'>
+    <xs:annotation>
+      <xs:documentation>
+        An acoustic sensor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SensorType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='AcousticSensor' substitutionGroup='Sensor' type='AcousticSensorType'>
+    <xs:annotation>
+      <xs:documentation>
+        An acoustic sensor
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='TemperatureSensorType'>
+    <xs:annotation>
+      <xs:documentation>
+        An acoustic sensor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SensorType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='TemperatureSensor' substitutionGroup='Sensor' type='TemperatureSensorType'>
+    <xs:annotation>
+      <xs:documentation>
+        An acoustic sensor
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DisplacementSensorType'>
+    <xs:annotation>
+      <xs:documentation>
+        An acoustic sensor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SensorType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='DisplacementSensor' substitutionGroup='Sensor' type='DisplacementSensorType'>
+    <xs:annotation>
+      <xs:documentation>
+        An acoustic sensor
       </xs:documentation>
     </xs:annotation>
   </xs:element>

@@ -47,10 +47,15 @@ package :Component, 'Top Level Components Package' do
 
   type :Power, 'DEPRECATED: A power measuring component', :CommonComponent
   type :Sensor, 'A sensor, this is not abstract to allow for easy extensibility.', :CommonComponent
-  type :Thermostat, 'A thermostate', :Sensor
-  type :Vibration, 'A sensor for reading the vibration from a component', :Sensor
+  type :Thermostat, 'DEPRECATED: A thermostate', :Sensor
+  type :Vibration, 'DEPRECATED: A sensor for reading the vibration from a component', :Sensor
   type :Path, 'A path component', :CommonComponent
   type :Actuator, 'A component that causes motion', :CommonComponent
-  
   type :Door, 'A door on the machine', :CommonComponent  
+  
+  type :AcousticSensor, 'An acoustic sensor', :Sensor
+  type :TemperatureSensor, 'An acoustic sensor', :Sensor
+  type :DisplacementSensor, 'An acoustic sensor', :Sensor
+
+
 end
