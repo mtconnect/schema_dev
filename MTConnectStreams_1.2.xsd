@@ -853,6 +853,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='DurationTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A length of time in seconds
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
   <xs:complexType name='SampleType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -862,6 +870,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='ResultType'>
         <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
+        <xs:attribute name='duration' type='DurationTimeType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1157,6 +1166,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='VoltsType'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED: The voltage
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Volts' substitutionGroup='Sample' type='VoltsType'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED: The voltage
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='VoltageType'>
     <xs:annotation>
       <xs:documentation>
@@ -1179,7 +1207,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='WattsType'>
     <xs:annotation>
       <xs:documentation>
-        The number of Watts
+        DEPRECATED: The number of Watts
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -1191,7 +1219,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Watts' substitutionGroup='Sample' type='WattsType'>
     <xs:annotation>
       <xs:documentation>
-        The number of Watts
+        DEPRECATED: The number of Watts
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -1249,6 +1277,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The 3 dimensional position for tool tip in the path (X Y Z)
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='WattageType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of Watts
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Wattage' substitutionGroup='Sample' type='WattageType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of Watts
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -1774,6 +1821,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='VoltsTimeSeriesType'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of DEPRECATED: The voltage
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='TimeSeriesType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='VoltsTimeSeries' substitutionGroup='TimeSeries' type='VoltsTimeSeriesType'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of DEPRECATED: The voltage
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='VoltageTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -1794,7 +1858,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='WattsTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The number of Watts
+        Time series of DEPRECATED: The number of Watts
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -1804,7 +1868,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='WattsTimeSeries' substitutionGroup='TimeSeries' type='WattsTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The number of Watts
+        Time series of DEPRECATED: The number of Watts
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -1858,6 +1922,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         Time series of The 3 dimensional position for tool tip in the path (X Y
         Z)
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='WattageTimeSeriesType'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of The number of Watts
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='TimeSeriesType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='WattageTimeSeries' substitutionGroup='TimeSeries' type='WattageTimeSeriesType'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of The number of Watts
       </xs:documentation>
     </xs:annotation>
   </xs:element>

@@ -37,13 +37,13 @@ package :Samlpes, 'The samples' do
   basic_type(:CountValue, 'The number of values') { pattern float_value }
   basic_type(:SampleRate, 'The sampling rate in samples per second') { pattern float_value }
   
-  attr :Duration, 'A length of time in seconds', :float
+  attr :DurationTime, 'A length of time in seconds', :float
   
   type :Sample, 'An abstract sample', :Result do
     abstract
     
     member :Statistic, 'The statistical operation on this data', 0..1, :DataItemStatistics
-    member :Duration, 'The number of seconds since the reset of the statistic'
+    member :Duration, 'The number of seconds since the reset of the statistic', 0..1, :DurationTime
   end
   
   type :Amperage, 'An current a component is drawing', :Sample do

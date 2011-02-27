@@ -9,12 +9,12 @@ package :Assets, 'Mobile Assets' do
   attr :ToolId, 'The unique identifier of the tool type'
   attr :EdgeCount, 'The number of cutting edges', :integer
   attr :ToolLifeValue, 'The life of the tool in seconds?', :float
-  attr :EdgeId, 'An identifier for the insert', :integer
+  attr :ItemId, 'An identifier for the insert', :integer
   attr :MeasurementValue, 'A measurement value', :float
   attr :Maximum, 'A maximum value', :float
   attr :Minimum, 'A minimum value', :float  
     
-  enum :ToolStatusValue, 'The state of the tool' do
+  enum :CutterStatusValue, 'The state of the tool' do
     value :NEW, 'The tool is new'
     value :NOT_REGISTERED, ' An unregisterd state'
     value :RECONDITIONED, 'The tool is being reconditioned'
@@ -42,9 +42,8 @@ package :Assets, 'Mobile Assets' do
   end
   
   enum :ToolLifeType, 'The direction of tool life count' do
-    value :TIME, 'The tool life measured in minutes'
+    value :MINUTEs, 'The tool life measured in minutes'
     value :PART_COUNT, 'The tool life measured in parts made'
-    value :WEAR, 'The tool life measured in wear'
   end
   
   type :AssetDescription, 'The description of an asset, can be freeform text or elemenrts' do
@@ -72,17 +71,17 @@ package :Assets, 'Mobile Assets' do
   end
   
   type :CuttingTool, 'A cutting tool', :Asset do
+    member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
+    member :ToolId, 'The Identifier of the tool type'
+    
     member :ToolDefinition, 'Description of tool'
     member :ToolLifeCycle, 'the tool lifecycle'
   end
       
   type :ToolLifeCycle, 'A defintion of a cutting tool application and life cycle' do
     # Identification
-    member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
-    member :ToolId, 'The Identifier of the tool type'
-    
     # Status
-    element :Status, 'The state of the tool assembly', 0..1, :ToolStatusValue
+    element :CutterStatus, 'The state of the tool assembly', 0..1, :CutterStatusValue
     member :ToolLife, 'The life of a tool assembly', 0..3, :Life
     
     # Connection
@@ -93,9 +92,9 @@ package :Assets, 'Mobile Assets' do
     end
     
     # Geometry
+    member :Offset, 'The offset of the tool assembly', 0..1
     member :Length, 'The length of the tool assembly', 0..1
     member :Diameter, 'The diameter of the tool assembly', 0..1
-    member :Offset, 'The offset of the tool assembly', 0..1
 
     # Edges
     member :CuttingItems, 'A list of edges for this assembly'
@@ -115,12 +114,12 @@ package :Assets, 'Mobile Assets' do
   end
     
   type :CuttingItem, 'An edge into a tool assembly' do
-    member :EdgeId, 'The unique identifier of this insert in this assembly'      
+    member :ItemId, 'The unique identifier of this insert in this assembly'      
     member :Length, 'The length of the edge', 0..1
     member :Diameter, 'The diameter of the edge', 0..1
     member :TipAngle, 'The angle of the tool cutting edge', 0..1
     member :CornerRadius, 'The angle of the tool cutting edge', 0..1
-    member :EdgeLife, 'The life of an edge', 0..1, :Life
+    member :ItemLife, 'The life of an edge', 0..1, :Life
   end
   
   type :EdgeMeasurement, 'An abstract type for edge measurements' do
