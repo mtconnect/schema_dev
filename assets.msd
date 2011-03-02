@@ -63,11 +63,8 @@ package :Assets, 'Mobile Assets' do
     member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
     member :ToolId, 'The Identifier of the tool type'
     
-    choice do 
-      set do
-        member :CuttingToolDefinition, 'Description of tool'
-        member :CuttingToolLifeCycle, 'the tool lifecycle', 0..1
-      end
+    at_least_one do 
+      member :CuttingToolDefinition, 'Description of tool'
       member :CuttingToolLifeCycle, 'the tool lifecycle'
     end
   end

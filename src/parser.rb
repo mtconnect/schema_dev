@@ -316,6 +316,23 @@ class Schema
     def choice(occurrence = 1, &block)
       @members << Choice.new(@schema, occurrence, &block)
     end
+    
+    def at_least_one(occurrence = 1, &block)
+      c = Choice.new(@schema, occurrence, &block)
+      m, mc = c.members, c.members.dup
+      m.clear
+      (mc.size - 1).times do |i|
+        s = ChoiceSet.new(@schema)
+        (i...mc.size).each do |j|
+          nm = mc[j].dup
+          nm.occurrence = 0..1 if (j > i)
+          s.members << nm
+        end
+        m << s
+      end
+      m << mc.last.dup
+      @members << c
+    end
 
     def <=>(other)
       @name <=> other.name
