@@ -1,6 +1,6 @@
 
 package :Assets, 'Mobile Assets' do
-  basic_type :Size, 'The number of pots (Is this term confusing?)', :integer
+  basic_type :PocketSize, 'The number of pots (Is this term confusing?)', :integer
   basic_type :PocketId, 'An identifier for the insert'
   basic_type :ProgramToolNumber, 'The number referenced in the program for this tool', :integer
   basic_type :SettingGuage, 'The setting guage'
@@ -23,19 +23,7 @@ package :Assets, 'Mobile Assets' do
     value :TAGGED_OUT, 'The tool is currently out being reconditioned or sharpened'
     value :BROKEN, 'The tool is broken'
   end
-  
-  enum :AssemblyOrientation, 'The orientation of the curring tool' do
-    value :LEFT, 'A left oriented tool'
-    value :RIGHT, 'A right oriented tool'
-    value :BOTH, '????'
-  end
-
-  enum :DeviceOrientation, 'The orientation of the cutting tool relative machine tool' do
-    value :LEFT, 'A left oriented tool'
-    value :RIGHT, 'A right oriented tool'
-    value :BOTH, '????'
-  end
-  
+    
   enum :ToolLifeDirection, 'The direction of tool life count' do
     value :UP, 'The tool life counts up from the 0 to maximum'
     value :DOWN, 'The tool life counts down from maximum to 0'
@@ -44,6 +32,7 @@ package :Assets, 'Mobile Assets' do
   enum :ToolLifeType, 'The direction of tool life count' do
     value :MINUTEs, 'The tool life measured in minutes'
     value :PART_COUNT, 'The tool life measured in parts made'
+    value :WEAR, 'Measurement of tool life in tool wear'
   end
   
   type :AssetDescription, 'The description of an asset, can be freeform text or elemenrts' do
@@ -51,7 +40,7 @@ package :Assets, 'Mobile Assets' do
     member :any, 'Any elements', 0..INF
   end  
   
-  type :ToolDefinition, 'The description of an asset, can be freeform text or elemenrts' do
+  type :CuttingToolDefinition, 'The description of an asset, can be freeform text or elemenrts' do
     mixed
     member :any, 'Any elements', 0..INF
   end 
@@ -74,11 +63,16 @@ package :Assets, 'Mobile Assets' do
     member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
     member :ToolId, 'The Identifier of the tool type'
     
-    member :ToolDefinition, 'Description of tool'
-    member :ToolLifeCycle, 'the tool lifecycle'
+    choice do 
+      set do
+        member :CuttingToolDefinition, 'Description of tool'
+        member :CuttingToolLifeCycle, 'the tool lifecycle', 0..1
+      end
+      member :CuttingToolLifeCycle, 'the tool lifecycle'
+    end
   end
       
-  type :ToolLifeCycle, 'A defintion of a cutting tool application and life cycle' do
+  type :CuttingToolLifeCycle, 'A defintion of a cutting tool application and life cycle' do
     # Identification
     # Status
     element :CutterStatus, 'The state of the tool assembly', 0..1, :CutterStatusValue
@@ -87,7 +81,7 @@ package :Assets, 'Mobile Assets' do
     # Connection
     member :PocketId, 'The pocket location', 0..1
     member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
-    member :Size, 'The number of pots this tool will consume due to interference. If not given, assume 1', 0..1 do
+    member :PocketSize, 'The number of pots this tool will consume due to interference. If not given, assume 1', 0..1 do
       self.default = 1
     end
     
@@ -97,8 +91,9 @@ package :Assets, 'Mobile Assets' do
     member :Diameter, 'The diameter of the tool assembly', 0..1
 
     # Edges
-    member :CuttingItems, 'A list of edges for this assembly'
+    member :CuttingItems, 'A list of edges for this assembly', 0..1
   end
+  
   
   type :Life, 'Abstract cutter life' do 
     member :Type, 'One of time, part count, or wear', 1, :ToolLifeType
