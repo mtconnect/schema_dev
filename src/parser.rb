@@ -320,17 +320,21 @@ class Schema
     def at_least_one(occurrence = 1, &block)
       c = Choice.new(@schema, occurrence, &block)
       m, mc = c.members, c.members.dup
+      raise "at least one must have more than one member" unless mc.size > 1
       m.clear
-      (mc.size - 1).times do |i|
+      nm = mc.shift
+      while !mc.empty?
         s = ChoiceSet.new(@schema)
-        (i...mc.size).each do |j|
-          nm = mc[j].dup
-          nm.occurrence = 0..1 if (j > i)
-          s.members << nm
+        s.members << nm.dup
+        mc.each do |om|
+          om = om.dup
+          om.occurrence = 0..1
+          s.members << om
         end
         m << s
+        nm = mc.shift        
       end
-      m << mc.last.dup
+      m << nm.dup
       @members << c
     end
 

@@ -2,6 +2,7 @@
 package :Component, 'Top Level Components Package' do
   attr :Station, 'The station id for this device'
   attr :Iso841Class, 'The ISO 841 classification for the device', :integer
+  attr :Model, 'The model name'
   
   type :Devices, 'The top level components' do
     member :Device, 'A piece of equipment', 1..INF
@@ -22,6 +23,7 @@ package :Component, 'Top Level Components Package' do
     mixed
     
     member :Manufacturer, 'The manufacturer of this component', 0..1, :Name
+    member :Model, 'The manufacturer of this component', 0..1
     member :SerialNumber, 'The serial number of the component', 0..1
     member :Station, 'The location of this component', 0..1
     member :any, 'Any desciptive schema like calibration', 0..INF

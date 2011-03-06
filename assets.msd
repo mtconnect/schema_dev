@@ -5,6 +5,8 @@ package :Assets, 'Mobile Assets' do
   basic_type :ProgramToolNumber, 'The number referenced in the program for this tool', :integer
   basic_type :SettingGuage, 'The setting guage'
   basic_type :Offset, 'The offset of the tool', :float
+  basic_type :ReconditionCount, 'The number of times the cutter has been reconditioned'
+  basic_type :PocketWeight, 'The weight of the cutter in kg'
   
   attr :ToolId, 'The unique identifier of the tool type'
   attr :EdgeCount, 'The number of cutting edges', :integer
@@ -13,6 +15,13 @@ package :Assets, 'Mobile Assets' do
   attr :MeasurementValue, 'A measurement value', :float
   attr :Maximum, 'A maximum value', :float
   attr :Minimum, 'A minimum value', :float  
+
+  enum :DefinitionFormat, 'The format of the definition' do
+    value :EXPRESS, 'The definition will be provided in EXPRESS format'
+    value :XML, 'The definition will be provided in XML'
+    value :TEXT, 'The definition will be provided in uninterpreted TEXT'
+    value :UNDEFINED, 'The definition will be provided in an unspecified format'
+  end
     
   enum :CutterStatusValue, 'The state of the tool' do
     value :NEW, 'The tool is new'
@@ -30,7 +39,7 @@ package :Assets, 'Mobile Assets' do
   end
   
   enum :ToolLifeType, 'The direction of tool life count' do
-    value :MINUTEs, 'The tool life measured in minutes'
+    value :MINUTES, 'The tool life measured in minutes'
     value :PART_COUNT, 'The tool life measured in parts made'
     value :WEAR, 'Measurement of tool life in tool wear'
   end
@@ -42,6 +51,9 @@ package :Assets, 'Mobile Assets' do
   
   type :CuttingToolDefinition, 'The description of an asset, can be freeform text or elemenrts' do
     mixed
+    member :format, 'The format of the data in the definition', 0..1, :DefinitionFormat do
+      default = 'XML'
+    end
     member :any, 'Any elements', 0..INF
   end 
       
@@ -74,6 +86,7 @@ package :Assets, 'Mobile Assets' do
     # Status
     element :CutterStatus, 'The state of the tool assembly', 0..1, :CutterStatusValue
     member :ToolLife, 'The life of a tool assembly', 0..3, :Life
+    member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
     
     # Connection
     member :PocketId, 'The pocket location', 0..1
@@ -81,6 +94,7 @@ package :Assets, 'Mobile Assets' do
     member :PocketSize, 'The number of pots this tool will consume due to interference. If not given, assume 1', 0..1 do
       self.default = 1
     end
+    member :PocketWeight, 'The weight of the cutter in kilograms', 0..1
     
     # Geometry
     member :Offset, 'The offset of the tool assembly', 0..1
@@ -95,7 +109,7 @@ package :Assets, 'Mobile Assets' do
   type :Life, 'Abstract cutter life' do 
     member :Type, 'One of time, part count, or wear', 1, :ToolLifeType
     member :Direction, 'The count up or count down', 1, :ToolLifeDirection
-    member :Warning, 'Tool life warning level', 0..1, :ToolLifeValue
+    member :WarningLevel, 'Tool life warning level', 0..1, :ToolLifeValue
     member :Maximum, 'Maximum tool life', 1, :ToolLifeValue
     member :Value, 'The current tool life', :ToolLifeValue
   end
