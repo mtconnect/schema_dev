@@ -16,6 +16,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :SerialNumber, 'A serial number for a piece of equipment'
   attr :ItemSource, 'The measurement source'
   attr :Rate, 'A sample rate in milliseconds per sample', :float
+  attr :ComponentId, 'The id of the component (maps to the id from probe)', :ID
   attr :ID, 'An identifier', :ID
   
   attr :AssetId, 'The unique id of the asset'
@@ -45,6 +46,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :AVAILABILITY, 'The components availability'
     value :BLOCK, 'The current executing block'
     value :CODE, 'The current executing code'
+    value :CONDUCTIVITY, 'The conductivity of a piece of material'
     value :DISPLACEMENT, 'The displacement as measured from zero to peak'
     value :DIRECTION, 'The direction of rotation'
     value :DOOR_STATE, 'The open/closed state of the door'
@@ -58,7 +60,8 @@ package :common, 'Common attributes and elements for all schemas' do
     value :AXIS_FEEDRATE, 'The feedrate for the axis'
     value :LINE, 'The line of the program being executed'
     value :CONTROLLER_MODE, 'The CNC\'s mode'
-    value :LOAD, 'The load on the component'
+    value :LOAD, 'The load on the component as a percentage of rated'
+    value :MASS, 'The weight of some object in kilograms'
     value :MESSAGE, 'A uninterpreted message'
     value :POSITION, 'The position as given in mm'
     value :POWER_STATUS, 'DEPRECATED: The power status of the component'
@@ -93,6 +96,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :VISCOSITY, 'viscosity'
     value :CONCENTRATION, 'Percentage of one component in all components. Subtypes: WEIGHT, VOLUME, MOLE'
     value :ROTATIONAL_VELOCITY, 'The rotational velocity in revolutions per minute'
+    value :LINEAR_FORCE, 'The magnitude of a push or pull introduced by an actuator or exerted on an object'
     
     # Condition types
     value :COMMUNICATIONS, 'The communications system'
@@ -120,6 +124,9 @@ package :common, 'Common attributes and elements for all schemas' do
     value :ALL, 'Inclusive of all items'
     value :LINE, 'The high voltage subtype for power state'
     value :CONTROL, 'The low voltage subtype for power state'
+    
+    value :ALTERNATING_CURRENT, 'Corresponds to an alternating current'
+    value :DIRECT_CURRENT, 'Corresponds to an alternating current'
     
     # For 1.2
     value :WEIGHT, 'Concentration in weight'

@@ -152,6 +152,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
+  <xs:simpleType name='ComponentIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The id of the component (maps to the id from probe)
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:ID'/>
+  </xs:simpleType>
   <xs:simpleType name='IDType'>
     <xs:annotation>
       <xs:documentation>
@@ -215,6 +223,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='AVAILABILITY'/>
       <xs:enumeration value='BLOCK'/>
       <xs:enumeration value='CODE'/>
+      <xs:enumeration value='CONDUCTIVITY'/>
       <xs:enumeration value='DISPLACEMENT'/>
       <xs:enumeration value='DIRECTION'/>
       <xs:enumeration value='DOOR_STATE'/>
@@ -261,6 +270,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VISCOSITY'/>
       <xs:enumeration value='CONCENTRATION'/>
       <xs:enumeration value='ROTATIONAL_VELOCITY'/>
+      <xs:enumeration value='LINEAR_FORCE'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -338,6 +348,145 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:union memberTypes='DataItemStatisticsTypeEnum DataItemStatsExtType'/>
   </xs:simpleType>
+  <xs:simpleType name='UnitsExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for data item types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='x:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='UnitsTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The units supported
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='AMPERE'/>
+      <xs:enumeration value='CELSIUS'/>
+      <xs:enumeration value='COUNT'/>
+      <xs:enumeration value='DEGREE'/>
+      <xs:enumeration value='DEGREE/SECOND'/>
+      <xs:enumeration value='DEGREE/SECOND^2'/>
+      <xs:enumeration value='HERTZ'/>
+      <xs:enumeration value='JOULE'/>
+      <xs:enumeration value='KILOGRAM'/>
+      <xs:enumeration value='LITER'/>
+      <xs:enumeration value='LITER/SECOND'/>
+      <xs:enumeration value='MILLIMETER'/>
+      <xs:enumeration value='MILLIMETER/SECOND'/>
+      <xs:enumeration value='MILLIMETER/SECOND^2'/>
+      <xs:enumeration value='MILLIMETER_3D'/>
+      <xs:enumeration value='NEWTON'/>
+      <xs:enumeration value='NEWTON_METER'/>
+      <xs:enumeration value='PASCAL'/>
+      <xs:enumeration value='PERCENT'/>
+      <xs:enumeration value='PH'/>
+      <xs:enumeration value='REVOLUTION/MINUTE'/>
+      <xs:enumeration value='SECOND'/>
+      <xs:enumeration value='VOLT'/>
+      <xs:enumeration value='WATT'/>
+      <xs:enumeration value='OHM'/>
+      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SIEMENS/METER'/>
+      <xs:enumeration value='MICRO_RADIAN'/>
+      <xs:enumeration value='PASCAL_SECOND'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='UnitsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The units supported
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='UnitsTypeEnum UnitsExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='NativeUnitsTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The units supported for the source equipment that can be converted into
+        MTC Units.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='AMPERE'/>
+      <xs:enumeration value='CELSIUS'/>
+      <xs:enumeration value='COUNT'/>
+      <xs:enumeration value='DEGREE'/>
+      <xs:enumeration value='DEGREE/SECOND'/>
+      <xs:enumeration value='DEGREE/SECOND^2'/>
+      <xs:enumeration value='HERTZ'/>
+      <xs:enumeration value='JOULE'/>
+      <xs:enumeration value='KILOGRAM'/>
+      <xs:enumeration value='LITER'/>
+      <xs:enumeration value='LITER/SECOND'/>
+      <xs:enumeration value='MILLIMETER'/>
+      <xs:enumeration value='MILLIMETER/SECOND'/>
+      <xs:enumeration value='MILLIMETER/SECOND^2'/>
+      <xs:enumeration value='MILLIMETER_3D'/>
+      <xs:enumeration value='NEWTON'/>
+      <xs:enumeration value='NEWTON_METER'/>
+      <xs:enumeration value='PASCAL'/>
+      <xs:enumeration value='PERCENT'/>
+      <xs:enumeration value='PH'/>
+      <xs:enumeration value='REVOLUTION/MINUTE'/>
+      <xs:enumeration value='SECOND'/>
+      <xs:enumeration value='VOLT'/>
+      <xs:enumeration value='WATT'/>
+      <xs:enumeration value='OHM'/>
+      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SIEMENS/METER'/>
+      <xs:enumeration value='MICRO_RADIAN'/>
+      <xs:enumeration value='PASCAL_SECOND'/>
+      <xs:enumeration value='DEGREE/MINUTE'/>
+      <xs:enumeration value='FAHRENHEIT'/>
+      <xs:enumeration value='FOOT'/>
+      <xs:enumeration value='FOOT/MINUTE'/>
+      <xs:enumeration value='FOOT/SECOND'/>
+      <xs:enumeration value='FOOT/SECOND^2'/>
+      <xs:enumeration value='FOOT_3D'/>
+      <xs:enumeration value='GALLON/MINUTE'/>
+      <xs:enumeration value='INCH'/>
+      <xs:enumeration value='INCH/MINUTE'/>
+      <xs:enumeration value='INCH/SECOND'/>
+      <xs:enumeration value='INCH/SECOND^2'/>
+      <xs:enumeration value='INCH_3D'/>
+      <xs:enumeration value='KILOWATT'/>
+      <xs:enumeration value='KILOWATT_HOUR'/>
+      <xs:enumeration value='MILLIMETER/MINUTE'/>
+      <xs:enumeration value='OTHER'/>
+      <xs:enumeration value='POUND'/>
+      <xs:enumeration value='POUND/INCH^2'/>
+      <xs:enumeration value='RADIAN'/>
+      <xs:enumeration value='RADIAN/MINUTE'/>
+      <xs:enumeration value='RADIAN/SECOND'/>
+      <xs:enumeration value='RADIAN/SECOND^2'/>
+      <xs:enumeration value='REVOLUTION/SECOND'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='NativeUnitsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The units supported for the source equipment that can be converted into
+        MTC Units.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='NativeUnitsTypeEnum UnitsExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='CoordinateSystemType'>
+    <xs:annotation>
+      <xs:documentation>
+        The coordinate system to be used for the position
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='MACHINE'/>
+      <xs:enumeration value='WORK'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='HeaderType'>
     <xs:annotation>
       <xs:documentation>
@@ -394,6 +543,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
+  <xs:simpleType name='ModelType'>
+    <xs:annotation>
+      <xs:documentation>
+        The model name
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:complexType name='DevicesType'>
     <xs:annotation>
       <xs:documentation>
@@ -424,6 +581,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Configuration' maxOccurs='1' minOccurs='0' type='ComponentConfigurationType'>
+        <xs:annotation>
+          <xs:documentation>
+            The configuration information about this component
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='DataItems' maxOccurs='1' minOccurs='0' type='DataItemsType'>
         <xs:annotation>
           <xs:documentation>
@@ -442,7 +606,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='id' type='IDType' use='required'/>
     <xs:attribute name='name' type='NameType' use='required'/>
     <xs:attribute name='nativeName' type='NameType' use='optional'/>
-    <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
+    <xs:attribute name='sampleInterval' type='SampleIntervalType' use='optional'/>
   </xs:complexType>
   <xs:element name='Component' abstract='true' type='ComponentType'>
     <xs:annotation>
@@ -468,8 +632,26 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:any>
     </xs:sequence>
     <xs:attribute name='manufacturer' type='NameType' use='optional'/>
+    <xs:attribute name='model' type='ModelType' use='optional'/>
     <xs:attribute name='serialNumber' type='SerialNumberType' use='optional'/>
     <xs:attribute name='station' type='StationType' use='optional'/>
+  </xs:complexType>
+  <xs:complexType name='ComponentConfigurationType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        The configuration data associated with this component. For example,
+        sensors may use 1451.5 or TEDS
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any processContents='lax' maxOccurs='unbounded' minOccurs='0'>
+        <xs:annotation>
+          <xs:documentation>
+            Any desciptive schema like calibration
+          </xs:documentation>
+        </xs:annotation>
+      </xs:any>
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name='CommonComponentType'>
     <xs:annotation>
@@ -571,40 +753,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ThermostatType'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED: A thermostate
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SensorType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Thermostat' substitutionGroup='Sensor' type='ThermostatType'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED: A thermostate
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='VibrationType'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED: A sensor for reading the vibration from a component
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SensorType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Vibration' substitutionGroup='Sensor' type='VibrationType'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED: A sensor for reading the vibration from a component
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:complexType name='PathType'>
     <xs:annotation>
       <xs:documentation>
@@ -653,57 +801,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         A door on the machine
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AcousticSensorType'>
-    <xs:annotation>
-      <xs:documentation>
-        An acoustic sensor
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SensorType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='AcousticSensor' substitutionGroup='Sensor' type='AcousticSensorType'>
-    <xs:annotation>
-      <xs:documentation>
-        An acoustic sensor
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='TemperatureSensorType'>
-    <xs:annotation>
-      <xs:documentation>
-        An acoustic sensor
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SensorType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='TemperatureSensor' substitutionGroup='Sensor' type='TemperatureSensorType'>
-    <xs:annotation>
-      <xs:documentation>
-        An acoustic sensor
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='DisplacementSensorType'>
-    <xs:annotation>
-      <xs:documentation>
-        An acoustic sensor
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SensorType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='DisplacementSensor' substitutionGroup='Sensor' type='DisplacementSensorType'>
-    <xs:annotation>
-      <xs:documentation>
-        An acoustic sensor
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -911,10 +1008,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='SampleIntervalType'>
+    <xs:annotation>
+      <xs:documentation>
+        The interval between adjacent sampleing of data
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
   <xs:simpleType name='SampleRateType'>
     <xs:annotation>
       <xs:documentation>
-        The rate a measurement is sampled
+        The frequency a measurement is sampled
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:float'/>
@@ -963,145 +1068,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:simpleType name='UnitsExtType'>
-    <xs:annotation>
-      <xs:documentation>
-        An extension point for data item types
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:pattern value='x:[A-Z_0-9]+'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='UnitsTypeEnum'>
-    <xs:annotation>
-      <xs:documentation>
-        The units supported
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='AMPERE'/>
-      <xs:enumeration value='CELSIUS'/>
-      <xs:enumeration value='COUNT'/>
-      <xs:enumeration value='DEGREE'/>
-      <xs:enumeration value='DEGREE/SECOND'/>
-      <xs:enumeration value='DEGREE/SECOND^2'/>
-      <xs:enumeration value='HERTZ'/>
-      <xs:enumeration value='JOULE'/>
-      <xs:enumeration value='KILOGRAM'/>
-      <xs:enumeration value='LITER'/>
-      <xs:enumeration value='LITER/SECOND'/>
-      <xs:enumeration value='MILLIMETER'/>
-      <xs:enumeration value='MILLIMETER/SECOND'/>
-      <xs:enumeration value='MILLIMETER/SECOND^2'/>
-      <xs:enumeration value='MILLIMETER_3D'/>
-      <xs:enumeration value='NEWTON'/>
-      <xs:enumeration value='NEWTON_METER'/>
-      <xs:enumeration value='PASCAL'/>
-      <xs:enumeration value='PERCENT'/>
-      <xs:enumeration value='PH'/>
-      <xs:enumeration value='REVOLUTION/MINUTE'/>
-      <xs:enumeration value='SECOND'/>
-      <xs:enumeration value='VOLT'/>
-      <xs:enumeration value='WATT'/>
-      <xs:enumeration value='OHM'/>
-      <xs:enumeration value='DECIBEL'/>
-      <xs:enumeration value='SIEMENS/METER'/>
-      <xs:enumeration value='MICRO_RADIAN'/>
-      <xs:enumeration value='PASCAL_SECOND'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='UnitsType'>
-    <xs:annotation>
-      <xs:documentation>
-        The units supported
-      </xs:documentation>
-    </xs:annotation>
-    <xs:union memberTypes='UnitsTypeEnum UnitsExtType'/>
-  </xs:simpleType>
-  <xs:simpleType name='NativeUnitsTypeEnum'>
-    <xs:annotation>
-      <xs:documentation>
-        The units supported for the source equipment that can be converted into
-        MTC Units.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='AMPERE'/>
-      <xs:enumeration value='CELSIUS'/>
-      <xs:enumeration value='COUNT'/>
-      <xs:enumeration value='DEGREE'/>
-      <xs:enumeration value='DEGREE/SECOND'/>
-      <xs:enumeration value='DEGREE/SECOND^2'/>
-      <xs:enumeration value='HERTZ'/>
-      <xs:enumeration value='JOULE'/>
-      <xs:enumeration value='KILOGRAM'/>
-      <xs:enumeration value='LITER'/>
-      <xs:enumeration value='LITER/SECOND'/>
-      <xs:enumeration value='MILLIMETER'/>
-      <xs:enumeration value='MILLIMETER/SECOND'/>
-      <xs:enumeration value='MILLIMETER/SECOND^2'/>
-      <xs:enumeration value='MILLIMETER_3D'/>
-      <xs:enumeration value='NEWTON'/>
-      <xs:enumeration value='NEWTON_METER'/>
-      <xs:enumeration value='PASCAL'/>
-      <xs:enumeration value='PERCENT'/>
-      <xs:enumeration value='PH'/>
-      <xs:enumeration value='REVOLUTION/MINUTE'/>
-      <xs:enumeration value='SECOND'/>
-      <xs:enumeration value='VOLT'/>
-      <xs:enumeration value='WATT'/>
-      <xs:enumeration value='OHM'/>
-      <xs:enumeration value='DECIBEL'/>
-      <xs:enumeration value='SIEMENS/METER'/>
-      <xs:enumeration value='MICRO_RADIAN'/>
-      <xs:enumeration value='PASCAL_SECOND'/>
-      <xs:enumeration value='DEGREE/MINUTE'/>
-      <xs:enumeration value='FAHRENHEIT'/>
-      <xs:enumeration value='FOOT'/>
-      <xs:enumeration value='FOOT/MINUTE'/>
-      <xs:enumeration value='FOOT/SECOND'/>
-      <xs:enumeration value='FOOT/SECOND^2'/>
-      <xs:enumeration value='FOOT_3D'/>
-      <xs:enumeration value='GALLON/MINUTE'/>
-      <xs:enumeration value='INCH'/>
-      <xs:enumeration value='INCH/MINUTE'/>
-      <xs:enumeration value='INCH/SECOND'/>
-      <xs:enumeration value='INCH/SECOND^2'/>
-      <xs:enumeration value='INCH_3D'/>
-      <xs:enumeration value='KILOWATT'/>
-      <xs:enumeration value='KILOWATT_HOUR'/>
-      <xs:enumeration value='MILLIMETER/MINUTE'/>
-      <xs:enumeration value='OTHER'/>
-      <xs:enumeration value='POUND'/>
-      <xs:enumeration value='POUND/INCH^2'/>
-      <xs:enumeration value='RADIAN'/>
-      <xs:enumeration value='RADIAN/MINUTE'/>
-      <xs:enumeration value='RADIAN/SECOND'/>
-      <xs:enumeration value='RADIAN/SECOND^2'/>
-      <xs:enumeration value='REVOLUTION/SECOND'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='NativeUnitsType'>
-    <xs:annotation>
-      <xs:documentation>
-        The units supported for the source equipment that can be converted into
-        MTC Units.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:union memberTypes='NativeUnitsTypeEnum UnitsExtType'/>
-  </xs:simpleType>
-  <xs:simpleType name='CoordinateSystemType'>
-    <xs:annotation>
-      <xs:documentation>
-        The coordinate system to be used for the position
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='MACHINE'/>
-      <xs:enumeration value='WORK'/>
-    </xs:restriction>
-  </xs:simpleType>
   <xs:simpleType name='RepresentationType'>
     <xs:annotation>
       <xs:documentation>
@@ -1139,9 +1105,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Source' maxOccurs='1' minOccurs='0' type='SourceType'>
         <xs:annotation>
           <xs:documentation>
-            The measurement&apos;s source. This is the native machine identifier
-            for this measurement. The source will be used to identify the
-            correct incoming value with the measurement.
+            Additional information about the component, channel, register,
+            etc... that collects the data.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -1219,7 +1184,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='ItemSourceType'/>
+      <xs:extension base='ItemSourceType'>
+        <xs:attribute name='componentId' type='ComponentIdType' use='optional'/>
+      </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
 </xs:schema>

@@ -152,6 +152,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
+  <xs:simpleType name='ComponentIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The id of the component (maps to the id from probe)
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:ID'/>
+  </xs:simpleType>
   <xs:simpleType name='IDType'>
     <xs:annotation>
       <xs:documentation>
@@ -215,6 +223,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='AVAILABILITY'/>
       <xs:enumeration value='BLOCK'/>
       <xs:enumeration value='CODE'/>
+      <xs:enumeration value='CONDUCTIVITY'/>
       <xs:enumeration value='DISPLACEMENT'/>
       <xs:enumeration value='DIRECTION'/>
       <xs:enumeration value='DOOR_STATE'/>
@@ -261,6 +270,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VISCOSITY'/>
       <xs:enumeration value='CONCENTRATION'/>
       <xs:enumeration value='ROTATIONAL_VELOCITY'/>
+      <xs:enumeration value='LINEAR_FORCE'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -298,6 +308,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALL'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROL'/>
+      <xs:enumeration value='ALTERNATING_CURRENT'/>
+      <xs:enumeration value='DIRECT_CURRENT'/>
       <xs:enumeration value='WEIGHT'/>
       <xs:enumeration value='VOLUME'/>
       <xs:enumeration value='MOLE'/>
@@ -337,6 +349,145 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:union memberTypes='DataItemStatisticsTypeEnum DataItemStatsExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='UnitsExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for data item types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='x:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='UnitsTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The units supported
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='AMPERE'/>
+      <xs:enumeration value='CELSIUS'/>
+      <xs:enumeration value='COUNT'/>
+      <xs:enumeration value='DEGREE'/>
+      <xs:enumeration value='DEGREE/SECOND'/>
+      <xs:enumeration value='DEGREE/SECOND^2'/>
+      <xs:enumeration value='HERTZ'/>
+      <xs:enumeration value='JOULE'/>
+      <xs:enumeration value='KILOGRAM'/>
+      <xs:enumeration value='LITER'/>
+      <xs:enumeration value='LITER/SECOND'/>
+      <xs:enumeration value='MILLIMETER'/>
+      <xs:enumeration value='MILLIMETER/SECOND'/>
+      <xs:enumeration value='MILLIMETER/SECOND^2'/>
+      <xs:enumeration value='MILLIMETER_3D'/>
+      <xs:enumeration value='NEWTON'/>
+      <xs:enumeration value='NEWTON_METER'/>
+      <xs:enumeration value='PASCAL'/>
+      <xs:enumeration value='PERCENT'/>
+      <xs:enumeration value='PH'/>
+      <xs:enumeration value='REVOLUTION/MINUTE'/>
+      <xs:enumeration value='SECOND'/>
+      <xs:enumeration value='VOLT'/>
+      <xs:enumeration value='WATT'/>
+      <xs:enumeration value='OHM'/>
+      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SIEMENS/METER'/>
+      <xs:enumeration value='MICRO_RADIAN'/>
+      <xs:enumeration value='PASCAL_SECOND'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='UnitsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The units supported
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='UnitsTypeEnum UnitsExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='NativeUnitsTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The units supported for the source equipment that can be converted into
+        MTC Units.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='AMPERE'/>
+      <xs:enumeration value='CELSIUS'/>
+      <xs:enumeration value='COUNT'/>
+      <xs:enumeration value='DEGREE'/>
+      <xs:enumeration value='DEGREE/SECOND'/>
+      <xs:enumeration value='DEGREE/SECOND^2'/>
+      <xs:enumeration value='HERTZ'/>
+      <xs:enumeration value='JOULE'/>
+      <xs:enumeration value='KILOGRAM'/>
+      <xs:enumeration value='LITER'/>
+      <xs:enumeration value='LITER/SECOND'/>
+      <xs:enumeration value='MILLIMETER'/>
+      <xs:enumeration value='MILLIMETER/SECOND'/>
+      <xs:enumeration value='MILLIMETER/SECOND^2'/>
+      <xs:enumeration value='MILLIMETER_3D'/>
+      <xs:enumeration value='NEWTON'/>
+      <xs:enumeration value='NEWTON_METER'/>
+      <xs:enumeration value='PASCAL'/>
+      <xs:enumeration value='PERCENT'/>
+      <xs:enumeration value='PH'/>
+      <xs:enumeration value='REVOLUTION/MINUTE'/>
+      <xs:enumeration value='SECOND'/>
+      <xs:enumeration value='VOLT'/>
+      <xs:enumeration value='WATT'/>
+      <xs:enumeration value='OHM'/>
+      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SIEMENS/METER'/>
+      <xs:enumeration value='MICRO_RADIAN'/>
+      <xs:enumeration value='PASCAL_SECOND'/>
+      <xs:enumeration value='DEGREE/MINUTE'/>
+      <xs:enumeration value='FAHRENHEIT'/>
+      <xs:enumeration value='FOOT'/>
+      <xs:enumeration value='FOOT/MINUTE'/>
+      <xs:enumeration value='FOOT/SECOND'/>
+      <xs:enumeration value='FOOT/SECOND^2'/>
+      <xs:enumeration value='FOOT_3D'/>
+      <xs:enumeration value='GALLON/MINUTE'/>
+      <xs:enumeration value='INCH'/>
+      <xs:enumeration value='INCH/MINUTE'/>
+      <xs:enumeration value='INCH/SECOND'/>
+      <xs:enumeration value='INCH/SECOND^2'/>
+      <xs:enumeration value='INCH_3D'/>
+      <xs:enumeration value='KILOWATT'/>
+      <xs:enumeration value='KILOWATT_HOUR'/>
+      <xs:enumeration value='MILLIMETER/MINUTE'/>
+      <xs:enumeration value='OTHER'/>
+      <xs:enumeration value='POUND'/>
+      <xs:enumeration value='POUND/INCH^2'/>
+      <xs:enumeration value='RADIAN'/>
+      <xs:enumeration value='RADIAN/MINUTE'/>
+      <xs:enumeration value='RADIAN/SECOND'/>
+      <xs:enumeration value='RADIAN/SECOND^2'/>
+      <xs:enumeration value='REVOLUTION/SECOND'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='NativeUnitsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The units supported for the source equipment that can be converted into
+        MTC Units.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='NativeUnitsTypeEnum UnitsExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='CoordinateSystemType'>
+    <xs:annotation>
+      <xs:documentation>
+        The coordinate system to be used for the position
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='MACHINE'/>
+      <xs:enumeration value='WORK'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='StationType'>
     <xs:annotation>
@@ -396,14 +547,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
-  </xs:simpleType>
-  <xs:simpleType name='ComponentIdType'>
-    <xs:annotation>
-      <xs:documentation>
-        The id of the component (maps to the id from probe)
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:ID'/>
   </xs:simpleType>
   <xs:simpleType name='NativeCodeType'>
     <xs:annotation>
@@ -837,6 +980,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The number of values
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ForceValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The magnitude of push or pull
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -1527,6 +1680,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='LinearForceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The magnitude of a push or pull introduced by an actuator or exerted on
+        an object
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='LinearForce' substitutionGroup='Sample' type='LinearForceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The magnitude of a push or pull introduced by an actuator or exerted on
+        an object
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='AbsTimeSeriesType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -2143,6 +2317,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The Concentration
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LinearForceTimeSeriesType'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of The magnitude of a push or pull introduced by an actuator
+        or exerted on an object
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='TimeSeriesType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='LinearForceTimeSeries' substitutionGroup='TimeSeries' type='LinearForceTimeSeriesType'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of The magnitude of a push or pull introduced by an actuator
+        or exerted on an object
       </xs:documentation>
     </xs:annotation>
   </xs:element>

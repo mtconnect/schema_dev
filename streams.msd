@@ -1,7 +1,6 @@
 
 package :Streams, 'Event Package' do
   attr :DataItemId, 'The item\'s unique ID that references the data item id from probe', :NMTOKEN
-  attr :ComponentId, 'The id of the component (maps to the id from probe)', :ID
   attr :NativeCode, 'An Condition code as defined by the component'
 
   type :Streams, 'Event container for all component events' do

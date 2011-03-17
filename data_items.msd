@@ -1,10 +1,10 @@
 
 package :DataItems, 'Data Items Package' do
-  attr :SampleRate, 'The rate a measurement is sampled', :float
+  attr :SampleInterval, 'The interval between adjacent sampleing of data', :float
+  attr :SampleRate, 'The frequency a measurement is sampled', :float
   attr :DataItemOption, 'The constrained value for this data item'
   attr :DataItemValue, 'The constrained value for this data item'
-  attr :SignificantDigitsValue, 'The number significant digits', :integer
-  
+  attr :SignificantDigitsValue, 'The number significant digits', :integer  
   
   # Measurement types
   enum :Category, 'The measurement sampling type' do
@@ -37,7 +37,7 @@ package :DataItems, 'Data Items Package' do
     member :NativeUnits, 'The units as expressed by the machine', 0..1
     member :NativeScale, 'The units as expressed by the machine', 0..1
     member :Category, 'The category of the data item'
-    member :Source, 'The measurement\'s source. This is the native machine identifier for this measurement. The source will be used to identify the correct incoming value with the measurement.', 0..1
+    member :Source, 'Additional information about the component, channel, register, etc... that collects the data.', 0..1
     member :CoordinateSystem, 'The coordinate system used for the positions', 0..1
     member :SampleRate, 'Used as the default sample rate for waveforms', 0..1
     member(:Representation, 'The data item\'s representation', 0..1) { self.default = :VALUE } 
@@ -62,7 +62,8 @@ package :DataItems, 'Data Items Package' do
   end
   
   type :Source, 'A native data source' do
-    member :Value, 'The source', :ItemSource
+    member :ComponentId, 'The component that is collecting the data associated with this data item', 0..1
+    member :Value, 'The source or channel for this data', :ItemSource
   end
 
 end
