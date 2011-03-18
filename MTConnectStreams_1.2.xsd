@@ -238,6 +238,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
       <xs:enumeration value='LOAD'/>
+      <xs:enumeration value='MASS'/>
       <xs:enumeration value='MESSAGE'/>
       <xs:enumeration value='POSITION'/>
       <xs:enumeration value='POWER_STATUS'/>
@@ -990,6 +991,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The magnitude of push or pull
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='MassValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The weight of an object
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -2450,14 +2461,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='UNAVAILABLE|[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='ResetValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        A reset event, may be empty or unavailable
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:simpleType name='DirectionValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -3067,23 +3070,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         An asset was just modified
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ResetType'>
-    <xs:annotation>
-      <xs:documentation>
-        The statistics have been reset
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:restriction base='EventType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Reset' substitutionGroup='Event' type='ResetType'>
-    <xs:annotation>
-      <xs:documentation>
-        The statistics have been reset
       </xs:documentation>
     </xs:annotation>
   </xs:element>

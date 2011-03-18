@@ -13,7 +13,6 @@ package :Events, 'Event Package' do
   basic_type :WorkholdingIdValue, 'The workholding identifier'
   basic_type :MessageValue, 'A message'
   basic_type(:AxesListValue, 'A space delimited list of values') { pattern 'UNAVAILABLE|[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
-  basic_type :ResetValue, 'A reset event, may be empty or unavailable'
   
   enum :DirectionValue, 'Rotation Direction' do
     value :CLOCKWISE, 'Clockwise rotation'
@@ -175,9 +174,5 @@ package :Events, 'Event Package' do
   type :AssetChanged, 'An asset was just modified', :Event do
     member :Value, 'The asset identifier', :AssetId
   end
-  
-  type :Reset, 'The statistics have been reset', :Event do
-    member :Value, 'The asset identifier', :ResetValue
-  end
-  
+    
 end

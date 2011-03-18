@@ -238,6 +238,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
       <xs:enumeration value='LOAD'/>
+      <xs:enumeration value='MASS'/>
       <xs:enumeration value='MESSAGE'/>
       <xs:enumeration value='POSITION'/>
       <xs:enumeration value='POWER_STATUS'/>
@@ -308,6 +309,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALL'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROL'/>
+      <xs:enumeration value='ALTERNATING_CURRENT'/>
+      <xs:enumeration value='DIRECT_CURRENT'/>
       <xs:enumeration value='WEIGHT'/>
       <xs:enumeration value='VOLUME'/>
       <xs:enumeration value='MOLE'/>
