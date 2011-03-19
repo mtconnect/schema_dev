@@ -3,7 +3,6 @@ package :Assets, 'Mobile Assets' do
   basic_type :LocationNumberValue, 'The tool location', :integer
   basic_type :ProgramToolNumber, 'The number referenced in the program for this tool', :integer
   basic_type :ReconditionCountValue, 'The number of times the cutter has been reconditioned', :integer
-  basic_type :FeedDirection, 'The direction of movement of a cutting tool', :string
   
   attr :LocationSize, 'The number of pots (Is this term confusing?)', :integer
   attr :ToolId, 'The unique identifier of the tool type'
@@ -13,7 +12,10 @@ package :Assets, 'Mobile Assets' do
   attr :MeasurementValue, 'A measurement value', :float
   attr :Minimum, 'A minimum value', :float  
   attr :Maximum, 'A maximum value', :float
+  attr :Nominal, 'A nominal value', :float
+  attr :Speed, 'A speed', :float
   attr :MaximumCount, 'A maximum count value', :integer
+  attr :Code, 'A application specific code'
   
   enum :DefinitionFormat, 'The format of the definition' do
     value :EXPRESS, 'The definition will be provided in EXPRESS format'
@@ -100,9 +102,17 @@ package :Assets, 'Mobile Assets' do
     member :Value, 'The number of times', :ReconditionCountValue
   end
   
+  type :ProgramSpindleSpeed, 'The spindle speed properties of this tool' do
+    member :Maximum, 'The maximum speed this tool may operate at', 0..1
+    member :Minimum, 'The minimum speed this tool may operate at', 0..1
+    member :Nominal, 'The nominal speed this tool may operate at', 0..1
+    member :Value, 'The programmed tool spindle speed', 0..1, :Speed
+  end
+  
   # Define measurements for a cutting tool life cycle
   type :Measurement, 'An abstract type for edge measurements' do
     abstract
+    member :Code, 'The shop or application specific code for this measurement', 0..1
     member :Maximum, 'The maximum tolerance value', 0..1, :MeasurementValue
     member :Minimum, 'The minimum tolerance value', 0..1, :MeasurementValue
     member :Nominal, 'The nominal value', 0..1, :MeasurementValue
@@ -153,6 +163,7 @@ package :Assets, 'Mobile Assets' do
     # Connection
     member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
     member :LocationNumber, 'The pocket location', 0..1
+    member :ProgramSpindleSpeed, 'The tools constraned programmed spindle speed', 0..1
     
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :AssemblyMeasurements
@@ -203,7 +214,6 @@ package :Assets, 'Mobile Assets' do
   type :CuttingItem, 'An edge into a tool assembly' do
     member :ItemId, 'The unique identifier of this insert in this assembly'      
     member :ItemLife, 'The life of an edge', 0..1, :Life
-    member :FeedDirection, 'The movement of a cutting tool in the direction that achieves the main cutting function of the tool', 0..1, :FeedDirection
     
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :CuttingItemMeasurements

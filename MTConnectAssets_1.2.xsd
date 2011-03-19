@@ -571,14 +571,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='FeedDirectionType'>
-    <xs:annotation>
-      <xs:documentation>
-        The direction of movement of a cutting tool
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:simpleType name='LocationSizeType'>
     <xs:annotation>
       <xs:documentation>
@@ -643,6 +635,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
+  <xs:simpleType name='NominalType'>
+    <xs:annotation>
+      <xs:documentation>
+        A nominal value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
+  <xs:simpleType name='SpeedType'>
+    <xs:annotation>
+      <xs:documentation>
+        A speed
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
   <xs:simpleType name='MaximumCountType'>
     <xs:annotation>
       <xs:documentation>
@@ -650,6 +658,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='CodeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A application specific code
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
   </xs:simpleType>
   <xs:simpleType name='DefinitionFormatType'>
     <xs:annotation>
@@ -857,6 +873,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:complexType name='ProgramSpindleSpeedType'>
+    <xs:annotation>
+      <xs:documentation>
+        The spindle speed properties of this tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='SpeedType'>
+        <xs:attribute name='maximum' type='MaximumType' use='optional'/>
+        <xs:attribute name='minimum' type='MinimumType' use='optional'/>
+        <xs:attribute name='nominal' type='NominalType' use='optional'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='MeasurementType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -865,6 +895,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='MeasurementValueType'>
+        <xs:attribute name='code' type='CodeType' use='optional'/>
         <xs:attribute name='maximum' type='MeasurementValueType' use='optional'/>
         <xs:attribute name='minimum' type='MeasurementValueType' use='optional'/>
         <xs:attribute name='nominal' type='MeasurementValueType' use='optional'/>
@@ -1171,6 +1202,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The pocket location
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProgramSpindleSpeed' maxOccurs='1' minOccurs='0' type='ProgramSpindleSpeedType'>
+        <xs:annotation>
+          <xs:documentation>
+            The tools constraned programmed spindle speed
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -1550,14 +1588,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The life of an edge
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='FeedDirection' maxOccurs='1' minOccurs='0' type='FeedDirectionType'>
-        <xs:annotation>
-          <xs:documentation>
-            The movement of a cutting tool in the direction that achieves the
-            main cutting function of the tool
           </xs:documentation>
         </xs:annotation>
       </xs:element>
