@@ -1,10 +1,10 @@
 
 package :Assets, 'Mobile Assets' do
-  basic_type :LocationNumberValue, 'The tool location', :integer
+  basic_type :PotLocationValue, 'The tool location', :integer
   basic_type :ProgramToolNumber, 'The number referenced in the program for this tool', :integer
   basic_type :ReconditionCountValue, 'The number of times the cutter has been reconditioned', :integer
   
-  attr :LocationSize, 'The number of pots (Is this term confusing?)', :integer
+  attr :PotLocationSize, 'The number of pots (Is this term confusing?)', :integer
   attr :ToolId, 'The unique identifier of the tool type'
   attr :EdgeCount, 'The number of cutting edges', :integer
   attr :ToolLifeValue, 'The life of the tool in seconds?', :float
@@ -32,6 +32,8 @@ package :Assets, 'Mobile Assets' do
     value :EXPIRED, 'The tool is dead'
     value :TAGGED_OUT, 'The tool is currently out being reconditioned or sharpened'
     value :BROKEN, 'The tool is broken'
+    value :ALLOCATED, 'The cutting tool is assigned to this device'
+    value :UNALLOCATED, 'The cutting tool is NOT assigned to this device'
     value :UNKNOWN, 'The status of this cutter is undetermined'
   end
     
@@ -46,7 +48,7 @@ package :Assets, 'Mobile Assets' do
     value :WEAR, 'Measurement of tool life in tool wear'
   end
   
-  enum :LocationDirection, 'The positive or negative progression' do
+  enum :PotLocationDirection, 'The positive or negative progression' do
     value :NEGATIVE, 'The tool occupies the pots at a smaller index'
     value :POSITIVE, 'The tool occupies the pots at a greater index'
   end
@@ -89,12 +91,12 @@ package :Assets, 'Mobile Assets' do
     end
   end
   
-  type :LocationNumber, 'The location of the tool in the tool changer (pot) or the station of the tool' do
-    member :Size, 'The number of pots this tool will consume due to interference. If not given, assume 1', 0..1, :LocationSize do
+  type :PotLocation, 'The location of the tool in the tool changer (pot) or the station of the tool' do
+    member :Size, 'The number of pots this tool will consume due to interference. If not given, assume 1', 0..1, :PotLocationSize do
       self.default = 1
     end
-    member :Direction, 'The index direction of additional pots occupied by this', 0..1, :LocationDirection
-    member :Value, 'The location', :LocationNumberValue
+    member :Direction, 'The index direction of additional pots occupied by this', 0..1, :PotLocationDirection
+    member :Value, 'The location', :PotLocationValue
   end
   
   type :ReconditionCount, 'The number of times this tool has been reconditioned' do
@@ -162,7 +164,7 @@ package :Assets, 'Mobile Assets' do
     
     # Connection
     member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
-    member :LocationNumber, 'The pocket location', 0..1
+    member :PotLocation, 'The pocket location', 0..1
     member :ProgramSpindleSpeed, 'The tools constraned programmed spindle speed', 0..1
     
     # Measurements

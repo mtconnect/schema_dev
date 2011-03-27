@@ -15,8 +15,10 @@ package :Events, 'Event Package' do
   basic_type(:AxesListValue, 'A space delimited list of values') { pattern 'UNAVAILABLE|[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
   
   enum :DirectionValue, 'Rotation Direction' do
-    value :CLOCKWISE, 'Clockwise rotation'
-    value :COUNTER_CLOCKWISE, 'Counter clockwise rotation'
+    value :CLOCKWISE, 'Rotary clockwise rotation'
+    value :COUNTER_CLOCKWISE, 'Rotary counter clockwise rotation'
+    value :POSITIVE, 'Linear motion in ascending values'
+    value :NEGATIVE, 'Linear motion in decending values'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
 
@@ -73,6 +75,12 @@ package :Events, 'Event Package' do
     value :AVAILABLE, 'The component is available'
     value :UNAVAILABLE, 'The component is unavailable'
   end
+  
+  enum :ActuatorStateValue, 'The possible values for actuator state.' do
+    value :ACTIVE, 'The actuator is active'
+    value :INACTIVE, 'The actuator is inactive'
+  end
+  
 
   type :Event, 'An abstract event', :Result do
     abstract
@@ -163,14 +171,15 @@ package :Events, 'Event Package' do
     member :Value, 'The availability', :AvailabilityValue
   end
   
+  type :ActuatorState, 'The actuator state of the component', :Event do
+    member :Value, 'The availability', :ActuatorStateValue
+  end
+  
+  
   type :LinePowerState, 'The state of the line power', :PowerState
   type :ControlPowerState, 'The state of the line power', :PowerState
   
   # For assets  
-  type :AssetAdded, 'A new asset was added', :Event do
-    member :Value, 'The asset identifier', :AssetId
-  end
-
   type :AssetChanged, 'An asset was just modified', :Event do
     member :Value, 'The asset identifier', :AssetId
   end

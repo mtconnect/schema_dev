@@ -41,14 +41,11 @@ package :common, 'Common attributes and elements for all schemas' do
     value :ANGLE, 'The position as given in degrees'
     value :ANGULAR_ACCELERATION, 'The accelleration of the component'
     value :ANGULAR_VELOCITY, 'The velocity of the component'
-    value :ASSET_ADDED, 'A new asset has been added'
-    value :ASSET_CHANGED, 'A new asset has been added'
     value :AVAILABILITY, 'The components availability'
+    value :AXIS_FEEDRATE, 'The feedrate for the axis'
     value :BLOCK, 'The current executing block'
     value :CODE, 'The current executing code'
-    value :CONDUCTIVITY, 'The conductivity of a piece of material'
-    value :DISPLACEMENT, 'The displacement as measured from zero to peak'
-    value :DIRECTION, 'The direction of rotation'
+    value :DIRECTION, 'The direction of rotation or linear motion'
     value :DOOR_STATE, 'The open/closed state of the door'
     value :EMERGENCY_STOP, 'The state of the ESTOP button'
     value :EXECUTION, 'The programs execution state'
@@ -57,11 +54,9 @@ package :common, 'Common attributes and elements for all schemas' do
     value :PART_ID, 'The identifier of the part loaded'
     value :PATH_FEEDRATE, 'The feedrate for the path'
     value :PATH_POSITION, 'The three space position X, Y, Z'
-    value :AXIS_FEEDRATE, 'The feedrate for the axis'
     value :LINE, 'The line of the program being executed'
     value :CONTROLLER_MODE, 'The CNC\'s mode'
     value :LOAD, 'The load on the component as a percentage of rated'
-    value :MASS, 'The weight of some object in kilograms'
     value :MESSAGE, 'A uninterpreted message'
     value :POSITION, 'The position as given in mm'
     value :POWER_STATUS, 'DEPRECATED: The power status of the component'
@@ -83,21 +78,27 @@ package :common, 'Common attributes and elements for all schemas' do
     value :WORKHOLDING_ID, 'The workholding identifier'
     
     # Types for 1.2
-    value :DISPLACEMENT, 'The linear displacement in mm'
-    value :TILT, 'micrometer/meter (alignment errors of axes or spindle errors)'
+    value :ACTUATOR_STATE, 'The state of the actuator. ACTIVE or INACTIVE.'
+    value :ASSET_CHANGED, 'A new asset has been added'
+    value :CONCENTRATION, 'Percentage of one component within a mixture of components'
+    value :CONDUCTIVITY, 'The conductivity of a piece of material'
+    value :DISPLACEMENT, 'The displacement as measured from zero to peak'
     value :ELAPSED_TIME, 'The accumulated time for a category or classification'
-    value :DURATION, 'The duration of an event or happening'
-    value :POWER_FACTOR, 'The power factor'
+    value :FILL_LEVEL, 'The measurement of the amount of a substance remaining compared to the planned maximum amount of that substance'
+    value :FLOW, 'The rate of flow of a fluid'
+    value :LINEAR_FORCE, 'The measure of the push or pull introduced by an actuator or exerted on an object'
+    value :MASS, 'The weight of some object in kilograms'
+    value :PH, 'The measure of ion concentration in a substance; a measure of the acidity or alkalinity of a solution.'
+    value :POWER_FACTOR, 'The ratio of the real power flowing in a circuit to the apparent power in the circuit'
+    value :RESISTANCE, 'The measurement of the degree to which an object opposes an electric current through it'
+    value :ROTARY_VELOCITY, 'The rotational speed of a rotary axis.'
+    value :SOUND_PRESSURE, 'Measurement of acoustic pressure'
     value :STRAIN, 'Inches / Inch - dimensional change - measured under pressure or tension. micro change in length'
-    value :FLOW, 'The number of liters in a second'
-    value :SOUND_PRESSURE, 'sound pressure level'
-    value :RESISTANCE, 'Electrical resistance'
-    value :CONDUCTIVITY, 'CONDUCTIVITY'
+    value :TILT, 'micrometer/meter (alignment errors of axes or spindle errors)'
+    value :VOLT_AMPERE, 'The measure of the apparent power in an electrical circuit, equal to the product of root-mean-square (RMS) voltage and RMS current'
+    value :VOLT_AMPERE_REACTIVE, 'The measurement of measure reactive power in an AC electrical circuit'
     value :VISCOSITY, 'viscosity'
-    value :CONCENTRATION, 'Percentage of one component in all components. Subtypes: WEIGHT, VOLUME, MOLE'
-    value :ROTATIONAL_VELOCITY, 'The rotational velocity in revolutions per minute'
-    value :LINEAR_FORCE, 'The magnitude of a push or pull introduced by an actuator or exerted on an object'
-    
+
     # Condition types
     value :COMMUNICATIONS, 'The communications system'
     value :LOGIC_PROGRAM, 'The logic program'
@@ -147,6 +148,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :MEAN, 'The mean average'
     value :MODE, 'The mode of the sample'
     value :RANGE, 'The difference between the maximum and minimum value during the calculated period'
+    value :KURTOSIS, 'In probability theory and statistics, kurtosis is a measure of the "peakedness" of the probability distribution'
   end
   
   # Common Units
@@ -184,16 +186,20 @@ package :common, 'Common attributes and elements for all schemas' do
     
     # For 1.2
     value :OHM, 'Electrical resistance'
-    value :DECIBEL, 'Sound pressure'
+    value :DECIBEL, 'Sound pressure - a sound pressure level of .0002 microbar'
     value :'SIEMENS/METER', 'Conductivity'
     value :'MICRO_RADIAN', 'Angular motion for tilt'
     value :'PASCAL_SECOND', 'Measure of viscosity'
+    value :VOLT_AMPERE, 'A volt ampere'
+    value :VOLT_AMPERE_REACTIVE, 'A volt ampere reactive'
+    value :WATT_SECOND, 'A measure of energy equivilent to one Joule or 1/3,600,000 kilowatt hour'
   end
 
   enum :NativeUnits, 'The units supported for the source equipment that can be converted into MTC Units.', :Units do
     # Alternate types for the source system.
     extensible :UnitsExt
     
+    value :CENTIPOISE, 'A measure of viscosity'
     value :'DEGREE/MINUTE', 'Feedrate in degrees per minute'
     value :FAHRENHEIT, 'Degrees Fahrenheit'
     value :FOOT, 'Feet'
