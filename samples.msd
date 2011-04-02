@@ -44,6 +44,7 @@ package :Samlpes, 'The samples' do
   type :Sample, 'An abstract sample', :Result do
     abstract
     
+    attribute :SampleRate, 'The rate the waveform was sampled at, default back to the value given in the data item', 0..1
     member :Statistic, 'The statistical operation on this data', 0..1, :DataItemStatistics
     member :Duration, 'The number of seconds since the reset of the statistic', 0..1, :DurationTime
   end
@@ -193,7 +194,6 @@ package :Samlpes, 'The samples' do
     abstract
     
     attribute :SampleCount, 'The number of samples', :CountValue
-    attribute :SampleRate, 'The rate the waveform was sampled at, default back to the value given in the data item', 0..1
   end
   
   type :TimeSeries, 'An abstract time series with the restriction value', :AbsTimeSeries do

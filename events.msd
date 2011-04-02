@@ -126,7 +126,7 @@ package :Events, 'Event Package' do
     member :Value, 'The CNC mode state', :ControllerModeValue
   end
   
-  type :ToolId, 'The current Tool Identifier', :Event do 
+  type :ToolAssetId, 'The unique tool Identifier as referenced in part 4 - assets', :Event do 
     member :Value, 'The tool identifier', :ToolIdValue
   end
   

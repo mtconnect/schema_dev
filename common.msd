@@ -70,7 +70,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :SPINDLE_SPEED, 'DEPRECATED: The velocity of the spindle'
     value :TEMPERATURE, 'The temperature of the component'
     value :TORQUE, 'The torque - force times distance'
-    value :TOOL_ID, 'The identifier of the tool in use'
+    value :TOOL_ASSET_ID, 'The unique asset identifier of the tool in use'
     value :VELOCITY, 'The velocity of the component'
     value :VIBRATION, 'The status indicator'
     value :VOLTAGE, 'The voltage'
@@ -84,6 +84,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :CONDUCTIVITY, 'The conductivity of a piece of material'
     value :DISPLACEMENT, 'The displacement as measured from zero to peak'
     value :ELAPSED_TIME, 'The accumulated time for a category or classification'
+    value :ELECTRICAL_POWER, 'Electrical power as measured in Watt-Seconds'
     value :FILL_LEVEL, 'The measurement of the amount of a substance remaining compared to the planned maximum amount of that substance'
     value :FLOW, 'The rate of flow of a fluid'
     value :LINEAR_FORCE, 'The measure of the push or pull introduced by an actuator or exerted on an object'
@@ -97,6 +98,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :TILT, 'micrometer/meter (alignment errors of axes or spindle errors)'
     value :VOLT_AMPERE, 'The measure of the apparent power in an electrical circuit, equal to the product of root-mean-square (RMS) voltage and RMS current'
     value :VOLT_AMPERE_REACTIVE, 'The measurement of measure reactive power in an AC electrical circuit'
+    value :WATT_SECOND, 'The measure of watts for one second, equivilent to joules'
     value :VISCOSITY, 'viscosity'
 
     # Condition types
@@ -126,8 +128,8 @@ package :common, 'Common attributes and elements for all schemas' do
     value :LINE, 'The high voltage subtype for power state'
     value :CONTROL, 'The low voltage subtype for power state'
     
-    value :ALTERNATING_CURRENT, 'Corresponds to an alternating current'
-    value :DIRECT_CURRENT, 'Corresponds to an alternating current'
+    value :ALTERNATING, 'Corresponds to an alternating current'
+    value :DIRECT, 'Corresponds to an alternating current'
     
     # For 1.2
     value :WEIGHT, 'Concentration in weight'

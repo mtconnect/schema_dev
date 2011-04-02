@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MTConnectDevices xmlns="urn:mtconnect.com:MTConnectDevices:1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.com:MTConnectDevices:1.1 ../MTConnectDevices.xsd">
-  <Header bufferSize="130000" instanceId="1" creationTime="2009-11-13T02:31:40" sender="local" version="1.1"/>
+<MTConnectDevices xmlns="urn:mtconnect.org:MTConnectDevices:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.2 ../MTConnectDevices_1.2.xsd">
+  <Header bufferSize="130000" instanceId="1" creationTime="2009-11-13T02:31:40" sender="local" version="1.2"/>
   <Devices>
     <Device id="d1" uuid="HM1" name="HMC_3Axis">
       <Description>3 Axis Mill</Description>
+      <DataItems>
+		  <DataItem type="AVAILABILITY" category="EVENT" id="avail" />
+      </DataItems>
       <Components>
         <Axes id="a" name="base">
           <Components>
@@ -24,12 +27,15 @@
             </Linear>
             <Rotary id="c" name="C">
               <DataItems>
-                <DataItem type="SPINDLE_SPEED" id="cspd" category="SAMPLE" name="Sspeed" subType="ACTUAL" units="REVOLUTION/MINUTE" nativeUnits="REVOLUTION/MINUTE"/>
-                <DataItem type="SPINDLE_SPEED" id="cso" category="SAMPLE" name="Sovr" subType="OVERRIDE" units="PERCENT" nativeUnits="PERCENT"/>
+                <DataItem type="ROTARY_VELOCITY" id="cspd" category="SAMPLE" name="Sspeed" subType="ACTUAL" units="REVOLUTION/MINUTE" nativeUnits="REVOLUTION/MINUTE"/>
+                <DataItem type="ROTARY_VELOCITY" id="cso" category="SAMPLE" name="Sovr" subType="OVERRIDE" units="PERCENT" nativeUnits="PERCENT"/>
                 <DataItem type="ROTARY_MODE" id="rf" category="EVENT" name="rfunc">
                   <Constraints>
                     <Value>SPINDLE</Value>
                   </Constraints>
+                </DataItem>
+                <DataItem type="TEMPERATURE" category="SAMPLE" name="Ctemp" id="ct" units="CELSIUS" statistic="AVERAGE">
+					<Source componentId="s1">channel:1</Source>
                 </DataItem>
               </DataItems>
             </Rotary>
@@ -41,28 +47,34 @@
               <DataItems>
                 <DataItem type="PROGRAM" id="pgm" category="EVENT" name="program"/>
                 <DataItem type="BLOCK" id="blk" category="EVENT" name="block"/>
-                <DataItem type="LINE" id="ln" category="EVENT" name="line"/>
                 <DataItem type="PATH_FEEDRATE" id="pf" category="SAMPLE" name="Fact" units="MILLIMETER/SECOND" nativeUnits="FOOT/MINUTE" subType="ACTUAL" coordinateSystem="WORK"/>
                 <DataItem type="PATH_FEEDRATE" id="pfo" category="SAMPLE" name="Fovr" units="PERCENT" nativeUnits="PERCENT" subType="OVERRIDE"/>
                 <DataItem type="PATH_POSITION" id="pp" category="SAMPLE" name="Ppos" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="WORK"/>
-                <DataItem type="TOOL_ID" id="tid" category="EVENT" name="Tid"/>
-                <DataItem type="PART_ID" id="pid" category="EVENT" name="Pid"/>
                 <DataItem type="EXECUTION" id="exec" category="EVENT" name="execution"/>
                 <DataItem type="CONTROLLER_MODE" id="cm" category="EVENT" name="mode"/>
               </DataItems>
             </Path>
           </Components>
         </Controller>
-        <Power id="power" name="power">
-          <DataItems>
-            <DataItem type="POWER_STATE" id="ps" category="EVENT" name="power_status"/>
-          </DataItems>
-        </Power>
-        <Door id="d" name="door">
-          <DataItems>
-            <DataItem id="ds" category="EVENT" name="door_status" type="DOOR_STATE"/>
-          </DataItems>
-        </Door>
+        <Sensor id="sensor" name="sensor">
+			<Configuration>
+				<SensorConfiguration>
+					<FirmwareVersion>2.02</FirmwareVersion>
+					<CalibrationDate>2010-05-16</CalibrationDate>
+					<NextCalibrationDate>2010-05-16</NextCalibrationDate>
+					<CalibrationInitials>WS</CalibrationInitials>
+					<Channels>
+						<Channel number="1" name="A/D:1">
+							<Description>A/D With Thermister</Description>
+						</Channel>						
+					</Channels>
+				</SensorConfiguration>
+			</Configuration>
+			<DataItems>
+				<DataItem category="CONDITION" id="senvc" type="VOLTAGE" />
+				<DataItem category="SAMPLE" id="senv" type="VELOCITY" units="VOLT" subType="DIRECT" />
+			</DataItems>
+        </Sensor>
       </Components>
     </Device>
   </Devices>

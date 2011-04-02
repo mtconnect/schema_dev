@@ -272,6 +272,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TILT'/>
       <xs:enumeration value='VOLT_AMPERE'/>
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
+      <xs:enumeration value='WATT_SECOND'/>
       <xs:enumeration value='VISCOSITY'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
@@ -310,8 +311,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALL'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROL'/>
-      <xs:enumeration value='ALTERNATING_CURRENT'/>
-      <xs:enumeration value='DIRECT_CURRENT'/>
+      <xs:enumeration value='ALTERNATING'/>
+      <xs:enumeration value='DIRECT'/>
       <xs:enumeration value='WEIGHT'/>
       <xs:enumeration value='VOLUME'/>
       <xs:enumeration value='MOLE'/>
@@ -556,7 +557,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:simpleType name='PotLocationValueType'>
+  <xs:simpleType name='LocationValueType'>
     <xs:annotation>
       <xs:documentation>
         The tool location
@@ -580,10 +581,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='PotLocationSizeType'>
+  <xs:simpleType name='LocationSizeType'>
     <xs:annotation>
       <xs:documentation>
-        The number of pots (Is this term confusing?)
+        The number of location units required to hold this tool
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
@@ -592,6 +593,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The unique identifier of the tool type
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ProcessIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The process identifier for this device. Used to differentiate a tool
+        that is used in multiple processes
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -607,7 +617,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='ToolLifeValueType'>
     <xs:annotation>
       <xs:documentation>
-        The life of the tool in seconds?
+        The life of the tool in time, wear, or parts
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:float'/>
@@ -692,20 +702,32 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='CutterStatusValueType'>
     <xs:annotation>
       <xs:documentation>
-        The state of the tool
+        The state of the tool. These can be combined to define the complete
+        cutting tool state
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:enumeration value='NEW'/>
+      <xs:enumeration value='MEASURED'/>
       <xs:enumeration value='NOT_REGISTERED'/>
       <xs:enumeration value='RECONDITIONED'/>
       <xs:enumeration value='USED'/>
       <xs:enumeration value='EXPIRED'/>
       <xs:enumeration value='TAGGED_OUT'/>
       <xs:enumeration value='BROKEN'/>
+      <xs:enumeration value='UNKNOWN'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='AllocationType'>
+    <xs:annotation>
+      <xs:documentation>
+        Determines if the cutting tool has been allocated to this process or is
+        available
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
       <xs:enumeration value='ALLOCATED'/>
       <xs:enumeration value='UNALLOCATED'/>
-      <xs:enumeration value='UNKNOWN'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ToolLifeDirectionType'>
@@ -731,7 +753,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WEAR'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='PotLocationDirectionType'>
+  <xs:simpleType name='LocationDirectionType'>
     <xs:annotation>
       <xs:documentation>
         The positive or negative progression
@@ -740,6 +762,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:restriction base='xs:string'>
       <xs:enumeration value='NEGATIVE'/>
       <xs:enumeration value='POSITIVE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='LocationsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The type of tool location
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='POT'/>
+      <xs:enumeration value='STATION'/>
+      <xs:enumeration value='CRIB'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='AssetDescriptionType' mixed='true'>
@@ -848,6 +882,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:sequence>
         <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
         <xs:attribute name='toolId' type='ToolIdType' use='required'/>
+        <xs:attribute name='processId' type='ProcessIdType' use='optional'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -858,7 +893,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='PotLocationType'>
+  <xs:complexType name='CutterStatusType'>
+    <xs:annotation>
+      <xs:documentation>
+        The set of applicatable status for this cutting tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Status' maxOccurs='unbounded' minOccurs='1' type='CutterStatusValueType'>
+        <xs:annotation>
+          <xs:documentation>
+            The status of the cutting tool
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='LocationType'>
     <xs:annotation>
       <xs:documentation>
         The location of the tool in the tool changer (pot) or the station of the
@@ -866,9 +917,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='PotLocationValueType'>
-        <xs:attribute name='size' default='1' type='PotLocationSizeType' use='optional'/>
-        <xs:attribute name='direction' type='PotLocationDirectionType' use='optional'/>
+      <xs:extension base='LocationValueType'>
+        <xs:attribute name='type' type='LocationsType' use='required'/>
+        <xs:attribute name='size' default='1' type='LocationSizeType' use='optional'/>
+        <xs:attribute name='direction' type='LocationDirectionType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1188,10 +1240,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='CutterStatus' minOccurs='1' default='UNKNOWN' type='CutterStatusValueType'>
+      <xs:element name='CutterStatus' minOccurs='1' type='CutterStatusType'>
         <xs:annotation>
           <xs:documentation>
             The state of the tool assembly
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Allocation' maxOccurs='1' minOccurs='0' type='AllocationType'>
+        <xs:annotation>
+          <xs:documentation>
+            The allocated status of this cutter in this device
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -1202,6 +1261,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='ToolLife' maxOccurs='1' minOccurs='0' type='LifeType'>
+        <xs:annotation>
+          <xs:documentation>
+            The life of the cutting tool assembly
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='ProgramToolNumber' maxOccurs='1' minOccurs='0' type='ProgramToolNumberType'>
         <xs:annotation>
           <xs:documentation>
@@ -1209,7 +1275,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='PotLocation' maxOccurs='1' minOccurs='0' type='PotLocationType'>
+      <xs:element name='Location' maxOccurs='1' minOccurs='0' type='LocationType'>
         <xs:annotation>
           <xs:documentation>
             The pocket location

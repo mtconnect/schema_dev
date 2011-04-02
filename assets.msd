@@ -1,13 +1,14 @@
 
 package :Assets, 'Mobile Assets' do
-  basic_type :PotLocationValue, 'The tool location', :integer
+  basic_type :LocationValue, 'The tool location', :integer
   basic_type :ProgramToolNumber, 'The number referenced in the program for this tool', :integer
   basic_type :ReconditionCountValue, 'The number of times the cutter has been reconditioned', :integer
   
-  attr :PotLocationSize, 'The number of pots (Is this term confusing?)', :integer
+  attr :LocationSize, 'The number of location units required to hold this tool', :integer
   attr :ToolId, 'The unique identifier of the tool type'
+  attr :ProcessId, 'The process identifier for this device. Used to differentiate a tool that is used in multiple processes'
   attr :EdgeCount, 'The number of cutting edges', :integer
-  attr :ToolLifeValue, 'The life of the tool in seconds?', :float
+  attr :ToolLifeValue, 'The life of the tool in time, wear, or parts', :float
   attr :ItemId, 'An identifier for the insert', :integer
   attr :MeasurementValue, 'A measurement value', :float
   attr :Minimum, 'A minimum value', :float  
@@ -23,18 +24,23 @@ package :Assets, 'Mobile Assets' do
     value :TEXT, 'The definition will be provided in uninterpreted TEXT'
     value :UNDEFINED, 'The definition will be provided in an unspecified format'
   end
-    
-  enum :CutterStatusValue, 'The state of the tool' do
+  
+  enum :CutterStatusValue, 'The state of the tool. These can be combined to define the complete cutting tool state' do
     value :NEW, 'The tool is new'
+    value :MEASURED, 'The tool has been measured'
     value :NOT_REGISTERED, ' An unregisterd state'
     value :RECONDITIONED, 'The tool is being reconditioned'
     value :USED,'The tool is used'
     value :EXPIRED, 'The tool is dead'
     value :TAGGED_OUT, 'The tool is currently out being reconditioned or sharpened'
     value :BROKEN, 'The tool is broken'
-    value :ALLOCATED, 'The cutting tool is assigned to this device'
-    value :UNALLOCATED, 'The cutting tool is NOT assigned to this device'
     value :UNKNOWN, 'The status of this cutter is undetermined'
+  end
+  
+  
+  enum :Allocation, 'Determines if the cutting tool has been allocated to this process or is available' do
+    value :ALLOCATED, 'The cutting tool is assigned to this proces'
+    value :UNALLOCATED, 'The cutting tool is NOT assigned to this device'    
   end
     
   enum :ToolLifeDirection, 'The direction of tool life count' do
@@ -48,9 +54,15 @@ package :Assets, 'Mobile Assets' do
     value :WEAR, 'Measurement of tool life in tool wear'
   end
   
-  enum :PotLocationDirection, 'The positive or negative progression' do
+  enum :LocationDirection, 'The positive or negative progression' do
     value :NEGATIVE, 'The tool occupies the pots at a smaller index'
     value :POSITIVE, 'The tool occupies the pots at a greater index'
+  end
+  
+  enum :LocationsType, 'The type of tool location' do
+    value :POT, 'Pot location of tool'
+    value :STATION, 'The station on a turning machine'
+    value :CRIB, 'The crib location of the tool'
   end
   
   type :AssetDescription, 'The description of an asset, can be freeform text or elemenrts' do
@@ -84,6 +96,7 @@ package :Assets, 'Mobile Assets' do
   type :CuttingTool, 'A cutting tool', :Asset do
     member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
     member :ToolId, 'The Identifier of the tool type'
+    member :ProcessId, 'The process identifier', 0..1
     
     at_least_one do 
       member :CuttingToolDefinition, 'Description of tool'
@@ -91,12 +104,17 @@ package :Assets, 'Mobile Assets' do
     end
   end
   
-  type :PotLocation, 'The location of the tool in the tool changer (pot) or the station of the tool' do
-    member :Size, 'The number of pots this tool will consume due to interference. If not given, assume 1', 0..1, :PotLocationSize do
+  type :CutterStatus, 'The set of applicatable status for this cutting tool' do
+    element :Status, 'The status of the cutting tool', 1..INF, :CutterStatusValue
+  end
+  
+  type :Location, 'The location of the tool in the tool changer (pot) or the station of the tool' do
+    member :Type, 'The type of location', :LocationsType
+    member :Size, 'The number of pots this tool will consume due to interference. If not given, assume 1', 0..1, :LocationSize do
       self.default = 1
     end
-    member :Direction, 'The index direction of additional pots occupied by this', 0..1, :PotLocationDirection
-    member :Value, 'The location', :PotLocationValue
+    member :Direction, 'The index direction of additional pots occupied by this', 0..1, :LocationDirection
+    member :Value, 'The location', :LocationValue
   end
   
   type :ReconditionCount, 'The number of times this tool has been reconditioned' do
@@ -152,19 +170,18 @@ package :Assets, 'Mobile Assets' do
   type :ShankLength, 'dimension of the length of a shank', :AssemblyMeasurement
   type :ShankWidth, 'dimension of the width of a shank', :AssemblyMeasurement
   type :UsableLength, 'The maximum length of a cutting tool that can be used in a particular cutting operation including the non-cutting portions of the tool.', :AssemblyMeasurement
-    
   
   type :CuttingToolLifeCycle, 'A defintion of a cutting tool application and life cycle' do
     # Identification
     # Status
-    element :CutterStatus, 'The state of the tool assembly', 1, :CutterStatusValue do
-      self.default = :UNKNOWN
-    end
+    member :CutterStatus, 'The state of the tool assembly', 1
+    element :Allocation, 'The allocated status of this cutter in this device', 0..1
     member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
+    member :ToolLife, 'The life of the cutting tool assembly', 0..1, :Life
     
     # Connection
     member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
-    member :PotLocation, 'The pocket location', 0..1
+    member :Location, 'The pocket location', 0..1
     member :ProgramSpindleSpeed, 'The tools constraned programmed spindle speed', 0..1
     
     # Measurements
@@ -206,6 +223,7 @@ package :Assets, 'Mobile Assets' do
   type :ToolLeadAngle, 'angle between the tool cutting edge plane and a plane perpendicular to the tool feed plane measured in a plane parallel the xy-plane', :CuttingItemMeasurement
   type :WiperEdgeLength, 'measure of the length of a wiper edge of a cutting item', :CuttingItemMeasurement
   type :FunctionalLength, 'distance from the gauge plane or from the end of the shank, if a gauge plane does not exist, to the cutting reference point determined by the main function of the tool', :CuttingItemMeasurement
+  type :ToolOrientation, 'The orientation as expressed in degrees of the cutting item to the workpiece for this process.'
   
       
   type :CuttingItems, 'A list of edge' do

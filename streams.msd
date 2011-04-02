@@ -1,5 +1,7 @@
 
 package :Streams, 'Event Package' do
+  basic_type :ResultValue, 'An events data'
+  
   attr :DataItemId, 'The item\'s unique ID that references the data item id from probe', :NMTOKEN
   attr :NativeCode, 'An Condition code as defined by the component'
 
@@ -40,7 +42,7 @@ package :Streams, 'Event Package' do
     standards :OMAC => 'Value'
     abstract
     member :Sequence, 'The events sequence number'
-    member :Value, 'Abstract event data', :SampleValue
+    member :Value, 'Abstract event data', :ResultValue
     member :SubType, 'The event subtype corresponding to the measurement subtype', 0..1, :DataItemSubEnum
     member :Timestamp, 'The time the event occurred or recorded'
     member :Name, 'The name of the event corresponding to the measurement', 0..1

@@ -218,13 +218,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ANGLE'/>
       <xs:enumeration value='ANGULAR_ACCELERATION'/>
       <xs:enumeration value='ANGULAR_VELOCITY'/>
-      <xs:enumeration value='ASSET_ADDED'/>
-      <xs:enumeration value='ASSET_CHANGED'/>
       <xs:enumeration value='AVAILABILITY'/>
+      <xs:enumeration value='AXIS_FEEDRATE'/>
       <xs:enumeration value='BLOCK'/>
       <xs:enumeration value='CODE'/>
-      <xs:enumeration value='CONDUCTIVITY'/>
-      <xs:enumeration value='DISPLACEMENT'/>
       <xs:enumeration value='DIRECTION'/>
       <xs:enumeration value='DOOR_STATE'/>
       <xs:enumeration value='EMERGENCY_STOP'/>
@@ -234,11 +231,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PART_ID'/>
       <xs:enumeration value='PATH_FEEDRATE'/>
       <xs:enumeration value='PATH_POSITION'/>
-      <xs:enumeration value='AXIS_FEEDRATE'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
       <xs:enumeration value='LOAD'/>
-      <xs:enumeration value='MASS'/>
       <xs:enumeration value='MESSAGE'/>
       <xs:enumeration value='POSITION'/>
       <xs:enumeration value='POWER_STATUS'/>
@@ -252,26 +247,34 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SPINDLE_SPEED'/>
       <xs:enumeration value='TEMPERATURE'/>
       <xs:enumeration value='TORQUE'/>
-      <xs:enumeration value='TOOL_ID'/>
+      <xs:enumeration value='TOOL_ASSET_ID'/>
       <xs:enumeration value='VELOCITY'/>
       <xs:enumeration value='VIBRATION'/>
       <xs:enumeration value='VOLTAGE'/>
       <xs:enumeration value='WATTAGE'/>
       <xs:enumeration value='WORKHOLDING_ID'/>
-      <xs:enumeration value='DISPLACEMENT'/>
-      <xs:enumeration value='TILT'/>
-      <xs:enumeration value='ELAPSED_TIME'/>
-      <xs:enumeration value='DURATION'/>
-      <xs:enumeration value='POWER_FACTOR'/>
-      <xs:enumeration value='STRAIN'/>
-      <xs:enumeration value='FLOW'/>
-      <xs:enumeration value='SOUND_PRESSURE'/>
-      <xs:enumeration value='RESISTANCE'/>
-      <xs:enumeration value='CONDUCTIVITY'/>
-      <xs:enumeration value='VISCOSITY'/>
+      <xs:enumeration value='ACTUATOR_STATE'/>
+      <xs:enumeration value='ASSET_CHANGED'/>
       <xs:enumeration value='CONCENTRATION'/>
-      <xs:enumeration value='ROTATIONAL_VELOCITY'/>
+      <xs:enumeration value='CONDUCTIVITY'/>
+      <xs:enumeration value='DISPLACEMENT'/>
+      <xs:enumeration value='ELAPSED_TIME'/>
+      <xs:enumeration value='ELECTRICAL_POWER'/>
+      <xs:enumeration value='FILL_LEVEL'/>
+      <xs:enumeration value='FLOW'/>
       <xs:enumeration value='LINEAR_FORCE'/>
+      <xs:enumeration value='MASS'/>
+      <xs:enumeration value='PH'/>
+      <xs:enumeration value='POWER_FACTOR'/>
+      <xs:enumeration value='RESISTANCE'/>
+      <xs:enumeration value='ROTARY_VELOCITY'/>
+      <xs:enumeration value='SOUND_PRESSURE'/>
+      <xs:enumeration value='STRAIN'/>
+      <xs:enumeration value='TILT'/>
+      <xs:enumeration value='VOLT_AMPERE'/>
+      <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
+      <xs:enumeration value='WATT_SECOND'/>
+      <xs:enumeration value='VISCOSITY'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -309,8 +312,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALL'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROL'/>
-      <xs:enumeration value='ALTERNATING_CURRENT'/>
-      <xs:enumeration value='DIRECT_CURRENT'/>
+      <xs:enumeration value='ALTERNATING'/>
+      <xs:enumeration value='DIRECT'/>
       <xs:enumeration value='WEIGHT'/>
       <xs:enumeration value='VOLUME'/>
       <xs:enumeration value='MOLE'/>
@@ -341,6 +344,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MEAN'/>
       <xs:enumeration value='MODE'/>
       <xs:enumeration value='RANGE'/>
+      <xs:enumeration value='KURTOSIS'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemStatisticsType'>
@@ -397,6 +401,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SIEMENS/METER'/>
       <xs:enumeration value='MICRO_RADIAN'/>
       <xs:enumeration value='PASCAL_SECOND'/>
+      <xs:enumeration value='VOLT_AMPERE'/>
+      <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
+      <xs:enumeration value='WATT_SECOND'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='UnitsType'>
@@ -444,6 +451,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SIEMENS/METER'/>
       <xs:enumeration value='MICRO_RADIAN'/>
       <xs:enumeration value='PASCAL_SECOND'/>
+      <xs:enumeration value='VOLT_AMPERE'/>
+      <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
+      <xs:enumeration value='WATT_SECOND'/>
+      <xs:enumeration value='CENTIPOISE'/>
       <xs:enumeration value='DEGREE/MINUTE'/>
       <xs:enumeration value='FAHRENHEIT'/>
       <xs:enumeration value='FOOT'/>
@@ -639,6 +650,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='serialNumber' type='SerialNumberType' use='optional'/>
     <xs:attribute name='station' type='StationType' use='optional'/>
   </xs:complexType>
+  <xs:complexType name='ConfigurationType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        Abstract configuration
+      </xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:element name='Configuration' abstract='true' type='ConfigurationType'>
+    <xs:annotation>
+      <xs:documentation>
+        Abstract configuration
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='ComponentConfigurationType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
@@ -647,13 +672,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:any processContents='lax' maxOccurs='unbounded' minOccurs='0'>
-        <xs:annotation>
-          <xs:documentation>
-            Any desciptive schema like calibration
-          </xs:documentation>
-        </xs:annotation>
-      </xs:any>
+      <xs:element maxOccurs='1' minOccurs='0' ref='Configuration'/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name='CommonComponentType'>
@@ -807,6 +826,156 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='CalibrationDateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The time the calibration was preformed
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:date'/>
+  </xs:simpleType>
+  <xs:simpleType name='NextCalibrationDateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The time the next calibration should be preformed
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:date'/>
+  </xs:simpleType>
+  <xs:simpleType name='CalibrationInitialsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The initials of the person doing the calibration
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='FirmwareVersionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The firmware version of this sensor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ChannelNumberType'>
+    <xs:annotation>
+      <xs:documentation>
+        The channel number
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:complexType name='SensorConfigurationType'>
+    <xs:annotation>
+      <xs:documentation>
+        Calibration data for a sensor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ConfigurationType'>
+        <xs:sequence>
+          <xs:element name='FirmwareVersion' type='FirmwareVersionType'>
+            <xs:annotation>
+              <xs:documentation>
+                The firmware version
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='CalibrationDate' maxOccurs='1' minOccurs='0' type='CalibrationDateType'>
+            <xs:annotation>
+              <xs:documentation>
+                The date and time the sensor was calibrated
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='NextCalibrationDate' maxOccurs='1' minOccurs='0' type='NextCalibrationDateType'>
+            <xs:annotation>
+              <xs:documentation>
+                The date and time the sensor was calibrated
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='CalibrationInitials' maxOccurs='1' minOccurs='0' type='CalibrationInitialsType'>
+            <xs:annotation>
+              <xs:documentation>
+                The initials of the person who calibrated this sensor
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Channels' maxOccurs='1' minOccurs='0' type='ChannelsType'>
+            <xs:annotation>
+              <xs:documentation>
+                The sensor channels
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='SensorConfiguration' substitutionGroup='Configuration' type='SensorConfigurationType'>
+    <xs:annotation>
+      <xs:documentation>
+        Calibration data for a sensor
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ChannelsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A collection of channel calibration data
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Channel' maxOccurs='unbounded' minOccurs='1' type='ChannelType'>
+        <xs:annotation>
+          <xs:documentation>
+            A calabration channel
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='ChannelType'>
+    <xs:annotation>
+      <xs:documentation>
+        The calibration channel
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Description' maxOccurs='1' minOccurs='0' type='DescriptionTextType'>
+        <xs:annotation>
+          <xs:documentation>
+            A text description of the channel
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='CalibrationDate' maxOccurs='1' minOccurs='0' type='CalibrationDateType'>
+        <xs:annotation>
+          <xs:documentation>
+            The date and time the sensor was calibrated
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='NextCalibrationDate' maxOccurs='1' minOccurs='0' type='NextCalibrationDateType'>
+        <xs:annotation>
+          <xs:documentation>
+            The date and time the sensor was calibrated
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='CalibrationInitials' maxOccurs='1' minOccurs='0' type='CalibrationInitialsType'>
+        <xs:annotation>
+          <xs:documentation>
+            The initials of the person who calibrated this sensor
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='number' type='ChannelNumberType' use='required'/>
+    <xs:attribute name='name' type='NameType' use='optional'/>
+  </xs:complexType>
   <xs:complexType name='AxesType'>
     <xs:annotation>
       <xs:documentation>
