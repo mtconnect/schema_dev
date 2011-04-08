@@ -74,6 +74,12 @@ package :Events, 'Event Package' do
     value :UNAVAILABLE, 'The component is unavailable'
   end
 
+  enum :PathModeValue, 'The values for path mode' do
+    value :SYNCHRONOUS, 'The paths are working together in unison'
+    value :MIRROR, 'The paths are making mirror images'
+    value :INDEPENDENT, 'The paths are operating independently'
+  end
+
   type :Event, 'An abstract event', :Result do
     abstract
   end
@@ -161,6 +167,10 @@ package :Events, 'Event Package' do
   
   type :Availability, 'The availability of the component', :Event do
     member :Value, 'The availability', :AvailabilityValue
+  end
+  
+  type :PathMode, 'The actuator state of the component', :Event do
+    member :Value, 'The path mode', :PathModeValue
   end
   
   type :LinePowerState, 'The state of the line power', :PowerState
