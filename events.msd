@@ -81,6 +81,11 @@ package :Events, 'Event Package' do
     value :INACTIVE, 'The actuator is inactive'
   end
   
+  enum :PathModeValue, 'The values for path mode' do
+    value :SYNCHRONOUS, 'The paths are working together in unison'
+    value :MIRROR, 'The paths are making mirror images'
+    value :INDEPENDENT, 'The paths are operating independently'
+  end
 
   type :Event, 'An abstract event', :Result do
     abstract
@@ -175,6 +180,9 @@ package :Events, 'Event Package' do
     member :Value, 'The availability', :ActuatorStateValue
   end
   
+  type :PathMode, 'The actuator state of the component', :Event do
+    member :Value, 'The path mode', :PathModeValue
+  end
   
   type :LinePowerState, 'The state of the line power', :PowerState
   type :ControlPowerState, 'The state of the line power', :PowerState
