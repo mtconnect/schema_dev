@@ -85,6 +85,10 @@ class Schema
   def type(name)
     @type_map[name]
   end
+  
+  def check_type(name)
+    raise "Cannot resolve type #{name}" unless @type_map[name]
+  end
 
   def standards
     unless defined? @ordered_standards
@@ -234,6 +238,7 @@ class Schema
       super(schema, name, annotation, parent)
       @name, @annotation, @parent = name, annotation, parent
       @abstract = false
+      @mixed = false
       @members = []
       @children = []
       @schema.derived << @parent if @parent and @parent != :abstract
@@ -247,9 +252,17 @@ class Schema
     def abstract
       @abstract = true
     end
+    
+    def mixed
+      @mixed = true
+    end
 
     def abstract?
       @abstract
+    end
+    
+    def mixed?
+      @mixed
     end
 
     def subtype?
@@ -257,7 +270,11 @@ class Schema
     end
 
     def resolve_parent
-      @schema.type(@parent)
+      if @parent
+        par = @schema.type(@parent)
+        raise "Cannot resolve parent type #{@parent}" unless par
+      end
+      par
     end
 
     def has_subtypes?
@@ -278,12 +295,47 @@ class Schema
       @members << Member.new(@schema, name, annotation, occurrence, type, &block)
     end
     
+    def attribute(name, annotation, occurrence = nil, type = nil, &block)
+      type, occurrence = occurrence, nil if Symbol === occurrence
+      mem = Member.new(@schema, name, annotation, occurrence, type, &block)
+      mem.attribute = true
+      @members << mem
+    end
+    
+    def element(name, annotation, occurrence = nil, type = nil, &block)
+      type, occurrence = occurrence, nil if Symbol === occurrence
+      mem = Member.new(@schema, name, annotation, occurrence, type, &block)
+      mem.attribute = false
+      @members << mem
+    end
+
     def all_subtypes(base, occurrence = 0..INF)
       @members << Subtypes.new(@schema, base, occurrence)
     end
 
     def choice(occurrence = 1, &block)
       @members << Choice.new(@schema, occurrence, &block)
+    end
+    
+    def at_least_one(occurrence = 1, &block)
+      c = Choice.new(@schema, occurrence, &block)
+      m, mc = c.members, c.members.dup
+      raise "at least one must have more than one member" unless mc.size > 1
+      m.clear
+      nm = mc.shift
+      while !mc.empty?
+        s = ChoiceSet.new(@schema)
+        s.members << nm.dup
+        mc.each do |om|
+          om = om.dup
+          om.occurrence = 0..1
+          s.members << om
+        end
+        m << s
+        nm = mc.shift        
+      end
+      m << nm.dup
+      @members << c
     end
 
     def <=>(other)
@@ -313,7 +365,13 @@ class Schema
     end
     
     def build_hierarchy
-      @schema.type(@parent).add_child(self) if @parent
+      if @parent
+        unless @schema.type(@parent)
+          puts "Cannot find parent '#{@parent.inspect}' for '#{self}'"
+          exit 9
+        end
+        @schema.type(@parent).add_child(self)
+      end
     end
     
     def resolve
@@ -345,9 +403,13 @@ class Schema
     end
 
     def resolve_type
-      res = @schema.type(@type)
-      unless res
-        raise "Cannot resolve type #{@type}"
+      if @type == :any
+        res = @type 
+      else
+        res = @schema.type(@type)
+        unless res
+          raise "Cannot resolve type #{@type} for #{@name}"
+        end
       end
       res
     end
@@ -363,9 +425,13 @@ class Schema
     def attribute?
       if !defined?(@attribute)
         type = @schema.type(@type)
-        @attribute = (@name != :Value and (type.nil? or type.attr))
+        @attribute = (@name != :Value and @name != :any and (type.nil? or type.attr))
       end
       @attribute
+    end
+    
+    def attribute=(a)
+      @attribute = a
     end
 
     def references_abstract?

@@ -49,6 +49,7 @@ module CamelName
     name = type_name(@parent.to_s, withNs)
     par = @schema.type(@parent)
     name = "#{par.imported.namespace}:#{name}" if par.imported
+    name
   end
 end
 
@@ -114,7 +115,7 @@ class Schema
       value = @members.find { |m| m.is_value? }
       return true if value
       return true if @parent.nil? and !abstract?
-      resolve_parent.simple? if @parent
+      return resolve_parent.simple? if @parent
       false
     end
 
@@ -131,6 +132,7 @@ class Schema
       
       # Check for a pure abstract class.
       complex_type.add_attribute('abstract', 'true') if abstract?
+      complex_type.add_attribute('mixed', 'true') if mixed?
 
       complex_type
     end
@@ -161,6 +163,7 @@ class Schema
           else
             @attr_elem = extension = REXML::Element.new('xs:extension')
           end
+          # puts "Adding base of #{parent_as_xsd_type(true)} for #{@name}"
           extension.add_attribute('base', parent_as_xsd_type(true))
           
           # Since extension by restriction does not allow us
@@ -219,6 +222,7 @@ class Schema
         simple_content << extension
         complex_type << simple_content
       elsif @parent
+        # puts "Complex type: #{@name}"
         complex_content = REXML::Element.new('xs:complexContent')
         extension = REXML::Element.new('xs:extension')
         extension.add_attribute('base', parent_as_xsd_type(true))
@@ -255,6 +259,8 @@ class Schema
           extension = REXML::Element.new('xs:extension')
         end
         extension.add_attribute('base', parent_as_xsd_type(true))
+        # puts "Adding base of #{parent_as_xsd_type(true)} for #{@name}"
+        
         @attr_elem = extension
         complex_content << extension
         complex_type << complex_content
@@ -409,31 +415,44 @@ class Schema
 
     def generate_xsd
       # Create the element.
-      element = REXML::Element.new('xs:element')
-      
-      if @default
-        element.add_attribute('default', @default.to_s)
-      end
-      
-      # If this is an abstract object with a parent or if it
-      # has subclasses, we will need to create substitution groups
-      # so add a reference instead of a name and type.
-      type = resolve_type
-      if references_abstract?
-        element.add_attribute('ref', "#{type.name}")
-      else
-        element.add_attribute('name', @name.to_s)
-        element.add_attribute('type', type_as_xsd_type(true))
+      if @name == :any
+        element = REXML::Element.new('xs:any')
+        # Need to make this optional
+        element.add_attribute('processContents', 'lax') 
         
-        # Add annotation to make sure the element is documented. This is not
-        # necessary for references.
-        if type
-          #puts "#{name} #{type.name}"
-          anno = REXML::Element.new('xs:annotation')
-          docs = REXML::Element.new('xs:documentation')
-          docs.text = @annotation
-          anno << docs
-          element << anno
+        # Put the documention here as well
+        anno = REXML::Element.new('xs:annotation')
+        docs = REXML::Element.new('xs:documentation')
+        docs.text = @annotation
+        anno << docs
+        element << anno
+      else
+        element = REXML::Element.new('xs:element')
+      
+        if @default
+          element.add_attribute('default', @default.to_s)
+        end
+      
+        # If this is an abstract object with a parent or if it
+        # has subclasses, we will need to create substitution groups
+        # so add a reference instead of a name and type.
+        type = resolve_type
+        if references_abstract?
+          element.add_attribute('ref', "#{type.name}")
+        else
+          element.add_attribute('name', @name.to_s)
+          element.add_attribute('type', type_as_xsd_type(true))
+        
+          # Add annotation to make sure the element is documented. This is not
+          # necessary for references.
+          if type
+            #puts "#{name} #{type.name}"
+            anno = REXML::Element.new('xs:annotation')
+            docs = REXML::Element.new('xs:documentation')
+            docs.text = @annotation
+            anno << docs
+            element << anno
+          end
         end
       end
       
@@ -538,6 +557,8 @@ class Schema
       elements << simple_type
 
       if @extensible
+        @schema.check_type(@extensible)
+        
         simple_type = REXML::Element.new('xs:simpleType')
         simple_type.add_attribute('name', name_as_xsd_type)
         anno = REXML::Element.new('xs:annotation')
