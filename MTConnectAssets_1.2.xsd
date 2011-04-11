@@ -231,6 +231,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PART_ID'/>
       <xs:enumeration value='PATH_FEEDRATE'/>
       <xs:enumeration value='PATH_POSITION'/>
+      <xs:enumeration value='PATH_MODE'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
       <xs:enumeration value='LOAD'/>
@@ -247,7 +248,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SPINDLE_SPEED'/>
       <xs:enumeration value='TEMPERATURE'/>
       <xs:enumeration value='TORQUE'/>
-      <xs:enumeration value='TOOL_ID'/>
+      <xs:enumeration value='TOOL_ASSET_ID'/>
       <xs:enumeration value='VELOCITY'/>
       <xs:enumeration value='VIBRATION'/>
       <xs:enumeration value='VOLTAGE'/>
@@ -259,6 +260,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CONDUCTIVITY'/>
       <xs:enumeration value='DISPLACEMENT'/>
       <xs:enumeration value='ELAPSED_TIME'/>
+      <xs:enumeration value='ELECTRICAL_POWER'/>
       <xs:enumeration value='FILL_LEVEL'/>
       <xs:enumeration value='FLOW'/>
       <xs:enumeration value='LINEAR_FORCE'/>
@@ -1637,6 +1639,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='ToolOrientationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The orientation as expressed in degrees of the cutting item to the
+        workpiece for this process.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'/>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='CuttingItemsType'>
     <xs:annotation>
       <xs:documentation>

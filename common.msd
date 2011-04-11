@@ -54,7 +54,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :PART_ID, 'The identifier of the part loaded'
     value :PATH_FEEDRATE, 'The feedrate for the path'
     value :PATH_POSITION, 'The three space position X, Y, Z'
-    value :PATH_MDOE, 'The mode of the path'
+    value :PATH_MODE, 'The mode of the path'
     value :LINE, 'The line of the program being executed'
     value :CONTROLLER_MODE, 'The CNC\'s mode'
     value :LOAD, 'The load on the component as a percentage of rated'

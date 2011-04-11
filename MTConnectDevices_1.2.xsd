@@ -231,6 +231,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PART_ID'/>
       <xs:enumeration value='PATH_FEEDRATE'/>
       <xs:enumeration value='PATH_POSITION'/>
+      <xs:enumeration value='PATH_MODE'/>
       <xs:enumeration value='LINE'/>
       <xs:enumeration value='CONTROLLER_MODE'/>
       <xs:enumeration value='LOAD'/>
