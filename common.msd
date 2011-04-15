@@ -79,12 +79,12 @@ package :common, 'Common attributes and elements for all schemas' do
     value :WORKHOLDING_ID, 'The workholding identifier'
     
     # Types for 1.2
+    value :ACCUMULATED_TIME, 'The non-contiguous accumulation of time'
     value :ACTUATOR_STATE, 'The state of the actuator. ACTIVE or INACTIVE.'
     value :ASSET_CHANGED, 'A new asset has been added'
     value :CONCENTRATION, 'Percentage of one component within a mixture of components'
     value :CONDUCTIVITY, 'The conductivity of a piece of material'
     value :DISPLACEMENT, 'The displacement as measured from zero to peak'
-    value :ELAPSED_TIME, 'The accumulated time for a category or classification'
     value :ELECTRICAL_POWER, 'Electrical power as measured in Watt-Seconds'
     value :FILL_LEVEL, 'The measurement of the amount of a substance remaining compared to the planned maximum amount of that substance'
     value :FLOW, 'The rate of flow of a fluid'
@@ -138,6 +138,14 @@ package :common, 'Common attributes and elements for all schemas' do
     value :MOLE, 'Concentration in mole'
     value :KINETIC, 'Kenetic viscosity'
     value :DYNAMIC, 'Dynamic viscosity'
+
+    # For 1.2 sound level
+    value :NO_SCALE, 'No weighting factor on the frequency scale'
+    value :A_SCALE, 'A Scale weighting factor.   This is the default weighting factor if no factor is specified'
+    value :B_SCALE, 'B Scale weighting factor'
+    value :C_SCALE, 'C Scale weighting factor'
+    value :D_SCALE, 'D Scale weighting factor'
+
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
@@ -189,7 +197,7 @@ package :common, 'Common attributes and elements for all schemas' do
     
     # For 1.2
     value :OHM, 'Electrical resistance'
-    value :DECIBEL, 'Sound pressure - a sound pressure level of .0002 microbar'
+    value :SOUND_LEVEL, 'Sound pressure - a sound pressure level of .0002 microbar'
     value :'SIEMENS/METER', 'Conductivity'
     value :'MICRO_RADIAN', 'Angular motion for tilt'
     value :'PASCAL_SECOND', 'Measure of viscosity'

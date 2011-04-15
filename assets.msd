@@ -6,7 +6,6 @@ package :Assets, 'Mobile Assets' do
   
   attr :LocationSize, 'The number of location units required to hold this tool', :integer
   attr :ToolId, 'The unique identifier of the tool type'
-  attr :ProcessId, 'The process identifier for this device. Used to differentiate a tool that is used in multiple processes'
   attr :EdgeCount, 'The number of cutting edges', :integer
   attr :ToolLifeValue, 'The life of the tool in time, wear, or parts', :float
   attr :ItemId, 'An identifier for the insert', :integer
@@ -88,6 +87,7 @@ package :Assets, 'Mobile Assets' do
     abstract
     member :AssetId, 'The unique identifier of the asset - may be same as serial number (should we remove serial number?)'
     member :SerialNumber, 'The serial number of the asset'
+    member :Manufacturer, 'The manufacturer of this asset', 0..1, :Name
     member :Description, 'The description of the asset (freeform)', 0..1, :AssetDescription
     member :Timestamp, 'The time asset information was recorded'
   end
@@ -96,7 +96,6 @@ package :Assets, 'Mobile Assets' do
   type :CuttingTool, 'A cutting tool', :Asset do
     member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
     member :ToolId, 'The Identifier of the tool type'
-    member :ProcessId, 'The process identifier', 0..1
     
     at_least_one do 
       member :CuttingToolDefinition, 'Description of tool'
@@ -234,6 +233,7 @@ package :Assets, 'Mobile Assets' do
   type :CuttingItem, 'An edge into a tool assembly' do
     member :ItemId, 'The unique identifier of this insert in this assembly'      
     member :ItemLife, 'The life of an edge', 0..1, :Life
+    member :Manufacturer, 'The manufacturer of this asset', 0..1, :Name
     
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :CuttingItemMeasurements

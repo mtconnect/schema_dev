@@ -6,6 +6,8 @@ package :Samlpes, 'The samples' do
   
   basic_type :SampleValue, 'An events data'
   basic_type(:PositionValue, 'The value for the position') { pattern float_value }
+  basic_type(:EnergyValue, 'The value of energy') {  pattern float_value }
+  basic_type(:DecibelValue, 'The sound pressure') {  pattern float_value }
   basic_type(:DisplacementValue, 'The value for the displacement') { pattern float_value }
   basic_type(:FrequencyValue, 'The value for the frequency') { pattern float_value }
   basic_type(:AmperageValue, 'The amperage') { pattern float_value }
@@ -146,12 +148,8 @@ package :Samlpes, 'The samples' do
     member :Value, 'The tilt', :TiltValue
   end
   
-  type :Duration, 'The duration of an event in seconds', :Sample do
+  type :AccumulatedTime, 'The non-contiguous duration of an event in seconds', :Sample do
     member :Value, 'The duration', :DurationValue
-  end
-  
-  type :ElapsedTime, 'The accumulated time', :Sample do
-    member :Value, 'accumulated time', :AccumulatedTime
   end
   
   type :PowerFactor, 'The power factor', :Sample do
@@ -185,10 +183,17 @@ package :Samlpes, 'The samples' do
   type :Concentration, 'The Concentration', :Sample do
     member :Value, 'Concentration', :ConcentrationValue
   end
+
+  type :ELECTRICAL_ENERGY, 'Electrical energy', :Sample do
+    member :Value, 'Energy in watt seconds', :EnergyValue
   
   type :LinearForce, 'The magnitude of a push or pull introduced by an actuator or exerted on an object', :Sample do
     member :Value, 'Force value', :ForceValue
   end
+
+    type :SoundLevel, 'Measurement of a sound level or sound pressure level relative to atmospheric pressure' do
+      member :Value, 'Decibel value', :DecibelValue
+    end
   
   type :AbsTimeSeries, 'The abstract waveform', :Sample do    
     abstract

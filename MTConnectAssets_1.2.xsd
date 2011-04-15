@@ -254,12 +254,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLTAGE'/>
       <xs:enumeration value='WATTAGE'/>
       <xs:enumeration value='WORKHOLDING_ID'/>
+      <xs:enumeration value='ACCUMULATED_TIME'/>
       <xs:enumeration value='ACTUATOR_STATE'/>
       <xs:enumeration value='ASSET_CHANGED'/>
       <xs:enumeration value='CONCENTRATION'/>
       <xs:enumeration value='CONDUCTIVITY'/>
       <xs:enumeration value='DISPLACEMENT'/>
-      <xs:enumeration value='ELAPSED_TIME'/>
       <xs:enumeration value='ELECTRICAL_POWER'/>
       <xs:enumeration value='FILL_LEVEL'/>
       <xs:enumeration value='FLOW'/>
@@ -320,6 +320,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MOLE'/>
       <xs:enumeration value='KINETIC'/>
       <xs:enumeration value='DYNAMIC'/>
+      <xs:enumeration value='NO_SCALE'/>
+      <xs:enumeration value='A_SCALE'/>
+      <xs:enumeration value='B_SCALE'/>
+      <xs:enumeration value='C_SCALE'/>
+      <xs:enumeration value='D_SCALE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -398,7 +403,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT'/>
       <xs:enumeration value='WATT'/>
       <xs:enumeration value='OHM'/>
-      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SOUND_LEVEL'/>
       <xs:enumeration value='SIEMENS/METER'/>
       <xs:enumeration value='MICRO_RADIAN'/>
       <xs:enumeration value='PASCAL_SECOND'/>
@@ -448,7 +453,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT'/>
       <xs:enumeration value='WATT'/>
       <xs:enumeration value='OHM'/>
-      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SOUND_LEVEL'/>
       <xs:enumeration value='SIEMENS/METER'/>
       <xs:enumeration value='MICRO_RADIAN'/>
       <xs:enumeration value='PASCAL_SECOND'/>
@@ -595,15 +600,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The unique identifier of the tool type
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:simpleType name='ProcessIdType'>
-    <xs:annotation>
-      <xs:documentation>
-        The process identifier for this device. Used to differentiate a tool
-        that is used in multiple processes
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -838,6 +834,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='assetId' type='AssetIdType' use='required'/>
     <xs:attribute name='serialNumber' type='SerialNumberType' use='required'/>
+    <xs:attribute name='manufacturer' type='NameType' use='optional'/>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
   </xs:complexType>
   <xs:element name='Asset' abstract='true' type='AssetType'>
@@ -884,7 +881,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:sequence>
         <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
         <xs:attribute name='toolId' type='ToolIdType' use='required'/>
-        <xs:attribute name='processId' type='ProcessIdType' use='optional'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -1690,5 +1686,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
     <xs:attribute name='itemId' type='ItemIdType' use='required'/>
+    <xs:attribute name='manufacturer' type='NameType' use='optional'/>
   </xs:complexType>
 </xs:schema>
