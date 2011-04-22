@@ -5,8 +5,10 @@ package :Assets, 'Mobile Assets' do
   basic_type :ReconditionCountValue, 'The number of times the cutter has been reconditioned', :integer
   
   attr :LocationSize, 'The number of location units required to hold this tool', :integer
-  attr :ToolId, 'The unique identifier of the tool type'
+  attr :ToolId, 'The identifier of the tool type'
+  attr :ToolGroup, 'The tool group associated with the tool'
   attr :EdgeCount, 'The number of cutting edges', :integer
+  attr :Overlap, 'The number of additional locations taken by a tool', :integer
   attr :ToolLifeValue, 'The life of the tool in time, wear, or parts', :float
   attr :ItemId, 'An identifier for the insert', :integer
   attr :MeasurementValue, 'A measurement value', :float
@@ -16,6 +18,7 @@ package :Assets, 'Mobile Assets' do
   attr :Speed, 'A speed', :float
   attr :MaximumCount, 'A maximum count value', :integer
   attr :Code, 'A application specific code'
+  attr :Manufacturers, 'A comman delimited list of manufactures'
   
   enum :DefinitionFormat, 'The format of the definition' do
     value :EXPRESS, 'The definition will be provided in EXPRESS format'
@@ -26,6 +29,10 @@ package :Assets, 'Mobile Assets' do
   
   enum :CutterStatusValue, 'The state of the tool. These can be combined to define the complete cutting tool state' do
     value :NEW, 'The tool is new'
+    value :AVAILABLE, 'The cutting tool is available for use'
+    value :UNAVAILABLE, 'The cutting tool is unavailable for use'
+    value :ALLOCATED, 'The cutting tool is assigned to this proces'
+    value :UNALLOCATED, 'The cutting tool is NOT assigned to this device'    
     value :MEASURED, 'The tool has been measured'
     value :NOT_REGISTERED, ' An unregisterd state'
     value :RECONDITIONED, 'The tool is being reconditioned'
@@ -37,11 +44,6 @@ package :Assets, 'Mobile Assets' do
   end
   
   
-  enum :Allocation, 'Determines if the cutting tool has been allocated to this process or is available' do
-    value :ALLOCATED, 'The cutting tool is assigned to this proces'
-    value :UNALLOCATED, 'The cutting tool is NOT assigned to this device'    
-  end
-    
   enum :ToolLifeDirection, 'The direction of tool life count' do
     value :UP, 'The tool life counts up from the 0 to maximum'
     value :DOWN, 'The tool life counts down from maximum to 0'
@@ -51,11 +53,6 @@ package :Assets, 'Mobile Assets' do
     value :MINUTES, 'The tool life measured in minutes'
     value :PART_COUNT, 'The tool life measured in parts made'
     value :WEAR, 'Measurement of tool life in tool wear'
-  end
-  
-  enum :LocationDirection, 'The positive or negative progression' do
-    value :NEGATIVE, 'The tool occupies the pots at a smaller index'
-    value :POSITIVE, 'The tool occupies the pots at a greater index'
   end
   
   enum :LocationsType, 'The type of tool location' do
@@ -87,7 +84,7 @@ package :Assets, 'Mobile Assets' do
     abstract
     member :AssetId, 'The unique identifier of the asset - may be same as serial number (should we remove serial number?)'
     member :SerialNumber, 'The serial number of the asset'
-    member :Manufacturer, 'The manufacturer of this asset', 0..1, :Name
+    member :Manufacturers, 'The manufacturer of this asset', 0..1
     member :Description, 'The description of the asset (freeform)', 0..1, :AssetDescription
     member :Timestamp, 'The time asset information was recorded'
   end
@@ -96,6 +93,7 @@ package :Assets, 'Mobile Assets' do
   type :CuttingTool, 'A cutting tool', :Asset do
     member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
     member :ToolId, 'The Identifier of the tool type'
+    member :ToolGroup, 'The Identifier of the tool type', 0..1
     
     at_least_one do 
       member :CuttingToolDefinition, 'Description of tool'
@@ -109,10 +107,8 @@ package :Assets, 'Mobile Assets' do
   
   type :Location, 'The location of the tool in the tool changer (pot) or the station of the tool' do
     member :Type, 'The type of location', :LocationsType
-    member :Size, 'The number of pots this tool will consume due to interference. If not given, assume 1', 0..1, :LocationSize do
-      self.default = 1
-    end
-    member :Direction, 'The index direction of additional pots occupied by this', 0..1, :LocationDirection
+    member :negativeOverlap, 'The additional locations occupied in at lower indexed values', :Overlap
+    member :positiveOverlap, 'The additional locations occupied in at higher indexed values', :Overlap
     member :Value, 'The location', :LocationValue
   end
   
@@ -174,7 +170,6 @@ package :Assets, 'Mobile Assets' do
     # Identification
     # Status
     member :CutterStatus, 'The state of the tool assembly', 1
-    element :Allocation, 'The allocated status of this cutter in this device', 0..1
     member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
     member :ToolLife, 'The life of the cutting tool assembly', 0..1, :Life
     
@@ -233,7 +228,7 @@ package :Assets, 'Mobile Assets' do
   type :CuttingItem, 'An edge into a tool assembly' do
     member :ItemId, 'The unique identifier of this insert in this assembly'      
     member :ItemLife, 'The life of an edge', 0..1, :Life
-    member :Manufacturer, 'The manufacturer of this asset', 0..1, :Name
+    member :Manufacturers, 'The manufacturer of this asset', 0..1
     
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :CuttingItemMeasurements

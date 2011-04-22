@@ -599,7 +599,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='ToolIdType'>
     <xs:annotation>
       <xs:documentation>
-        The unique identifier of the tool type
+        The identifier of the tool type
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ToolGroupType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool group associated with the tool
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -608,6 +616,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The number of cutting edges
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='OverlapType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of additional locations taken by a tool
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
@@ -684,6 +700,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='ManufacturersType'>
+    <xs:annotation>
+      <xs:documentation>
+        A comman delimited list of manufactures
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='DefinitionFormatType'>
     <xs:annotation>
       <xs:documentation>
@@ -706,6 +730,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:enumeration value='NEW'/>
+      <xs:enumeration value='AVAILABLE'/>
+      <xs:enumeration value='UNAVAILABLE'/>
+      <xs:enumeration value='ALLOCATED'/>
+      <xs:enumeration value='UNALLOCATED'/>
       <xs:enumeration value='MEASURED'/>
       <xs:enumeration value='NOT_REGISTERED'/>
       <xs:enumeration value='RECONDITIONED'/>
@@ -714,18 +742,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TAGGED_OUT'/>
       <xs:enumeration value='BROKEN'/>
       <xs:enumeration value='UNKNOWN'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='AllocationType'>
-    <xs:annotation>
-      <xs:documentation>
-        Determines if the cutting tool has been allocated to this process or is
-        available
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='ALLOCATED'/>
-      <xs:enumeration value='UNALLOCATED'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ToolLifeDirectionType'>
@@ -749,17 +765,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MINUTES'/>
       <xs:enumeration value='PART_COUNT'/>
       <xs:enumeration value='WEAR'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='LocationDirectionType'>
-    <xs:annotation>
-      <xs:documentation>
-        The positive or negative progression
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='NEGATIVE'/>
-      <xs:enumeration value='POSITIVE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='LocationsType'>
@@ -834,7 +839,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='assetId' type='AssetIdType' use='required'/>
     <xs:attribute name='serialNumber' type='SerialNumberType' use='required'/>
-    <xs:attribute name='manufacturer' type='NameType' use='optional'/>
+    <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
   </xs:complexType>
   <xs:element name='Asset' abstract='true' type='AssetType'>
@@ -881,6 +886,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:sequence>
         <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
         <xs:attribute name='toolId' type='ToolIdType' use='required'/>
+        <xs:attribute name='toolGroup' type='ToolGroupType' use='optional'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -917,8 +923,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='LocationValueType'>
         <xs:attribute name='type' type='LocationsType' use='required'/>
-        <xs:attribute name='size' default='1' type='LocationSizeType' use='optional'/>
-        <xs:attribute name='direction' type='LocationDirectionType' use='optional'/>
+        <xs:attribute name='negativeOverlap' type='OverlapType' use='required'/>
+        <xs:attribute name='positiveOverlap' type='OverlapType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1242,13 +1248,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The state of the tool assembly
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Allocation' maxOccurs='1' minOccurs='0' type='AllocationType'>
-        <xs:annotation>
-          <xs:documentation>
-            The allocated status of this cutter in this device
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -1686,6 +1685,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
     <xs:attribute name='itemId' type='ItemIdType' use='required'/>
-    <xs:attribute name='manufacturer' type='NameType' use='optional'/>
+    <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
   </xs:complexType>
 </xs:schema>
