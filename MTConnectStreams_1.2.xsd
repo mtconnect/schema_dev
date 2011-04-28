@@ -254,12 +254,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLTAGE'/>
       <xs:enumeration value='WATTAGE'/>
       <xs:enumeration value='WORKHOLDING_ID'/>
+      <xs:enumeration value='ACCUMULATED_TIME'/>
       <xs:enumeration value='ACTUATOR_STATE'/>
       <xs:enumeration value='ASSET_CHANGED'/>
       <xs:enumeration value='CONCENTRATION'/>
       <xs:enumeration value='CONDUCTIVITY'/>
       <xs:enumeration value='DISPLACEMENT'/>
-      <xs:enumeration value='ELAPSED_TIME'/>
       <xs:enumeration value='ELECTRICAL_POWER'/>
       <xs:enumeration value='FILL_LEVEL'/>
       <xs:enumeration value='FLOW'/>
@@ -320,6 +320,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MOLE'/>
       <xs:enumeration value='KINETIC'/>
       <xs:enumeration value='DYNAMIC'/>
+      <xs:enumeration value='NO_SCALE'/>
+      <xs:enumeration value='A_SCALE'/>
+      <xs:enumeration value='B_SCALE'/>
+      <xs:enumeration value='C_SCALE'/>
+      <xs:enumeration value='D_SCALE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -398,7 +403,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT'/>
       <xs:enumeration value='WATT'/>
       <xs:enumeration value='OHM'/>
-      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SOUND_LEVEL'/>
       <xs:enumeration value='SIEMENS/METER'/>
       <xs:enumeration value='MICRO_RADIAN'/>
       <xs:enumeration value='PASCAL_SECOND'/>
@@ -448,7 +453,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT'/>
       <xs:enumeration value='WATT'/>
       <xs:enumeration value='OHM'/>
-      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SOUND_LEVEL'/>
       <xs:enumeration value='SIEMENS/METER'/>
       <xs:enumeration value='MICRO_RADIAN'/>
       <xs:enumeration value='PASCAL_SECOND'/>
@@ -711,6 +716,26 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The value for the position
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='EnergyValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value of energy
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DecibelValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The sound pressure
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -1389,7 +1414,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='WattsType'>
+  <xs:complexType name='WattageType'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: The number of Watts
@@ -1401,7 +1426,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Watts' substitutionGroup='Sample' type='WattsType'>
+  <xs:element name='Wattage' substitutionGroup='Sample' type='WattageType'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: The number of Watts
@@ -1522,10 +1547,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='DurationType'>
+  <xs:complexType name='AccumulatedTimeType'>
     <xs:annotation>
       <xs:documentation>
-        The duration of an event in seconds
+        The non-contiguous duration of an event in seconds
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -1534,29 +1559,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Duration' substitutionGroup='Sample' type='DurationType'>
+  <xs:element name='AccumulatedTime' substitutionGroup='Sample' type='AccumulatedTimeType'>
     <xs:annotation>
       <xs:documentation>
-        The duration of an event in seconds
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ElapsedTimeType'>
-    <xs:annotation>
-      <xs:documentation>
-        The accumulated time
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:restriction base='SampleType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
-      </xs:restriction>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='ElapsedTime' substitutionGroup='Sample' type='ElapsedTimeType'>
-    <xs:annotation>
-      <xs:documentation>
-        The accumulated time
+        The non-contiguous duration of an event in seconds
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -1712,6 +1718,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='ElectricalEnergyType'>
+    <xs:annotation>
+      <xs:documentation>
+        Electrical energy
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ElectricalEnergy' substitutionGroup='Sample' type='ElectricalEnergyType'>
+    <xs:annotation>
+      <xs:documentation>
+        Electrical energy
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='LinearForceType'>
     <xs:annotation>
       <xs:documentation>
@@ -1733,6 +1758,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='SoundLevelType'>
+    <xs:annotation>
+      <xs:documentation>
+        Measurement of a sound level or sound pressure level relative to
+        atmospheric pressure
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='DecibelValueType'/>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='AbsTimeSeriesType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -2060,7 +2096,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='WattsTimeSeriesType'>
+  <xs:complexType name='WattageTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
         Time series of DEPRECATED: The number of Watts
@@ -2070,7 +2106,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='WattsTimeSeries' substitutionGroup='TimeSeries' type='WattsTimeSeriesType'>
+  <xs:element name='WattageTimeSeries' substitutionGroup='TimeSeries' type='WattageTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
         Time series of DEPRECATED: The number of Watts
@@ -2181,37 +2217,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='DurationTimeSeriesType'>
+  <xs:complexType name='AccumulatedTimeTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The duration of an event in seconds
+        Time series of The non-contiguous duration of an event in seconds
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='DurationTimeSeries' substitutionGroup='TimeSeries' type='DurationTimeSeriesType'>
+  <xs:element name='AccumulatedTimeTimeSeries' substitutionGroup='TimeSeries' type='AccumulatedTimeTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The duration of an event in seconds
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ElapsedTimeTimeSeriesType'>
-    <xs:annotation>
-      <xs:documentation>
-        Time series of The accumulated time
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='TimeSeriesType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='ElapsedTimeTimeSeries' substitutionGroup='TimeSeries' type='ElapsedTimeTimeSeriesType'>
-    <xs:annotation>
-      <xs:documentation>
-        Time series of The accumulated time
+        Time series of The non-contiguous duration of an event in seconds
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -2348,6 +2367,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The Concentration
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ElectricalEnergyTimeSeriesType'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of Electrical energy
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='TimeSeriesType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ElectricalEnergyTimeSeries' substitutionGroup='TimeSeries' type='ElectricalEnergyTimeSeriesType'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of Electrical energy
       </xs:documentation>
     </xs:annotation>
   </xs:element>

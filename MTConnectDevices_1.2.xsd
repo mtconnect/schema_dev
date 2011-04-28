@@ -254,12 +254,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLTAGE'/>
       <xs:enumeration value='WATTAGE'/>
       <xs:enumeration value='WORKHOLDING_ID'/>
+      <xs:enumeration value='ACCUMULATED_TIME'/>
       <xs:enumeration value='ACTUATOR_STATE'/>
       <xs:enumeration value='ASSET_CHANGED'/>
       <xs:enumeration value='CONCENTRATION'/>
       <xs:enumeration value='CONDUCTIVITY'/>
       <xs:enumeration value='DISPLACEMENT'/>
-      <xs:enumeration value='ELAPSED_TIME'/>
       <xs:enumeration value='ELECTRICAL_POWER'/>
       <xs:enumeration value='FILL_LEVEL'/>
       <xs:enumeration value='FLOW'/>
@@ -320,6 +320,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MOLE'/>
       <xs:enumeration value='KINETIC'/>
       <xs:enumeration value='DYNAMIC'/>
+      <xs:enumeration value='NO_SCALE'/>
+      <xs:enumeration value='A_SCALE'/>
+      <xs:enumeration value='B_SCALE'/>
+      <xs:enumeration value='C_SCALE'/>
+      <xs:enumeration value='D_SCALE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -398,7 +403,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT'/>
       <xs:enumeration value='WATT'/>
       <xs:enumeration value='OHM'/>
-      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SOUND_LEVEL'/>
       <xs:enumeration value='SIEMENS/METER'/>
       <xs:enumeration value='MICRO_RADIAN'/>
       <xs:enumeration value='PASCAL_SECOND'/>
@@ -448,7 +453,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT'/>
       <xs:enumeration value='WATT'/>
       <xs:enumeration value='OHM'/>
-      <xs:enumeration value='DECIBEL'/>
+      <xs:enumeration value='SOUND_LEVEL'/>
       <xs:enumeration value='SIEMENS/METER'/>
       <xs:enumeration value='MICRO_RADIAN'/>
       <xs:enumeration value='PASCAL_SECOND'/>

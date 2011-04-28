@@ -184,8 +184,9 @@ package :Samlpes, 'The samples' do
     member :Value, 'Concentration', :ConcentrationValue
   end
 
-  type :ELECTRICAL_ENERGY, 'Electrical energy', :Sample do
+  type :ElectricalEnergy, 'Electrical energy', :Sample do
     member :Value, 'Energy in watt seconds', :EnergyValue
+  end
   
   type :LinearForce, 'The magnitude of a push or pull introduced by an actuator or exerted on an object', :Sample do
     member :Value, 'Force value', :ForceValue
