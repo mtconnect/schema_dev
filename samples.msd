@@ -119,7 +119,7 @@ package :Samlpes, 'The samples' do
     member :Value, 'The voltage', :VoltageValue
   end
   
-  type :Watts, 'DEPRECATED: The number of Watts', :Sample do
+  type :Wattage, 'DEPRECATED: The number of Watts', :Sample do
     member :Value, 'The Watts', :WattValue
   end
     
