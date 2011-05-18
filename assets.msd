@@ -1,21 +1,26 @@
 
 package :Assets, 'Mobile Assets' do
+  range = "(\\d+|\\d+-\\d+)(,(\\d+|\\d+-\\d+))*"
+  
   basic_type :LocationValue, 'The tool location', :integer
   basic_type :ProgramToolNumber, 'The number referenced in the program for this tool', :integer
   basic_type :ReconditionCountValue, 'The number of times the cutter has been reconditioned', :integer
+  basic_type :ConnectionCodeMachineSide, 'The code for the connection to the machine'
   
   attr :LocationSize, 'The number of location units required to hold this tool', :integer
-  attr :ToolId, 'The identifier of the tool type'
+  attr :ToolId, 'The identifier of the tool type', :NMTOKEN
   attr :ToolGroup, 'The tool group associated with the tool'
   attr :EdgeCount, 'The number of cutting edges', :integer
   attr :Overlap, 'The number of additional locations taken by a tool', :integer
   attr :ToolLifeValue, 'The life of the tool in time, wear, or parts', :float
-  attr :ItemId, 'An identifier for the insert', :integer
+  attr :ItemId, 'An identifier for the insert', :NMTOKEN
+  attr(:IndexRange, 'A single or range of indexes. A range can be a comma separated set of individual elements as in "1,2,3,4", or as a inclusive range of values as in "1-10" or multiple ranges "1-4,6-10"') { pattern range }
   attr :MeasurementValue, 'A measurement value', :float
   attr :Minimum, 'A minimum value', :float  
   attr :Maximum, 'A maximum value', :float
   attr :Nominal, 'A nominal value', :float
-  attr :Speed, 'A speed', :float
+  attr :Speed, 'A speed in RPM or mm/s', :float
+  attr :Grade, 'The material for a cutting item'
   attr :MaximumCount, 'A maximum count value', :integer
   attr :Code, 'A application specific code'
   attr :Manufacturers, 'A comman delimited list of manufactures'
@@ -121,7 +126,14 @@ package :Assets, 'Mobile Assets' do
     member :Maximum, 'The maximum speed this tool may operate at', 0..1
     member :Minimum, 'The minimum speed this tool may operate at', 0..1
     member :Nominal, 'The nominal speed this tool may operate at', 0..1
-    member :Value, 'The programmed tool spindle speed', 0..1, :Speed
+    member :Value, 'The actual tool spindle speed', 0..1, :Speed
+  end
+
+  type :ProgramFeedRate, 'The feed rate properties of this tool in MILLIMETERS/SECOND' do
+    member :Maximum, 'The maximum feed rate this tool may operate at', 0..1
+    member :Minimum, 'The minimum feed rate this tool may operate at', 0..1
+    member :Nominal, 'The nominal feed rate this tool may operate at', 0..1
+    member :Value, 'The actual feed rate', 0..1, :Speed
   end
   
   # Define measurements for a cutting tool life cycle
@@ -153,18 +165,20 @@ package :Assets, 'Mobile Assets' do
 
   # Common
   type :ProtrudingLength, 'dimension from the yz-plane to the furthest point of the tool item or adaptive item measured in the -X direction', :CommonMeasurement
-  type :Mass, 'The weight measured in grams', :CommonMeasurement
+  type :Weight, 'WT: The weight measured in grams', :CommonMeasurement
+  type :FunctionalLength, 'LF: The furthest distance from the gauge plane.', :CommonMeasurement
   
-  # Assembly
-  type :BodyDiameter, 'The largest diameter of the body of a tool item', :AssemblyMeasurement
-  type :BodyLength, 'The distance measured along the X axis from that point of the item closest to the workpiece, including the cutting item for a tool item but excluding a protuding locking mechanism for an adaptive item, to either the front of the flange on a flanged body or the beginning of the connection interface feature on the machine side for cylindrical or prismatic shanks', :AssemblyMeasurement
-  type :DepthOfCut, 'The maximum engagement of the cutting edge or edges with the workpiece measured perpendicular to the feed motion.'
-  type :OverallLength, 'largest length dimension of the tool item including the master insert where applicable', :AssemblyMeasurement
-  type :ShankDiameter, 'dimension of the diameter of a cylindrical portion of a tool item or an adaptive item that can participate in a connection', :AssemblyMeasurement
-  type :ShankHeight, 'dimension of the height of a shank', :AssemblyMeasurement
-  type :ShankLength, 'dimension of the length of a shank', :AssemblyMeasurement
-  type :ShankWidth, 'dimension of the width of a shank', :AssemblyMeasurement
-  type :UsableLength, 'The maximum length of a cutting tool that can be used in a particular cutting operation including the non-cutting portions of the tool.', :AssemblyMeasurement
+  # Cutting Tool - Assembly
+  type :BodyDiameterMax, 'BDX: The largest diameter of the body of a tool item', :AssemblyMeasurement
+  type :BodyLengthMax, 'LBX: The distance measured along the X axis from that point of the item closest to the workpiece, including the cutting item for a tool item but excluding a protuding locking mechanism for an adaptive item, to either the front of the flange on a flanged body or the beginning of the connection interface feature on the machine side for cylindrical or prismatic shanks', :AssemblyMeasurement
+  type :CuttingDiameterMax, 'DC: The maximum diameter of a circle on which the defined point Pk of each of the master inserts is located on a tool item. The normal of the machined peripheral surface points towards the axis of the cutting tool.', :AssemblyMeasurement
+  type :FlangeDiameterMax, 'The maxumum dimension between two parallel tangents on the outside edge of a flange', :AssemblyMeasurement
+  type :DepthOfCutMax, 'APMX: The maximum engagement of the cutting edge or edges with the workpiece measured perpendicular to the feed motion.', :AssemblyMeasurement
+  type :OverallToolLength, 'OAL: largest length dimension of the tool item including the master insert where applicable', :AssemblyMeasurement
+  type :ShankDiameter, 'DMM: dimension of the diameter of a cylindrical portion of a tool item or an adaptive item that can participate in a connection', :AssemblyMeasurement
+  type :ShankHeight, 'H: dimension of the height of a shank', :AssemblyMeasurement
+  type :ShankLength, 'LS: dimension of the length of a shank', :AssemblyMeasurement
+  type :UsableLengthMax, 'The maximum length of a cutting tool that can be used in a particular cutting operation including the non-cutting portions of the tool.', :AssemblyMeasurement
   
   type :CuttingToolLifeCycle, 'A defintion of a cutting tool application and life cycle' do
     # Identification
@@ -173,10 +187,12 @@ package :Assets, 'Mobile Assets' do
     member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
     member :ToolLife, 'The life of the cutting tool assembly', 0..1, :Life
     
-    # Connection
+    # Properties
     member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
     member :Location, 'The pocket location', 0..1
     member :ProgramSpindleSpeed, 'The tools constraned programmed spindle speed', 0..1
+    member :ProgramFeedRate, 'The tools constraned programmed feed rate', 0..1
+    member :ConnectionCodeMachineSide, 'CCMS: identifier for the cabability to connect any component of the cutting tool together, except assembly items, on the machine side', 0..1
     
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :AssemblyMeasurements
@@ -216,8 +232,9 @@ package :Assets, 'Mobile Assets' do
   type :ToolCuttingEdgeAngle, 'angle between the tool cutting edge plane and the tool feed plane measured in a plane parallel the xy-plane', :CuttingItemMeasurement
   type :ToolLeadAngle, 'angle between the tool cutting edge plane and a plane perpendicular to the tool feed plane measured in a plane parallel the xy-plane', :CuttingItemMeasurement
   type :WiperEdgeLength, 'measure of the length of a wiper edge of a cutting item', :CuttingItemMeasurement
-  type :FunctionalLength, 'distance from the gauge plane or from the end of the shank, if a gauge plane does not exist, to the cutting reference point determined by the main function of the tool', :CuttingItemMeasurement
   type :ToolOrientation, 'The orientation as expressed in degrees of the cutting item to the workpiece for this process.'
+  
+  basic_type :Locus, 'The location of the cutting item - not yet restricted.'
   
       
   type :CuttingItems, 'A list of edge' do
@@ -226,9 +243,14 @@ package :Assets, 'Mobile Assets' do
   end
     
   type :CuttingItem, 'An edge into a tool assembly' do
-    member :ItemId, 'The unique identifier of this insert in this assembly'      
-    member :ItemLife, 'The life of an edge', 0..1, :Life
+    member :Indices, 'The unique identifier of this insert in this assembly', :IndexRange
+    member :ItemId, 'The manufacturer identifier of this cutting item ', 0..1    
+    member :Grade, 'The material used for the cutting item', 0..1
     member :Manufacturers, 'The manufacturer of this asset', 0..1
+    
+    member :Description, 'The description of the cutting item', 0..1, :AssetDescription
+    member :Locus, 'The cutting item\'s location on the cutting tool', 0..1
+    member :ItemLife, 'The life of an edge', 0..1, :Life
     
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :CuttingItemMeasurements
