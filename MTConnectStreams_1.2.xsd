@@ -912,16 +912,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='AccumulatedTimeType'>
-    <xs:annotation>
-      <xs:documentation>
-        An accumulated time
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
-    </xs:restriction>
-  </xs:simpleType>
   <xs:simpleType name='PowerFactorValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -1414,7 +1404,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='WattageType'>
+  <xs:complexType name='WattType'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: The number of Watts
@@ -1426,7 +1416,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Wattage' substitutionGroup='Sample' type='WattageType'>
+  <xs:element name='Watt' substitutionGroup='Sample' type='WattType'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: The number of Watts
@@ -2096,7 +2086,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='WattageTimeSeriesType'>
+  <xs:complexType name='WattTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
         Time series of DEPRECATED: The number of Watts
@@ -2106,7 +2096,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='WattageTimeSeries' substitutionGroup='TimeSeries' type='WattageTimeSeriesType'>
+  <xs:element name='WattTimeSeries' substitutionGroup='TimeSeries' type='WattTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
         Time series of DEPRECATED: The number of Watts
