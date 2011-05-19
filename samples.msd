@@ -25,7 +25,6 @@ package :Samlpes, 'The samples' do
   basic_type(:TorqueValue, 'A component\'s torque') { pattern float_value }
   basic_type(:ThreeDimensionalValue, 'A three dimensional value \'X Y Z\' or \'A B C\'') { pattern "#{float} #{float} #{float}|UNAVAILABLE" }
   basic_type(:TiltValue, 'The value for the position') { pattern float_value }
-  basic_type(:AccumulatedTime, 'An accumulated time') { pattern float_value }
   basic_type(:PowerFactorValue, 'Power factor') { pattern float_value }
   basic_type(:StrainValue, 'Strain') { pattern float_value }
   basic_type(:FlowValue, 'Flow') { pattern float_value }
@@ -119,7 +118,7 @@ package :Samlpes, 'The samples' do
     member :Value, 'The voltage', :VoltageValue
   end
   
-  type :Wattage, 'DEPRECATED: The number of Watts', :Sample do
+  type :Watt, 'DEPRECATED: The number of Watts', :Sample do
     member :Value, 'The Watts', :WattValue
   end
     

@@ -24,6 +24,7 @@ package :Streams, 'Event Package' do
     member :Samples, 'A collection of samples', 0..1
     member :Events, 'A collection of events', 0..1
     member :Condition, 'The representation of the devices condition', 0..1, :ConditionList
+    member :Interfaces, 'A collection of interface events', 0..1
   end
 
   type :Samples, 'A collection of samples for this component' do
@@ -36,6 +37,10 @@ package :Streams, 'Event Package' do
   
   type :ConditionList, 'The condition of the device' do
     member :Condition, 'A subtype of a condition', 1..INF 
+  end
+  
+  type :Interfaces, 'A collection of interface actions' do
+    member :Interface, 'A list of interface events', 1..INF
   end
 
   type :Result, 'An abstract event' do

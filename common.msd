@@ -145,7 +145,10 @@ package :common, 'Common attributes and elements for all schemas' do
     value :B_SCALE, 'B Scale weighting factor'
     value :C_SCALE, 'C Scale weighting factor'
     value :D_SCALE, 'D Scale weighting factor'
-
+    
+    # For 1.3 Interface
+    value :REQUEST, 'The request side of the interface'
+    value :RESPONSE, 'The response side of the interface'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do

@@ -1,9 +1,9 @@
 
-self.urn = 'urn:mtconnect.org:MTConnectDevices:1.2'
+self.urn = 'urn:mtconnect.org:MTConnectDevices:1.3'
 self.namespace = 'mt'
 self.top = :MTConnectDevices
 self.license = File.read('license.txt')
-self.version = '1.2'
+self.version = '1.3'
 
 load 'common'
 
@@ -27,5 +27,6 @@ load 'components'
 load 'axes'
 load 'systems'
 load 'data_items'
+load 'interface'
 
 
