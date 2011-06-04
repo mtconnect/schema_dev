@@ -168,6 +168,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:ID'/>
   </xs:simpleType>
+  <xs:simpleType name='SignificantDigitsValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number significant digits
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -1004,6 +1012,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='MeasurementValueType'>
+        <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'/>
+        <xs:attribute name='units' type='UnitsType' use='optional'/>
+        <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'/>
         <xs:attribute name='code' type='CodeType' use='optional'/>
         <xs:attribute name='maximum' type='MeasurementValueType' use='optional'/>
         <xs:attribute name='minimum' type='MeasurementValueType' use='optional'/>
@@ -1398,10 +1409,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='CuttingItems' type='CuttingItemsType'>
+      <xs:element name='CuttingItems' maxOccurs='1' minOccurs='0' type='CuttingItemsType'>
         <xs:annotation>
           <xs:documentation>
-            A list of edges for this assembly
+            An optional list of edges for this assembly
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -1723,6 +1734,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         The orientation as expressed in degrees of the cutting item to the
         workpiece for this process.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='DriveAngleType'>
+    <xs:annotation>
+      <xs:documentation>
+        Angle between the driving mechanism locator on a tool item and the main
+        cutting edge.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>

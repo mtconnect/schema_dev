@@ -18,6 +18,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :Rate, 'A sample rate in milliseconds per sample', :float
   attr :ComponentId, 'The id of the component (maps to the id from probe)', :ID
   attr :ID, 'An identifier', :ID
+  attr :SignificantDigitsValue, 'The number significant digits', :integer
   
   attr :AssetId, 'The unique id of the asset'
 

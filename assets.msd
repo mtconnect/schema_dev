@@ -139,6 +139,9 @@ package :Assets, 'Mobile Assets' do
   # Define measurements for a cutting tool life cycle
   type :Measurement, 'An abstract type for edge measurements' do
     abstract
+    member :SignificantDigits, "The number of significant digits", 0..1, :SignificantDigitsValue
+    member :Units, 'The units for the measurement. This will be defined by MTConnect', 0..1
+    member :NativeUnits, 'The native units for the measurement, if different from units', 0..1
     member :Code, 'The shop or application specific code for this measurement', 0..1
     member :Maximum, 'The maximum tolerance value', 0..1, :MeasurementValue
     member :Minimum, 'The minimum tolerance value', 0..1, :MeasurementValue
@@ -198,7 +201,7 @@ package :Assets, 'Mobile Assets' do
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :AssemblyMeasurements
 
     # Cutting Items
-    member :CuttingItems, 'A list of edges for this assembly'
+    member :CuttingItems, 'An optional list of edges for this assembly', 0..1
   end
   
   type :Life, 'Abstract cutter life' do 
@@ -233,6 +236,7 @@ package :Assets, 'Mobile Assets' do
   type :ToolLeadAngle, 'angle between the tool cutting edge plane and a plane perpendicular to the tool feed plane measured in a plane parallel the xy-plane', :CuttingItemMeasurement
   type :WiperEdgeLength, 'measure of the length of a wiper edge of a cutting item', :CuttingItemMeasurement
   type :ToolOrientation, 'The orientation as expressed in degrees of the cutting item to the workpiece for this process.'
+  type :DriveAngle, 'Angle between the driving mechanism locator on a tool item and the main cutting edge.'
   
   basic_type :Locus, 'The location of the cutting item - not yet restricted.'
   
