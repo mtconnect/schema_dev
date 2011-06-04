@@ -168,6 +168,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:ID'/>
   </xs:simpleType>
+  <xs:simpleType name='SignificantDigitsValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number significant digits
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -283,6 +291,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SYSTEM'/>
       <xs:enumeration value='LEVEL'/>
       <xs:enumeration value='ACTUATOR'/>
+      <xs:enumeration value='CLAMP_STATUS'/>
+      <xs:enumeration value='FEED_STOCK'/>
+      <xs:enumeration value='CHANGE_STOCK'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -1219,14 +1230,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:simpleType name='SignificantDigitsValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The number significant digits
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:integer'/>
   </xs:simpleType>
   <xs:simpleType name='CategoryType'>
     <xs:annotation>

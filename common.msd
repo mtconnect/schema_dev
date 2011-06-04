@@ -18,6 +18,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :Rate, 'A sample rate in milliseconds per sample', :float
   attr :ComponentId, 'The id of the component (maps to the id from probe)', :ID
   attr :ID, 'An identifier', :ID
+  attr :SignificantDigitsValue, 'The number significant digits', :integer
   
   attr :AssetId, 'The unique id of the asset'
 
@@ -110,6 +111,11 @@ package :common, 'Common attributes and elements for all schemas' do
     value :SYSTEM, 'A system level condition'
     value :LEVEL, 'The level of a resource'
     value :ACTUATOR, 'An actuator related condition'
+    
+    # 1.3 additions
+    value :CLAMP_STATUS, 'A clamp status'
+    value :FEED_STOCK, 'Feed material'
+    value :CHANGE_STOCK, 'Change the material'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do

@@ -4,7 +4,6 @@ package :DataItems, 'Data Items Package' do
   attr :SampleRate, 'The frequency a measurement is sampled', :float
   attr :DataItemOption, 'The constrained value for this data item'
   attr :DataItemValue, 'The constrained value for this data item'
-  attr :SignificantDigitsValue, 'The number significant digits', :integer  
   
   # Measurement types
   enum :Category, 'The measurement sampling type' do

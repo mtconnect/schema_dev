@@ -5,6 +5,7 @@ package :InterfaceStream, 'A stream of interfaces' do
     value :READY, 'The interface is in an idle state'
     value :ACTIVE, 'The interface is executing an activity'
     value :COMPLETE, 'The executor is finished with the activity'
+    value :FAIL, 'The activity failed'
   end
   
   type :Interface, 'An abstract interface events', :Result do

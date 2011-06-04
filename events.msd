@@ -47,6 +47,7 @@ package :Events, 'Event Package' do
   enum :DoorStateValue, 'The status of a door' do
     value :OPEN, 'The door is open'
     value :CLOSED, 'The door is closed'
+    value :INDETERMINATE, 'The status is undefined'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
@@ -85,6 +86,13 @@ package :Events, 'Event Package' do
     value :SYNCHRONOUS, 'The paths are working together in unison'
     value :MIRROR, 'The paths are making mirror images'
     value :INDEPENDENT, 'The paths are operating independently'
+  end
+  
+  enum :ClampStateValue, 'The values of the clamp status' do
+    value :OPEN, 'The clamp is open'
+    value :CLOSED, 'The clamp is closed'
+    value :INDETERMINATE, 'The status is undefined'
+    value :UNAVAILABLE, 'The value is indeterminate'
   end
 
   type :Event, 'An abstract event', :Result do
@@ -190,6 +198,11 @@ package :Events, 'Event Package' do
   # For assets  
   type :AssetChanged, 'An asset was just modified', :Event do
     member :Value, 'The asset identifier', :AssetId
+  end
+
+  # For 1.3
+  type :ClampState, 'The clamp status', :Event do
+    member :Value, 'The path mode', :ClampStateValue
   end
     
 end
