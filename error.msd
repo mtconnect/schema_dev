@@ -11,6 +11,7 @@ package :Error, 'The error package' do
     value :INTERNAL_ERROR, 'Contact the software provider, the agent did not behave correctly.'
     value :INVALID_PATH, 'The xpath could not be parsed. Invalid syntax.'
     value :UNSUPPORTED, 'The request is not supported by this implementation'
+    value :ASSET_NOT_FOUND, 'The asset ID cannot be found'
   end
 
   type :Error, 'An error description' do
