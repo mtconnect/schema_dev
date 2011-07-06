@@ -184,6 +184,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='AssetAttrType'>
+    <xs:annotation>
+      <xs:documentation>
+        An asset type
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='DescriptionTextType'>
     <xs:annotation>
       <xs:documentation>
@@ -418,6 +426,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE'/>
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
+      <xs:enumeration value='DECIBEL'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='UnitsType'>
@@ -468,6 +477,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE'/>
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
+      <xs:enumeration value='DECIBEL'/>
       <xs:enumeration value='CENTIPOISE'/>
       <xs:enumeration value='DEGREE/MINUTE'/>
       <xs:enumeration value='FAHRENHEIT'/>
@@ -3168,7 +3178,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:restriction base='EventType'/>
+      <xs:extension base='EventType'>
+        <xs:attribute name='assetAttrType' type='AssetAttrType' use='required'/>
+      </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:element name='AssetChanged' substitutionGroup='Event' type='AssetChangedType'>

@@ -21,6 +21,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :SignificantDigitsValue, 'The number significant digits', :integer
   
   attr :AssetId, 'The unique id of the asset'
+  attr :AssetAttrType, 'An asset type'
 
   basic_type :DescriptionText, 'A description'
   basic_type(:DataItemExt, 'An extension point for data item types') do
@@ -205,6 +206,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :VOLT_AMPERE, 'A volt ampere'
     value :VOLT_AMPERE_REACTIVE, 'A volt ampere reactive'
     value :WATT_SECOND, 'A measure of energy equivilent to one Joule or 1/3,600,000 kilowatt hour'
+    value :DECIBEL, 'Sound level    '
   end
 
   enum :NativeUnits, 'The units supported for the source equipment that can be converted into MTC Units.', :Units do

@@ -4,6 +4,8 @@ package :DataItems, 'Data Items Package' do
   attr :SampleRate, 'The frequency a measurement is sampled', :float
   attr :DataItemOption, 'The constrained value for this data item'
   attr :DataItemValue, 'The constrained value for this data item'
+  attr :SourceComponentId, 'An idref to the component id', :IDREF
+  attr :SourceDataItemId, 'An idref to the data item id', :IDREF
   
   # Measurement types
   enum :Category, 'The measurement sampling type' do
@@ -11,7 +13,7 @@ package :DataItems, 'Data Items Package' do
     value :SAMPLE, 'A sample is a data point for continuous data items, that is, the value of a data item at a point in time.'
     value :CONDITION, 'The condition of the device'
   end
-
+  
   attr :NativeScale, 'The multiplier for the native value. Conversion divides by this value', :float
 
   # Data item types and sub types have been moved to common.  
@@ -61,7 +63,8 @@ package :DataItems, 'Data Items Package' do
   end
   
   type :Source, 'A native data source' do
-    member :ComponentId, 'The component that is collecting the data associated with this data item', 0..1
+    member :ComponentId, 'The component that is collecting the data associated with this data item', 0..1, :SourceComponentId
+    member :DataItemId, 'The optional data item within the source component that provides the underlying data', 0..1, :SourceDataItemId
     member :Value, 'The source or channel for this data', :ItemSource
   end
 

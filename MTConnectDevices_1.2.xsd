@@ -184,6 +184,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='AssetAttrType'>
+    <xs:annotation>
+      <xs:documentation>
+        An asset type
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='DescriptionTextType'>
     <xs:annotation>
       <xs:documentation>
@@ -418,6 +426,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE'/>
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
+      <xs:enumeration value='DECIBEL'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='UnitsType'>
@@ -468,6 +477,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE'/>
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
+      <xs:enumeration value='DECIBEL'/>
       <xs:enumeration value='CENTIPOISE'/>
       <xs:enumeration value='DEGREE/MINUTE'/>
       <xs:enumeration value='FAHRENHEIT'/>
@@ -515,22 +525,63 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WORK'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='AssetCountValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of assets
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:complexType name='AssetCountsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of assets by type
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='AssetCount' maxOccurs='unbounded' minOccurs='1' type='AssetCountType'>
+        <xs:annotation>
+          <xs:documentation>
+            The number of assets for a given type
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='AssetCountType'>
+    <xs:annotation>
+      <xs:documentation>
+        The count of assets for a certain type
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='AssetCountValueType'>
+        <xs:attribute name='assetAttrType' type='AssetAttrType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='HeaderType'>
     <xs:annotation>
       <xs:documentation>
         Message header for protocol information
       </xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='xs:string'>
-        <xs:attribute name='version' type='VersionType' use='required'/>
-        <xs:attribute name='creationTime' type='CreationTimeType' use='required'/>
-        <xs:attribute name='testIndicator' type='TestIndicatorType' use='optional'/>
-        <xs:attribute name='instanceId' type='InstanceIdType' use='required'/>
-        <xs:attribute name='sender' type='SenderType' use='required'/>
-        <xs:attribute name='bufferSize' type='BufferSizeType' use='required'/>
-      </xs:extension>
-    </xs:simpleContent>
+    <xs:sequence>
+      <xs:element name='AssetCounts' maxOccurs='1' minOccurs='0' type='AssetCountsType'>
+        <xs:annotation>
+          <xs:documentation>
+            The asset statistics
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='version' type='VersionType' use='required'/>
+    <xs:attribute name='creationTime' type='CreationTimeType' use='required'/>
+    <xs:attribute name='testIndicator' type='TestIndicatorType' use='optional'/>
+    <xs:attribute name='instanceId' type='InstanceIdType' use='required'/>
+    <xs:attribute name='sender' type='SenderType' use='required'/>
+    <xs:attribute name='bufferSize' type='BufferSizeType' use='required'/>
   </xs:complexType>
   <xs:complexType name='MTConnectDevicesType'>
     <xs:annotation>
@@ -1226,6 +1277,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='SourceComponentIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        An idref to the component id
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
+  <xs:simpleType name='SourceDataItemIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        An idref to the data item id
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
   <xs:simpleType name='CategoryType'>
     <xs:annotation>
       <xs:documentation>
@@ -1363,7 +1430,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='ItemSourceType'>
-        <xs:attribute name='componentId' type='ComponentIdType' use='optional'/>
+        <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
+        <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
