@@ -363,6 +363,18 @@ class Schema
             
           when 'len'
             restriction.add_element('xs:length', {'value' => v})
+
+          when 'minIncl'
+            restriction.add_element('xs:minInclusive', {'value' => v})
+            
+          when 'minExcl'
+            restriction.add_element('xs:minExclusive', {'value' => v})
+            
+          when 'maxIncl'
+            restriction.add_element('xs:maxInclusive', {'value' => v})
+            
+          when 'maxExcl'
+            restriction.add_element('xs:maxExclusive', {'value' => v})
             
           else
             raise "Can not gen facet: #{f} = #{v}"

@@ -61,7 +61,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         A sequence number
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:integer'/>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='1'/>
+      <xs:maxExclusive value='18446744073709500000'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='TestIndicatorType'>
     <xs:annotation>
@@ -77,7 +80,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The instance number of the agent, used for fault tolerance
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:string'/>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='1'/>
+      <xs:maxExclusive value='18446744073709500000'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='BufferSizeType'>
     <xs:annotation>
@@ -191,6 +197,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='AssetBufferSizeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The maximum number of assets
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='AssetCountAttrType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of assets
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
   </xs:simpleType>
   <xs:simpleType name='DescriptionTextType'>
     <xs:annotation>
@@ -525,22 +547,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WORK'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='AssetBufferSizeType'>
-    <xs:annotation>
-      <xs:documentation>
-        The maximum number of assets
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:integer'/>
-  </xs:simpleType>
-  <xs:simpleType name='AssetCountType'>
-    <xs:annotation>
-      <xs:documentation>
-        The number of assets
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:integer'/>
-  </xs:simpleType>
   <xs:complexType name='HeaderType'>
     <xs:annotation>
       <xs:documentation>
@@ -555,7 +561,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='instanceId' type='InstanceIdType' use='required'/>
         <xs:attribute name='sender' type='SenderType' use='required'/>
         <xs:attribute name='assetBufferSize' type='AssetBufferSizeType' use='required'/>
-        <xs:attribute name='assetCount' type='AssetCountType' use='required'/>
+        <xs:attribute name='assetCount' type='AssetCountAttrType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

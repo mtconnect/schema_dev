@@ -3,9 +3,13 @@
 package :common, 'Common attributes and elements for all schemas' do
   attr :Sender, 'The sender of the message'
   attr :CreationTime, 'The date and time the document was created', :dateTime
-  attr :Sequence, 'A sequence number', :integer
+  attr(:Sequence, 'A sequence number', :integer) do
+    facet 'minIncl=1;maxExcl=18446744073709500000'
+  end
   attr :TestIndicator, 'A debugging flag for testing.', :boolean
-  attr :InstanceId, 'The instance number of the agent, used for fault tolerance'
+  attr(:InstanceId, 'The instance number of the agent, used for fault tolerance', :integer) do
+    facet 'minIncl=1;maxExcl=18446744073709500000'
+  end
   attr :BufferSize, 'The size of the agents buffer', :integer
   
   attr :Timestamp, 'The time the sample was reported', :dateTime
@@ -22,6 +26,8 @@ package :common, 'Common attributes and elements for all schemas' do
   
   attr :AssetId, 'The unique id of the asset'
   attr :AssetAttrType, 'An asset type'
+  attr :AssetBufferSize, 'The maximum number of assets', :integer
+  attr :AssetCountAttr, 'The number of assets', :integer
 
   basic_type :DescriptionText, 'A description'
   basic_type(:DataItemExt, 'An extension point for data item types') do

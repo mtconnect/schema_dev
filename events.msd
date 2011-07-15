@@ -189,7 +189,7 @@ package :Events, 'Event Package' do
   
   # For assets  
   type :AssetChanged, 'An asset was just modified', :Event do
-    member :AssetAttrType, 'The type of asset that changed'
+    member :AssetType, 'The type of asset that changed', :AssetAttrType
     member :Value, 'The asset identifier', :AssetId
   end
     

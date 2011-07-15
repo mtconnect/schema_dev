@@ -15,7 +15,7 @@ package :MTC, 'MTC Top Level Package' do
   end
     
   type :AssetCount, 'The count of assets for a certain type' do
-    member :AssetAttrType, 'The type of asset'
+    member :AssetType, 'The type of asset', :AssetAttrType
     member :Value, 'The count', :AssetCountValue
   end
   
@@ -26,6 +26,8 @@ package :MTC, 'MTC Top Level Package' do
     member :InstanceId, 'The unique instance identifier of this agent process'
     member :Sender, 'The sender of the message'
     member :BufferSize, 'The size of the agent\'s buffer.'
+    member :AssetBufferSize, 'The maximum number of assets'
+    member :AssetCount, 'The number of assets we have', :AssetCountAttr
     member :AssetCounts, 'The asset statistics', 0..1
   end
 
