@@ -4,13 +4,15 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :Sender, 'The sender of the message'
   attr :CreationTime, 'The date and time the document was created', :dateTime
   attr(:Sequence, 'A sequence number', :integer) do
-    facet 'minIncl=1;maxExcl=18446744073709500000'
+    facet 'minIncl=1;maxExcl=18446744073709551615'
   end
   attr :TestIndicator, 'A debugging flag for testing.', :boolean
   attr(:InstanceId, 'The instance number of the agent, used for fault tolerance', :integer) do
-    facet 'minIncl=1;maxExcl=18446744073709500000'
+    facet 'minIncl=1;maxExcl=18446744073709551615'
   end
-  attr :BufferSize, 'The size of the agents buffer', :integer
+  attr(:BufferSize, 'The size of the agents buffer', :integer) do 
+    facet 'minIncl=1;maxExcl=4294967295'
+  end
   
   attr :Timestamp, 'The time the sample was reported', :dateTime
   attr :OccurrenceTime, 'The time a sample occurred', :dateTime
@@ -26,8 +28,12 @@ package :common, 'Common attributes and elements for all schemas' do
   
   attr :AssetId, 'The unique id of the asset'
   attr :AssetAttrType, 'An asset type'
-  attr :AssetBufferSize, 'The maximum number of assets', :integer
-  attr :AssetCountAttr, 'The number of assets', :integer
+  attr(:AssetBufferSize, 'The maximum number of assets', :integer) do
+    facet 'minIncl=1;maxExcl=4294967295'
+  end
+  attr(:AssetCountAttr, 'The number of assets', :integer) do
+    facet 'minIncl=1;maxExcl=4294967295'    
+  end
 
   basic_type :DescriptionText, 'A description'
   basic_type(:DataItemExt, 'An extension point for data item types') do

@@ -63,7 +63,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'>
       <xs:minInclusive value='1'/>
-      <xs:maxExclusive value='18446744073709500000'/>
+      <xs:maxExclusive value='18446744073709551615'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='TestIndicatorType'>
@@ -82,7 +82,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'>
       <xs:minInclusive value='1'/>
-      <xs:maxExclusive value='18446744073709500000'/>
+      <xs:maxExclusive value='18446744073709551615'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='BufferSizeType'>
@@ -91,7 +91,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The size of the agents buffer
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:integer'/>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='1'/>
+      <xs:maxExclusive value='4294967295'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='TimestampType'>
     <xs:annotation>
@@ -204,7 +207,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The maximum number of assets
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:integer'/>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='1'/>
+      <xs:maxExclusive value='4294967295'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='AssetCountAttrType'>
     <xs:annotation>
@@ -212,7 +218,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The number of assets
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:integer'/>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='1'/>
+      <xs:maxExclusive value='4294967295'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DescriptionTextType'>
     <xs:annotation>
