@@ -9,7 +9,7 @@ load 'common'
 
 package :MTC, 'MTC Top Level Package' do
   basic_type(:AssetCountValue, 'The number of assets', :integer) do
-    facet 'minIncl=1;maxExcl=4294967295'    
+    facet 'minIncl=0;maxExcl=4294967295'    
   end
   
   type :AssetCounts, 'The number of assets by type' do

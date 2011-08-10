@@ -32,7 +32,7 @@ package :common, 'Common attributes and elements for all schemas' do
     facet 'minIncl=1;maxExcl=4294967295'
   end
   attr(:AssetCountAttr, 'The number of assets', :integer) do
-    facet 'minIncl=1;maxExcl=4294967295'    
+    facet 'minIncl=0;maxExcl=4294967295'    
   end
 
   basic_type :DescriptionText, 'A description'
@@ -86,6 +86,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :TEMPERATURE, 'The temperature of the component'
     value :TORQUE, 'The torque - force times distance'
     value :TOOL_ASSET_ID, 'The unique asset identifier of the tool in use'
+    value :TOOL_ID, 'DEPRECATED: Use TOOL_ASSET_ID'
     value :VELOCITY, 'The velocity of the component'
     value :VIBRATION, 'The status indicator'
     value :VOLTAGE, 'The voltage'

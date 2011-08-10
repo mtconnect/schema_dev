@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema targetNamespace='urn:mtconnect.org:MTConnectAssets:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.2' xmlns='urn:mtconnect.org:MTConnectAssets:1.2'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectAssets:1.2' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.2' targetNamespace='urn:mtconnect.org:MTConnectAssets:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified'>
   <xs:element name='MTConnectAssets' type='MTConnectAssetsType'>
     <xs:annotation>
       <xs:documentation>
@@ -629,6 +629,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='ProgramToolGroupType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool group associated with the tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='LocationSizeType'>
     <xs:annotation>
       <xs:documentation>
@@ -644,14 +652,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
-  </xs:simpleType>
-  <xs:simpleType name='ToolGroupType'>
-    <xs:annotation>
-      <xs:documentation>
-        The tool group associated with the tool
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
   </xs:simpleType>
   <xs:simpleType name='EdgeCountType'>
     <xs:annotation>
@@ -847,7 +847,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:any processContents='lax' maxOccurs='unbounded' minOccurs='0'>
+      <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             Any elements
@@ -863,7 +863,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:any processContents='lax' maxOccurs='unbounded' minOccurs='0'>
+      <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             Any elements
@@ -879,7 +879,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The collection of mobile assets
       </xs:documentation>
     </xs:annotation>
-    <xs:choice maxOccurs='unbounded' minOccurs='1'>
+    <xs:choice minOccurs='1' maxOccurs='unbounded'>
       <xs:element ref='Asset'/>
     </xs:choice>
   </xs:complexType>
@@ -890,7 +890,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Description' maxOccurs='1' minOccurs='0' type='AssetDescriptionType'>
+      <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The description of the asset (freeform)
@@ -903,7 +903,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
   </xs:complexType>
-  <xs:element name='Asset' abstract='true' type='AssetType'>
+  <xs:element abstract='true' name='Asset' type='AssetType'>
     <xs:annotation>
       <xs:documentation>
         An abstract mobile asset
@@ -928,7 +928,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
                   </xs:documentation>
                 </xs:annotation>
               </xs:element>
-              <xs:element name='CuttingToolLifeCycle' maxOccurs='1' minOccurs='0' type='CuttingToolLifeCycleType'>
+              <xs:element name='CuttingToolLifeCycle' type='CuttingToolLifeCycleType' minOccurs='0' maxOccurs='1'>
                 <xs:annotation>
                   <xs:documentation>
                     the tool lifecycle
@@ -947,11 +947,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:sequence>
         <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
         <xs:attribute name='toolId' type='ToolIdType' use='required'/>
-        <xs:attribute name='toolGroup' type='ToolGroupType' use='optional'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='CuttingTool' substitutionGroup='Asset' type='CuttingToolType'>
+  <xs:element name='CuttingTool' type='CuttingToolType' substitutionGroup='Asset'>
     <xs:annotation>
       <xs:documentation>
         A cutting tool
@@ -965,7 +964,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Status' maxOccurs='unbounded' minOccurs='1' type='CutterStatusValueType'>
+      <xs:element name='Status' type='CutterStatusValueType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             The status of the cutting tool
@@ -1001,7 +1000,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='ProgramSpindleSpeedType'>
+  <xs:complexType name='ProcessSpindleSpeedType'>
     <xs:annotation>
       <xs:documentation>
         The spindle speed properties of this tool
@@ -1015,7 +1014,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='ProgramFeedRateType'>
+  <xs:complexType name='ProcessFeedRateType'>
     <xs:annotation>
       <xs:documentation>
         The feed rate properties of this tool in MILLIMETERS/SECOND
@@ -1047,7 +1046,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Measurement' abstract='true' type='MeasurementType'>
+  <xs:element abstract='true' name='Measurement' type='MeasurementType'>
     <xs:annotation>
       <xs:documentation>
         An abstract type for edge measurements
@@ -1064,7 +1063,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='MeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='CommonMeasurement' abstract='true' substitutionGroup='Measurement' type='CommonMeasurementType'>
+  <xs:element abstract='true' name='CommonMeasurement' type='CommonMeasurementType' substitutionGroup='Measurement'>
     <xs:annotation>
       <xs:documentation>
         Measurements for both the assembly and the cutting item
@@ -1081,7 +1080,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='MeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AssemblyMeasurement' abstract='true' substitutionGroup='Measurement' type='AssemblyMeasurementType'>
+  <xs:element abstract='true' name='AssemblyMeasurement' type='AssemblyMeasurementType' substitutionGroup='Measurement'>
     <xs:annotation>
       <xs:documentation>
         Measurements for the assembly
@@ -1098,7 +1097,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='MeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='CuttingItemMeasurement' abstract='true' substitutionGroup='Measurement' type='CuttingItemMeasurementType'>
+  <xs:element abstract='true' name='CuttingItemMeasurement' type='CuttingItemMeasurementType' substitutionGroup='Measurement'>
     <xs:annotation>
       <xs:documentation>
         Measurements for the cutting item
@@ -1111,7 +1110,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         A collection of assembly measurements
       </xs:documentation>
     </xs:annotation>
-    <xs:choice maxOccurs='unbounded' minOccurs='1'>
+    <xs:choice minOccurs='1' maxOccurs='unbounded'>
       <xs:element ref='CommonMeasurement'/>
       <xs:element ref='AssemblyMeasurement'/>
     </xs:choice>
@@ -1127,7 +1126,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ProtrudingLength' substitutionGroup='CommonMeasurement' type='ProtrudingLengthType'>
+  <xs:element name='ProtrudingLength' type='ProtrudingLengthType' substitutionGroup='CommonMeasurement'>
     <xs:annotation>
       <xs:documentation>
         dimension from the yz-plane to the furthest point of the tool item or
@@ -1145,7 +1144,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Weight' substitutionGroup='CommonMeasurement' type='WeightType'>
+  <xs:element name='Weight' type='WeightType' substitutionGroup='CommonMeasurement'>
     <xs:annotation>
       <xs:documentation>
         WT: The weight measured in grams
@@ -1162,7 +1161,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='FunctionalLength' substitutionGroup='CommonMeasurement' type='FunctionalLengthType'>
+  <xs:element name='FunctionalLength' type='FunctionalLengthType' substitutionGroup='CommonMeasurement'>
     <xs:annotation>
       <xs:documentation>
         LF: The furthest distance from the gauge plane.
@@ -1179,7 +1178,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AssemblyMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='BodyDiameterMax' substitutionGroup='AssemblyMeasurement' type='BodyDiameterMaxType'>
+  <xs:element name='BodyDiameterMax' type='BodyDiameterMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
         BDX: The largest diameter of the body of a tool item
@@ -1201,7 +1200,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AssemblyMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='BodyLengthMax' substitutionGroup='AssemblyMeasurement' type='BodyLengthMaxType'>
+  <xs:element name='BodyLengthMax' type='BodyLengthMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
         LBX: The distance measured along the X axis from that point of the item
@@ -1225,7 +1224,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AssemblyMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='CuttingDiameterMax' substitutionGroup='AssemblyMeasurement' type='CuttingDiameterMaxType'>
+  <xs:element name='CuttingDiameterMax' type='CuttingDiameterMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
         DC: The maximum diameter of a circle on which the defined point Pk of
@@ -1245,7 +1244,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AssemblyMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='FlangeDiameterMax' substitutionGroup='AssemblyMeasurement' type='FlangeDiameterMaxType'>
+  <xs:element name='FlangeDiameterMax' type='FlangeDiameterMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
         The maxumum dimension between two parallel tangents on the outside edge
@@ -1264,7 +1263,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AssemblyMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='DepthOfCutMax' substitutionGroup='AssemblyMeasurement' type='DepthOfCutMaxType'>
+  <xs:element name='DepthOfCutMax' type='DepthOfCutMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
         APMX: The maximum engagement of the cutting edge or edges with the
@@ -1283,7 +1282,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AssemblyMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='OverallToolLength' substitutionGroup='AssemblyMeasurement' type='OverallToolLengthType'>
+  <xs:element name='OverallToolLength' type='OverallToolLengthType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
         OAL: largest length dimension of the tool item including the master
@@ -1302,7 +1301,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AssemblyMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ShankDiameter' substitutionGroup='AssemblyMeasurement' type='ShankDiameterType'>
+  <xs:element name='ShankDiameter' type='ShankDiameterType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
         DMM: dimension of the diameter of a cylindrical portion of a tool item
@@ -1320,7 +1319,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AssemblyMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ShankHeight' substitutionGroup='AssemblyMeasurement' type='ShankHeightType'>
+  <xs:element name='ShankHeight' type='ShankHeightType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
         H: dimension of the height of a shank
@@ -1337,7 +1336,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AssemblyMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ShankLength' substitutionGroup='AssemblyMeasurement' type='ShankLengthType'>
+  <xs:element name='ShankLength' type='ShankLengthType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
         LS: dimension of the length of a shank
@@ -1355,7 +1354,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AssemblyMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='UsableLengthMax' substitutionGroup='AssemblyMeasurement' type='UsableLengthMaxType'>
+  <xs:element name='UsableLengthMax' type='UsableLengthMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
         The maximum length of a cutting tool that can be used in a particular
@@ -1370,56 +1369,63 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='CutterStatus' minOccurs='1' type='CutterStatusType'>
+      <xs:element name='CutterStatus' type='CutterStatusType' minOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The state of the tool assembly
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ReconditionCount' maxOccurs='1' minOccurs='0' type='ReconditionCountType'>
+      <xs:element name='ReconditionCount' type='ReconditionCountType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The number of times the cutter has been reconditioned
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ToolLife' maxOccurs='1' minOccurs='0' type='LifeType'>
+      <xs:element name='ToolLife' type='LifeType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The life of the cutting tool assembly
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ProgramToolNumber' maxOccurs='1' minOccurs='0' type='ProgramToolNumberType'>
+      <xs:element name='ProgramToolGroup' type='ProgramToolGroupType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The number used to identify this tool in the program
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Location' maxOccurs='1' minOccurs='0' type='LocationType'>
+      <xs:element name='ProgramToolNumber' type='ProgramToolNumberType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The number used to identify this tool in the program
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Location' type='LocationType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The pocket location
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ProgramSpindleSpeed' maxOccurs='1' minOccurs='0' type='ProgramSpindleSpeedType'>
+      <xs:element name='ProcessSpindleSpeed' type='ProcessSpindleSpeedType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The tools constraned programmed spindle speed
+            The tools constrained process target spindle speed
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ProgramFeedRate' maxOccurs='1' minOccurs='0' type='ProgramFeedRateType'>
+      <xs:element name='ProcessFeedRate' type='ProcessFeedRateType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The tools constraned programmed feed rate
+            The tools constrained process target feed rate
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ConnectionCodeMachineSide' maxOccurs='1' minOccurs='0' type='ConnectionCodeMachineSideType'>
+      <xs:element name='ConnectionCodeMachineSide' type='ConnectionCodeMachineSideType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             CCMS: identifier for the cabability to connect any component of the
@@ -1427,14 +1433,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Measurements' maxOccurs='1' minOccurs='0' type='AssemblyMeasurementsType'>
+      <xs:element name='Measurements' type='AssemblyMeasurementsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A set of measurements associated with the cutting tool
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='CuttingItems' maxOccurs='1' minOccurs='0' type='CuttingItemsType'>
+      <xs:element name='CuttingItems' type='CuttingItemsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             An optional list of edges for this assembly
@@ -1453,8 +1459,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ToolLifeValueType'>
         <xs:attribute name='type' type='ToolLifeType' use='required'/>
         <xs:attribute name='countDirection' type='ToolLifeDirectionType' use='required'/>
-        <xs:attribute name='warningLevel' type='ToolLifeValueType' use='optional'/>
-        <xs:attribute name='maximum' type='ToolLifeValueType' use='required'/>
+        <xs:attribute name='warning' type='ToolLifeValueType' use='optional'/>
+        <xs:attribute name='limit' type='ToolLifeValueType' use='required'/>
+        <xs:attribute name='initial' type='ToolLifeValueType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1464,7 +1471,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         A collection of assembly measurements
       </xs:documentation>
     </xs:annotation>
-    <xs:choice maxOccurs='unbounded' minOccurs='1'>
+    <xs:choice minOccurs='1' maxOccurs='unbounded'>
       <xs:element ref='CommonMeasurement'/>
       <xs:element ref='CuttingItemMeasurement'/>
     </xs:choice>
@@ -1481,7 +1488,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='CuttingDiameter' substitutionGroup='CuttingItemMeasurement' type='CuttingDiameterType'>
+  <xs:element name='CuttingDiameter' type='CuttingDiameterType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         diameter of a circle on which the defined point Pk of each of the master
@@ -1500,7 +1507,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='CornerRadius' substitutionGroup='CuttingItemMeasurement' type='CornerRadiusType'>
+  <xs:element name='CornerRadius' type='CornerRadiusType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         nominal radius of a rounded corner measured in the XY-plane
@@ -1518,7 +1525,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='CuttingEdgeLength' substitutionGroup='CuttingItemMeasurement' type='CuttingEdgeLengthType'>
+  <xs:element name='CuttingEdgeLength' type='CuttingEdgeLengthType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         theoretical length of the cutting edge of a cutting item over sharp
@@ -1537,7 +1544,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='CuttingHeight' substitutionGroup='CuttingItemMeasurement' type='CuttingHeightType'>
+  <xs:element name='CuttingHeight' type='CuttingHeightType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         theoretical length of the cutting edge of a cutting item over sharp
@@ -1556,7 +1563,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='CuttingReferencePoiint' substitutionGroup='CuttingItemMeasurement' type='CuttingReferencePoiintType'>
+  <xs:element name='CuttingReferencePoiint' type='CuttingReferencePoiintType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         the theoretical sharp point of the cutting tool from which the major
@@ -1574,7 +1581,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='FlangeDiameter' substitutionGroup='CuttingItemMeasurement' type='FlangeDiameterType'>
+  <xs:element name='FlangeDiameter' type='FlangeDiameterType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         dimension between two parallel tangents on the outside edge of a flange
@@ -1592,7 +1599,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='FunctionalWidth' substitutionGroup='CuttingItemMeasurement' type='FunctionalWidthType'>
+  <xs:element name='FunctionalWidth' type='FunctionalWidthType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         distance between the cutting reference point and the rear backing
@@ -1611,7 +1618,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='InclinationAngle' substitutionGroup='CuttingItemMeasurement' type='InclinationAngleType'>
+  <xs:element name='InclinationAngle' type='InclinationAngleType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         angle between the tool rake plane and a plane parallel to the xy-plane
@@ -1630,7 +1637,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='IncribedCircleDiameter' substitutionGroup='CuttingItemMeasurement' type='IncribedCircleDiameterType'>
+  <xs:element name='IncribedCircleDiameter' type='IncribedCircleDiameterType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         diameter of a circle to which all edges of a equilateral and round
@@ -1649,7 +1656,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PointAngle' substitutionGroup='CuttingItemMeasurement' type='PointAngleType'>
+  <xs:element name='PointAngle' type='PointAngleType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         angle between the major cutting edge and the same cutting edge rotated
@@ -1670,7 +1677,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='StepDiameterLength' substitutionGroup='CuttingItemMeasurement' type='StepDiameterLengthType'>
+  <xs:element name='StepDiameterLength' type='StepDiameterLengthType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         length of a portion of a cutting tool that is related to the
@@ -1691,7 +1698,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='StepIncludedAngle' substitutionGroup='CuttingItemMeasurement' type='StepIncludedAngleType'>
+  <xs:element name='StepIncludedAngle' type='StepIncludedAngleType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         angle between a major edge on a step of a stepped tool and the same
@@ -1710,7 +1717,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ToolCuttingEdgeAngle' substitutionGroup='CuttingItemMeasurement' type='ToolCuttingEdgeAngleType'>
+  <xs:element name='ToolCuttingEdgeAngle' type='ToolCuttingEdgeAngleType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         angle between the tool cutting edge plane and the tool feed plane
@@ -1729,7 +1736,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ToolLeadAngle' substitutionGroup='CuttingItemMeasurement' type='ToolLeadAngleType'>
+  <xs:element name='ToolLeadAngle' type='ToolLeadAngleType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         angle between the tool cutting edge plane and a plane perpendicular to
@@ -1747,7 +1754,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CuttingItemMeasurementType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='WiperEdgeLength' substitutionGroup='CuttingItemMeasurement' type='WiperEdgeLengthType'>
+  <xs:element name='WiperEdgeLength' type='WiperEdgeLengthType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
         measure of the length of a wiper edge of a cutting item
@@ -1791,7 +1798,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='CuttingItem' maxOccurs='unbounded' minOccurs='1' type='CuttingItemType'>
+      <xs:element name='CuttingItem' type='CuttingItemType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             An edge
@@ -1808,28 +1815,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Description' maxOccurs='1' minOccurs='0' type='AssetDescriptionType'>
+      <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The description of the cutting item
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Locus' maxOccurs='1' minOccurs='0' type='LocusType'>
+      <xs:element name='Locus' type='LocusType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The cutting item&apos;s location on the cutting tool
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ItemLife' maxOccurs='1' minOccurs='0' type='LifeType'>
+      <xs:element name='ItemLife' type='LifeType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The life of an edge
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Measurements' maxOccurs='1' minOccurs='0' type='CuttingItemMeasurementsType'>
+      <xs:element name='Measurements' type='CuttingItemMeasurementsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A set of measurements associated with the cutting tool

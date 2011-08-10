@@ -6,10 +6,10 @@ package :Assets, 'Mobile Assets' do
   basic_type :ProgramToolNumber, 'The number referenced in the program for this tool', :integer
   basic_type :ReconditionCountValue, 'The number of times the cutter has been reconditioned', :integer
   basic_type :ConnectionCodeMachineSide, 'The code for the connection to the machine'
+  basic_type :ProgramToolGroup, 'The tool group associated with the tool'
   
   attr :LocationSize, 'The number of location units required to hold this tool', :integer
   attr :ToolId, 'The identifier of the tool type', :NMTOKEN
-  attr :ToolGroup, 'The tool group associated with the tool'
   attr :EdgeCount, 'The number of cutting edges', :integer
   attr :Overlap, 'The number of additional locations taken by a tool', :integer
   attr :ToolLifeValue, 'The life of the tool in time, wear, or parts', :float
@@ -98,7 +98,6 @@ package :Assets, 'Mobile Assets' do
   type :CuttingTool, 'A cutting tool', :Asset do
     member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
     member :ToolId, 'The Identifier of the tool type'
-    member :ToolGroup, 'The Identifier of the tool type', 0..1
     
     at_least_one do 
       member :CuttingToolDefinition, 'Description of tool'
@@ -122,14 +121,14 @@ package :Assets, 'Mobile Assets' do
     member :Value, 'The number of times', :ReconditionCountValue
   end
   
-  type :ProgramSpindleSpeed, 'The spindle speed properties of this tool' do
+  type :ProcessSpindleSpeed, 'The spindle speed properties of this tool' do
     member :Maximum, 'The maximum speed this tool may operate at', 0..1
     member :Minimum, 'The minimum speed this tool may operate at', 0..1
     member :Nominal, 'The nominal speed this tool may operate at', 0..1
     member :Value, 'The actual tool spindle speed', 0..1, :Speed
   end
 
-  type :ProgramFeedRate, 'The feed rate properties of this tool in MILLIMETERS/SECOND' do
+  type :ProcessFeedRate, 'The feed rate properties of this tool in MILLIMETERS/SECOND' do
     member :Maximum, 'The maximum feed rate this tool may operate at', 0..1
     member :Minimum, 'The minimum feed rate this tool may operate at', 0..1
     member :Nominal, 'The nominal feed rate this tool may operate at', 0..1
@@ -191,10 +190,11 @@ package :Assets, 'Mobile Assets' do
     member :ToolLife, 'The life of the cutting tool assembly', 0..1, :Life
     
     # Properties
+    member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
     member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
     member :Location, 'The pocket location', 0..1
-    member :ProgramSpindleSpeed, 'The tools constraned programmed spindle speed', 0..1
-    member :ProgramFeedRate, 'The tools constraned programmed feed rate', 0..1
+    member :ProcessSpindleSpeed, 'The tools constrained process target spindle speed', 0..1
+    member :ProcessFeedRate, 'The tools constrained process target feed rate', 0..1
     member :ConnectionCodeMachineSide, 'CCMS: identifier for the cabability to connect any component of the cutting tool together, except assembly items, on the machine side', 0..1
     
     # Measurements
@@ -207,8 +207,9 @@ package :Assets, 'Mobile Assets' do
   type :Life, 'Abstract cutter life' do 
     member :Type, 'One of time, part count, or wear', 1, :ToolLifeType
     member :CountDirection, 'The count up or count down', 1, :ToolLifeDirection
-    member :WarningLevel, 'Tool life warning level', 0..1, :ToolLifeValue
-    member :Maximum, 'Maximum tool life', 1, :ToolLifeValue
+    member :Warning, 'Tool life warning level', 0..1, :ToolLifeValue
+    member :Limit, 'Maximum tool life', 1, :ToolLifeValue
+    member :Initial, 'The life when the tool is new', 1, :ToolLifeValue
     member :Value, 'The current tool life', :ToolLifeValue
   end
   

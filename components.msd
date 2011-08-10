@@ -30,14 +30,14 @@ package :Component, 'Top Level Components Package' do
     member :any, 'Any desciptive schema like calibration', 0..INF
   end
   
-  type :Configuration, 'Abstract configuration' do
+  type :AbstractConfiguration, 'Abstract configuration' do
     abstract
   end
   
   type :ComponentConfiguration, 'The configuration data associated with this component. For example, sensors may use 1451.5 or TEDS' do
     mixed
     
-    member :Configuration,  'Configuration types', 0..1
+    member :Configuration,  'Configuration types', 0..1, :AbstractConfiguration
   end
   
   type :CommonComponent, "An abstract component that has an optional uuid", :Component do 

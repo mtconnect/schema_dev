@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema targetNamespace='urn:mtconnect.org:MTConnectDevices:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.2' xmlns='urn:mtconnect.org:MTConnectDevices:1.2'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectDevices:1.2' xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.2' targetNamespace='urn:mtconnect.org:MTConnectDevices:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified'>
   <xs:element name='MTConnectDevices' type='MTConnectDevicesType'>
     <xs:annotation>
       <xs:documentation>
@@ -219,7 +219,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:integer'>
-      <xs:minInclusive value='1'/>
+      <xs:minInclusive value='0'/>
       <xs:maxExclusive value='4294967295'/>
     </xs:restriction>
   </xs:simpleType>
@@ -296,6 +296,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TEMPERATURE'/>
       <xs:enumeration value='TORQUE'/>
       <xs:enumeration value='TOOL_ASSET_ID'/>
+      <xs:enumeration value='TOOL_ID'/>
       <xs:enumeration value='VELOCITY'/>
       <xs:enumeration value='VIBRATION'/>
       <xs:enumeration value='VOLTAGE'/>
@@ -563,7 +564,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:integer'>
-      <xs:minInclusive value='1'/>
+      <xs:minInclusive value='0'/>
       <xs:maxExclusive value='4294967295'/>
     </xs:restriction>
   </xs:simpleType>
@@ -574,7 +575,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='AssetCount' maxOccurs='unbounded' minOccurs='1' type='AssetCountType'>
+      <xs:element name='AssetCount' type='AssetCountType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             The number of assets for a given type
@@ -602,7 +603,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='AssetCounts' maxOccurs='1' minOccurs='0' type='AssetCountsType'>
+      <xs:element name='AssetCounts' type='AssetCountsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The asset statistics
@@ -673,7 +674,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Device' maxOccurs='unbounded' minOccurs='1' type='DeviceType'>
+      <xs:element name='Device' type='DeviceType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             A piece of equipment
@@ -689,28 +690,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Description' maxOccurs='1' minOccurs='0' type='ComponentDescriptionType'>
+      <xs:element name='Description' type='ComponentDescriptionType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The descriptive information about this component
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Configuration' maxOccurs='1' minOccurs='0' type='ComponentConfigurationType'>
+      <xs:element name='Configuration' type='ComponentConfigurationType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The configuration information about this component
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='DataItems' maxOccurs='1' minOccurs='0' type='DataItemsType'>
+      <xs:element name='DataItems' type='DataItemsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The component&apos;s Data Items
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Components' maxOccurs='1' minOccurs='0' type='ComponentsType'>
+      <xs:element name='Components' type='ComponentsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The sub components
@@ -723,7 +724,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='nativeName' type='NameType' use='optional'/>
     <xs:attribute name='sampleInterval' type='SampleIntervalType' use='optional'/>
   </xs:complexType>
-  <xs:element name='Component' abstract='true' type='ComponentType'>
+  <xs:element abstract='true' name='Component' type='ComponentType'>
     <xs:annotation>
       <xs:documentation>
         An abstract component type. This is a placeholder for all components
@@ -738,7 +739,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:any processContents='lax' maxOccurs='unbounded' minOccurs='0'>
+      <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             Any desciptive schema like calibration
@@ -751,14 +752,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='serialNumber' type='SerialNumberType' use='optional'/>
     <xs:attribute name='station' type='StationType' use='optional'/>
   </xs:complexType>
-  <xs:complexType name='ConfigurationType' abstract='true'>
+  <xs:complexType name='AbstractConfigurationType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
         Abstract configuration
       </xs:documentation>
     </xs:annotation>
   </xs:complexType>
-  <xs:element name='Configuration' abstract='true' type='ConfigurationType'>
+  <xs:element abstract='true' name='AbstractConfiguration' type='AbstractConfigurationType'>
     <xs:annotation>
       <xs:documentation>
         Abstract configuration
@@ -773,7 +774,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs='1' minOccurs='0' ref='Configuration'/>
+      <xs:element ref='AbstractConfiguration' minOccurs='0' maxOccurs='1'/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name='CommonComponentType'>
@@ -788,7 +789,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='CommonComponent' substitutionGroup='Component' type='CommonComponentType'>
+  <xs:element name='CommonComponent' type='CommonComponentType' substitutionGroup='Component'>
     <xs:annotation>
       <xs:documentation>
         An abstract component that has an optional uuid
@@ -802,7 +803,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs='unbounded' minOccurs='1' ref='Component'/>
+      <xs:element ref='Component' minOccurs='1' maxOccurs='unbounded'/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name='DeviceType'>
@@ -818,7 +819,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Device' substitutionGroup='Component' type='DeviceType'>
+  <xs:element name='Device' type='DeviceType' substitutionGroup='Component'>
     <xs:annotation>
       <xs:documentation>
         The top level component managed by the agent
@@ -835,7 +836,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Controller' substitutionGroup='CommonComponent' type='ControllerType'>
+  <xs:element name='Controller' type='ControllerType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
         A controller
@@ -852,7 +853,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Power' substitutionGroup='CommonComponent' type='PowerType'>
+  <xs:element name='Power' type='PowerType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: A power measuring component
@@ -869,7 +870,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Sensor' substitutionGroup='CommonComponent' type='SensorType'>
+  <xs:element name='Sensor' type='SensorType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
         A sensor, this is not abstract to allow for easy extensibility.
@@ -886,7 +887,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Path' substitutionGroup='CommonComponent' type='PathType'>
+  <xs:element name='Path' type='PathType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
         A path component
@@ -903,7 +904,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Actuator' substitutionGroup='CommonComponent' type='ActuatorType'>
+  <xs:element name='Actuator' type='ActuatorType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
         A component that causes motion
@@ -920,7 +921,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Door' substitutionGroup='CommonComponent' type='DoorType'>
+  <xs:element name='Door' type='DoorType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
         A door on the machine
@@ -974,7 +975,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='ConfigurationType'>
+      <xs:extension base='AbstractConfigurationType'>
         <xs:sequence>
           <xs:element name='FirmwareVersion' type='FirmwareVersionType'>
             <xs:annotation>
@@ -983,28 +984,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='CalibrationDate' maxOccurs='1' minOccurs='0' type='CalibrationDateType'>
+          <xs:element name='CalibrationDate' type='CalibrationDateType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 The date and time the sensor was calibrated
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='NextCalibrationDate' maxOccurs='1' minOccurs='0' type='NextCalibrationDateType'>
+          <xs:element name='NextCalibrationDate' type='NextCalibrationDateType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 The date and time the sensor was calibrated
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='CalibrationInitials' maxOccurs='1' minOccurs='0' type='CalibrationInitialsType'>
+          <xs:element name='CalibrationInitials' type='CalibrationInitialsType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 The initials of the person who calibrated this sensor
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Channels' maxOccurs='1' minOccurs='0' type='ChannelsType'>
+          <xs:element name='Channels' type='ChannelsType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 The sensor channels
@@ -1015,7 +1016,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='SensorConfiguration' substitutionGroup='Configuration' type='SensorConfigurationType'>
+  <xs:element name='SensorConfiguration' type='SensorConfigurationType' substitutionGroup='AbstractConfiguration'>
     <xs:annotation>
       <xs:documentation>
         Calibration data for a sensor
@@ -1029,7 +1030,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Channel' maxOccurs='unbounded' minOccurs='1' type='ChannelType'>
+      <xs:element name='Channel' type='ChannelType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             A calabration channel
@@ -1045,28 +1046,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Description' maxOccurs='1' minOccurs='0' type='DescriptionTextType'>
+      <xs:element name='Description' type='DescriptionTextType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A text description of the channel
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='CalibrationDate' maxOccurs='1' minOccurs='0' type='CalibrationDateType'>
+      <xs:element name='CalibrationDate' type='CalibrationDateType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The date and time the sensor was calibrated
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='NextCalibrationDate' maxOccurs='1' minOccurs='0' type='NextCalibrationDateType'>
+      <xs:element name='NextCalibrationDate' type='NextCalibrationDateType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The date and time the sensor was calibrated
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='CalibrationInitials' maxOccurs='1' minOccurs='0' type='CalibrationInitialsType'>
+      <xs:element name='CalibrationInitials' type='CalibrationInitialsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The initials of the person who calibrated this sensor
@@ -1087,7 +1088,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Axes' substitutionGroup='CommonComponent' type='AxesType'>
+  <xs:element name='Axes' type='AxesType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
         A logical group of Axes representing a structural base
@@ -1104,7 +1105,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Axis' abstract='true' substitutionGroup='CommonComponent' type='AxisType'>
+  <xs:element abstract='true' name='Axis' type='AxisType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
         A abstract machine axis
@@ -1121,7 +1122,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AxisType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Linear' substitutionGroup='Axis' type='LinearType'>
+  <xs:element name='Linear' type='LinearType' substitutionGroup='Axis'>
     <xs:annotation>
       <xs:documentation>
         A linear axis
@@ -1138,7 +1139,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AxisType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Rotary' substitutionGroup='Axis' type='RotaryType'>
+  <xs:element name='Rotary' type='RotaryType' substitutionGroup='Axis'>
     <xs:annotation>
       <xs:documentation>
         A rotary axis that moves in a rotational manor
@@ -1155,7 +1156,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AxisType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Spindle' substitutionGroup='Axis' type='SpindleType'>
+  <xs:element name='Spindle' type='SpindleType' substitutionGroup='Axis'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: A spindle axis that spins
@@ -1172,7 +1173,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Systems' substitutionGroup='CommonComponent' type='SystemsType'>
+  <xs:element name='Systems' type='SystemsType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
         A grouping of all the systems of the device
@@ -1189,7 +1190,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='System' substitutionGroup='CommonComponent' type='SystemType'>
+  <xs:element name='System' type='SystemType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
         A logical group of parts representing sub-system of the device
@@ -1206,7 +1207,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='SystemType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Pneumatic' substitutionGroup='System' type='PneumaticType'>
+  <xs:element name='Pneumatic' type='PneumaticType' substitutionGroup='System'>
     <xs:annotation>
       <xs:documentation>
         A component representing the pneumatic system
@@ -1223,7 +1224,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='SystemType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Hydraulic' substitutionGroup='System' type='HydraulicType'>
+  <xs:element name='Hydraulic' type='HydraulicType' substitutionGroup='System'>
     <xs:annotation>
       <xs:documentation>
         A component representing the hydraulic system
@@ -1240,7 +1241,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='SystemType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Lubrication' substitutionGroup='System' type='LubricationType'>
+  <xs:element name='Lubrication' type='LubricationType' substitutionGroup='System'>
     <xs:annotation>
       <xs:documentation>
         A component representing the lubrication system
@@ -1257,7 +1258,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='SystemType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Coolant' substitutionGroup='System' type='CoolantType'>
+  <xs:element name='Coolant' type='CoolantType' substitutionGroup='System'>
     <xs:annotation>
       <xs:documentation>
         A component representing the coolant system
@@ -1274,7 +1275,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='SystemType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Electric' substitutionGroup='System' type='ElectricType'>
+  <xs:element name='Electric' type='ElectricType' substitutionGroup='System'>
     <xs:annotation>
       <xs:documentation>
         A component representing the coolant system
@@ -1367,7 +1368,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='DataItem' maxOccurs='unbounded' minOccurs='1' type='DataItemType'>
+      <xs:element name='DataItem' type='DataItemType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             A measurement for this component
@@ -1383,7 +1384,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Source' maxOccurs='1' minOccurs='0' type='SourceType'>
+      <xs:element name='Source' type='SourceType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             Additional information about the component, channel, register,
@@ -1391,7 +1392,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Constraints' maxOccurs='1' minOccurs='0' type='DataItemLimitsType'>
+      <xs:element name='Constraints' type='DataItemLimitsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             Limits on the set of possible values
@@ -1410,7 +1411,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='category' type='CategoryType' use='required'/>
     <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'/>
     <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
-    <xs:attribute name='representation' default='VALUE' type='RepresentationType' use='optional'/>
+    <xs:attribute name='representation' type='RepresentationType' use='optional' default='VALUE'/>
     <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='DataItemLimitsType'>
@@ -1421,7 +1422,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:choice minOccurs='1'>
       <xs:sequence minOccurs='1'>
-        <xs:element name='Value' maxOccurs='unbounded' minOccurs='1' type='DataItemValueElementType'>
+        <xs:element name='Value' type='DataItemValueElementType' minOccurs='1' maxOccurs='unbounded'>
           <xs:annotation>
             <xs:documentation>
               An possible value for this data item. Used for controlled
