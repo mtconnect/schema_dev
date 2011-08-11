@@ -219,7 +219,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:integer'>
-      <xs:minInclusive value='1'/>
+      <xs:minInclusive value='0'/>
       <xs:maxExclusive value='4294967295'/>
     </xs:restriction>
   </xs:simpleType>
@@ -296,6 +296,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TEMPERATURE'/>
       <xs:enumeration value='TORQUE'/>
       <xs:enumeration value='TOOL_ASSET_ID'/>
+      <xs:enumeration value='TOOL_ID'/>
       <xs:enumeration value='VELOCITY'/>
       <xs:enumeration value='VIBRATION'/>
       <xs:enumeration value='VOLTAGE'/>

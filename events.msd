@@ -33,6 +33,7 @@ package :Events, 'Event Package' do
     value :INTERRUPTED, 'The program has been paused'
     value :ACTIVE, 'The program is actively running'
     value :STOPPED, 'The program has been stopped'
+    value :FEED_HOLD, 'The machine is in feed hold - spindle spinning/axis stopped'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
@@ -47,6 +48,7 @@ package :Events, 'Event Package' do
   enum :DoorStateValue, 'The status of a door' do
     value :OPEN, 'The door is open'
     value :CLOSED, 'The door is closed'
+    value :UNLATCHED, 'The door is not latched closed, but may not fully open'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   

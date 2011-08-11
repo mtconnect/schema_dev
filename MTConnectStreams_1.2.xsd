@@ -219,7 +219,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:integer'>
-      <xs:minInclusive value='1'/>
+      <xs:minInclusive value='0'/>
       <xs:maxExclusive value='4294967295'/>
     </xs:restriction>
   </xs:simpleType>
@@ -296,6 +296,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TEMPERATURE'/>
       <xs:enumeration value='TORQUE'/>
       <xs:enumeration value='TOOL_ASSET_ID'/>
+      <xs:enumeration value='TOOL_ID'/>
       <xs:enumeration value='VELOCITY'/>
       <xs:enumeration value='VIBRATION'/>
       <xs:enumeration value='VOLTAGE'/>
@@ -1091,6 +1092,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='FillLevelValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The fill level of a tank
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name='SampleRateType'>
     <xs:annotation>
       <xs:documentation>
@@ -1320,7 +1331,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='RotationalVelocityType'>
+  <xs:complexType name='RotaryVelocityType'>
     <xs:annotation>
       <xs:documentation>
         The rotational velocity of the component in RPM
@@ -1332,7 +1343,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='RotationalVelocity' type='RotationalVelocityType' substitutionGroup='Sample'>
+  <xs:element name='RotaryVelocity' type='RotaryVelocityType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The rotational velocity of the component in RPM
@@ -1776,6 +1787,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='FillLevelType'>
+    <xs:annotation>
+      <xs:documentation>
+        The fill level of a tank
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='FillLevel' type='FillLevelType' substitutionGroup='Sample'>
+    <xs:annotation>
+      <xs:documentation>
+        The fill level of a tank
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='LinearForceType'>
     <xs:annotation>
       <xs:documentation>
@@ -2016,7 +2046,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='RotationalVelocityTimeSeriesType'>
+  <xs:complexType name='RotaryVelocityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
         Time series of The rotational velocity of the component in RPM
@@ -2026,7 +2056,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='RotationalVelocityTimeSeries' type='RotationalVelocityTimeSeriesType' substitutionGroup='TimeSeries'>
+  <xs:element name='RotaryVelocityTimeSeries' type='RotaryVelocityTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The rotational velocity of the component in RPM
@@ -2426,6 +2456,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='FillLevelTimeSeriesType'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of The fill level of a tank
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='TimeSeriesType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='FillLevelTimeSeries' type='FillLevelTimeSeriesType' substitutionGroup='TimeSeries'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of The fill level of a tank
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='LinearForceTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -2593,6 +2640,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='INTERRUPTED'/>
       <xs:enumeration value='ACTIVE'/>
       <xs:enumeration value='STOPPED'/>
+      <xs:enumeration value='FEED_HOLD'/>
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
@@ -2619,6 +2667,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:restriction base='xs:string'>
       <xs:enumeration value='OPEN'/>
       <xs:enumeration value='CLOSED'/>
+      <xs:enumeration value='UNLATCHED'/>
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
@@ -2878,6 +2927,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:enumeration value='INTERRUPTED'/>
         <xs:enumeration value='ACTIVE'/>
         <xs:enumeration value='STOPPED'/>
+        <xs:enumeration value='FEED_HOLD'/>
         <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
@@ -2956,6 +3006,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:restriction base='EventType'>
         <xs:enumeration value='OPEN'/>
         <xs:enumeration value='CLOSED'/>
+        <xs:enumeration value='UNLATCHED'/>
         <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
