@@ -92,11 +92,11 @@ package :Assets, 'Mobile Assets' do
     member :Manufacturers, 'The manufacturer of this asset', 0..1
     member :Description, 'The description of the asset (freeform)', 0..1, :AssetDescription
     member :Timestamp, 'The time asset information was recorded'
+    member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
   end
     
   # Cutting tool definition
   type :CuttingTool, 'A cutting tool', :Asset do
-    member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
     member :ToolId, 'The Identifier of the tool type'
     
     at_least_one do 
@@ -187,7 +187,7 @@ package :Assets, 'Mobile Assets' do
     # Status
     member :CutterStatus, 'The state of the tool assembly', 1
     member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
-    member :ToolLife, 'The life of the cutting tool assembly', 0..1, :Life
+    member :ToolLife, 'The life of the cutting tool assembly', 0..3, :Life
     
     # Properties
     member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
@@ -255,7 +255,7 @@ package :Assets, 'Mobile Assets' do
     
     member :Description, 'The description of the cutting item', 0..1, :AssetDescription
     member :Locus, 'The cutting item\'s location on the cutting tool', 0..1
-    member :ItemLife, 'The life of an edge', 0..1, :Life
+    member :ItemLife, 'The life of an edge', 0..3, :Life
     
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :CuttingItemMeasurements
