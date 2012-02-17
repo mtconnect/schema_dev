@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectStreams xmlns:mt="urn:mtconnect.org:MTConnectStreams:1.2" xmlns="urn:mtconnect.org:MTConnectStreams:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectStreams:1.2 ../MTConnectStreams_1.2.xsd">
+  <Header creationTime="2010-03-04T18:58:50+00:00" sender="localhost" instanceId="1267728234" bufferSize="131072" version="1.1" nextSequence="183806" firstSequence="52734" lastSequence="183805" />
+  <Streams>
+    <DeviceStream name="VMC-3Axis" uuid="000">
+      <ComponentStream component="Device" name="vmc" componentId="c1">
+		  <Events>
+			  <AssetAdded dataItemId="a1" name="asset" sequence="12" timestamp="2011-01-07T12:32:00Z">T1231</AssetAdded>
+			  <AssetChanged dataItemId="a1" name="asset" sequence="12" timestamp="2011-01-07T12:32:00Z">T5551</AssetChanged>
+		  </Events>
+	  </ComponentStream>
+	 </DeviceStream>
+	</Streams>
+</MTConnectStreams>

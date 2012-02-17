@@ -12,11 +12,13 @@ package :Events, 'Event Package' do
   basic_type :PartIdValue, 'The part identifier'
   basic_type :WorkholdingIdValue, 'The workholding identifier'
   basic_type :MessageValue, 'A message'
-  basic_type(:AxesListValue, 'A space delimited list of values') { pattern '[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
-  
+  basic_type(:AxesListValue, 'A space delimited list of values') { pattern 'UNAVAILABLE|[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
+    
   enum :DirectionValue, 'Rotation Direction' do
-    value :CLOCKWISE, 'Clockwise rotation'
-    value :COUNTER_CLOCKWISE, 'Counter clockwise rotation'
+    value :CLOCKWISE, 'Rotary clockwise rotation'
+    value :COUNTER_CLOCKWISE, 'Rotary counter clockwise rotation'
+    value :POSITIVE, 'Linear motion in ascending values'
+    value :NEGATIVE, 'Linear motion in decending values'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
 
@@ -31,6 +33,7 @@ package :Events, 'Event Package' do
     value :INTERRUPTED, 'The program has been paused'
     value :ACTIVE, 'The program is actively running'
     value :STOPPED, 'The program has been stopped'
+    value :FEED_HOLD, 'The machine is in feed hold - spindle spinning/axis stopped'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
@@ -45,6 +48,7 @@ package :Events, 'Event Package' do
   enum :DoorStateValue, 'The status of a door' do
     value :OPEN, 'The door is open'
     value :CLOSED, 'The door is closed'
+    value :UNLATCHED, 'The door is not latched closed, but may not fully open'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
@@ -72,6 +76,17 @@ package :Events, 'Event Package' do
   enum :AvailabilityValue, 'Possible values for availability data item' do
     value :AVAILABLE, 'The component is available'
     value :UNAVAILABLE, 'The component is unavailable'
+  end
+  
+  enum :ActuatorStateValue, 'The possible values for actuator state.' do
+    value :ACTIVE, 'The actuator is active'
+    value :INACTIVE, 'The actuator is inactive'
+  end
+  
+  enum :PathModeValue, 'The values for path mode' do
+    value :SYNCHRONOUS, 'The paths are working together in unison'
+    value :MIRROR, 'The paths are making mirror images'
+    value :INDEPENDENT, 'The paths are operating independently'
   end
 
   enum :PathModeValue, 'The values for path mode' do
@@ -124,7 +139,7 @@ package :Events, 'Event Package' do
     member :Value, 'The CNC mode state', :ControllerModeValue
   end
   
-  type :ToolId, 'The current Tool Identifier', :Event do 
+  type :ToolAssetId, 'The unique tool Identifier as referenced in part 4 - assets', :Event do 
     member :Value, 'The tool identifier', :ToolIdValue
   end
   
@@ -169,10 +184,21 @@ package :Events, 'Event Package' do
     member :Value, 'The availability', :AvailabilityValue
   end
   
+  type :ActuatorState, 'The actuator state of the component', :Event do
+    member :Value, 'The availability', :ActuatorStateValue
+  end
+  
   type :PathMode, 'The actuator state of the component', :Event do
     member :Value, 'The path mode', :PathModeValue
   end
   
   type :LinePowerState, 'The state of the line power', :PowerState
   type :ControlPowerState, 'The state of the line power', :PowerState
+  
+  # For assets  
+  type :AssetChanged, 'An asset was just modified', :Event do
+    member :AssetType, 'The type of asset that changed', :AssetAttrType
+    member :Value, 'The asset identifier', :AssetId
+  end
+    
 end

@@ -2,6 +2,7 @@
 package :Component, 'Top Level Components Package' do
   attr :Station, 'The station id for this device'
   attr :Iso841Class, 'The ISO 841 classification for the device', :integer
+  attr :Model, 'The model name'
   
   type :Devices, 'The top level components' do
     member :Device, 'A piece of equipment', 1..INF
@@ -12,17 +13,31 @@ package :Component, 'Top Level Components Package' do
     member :id, 'The data item identifier', :ID
     member :Name, 'The components name'
     member :NativeName, 'The device manufacturer component name', 0..1, :Name
-    member :SampleRate, 'The rate at which the data is sampled from the component', 0..1
+    member :SampleInterval, 'The rate at which the data is sampled from the component', 0..1
     member :Description, 'The descriptive information about this component', 0..1, :ComponentDescription
+    member :Configuration, 'The configuration information about this component', 0..1, :ComponentConfiguration
     member :DataItems, 'The component\'s Data Items', 0..1
     member :Components, 'The sub components', 0..1
   end
 
   type :ComponentDescription, 'The descriptive information for this component. This can be manufacturer specific' do
-    member :Value, 'A text description of the component, will be replaced later by structed content', :DescriptionText
+    mixed
+    
     member :Manufacturer, 'The manufacturer of this component', 0..1, :Name
+    member :Model, 'The manufacturer of this component', 0..1
     member :SerialNumber, 'The serial number of the component', 0..1
     member :Station, 'The location of this component', 0..1
+    member :any, 'Any desciptive schema like calibration', 0..INF
+  end
+  
+  type :AbstractConfiguration, 'Abstract configuration' do
+    abstract
+  end
+  
+  type :ComponentConfiguration, 'The configuration data associated with this component. For example, sensors may use 1451.5 or TEDS' do
+    mixed
+    
+    member :Configuration,  'Configuration types', 0..1, :AbstractConfiguration
   end
   
   type :CommonComponent, "An abstract component that has an optional uuid", :Component do 
@@ -45,10 +60,10 @@ package :Component, 'Top Level Components Package' do
 
   type :Power, 'DEPRECATED: A power measuring component', :CommonComponent
   type :Sensor, 'A sensor, this is not abstract to allow for easy extensibility.', :CommonComponent
-  type :Thermostat, 'A thermostate', :Sensor
-  type :Vibration, 'A sensor for reading the vibration from a component', :Sensor
   type :Path, 'A path component', :CommonComponent
   type :Actuator, 'A component that causes motion', :CommonComponent
-  
   type :Door, 'A door on the machine', :CommonComponent  
+
 end
+
+load 'sensors'
