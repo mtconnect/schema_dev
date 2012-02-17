@@ -2744,6 +2744,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='INDEPENDENT'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='PathModeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The values for path mode
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='SYNCHRONOUS'/>
+      <xs:enumeration value='MIRROR'/>
+      <xs:enumeration value='INDEPENDENT'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='EventType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
