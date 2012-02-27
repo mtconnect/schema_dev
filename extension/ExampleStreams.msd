@@ -1,10 +1,10 @@
-self.urn = 'urn:example.com:ExampleStreams:1.2'
+self.self.urn = 'urn:example.com:ExampleStreams:1.2'
 self.namespace = 'e'
 self.top = :MTConnectStreams
 self.license = File.read('../license.txt')
 self.version = '1.2'
 
-import "../MTConnectStreams", '/schemas/MTConnectStreams_1.2.xsd'
+import "../MTConnectStreams", '../MTConnectStreams_1.2.xsd'
 
 package :Example, 'Example Package' do
   float = '[+-]?\d+(\.\d+)?(E[+-]?\d+)?'

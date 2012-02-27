@@ -757,7 +757,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='SampleValueType'>
     <xs:annotation>
       <xs:documentation>
-        An events data
+        An floating point value or array of floating point values
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -2730,18 +2730,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:restriction base='xs:string'>
       <xs:enumeration value='ACTIVE'/>
       <xs:enumeration value='INACTIVE'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='PathModeValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The values for path mode
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='SYNCHRONOUS'/>
-      <xs:enumeration value='MIRROR'/>
-      <xs:enumeration value='INDEPENDENT'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='PathModeValueType'>

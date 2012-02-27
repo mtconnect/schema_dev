@@ -89,12 +89,6 @@ package :Events, 'Event Package' do
     value :INDEPENDENT, 'The paths are operating independently'
   end
 
-  enum :PathModeValue, 'The values for path mode' do
-    value :SYNCHRONOUS, 'The paths are working together in unison'
-    value :MIRROR, 'The paths are making mirror images'
-    value :INDEPENDENT, 'The paths are operating independently'
-  end
-
   type :Event, 'An abstract event', :Result do
     abstract
   end
