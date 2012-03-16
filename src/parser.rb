@@ -106,7 +106,9 @@ class Schema
     attr_reader :location
     
     undef :load
-    undef :type
+    if RUBY_VERSION < '1.9.2'
+      undef :type
+    end
     
     def initialize(schema, file, location)
       old_importing, schema.importing = schema.importing, self

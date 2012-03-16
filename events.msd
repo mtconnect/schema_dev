@@ -13,7 +13,7 @@ package :Events, 'Event Package' do
   basic_type :WorkholdingIdValue, 'The workholding identifier'
   basic_type :MessageValue, 'A message'
   basic_type(:AxesListValue, 'A space delimited list of values') { pattern 'UNAVAILABLE|[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
-  
+    
   enum :DirectionValue, 'Rotation Direction' do
     value :CLOCKWISE, 'Rotary clockwise rotation'
     value :COUNTER_CLOCKWISE, 'Rotary counter clockwise rotation'
@@ -33,6 +33,7 @@ package :Events, 'Event Package' do
     value :INTERRUPTED, 'The program has been paused'
     value :ACTIVE, 'The program is actively running'
     value :STOPPED, 'The program has been stopped'
+    value :FEED_HOLD, 'The machine is in feed hold - spindle spinning/axis stopped'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
@@ -47,7 +48,7 @@ package :Events, 'Event Package' do
   enum :DoorStateValue, 'The status of a door' do
     value :OPEN, 'The door is open'
     value :CLOSED, 'The door is closed'
-    value :INDETERMINATE, 'The status is undefined'
+    value :UNLATCHED, 'The door is not latched closed, but may not fully open'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
@@ -197,6 +198,7 @@ package :Events, 'Event Package' do
   
   # For assets  
   type :AssetChanged, 'An asset was just modified', :Event do
+    member :AssetType, 'The type of asset that changed', :AssetAttrType
     member :Value, 'The asset identifier', :AssetId
   end
 

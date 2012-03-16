@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema targetNamespace='urn:mtconnect.org:MTConnectStreams:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:mt='urn:mtconnect.org:MTConnectStreams:1.2' xmlns='urn:mtconnect.org:MTConnectStreams:1.2'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectStreams:1.2' xmlns:mt='urn:mtconnect.org:MTConnectStreams:1.2' targetNamespace='urn:mtconnect.org:MTConnectStreams:1.2' elementFormDefault='qualified' attributeFormDefault='unqualified'>
   <xs:element name='MTConnectStreams' type='MTConnectStreamsType'>
     <xs:annotation>
       <xs:documentation>
@@ -61,7 +61,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         A sequence number
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:integer'/>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='1'/>
+      <xs:maxExclusive value='18446744073709551615'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='TestIndicatorType'>
     <xs:annotation>
@@ -77,7 +80,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The instance number of the agent, used for fault tolerance
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:string'/>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='1'/>
+      <xs:maxExclusive value='18446744073709551615'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='BufferSizeType'>
     <xs:annotation>
@@ -85,7 +91,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The size of the agents buffer
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:integer'/>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='1'/>
+      <xs:maxExclusive value='4294967295'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='TimestampType'>
     <xs:annotation>
@@ -168,6 +177,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:ID'/>
   </xs:simpleType>
+  <xs:simpleType name='SignificantDigitsValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number significant digits
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -175,6 +192,36 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='AssetAttrType'>
+    <xs:annotation>
+      <xs:documentation>
+        An asset type
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='AssetBufferSizeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The maximum number of assets
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='1'/>
+      <xs:maxExclusive value='4294967295'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='AssetCountAttrType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of assets
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='0'/>
+      <xs:maxExclusive value='4294967295'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DescriptionTextType'>
     <xs:annotation>
@@ -249,6 +296,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TEMPERATURE'/>
       <xs:enumeration value='TORQUE'/>
       <xs:enumeration value='TOOL_ASSET_ID'/>
+      <xs:enumeration value='TOOL_ID'/>
       <xs:enumeration value='VELOCITY'/>
       <xs:enumeration value='VIBRATION'/>
       <xs:enumeration value='VOLTAGE'/>
@@ -410,6 +458,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE'/>
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
+      <xs:enumeration value='DECIBEL'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='UnitsType'>
@@ -460,6 +509,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE'/>
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
+      <xs:enumeration value='DECIBEL'/>
       <xs:enumeration value='CENTIPOISE'/>
       <xs:enumeration value='DEGREE/MINUTE'/>
       <xs:enumeration value='FAHRENHEIT'/>
@@ -589,7 +639,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='DeviceStream' maxOccurs='unbounded' minOccurs='1' type='DeviceStreamType'>
+      <xs:element name='DeviceStream' type='DeviceStreamType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             The data from a device
@@ -605,7 +655,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='ComponentStream' maxOccurs='unbounded' minOccurs='0' type='ComponentStreamType'>
+      <xs:element name='ComponentStream' type='ComponentStreamType' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             The data for each component
@@ -623,21 +673,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Samples' maxOccurs='1' minOccurs='0' type='SamplesType'>
+      <xs:element name='Samples' type='SamplesType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A collection of samples
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Events' maxOccurs='1' minOccurs='0' type='EventsType'>
+      <xs:element name='Events' type='EventsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A collection of events
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Condition' maxOccurs='1' minOccurs='0' type='ConditionListType'>
+      <xs:element name='Condition' type='ConditionListType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The representation of the devices condition
@@ -658,7 +708,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs='unbounded' minOccurs='1' ref='Sample'/>
+      <xs:element ref='Sample' minOccurs='1' maxOccurs='unbounded'/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name='EventsType'>
@@ -668,7 +718,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs='unbounded' minOccurs='1' ref='Event'/>
+      <xs:element ref='Event' minOccurs='1' maxOccurs='unbounded'/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name='ConditionListType'>
@@ -678,7 +728,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs='unbounded' minOccurs='1' ref='Condition'/>
+      <xs:element ref='Condition' minOccurs='1' maxOccurs='unbounded'/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name='ResultType' abstract='true'>
@@ -697,7 +747,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Result' abstract='true' type='ResultType'>
+  <xs:element abstract='true' name='Result' type='ResultType'>
     <xs:annotation>
       <xs:documentation>
         An abstract event
@@ -707,7 +757,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='SampleValueType'>
     <xs:annotation>
       <xs:documentation>
-        An events data
+        An floating point value or array of floating point values
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -912,16 +962,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='AccumulatedTimeType'>
-    <xs:annotation>
-      <xs:documentation>
-        An accumulated time
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
-    </xs:restriction>
-  </xs:simpleType>
   <xs:simpleType name='PowerFactorValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -1052,6 +1092,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='FillLevelValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The fill level of a tank
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name='SampleRateType'>
     <xs:annotation>
       <xs:documentation>
@@ -1084,7 +1134,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Sample' abstract='true' substitutionGroup='Result' type='SampleType'>
+  <xs:element abstract='true' name='Sample' type='SampleType' substitutionGroup='Result'>
     <xs:annotation>
       <xs:documentation>
         An abstract sample
@@ -1103,7 +1153,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Amperage' substitutionGroup='Sample' type='AmperageType'>
+  <xs:element name='Amperage' type='AmperageType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         An current a component is drawing
@@ -1122,7 +1172,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='GlobalPosition' substitutionGroup='Sample' type='GlobalPositionType'>
+  <xs:element name='GlobalPosition' type='GlobalPositionType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: The three space position of the component
@@ -1141,7 +1191,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Position' substitutionGroup='Sample' type='PositionType'>
+  <xs:element name='Position' type='PositionType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The position of the component
@@ -1160,7 +1210,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Velocity' substitutionGroup='Sample' type='VelocityType'>
+  <xs:element name='Velocity' type='VelocityType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The velocity of the component
@@ -1179,7 +1229,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Acceleration' substitutionGroup='Sample' type='AccelerationType'>
+  <xs:element name='Acceleration' type='AccelerationType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The acceleration of the component
@@ -1198,7 +1248,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AngularAcceleration' substitutionGroup='Sample' type='AngularAccelerationType'>
+  <xs:element name='AngularAcceleration' type='AngularAccelerationType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The angular acceleration of the component
@@ -1217,7 +1267,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AngularVelocity' substitutionGroup='Sample' type='AngularVelocityType'>
+  <xs:element name='AngularVelocity' type='AngularVelocityType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The angular velocity of the component
@@ -1236,7 +1286,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PathFeedrate' substitutionGroup='Sample' type='PathFeedrateType'>
+  <xs:element name='PathFeedrate' type='PathFeedrateType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The feedrate of the component
@@ -1255,7 +1305,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AxisFeedrate' substitutionGroup='Sample' type='AxisFeedrateType'>
+  <xs:element name='AxisFeedrate' type='AxisFeedrateType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The feedrate of the component
@@ -1274,14 +1324,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='SpindleSpeed' substitutionGroup='Sample' type='SpindleSpeedType'>
+  <xs:element name='SpindleSpeed' type='SpindleSpeedType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The spindle speed of the component: DEPRECATED
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='RotationalVelocityType'>
+  <xs:complexType name='RotaryVelocityType'>
     <xs:annotation>
       <xs:documentation>
         The rotational velocity of the component in RPM
@@ -1293,7 +1343,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='RotationalVelocity' substitutionGroup='Sample' type='RotationalVelocityType'>
+  <xs:element name='RotaryVelocity' type='RotaryVelocityType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The rotational velocity of the component in RPM
@@ -1312,7 +1362,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Angle' substitutionGroup='Sample' type='AngleType'>
+  <xs:element name='Angle' type='AngleType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The angle of the component
@@ -1331,7 +1381,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Temperature' substitutionGroup='Sample' type='TemperatureType'>
+  <xs:element name='Temperature' type='TemperatureType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The temperature
@@ -1350,7 +1400,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Load' substitutionGroup='Sample' type='LoadType'>
+  <xs:element name='Load' type='LoadType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The program code
@@ -1369,7 +1419,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Frequency' substitutionGroup='Sample' type='FrequencyType'>
+  <xs:element name='Frequency' type='FrequencyType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The frequency in hertz
@@ -1388,7 +1438,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Volts' substitutionGroup='Sample' type='VoltsType'>
+  <xs:element name='Volts' type='VoltsType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: The voltage
@@ -1407,14 +1457,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Voltage' substitutionGroup='Sample' type='VoltageType'>
+  <xs:element name='Voltage' type='VoltageType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The voltage
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='WattageType'>
+  <xs:complexType name='WattType'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: The number of Watts
@@ -1426,7 +1476,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Wattage' substitutionGroup='Sample' type='WattageType'>
+  <xs:element name='Watt' type='WattType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: The number of Watts
@@ -1445,7 +1495,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Pressure' substitutionGroup='Sample' type='PressureType'>
+  <xs:element name='Pressure' type='PressureType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The pressure
@@ -1464,7 +1514,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Torque' substitutionGroup='Sample' type='TorqueType'>
+  <xs:element name='Torque' type='TorqueType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The torque
@@ -1483,7 +1533,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PathPosition' substitutionGroup='Sample' type='PathPositionType'>
+  <xs:element name='PathPosition' type='PathPositionType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The 3 dimensional position for tool tip in the path (X Y Z)
@@ -1502,7 +1552,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Wattage' substitutionGroup='Sample' type='WattageType'>
+  <xs:element name='Wattage' type='WattageType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The number of Watts
@@ -1521,7 +1571,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Displacement' substitutionGroup='Sample' type='DisplacementType'>
+  <xs:element name='Displacement' type='DisplacementType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The linear displacement in millimeters
@@ -1540,7 +1590,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Tilt' substitutionGroup='Sample' type='TiltType'>
+  <xs:element name='Tilt' type='TiltType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The tilt
@@ -1559,7 +1609,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AccumulatedTime' substitutionGroup='Sample' type='AccumulatedTimeType'>
+  <xs:element name='AccumulatedTime' type='AccumulatedTimeType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The non-contiguous duration of an event in seconds
@@ -1578,7 +1628,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PowerFactor' substitutionGroup='Sample' type='PowerFactorType'>
+  <xs:element name='PowerFactor' type='PowerFactorType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The power factor
@@ -1597,7 +1647,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Strain' substitutionGroup='Sample' type='StrainType'>
+  <xs:element name='Strain' type='StrainType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The strain
@@ -1616,7 +1666,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Flow' substitutionGroup='Sample' type='FlowType'>
+  <xs:element name='Flow' type='FlowType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The flow
@@ -1635,7 +1685,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='SoundPressure' substitutionGroup='Sample' type='SoundPressureType'>
+  <xs:element name='SoundPressure' type='SoundPressureType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The sound pressure
@@ -1654,7 +1704,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Resistance' substitutionGroup='Sample' type='ResistanceType'>
+  <xs:element name='Resistance' type='ResistanceType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The Resistance
@@ -1673,7 +1723,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Conductivity' substitutionGroup='Sample' type='ConductivityType'>
+  <xs:element name='Conductivity' type='ConductivityType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The Conductivity
@@ -1692,7 +1742,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Viscosity' substitutionGroup='Sample' type='ViscosityType'>
+  <xs:element name='Viscosity' type='ViscosityType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The Viscosity
@@ -1711,7 +1761,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Concentration' substitutionGroup='Sample' type='ConcentrationType'>
+  <xs:element name='Concentration' type='ConcentrationType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The Concentration
@@ -1730,10 +1780,29 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ElectricalEnergy' substitutionGroup='Sample' type='ElectricalEnergyType'>
+  <xs:element name='ElectricalEnergy' type='ElectricalEnergyType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         Electrical energy
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FillLevelType'>
+    <xs:annotation>
+      <xs:documentation>
+        The fill level of a tank
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='FillLevel' type='FillLevelType' substitutionGroup='Sample'>
+    <xs:annotation>
+      <xs:documentation>
+        The fill level of a tank
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -1750,7 +1819,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='LinearForce' substitutionGroup='Sample' type='LinearForceType'>
+  <xs:element name='LinearForce' type='LinearForceType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The magnitude of a push or pull introduced by an actuator or exerted on
@@ -1781,7 +1850,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AbsTimeSeries' abstract='true' substitutionGroup='Sample' type='AbsTimeSeriesType'>
+  <xs:element abstract='true' name='AbsTimeSeries' type='AbsTimeSeriesType' substitutionGroup='Sample'>
     <xs:annotation>
       <xs:documentation>
         The abstract waveform
@@ -1800,7 +1869,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='TimeSeries' abstract='true' substitutionGroup='AbsTimeSeries' type='TimeSeriesType'>
+  <xs:element abstract='true' name='TimeSeries' type='TimeSeriesType' substitutionGroup='AbsTimeSeries'>
     <xs:annotation>
       <xs:documentation>
         An abstract time series with the restriction value
@@ -1817,7 +1886,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AmperageTimeSeries' substitutionGroup='TimeSeries' type='AmperageTimeSeriesType'>
+  <xs:element name='AmperageTimeSeries' type='AmperageTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of An current a component is drawing
@@ -1834,7 +1903,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='GlobalPositionTimeSeries' substitutionGroup='TimeSeries' type='GlobalPositionTimeSeriesType'>
+  <xs:element name='GlobalPositionTimeSeries' type='GlobalPositionTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of DEPRECATED: The three space position of the component
@@ -1851,7 +1920,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PositionTimeSeries' substitutionGroup='TimeSeries' type='PositionTimeSeriesType'>
+  <xs:element name='PositionTimeSeries' type='PositionTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The position of the component
@@ -1868,7 +1937,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='VelocityTimeSeries' substitutionGroup='TimeSeries' type='VelocityTimeSeriesType'>
+  <xs:element name='VelocityTimeSeries' type='VelocityTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The velocity of the component
@@ -1885,7 +1954,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AccelerationTimeSeries' substitutionGroup='TimeSeries' type='AccelerationTimeSeriesType'>
+  <xs:element name='AccelerationTimeSeries' type='AccelerationTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The acceleration of the component
@@ -1902,7 +1971,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AngularAccelerationTimeSeries' substitutionGroup='TimeSeries' type='AngularAccelerationTimeSeriesType'>
+  <xs:element name='AngularAccelerationTimeSeries' type='AngularAccelerationTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The angular acceleration of the component
@@ -1919,7 +1988,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AngularVelocityTimeSeries' substitutionGroup='TimeSeries' type='AngularVelocityTimeSeriesType'>
+  <xs:element name='AngularVelocityTimeSeries' type='AngularVelocityTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The angular velocity of the component
@@ -1936,7 +2005,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PathFeedrateTimeSeries' substitutionGroup='TimeSeries' type='PathFeedrateTimeSeriesType'>
+  <xs:element name='PathFeedrateTimeSeries' type='PathFeedrateTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The feedrate of the component
@@ -1953,7 +2022,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AxisFeedrateTimeSeries' substitutionGroup='TimeSeries' type='AxisFeedrateTimeSeriesType'>
+  <xs:element name='AxisFeedrateTimeSeries' type='AxisFeedrateTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The feedrate of the component
@@ -1970,14 +2039,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='SpindleSpeedTimeSeries' substitutionGroup='TimeSeries' type='SpindleSpeedTimeSeriesType'>
+  <xs:element name='SpindleSpeedTimeSeries' type='SpindleSpeedTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The spindle speed of the component: DEPRECATED
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='RotationalVelocityTimeSeriesType'>
+  <xs:complexType name='RotaryVelocityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
         Time series of The rotational velocity of the component in RPM
@@ -1987,7 +2056,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='RotationalVelocityTimeSeries' substitutionGroup='TimeSeries' type='RotationalVelocityTimeSeriesType'>
+  <xs:element name='RotaryVelocityTimeSeries' type='RotaryVelocityTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The rotational velocity of the component in RPM
@@ -2004,7 +2073,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AngleTimeSeries' substitutionGroup='TimeSeries' type='AngleTimeSeriesType'>
+  <xs:element name='AngleTimeSeries' type='AngleTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The angle of the component
@@ -2021,7 +2090,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='TemperatureTimeSeries' substitutionGroup='TimeSeries' type='TemperatureTimeSeriesType'>
+  <xs:element name='TemperatureTimeSeries' type='TemperatureTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The temperature
@@ -2038,7 +2107,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='LoadTimeSeries' substitutionGroup='TimeSeries' type='LoadTimeSeriesType'>
+  <xs:element name='LoadTimeSeries' type='LoadTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The program code
@@ -2055,7 +2124,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='FrequencyTimeSeries' substitutionGroup='TimeSeries' type='FrequencyTimeSeriesType'>
+  <xs:element name='FrequencyTimeSeries' type='FrequencyTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The frequency in hertz
@@ -2072,7 +2141,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='VoltsTimeSeries' substitutionGroup='TimeSeries' type='VoltsTimeSeriesType'>
+  <xs:element name='VoltsTimeSeries' type='VoltsTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of DEPRECATED: The voltage
@@ -2089,14 +2158,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='VoltageTimeSeries' substitutionGroup='TimeSeries' type='VoltageTimeSeriesType'>
+  <xs:element name='VoltageTimeSeries' type='VoltageTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The voltage
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='WattageTimeSeriesType'>
+  <xs:complexType name='WattTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
         Time series of DEPRECATED: The number of Watts
@@ -2106,7 +2175,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='WattageTimeSeries' substitutionGroup='TimeSeries' type='WattageTimeSeriesType'>
+  <xs:element name='WattTimeSeries' type='WattTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of DEPRECATED: The number of Watts
@@ -2123,7 +2192,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PressureTimeSeries' substitutionGroup='TimeSeries' type='PressureTimeSeriesType'>
+  <xs:element name='PressureTimeSeries' type='PressureTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The pressure
@@ -2140,7 +2209,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='TorqueTimeSeries' substitutionGroup='TimeSeries' type='TorqueTimeSeriesType'>
+  <xs:element name='TorqueTimeSeries' type='TorqueTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The torque
@@ -2158,7 +2227,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PathPositionTimeSeries' substitutionGroup='TimeSeries' type='PathPositionTimeSeriesType'>
+  <xs:element name='PathPositionTimeSeries' type='PathPositionTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The 3 dimensional position for tool tip in the path (X Y
@@ -2176,7 +2245,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='WattageTimeSeries' substitutionGroup='TimeSeries' type='WattageTimeSeriesType'>
+  <xs:element name='WattageTimeSeries' type='WattageTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The number of Watts
@@ -2193,7 +2262,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='DisplacementTimeSeries' substitutionGroup='TimeSeries' type='DisplacementTimeSeriesType'>
+  <xs:element name='DisplacementTimeSeries' type='DisplacementTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The linear displacement in millimeters
@@ -2210,7 +2279,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='TiltTimeSeries' substitutionGroup='TimeSeries' type='TiltTimeSeriesType'>
+  <xs:element name='TiltTimeSeries' type='TiltTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The tilt
@@ -2227,7 +2296,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AccumulatedTimeTimeSeries' substitutionGroup='TimeSeries' type='AccumulatedTimeTimeSeriesType'>
+  <xs:element name='AccumulatedTimeTimeSeries' type='AccumulatedTimeTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The non-contiguous duration of an event in seconds
@@ -2244,7 +2313,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PowerFactorTimeSeries' substitutionGroup='TimeSeries' type='PowerFactorTimeSeriesType'>
+  <xs:element name='PowerFactorTimeSeries' type='PowerFactorTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The power factor
@@ -2261,7 +2330,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='StrainTimeSeries' substitutionGroup='TimeSeries' type='StrainTimeSeriesType'>
+  <xs:element name='StrainTimeSeries' type='StrainTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The strain
@@ -2278,7 +2347,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='FlowTimeSeries' substitutionGroup='TimeSeries' type='FlowTimeSeriesType'>
+  <xs:element name='FlowTimeSeries' type='FlowTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The flow
@@ -2295,7 +2364,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='SoundPressureTimeSeries' substitutionGroup='TimeSeries' type='SoundPressureTimeSeriesType'>
+  <xs:element name='SoundPressureTimeSeries' type='SoundPressureTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The sound pressure
@@ -2312,7 +2381,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ResistanceTimeSeries' substitutionGroup='TimeSeries' type='ResistanceTimeSeriesType'>
+  <xs:element name='ResistanceTimeSeries' type='ResistanceTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The Resistance
@@ -2329,7 +2398,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ConductivityTimeSeries' substitutionGroup='TimeSeries' type='ConductivityTimeSeriesType'>
+  <xs:element name='ConductivityTimeSeries' type='ConductivityTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The Conductivity
@@ -2346,7 +2415,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ViscosityTimeSeries' substitutionGroup='TimeSeries' type='ViscosityTimeSeriesType'>
+  <xs:element name='ViscosityTimeSeries' type='ViscosityTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The Viscosity
@@ -2363,7 +2432,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ConcentrationTimeSeries' substitutionGroup='TimeSeries' type='ConcentrationTimeSeriesType'>
+  <xs:element name='ConcentrationTimeSeries' type='ConcentrationTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The Concentration
@@ -2380,10 +2449,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ElectricalEnergyTimeSeries' substitutionGroup='TimeSeries' type='ElectricalEnergyTimeSeriesType'>
+  <xs:element name='ElectricalEnergyTimeSeries' type='ElectricalEnergyTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of Electrical energy
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FillLevelTimeSeriesType'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of The fill level of a tank
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='TimeSeriesType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='FillLevelTimeSeries' type='FillLevelTimeSeriesType' substitutionGroup='TimeSeries'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of The fill level of a tank
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -2398,7 +2484,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='LinearForceTimeSeries' substitutionGroup='TimeSeries' type='LinearForceTimeSeriesType'>
+  <xs:element name='LinearForceTimeSeries' type='LinearForceTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The magnitude of a push or pull introduced by an actuator
@@ -2416,7 +2502,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='TimeSeriesType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AbsTimeSeriesTimeSeries' substitutionGroup='TimeSeries' type='AbsTimeSeriesTimeSeriesType'>
+  <xs:element name='AbsTimeSeriesTimeSeries' type='AbsTimeSeriesTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
         Time series of The abstract waveform
@@ -2554,6 +2640,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='INTERRUPTED'/>
       <xs:enumeration value='ACTIVE'/>
       <xs:enumeration value='STOPPED'/>
+      <xs:enumeration value='FEED_HOLD'/>
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
@@ -2580,6 +2667,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:restriction base='xs:string'>
       <xs:enumeration value='OPEN'/>
       <xs:enumeration value='CLOSED'/>
+      <xs:enumeration value='UNLATCHED'/>
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
@@ -2666,7 +2754,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ResultType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Event' abstract='true' substitutionGroup='Result' type='EventType'>
+  <xs:element abstract='true' name='Event' type='EventType' substitutionGroup='Result'>
     <xs:annotation>
       <xs:documentation>
         An abstract event
@@ -2683,7 +2771,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:restriction base='EventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Code' substitutionGroup='Event' type='CodeType'>
+  <xs:element name='Code' type='CodeType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: The program code
@@ -2700,7 +2788,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:restriction base='EventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Block' substitutionGroup='Event' type='BlockType'>
+  <xs:element name='Block' type='BlockType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The program code
@@ -2719,7 +2807,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Line' substitutionGroup='Event' type='LineType'>
+  <xs:element name='Line' type='LineType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The program&apos;s line of execution
@@ -2740,7 +2828,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PowerStatus' substitutionGroup='Event' type='PowerStatusType'>
+  <xs:element name='PowerStatus' type='PowerStatusType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED: The components power status
@@ -2761,7 +2849,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PowerState' substitutionGroup='Event' type='PowerStateType'>
+  <xs:element name='PowerState' type='PowerStateType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The components power state
@@ -2780,7 +2868,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PartCount' substitutionGroup='Event' type='PartCountType'>
+  <xs:element name='PartCount' type='PartCountType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         An event that indicates the number of parts
@@ -2803,7 +2891,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Direction' substitutionGroup='Event' type='DirectionType'>
+  <xs:element name='Direction' type='DirectionType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The direction of rotation
@@ -2820,7 +2908,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:restriction base='EventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Program' substitutionGroup='Event' type='ProgramType'>
+  <xs:element name='Program' type='ProgramType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The programs file name or identifier
@@ -2839,11 +2927,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:enumeration value='INTERRUPTED'/>
         <xs:enumeration value='ACTIVE'/>
         <xs:enumeration value='STOPPED'/>
+        <xs:enumeration value='FEED_HOLD'/>
         <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Execution' substitutionGroup='Event' type='ExecutionType'>
+  <xs:element name='Execution' type='ExecutionType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         Program execution events
@@ -2866,7 +2955,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ControllerMode' substitutionGroup='Event' type='ControllerModeType'>
+  <xs:element name='ControllerMode' type='ControllerModeType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         CNC mode state
@@ -2883,7 +2972,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:restriction base='EventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ToolAssetId' substitutionGroup='Event' type='ToolAssetIdType'>
+  <xs:element name='ToolAssetId' type='ToolAssetIdType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The unique tool Identifier as referenced in part 4 - assets
@@ -2900,7 +2989,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:restriction base='EventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PartId' substitutionGroup='Event' type='PartIdType'>
+  <xs:element name='PartId' type='PartIdType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The current Tool Identifier
@@ -2917,11 +3006,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:restriction base='EventType'>
         <xs:enumeration value='OPEN'/>
         <xs:enumeration value='CLOSED'/>
+        <xs:enumeration value='UNLATCHED'/>
         <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='DoorState' substitutionGroup='Event' type='DoorStateType'>
+  <xs:element name='DoorState' type='DoorStateType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The status of the door
@@ -2938,7 +3028,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:restriction base='EventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='WorkholdingId' substitutionGroup='Event' type='WorkholdingIdType'>
+  <xs:element name='WorkholdingId' type='WorkholdingIdType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The current workholding Identifier
@@ -2960,7 +3050,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='RotaryMode' substitutionGroup='Event' type='RotaryModeType'>
+  <xs:element name='RotaryMode' type='RotaryModeType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The function of the rotary axis
@@ -2979,7 +3069,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ActiveAxes' substitutionGroup='Event' type='ActiveAxesType'>
+  <xs:element name='ActiveAxes' type='ActiveAxesType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The list of axes in use
@@ -2998,7 +3088,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='CoupledAxes' substitutionGroup='Event' type='CoupledAxesType'>
+  <xs:element name='CoupledAxes' type='CoupledAxesType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The list of associated axes
@@ -3021,7 +3111,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AxesCoupling' substitutionGroup='Event' type='AxesCouplingType'>
+  <xs:element name='AxesCoupling' type='AxesCouplingType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The way the axes are associated
@@ -3040,7 +3130,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Message' substitutionGroup='Event' type='MessageType'>
+  <xs:element name='Message' type='MessageType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         A generic message
@@ -3061,7 +3151,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='EmergencyStop' substitutionGroup='Event' type='EmergencyStopType'>
+  <xs:element name='EmergencyStop' type='EmergencyStopType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         Emergency Stop status
@@ -3081,7 +3171,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Availability' substitutionGroup='Event' type='AvailabilityType'>
+  <xs:element name='Availability' type='AvailabilityType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The availability of the component
@@ -3101,7 +3191,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ActuatorState' substitutionGroup='Event' type='ActuatorStateType'>
+  <xs:element name='ActuatorState' type='ActuatorStateType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The actuator state of the component
@@ -3122,7 +3212,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PathMode' substitutionGroup='Event' type='PathModeType'>
+  <xs:element name='PathMode' type='PathModeType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The actuator state of the component
@@ -3139,7 +3229,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='PowerStateType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='LinePowerState' substitutionGroup='PowerState' type='LinePowerStateType'>
+  <xs:element name='LinePowerState' type='LinePowerStateType' substitutionGroup='PowerState'>
     <xs:annotation>
       <xs:documentation>
         The state of the line power
@@ -3156,7 +3246,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='PowerStateType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ControlPowerState' substitutionGroup='PowerState' type='ControlPowerStateType'>
+  <xs:element name='ControlPowerState' type='ControlPowerStateType' substitutionGroup='PowerState'>
     <xs:annotation>
       <xs:documentation>
         The state of the line power
@@ -3170,10 +3260,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:restriction base='EventType'/>
+      <xs:extension base='EventType'>
+        <xs:attribute name='assetType' type='AssetAttrType' use='required'/>
+      </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AssetChanged' substitutionGroup='Event' type='AssetChangedType'>
+  <xs:element name='AssetChanged' type='AssetChangedType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         An asset was just modified
@@ -3228,7 +3320,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Condition' abstract='true' type='ConditionType'>
+  <xs:element abstract='true' name='Condition' type='ConditionType'>
     <xs:annotation>
       <xs:documentation>
         An abstract indicator of the device&apos;s condition
@@ -3245,7 +3337,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ConditionType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Unavailable' substitutionGroup='Condition' type='UnavailableType'>
+  <xs:element name='Unavailable' type='UnavailableType' substitutionGroup='Condition'>
     <xs:annotation>
       <xs:documentation>
         The conditon can not be determined.
@@ -3263,7 +3355,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ConditionType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Normal' substitutionGroup='Condition' type='NormalType'>
+  <xs:element name='Normal' type='NormalType' substitutionGroup='Condition'>
     <xs:annotation>
       <xs:documentation>
         The item being monitored is operating normally and no action is
@@ -3282,7 +3374,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ConditionType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Warning' substitutionGroup='Condition' type='WarningType'>
+  <xs:element name='Warning' type='WarningType' substitutionGroup='Condition'>
     <xs:annotation>
       <xs:documentation>
         he item being monitored is moving into the abnormal range and should be
@@ -3303,7 +3395,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ConditionType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Fault' substitutionGroup='Condition' type='FaultType'>
+  <xs:element name='Fault' type='FaultType' substitutionGroup='Condition'>
     <xs:annotation>
       <xs:documentation>
         The item has failed an intervention is required to return to a normal
@@ -3316,7 +3408,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='NotifcationDescriptionType'>
     <xs:annotation>
       <xs:documentation>
-        The description of the Notifcation
+        DEPRECATED: The description of the Notifcation
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -3324,7 +3416,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='NativeNotifcationCodeType'>
     <xs:annotation>
       <xs:documentation>
-        An Notifcation code as defined by the component
+        DEPRECATED: An Notifcation code as defined by the component
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -3332,7 +3424,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='NotifcationCodeType'>
     <xs:annotation>
       <xs:documentation>
-        Types of Notifcations
+        DEPRECATED: Types of Notifcations
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -3350,7 +3442,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='AlarmStateType'>
     <xs:annotation>
       <xs:documentation>
-        The active or cleared state of the notification
+        DEPRECATED: The active or cleared state of the notification
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -3361,7 +3453,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='SeverityType'>
     <xs:annotation>
       <xs:documentation>
-        The severity of the notification
+        DEPRECATED: The severity of the notification
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -3374,7 +3466,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AlarmType'>
     <xs:annotation>
       <xs:documentation>
-        An Notifcation event
+        DEPRECATED: An Notifcation event
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3386,10 +3478,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Alarm' substitutionGroup='Event' type='AlarmType'>
+  <xs:element name='Alarm' type='AlarmType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
-        An Notifcation event
+        DEPRECATED: An Notifcation event
       </xs:documentation>
     </xs:annotation>
   </xs:element>

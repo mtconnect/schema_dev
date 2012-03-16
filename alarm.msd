@@ -1,9 +1,9 @@
 
 package :Alarm, 'Alarms Package, these are types of events' do
-  basic_type :NotifcationDescription, 'The description of the Notifcation'
-  attr :NativeNotifcationCode, 'An Notifcation code as defined by the component'
+  basic_type :NotifcationDescription, 'DEPRECATED: The description of the Notifcation'
+  attr :NativeNotifcationCode, 'DEPRECATED: An Notifcation code as defined by the component'
   
-  enum :NotifcationCode, 'Types of Notifcations' do
+  enum :NotifcationCode, 'DEPRECATED: Types of Notifcations' do
     value :FAILURE, 'A failure'
     value :FAULT, 'A fault occurred'
     value :CRASH, 'A spindle crash'
@@ -16,19 +16,19 @@ package :Alarm, 'Alarms Package, these are types of events' do
     # Need to complete this list
   end
   
-  enum :AlarmState, 'The active or cleared state of the notification' do
+  enum :AlarmState, 'DEPRECATED: The active or cleared state of the notification' do
     value :ACTIVE, 'The notification is active'
     value :CLEARED, 'The notification has been cleared'
   end
   
-  enum :Severity, 'The severity of the notification' do
+  enum :Severity, 'DEPRECATED: The severity of the notification' do
     value :CRITICAL, 'The notification is critical'
     value :ERROR, 'An error has occurred'
     value :WARNING, 'A medium level notification that should be observed'
     value :INFORMATION, 'This notification is for information purposes only'
   end
 
-  type :Alarm, 'An Notifcation event', :Event do
+  type :Alarm, 'DEPRECATED: An Notifcation event', :Event do
     member :Code, 'The Notifcation type', :NotifcationCode
     member :Severity, 'The severity', 0..1
     member :State, 'The state', 0..1, :AlarmState

@@ -3,10 +3,16 @@
 package :common, 'Common attributes and elements for all schemas' do
   attr :Sender, 'The sender of the message'
   attr :CreationTime, 'The date and time the document was created', :dateTime
-  attr :Sequence, 'A sequence number', :integer
+  attr(:Sequence, 'A sequence number', :integer) do
+    facet 'minIncl=1;maxExcl=18446744073709551615'
+  end
   attr :TestIndicator, 'A debugging flag for testing.', :boolean
-  attr :InstanceId, 'The instance number of the agent, used for fault tolerance'
-  attr :BufferSize, 'The size of the agents buffer', :integer
+  attr(:InstanceId, 'The instance number of the agent, used for fault tolerance', :integer) do
+    facet 'minIncl=1;maxExcl=18446744073709551615'
+  end
+  attr(:BufferSize, 'The size of the agents buffer', :integer) do 
+    facet 'minIncl=1;maxExcl=4294967295'
+  end
   
   attr :Timestamp, 'The time the sample was reported', :dateTime
   attr :OccurrenceTime, 'The time a sample occurred', :dateTime
@@ -21,6 +27,13 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :SignificantDigitsValue, 'The number significant digits', :integer
   
   attr :AssetId, 'The unique id of the asset'
+  attr :AssetAttrType, 'An asset type'
+  attr(:AssetBufferSize, 'The maximum number of assets', :integer) do
+    facet 'minIncl=1;maxExcl=4294967295'
+  end
+  attr(:AssetCountAttr, 'The number of assets', :integer) do
+    facet 'minIncl=0;maxExcl=4294967295'    
+  end
 
   basic_type :DescriptionText, 'A description'
   basic_type(:DataItemExt, 'An extension point for data item types') do
@@ -73,6 +86,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :TEMPERATURE, 'The temperature of the component'
     value :TORQUE, 'The torque - force times distance'
     value :TOOL_ASSET_ID, 'The unique asset identifier of the tool in use'
+    value :TOOL_ID, 'DEPRECATED: Use TOOL_ASSET_ID'
     value :VELOCITY, 'The velocity of the component'
     value :VIBRATION, 'The status indicator'
     value :VOLTAGE, 'The voltage'
@@ -213,6 +227,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :VOLT_AMPERE, 'A volt ampere'
     value :VOLT_AMPERE_REACTIVE, 'A volt ampere reactive'
     value :WATT_SECOND, 'A measure of energy equivilent to one Joule or 1/3,600,000 kilowatt hour'
+    value :DECIBEL, 'Sound level    '
   end
 
   enum :NativeUnits, 'The units supported for the source equipment that can be converted into MTC Units.', :Units do

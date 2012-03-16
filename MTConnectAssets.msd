@@ -7,10 +7,7 @@ self.version = '1.2'
 
 load 'common'
 
-package :MTC, 'MTC Top Level Package' do
-  attr :AssetBufferSize, 'The maximum number of assets', :integer
-  attr :AssetCount, 'The number of assets', :integer
-  
+package :MTC, 'MTC Top Level Package' do  
   type :Header, 'Message header for protocol information' do
     member :Version, 'The document version'
     member :CreationTime, 'The date and time the document was created'
@@ -18,7 +15,7 @@ package :MTC, 'MTC Top Level Package' do
     member :InstanceId, 'The unique instance identifier of this agent process'
     member :Sender, 'The sender of the message'
     member :AssetBufferSize, 'The maximum number of assets'
-    member :AssetCount, 'The number of assets we have'
+    member :AssetCount, 'The number of assets we have', :AssetCountAttr
   end
 
   type :MTConnectAssets, 'The root node for MTConnect' do

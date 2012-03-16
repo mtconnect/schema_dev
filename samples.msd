@@ -4,7 +4,7 @@ package :Samlpes, 'The samples' do
   float_value = "#{float}|UNAVAILABLE"
   vector_value = "(#{float}( )*)+|UNAVAILABLE"
   
-  basic_type :SampleValue, 'An events data'
+  basic_type :SampleValue, 'An floating point value or array of floating point values'
   basic_type(:PositionValue, 'The value for the position') { pattern float_value }
   basic_type(:EnergyValue, 'The value of energy') {  pattern float_value }
   basic_type(:DecibelValue, 'The sound pressure') {  pattern float_value }
@@ -38,6 +38,7 @@ package :Samlpes, 'The samples' do
   basic_type(:CountValue, 'The number of values') { pattern float_value }
   basic_type(:ForceValue, 'The magnitude of push or pull') { pattern float_value }
   basic_type(:MassValue, 'The weight of an object') { pattern float_value }
+  basic_type(:FillLevelValue, 'The fill level of a tank') { pattern float_value }
   basic_type(:SampleRate, 'The sampling rate in samples per second') { pattern float_value }
   
   attr :DurationTime, 'A length of time in seconds', :float
@@ -90,7 +91,7 @@ package :Samlpes, 'The samples' do
     member :Value, 'The spindle speed', :RotationalVelocityValue
   end
   
-  type :RotationalVelocity, 'The rotational velocity of the component in RPM', :Sample do
+  type :RotaryVelocity, 'The rotational velocity of the component in RPM', :Sample do
     member :Value, 'The velocity', :VelocityValue
   end
 
@@ -187,6 +188,10 @@ package :Samlpes, 'The samples' do
     member :Value, 'Energy in watt seconds', :EnergyValue
   end
   
+  type :FillLevel, 'The fill level of a tank', :Sample do
+    member :Value, 'The fill level', :FillLevelValue
+  end
+
   type :LinearForce, 'The magnitude of a push or pull introduced by an actuator or exerted on an object', :Sample do
     member :Value, 'Force value', :ForceValue
   end
