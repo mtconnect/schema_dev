@@ -24,6 +24,7 @@ package :Assets, 'Mobile Assets' do
   attr :MaximumCount, 'A maximum count value', :integer
   attr :Code, 'A application specific code'
   attr :Manufacturers, 'A comman delimited list of manufactures'
+  attr :Source, 'A URI reference', :anyURI
   
   enum :DefinitionFormat, 'The format of the definition' do
     value :EXPRESS, 'The definition will be provided in EXPRESS format'
@@ -98,11 +99,49 @@ package :Assets, 'Mobile Assets' do
   # Cutting tool definition
   type :CuttingTool, 'A cutting tool', :Asset do
     member :ToolId, 'The Identifier of the tool type'
+    member :CuttingToolArchetypeReference, 'The reference to the cutting tool archetype', 0..1
     
+    at_least_one do 
+      member :CuttingToolDefinition, 'DEPRECATED: Description of tool - now only in Archetype'
+      member :CuttingToolLifeCycle, 'the tool lifecycle'
+    end
+  end
+  
+  # Archetype 
+  type :CuttingToolArchetype, 'A Archetypical cutting tool', :Asset do
+    member :ToolId, 'The Identifier of the tool type'
+
     at_least_one do 
       member :CuttingToolDefinition, 'Description of tool'
       member :CuttingToolLifeCycle, 'the tool lifecycle'
     end
+  end
+  
+  type :CuttingToolLifeCycle, 'A defintion of a cutting tool application and life cycle' do
+    # Identification
+    # Status
+    member :CutterStatus, 'The state of the tool assembly', 0..1 # Now optional so we can have
+    member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
+    member :ToolLife, 'The life of the cutting tool assembly', 0..3, :Life
+    
+    # Properties
+    member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
+    member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
+    member :Location, 'The pocket location', 0..1
+    member :ProcessSpindleSpeed, 'The tools constrained process target spindle speed', 0..1
+    member :ProcessFeedRate, 'The tools constrained process target feed rate', 0..1
+    member :ConnectionCodeMachineSide, 'CCMS: identifier for the cabability to connect any component of the cutting tool together, except assembly items, on the machine side', 0..1
+    
+    # Measurements
+    member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :AssemblyMeasurements
+
+    # Cutting Items
+    member :CuttingItems, 'An optional list of edges for this assembly', 0..1
+  end
+  
+  type :CuttingToolArchetypeReference, 'A reference to the cutting tool archetype' do
+    member :source, 'A uri representing where to get the cutting tool architype', 0..1, :Source
+    member :Value, 'The asset id of the archetype'
   end
   
   type :CutterStatus, 'The set of applicatable status for this cutting tool' do
@@ -145,7 +184,7 @@ package :Assets, 'Mobile Assets' do
     member :Maximum, 'The maximum tolerance value', 0..1, :MeasurementValue
     member :Minimum, 'The minimum tolerance value', 0..1, :MeasurementValue
     member :Nominal, 'The nominal value', 0..1, :MeasurementValue
-    member :Value, 'The actual measurement', :MeasurementValue
+    member :Value, 'The actual measurement', 0..1, :MeasurementValue
   end
   
   type :CommonMeasurement, 'Measurements for both the assembly and the cutting item', :Measurement do
@@ -181,29 +220,7 @@ package :Assets, 'Mobile Assets' do
   type :ShankHeight, 'H: dimension of the height of a shank', :AssemblyMeasurement
   type :ShankLength, 'LS: dimension of the length of a shank', :AssemblyMeasurement
   type :UsableLengthMax, 'The maximum length of a cutting tool that can be used in a particular cutting operation including the non-cutting portions of the tool.', :AssemblyMeasurement
-  
-  type :CuttingToolLifeCycle, 'A defintion of a cutting tool application and life cycle' do
-    # Identification
-    # Status
-    member :CutterStatus, 'The state of the tool assembly', 1
-    member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
-    member :ToolLife, 'The life of the cutting tool assembly', 0..3, :Life
     
-    # Properties
-    member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
-    member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
-    member :Location, 'The pocket location', 0..1
-    member :ProcessSpindleSpeed, 'The tools constrained process target spindle speed', 0..1
-    member :ProcessFeedRate, 'The tools constrained process target feed rate', 0..1
-    member :ConnectionCodeMachineSide, 'CCMS: identifier for the cabability to connect any component of the cutting tool together, except assembly items, on the machine side', 0..1
-    
-    # Measurements
-    member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :AssemblyMeasurements
-
-    # Cutting Items
-    member :CuttingItems, 'An optional list of edges for this assembly', 0..1
-  end
-  
   type :Life, 'Abstract cutter life' do 
     member :Type, 'One of time, part count, or wear', 1, :ToolLifeType
     member :CountDirection, 'The count up or count down', 1, :ToolLifeDirection
