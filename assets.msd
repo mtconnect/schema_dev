@@ -113,14 +113,32 @@ package :Assets, 'Mobile Assets' do
 
     at_least_one do 
       member :CuttingToolDefinition, 'Description of tool'
-      member :CuttingToolLifeCycle, 'the tool lifecycle'
+      member :CuttingToolLifeCycle, 'the tool lifecycle', :CuttingToolLifeCycleArchetype
     end
+  end
+  
+  type :CuttingToolLifeCycleArchetype, 'A archetypical cutting tool life cycle definition' do
+    member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
+    member :ToolLife, 'The life of the cutting tool assembly', 0..3, :Life
+    
+    # Properties
+    member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
+    member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
+    member :ProcessSpindleSpeed, 'The tools constrained process target spindle speed', 0..1
+    member :ProcessFeedRate, 'The tools constrained process target feed rate', 0..1
+    member :ConnectionCodeMachineSide, 'CCMS: identifier for the cabability to connect any component of the cutting tool together, except assembly items, on the machine side', 0..1
+    
+    # Measurements
+    member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :AssemblyMeasurements
+
+    # Cutting Items
+    member :CuttingItems, 'An optional list of edges for this assembly', 0..1
   end
   
   type :CuttingToolLifeCycle, 'A defintion of a cutting tool application and life cycle' do
     # Identification
     # Status
-    member :CutterStatus, 'The state of the tool assembly', 0..1 # Now optional so we can have
+    member :CutterStatus, 'The state of the tool assembly - only for Instance (not archetype)', 1 
     member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
     member :ToolLife, 'The life of the cutting tool assembly', 0..3, :Life
     
@@ -141,7 +159,7 @@ package :Assets, 'Mobile Assets' do
   
   type :CuttingToolArchetypeReference, 'A reference to the cutting tool archetype' do
     member :source, 'A uri representing where to get the cutting tool architype', 0..1, :Source
-    member :Value, 'The asset id of the archetype'
+    member :Value, 'The asset id of the archetype', :AssetId
   end
   
   type :CutterStatus, 'The set of applicatable status for this cutting tool' do
