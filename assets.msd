@@ -25,6 +25,7 @@ package :Assets, 'Mobile Assets' do
   attr :Code, 'A application specific code'
   attr :Manufacturers, 'A comman delimited list of manufactures'
   attr :Source, 'A URI reference', :anyURI
+  attr :Removed, 'A flag indicating the item has been removed', :boolean
   
   enum :DefinitionFormat, 'The format of the definition' do
     value :EXPRESS, 'The definition will be provided in EXPRESS format'
@@ -94,6 +95,7 @@ package :Assets, 'Mobile Assets' do
     member :Description, 'The description of the asset (freeform)', 0..1, :AssetDescription
     member :Timestamp, 'The time asset information was recorded'
     member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
+    member :Removed, 'The asset has been marked as removed', 0..1
   end
     
   # Cutting tool definition
