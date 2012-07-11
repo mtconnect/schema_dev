@@ -1,4 +1,4 @@
-self.self.urn = 'urn:example.com:ExampleStreams:1.2'
+self.urn = 'urn:example.com:ExampleStreams:1.2'
 self.namespace = 'e'
 self.top = :MTConnectStreams
 self.license = File.read('../license.txt')
@@ -11,9 +11,20 @@ package :Example, 'Example Package' do
   float_value = "#{float}|UNAVAILABLE"
   
   basic_type(:SignalStrengthValue, 'The strength of the signal in db') { pattern float_value }
+  basic_type(:CommonVariableValue, 'The value') { pattern float_value }
+  attr :Index, 'The index into the common variables table', :integer
   
   type :SignalStrength, 'The pressure', :Sample do
     member :Value, 'The flow', :SignalStrengthValue
+  end
+  
+  type :AbstractCommonVariable, 'An abstract common variable', :Sample do
+    abstract
+    member :Index, 'the values index'
+  end    
+  
+  type :CommonVariable, 'A variable value', :AbstractCommonVariable do
+    member :Value, 'the value', :CommonVariableValue
   end
 end
 
