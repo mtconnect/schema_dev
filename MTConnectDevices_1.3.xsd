@@ -779,6 +779,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:complexType>
+  <xs:element abstract='true' name='AbstractConfiguration' type='AbstractConfigurationType'>
+    <xs:annotation>
+      <xs:documentation>
+        Abstract configuration
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='ComponentConfigurationType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
@@ -787,13 +794,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Configuration' type='AbstractConfigurationType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            Configuration types
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
+      <xs:element ref='AbstractConfiguration' minOccurs='0' maxOccurs='1'/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name='CommonComponentType'>
@@ -947,6 +948,156 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='CalibrationDateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The time the calibration was preformed
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:date'/>
+  </xs:simpleType>
+  <xs:simpleType name='NextCalibrationDateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The time the next calibration should be preformed
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:date'/>
+  </xs:simpleType>
+  <xs:simpleType name='CalibrationInitialsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The initials of the person doing the calibration
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='FirmwareVersionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The firmware version of this sensor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ChannelNumberType'>
+    <xs:annotation>
+      <xs:documentation>
+        The channel number
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:complexType name='SensorConfigurationType'>
+    <xs:annotation>
+      <xs:documentation>
+        Calibration data for a sensor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AbstractConfigurationType'>
+        <xs:sequence>
+          <xs:element name='FirmwareVersion' type='FirmwareVersionType'>
+            <xs:annotation>
+              <xs:documentation>
+                The firmware version
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='CalibrationDate' type='CalibrationDateType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The date and time the sensor was calibrated
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='NextCalibrationDate' type='NextCalibrationDateType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The date and time the sensor was calibrated
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='CalibrationInitials' type='CalibrationInitialsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The initials of the person who calibrated this sensor
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Channels' type='ChannelsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The sensor channels
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='SensorConfiguration' type='SensorConfigurationType' substitutionGroup='AbstractConfiguration'>
+    <xs:annotation>
+      <xs:documentation>
+        Calibration data for a sensor
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ChannelsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A collection of channel calibration data
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Channel' type='ChannelType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A calabration channel
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='ChannelType'>
+    <xs:annotation>
+      <xs:documentation>
+        The calibration channel
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Description' type='DescriptionTextType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A text description of the channel
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='CalibrationDate' type='CalibrationDateType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The date and time the sensor was calibrated
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='NextCalibrationDate' type='NextCalibrationDateType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The date and time the sensor was calibrated
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='CalibrationInitials' type='CalibrationInitialsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The initials of the person who calibrated this sensor
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='number' type='ChannelNumberType' use='required'/>
+    <xs:attribute name='name' type='NameType' use='optional'/>
+  </xs:complexType>
   <xs:complexType name='AxesType'>
     <xs:annotation>
       <xs:documentation>

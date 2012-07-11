@@ -65,3 +65,5 @@ package :Component, 'Top Level Components Package' do
   type :Door, 'A door on the machine', :CommonComponent  
 
 end
+
+load 'sensors'
