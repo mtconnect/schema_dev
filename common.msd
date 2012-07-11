@@ -126,10 +126,26 @@ package :common, 'Common attributes and elements for all schemas' do
     value :LEVEL, 'The level of a resource'
     value :ACTUATOR, 'An actuator related condition'
     
+    # 1.3 general changes
+    value :SPINDLE_SPEED_OVERRIDE, 'The override percent for the spindle speed'
+    value :FEEDRATE_OVERRIDE, 'The override percent for the spindle speed'
+    value :PART_ASSET_ID, 'The identifier of the part loaded'
+    
     # 1.3 additions
-    value :CLAMP_STATUS, 'A clamp status'
-    value :FEED_STOCK, 'Feed material'
-    value :CHANGE_STOCK, 'Change the material'
+    value :CHUCK_STATE, 'A state of a chuck'
+    value :END_OF_BAR, 'Indicator that the end of material has been reached'
+    value :AUXILIARY_END_OF_BAR, 'Indicator that the end of material has been reached, but more material remains'
+    value :SPINDLE_INTERLOCK, 'Spindle interlock indicator'
+    value :MANUAL_CHUCK_UNCLAMP_INTERLOCK, 'Prevent the chuck from unclamping'
+    value :LENGTH, 'Represents the length of the material'
+    value :AXIS_STATE, 'The home or travel state of the axis'
+    value :INTERFACE_STATE, 'The state of the interface'
+    
+    # 1.3 Interfaces
+    value :MATERIAL_FEED, 'Feed material'
+    value :MATERIAL_CHANGE, 'Change the material'
+    value :MATERIAL_RETRACT, 'Change the material'
+    value :PART_CHANGE, 'Change the part on the bar feeder - changes the job being run'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
@@ -169,6 +185,11 @@ package :common, 'Common attributes and elements for all schemas' do
     # For 1.3 Interface
     value :REQUEST, 'The request side of the interface'
     value :RESPONSE, 'The response side of the interface'
+    value :REMAINING, 'The measurement represents the amount remaining'
+    
+    # For 1.3 overrides
+    value :JOG, 'Jog override'
+    value :RAPID, 'Rapid override'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do

@@ -1,6 +1,8 @@
 
 package :Events, 'Event Package' do
   integer_value = '[+-]?\d+|UNAVAILABLE'
+  float = '[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?'
+  float_value = "#{float}|UNAVAILABLE"
   
   basic_type(:PartCountValue, 'The number of parts') { pattern integer_value }
   basic_type :BlockValue, 'Code block value'
@@ -9,10 +11,13 @@ package :Events, 'Event Package' do
   basic_type :ToolEventValue, 'A tool event'
   basic_type(:LineValue, 'The line number') { pattern integer_value }
   basic_type :ToolIdValue, 'The tool identifier'
+  basic_type :AssetIdValue, 'The tool identifier'
   basic_type :PartIdValue, 'The part identifier'
   basic_type :WorkholdingIdValue, 'The workholding identifier'
   basic_type :MessageValue, 'A message'
   basic_type(:AxesListValue, 'A space delimited list of values') { pattern 'UNAVAILABLE|[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
+  basic_type(:LengthValue, 'The value for the length') { pattern float_value }
+  basic_type(:OverrideValue, 'The value for a percent override') { pattern float_value }
     
   enum :DirectionValue, 'Rotation Direction' do
     value :CLOCKWISE, 'Rotary clockwise rotation'
@@ -81,6 +86,7 @@ package :Events, 'Event Package' do
   enum :ActuatorStateValue, 'The possible values for actuator state.' do
     value :ACTIVE, 'The actuator is active'
     value :INACTIVE, 'The actuator is inactive'
+    value :UNAVAILABLE, 'The component is unavailable'
   end
   
   enum :PathModeValue, 'The values for path mode' do
@@ -89,10 +95,22 @@ package :Events, 'Event Package' do
     value :INDEPENDENT, 'The paths are operating independently'
   end
   
-  enum :ClampStateValue, 'The values of the clamp status' do
+  enum :ChuckStateValue, 'The values of the clamp status' do
     value :OPEN, 'The clamp is open'
     value :CLOSED, 'The clamp is closed'
-    value :INDETERMINATE, 'The status is undefined'
+    value :UNLATCHED, 'The status is undefined'
+    value :UNAVAILABLE, 'The value is indeterminate'
+  end
+
+  enum :BooleanValue, 'A yes/no value' do
+    value :YES, 'yes'
+    value :NO, 'no'
+    value :UNAVAILABLE, 'The value is indeterminate'
+  end
+
+  enum :AxisStateValue, 'The values for the axis states' do
+    value :HOME, 'The axis is in a home position'
+    value :TRAVEL, 'The axis is not in a home position'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
 
@@ -141,7 +159,7 @@ package :Events, 'Event Package' do
   end
   
   type :ToolAssetId, 'The unique tool Identifier as referenced in part 4 - assets', :Event do 
-    member :Value, 'The tool identifier', :ToolIdValue
+    member :Value, 'The tool identifier', :AssetIdValue
   end
   
   type :PartId, 'The current Tool Identifier', :Event do 
@@ -203,8 +221,43 @@ package :Events, 'Event Package' do
   end
 
   # For 1.3
-  type :ClampState, 'The clamp status', :Event do
-    member :Value, 'The path mode', :ClampStateValue
+  type :ChuckState, 'The chuck status', :Event do
+    member :Value, 'The chuck mode', :ChuckStateValue
   end
     
+  type :EndOfBar, 'An end of bar status', :Event do
+    member :Value, 'The status', :BooleanValue
+  end
+  
+  type :AuxiliaryEndOfBar, 'An end of bar status', :Event do
+    member :Value, 'The status', :BooleanValue
+  end
+  
+  type :SpindleInterlock, 'Spindle lock status', :Event do
+    member :Value, 'The status', :BooleanValue
+  end
+
+  type :ManualChuckUnclampInterlock, 'Prevents the chuck from unclaming', :Event do
+    member :Value, 'The status', :BooleanValue
+  end
+  
+  type :Length, 'A length measurement', :Event do
+    member :Value, 'The length', :LengthValue
+  end
+
+  type :AxisState, 'The home/travel state of the axis', :Event do
+    member :Value, 'The status', :AxisStateValue
+  end
+
+  type :FeedrateOverride, 'The override of the feedrate', :Event do
+    member :Value, 'The override', :OverrideValue
+  end
+
+  type :SpindleSpeedOverride, 'The override of the spindle speed (rotary velocity)', :Event do
+    member :Value, 'The override', :OverrideValue
+  end
+  
+  type :PartAssetId, 'The unique part Identifier as referenced in part 4 - assets', :Event do 
+    member :Value, 'The tool identifier', :AssetIdValue
+  end
 end

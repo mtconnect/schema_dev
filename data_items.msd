@@ -12,7 +12,6 @@ package :DataItems, 'Data Items Package' do
     value :EVENT, 'An event represents a change in state occurs at a point in time. Note: An event does not occur at predefined frequencies.'
     value :SAMPLE, 'A sample is a data point for continuous data items, that is, the value of a data item at a point in time.'
     value :CONDITION, 'The condition of the device'
-    value :INTERFACE, 'A data item representing an interface'
   end
   
   attr :NativeScale, 'The multiplier for the native value. Conversion divides by this value', :float

@@ -331,9 +331,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SYSTEM'/>
       <xs:enumeration value='LEVEL'/>
       <xs:enumeration value='ACTUATOR'/>
-      <xs:enumeration value='CLAMP_STATUS'/>
-      <xs:enumeration value='FEED_STOCK'/>
-      <xs:enumeration value='CHANGE_STOCK'/>
+      <xs:enumeration value='SPINDLE_SPEED_OVERRIDE'/>
+      <xs:enumeration value='FEEDRATE_OVERRIDE'/>
+      <xs:enumeration value='PART_ASSET_ID'/>
+      <xs:enumeration value='CHUCK_STATE'/>
+      <xs:enumeration value='END_OF_BAR'/>
+      <xs:enumeration value='AUXILIARY_END_OF_BAR'/>
+      <xs:enumeration value='SPINDLE_INTERLOCK'/>
+      <xs:enumeration value='MANUAL_CHUCK_UNCLAMP_INTERLOCK'/>
+      <xs:enumeration value='LENGTH'/>
+      <xs:enumeration value='AXIS_STATE'/>
+      <xs:enumeration value='INTERFACE_STATE'/>
+      <xs:enumeration value='MATERIAL_FEED'/>
+      <xs:enumeration value='MATERIAL_CHANGE'/>
+      <xs:enumeration value='MATERIAL_RETRACT'/>
+      <xs:enumeration value='PART_CHANGE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -378,6 +390,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='D_SCALE'/>
       <xs:enumeration value='REQUEST'/>
       <xs:enumeration value='RESPONSE'/>
+      <xs:enumeration value='REMAINING'/>
+      <xs:enumeration value='JOG'/>
+      <xs:enumeration value='RAPID'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -699,13 +714,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Interfaces' type='InterfacesType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A collection of interface events
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
     </xs:sequence>
     <xs:attribute name='componentId' type='ComponentIdType' use='required'/>
     <xs:attribute name='name' type='NameType' use='required'/>
@@ -741,16 +749,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:sequence>
       <xs:element ref='Condition' minOccurs='1' maxOccurs='unbounded'/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name='InterfacesType'>
-    <xs:annotation>
-      <xs:documentation>
-        A collection of interface actions
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element ref='Interface' minOccurs='1' maxOccurs='unbounded'/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name='ResultType' abstract='true'>
@@ -2591,6 +2589,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='AssetIdValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='PartIdValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -2623,6 +2629,26 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:pattern value='UNAVAILABLE|[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='LengthValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value for the length
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='OverrideValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value for a percent override
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DirectionValueType'>
@@ -2752,6 +2778,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:restriction base='xs:string'>
       <xs:enumeration value='ACTIVE'/>
       <xs:enumeration value='INACTIVE'/>
+      <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='PathModeValueType'>
@@ -2766,7 +2793,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='INDEPENDENT'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='ClampStateValueType'>
+  <xs:simpleType name='ChuckStateValueType'>
     <xs:annotation>
       <xs:documentation>
         The values of the clamp status
@@ -2775,7 +2802,31 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:restriction base='xs:string'>
       <xs:enumeration value='OPEN'/>
       <xs:enumeration value='CLOSED'/>
-      <xs:enumeration value='INDETERMINATE'/>
+      <xs:enumeration value='UNLATCHED'/>
+      <xs:enumeration value='UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='BooleanValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        A yes/no value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='YES'/>
+      <xs:enumeration value='NO'/>
+      <xs:enumeration value='UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='AxisStateValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The values for the axis states
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='HOME'/>
+      <xs:enumeration value='TRAVEL'/>
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
@@ -3223,6 +3274,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:restriction base='EventType'>
         <xs:enumeration value='ACTIVE'/>
         <xs:enumeration value='INACTIVE'/>
+        <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -3307,25 +3359,204 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ClampStateType'>
+  <xs:complexType name='ChuckStateType'>
     <xs:annotation>
       <xs:documentation>
-        The clamp status
+        The chuck status
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='EventType'>
         <xs:enumeration value='OPEN'/>
         <xs:enumeration value='CLOSED'/>
-        <xs:enumeration value='INDETERMINATE'/>
+        <xs:enumeration value='UNLATCHED'/>
         <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ClampState' type='ClampStateType' substitutionGroup='Event'>
+  <xs:element name='ChuckState' type='ChuckStateType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
-        The clamp status
+        The chuck status
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='EndOfBarType'>
+    <xs:annotation>
+      <xs:documentation>
+        An end of bar status
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='YES'/>
+        <xs:enumeration value='NO'/>
+        <xs:enumeration value='UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='EndOfBar' type='EndOfBarType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        An end of bar status
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AuxiliaryEndOfBarType'>
+    <xs:annotation>
+      <xs:documentation>
+        An end of bar status
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='YES'/>
+        <xs:enumeration value='NO'/>
+        <xs:enumeration value='UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AuxiliaryEndOfBar' type='AuxiliaryEndOfBarType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        An end of bar status
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SpindleInterlockType'>
+    <xs:annotation>
+      <xs:documentation>
+        Spindle lock status
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='YES'/>
+        <xs:enumeration value='NO'/>
+        <xs:enumeration value='UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='SpindleInterlock' type='SpindleInterlockType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        Spindle lock status
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ManualChuckUnclampInterlockType'>
+    <xs:annotation>
+      <xs:documentation>
+        Prevents the chuck from unclaming
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='YES'/>
+        <xs:enumeration value='NO'/>
+        <xs:enumeration value='UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ManualChuckUnclampInterlock' type='ManualChuckUnclampInterlockType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        Prevents the chuck from unclaming
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LengthType'>
+    <xs:annotation>
+      <xs:documentation>
+        A length measurement
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Length' type='LengthType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        A length measurement
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AxisStateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The home/travel state of the axis
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='HOME'/>
+        <xs:enumeration value='TRAVEL'/>
+        <xs:enumeration value='UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AxisState' type='AxisStateType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The home/travel state of the axis
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FeedrateOverrideType'>
+    <xs:annotation>
+      <xs:documentation>
+        The override of the feedrate
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='FeedrateOverride' type='FeedrateOverrideType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The override of the feedrate
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SpindleSpeedOverrideType'>
+    <xs:annotation>
+      <xs:documentation>
+        The override of the spindle speed (rotary velocity)
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='SpindleSpeedOverride' type='SpindleSpeedOverrideType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The override of the spindle speed (rotary velocity)
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PartAssetIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The unique part Identifier as referenced in part 4 - assets
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PartAssetId' type='PartAssetIdType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The unique part Identifier as referenced in part 4 - assets
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3542,7 +3773,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name='InterfaceStateType'>
+  <xs:simpleType name='InterfaceValuesType'>
     <xs:annotation>
       <xs:documentation>
         Interface state
@@ -3555,56 +3786,124 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='FAIL'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name='InterfaceType' abstract='true'>
+  <xs:complexType name='InterfaceEventType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        An abstract interface events
+        Abstract interface event type. Values are limited to the event states
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='ResultType'>
-        <xs:attribute name='state' type='InterfaceStateType' use='required'/>
-      </xs:extension>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='READY'/>
+        <xs:enumeration value='ACTIVE'/>
+        <xs:enumeration value='COMPLETE'/>
+        <xs:enumeration value='FAIL'/>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element abstract='true' name='Interface' type='InterfaceType' substitutionGroup='Result'>
+  <xs:element abstract='true' name='InterfaceEvent' type='InterfaceEventType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
-        An abstract interface events
+        Abstract interface event type. Values are limited to the event states
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='FeedStockType'>
+  <xs:complexType name='MaterialFeedType'>
     <xs:annotation>
       <xs:documentation>
-        A request/response for feeding of material
+        Material feed interface
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='InterfaceType'/>
+      <xs:extension base='InterfaceEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='FeedStock' type='FeedStockType' substitutionGroup='Interface'>
+  <xs:element name='MaterialFeed' type='MaterialFeedType' substitutionGroup='InterfaceEvent'>
     <xs:annotation>
       <xs:documentation>
-        A request/response for feeding of material
+        Material feed interface
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ChangeStockType'>
+  <xs:complexType name='MaterialChangeType'>
     <xs:annotation>
       <xs:documentation>
-        A request/response to change the material
+        Material change interface
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='InterfaceType'/>
+      <xs:extension base='InterfaceEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ChangeStock' type='ChangeStockType' substitutionGroup='Interface'>
+  <xs:element name='MaterialChange' type='MaterialChangeType' substitutionGroup='InterfaceEvent'>
     <xs:annotation>
       <xs:documentation>
-        A request/response to change the material
+        Material change interface
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='MaterialRetractType'>
+    <xs:annotation>
+      <xs:documentation>
+        Material retract interface
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InterfaceEventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='MaterialRetract' type='MaterialRetractType' substitutionGroup='InterfaceEvent'>
+    <xs:annotation>
+      <xs:documentation>
+        Material retract interface
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PartChangeType'>
+    <xs:annotation>
+      <xs:documentation>
+        Part change interface
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InterfaceEventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PartChange' type='PartChangeType' substitutionGroup='InterfaceEvent'>
+    <xs:annotation>
+      <xs:documentation>
+        Part change interface
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='InterfaceStatesType'>
+    <xs:annotation>
+      <xs:documentation>
+        The states of the interface
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ENABLE'/>
+      <xs:enumeration value='DISABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='InterfaceStateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The enable/disabled state of the interface
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='ENABLE'/>
+        <xs:enumeration value='DISABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='InterfaceState' type='InterfaceStateType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The enable/disabled state of the interface
       </xs:documentation>
     </xs:annotation>
   </xs:element>
