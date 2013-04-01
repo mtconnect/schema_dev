@@ -92,7 +92,6 @@ package :Assets, 'Mobile Assets' do
     member :AssetId, 'The unique identifier of the asset - may be same as serial number (should we remove serial number?)'
     member :SerialNumber, 'The serial number of the asset'
     member :Manufacturers, 'The manufacturer of this asset', 0..1
-    member :Description, 'The description of the asset (freeform)', 0..1, :AssetDescription
     member :Timestamp, 'The time asset information was recorded'
     member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
     member :Removed, 'The asset has been marked as removed', 0..1
@@ -100,6 +99,7 @@ package :Assets, 'Mobile Assets' do
     
   # Cutting tool definition
   type :CuttingTool, 'A cutting tool', :Asset do
+    member :Description, 'The description of the asset (freeform)', 0..1, :AssetDescription
     member :ToolId, 'The Identifier of the tool type'
     member :CuttingToolArchetypeReference, 'The reference to the cutting tool archetype', 0..1
     
@@ -112,6 +112,7 @@ package :Assets, 'Mobile Assets' do
   # Archetype 
   type :CuttingToolArchetype, 'A Archetypical cutting tool', :Asset do
     member :ToolId, 'The Identifier of the tool type'
+    member :Description, 'The description of the asset (freeform)', 0..1, :AssetDescription
 
     at_least_one do 
       member :CuttingToolDefinition, 'Description of tool'
