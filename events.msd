@@ -137,6 +137,14 @@ package :Events, 'Event Package' do
     member :Value, 'The tool identifier', :ToolIdValue
   end
   
+  type :ToolId, 'DEPRECATED in Rel. 1.2 See Tool_ASSET_ID.  The identifier of the tool currently in use for a given Path', :Event do 
+    member :Value, 'The tool identifier', :ToolIdValue
+  end
+  
+  type :ToolNumber, 'The identifier of a tool provided by the device controller.', :Event do 
+    member :Value, 'The tool identifier', :ToolIdValue
+  end  
+
   type :PartId, 'The current Tool Identifier', :Event do 
     member :Value, 'The tool identifier', :PartIdValue
   end
