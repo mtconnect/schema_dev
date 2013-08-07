@@ -4,7 +4,7 @@ package :Samlpes, 'The samples' do
   float_value = "#{float}|UNAVAILABLE"
   vector_value = "(#{float}( )*)+|UNAVAILABLE"
   
-  basic_type :SampleValue, 'An floating point value or array of floating point values'
+  basic_type :SampleValue, 'A floating point value or array of floating point values'
   basic_type(:PositionValue, 'The value for the position') { pattern float_value }
   basic_type(:EnergyValue, 'The value of energy') {  pattern float_value }
   basic_type(:DecibelValue, 'The sound pressure') {  pattern float_value }
