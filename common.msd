@@ -87,6 +87,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :TORQUE, 'The torque - force times distance'
     value :TOOL_ASSET_ID, 'The unique asset identifier of the tool in use'
     value :TOOL_ID, 'DEPRECATED: Use TOOL_ASSET_ID'
+    value :TOOL_NUMBER, 'The identifier of a tool provided by the device controller.'
     value :VELOCITY, 'The velocity of the component'
     value :VIBRATION, 'The status indicator'
     value :VOLTAGE, 'The voltage'
