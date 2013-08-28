@@ -16,7 +16,6 @@ package :Events, 'Event Package' do
   basic_type :WorkholdingIdValue, 'The workholding identifier'
   basic_type :MessageValue, 'A message'
   basic_type(:AxesListValue, 'A space delimited list of values') { pattern 'UNAVAILABLE|[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
-  basic_type(:LengthValue, 'The value for the length') { pattern float_value }
   basic_type(:OverrideValue, 'The value for a percent override') { pattern float_value }
     
   enum :DirectionValue, 'Rotation Direction' do
@@ -241,10 +240,6 @@ package :Events, 'Event Package' do
     member :Value, 'The status', :BooleanValue
   end
   
-  type :Length, 'A length measurement', :Event do
-    member :Value, 'The length', :LengthValue
-  end
-
   type :AxisState, 'The home/travel state of the axis', :Event do
     member :Value, 'The status', :AxisStateValue
   end
@@ -259,5 +254,28 @@ package :Events, 'Event Package' do
   
   type :PartAssetId, 'The unique part Identifier as referenced in part 4 - assets', :Event do 
     member :Value, 'The tool identifier', :AssetIdValue
+  end
+
+  enum :FunctionalModeValue, 'The valid functional modes' do
+    value :UNAVAILABLE, 'The value is unavailable'
+    value :PRODUCTION, 'The machine is producing parts'
+    value :SETUP, 'A job is being setup on the device'
+    value :TEARDOWN, 'A job is being torn down on the device'
+    value :MAINTENANCE, 'The machine is being repaired or is undergoing scheduled maintenance'
+    value :PROCESS_DEVELOPMENT, 'A machine is being used for part prove-out or developing a manufacturing process'
+  end
+
+  type :FunctionalMode, 'The current function the device is performing', :Event do
+    member :Value, 'The functional mode of the device', :FunctionalModeValue
+  end
+
+  basic_type :PalletIdValue, 'The pallet identifier'
+  type :PalletId, 'The identifier of the pallet being used', :Event do
+    member :Value, 'The pallet identifier', :PalletIdValue
+  end
+
+  basic_type :ProgramCommentValue, 'A comment'
+  type :ProgramComment, 'A comment in the control program', :Event do
+    member :Value, 'The comment', :ProgramCommentValue
   end
 end

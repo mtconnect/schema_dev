@@ -6,6 +6,7 @@ package :DataItems, 'Data Items Package' do
   attr :DataItemValue, 'The constrained value for this data item'
   attr :SourceComponentId, 'An idref to the component id', :IDREF
   attr :SourceDataItemId, 'An idref to the data item id', :IDREF
+  basic_type :FilterValue, 'The minimum limit on the change in a value', :float
   
   # Measurement types
   enum :Category, 'The measurement sampling type' do
@@ -20,6 +21,11 @@ package :DataItems, 'Data Items Package' do
   enum :Representation, 'The possible representations of a DataItem' do
     value :VALUE, 'A singluar value or fixed length value is give'
     value :TIME_SERIES, 'A waveform'
+  end
+
+  enum :FilterType, 'The type of filter' do
+    value :ABSOLUTE, 'An absolute change in value'
+    value :PERCENT, 'A Percent change in value'
   end
 
   # Measurement types
@@ -43,11 +49,11 @@ package :DataItems, 'Data Items Package' do
     member :SampleRate, 'Used as the default sample rate for waveforms', 0..1
     member(:Representation, 'The data item\'s representation', 0..1) { self.default = :VALUE } 
     member :SignificantDigits, 'The number of significant digits for this data item', 0..1, :SignificantDigitsValue
-    member :Constraints, 'Limits on the set of possible values', 0..1, :DataItemLimits
+    member :Constraints, 'Limits on the set of possible values', 0..1, :DataItemConstraints
   end
 
-  type :DataItemLimits, 'A set of limits for a data item' do
-    choice do
+  type :DataItemConstraints, 'A set of limits for a data item' do
+    choice(0..1) do
       set do
         member :Value, 'An possible value for this data item. Used for controlled vocabularies.', 1..INF, :DataItemValueElement
       end
@@ -56,10 +62,16 @@ package :DataItems, 'Data Items Package' do
         member :Maximum, 'A maximum value for this data item.', :DataItemValue
       end
     end
+    member :Filter, 'A limit on the amount of data by specifying the minimal delta required.', 0..1, :DataItemFilter
   end
   
   type :DataItemValueElement, 'The value element' do
     member :Value, 'A possible value for this data item', :DataItemOption
+  end
+
+  type :DataItemFilter, 'The filter for the data item' do
+    member :Value, 'A numeric value that limits the data depending on it\'s change. Change must be greater than this value.', :FilterValue
+    member :Type, 'The type of filter, ABSOLUTE or PERCENT', :FilterType
   end
   
   type :Source, 'A native data source' do

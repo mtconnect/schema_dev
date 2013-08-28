@@ -1,29 +1,41 @@
 
 package :InterfaceStream, 'A stream of interfaces' do
-  enum :InterfaceValues, 'Interface state' do
-    value :READY, 'The interface is in an idle state'
-    value :ACTIVE, 'The interface is executing an activity'
-    value :COMPLETE, 'The executor is finished with the activity'
-    value :FAIL, 'The activity failed'
+  # Interface events
+  enum :InterfaceEventValues, 'The possible values for an interface event' do
+    value :UNAVAILABLE, 'The value is unavailable'
+    value :NOT_READY, 'The interface is not ready'
+    value :READY, 'The interface is ready'
+    value :ACTIVE, 'The interface is actively executing'
+    value :COMPLETE, 'The interface has completed the action'
+    value :FAIL, 'The interface action has failed'
   end
-  
-  type :InterfaceEvent, 'Abstract interface event type. Values are limited to the event states', :Event do
+
+  type :InterfaceEvent, 'An abstract interface event', :Event do
     abstract
-    member :Value, 'Program code', :InterfaceValues
+    member :Value, 'Interface values', :InterfaceEventValues
   end
-  
-  type :MaterialFeed, 'Material feed interface', :InterfaceEvent
-  type :MaterialChange, 'Material change interface', :InterfaceEvent
-  type :MaterialRetract, 'Material retract interface', :InterfaceEvent
-  type :PartChange, 'Part change interface', :InterfaceEvent
-  
-  enum :InterfaceStates, 'The states of the interface' do
-    value :ENABLE, 'The interface is enabled'
-    value :DISABLE, 'The interface is disabled'
+
+  type :MaterialFeed, 'Requests material is fed into a device from a feeder', :InterfaceEvent
+  type :MaterialChange, 'Requests the device change the type of material being loaded or fed', :InterfaceEvent
+  type :MaterialRetract, 'Requests the material be removed from the device by retraction', :InterfaceEvent
+  type :PartChange, 'Requests that the type of part being made be changed. Coupled with PART_ID to indicate the part', :InterfaceEvent
+  type :MaterialLoad, 'A request for material to be loaded into the device.', :InterfaceEvent
+  type :MaterialUnload, 'A request for material to be unloaded from a device.', :InterfaceEvent
+  type :OpenDoor, 'A request for the device to open a door.', :InterfaceEvent
+  type :CloseDoor, 'A request for the device to close a door.', :InterfaceEvent
+  type :OpenChuck, 'A request for the device to open a chuck.', :InterfaceEvent
+  type :CloseChuck, 'A request for the device to close a chuck.', :InterfaceEvent
+
+  enum :InterfaceStates, 'The state of the interface' do
+    value :UNAVAILABLE, 'The value is unavailable'
+    value :ENABLED, 'The interface is enabled'
+    value :DISABLED, 'The interface is disabled'
   end
-  
+
   type :InterfaceState, 'The enable/disabled state of the interface', :Event do
     member :Value, 'The states of the interface', :InterfaceStates
   end
+
+
 end
 

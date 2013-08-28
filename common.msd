@@ -79,6 +79,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :PRESSURE, 'The current pressure'
     value :RESET, 'The statistical reset event'
     value :PROGRAM, 'The name of the program being run'
+    value :PROGRAM_COMMENT, 'A comment in the control program'
     value :ROTARY_MODE, 'The function of the rotary axis'
     value :COUPLED_AXES, 'The axes to which this axis is associated'
     value :AXIS_COUPLING, 'The method the axes are coupled together'
@@ -91,8 +92,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :VIBRATION, 'The status indicator'
     value :VOLTAGE, 'The voltage'
     value :WATTAGE, 'The wattage'
-    value :WORKHOLDING_ID, 'The workholding identifier'
-    
+
     # Types for 1.2
     value :ACCUMULATED_TIME, 'The non-contiguous accumulation of time'
     value :ACTUATOR_STATE, 'The state of the actuator. ACTIVE or INACTIVE.'
@@ -127,9 +127,11 @@ package :common, 'Common attributes and elements for all schemas' do
     value :ACTUATOR, 'An actuator related condition'
     
     # 1.3 general changes
-    value :SPINDLE_SPEED_OVERRIDE, 'The override percent for the spindle speed'
+    value :ROTARY_VELOCITY_OVERRIDE, 'The override percent for the spindle speed'
     value :FEEDRATE_OVERRIDE, 'The override percent for the spindle speed'
     value :PART_ASSET_ID, 'The identifier of the part loaded'
+    value :PROGRAM_EDIT, 'The state of the devices editor'
+    value :PROGRAM_EDIT_NAME, 'The name of the program being edited'
     
     # 1.3 additions
     value :CHUCK_STATE, 'A state of a chuck'
@@ -140,12 +142,22 @@ package :common, 'Common attributes and elements for all schemas' do
     value :LENGTH, 'Represents the length of the material'
     value :AXIS_STATE, 'The home or travel state of the axis'
     value :INTERFACE_STATE, 'The state of the interface'
-    
+    value :FUNCTIONAL_MODE, 'The current function of the device'
+    value :WORKHOLDING_ID, 'The workholding identifier'
+    value :PALLET_ID, 'The identifier of the pallet currently being used'
+    value :OPERATOR_ID, 'The identifier of the operator'
+
     # 1.3 Interfaces
     value :MATERIAL_FEED, 'Feed material'
     value :MATERIAL_CHANGE, 'Change the material'
     value :MATERIAL_RETRACT, 'Change the material'
     value :PART_CHANGE, 'Change the part on the bar feeder - changes the job being run'
+    value :OPEN_DOOR, 'Open a door'
+    value :CLOSE_DOOR, 'Close a door'
+    value :OPEN_CHUCK, 'Open a chuck'
+    value :CLOSE_CHUCK, 'Close a chuck'
+    value :MATERIAL_LOAD, 'Load material into a device'
+    value :MATERIAL_UNLOAD, 'Unload material into a device'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
@@ -156,7 +168,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :MAXIMUM, 'The maximum value for this measurement'
     value :MINIMUM, 'The minimum value for this measurement'
     value :OTHER, 'An extension point'
-    value :OVERRIDE, 'The override for the measurement'
+    value :OVERRIDE, 'DEPRECATED 1.3: The override for the measurement'
     value :PROBE, 'The position given by a probe'
     value :TARGET, 'The target position'
     value :GOOD, 'The good count'
@@ -190,6 +202,10 @@ package :common, 'Common attributes and elements for all schemas' do
     # For 1.3 overrides
     value :JOG, 'Jog override'
     value :RAPID, 'Rapid override'
+
+    # For 1.3 length
+    value :ACTUAL, 'The actual length of the object'
+    value :REMAINING, 'The remaining length of the object'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do

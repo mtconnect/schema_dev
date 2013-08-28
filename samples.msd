@@ -40,6 +40,7 @@ package :Samlpes, 'The samples' do
   basic_type(:MassValue, 'The weight of an object') { pattern float_value }
   basic_type(:FillLevelValue, 'The fill level of a tank') { pattern float_value }
   basic_type(:SampleRate, 'The sampling rate in samples per second') { pattern float_value }
+  basic_type(:LengthValue, 'The length in millimeters') { pattern float_value }
   
   attr :DurationTime, 'A length of time in seconds', :float
   
@@ -200,7 +201,11 @@ package :Samlpes, 'The samples' do
       member :Value, 'Decibel value', :DecibelValue
     end
   
-  type :AbsTimeSeries, 'The abstract waveform', :Sample do    
+  type :Length, 'The length of an object', :Sample do
+    member :Value, 'Length', :LengthValue
+  end
+
+  type :AbsTimeSeries, 'The abstract waveform', :Sample do
     abstract
     
     attribute :SampleCount, 'The number of samples', :CountValue
@@ -211,7 +216,8 @@ package :Samlpes, 'The samples' do
     
     member :Value, 'The time series representation', :TimeSeriesValue
   end
-    
+
+
   # Create waveforms for all the samples:
   self.elements.each do |type|
     if type.parent == :Sample

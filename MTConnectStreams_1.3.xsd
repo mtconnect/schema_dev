@@ -289,6 +289,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PRESSURE'/>
       <xs:enumeration value='RESET'/>
       <xs:enumeration value='PROGRAM'/>
+      <xs:enumeration value='PROGRAM_COMMENT'/>
       <xs:enumeration value='ROTARY_MODE'/>
       <xs:enumeration value='COUPLED_AXES'/>
       <xs:enumeration value='AXIS_COUPLING'/>
@@ -301,7 +302,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VIBRATION'/>
       <xs:enumeration value='VOLTAGE'/>
       <xs:enumeration value='WATTAGE'/>
-      <xs:enumeration value='WORKHOLDING_ID'/>
       <xs:enumeration value='ACCUMULATED_TIME'/>
       <xs:enumeration value='ACTUATOR_STATE'/>
       <xs:enumeration value='ASSET_CHANGED'/>
@@ -331,9 +331,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SYSTEM'/>
       <xs:enumeration value='LEVEL'/>
       <xs:enumeration value='ACTUATOR'/>
-      <xs:enumeration value='SPINDLE_SPEED_OVERRIDE'/>
+      <xs:enumeration value='ROTARY_VELOCITY_OVERRIDE'/>
       <xs:enumeration value='FEEDRATE_OVERRIDE'/>
       <xs:enumeration value='PART_ASSET_ID'/>
+      <xs:enumeration value='PROGRAM_EDIT'/>
+      <xs:enumeration value='PROGRAM_EDIT_NAME'/>
       <xs:enumeration value='CHUCK_STATE'/>
       <xs:enumeration value='END_OF_BAR'/>
       <xs:enumeration value='AUXILIARY_END_OF_BAR'/>
@@ -342,10 +344,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LENGTH'/>
       <xs:enumeration value='AXIS_STATE'/>
       <xs:enumeration value='INTERFACE_STATE'/>
+      <xs:enumeration value='FUNCTIONAL_MODE'/>
+      <xs:enumeration value='WORKHOLDING_ID'/>
+      <xs:enumeration value='PALLET_ID'/>
+      <xs:enumeration value='OPERATOR_ID'/>
       <xs:enumeration value='MATERIAL_FEED'/>
       <xs:enumeration value='MATERIAL_CHANGE'/>
       <xs:enumeration value='MATERIAL_RETRACT'/>
       <xs:enumeration value='PART_CHANGE'/>
+      <xs:enumeration value='OPEN_DOOR'/>
+      <xs:enumeration value='CLOSE_DOOR'/>
+      <xs:enumeration value='OPEN_CHUCK'/>
+      <xs:enumeration value='CLOSE_CHUCK'/>
+      <xs:enumeration value='MATERIAL_LOAD'/>
+      <xs:enumeration value='MATERIAL_UNLOAD'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -393,6 +405,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='REMAINING'/>
       <xs:enumeration value='JOG'/>
       <xs:enumeration value='RAPID'/>
+      <xs:enumeration value='ACTUAL'/>
+      <xs:enumeration value='REMAINING'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -1132,6 +1146,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='LengthValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The length in millimeters
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name='DurationTimeType'>
     <xs:annotation>
       <xs:documentation>
@@ -1858,6 +1882,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='DecibelValueType'/>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:complexType name='LengthType'>
+    <xs:annotation>
+      <xs:documentation>
+        The length of an object
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='SampleType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Length' type='LengthType' substitutionGroup='Sample'>
+    <xs:annotation>
+      <xs:documentation>
+        The length of an object
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='AbsTimeSeriesType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -2512,6 +2555,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='LengthTimeSeriesType'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of The length of an object
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='TimeSeriesType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='LengthTimeSeries' type='LengthTimeSeriesType' substitutionGroup='TimeSeries'>
+    <xs:annotation>
+      <xs:documentation>
+        Time series of The length of an object
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='AbsTimeSeriesTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -2629,16 +2689,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:pattern value='UNAVAILABLE|[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='LengthValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The value for the length
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='OverrideValueType'>
@@ -3465,25 +3515,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='LengthType'>
-    <xs:annotation>
-      <xs:documentation>
-        A length measurement
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:restriction base='EventType'>
-        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
-      </xs:restriction>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Length' type='LengthType' substitutionGroup='Event'>
-    <xs:annotation>
-      <xs:documentation>
-        A length measurement
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:complexType name='AxisStateType'>
     <xs:annotation>
       <xs:documentation>
@@ -3557,6 +3588,95 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The unique part Identifier as referenced in part 4 - assets
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='FunctionalModeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The valid functional modes
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='UNAVAILABLE'/>
+      <xs:enumeration value='PRODUCTION'/>
+      <xs:enumeration value='SETUP'/>
+      <xs:enumeration value='TEARDOWN'/>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='PROCESS_DEVELOPMENT'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='FunctionalModeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The current function the device is performing
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:enumeration value='UNAVAILABLE'/>
+        <xs:enumeration value='PRODUCTION'/>
+        <xs:enumeration value='SETUP'/>
+        <xs:enumeration value='TEARDOWN'/>
+        <xs:enumeration value='MAINTENANCE'/>
+        <xs:enumeration value='PROCESS_DEVELOPMENT'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='FunctionalMode' type='FunctionalModeType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The current function the device is performing
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='PalletIdValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The pallet identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='PalletIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the pallet being used
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PalletId' type='PalletIdType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the pallet being used
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='ProgramCommentValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        A comment
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='ProgramCommentType'>
+    <xs:annotation>
+      <xs:documentation>
+        A comment in the control program
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ProgramComment' type='ProgramCommentType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        A comment in the control program
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3773,13 +3893,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name='InterfaceValuesType'>
+  <xs:simpleType name='InterfaceEventValuesType'>
     <xs:annotation>
       <xs:documentation>
-        Interface state
+        The possible values for an interface event
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
+      <xs:enumeration value='UNAVAILABLE'/>
+      <xs:enumeration value='NOT_READY'/>
       <xs:enumeration value='READY'/>
       <xs:enumeration value='ACTIVE'/>
       <xs:enumeration value='COMPLETE'/>
@@ -3789,11 +3911,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='InterfaceEventType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        Abstract interface event type. Values are limited to the event states
+        An abstract interface event
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='EventType'>
+        <xs:enumeration value='UNAVAILABLE'/>
+        <xs:enumeration value='NOT_READY'/>
         <xs:enumeration value='READY'/>
         <xs:enumeration value='ACTIVE'/>
         <xs:enumeration value='COMPLETE'/>
@@ -3804,14 +3928,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element abstract='true' name='InterfaceEvent' type='InterfaceEventType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
-        Abstract interface event type. Values are limited to the event states
+        An abstract interface event
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='MaterialFeedType'>
     <xs:annotation>
       <xs:documentation>
-        Material feed interface
+        Requests material is fed into a device from a feeder
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3821,14 +3945,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='MaterialFeed' type='MaterialFeedType' substitutionGroup='InterfaceEvent'>
     <xs:annotation>
       <xs:documentation>
-        Material feed interface
+        Requests material is fed into a device from a feeder
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='MaterialChangeType'>
     <xs:annotation>
       <xs:documentation>
-        Material change interface
+        Requests the device change the type of material being loaded or fed
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3838,14 +3962,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='MaterialChange' type='MaterialChangeType' substitutionGroup='InterfaceEvent'>
     <xs:annotation>
       <xs:documentation>
-        Material change interface
+        Requests the device change the type of material being loaded or fed
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='MaterialRetractType'>
     <xs:annotation>
       <xs:documentation>
-        Material retract interface
+        Requests the material be removed from the device by retraction
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3855,14 +3979,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='MaterialRetract' type='MaterialRetractType' substitutionGroup='InterfaceEvent'>
     <xs:annotation>
       <xs:documentation>
-        Material retract interface
+        Requests the material be removed from the device by retraction
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='PartChangeType'>
     <xs:annotation>
       <xs:documentation>
-        Part change interface
+        Requests that the type of part being made be changed. Coupled with
+        PART_ID to indicate the part
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3872,19 +3997,123 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='PartChange' type='PartChangeType' substitutionGroup='InterfaceEvent'>
     <xs:annotation>
       <xs:documentation>
-        Part change interface
+        Requests that the type of part being made be changed. Coupled with
+        PART_ID to indicate the part
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='MaterialLoadType'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for material to be loaded into the device.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InterfaceEventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='MaterialLoad' type='MaterialLoadType' substitutionGroup='InterfaceEvent'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for material to be loaded into the device.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='MaterialUnloadType'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for material to be unloaded from a device.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InterfaceEventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='MaterialUnload' type='MaterialUnloadType' substitutionGroup='InterfaceEvent'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for material to be unloaded from a device.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='OpenDoorType'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for the device to open a door.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InterfaceEventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='OpenDoor' type='OpenDoorType' substitutionGroup='InterfaceEvent'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for the device to open a door.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='CloseDoorType'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for the device to close a door.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InterfaceEventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='CloseDoor' type='CloseDoorType' substitutionGroup='InterfaceEvent'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for the device to close a door.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='OpenChuckType'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for the device to open a chuck.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InterfaceEventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='OpenChuck' type='OpenChuckType' substitutionGroup='InterfaceEvent'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for the device to open a chuck.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='CloseChuckType'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for the device to close a chuck.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='InterfaceEventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='CloseChuck' type='CloseChuckType' substitutionGroup='InterfaceEvent'>
+    <xs:annotation>
+      <xs:documentation>
+        A request for the device to close a chuck.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:simpleType name='InterfaceStatesType'>
     <xs:annotation>
       <xs:documentation>
-        The states of the interface
+        The state of the interface
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='ENABLE'/>
-      <xs:enumeration value='DISABLE'/>
+      <xs:enumeration value='UNAVAILABLE'/>
+      <xs:enumeration value='ENABLED'/>
+      <xs:enumeration value='DISABLED'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='InterfaceStateType'>
@@ -3895,8 +4124,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='EventType'>
-        <xs:enumeration value='ENABLE'/>
-        <xs:enumeration value='DISABLE'/>
+        <xs:enumeration value='UNAVAILABLE'/>
+        <xs:enumeration value='ENABLED'/>
+        <xs:enumeration value='DISABLED'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
