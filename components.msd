@@ -11,7 +11,6 @@ package :Component, 'Top Level Components Package' do
   type :Component, "An abstract component type. This is a placeholder for all components" do
     abstract
     member :id, 'The data item identifier', :ID
-    member :Name, 'The components name'
     member :NativeName, 'The device manufacturer component name', 0..1, :Name
     member :SampleInterval, 'The rate at which the data is sampled from the component', 0..1
     member :SampleRate, 'DEPRECATED: The rate at which the data is sampled from the component', 0..1
@@ -43,6 +42,7 @@ package :Component, 'Top Level Components Package' do
   
   type :CommonComponent, "An abstract component that has an optional uuid", :Component do 
     member :Uuid, 'The components universally unique id. This can be composed of the manufactures id or name and the serial number.', 0..1
+    member :Name, 'The components name', 0..1
   end
 
   type :Components, 'A list of generic components' do
@@ -53,6 +53,7 @@ package :Component, 'Top Level Components Package' do
     standards :OMAC => 'resources'
     member :Iso841Class, 'The device\'s ISO-841 classification', 0..1
     member :Uuid, 'The components universally unique id. This can be composed of the manufactures id or name and the serial number.'
+    member :Name, 'The Device name.'
   end
 
   type :Controller, 'A controller', :CommonComponent do
