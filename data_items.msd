@@ -21,11 +21,11 @@ package :DataItems, 'Data Items Package' do
   enum :Representation, 'The possible representations of a DataItem' do
     value :VALUE, 'A singluar value or fixed length value is give'
     value :TIME_SERIES, 'A waveform'
+    value :DISCRETE, 'A discrete event type that may repeat'
   end
 
   enum :FilterType, 'The type of filter' do
-    value :ABSOLUTE, 'An absolute change in value'
-    value :PERCENT, 'A Percent change in value'
+    value :MINIMUM_DELTA, 'A minimum delta'
   end
 
   # Measurement types

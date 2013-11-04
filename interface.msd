@@ -5,19 +5,11 @@ package :interface, 'The interface component additions' do
   # Data Item References for Streams
   attr :Idref, 'A reference to an identifier', :IDREF
 
-  type :Reference, 'An abstract reference to a data item or component' do
-    abstract
+  type :Reference, 'A reference to a data item' do
+    member :DataItemId, 'A reference to a data item', :Idref
     member :Name, 'An optional name of the referenced item, used for documentation', 0..1
   end
-
-  type :DataItemReference, 'A reference to a data item', :Reference do
-    member :DataItemId, 'A reference to a data item', :Idref
-  end
   
-  type :ComponentReference, 'A reference to a Component', :Reference do
-    member :ComponentId, 'A reference to a component', :Idref
-  end
-
   type :References, 'A list of references' do
     member :Reference, 'A reference to a data item or component', 1..INF
   end

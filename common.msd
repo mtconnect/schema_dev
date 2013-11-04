@@ -137,7 +137,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :CHUCK_STATE, 'A state of a chuck'
     value :END_OF_BAR, 'Indicator that the end of material has been reached'
     value :AUXILIARY_END_OF_BAR, 'Indicator that the end of material has been reached, but more material remains'
-    value :SPINDLE_INTERLOCK, 'Spindle interlock indicator'
+    value :AXIS_INTERLOCK, 'Spindle interlock indicator'
     value :MANUAL_CHUCK_UNCLAMP_INTERLOCK, 'Prevent the chuck from unclamping'
     value :LENGTH, 'Represents the length of the material'
     value :AXIS_STATE, 'The home or travel state of the axis'
@@ -203,9 +203,11 @@ package :common, 'Common attributes and elements for all schemas' do
     value :JOG, 'Jog override'
     value :RAPID, 'Rapid override'
 
-    # For 1.3 length
-    value :ACTUAL, 'The actual length of the object'
-    value :REMAINING, 'The remaining length of the object'
+    # For end of bar
+    value :PRIMARY, 'The primary value for this data item'
+    value :AUXILIARY, 'The auxiliary value for this data item'
+
+    value :MANUAL_UNCLAMP, 'The component cannot be manually unclamped'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do

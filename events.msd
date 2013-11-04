@@ -13,7 +13,6 @@ package :Events, 'Event Package' do
   basic_type :ToolIdValue, 'The tool identifier'
   basic_type :AssetIdValue, 'The tool identifier'
   basic_type :PartIdValue, 'The part identifier'
-  basic_type :WorkholdingIdValue, 'The workholding identifier'
   basic_type :MessageValue, 'A message'
   basic_type(:AxesListValue, 'A space delimited list of values') { pattern 'UNAVAILABLE|[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
   basic_type(:OverrideValue, 'The value for a percent override') { pattern float_value }
@@ -156,7 +155,15 @@ package :Events, 'Event Package' do
   type :ControllerMode, 'CNC mode state', :Event do
     member :Value, 'The CNC mode state', :ControllerModeValue
   end
+
+  type :ToolId, 'DEPRECATED: The unique tool Identifier as referenced in part 4 - assets', :Event do 
+    member :Value, 'The tool identifier', :ToolIdValue
+  end
   
+  type :ToolNumber, 'The unique tool number as referenced in part 4 - assets', :Event do 
+    member :Value, 'The tool identifier', :ToolIdValue
+  end
+
   type :ToolAssetId, 'The unique tool Identifier as referenced in part 4 - assets', :Event do 
     member :Value, 'The tool identifier', :AssetIdValue
   end
@@ -168,11 +175,7 @@ package :Events, 'Event Package' do
   type :DoorState, 'The status of the door', :Event do
     member :Value, 'The status of the door', :DoorStateValue
   end
-  
-  type :WorkholdingId, 'The current workholding Identifier', :Event do 
-    member :Value, 'The workholding identifier', :WorkholdingIdValue
-  end
-  
+
   type :RotaryMode, 'The function of the rotary axis', :Event do
     member :Value, 'The rotary function', :RotaryModeValue
   end
@@ -220,6 +223,11 @@ package :Events, 'Event Package' do
   end
 
   # For 1.3
+  basic_type :WorkholdingIdValue, 'The workholding identifier'
+  type :WorkholdingId, 'The current workholding Identifier', :Event do
+    member :Value, 'The workholding identifier', :WorkholdingIdValue
+  end
+
   type :ChuckState, 'The chuck status', :Event do
     member :Value, 'The chuck mode', :ChuckStateValue
   end
@@ -228,15 +236,11 @@ package :Events, 'Event Package' do
     member :Value, 'The status', :BooleanValue
   end
   
-  type :AuxiliaryEndOfBar, 'An end of bar status', :Event do
-    member :Value, 'The status', :BooleanValue
-  end
-  
-  type :SpindleInterlock, 'Spindle lock status', :Event do
+  type :AxisInterlock, 'Spindle lock status', :Event do
     member :Value, 'The status', :BooleanValue
   end
 
-  type :ManualChuckUnclampInterlock, 'Prevents the chuck from unclaming', :Event do
+  type :ChuckInterlock, 'Prevents the chuck from unclaming', :Event do
     member :Value, 'The status', :BooleanValue
   end
   
@@ -277,5 +281,17 @@ package :Events, 'Event Package' do
   basic_type :ProgramCommentValue, 'A comment'
   type :ProgramComment, 'A comment in the control program', :Event do
     member :Value, 'The comment', :ProgramCommentValue
+  end
+
+  basic_type :OperatorIdValue, 'The operator identifier'
+  type :OperatorId, 'The identifier of the operator of the device', :Event do
+    member :Value, 'The operator identifier', :OperatorIdValue
+  end
+
+  # Create discrete events for non-state events
+  %w{PartCount ToolId ToolNumber ToolAssetId PalletId Message Block}.map do |s| 
+    self.schema.type(s.to_sym) 
+  end.each do |type|
+    self.type "#{type.name}Discrete".to_sym, "Discrete of #{type.annotation}", type.name
   end
 end

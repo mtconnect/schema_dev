@@ -221,7 +221,7 @@ package :Samlpes, 'The samples' do
   # Create waveforms for all the samples:
   self.elements.each do |type|
     if type.parent == :Sample
-      type "#{type.name}TimeSeries".to_s, "Time series of #{type.annotation}", :TimeSeries
+      self.type "#{type.name}TimeSeries".to_sym, "Time series of #{type.annotation}", :TimeSeries
     end
   end
   

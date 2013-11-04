@@ -17,7 +17,7 @@ package :Streams, 'Event Package' do
 
   type :ComponentStream, 'The stream of data for a component' do
     member :ComponentId, 'The id of the component (maps to the id from probe)'
-    member :Name, 'The component name'
+    member :Name, 'The component name', 0..1
     member :NativeName, 'The device manufacturer component name', 0..1, :Name
     member :Component, 'The type of the component', :Name
     member :Uuid, 'The unque identifier for this component', 0..1

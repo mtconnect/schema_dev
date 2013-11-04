@@ -130,7 +130,7 @@ class Schema
   
   class Type
     attr_reader :name, :parent, :imported
-    attr_reader :annotation, :attr
+    attr_reader :annotation, :attr, :schema
     attr_accessor :version
 
     include Standards
@@ -201,7 +201,7 @@ class Schema
   end
   
   class Package
-    attr_reader :elements, :enums, :basic_types, :name, :annotation
+    attr_reader :elements, :enums, :basic_types, :name, :annotation, :schema
 
     include Standards
     
@@ -369,7 +369,7 @@ class Schema
     def build_hierarchy
       if @parent
         unless @schema.type(@parent)
-          puts "Cannot find parent '#{@parent.inspect}' for '#{self}'"
+          puts "Cannot find parent '#{@parent.inspect}' for '#{self.name}'"
           exit 9
         end
         @schema.type(@parent).add_child(self)
