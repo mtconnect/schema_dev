@@ -131,8 +131,8 @@ package :Assets, 'Mobile Assets' do
     member :ProcessFeedRate, 'The tools constrained process target feed rate', 0..1
     member :ConnectionCodeMachineSide, 'CCMS: identifier for the cabability to connect any component of the cutting tool together, except assembly items, on the machine side', 0..1
     member :any, 'Any additional properties', 0..INF do
-      notNamespace = "##targetNamespace"
-      processContents = 'strict'
+      self.notNamespace = "##targetNamespace"
+      self.processContents = 'strict'
     end
     
     # Measurements
@@ -157,8 +157,8 @@ package :Assets, 'Mobile Assets' do
     member :ProcessFeedRate, 'The tools constrained process target feed rate', 0..1
     member :ConnectionCodeMachineSide, 'CCMS: identifier for the cabability to connect any component of the cutting tool together, except assembly items, on the machine side', 0..1
     member :any, 'Any additional properties', 0..INF do
-      notNamespace = "##targetNamespace"
-      processContents = 'strict'
+      self.notNamespace = "##targetNamespace"
+      self.processContents = 'strict'
     end
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :AssemblyMeasurements

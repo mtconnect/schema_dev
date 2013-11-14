@@ -12,8 +12,8 @@ package :Sensors, 'Sensor Calibration inspired by TEDS 1451.4' do
     member :NextCalibrationDate, 'The date and time the sensor was calibrated', 0..1
     member :CalibrationInitials, 'The initials of the person who calibrated this sensor', 0..1
     member :any, 'Any additional properties', 0..INF do
-      notNamespace = "##targetNamespace"
-      processContents = 'strict'
+      self.notNamespace = "##targetNamespace"
+      self.processContents = 'strict'
     end
     
     member :Channels, 'The sensor channels', 0..1
