@@ -219,6 +219,12 @@ class Schema
     def type(name, annotation, parent = nil, &block)
       @elements << Element.new(@schema, name, annotation, parent, &block)
     end
+    
+    def element(name, annotation, parent = nil, &block)
+      element = Element.new(@schema, name, annotation, parent, &block)
+      element.force_element = true
+      @elements << element
+    end
 
     def basic_type(name, annotation, parent = 'string', attr = false, &block)
       @basic_types << BasicType.new(@schema, name, annotation, parent, attr, &block)
@@ -235,12 +241,14 @@ class Schema
 
   class Element < Type
     attr_reader :members, :parent
+    attr_accessor :force_element
 
     def initialize(schema, name, annotation, parent = nil, &block)
       super(schema, name, annotation, parent)
       @name, @annotation, @parent = name, annotation, parent
       @abstract = false
       @mixed = false
+      @force_element = false
       @members = []
       @children = []
       @schema.derived << @parent if @parent and @parent != :abstract
@@ -385,7 +393,7 @@ class Schema
     include Comparable
     
     attr_reader :name, :type
-    attr_accessor :occurrence, :annotation, :default
+    attr_accessor :occurrence, :annotation, :default, :notQName, :processContents, :namespace, :notNamespace
     
     INF = 0xFFFFFFFF
 
@@ -395,6 +403,8 @@ class Schema
       @schema, @name, @annotation, @type = schema, name, annotation, type
       @occurrence = occurrence
       @type = @name unless @type
+      @notQName = @namespace = @notNamespace = nil
+      @processContents = 'lax'
       @standards = { }
       @imported = schema.importing
       instance_eval &block if block

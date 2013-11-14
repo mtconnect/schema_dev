@@ -130,6 +130,10 @@ package :Assets, 'Mobile Assets' do
     member :ProcessSpindleSpeed, 'The tools constrained process target spindle speed', 0..1
     member :ProcessFeedRate, 'The tools constrained process target feed rate', 0..1
     member :ConnectionCodeMachineSide, 'CCMS: identifier for the cabability to connect any component of the cutting tool together, except assembly items, on the machine side', 0..1
+    member :any, 'Any additional properties', 0..INF do
+      notNamespace = "##targetNamespace"
+      processContents = 'strict'
+    end
     
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :AssemblyMeasurements
@@ -152,7 +156,10 @@ package :Assets, 'Mobile Assets' do
     member :ProcessSpindleSpeed, 'The tools constrained process target spindle speed', 0..1
     member :ProcessFeedRate, 'The tools constrained process target feed rate', 0..1
     member :ConnectionCodeMachineSide, 'CCMS: identifier for the cabability to connect any component of the cutting tool together, except assembly items, on the machine side', 0..1
-    
+    member :any, 'Any additional properties', 0..INF do
+      notNamespace = "##targetNamespace"
+      processContents = 'strict'
+    end
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :AssemblyMeasurements
 
@@ -263,7 +270,7 @@ package :Assets, 'Mobile Assets' do
   type :CornerRadius, 'nominal radius of a rounded corner measured in the XY-plane', :CuttingItemMeasurement
   type :CuttingEdgeLength, 'theoretical length of the cutting edge of a cutting item over sharp corners', :CuttingItemMeasurement
   type :CuttingHeight, 'theoretical length of the cutting edge of a cutting item over sharp corners', :CuttingItemMeasurement
-  type :CuttingReferencePoiint, 'the theoretical sharp point of the cutting tool from which the major functional dimensions are taken', :CuttingItemMeasurement
+  type :CuttingReferencePoint, 'the theoretical sharp point of the cutting tool from which the major functional dimensions are taken', :CuttingItemMeasurement
   type :FlangeDiameter, 'dimension between two parallel tangents on the outside edge of a flange', :CuttingItemMeasurement
   type :FunctionalWidth, 'distance between the cutting reference point and the rear backing surface of a turning tool or the axis of a boring bar', :CuttingItemMeasurement
   type :InclinationAngle, 'angle between the tool rake plane and a plane parallel to the xy-plane measured in the tool cutting edge plane', :CuttingItemMeasurement

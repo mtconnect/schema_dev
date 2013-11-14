@@ -62,11 +62,13 @@ class Schema
     # Root schema node.
     root = REXML::Element.new('xs:schema')
     root.add_namespace('xs', 'http://www.w3.org/2001/XMLSchema')
+    root.add_namespace('vc', 'http://www.w3.org/2007/XMLSchema-versioning')
     root.add_namespace(@urn)
     root.add_namespace(@namespace, @urn)
     root.add_attribute('targetNamespace',@urn)
     root.add_attribute('elementFormDefault', "qualified")
     root.add_attribute('attributeFormDefault', "unqualified")
+    root.add_attribute('vc:minVersion', '1.1')
     
     @imports.each do |imp|
       root.add_namespace(imp.namespace, imp.urn)
@@ -283,21 +285,12 @@ class Schema
       end
     end
 
-    def create_substitution_group
-      # Add an element with a substitution group for this type. The
-      # substitution group will allow one level of subclassing below
-      # the abstract level. This may need to be extended later.
+    def create_element
       element = REXML::Element.new('xs:element')
       element.add_attribute('abstract', 'true') if abstract?
       element.add_attribute('name', @name.to_s)
       element.add_attribute('type', name_as_xsd_type(true))
-      if subtype? and abstract_parent?
-        name = @parent
-        par = @schema.type(@parent)
-        name = "#{par.imported.namespace}:#{name}" if par.imported
-        element.add_attribute('substitutionGroup', name)
-      end
-      
+
       # Annotate again for XML Spy documentation.
       anno = REXML::Element.new('xs:annotation')
       docs = REXML::Element.new('xs:documentation')
@@ -307,7 +300,22 @@ class Schema
 
       element
     end
-    
+
+    def create_substitution_group
+      # Add an element with a substitution group for this type. The
+      # substitution group will allow one level of subclassing below
+      # the abstract level. This may need to be extended later.
+      element = create_element
+      if subtype? and abstract_parent?
+        name = @parent
+        par = @schema.type(@parent)
+        name = "#{par.imported.namespace}:#{name}" if par.imported
+        element.add_attribute('substitutionGroup', name)
+      end
+      
+      element
+    end
+        
     def generate_xsd
       return [] if @imported
       
@@ -330,6 +338,8 @@ class Schema
       if abstract_parent? or (abstract? and has_subtypes?)
         elements << create_substitution_group
       end
+                  
+      elements << create_element if force_element
 
       elements
 
@@ -429,8 +439,12 @@ class Schema
       # Create the element.
       if @name == :any
         element = REXML::Element.new('xs:any')
+        
         # Need to make this optional
-        element.add_attribute('processContents', 'lax') 
+        element.add_attribute('processContents', @processContents)        
+        element.add_attribute('notQName', @notQName) if @notQName          
+        element.add_attribute('namespace', @namespace) if @namespace          
+        element.add_attribute('notNamespace', @notNamespace) if @notNamespace          
         
         # Put the documention here as well
         anno = REXML::Element.new('xs:annotation')
