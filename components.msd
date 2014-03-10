@@ -51,7 +51,7 @@ package :Component, 'Top Level Components Package' do
   
   type :Device, 'The top level component managed by the agent', :Component do
     standards :OMAC => 'resources'
-    member :Iso841Class, 'The device\'s ISO-841 classification', 0..1
+    member :Iso841Class, 'DEPRECATED: The device\'s ISO-841 classification', 0..1
     member :Uuid, 'The components universally unique id. This can be composed of the manufactures id or name and the serial number.'
     member :Name, 'The Device name.'
   end

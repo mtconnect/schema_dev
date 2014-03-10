@@ -18,12 +18,16 @@ package :Example, 'Example Package' do
     member :Value, 'The flow', :SignalStrengthValue
   end
   
-  type :AbstractCommonVariable, 'An abstract common variable', :Sample do
+  type :AbstractCommonVariable2, 'An abstract common variable', :Event do
     abstract
     member :Index, 'the values index'
   end    
   
-  type :CommonVariable, 'A variable value', :AbstractCommonVariable do
+  type :CommonVariable2, 'A variable value', :AbstractCommonVariable2 do
+    member :Value, 'the value', :CommonVariableValue
+  end
+
+  type :CommonVariable, 'A variable value', :Event do
     member :Value, 'the value', :CommonVariableValue
   end
 end
