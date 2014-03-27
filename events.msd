@@ -1,13 +1,14 @@
 
 package :Events, 'Event Package' do
   integer_value = '[+-]?\d+|UNAVAILABLE'
+  line_pattern = "[A-Za-z0-9]+|UNAVAILABLE"  
   
   basic_type(:PartCountValue, 'The number of parts') { pattern integer_value }
   basic_type :BlockValue, 'Code block value'
   basic_type :CodeValue, 'Value of the program code'
   basic_type :ProgramValue, 'The program name'
   basic_type :ToolEventValue, 'A tool event'
-  basic_type(:LineValue, 'The line number') { pattern integer_value }
+  basic_type(:LineValue, 'The line number') { pattern line_pattern }
   basic_type :ToolIdValue, 'The tool identifier'
   basic_type :PartIdValue, 'The part identifier'
   basic_type :WorkholdingIdValue, 'The workholding identifier'
