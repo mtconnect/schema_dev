@@ -3,13 +3,14 @@ package :Events, 'Event Package' do
   integer_value = '[+-]?\d+|UNAVAILABLE'
   float = '[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?'
   float_value = "#{float}|UNAVAILABLE"
+  line_pattern = "[A-Za-z0-9]+|UNAVAILABLE"
   
   basic_type(:PartCountValue, 'The number of parts') { pattern integer_value }
   basic_type :BlockValue, 'Code block value'
   basic_type :CodeValue, 'Value of the program code'
   basic_type :ProgramValue, 'The program name'
   basic_type :ToolEventValue, 'A tool event'
-  basic_type(:LineValue, 'The line number') { pattern integer_value }
+  basic_type(:LineValue, 'The line number') { pattern line_pattern }
   basic_type :ToolIdValue, 'The tool identifier'
   basic_type :AssetIdValue, 'The tool identifier'
   basic_type :PartIdValue, 'The part identifier'
@@ -32,11 +33,14 @@ package :Events, 'Event Package' do
   end
 
   enum :ExecutionValue, 'The execution value' do
-    value :READY, 'The cnc is idle and ready to do work'
+    value :READY, 'The cnc is idle and ready toß do work'
     value :INTERRUPTED, 'The program has been paused'
     value :ACTIVE, 'The program is actively running'
     value :STOPPED, 'The program has been stopped'
-    value :FEED_HOLD, 'The machine is in feed hold - spindle spinning/axis stopped'
+    value :FEED_HOLD, 'The machine is in feed hold - spindle spinning/axis stopped'    
+    value :PROGRAM_COMPLETED, 'The program has completed execution'
+    value :PROGRAM_STOPPED, 'The program has stopped'
+    value :PROGRAM_OPTIONAL_STOP, 'The program has been intentionally optionally stopped using an M01 or similar code'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
@@ -45,6 +49,7 @@ package :Events, 'Event Package' do
     value :MANUAL, 'The cnc is in manual mode'
     value :MANUAL_DATA_INPUT, 'The cnc is in manual data input mode (MDI)'
     value :SEMI_AUTOMATIC, 'The controller is operating in a single cycle, single block mode'
+    value :EDIT, 'The controller is currently editing a program in the foreground'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
@@ -109,6 +114,7 @@ package :Events, 'Event Package' do
   enum :AxisStateValue, 'The values for the axis states' do
     value :HOME, 'The axis is in a home position'
     value :TRAVEL, 'The axis is not in a home position'
+    value :STOPPED, 'The axis is stopped'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
 
@@ -239,9 +245,16 @@ package :Events, 'Event Package' do
   type :AxisInterlock, 'Spindle lock status', :Event do
     member :Value, 'The status', :BooleanValue
   end
+  
+  enum :ChuckInterlockValue, 'The values for the chuck interlock state' do
+      value :ACTIVE, 'The chuck cannot be operated'
+      value :INACTIVE, 'The chuck can be operated'
+      value :UNAVAILABLE, 'The value is indeterminate'
+      
+  end
 
   type :ChuckInterlock, 'Prevents the chuck from unclaming', :Event do
-    member :Value, 'The status', :BooleanValue
+    member :Value, 'The status', :ChuckInterlockValue
   end
   
   type :AxisState, 'The home/travel state of the axis', :Event do
@@ -283,9 +296,28 @@ package :Events, 'Event Package' do
     member :Value, 'The comment', :ProgramCommentValue
   end
 
+  basic_type :ProgramHeaderValue, 'A header'
+  type :ProgramHeader, 'A header in the control program', :Event do
+    member :Value, 'The header', :ProgramHeaderValue
+  end
+
   basic_type :OperatorIdValue, 'The operator identifier'
   type :OperatorId, 'The identifier of the operator of the device', :Event do
     member :Value, 'The operator identifier', :OperatorIdValue
+  end
+  
+  enum :ProgramEditValue, 'The values for the program edit values' do
+      value :ACTIVE, 'A program is currently being edited'
+      value :READY, 'The controller is vapable of editing a program, but is not currently editing a program'
+      value :NOT_READY, 'The controller is in a state where it cannot edit a program'
+      value :UNAVAILABLE, 'The value is unavailable'
+  end
+  type :ProgramEdit, 'The program edit state' do
+      member :Value, 'The program edit state', :ProgramEditValue
+  end
+  
+  type :ProgramEditName, 'The name of the program being edited' do
+      member :Value, 'The name of the program being edited', :ProgramValue
   end
 
   # Create discrete events for non-state events

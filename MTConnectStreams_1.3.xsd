@@ -2639,7 +2639,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[+-]?\d+|UNAVAILABLE'/>
+      <xs:pattern value='[A-Za-z0-9]+|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ToolIdValueType'>
@@ -2732,6 +2732,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ACTIVE'/>
       <xs:enumeration value='STOPPED'/>
       <xs:enumeration value='FEED_HOLD'/>
+      <xs:enumeration value='PROGRAM_COMPLETED'/>
+      <xs:enumeration value='PROGRAM_STOPPED'/>
+      <xs:enumeration value='PROGRAM_OPTIONAL_STOP'/>
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
@@ -2746,6 +2749,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MANUAL'/>
       <xs:enumeration value='MANUAL_DATA_INPUT'/>
       <xs:enumeration value='SEMI_AUTOMATIC'/>
+      <xs:enumeration value='EDIT'/>
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
@@ -2870,6 +2874,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:restriction base='xs:string'>
       <xs:enumeration value='HOME'/>
       <xs:enumeration value='TRAVEL'/>
+      <xs:enumeration value='STOPPED'/>
       <xs:enumeration value='UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
@@ -2932,7 +2937,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='EventType'>
-        <xs:pattern value='[+-]?\d+|UNAVAILABLE'/>
+        <xs:pattern value='[A-Za-z0-9]+|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -3057,6 +3062,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:enumeration value='ACTIVE'/>
         <xs:enumeration value='STOPPED'/>
         <xs:enumeration value='FEED_HOLD'/>
+        <xs:enumeration value='PROGRAM_COMPLETED'/>
+        <xs:enumeration value='PROGRAM_STOPPED'/>
+        <xs:enumeration value='PROGRAM_OPTIONAL_STOP'/>
         <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
@@ -3080,6 +3088,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:enumeration value='MANUAL'/>
         <xs:enumeration value='MANUAL_DATA_INPUT'/>
         <xs:enumeration value='SEMI_AUTOMATIC'/>
+        <xs:enumeration value='EDIT'/>
         <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
@@ -3508,6 +3517,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='ChuckInterlockValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The values for the chuck interlock state
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTIVE'/>
+      <xs:enumeration value='INACTIVE'/>
+      <xs:enumeration value='UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='ChuckInterlockType'>
     <xs:annotation>
       <xs:documentation>
@@ -3516,8 +3537,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='EventType'>
-        <xs:enumeration value='YES'/>
-        <xs:enumeration value='NO'/>
+        <xs:enumeration value='ACTIVE'/>
+        <xs:enumeration value='INACTIVE'/>
         <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
@@ -3539,6 +3560,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:restriction base='EventType'>
         <xs:enumeration value='HOME'/>
         <xs:enumeration value='TRAVEL'/>
+        <xs:enumeration value='STOPPED'/>
         <xs:enumeration value='UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
@@ -3694,6 +3716,31 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='ProgramHeaderValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        A header
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='ProgramHeaderType'>
+    <xs:annotation>
+      <xs:documentation>
+        A header in the control program
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ProgramHeader' type='ProgramHeaderType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        A header in the control program
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:simpleType name='OperatorIdValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -3719,6 +3766,39 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='ProgramEditValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The values for the program edit values
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTIVE'/>
+      <xs:enumeration value='READY'/>
+      <xs:enumeration value='NOT_READY'/>
+      <xs:enumeration value='UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='ProgramEditType'>
+    <xs:annotation>
+      <xs:documentation>
+        The program edit state
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ProgramEditValueType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='ProgramEditNameType'>
+    <xs:annotation>
+      <xs:documentation>
+        The name of the program being edited
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ProgramValueType'/>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='PartCountDiscreteType'>
     <xs:annotation>
       <xs:documentation>
