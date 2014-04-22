@@ -942,8 +942,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:attribute name='assetId' type='AssetIdType' use='required'/>
-    <xs:attribute name='serialNumber' type='SerialNumberType' use='required'/>
-    <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
     <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
     <xs:attribute name='removed' type='RemovedType' use='optional'/>
@@ -1004,6 +1002,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:element>
           </xs:choice>
         </xs:sequence>
+        <xs:attribute name='serialNumber' type='SerialNumberType' use='required'/>
+        <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
         <xs:attribute name='toolId' type='ToolIdType' use='required'/>
       </xs:extension>
     </xs:complexContent>
