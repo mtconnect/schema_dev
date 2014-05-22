@@ -146,6 +146,8 @@ package :common, 'Common attributes and elements for all schemas' do
     value :WORKHOLDING_ID, 'The workholding identifier'
     value :PALLET_ID, 'The identifier of the pallet currently being used'
     value :OPERATOR_ID, 'The identifier of the operator'
+    value :ASSET_REMOVED, 'The asset event when an asset is removed'
+    value :PROGRAM_HEADER, 'The header of a program'
 
     # 1.3 Interfaces
     value :MATERIAL_FEED, 'Feed material'

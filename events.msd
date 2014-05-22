@@ -228,6 +228,11 @@ package :Events, 'Event Package' do
     member :Value, 'The asset identifier', :AssetId
   end
 
+  type :AssetRemoved, 'An asset was just modified', :Event do
+    member :AssetType, 'The type of asset that changed', :AssetAttrType
+    member :Value, 'The asset identifier', :AssetId
+  end
+
   # For 1.3
   basic_type :WorkholdingIdValue, 'The workholding identifier'
   type :WorkholdingId, 'The current workholding Identifier', :Event do
