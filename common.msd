@@ -88,6 +88,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :TORQUE, 'The torque - force times distance'
     value :TOOL_ASSET_ID, 'The unique asset identifier of the tool in use'
     value :TOOL_ID, 'DEPRECATED: Use TOOL_ASSET_ID'
+    value :TOOL_NUMBER, 'The number of the tool as represented by the contoller T#'
     value :VELOCITY, 'The velocity of the component'
     value :VIBRATION, 'The status indicator'
     value :VOLTAGE, 'The voltage'
