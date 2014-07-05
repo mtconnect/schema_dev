@@ -636,6 +636,50 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name='AssetDescriptionType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        The description of an asset, can be freeform text or elemenrts
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            Any elements
+          </xs:documentation>
+        </xs:annotation>
+      </xs:any>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='AssetsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The collection of mobile assets
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs='1' maxOccurs='unbounded'>
+      <xs:element ref='Asset'/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name='AssetType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract mobile asset
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name='assetId' type='AssetIdType' use='required'/>
+    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
+    <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
+    <xs:attribute name='removed' type='RemovedType' use='optional'/>
+  </xs:complexType>
+  <xs:element abstract='true' name='Asset' type='AssetType'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract mobile asset
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:simpleType name='LocationValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -895,22 +939,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CRIB'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name='AssetDescriptionType' mixed='true'>
-    <xs:annotation>
-      <xs:documentation>
-        The description of an asset, can be freeform text or elemenrts
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            Any elements
-          </xs:documentation>
-        </xs:annotation>
-      </xs:any>
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name='CuttingToolDefinitionType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
@@ -928,34 +956,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='format' type='DefinitionFormatType' use='optional'/>
   </xs:complexType>
-  <xs:complexType name='AssetsType'>
-    <xs:annotation>
-      <xs:documentation>
-        The collection of mobile assets
-      </xs:documentation>
-    </xs:annotation>
-    <xs:choice minOccurs='1' maxOccurs='unbounded'>
-      <xs:element ref='Asset'/>
-    </xs:choice>
-  </xs:complexType>
-  <xs:complexType name='AssetType' abstract='true'>
-    <xs:annotation>
-      <xs:documentation>
-        An abstract mobile asset
-      </xs:documentation>
-    </xs:annotation>
-    <xs:attribute name='assetId' type='AssetIdType' use='required'/>
-    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
-    <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
-    <xs:attribute name='removed' type='RemovedType' use='optional'/>
-  </xs:complexType>
-  <xs:element abstract='true' name='Asset' type='AssetType'>
-    <xs:annotation>
-      <xs:documentation>
-        An abstract mobile asset
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:complexType name='CuttingToolType'>
     <xs:annotation>
       <xs:documentation>

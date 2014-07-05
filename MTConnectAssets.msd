@@ -25,5 +25,6 @@ package :MTC, 'MTC Top Level Package' do
 end
 
 load 'assets.msd'
+load 'tools.msd'
 load 'qif.msd'
 load 'parts.msd'
