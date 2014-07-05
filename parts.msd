@@ -107,7 +107,7 @@ package :Parts, 'Parts' do
   basic_type :PartIdentifier, 'An identifier of a part', :NMTOKEN
   
   enum :TypeOfPartIdentifier, 'An identifier' do
-    value :HEAD_ID, 'A heat id'
+    value :HEAT_ID, 'A heat id'
     value :BATCH_ID, 'A batch id'
     value :LOT_ID, 'A lot id'
     value :RAW_MATERIAL_ID, 'A raw material id'
@@ -121,12 +121,8 @@ package :Parts, 'Parts' do
     member :Timestamp, 'The timestamp'
   end
 
-  attr :HeatId, 'A heat id', :NMTOKEN
-  attr :BatchId, 'A heat id', :NMTOKEN
-  attr :LotId, 'A heat id', :NMTOKEN
-
   type :GroupIdentifier, 'A unique part' do
-    member :Type, 'The serial number of an individual part', :PartIdentifierType
+    member :Type, 'The serial number of an individual part', :TypeOfPartIdentifier
     member :StepId, 'The step this id is associated with', 0..1
     member :Value, 'The identifier', :PartIdentifier
     member :Timestamp, 'The timestamp'
