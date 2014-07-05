@@ -1,9 +1,9 @@
 
-self.urn = 'urn:mtconnect.org:MTConnectAssets:1.3'
+self.urn = 'urn:mtconnect.org:MTConnectAssets:1.4'
 self.namespace = 'mt'
 self.top = :MTConnectAssets
 self.license = File.read('license.txt')
-self.version = '1.3'
+self.version = '1.4'
 
 load 'common'
 
@@ -26,3 +26,4 @@ end
 
 load 'assets.msd'
 load 'qif.msd'
+load 'parts.msd'
