@@ -93,7 +93,7 @@ package :Parts, 'Parts' do
   end
   
   type :PartArchitypeRef, 'A reference to the part architype' do
-    member :Href, 'The URL refernce of the architype', :Source
+    member :Href, 'The URL refernce of the architype', 0..1, :Source
     member :Value, 'The architype id', :AssetId
   end
   
@@ -147,7 +147,7 @@ package :Parts, 'Parts' do
   
   type :SubCount, 'A sub count' do
     member :Label, 'A subcount label', :SubCountLabel
-    member :Count, 'A count for this group', :PartCount
+    member :Value, 'A count for this group', :PartCount
   end
   
   basic_type :OperatorId, 'An operator Id'
@@ -165,7 +165,15 @@ package :Parts, 'Parts' do
   end
   
   type :ProcessHistory, 'This history of this part' do
-    member :DeviceUuid, 'The unique identifier of the device this process was performed on', 0..1, :Uuid
+    member :ProcessHistoryItem, 'The steps in the history', 1..INF
+  end
+  
+  type :DeviceUuid, 'A device uuid' do
+    member :Value, 'The uuid', :Uuid
+  end
+  
+  type :ProcessHistoryItem, 'This history of this part' do
+    member :DeviceUuid, 'The unique identifier of the device this process was performed on', 0..1
     member :Location, 'The location of the part if not on the machine', 0..1, :PartLocation
     member :State, 'The process state', :ProcessHistoryState
     member :StepId, 'The step this history is associated with', 0..1
@@ -173,5 +181,6 @@ package :Parts, 'Parts' do
     member :PalletId, 'The pallet identifier', 0..1
     member :FixtureId, 'The fixture identifier', 0..1
     member :RevisionId, 'The revision of the process used', 0..1
+    member :Timestamp, 'The timestamp'
   end
 end
