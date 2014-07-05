@@ -1,3 +1,7 @@
 *~
 .*
 *.spp
+vendor
+Docs
+Versions
+schema.*
