@@ -2121,7 +2121,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='StepIDType'>
+  <xs:simpleType name='StepIdType'>
     <xs:annotation>
       <xs:documentation>
         The identifier of the step
@@ -2145,14 +2145,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='ControlProgramType'>
-    <xs:annotation>
-      <xs:documentation>
-        A control program
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:simpleType name='TargetTimeType'>
     <xs:annotation>
       <xs:documentation>
@@ -2160,6 +2152,40 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:float'/>
+  </xs:simpleType>
+  <xs:simpleType name='ProgramSizeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A size in bytes
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='ChecksumType'>
+    <xs:annotation>
+      <xs:documentation>
+        A checksum as a 32 bit unsigned value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='ITARFlagType'>
+    <xs:annotation>
+      <xs:documentation>
+        A flag
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='YES|NO'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ProgramNameType'>
+    <xs:annotation>
+      <xs:documentation>
+        A program name
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
   </xs:simpleType>
   <xs:complexType name='PartArchetypeType'>
     <xs:annotation>
@@ -2325,6 +2351,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+    <xs:attribute name='stepId' type='StepIdType' use='required'/>
   </xs:complexType>
   <xs:complexType name='ControlProgramsType'>
     <xs:annotation>
@@ -2341,6 +2368,41 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='ControlProgramType'>
+    <xs:annotation>
+      <xs:documentation>
+        A control program
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Description' type='StepDescriptionType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The description of the program
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Size' type='ProgramSizeType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The size of the program in bytes
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Checksum' type='ChecksumType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The checksum of the program
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='name' type='ProgramNameType' use='required'/>
+    <xs:attribute name='nameOnMachine' type='ProgramNameType' use='required'/>
+    <xs:attribute name='revisionId' type='RevisionIdType' use='required'/>
+    <xs:attribute name='timestamp' type='TimestampType' use='optional'/>
+    <xs:attribute name='itarControl' type='ITARFlagType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='ToolsType'>
     <xs:annotation>
@@ -2394,6 +2456,46 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='AssetIdType'/>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:simpleType name='WorkorderIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of this workorder
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='SubCountLabelType'>
+    <xs:annotation>
+      <xs:documentation>
+        The label of a sub count
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='PartCountType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of parts in this workorder
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='PurchaseOrderType'>
+    <xs:annotation>
+      <xs:documentation>
+        A purchase order
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='QualityIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The asset id of the quality doc
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:complexType name='PartInstanceType'>
     <xs:annotation>
       <xs:documentation>
@@ -2410,6 +2512,41 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:element name='PartArchitypeRef' type='PartArchitypeRefType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                A reference to the architype for this part
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='PartIdentifiers' type='PartIdentifiersType'>
+            <xs:annotation>
+              <xs:documentation>
+                The part identifiers
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Workorder' type='WorkorderType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                A workorder for this part instance
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='ProcessHistory' type='ProcessHistoryType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The history of the process for this part instance
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Quality' type='QualityType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                A reference to the quality information
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2421,4 +2558,285 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='PartArchitypeRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to the part architype
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='AssetIdType'>
+        <xs:attribute name='href' type='SourceType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='PartIdentifiersType'>
+    <xs:annotation>
+      <xs:documentation>
+        A collection of identifiers
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='UniqueIdentifier' type='UniqueIdentifierType'>
+        <xs:annotation>
+          <xs:documentation>
+            A unique serialized part identifier
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='GroupIdentifier' type='GroupIdentifierType'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier of a group of parts or a piece of raw material that
+            will be transformed into multiple parts
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:simpleType name='PartIdentifierType'>
+    <xs:annotation>
+      <xs:documentation>
+        An identifier of a part
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='TypeOfPartIdentifierType'>
+    <xs:annotation>
+      <xs:documentation>
+        An identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'>
+      <xs:enumeration value='HEAD_ID'/>
+      <xs:enumeration value='BATCH_ID'/>
+      <xs:enumeration value='LOT_ID'/>
+      <xs:enumeration value='RAW_MATERIAL_ID'/>
+      <xs:enumeration value='SERIAL_NUMBER'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='UniqueIdentifierType'>
+    <xs:annotation>
+      <xs:documentation>
+        A unique part
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='PartIdentifierType'>
+        <xs:attribute name='type' type='TypeOfPartIdentifierType' use='required'/>
+        <xs:attribute name='stepId' type='StepIdType' use='optional'/>
+        <xs:attribute name='timestamp' type='TimestampType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name='HeatIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        A heat id
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='BatchIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        A heat id
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='LotIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        A heat id
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:complexType name='GroupIdentifierType'>
+    <xs:annotation>
+      <xs:documentation>
+        A unique part
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='PartIdentifierType'>
+        <xs:attribute name='type' type='PartIdentifierType' use='required'/>
+        <xs:attribute name='stepId' type='StepIdType' use='optional'/>
+        <xs:attribute name='timestamp' type='TimestampType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='QualityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The quality reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='QualityIdType'>
+        <xs:attribute name='href' type='SourceType' use='optional'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='WorkorderType'>
+    <xs:annotation>
+      <xs:documentation>
+        A workorder for the part
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='CustomerId' type='CustomerIdType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The customer for this part
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='TotalCount' type='PartCountType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The total number of parts in this work order
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='SubCounts' type='SubCountsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A collection of sub-counts
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ExternalPurchaseOrder' type='PurchaseOrderType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier of the purchase order
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='workorderId' type='WorkorderIdType' use='required'/>
+  </xs:complexType>
+  <xs:complexType name='SubCountsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A collection of sub count
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='SubCount' type='SubCountType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A sub count
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='SubCountType'>
+    <xs:annotation>
+      <xs:documentation>
+        A sub count
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Count' type='PartCountType'>
+        <xs:annotation>
+          <xs:documentation>
+            A count for this group
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='label' type='SubCountLabelType' use='required'/>
+  </xs:complexType>
+  <xs:simpleType name='OperatorIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        An operator Id
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='PalletIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The pallet used in this process
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='FixtureIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The fixture used
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='PartLocationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The location of the part if not on the machine
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ProcessHistoryStateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The state of the process
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='RAW'/>
+      <xs:enumeration value='IN_PROCESS'/>
+      <xs:enumeration value='RE_WORK'/>
+      <xs:enumeration value='ON_HOLD'/>
+      <xs:enumeration value='SCRAP'/>
+      <xs:enumeration value='COMPLETE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='ProcessHistoryType'>
+    <xs:annotation>
+      <xs:documentation>
+        This history of this part
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Location' type='PartLocationType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The location of the part if not on the machine
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='OperatorId' type='OperatorIdType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The identifier of the operator
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='PalletId' type='PalletIdType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The pallet identifier
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='FixtureId' type='FixtureIdType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The fixture identifier
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
+    <xs:attribute name='state' type='ProcessHistoryStateType' use='required'/>
+    <xs:attribute name='stepId' type='StepIdType' use='optional'/>
+    <xs:attribute name='revisionId' type='RevisionIdType' use='optional'/>
+  </xs:complexType>
 </xs:schema>

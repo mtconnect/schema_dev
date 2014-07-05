@@ -27,6 +27,7 @@ package :Assets, 'Mobile Assets' do
   attr :Source, 'A URI reference', :anyURI
   attr :Removed, 'A flag indicating the item has been removed', :boolean
   
+  
   enum :DefinitionFormat, 'The format of the definition' do
     value :EXPRESS, 'The definition will be provided in EXPRESS format'
     value :XML, 'The definition will be provided in XML'
