@@ -11,7 +11,7 @@ package :Parts, 'Parts' do
   basic_type :ProgramSize, 'A size in bytes', :integer
   basic_type :Checksum, 'A checksum as a 32 bit unsigned value', :integer
   
-  attr(:ITARFlag, 'A flag') { pattern 'YES|NO' }
+  attr :ITARFlag, 'A flag', :boolean
   attr :ProgramName, 'A program name'
     
   type :PartArchetype, 'Common information regarding a part kind', :Asset do
