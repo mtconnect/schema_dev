@@ -636,6 +636,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:simpleType name='SourceType'>
+    <xs:annotation>
+      <xs:documentation>
+        A URI reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:anyURI'/>
+  </xs:simpleType>
+  <xs:simpleType name='RemovedType'>
+    <xs:annotation>
+      <xs:documentation>
+        A flag indicating the item has been removed
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:boolean'/>
+  </xs:simpleType>
   <xs:complexType name='AssetDescriptionType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
@@ -851,22 +867,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:simpleType name='SourceType'>
-    <xs:annotation>
-      <xs:documentation>
-        A URI reference
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:anyURI'/>
-  </xs:simpleType>
-  <xs:simpleType name='RemovedType'>
-    <xs:annotation>
-      <xs:documentation>
-        A flag indicating the item has been removed
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:boolean'/>
   </xs:simpleType>
   <xs:simpleType name='DefinitionFormatType'>
     <xs:annotation>
@@ -2175,9 +2175,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         A flag
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:pattern value='YES|NO'/>
-    </xs:restriction>
+    <xs:restriction base='xs:boolean'/>
   </xs:simpleType>
   <xs:simpleType name='ProgramNameType'>
     <xs:annotation>
@@ -2566,7 +2564,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='AssetIdType'>
-        <xs:attribute name='href' type='SourceType' use='required'/>
+        <xs:attribute name='href' type='SourceType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -2602,16 +2600,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
-  <xs:simpleType name='TypeOfPartIdentifierType'>
+  <xs:simpleType name='TypeOfUinqueIdentifierType'>
     <xs:annotation>
       <xs:documentation>
         An identifier
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'>
-      <xs:enumeration value='HEAD_ID'/>
-      <xs:enumeration value='BATCH_ID'/>
-      <xs:enumeration value='LOT_ID'/>
       <xs:enumeration value='RAW_MATERIAL_ID'/>
       <xs:enumeration value='SERIAL_NUMBER'/>
     </xs:restriction>
@@ -2624,35 +2619,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='PartIdentifierType'>
-        <xs:attribute name='type' type='TypeOfPartIdentifierType' use='required'/>
+        <xs:attribute name='type' type='TypeOfUinqueIdentifierType' use='required'/>
         <xs:attribute name='stepId' type='StepIdType' use='optional'/>
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:simpleType name='HeatIdType'>
+  <xs:simpleType name='TypeOfGroupIdentifierType'>
     <xs:annotation>
       <xs:documentation>
-        A heat id
+        An identifier
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:NMTOKEN'/>
-  </xs:simpleType>
-  <xs:simpleType name='BatchIdType'>
-    <xs:annotation>
-      <xs:documentation>
-        A heat id
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:NMTOKEN'/>
-  </xs:simpleType>
-  <xs:simpleType name='LotIdType'>
-    <xs:annotation>
-      <xs:documentation>
-        A heat id
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:NMTOKEN'/>
+    <xs:restriction base='xs:NMTOKEN'>
+      <xs:enumeration value='HEAT_ID'/>
+      <xs:enumeration value='BATCH_ID'/>
+      <xs:enumeration value='LOT_ID'/>
+      <xs:enumeration value='RAW_MATERIAL_ID'/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='GroupIdentifierType'>
     <xs:annotation>
@@ -2662,7 +2646,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='PartIdentifierType'>
-        <xs:attribute name='type' type='PartIdentifierType' use='required'/>
+        <xs:attribute name='type' type='TypeOfGroupIdentifierType' use='required'/>
         <xs:attribute name='stepId' type='StepIdType' use='optional'/>
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
       </xs:extension>
@@ -2740,16 +2724,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         A sub count
       </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Count' type='PartCountType'>
-        <xs:annotation>
-          <xs:documentation>
-            A count for this group
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-    <xs:attribute name='label' type='SubCountLabelType' use='required'/>
+    <xs:simpleContent>
+      <xs:extension base='PartCountType'>
+        <xs:attribute name='label' type='SubCountLabelType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:simpleType name='OperatorIdType'>
     <xs:annotation>
@@ -2805,6 +2784,39 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
+      <xs:element name='ProcessHistoryItem' type='ProcessHistoryItemType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            The steps in the history
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='DeviceUuidType'>
+    <xs:annotation>
+      <xs:documentation>
+        A device uuid
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='UuidType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='ProcessHistoryItemType'>
+    <xs:annotation>
+      <xs:documentation>
+        This history of this part
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='DeviceUuid' type='DeviceUuidType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The unique identifier of the device this process was performed on
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='Location' type='PartLocationType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -2834,9 +2846,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
     <xs:attribute name='state' type='ProcessHistoryStateType' use='required'/>
     <xs:attribute name='stepId' type='StepIdType' use='optional'/>
     <xs:attribute name='revisionId' type='RevisionIdType' use='optional'/>
+    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
   </xs:complexType>
 </xs:schema>
