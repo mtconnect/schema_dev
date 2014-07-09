@@ -129,7 +129,7 @@ package :common, 'Common attributes and elements for all schemas' do
     
     # 1.3 general changes
     value :ROTARY_VELOCITY_OVERRIDE, 'The override percent for the spindle speed'
-    value :FEEDRATE_OVERRIDE, 'The override percent for the spindle speed'
+    value :PATH_FEEDRATE_OVERRIDE, 'The override percent for the spindle speed'
     value :PART_ASSET_ID, 'The identifier of the part loaded'
     value :PROGRAM_EDIT, 'The state of the devices editor'
     value :PROGRAM_EDIT_NAME, 'The name of the program being edited'
