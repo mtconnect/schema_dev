@@ -266,11 +266,11 @@ package :Events, 'Event Package' do
     member :Value, 'The status', :AxisStateValue
   end
 
-  type :FeedrateOverride, 'The override of the feedrate', :Event do
+  type :PathFeedrateOverride, 'The override of the feedrate', :Event do
     member :Value, 'The override', :OverrideValue
   end
 
-  type :SpindleSpeedOverride, 'The override of the spindle speed (rotary velocity)', :Event do
+  type :RotaryVelocityOverride, 'The override of the spindle speed (rotary velocity)', :Event do
     member :Value, 'The override', :OverrideValue
   end
   
