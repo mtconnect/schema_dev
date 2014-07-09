@@ -202,10 +202,6 @@ package :common, 'Common attributes and elements for all schemas' do
     value :RESPONSE, 'The response side of the interface'
     value :REMAINING, 'The measurement represents the amount remaining'
     
-    # For 1.3 overrides
-    value :JOG, 'Jog override'
-    value :RAPID, 'Rapid override'
-
     # For end of bar
     value :PRIMARY, 'The primary value for this data item'
     value :AUXILIARY, 'The auxiliary value for this data item'
