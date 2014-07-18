@@ -205,6 +205,7 @@ package :common, 'Common attributes and elements for all schemas' do
     # For 1.3 overrides
     value :JOG, 'Manual movement'
     value :RAPID, 'Rapid movement'
+    value :PROGRAMMED, 'A programmed position or override effecting the given value'
 
     # For end of bar
     value :PRIMARY, 'The primary value for this data item'

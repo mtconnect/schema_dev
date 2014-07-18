@@ -1,0 +1,5 @@
+#!/bin/sh
+./generate MTConnectAssets.msd
+./generate MTConnectDevices.msd
+./generate MTConnectStreams.msd
+./generate MTConnectError.msd
