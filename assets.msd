@@ -302,6 +302,11 @@ package :Assets, 'Mobile Assets' do
     member :Locus, 'The cutting item\'s location on the cutting tool', 0..1
     member :ItemLife, 'The life of an edge', 0..3, :Life
     
+    member :any, 'Any additional properties', 0..INF do
+      self.notNamespace = "##targetNamespace"
+      self.processContents = 'strict'
+    end
+    
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :CuttingItemMeasurements
   end
