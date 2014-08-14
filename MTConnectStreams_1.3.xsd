@@ -3596,7 +3596,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='FeedrateOverrideType'>
+  <xs:complexType name='PathFeedrateOverrideType'>
     <xs:annotation>
       <xs:documentation>
         The override of the feedrate
@@ -3608,14 +3608,33 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='FeedrateOverride' type='FeedrateOverrideType' substitutionGroup='Event'>
+  <xs:element name='PathFeedrateOverride' type='PathFeedrateOverrideType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The override of the feedrate
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='SpindleSpeedOverrideType'>
+  <xs:complexType name='AxisFeedrateOverrideType'>
+    <xs:annotation>
+      <xs:documentation>
+        The override of the feedrate
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AxisFeedrateOverride' type='AxisFeedrateOverrideType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The override of the feedrate
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='RotaryVelocityOverrideType'>
     <xs:annotation>
       <xs:documentation>
         The override of the spindle speed (rotary velocity)
@@ -3627,7 +3646,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='SpindleSpeedOverride' type='SpindleSpeedOverrideType' substitutionGroup='Event'>
+  <xs:element name='RotaryVelocityOverride' type='RotaryVelocityOverrideType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The override of the spindle speed (rotary velocity)
