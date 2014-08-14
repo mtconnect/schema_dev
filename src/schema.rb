@@ -54,7 +54,10 @@ module CamelName
 end
 
 class Schema
-  def generate_xsd
+  attr_reader :xsd_version
+  
+  def generate_xsd(xsd_version)
+    @xsd_version = xsd_version
     doc = REXML::Document.new
     doc << REXML::XMLDecl.new("1.0", "UTF-8")
     doc << REXML::Comment.new(@license) if @license
@@ -62,13 +65,13 @@ class Schema
     # Root schema node.
     root = REXML::Element.new('xs:schema')
     root.add_namespace('xs', 'http://www.w3.org/2001/XMLSchema')
-    root.add_namespace('vc', 'http://www.w3.org/2007/XMLSchema-versioning')
+    root.add_namespace('vc', 'http://www.w3.org/2007/XMLSchema-versioning') if xsd_version == '1.1'
     root.add_namespace(@urn)
     root.add_namespace(@namespace, @urn)
     root.add_attribute('targetNamespace',@urn)
     root.add_attribute('elementFormDefault', "qualified")
     root.add_attribute('attributeFormDefault', "unqualified")
-    root.add_attribute('vc:minVersion', '1.1')
+    root.add_attribute('vc:minVersion', xsd_version)
     
     @imports.each do |imp|
       root.add_namespace(imp.namespace, imp.urn)
@@ -100,7 +103,7 @@ class Schema
     @types.each { |type| type.build_hierarchy }
     @types.each { |type| type.resolve }
     @types.each do |type|
-      elements = type.generate_xsd
+      elements = type.generate_xsd(xsd_version)
       elements.each { |e| root << e }
     end
 
@@ -148,7 +151,7 @@ class Schema
       if Choice === member and !subtype?
         # Start out with a complex type.
         complex_type = create_complex_type
-        complex_type << member.generate_xsd
+        complex_type << member.generate_xsd(@xsd_version)
         @attr_elem = complex_type
       elsif member.is_value?
         # Start out with a complex type.
@@ -271,7 +274,8 @@ class Schema
       # Add the elements to the sequence.
       sequence = REXML::Element.new('xs:sequence')
       @elems.each do |element|
-        sequence << element.generate_xsd
+        e = element.generate_xsd(@xsd_version)
+        sequence << e if e
       end
       (extension || complex_type) << sequence
 
@@ -316,7 +320,9 @@ class Schema
       element
     end
         
-    def generate_xsd
+    def generate_xsd(xsd_version)
+      @xsd_version = xsd_version
+      
       return [] if @imported
       
       collect_members
@@ -393,7 +399,7 @@ class Schema
       end
     end
 
-    def generate_xsd
+    def generate_xsd(xsd_version)
       return [] if @imported
       
       # Basic types are all simple types.
@@ -435,11 +441,13 @@ class Schema
       end
     end
 
-    def generate_xsd
+    def generate_xsd(xsd_version)
       # Create the element.
       if @name == :any
-        element = REXML::Element.new('xs:any')
+        return if xsd_version == '1.0' and notNamespace
         
+        element = REXML::Element.new('xs:any')
+              
         # Need to make this optional
         element.add_attribute('processContents', @processContents)        
         element.add_attribute('notQName', @notQName) if @notQName          
@@ -508,12 +516,12 @@ class Schema
   end
 
   class Choice
-    def generate_xsd
+    def generate_xsd(xsd_version)
       choice = REXML::Element.new('xs:choice')
       add_occurrence(choice)
 
       @members.each do |mem|
-        choice << mem.generate_xsd
+        choice << mem.generate_xsd(xsd_version)
       end
 
       choice
@@ -521,12 +529,12 @@ class Schema
   end
   
   class ChoiceSet
-    def generate_xsd      
+    def generate_xsd(xsd_version)      
       choice = REXML::Element.new('xs:sequence')
       add_occurrence(choice)
 
       @members.each do |mem|
-        choice << mem.generate_xsd
+        choice << mem.generate_xsd(xsd_version)
       end
 
       choice
@@ -541,7 +549,7 @@ class Schema
       end
     end
 
-    def generate_xsd
+    def generate_xsd(xsd_version)
       return [] if @imported
       
       # Enumerated values are always NMTOKEN value restricted by the

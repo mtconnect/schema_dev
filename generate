@@ -5,7 +5,9 @@ require 'schema'
 
 puts "Generating schema for #{ARGV[0]}"
 schema = Schema.new File.read(ARGV[0])
-doc = schema.generate_xsd
-out = ARGV[1] || "#{File.basename(ARGV[0], '.msd')}_#{schema.version}.xsd"
+version = ARGV[1]
+doc = schema.generate_xsd(version || "1.1")
+ver = "_#{version}" if version
+out = ARGV[2] || "#{File.basename(ARGV[0], '.msd')}_#{schema.version}#{ver}.xsd"
 puts "\tWriting schema document: #{out}"
 File.open(out, 'w') { |f| doc.write(f, 2) }
