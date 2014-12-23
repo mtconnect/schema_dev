@@ -130,6 +130,7 @@ package :common, 'Common attributes and elements for all schemas' do
     # 1.3 general changes
     value :ROTARY_VELOCITY_OVERRIDE, 'The override percent for the spindle speed'
     value :PATH_FEEDRATE_OVERRIDE, 'The override percent for the spindle speed'
+    value :AXIS_FEEDRATE_OVERRIDE, 'The override percent for the spindle speed'
     value :PART_ASSET_ID, 'The identifier of the part loaded'
     value :PROGRAM_EDIT, 'The state of the devices editor'
     value :PROGRAM_EDIT_NAME, 'The name of the program being edited'
@@ -203,8 +204,9 @@ package :common, 'Common attributes and elements for all schemas' do
     value :REMAINING, 'The measurement represents the amount remaining'
     
     # For 1.3 overrides
-    value :JOG, 'Jog override'
-    value :RAPID, 'Rapid override'
+    value :JOG, 'Manual movement'
+    value :RAPID, 'Rapid movement'
+    value :PROGRAMMED, 'A programmed position or override effecting the given value'
 
     # For end of bar
     value :PRIMARY, 'The primary value for this data item'

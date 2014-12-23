@@ -270,6 +270,10 @@ package :Events, 'Event Package' do
     member :Value, 'The override', :OverrideValue
   end
 
+  type :AxisFeedrateOverride, 'The override of the feedrate', :Event do
+    member :Value, 'The override', :OverrideValue
+  end
+
   type :RotaryVelocityOverride, 'The override of the spindle speed (rotary velocity)', :Event do
     member :Value, 'The override', :OverrideValue
   end
@@ -317,11 +321,11 @@ package :Events, 'Event Package' do
       value :NOT_READY, 'The controller is in a state where it cannot edit a program'
       value :UNAVAILABLE, 'The value is unavailable'
   end
-  type :ProgramEdit, 'The program edit state' do
+  type :ProgramEdit, 'The program edit state', :Event do
       member :Value, 'The program edit state', :ProgramEditValue
   end
   
-  type :ProgramEditName, 'The name of the program being edited' do
+  type :ProgramEditName, 'The name of the program being edited', :Event do
       member :Value, 'The name of the program being edited', :ProgramValue
   end
 
