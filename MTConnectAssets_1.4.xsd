@@ -676,7 +676,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The collection of mobile assets
       </xs:documentation>
     </xs:annotation>
-    <xs:choice minOccurs='1' maxOccurs='unbounded'>
+    <xs:choice minOccurs='0' maxOccurs='unbounded'>
       <xs:element ref='Asset'/>
     </xs:choice>
   </xs:complexType>
@@ -958,34 +958,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='format' type='DefinitionFormatType' use='optional'/>
   </xs:complexType>
-  <xs:complexType name='AssetsType'>
-    <xs:annotation>
-      <xs:documentation>
-        The collection of mobile assets
-      </xs:documentation>
-    </xs:annotation>
-    <xs:choice minOccurs='0' maxOccurs='unbounded'>
-      <xs:element ref='Asset'/>
-    </xs:choice>
-  </xs:complexType>
-  <xs:complexType name='AssetType' abstract='true'>
-    <xs:annotation>
-      <xs:documentation>
-        An abstract mobile asset
-      </xs:documentation>
-    </xs:annotation>
-    <xs:attribute name='assetId' type='AssetIdType' use='required'/>
-    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
-    <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
-    <xs:attribute name='removed' type='RemovedType' use='optional'/>
-  </xs:complexType>
-  <xs:element abstract='true' name='Asset' type='AssetType'>
-    <xs:annotation>
-      <xs:documentation>
-        An abstract mobile asset
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:complexType name='CuttingToolType'>
     <xs:annotation>
       <xs:documentation>
@@ -2079,13 +2051,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:any processContents='strict' notNamespace='##targetNamespace' minOccurs='0' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            Any additional properties
-          </xs:documentation>
-        </xs:annotation>
-      </xs:any>
       <xs:element name='Measurements' type='CuttingItemMeasurementsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -2099,7 +2064,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='grade' type='GradeType' use='optional'/>
     <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
   </xs:complexType>
-<<<<<<< HEAD:MTConnectAssets_1.4.xsd
   <xs:complexType name='InspectionResultsType'>
     <xs:annotation>
       <xs:documentation>
