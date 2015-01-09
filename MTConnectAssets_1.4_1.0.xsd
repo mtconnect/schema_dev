@@ -704,7 +704,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The tool location
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:integer'/>
+    <xs:restriction base='xs:string'/>
   </xs:simpleType>
   <xs:simpleType name='ProgramToolNumberType'>
     <xs:annotation>
@@ -870,6 +870,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='TurretLocationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The turret for a lathe or machine tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='DefinitionFormatType'>
     <xs:annotation>
       <xs:documentation>
@@ -939,6 +947,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POT'/>
       <xs:enumeration value='STATION'/>
       <xs:enumeration value='CRIB'/>
+      <xs:enumeration value='SPINDLE'/>
+      <xs:enumeration value='REJECT'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='CuttingToolDefinitionType' mixed='true'>
@@ -1271,8 +1281,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='LocationValueType'>
         <xs:attribute name='type' type='LocationsType' use='required'/>
-        <xs:attribute name='negativeOverlap' type='OverlapType' use='required'/>
-        <xs:attribute name='positiveOverlap' type='OverlapType' use='required'/>
+        <xs:attribute name='negativeOverlap' type='OverlapType' use='optional'/>
+        <xs:attribute name='positiveOverlap' type='OverlapType' use='optional'/>
+        <xs:attribute name='turret' type='TurretLocationType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -2023,6 +2034,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='CutterStatus' type='CutterStatusType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The status of an individual cutting item
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='Locus' type='LocusType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -2034,6 +2052,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The life of an edge
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProgramToolGroup' type='ProgramToolGroupType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The number used to identify this tool in the program
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2173,6 +2198,59 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:complexType name='QualityType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        The quality reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='QualityIdType'>
+        <xs:attribute name='href' type='SourceType' use='optional'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element abstract='true' name='Quality' type='QualityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The quality reference
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='QualityPlanType'>
+    <xs:annotation>
+      <xs:documentation>
+        The quality reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='QualityType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='QualityPlan' type='QualityPlanType' substitutionGroup='Quality'>
+    <xs:annotation>
+      <xs:documentation>
+        The quality reference
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='QualityResultType'>
+    <xs:annotation>
+      <xs:documentation>
+        The quality reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='QualityType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='QualityResult' type='QualityResultType' substitutionGroup='Quality'>
+    <xs:annotation>
+      <xs:documentation>
+        The quality reference
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='PartArchetypeType'>
     <xs:annotation>
       <xs:documentation>
@@ -2219,7 +2297,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CharacteristicsType'>
     <xs:annotation>
       <xs:documentation>
-        Characteristics of a part architype
+        Characteristics of a part archetype
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -2273,6 +2351,30 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:simpleType name='TargetLocationTypeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The set of possible locations
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='EXTERNAL'/>
+      <xs:enumeration value='STOCK'/>
+      <xs:enumeration value='INVENTORY'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='TargetLocationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The non-device location of a step
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute name='type' type='TargetLocationTypeValueType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='ProcessStepType'>
     <xs:annotation>
       <xs:documentation>
@@ -2287,13 +2389,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetDevice' type='TargetDeviceType'>
-        <xs:annotation>
-          <xs:documentation>
-            The UUID of the device this step is intended for
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
+      <xs:choice minOccurs='1'>
+        <xs:element name='TargetDevice' type='TargetDeviceType'>
+          <xs:annotation>
+            <xs:documentation>
+              The UUID of the device this step is intended for
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name='TargetLocation' type='TargetLocationType'>
+          <xs:annotation>
+            <xs:documentation>
+              The Location the step will be performed if not on a device
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
       <xs:element name='ControlPrograms' type='ControlProgramsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -2308,7 +2419,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetSetupime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='TargetSetupTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The amount of time this part is supposed to take
@@ -2333,6 +2444,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A collection of work holdings
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='QualityPlan' type='QualityPlanType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to an asset ID that has a quality plan
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2413,7 +2531,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='AssetIdType'/>
+      <xs:extension base='AssetIdType'>
+        <xs:attribute name='href' type='SourceType' use='optional'/>
+      </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name='WorkHoldingsType'>
@@ -2498,10 +2618,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='PartArchitypeRef' type='PartArchitypeRefType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='PartArchetypeRef' type='PartArchetypeRefType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                A reference to the architype for this part
+                A reference to the archetype for this part
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -2526,13 +2646,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Quality' type='QualityType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                A reference to the quality information
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2544,10 +2657,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='PartArchitypeRefType'>
+  <xs:complexType name='PartArchetypeRefType'>
     <xs:annotation>
       <xs:documentation>
-        A reference to the part architype
+        A reference to the part archetype
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -2637,18 +2750,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='type' type='TypeOfGroupIdentifierType' use='required'/>
         <xs:attribute name='stepId' type='StepIdType' use='optional'/>
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name='QualityType'>
-    <xs:annotation>
-      <xs:documentation>
-        The quality reference
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='QualityIdType'>
-        <xs:attribute name='href' type='SourceType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -2833,10 +2934,130 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='QualityResult' type='QualityResultType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to the quality information
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='state' type='ProcessHistoryStateType' use='required'/>
     <xs:attribute name='stepId' type='StepIdType' use='optional'/>
     <xs:attribute name='revisionId' type='RevisionIdType' use='optional'/>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
+  </xs:complexType>
+  <xs:complexType name='TransformationsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of named transformations associated with a device
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetType'>
+        <xs:sequence>
+          <xs:element name='Transformation' type='TransformationType' minOccurs='1' maxOccurs='unbounded'>
+            <xs:annotation>
+              <xs:documentation>
+                A named transformation
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Transformations' type='TransformationsType' substitutionGroup='Asset'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of named transformations associated with a device
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='OffsetValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        An offset given in millimeters or degrees
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
+  <xs:complexType name='OffsetType'>
+    <xs:annotation>
+      <xs:documentation>
+        An floating point represention of a transformation
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='OffsetValueType'>
+        <xs:attribute name='name' type='NameType' use='optional'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='TransformationType'>
+    <xs:annotation>
+      <xs:documentation>
+        A named transformation
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='X' type='OffsetType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The X linear offset in millimeters
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Y' type='OffsetType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The Y linear offset in millimeters
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Z' type='OffsetType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The Z linear offset in millimeters
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Length' type='OffsetType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A length linear offset in millimeters
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Diameter' type='OffsetType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A diameter linear offset in millimeters
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='A' type='OffsetType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The A angular offset in degrees (rotation around X)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='B' type='OffsetType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The B angular offset in degrees (rotation around Y)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='C' type='OffsetType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The C angular offset in degrees (rotation around Z)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='name' type='NameType' use='required'/>
   </xs:complexType>
 </xs:schema>

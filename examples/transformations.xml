@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectAssets xmlns="urn:mtconnect.org:MTConnectAssets:1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectAssets:1.4 ../MTConnectAssets_1.4.xsd">
+	<Header version="1.4" creationTime="2015-01-08T13:12:11Z" instanceId="1" sender="localhost" assetBufferSize="1024" assetCount="1"/>
+	<Assets>
+		<Transformations assetId="Offsets" timestamp="2015-01-08T13:12:11Z" deviceUuid="Machine-123">
+			<Transformation name="G54">
+				<X>-12.7</X>
+				<Y>18.2</Y>
+				<Z>2.3455</Z>
+			</Transformation>
+			<Transformation name="G55">
+				<A>22.12</A>
+				<B>0</B>
+				<C>11.2</C>
+			</Transformation>
+			<Transformation name="tool_1">
+				<Length>-0.002</Length>
+				<Diameter>0.93</Diameter>
+			</Transformation>
+		</Transformations>
+	</Assets>
+</MTConnectAssets>

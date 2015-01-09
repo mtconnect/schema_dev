@@ -13,7 +13,19 @@ package :Parts, 'Parts' do
   
   attr :ITARFlag, 'A flag', :boolean
   attr :ProgramName, 'A program name'
+  
+  type :Quality, 'The quality reference' do
+    abstract
+    member :Href, 'A url to the quality doc', 0..1, :Source
+    member :Value, 'The id of the quality doc', :QualityId
+  end  
     
+  type :QualityPlan, 'The quality reference', :Quality do
+  end  
+  
+  type :QualityResult, 'The quality reference', :Quality do
+  end  
+      
   type :PartArchetype, 'Common information regarding a part kind', :Asset do
     member :Description, 'The description of the part (freeform)', 0..1, :AssetDescription
     member :FamilyId, 'A group this part belongs to', 0..1
@@ -22,7 +34,7 @@ package :Parts, 'Parts' do
     member :ProcessSteps, 'The process steps involved in making a part', 0..1
   end
   
-  type :Characteristics, 'Characteristics of a part architype' do
+  type :Characteristics, 'Characteristics of a part archetype' do
     member :RawMaterial, 'Raw material'
     member :Customers, 'A customer identifier.  The combination of a Part ID and Customer ID can reference a customer Part Number', 0..1
   end  
@@ -35,16 +47,30 @@ package :Parts, 'Parts' do
     member :ProcessStep, 'An operation', 1..INF
   end
   
+  enum :TargetLocationTypeValue, 'The set of possible locations' do
+    value :EXTERNAL, 'The step will be performed outside this facility'
+    value :STOCK, 'The step will involve only manipulation of raw material'
+    value :INVENTORY, 'The part or material will be placed in storage'
+  end
+  
+  type :TargetLocation, 'The non-device location of a step' do
+    member :Type, 'The type of the location', :TargetLocationTypeValue
+  end
+  
   type :ProcessStep, 'An individual operation in the manufacturing process' do
     member :StepId, 'The identifier of this step'
     member :Description, 'The description of the step', 0..1, :StepDescription
-    member :TargetDevice, 'The UUID of the device this step is intended for'
+    choice do
+      member :TargetDevice, 'The UUID of the device this step is intended for'
+      member :TargetLocation, 'The Location the step will be performed if not on a device'
+    end      
     member :ControlPrograms, 'The names of the programs that are required for this step', 0..1
     member :TargetExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-    member :TargetSetupime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
+    member :TargetSetupTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
     member :TargetTeardownTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
     member :Tools, 'A collection of tools', 0..1
     member :WorkHoldings, 'A collection of work holdings', 0..1
+    member :QualityPlan, 'A reference to an asset ID that has a quality plan', 0..1
   end
   
   type :ControlPrograms, 'A collection of program names' do
@@ -65,7 +91,8 @@ package :Parts, 'Parts' do
     member :ToolAssetId, 'A Cutting tool tool asset id', 1..INF
   end
   
-  type :ToolAssetId, 'A tool asset id'do
+  type :ToolAssetId, 'A tool asset id' do
+    member :Href, 'A reference to the tool asset as a direct URI', 0..1, :Source
     member :Value, 'The asset id', :AssetId
   end
 
@@ -85,15 +112,14 @@ package :Parts, 'Parts' do
     
   type :PartInstance, 'A part or group of individual parts that are being from workpieces', :Asset do
     member :Description, 'The description of the part (freeform)', 0..1, :AssetDescription
-    member :PartArchitypeRef, 'A reference to the architype for this part', 0..1
+    member :PartArchetypeRef, 'A reference to the archetype for this part', 0..1
     member :PartIdentifiers, 'The part identifiers'
     member :Workorder, 'A workorder for this part instance', 0..1
     member :ProcessHistory, 'The history of the process for this part instance', 0..1
-    member :Quality, 'A reference to the quality information', 0..1
   end
   
-  type :PartArchitypeRef, 'A reference to the part architype' do
-    member :Href, 'The URL refernce of the architype', 0..1, :Source
+  type :PartArchetypeRef, 'A reference to the part archetype' do
+    member :Href, 'The URL refernce of the archetype', 0..1, :Source
     member :Value, 'The architype id', :AssetId
   end
   
@@ -132,10 +158,6 @@ package :Parts, 'Parts' do
     member :Timestamp, 'The timestamp'
   end
   
-  type :Quality, 'The quality reference' do
-    member :Href, 'A url to the quality doc', 0..1, :Source
-    member :Value, 'The id of the quality doc', :QualityId
-  end  
   
   type :Workorder, 'A workorder for the part' do
     member :WorkorderId, 'The workorder id'
@@ -186,5 +208,6 @@ package :Parts, 'Parts' do
     member :FixtureId, 'The fixture identifier', 0..1
     member :RevisionId, 'The revision of the process used', 0..1
     member :Timestamp, 'The timestamp'
+    member :QualityResult, 'A reference to the quality information', 0..1
   end
 end

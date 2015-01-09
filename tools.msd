@@ -1,7 +1,7 @@
 package :Tools, 'Cutting tools' do
   range = "(\\d+|\\d+-\\d+)(,(\\d+|\\d+-\\d+))*"
   
-  basic_type :LocationValue, 'The tool location', :integer
+  basic_type :LocationValue, 'The tool location'
   basic_type :ProgramToolNumber, 'The number referenced in the program for this tool', :integer
   basic_type :ReconditionCountValue, 'The number of times the cutter has been reconditioned', :integer
   basic_type :ConnectionCodeMachineSide, 'The code for the connection to the machine'
@@ -23,6 +23,7 @@ package :Tools, 'Cutting tools' do
   attr :MaximumCount, 'A maximum count value', :integer
   attr :Code, 'A application specific code'
   attr :Manufacturers, 'A comman delimited list of manufactures'
+  attr :TurretLocation, 'The turret for a lathe or machine tool'
     
   enum :DefinitionFormat, 'The format of the definition' do
     value :EXPRESS, 'The definition will be provided in EXPRESS format'
@@ -63,6 +64,8 @@ package :Tools, 'Cutting tools' do
     value :POT, 'Pot location of tool'
     value :STATION, 'The station on a turning machine'
     value :CRIB, 'The crib location of the tool'
+    value :SPINDLE, 'The spindle the tool currently resides in'
+    value :REJECT, 'The tool is in a reject pot location'
   end
   
   type :CuttingToolDefinition, 'The description of an asset, can be freeform text or elemenrts' do
@@ -156,8 +159,9 @@ package :Tools, 'Cutting tools' do
   
   type :Location, 'The location of the tool in the tool changer (pot) or the station of the tool' do
     member :Type, 'The type of location', :LocationsType
-    member :negativeOverlap, 'The additional locations occupied in at lower indexed values', :Overlap
-    member :positiveOverlap, 'The additional locations occupied in at higher indexed values', :Overlap
+    member :negativeOverlap, 'The additional locations occupied in at lower indexed values', 0..1, :Overlap
+    member :positiveOverlap, 'The additional locations occupied in at higher indexed values', 0..1, :Overlap
+    member :Turret, 'The turret the tool is currently mounted in or on', 0..1, :TurretLocation
     member :Value, 'The location', :LocationValue
   end
   
@@ -269,7 +273,7 @@ package :Tools, 'Cutting tools' do
     member :Count, 'The number of edges', :EdgeCount
     member :CuttingItem, 'An edge', 1..INF
   end
-    
+      
   type :CuttingItem, 'An edge into a tool assembly' do
     member :Indices, 'The unique identifier of this insert in this assembly', :IndexRange
     member :ItemId, 'The manufacturer identifier of this cutting item ', 0..1    
@@ -277,8 +281,15 @@ package :Tools, 'Cutting tools' do
     member :Manufacturers, 'The manufacturer of this asset', 0..1
     
     member :Description, 'The description of the cutting item', 0..1, :AssetDescription
+    member :CutterStatus, 'The status of an individual cutting item', 0..1, :CutterStatus
     member :Locus, 'The cutting item\'s location on the cutting tool', 0..1
     member :ItemLife, 'The life of an edge', 0..3, :Life
+    member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
+    
+    member :any, 'Any additional properties', 0..INF do
+      self.notNamespace = "##targetNamespace"
+      self.processContents = 'strict'
+    end
     
     # Measurements
     member :Measurements, 'A set of measurements associated with the cutting tool', 0..1, :CuttingItemMeasurements

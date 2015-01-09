@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectAssets xmlns="urn:mtconnect.org:MTConnectAssets:1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectAssets:1.4 file:///Z:/projects/MTConnect/schema/MTConnectAssets_1.4.xsd">
+	<Header version="1.4" creationTime="2015-01-04T12:23:00Z" instanceId="1" sender="localhost" assetBufferSize="1024" assetCount="100"/>
+	<Assets>
+		<PartInstance assetId="4145T44G01-BCM95620" timestamp="2005-10-05T00:00:00Z">
+			<Description>HPT Inner Case</Description>
+			<PartArchetypeRef>4145T33G01-A</PartArchetypeRef>
+			<PartIdentifiers>
+				<GroupIdentifier stepId="5" type="HEAT_ID" timestamp="2005-06-09T12:52:00Z">WHP35320</GroupIdentifier>
+				<GroupIdentifier stepId="10" type="BATCH_ID" timestamp="2005-06-09T12:52:00Z">BCM95630</GroupIdentifier>
+				<GroupIdentifier stepId="25" type="BATCH_ID" timestamp="2005-06-16T11:25:00Z">731553</GroupIdentifier>
+			</PartIdentifiers>
+			<Workorder workorderId="815885">
+				<TotalCount>15</TotalCount>
+			</Workorder>
+			<ProcessHistory>
+				<ProcessHistoryItem stepId="5" state="RAW" timestamp="2005-06-09T12:52:00Z">					
+					<OperatorId>STOCK Guy</OperatorId>
+				</ProcessHistoryItem>
+				<ProcessHistoryItem stepId="10" state="IN_PROCESS" timestamp="2005-06-09T11:24:00Z">
+					<DeviceUuid>SL-65</DeviceUuid>
+					<OperatorId>E-LAFLAM</OperatorId>
+				</ProcessHistoryItem>
+				<ProcessHistoryItem stepId="10" state="COMPLETE" timestamp="2005-06-09T13:24:00Z">
+					<DeviceUuid>SL-65</DeviceUuid>
+					<OperatorId>E-LAFLAM</OperatorId>
+				</ProcessHistoryItem>
+				<ProcessHistoryItem stepId="20" state="IN_PROCESS" timestamp="2005-06-13T13:24:00Z">
+					<DeviceUuid>SL-65</DeviceUuid>
+					<OperatorId>E-LAFLAM</OperatorId>
+				</ProcessHistoryItem>
+				<ProcessHistoryItem stepId="20" state="COMPLETE" timestamp="2005-06-13T13:24:00Z">
+					<DeviceUuid>SL-65</DeviceUuid>
+					<OperatorId>E-LAFLAM</OperatorId>
+				</ProcessHistoryItem>
+				<ProcessHistoryItem stepId="25" state="IN_PROCESS" timestamp="2005-06-16T13:24:00Z"/>
+			</ProcessHistory>
+		</PartInstance>
+	</Assets>
+</MTConnectAssets>
