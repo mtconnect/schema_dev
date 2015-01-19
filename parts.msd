@@ -1,5 +1,5 @@
 package :Parts, 'Parts' do
-  basic_type :CustomerId, 'A customer ID'
+  attr :CustomerId, 'A customer ID'
   basic_type :RawMaterial, 'The type of material used'
   attr :FamilyId, 'The family this part belongs to'
   attr :RevisionId, 'The revision of the part type'
@@ -10,6 +10,7 @@ package :Parts, 'Parts' do
   basic_type :TargetTime, 'An amount of time in seconds', :float
   basic_type :ProgramSize, 'A size in bytes', :integer
   basic_type :Checksum, 'A checksum as a 32 bit unsigned value', :integer
+  basic_type :CustomerName, 'A customer name'
   
   attr :ITARFlag, 'A flag', :boolean
   attr :ProgramName, 'A program name'
@@ -30,7 +31,7 @@ package :Parts, 'Parts' do
     member :Description, 'The description of the part (freeform)', 0..1, :AssetDescription
     member :FamilyId, 'A group this part belongs to', 0..1
     member :RevisionId, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
-    member :Characteristics, 'The charastics of a part'
+    member :Characteristics, 'The characteristics of a part'
     member :ProcessSteps, 'The process steps involved in making a part', 0..1
   end
   
@@ -40,13 +41,19 @@ package :Parts, 'Parts' do
   end  
   
   type :Customers, 'A list of customer ids' do
-    member :CustomerId, 'A customer identifier.  The combination of a Part ID and Customer ID can reference a customer Part Number', 1..INF    
+    member :Customer, 'Some basic customer informaiton', 1..INF
+  end
+  
+  type :Customer, 'Some basic customer information' do
+    member :CustomerId, 'The customer identification'
+    member :Name, 'The customer name', 0..1, :CustomerName
+    member :Description, 'Free form customer description', 0..1, :AssetDescription
   end
   
   type :ProcessSteps, 'A collection of process steps' do
     member :ProcessStep, 'An operation', 1..INF
   end
-  
+    
   enum :TargetLocationTypeValue, 'The set of possible locations' do
     value :EXTERNAL, 'The step will be performed outside this facility'
     value :STOCK, 'The step will involve only manipulation of raw material'
@@ -60,10 +67,7 @@ package :Parts, 'Parts' do
   type :ProcessStep, 'An individual operation in the manufacturing process' do
     member :StepId, 'The identifier of this step'
     member :Description, 'The description of the step', 0..1, :StepDescription
-    choice do
-      member :TargetDevice, 'The UUID of the device this step is intended for'
-      member :TargetLocation, 'The Location the step will be performed if not on a device'
-    end      
+    member :Targets, 'The locations or target devices'
     member :ControlPrograms, 'The names of the programs that are required for this step', 0..1
     member :TargetExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
     member :TargetSetupTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
@@ -72,6 +76,14 @@ package :Parts, 'Parts' do
     member :WorkHoldings, 'A collection of work holdings', 0..1
     member :QualityPlan, 'A reference to an asset ID that has a quality plan', 0..1
   end
+  
+  type :Targets, 'A list of target devices or locations' do
+    choice do
+      member :TargetDevice, 'The UUID of the device this step is intended for', 1..INF
+      member :TargetLocation, 'The Location the step will be performed if not on a device', 1..INF
+    end      
+  end
+  
   
   type :ControlPrograms, 'A collection of program names' do
     member :ControlProgram, 'A program', 1..INF
@@ -88,7 +100,19 @@ package :Parts, 'Parts' do
     member :ITARControl, 'Indicator if this is ITAR controlled', 0..1, :ITARFlag  end
     
   type :Tools, 'A collection of tooling' do
-    member :ToolAssetId, 'A Cutting tool tool asset id', 1..INF
+    member :ToolSetup, 'A Cutting tool tool asset id', 1..INF
+  end
+  
+  attr :SequenceNumber, 'The  number indication the sequence of the operaton', :integer
+  
+  type :ToolSetup, 'A specification of how a cutting tool will be used in a process step' do
+    member :Sequence, 'The sequence number of the tool', 0..1, :SequenceNumber
+    member :ToolAssetId, 'The refernce to the tool sequence number', 0..1
+    member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
+    member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
+    member :ProcessSpindleSpeed, 'The tools constrained process target spindle speed', 0..1
+    member :ProcessFeedRate, 'The tools constrained process target feed rate', 0..1
+    member :TargetExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
   end
   
   type :ToolAssetId, 'A tool asset id' do
@@ -161,7 +185,7 @@ package :Parts, 'Parts' do
   
   type :Workorder, 'A workorder for the part' do
     member :WorkorderId, 'The workorder id'
-    member :CustomerId, 'The customer for this part', 0..1
+    member :Customer, 'The customer for this part', 0..1
     member :TotalCount, 'The total number of parts in this work order', 0..1, :PartCount
     member :SubCounts, 'A collection of sub-counts', 0..1
     member :ExternalPurchaseOrder, 'An identifier of the purchase order', 0..1, :PurchaseOrder

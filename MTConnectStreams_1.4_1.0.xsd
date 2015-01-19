@@ -362,6 +362,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CLOSE_CHUCK'/>
       <xs:enumeration value='MATERIAL_LOAD'/>
       <xs:enumeration value='MATERIAL_UNLOAD'/>
+      <xs:enumeration value='TRANSFORMATION'/>
+      <xs:enumeration value='SINGLE_BLOCK'/>
+      <xs:enumeration value='DRY_RUN'/>
+      <xs:enumeration value='OPTIONAL_STOP'/>
+      <xs:enumeration value='MACHINE_LOCK'/>
+      <xs:enumeration value='BLOCK_NUMBER'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -413,6 +419,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PRIMARY'/>
       <xs:enumeration value='AUXILIARY'/>
       <xs:enumeration value='MANUAL_UNCLAMP'/>
+      <xs:enumeration value='WORKPIECE'/>
+      <xs:enumeration value='FIXTURE'/>
+      <xs:enumeration value='TOOL'/>
+      <xs:enumeration value='ABSOLUTE'/>
+      <xs:enumeration value='RELATIVE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -3979,6 +3990,41 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Discrete of The program code
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='OrderType'>
+    <xs:annotation>
+      <xs:documentation>
+        The order in which something will be done
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='TransformationValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The transformation name
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='TransformationType'>
+    <xs:annotation>
+      <xs:documentation>
+        A geometric transformation
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='EventType'>
+        <xs:attribute name='order' type='OrderType' use='optional'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Transformation' type='TransformationType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        A geometric transformation
       </xs:documentation>
     </xs:annotation>
   </xs:element>

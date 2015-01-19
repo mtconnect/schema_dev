@@ -335,4 +335,12 @@ package :Events, 'Event Package' do
   end.each do |type|
     self.type "#{type.name}Discrete".to_sym, "Discrete of #{type.annotation}", type.name
   end
+  
+  attr :Order, 'The order in which something will be done', :integer
+  basic_type :TransformationValue, 'The transformation name'
+  
+  type :Transformation, 'A geometric transformation', :Event do
+    member :Order, 'The order in which the transformation will be applied', 0..1
+    member :Value, 'Transformation name', :TransformationValue
+  end
 end

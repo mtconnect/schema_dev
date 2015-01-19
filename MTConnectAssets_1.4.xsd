@@ -362,6 +362,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CLOSE_CHUCK'/>
       <xs:enumeration value='MATERIAL_LOAD'/>
       <xs:enumeration value='MATERIAL_UNLOAD'/>
+      <xs:enumeration value='TRANSFORMATION'/>
+      <xs:enumeration value='SINGLE_BLOCK'/>
+      <xs:enumeration value='DRY_RUN'/>
+      <xs:enumeration value='OPTIONAL_STOP'/>
+      <xs:enumeration value='MACHINE_LOCK'/>
+      <xs:enumeration value='BLOCK_NUMBER'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -413,6 +419,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PRIMARY'/>
       <xs:enumeration value='AUXILIARY'/>
       <xs:enumeration value='MANUAL_UNCLAMP'/>
+      <xs:enumeration value='WORKPIECE'/>
+      <xs:enumeration value='FIXTURE'/>
+      <xs:enumeration value='TOOL'/>
+      <xs:enumeration value='ABSOLUTE'/>
+      <xs:enumeration value='RELATIVE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -2096,7 +2107,34 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='grade' type='GradeType' use='optional'/>
     <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
   </xs:complexType>
-  <xs:complexType name='InspectionResultsType'>
+  <xs:complexType name='InspectionPlanType'>
+    <xs:annotation>
+      <xs:documentation>
+        An inspection plan
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetType'>
+        <xs:sequence>
+          <xs:any processContents='lax' minOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                Any elements
+              </xs:documentation>
+            </xs:annotation>
+          </xs:any>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='InspectionPlan' type='InspectionPlanType' substitutionGroup='Asset'>
+    <xs:annotation>
+      <xs:documentation>
+        An inspection plan
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='InspectionResultType'>
     <xs:annotation>
       <xs:documentation>
         An inspection result
@@ -2116,7 +2154,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='InspectionResults' type='InspectionResultsType' substitutionGroup='Asset'>
+  <xs:element name='InspectionResult' type='InspectionResultType' substitutionGroup='Asset'>
     <xs:annotation>
       <xs:documentation>
         An inspection result
@@ -2202,6 +2240,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='CustomerNameType'>
+    <xs:annotation>
+      <xs:documentation>
+        A customer name
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
   </xs:simpleType>
   <xs:simpleType name='ITARFlagType'>
     <xs:annotation>
@@ -2291,7 +2337,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='Characteristics' type='CharacteristicsType'>
             <xs:annotation>
               <xs:documentation>
-                The charastics of a part
+                The characteristics of a part
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -2346,15 +2392,38 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='CustomerId' type='CustomerIdType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='Customer' type='CustomerType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            A customer identifier. The combination of a Part ID and Customer ID
-            can reference a customer Part Number
+            Some basic customer informaiton
           </xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='CustomerType'>
+    <xs:annotation>
+      <xs:documentation>
+        Some basic customer information
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Name' type='CustomerNameType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The customer name
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            Free form customer description
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='customerId' type='CustomerIdType' use='required'/>
   </xs:complexType>
   <xs:complexType name='ProcessStepsType'>
     <xs:annotation>
@@ -2410,22 +2479,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:choice minOccurs='1'>
-        <xs:element name='TargetDevice' type='TargetDeviceType'>
-          <xs:annotation>
-            <xs:documentation>
-              The UUID of the device this step is intended for
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element name='TargetLocation' type='TargetLocationType'>
-          <xs:annotation>
-            <xs:documentation>
-              The Location the step will be performed if not on a device
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-      </xs:choice>
+      <xs:element name='Targets' type='TargetsType'>
+        <xs:annotation>
+          <xs:documentation>
+            The locations or target devices
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='ControlPrograms' type='ControlProgramsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -2477,6 +2537,29 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
     <xs:attribute name='stepId' type='StepIdType' use='required'/>
+  </xs:complexType>
+  <xs:complexType name='TargetsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A list of target devices or locations
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs='1'>
+      <xs:element name='TargetDevice' type='TargetDeviceType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            The UUID of the device this step is intended for
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='TargetLocation' type='TargetLocationType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            The Location the step will be performed if not on a device
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
   </xs:complexType>
   <xs:complexType name='ControlProgramsType'>
     <xs:annotation>
@@ -2536,7 +2619,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='ToolAssetId' type='ToolAssetIdType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='ToolSetup' type='ToolSetupType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             A Cutting tool tool asset id
@@ -2544,6 +2627,66 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='SequenceNumberType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number indication the sequence of the operaton
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:complexType name='ToolSetupType'>
+    <xs:annotation>
+      <xs:documentation>
+        A specification of how a cutting tool will be used in a process step
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='ToolAssetId' type='ToolAssetIdType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The refernce to the tool sequence number
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProgramToolGroup' type='ProgramToolGroupType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The number used to identify this tool in the program
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProgramToolNumber' type='ProgramToolNumberType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The number used to identify this tool in the program
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProcessSpindleSpeed' type='ProcessSpindleSpeedType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The tools constrained process target spindle speed
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProcessFeedRate' type='ProcessFeedRateType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The tools constrained process target feed rate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='TargetExecutionTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The amount of time this part is supposed to take
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='sequence' type='SequenceNumberType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='ToolAssetIdType'>
     <xs:annotation>
@@ -2781,7 +2924,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='CustomerId' type='CustomerIdType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='Customer' type='CustomerType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The customer for this part
