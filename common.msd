@@ -162,6 +162,15 @@ package :common, 'Common attributes and elements for all schemas' do
     value :CLOSE_CHUCK, 'Close a chuck'
     value :MATERIAL_LOAD, 'Load material into a device'
     value :MATERIAL_UNLOAD, 'Unload material into a device'
+    
+    # For 1.4
+    value :TRANSFORMATION, 'A coordinate system transformation. References a transformation asset'
+    value :SINGLE_BLOCK, 'Controller is single stepping through program'
+    value :DRY_RUN, 'The controller is executing the program but suppressing motion'
+    value :OPTIONAL_STOP, 'Indicator if the optional stop setting on the machine indicating if it is enabled'
+    value :MACHINE_LOCK, 'The controller is in the machine lock state'
+    
+    value :BLOCK_NUMBER, 'The absolute or relative block number position in the program'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
@@ -213,6 +222,14 @@ package :common, 'Common attributes and elements for all schemas' do
     value :AUXILIARY, 'The auxiliary value for this data item'
 
     value :MANUAL_UNCLAMP, 'The component cannot be manually unclamped'
+    
+    # For 1.4
+    value :WORKPIECE, 'Workpiece coordinates are being transformed.'
+    value :FIXTURE, 'Fixture coordinates are being transformed.'
+    value :TOOL, 'Tool coordinates are being transformed.'
+    
+    value :ABSOLUTE, 'The absolute physical position in the program '
+    value :RELATIVE, 'The relative position in the program to the last line (N) number'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
