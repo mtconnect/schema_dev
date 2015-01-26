@@ -12,7 +12,7 @@ package :Parts, 'Parts' do
   basic_type :Checksum, 'A checksum as a 32 bit unsigned value', :integer
   basic_type :CustomerName, 'A customer name'
   
-  attr :ITARFlag, 'A flag', :boolean
+  attr :ExportControl, 'A flag'
   attr :ProgramName, 'A program name'
   
   type :Quality, 'The quality reference' do
@@ -91,13 +91,14 @@ package :Parts, 'Parts' do
   
   type :ControlProgram, 'A control program' do
     member :Name, 'The program name', :ProgramName
-    member :NameOnMachine, 'The name of the program on the machine', :ProgramName
+    member :ProgramName, 'The name of the program on the machine'
     member :RevisionId, 'The revision of this program'
     member :Description, 'The description of the program', 0..1, :StepDescription
     member :Size, 'The size of the program in bytes', 0..1, :ProgramSize
     member :Checksum, 'The checksum of the program', 0..1, :Checksum
     member :Timestamp, 'The time the program was last updated', 0..1, :Timestamp
-    member :ITARControl, 'Indicator if this is ITAR controlled', 0..1, :ITARFlag  end
+    member :ExportControl, 'Indicator if this is ITAR controlled', 0..1
+  end
     
   type :Tools, 'A collection of tooling' do
     member :ToolSetup, 'A Cutting tool tool asset id', 1..INF

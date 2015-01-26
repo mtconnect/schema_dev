@@ -2249,13 +2249,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='ITARFlagType'>
+  <xs:simpleType name='ExportControlType'>
     <xs:annotation>
       <xs:documentation>
         A flag
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:boolean'/>
+    <xs:restriction base='xs:string'/>
   </xs:simpleType>
   <xs:simpleType name='ProgramNameType'>
     <xs:annotation>
@@ -2607,10 +2607,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
     <xs:attribute name='name' type='ProgramNameType' use='required'/>
-    <xs:attribute name='nameOnMachine' type='ProgramNameType' use='required'/>
+    <xs:attribute name='programName' type='ProgramNameType' use='required'/>
     <xs:attribute name='revisionId' type='RevisionIdType' use='required'/>
     <xs:attribute name='timestamp' type='TimestampType' use='optional'/>
-    <xs:attribute name='itarControl' type='ITARFlagType' use='optional'/>
+    <xs:attribute name='exportControl' type='ExportControlType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='ToolsType'>
     <xs:annotation>
