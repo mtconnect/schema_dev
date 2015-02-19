@@ -2169,14 +2169,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='RawMaterialType'>
-    <xs:annotation>
-      <xs:documentation>
-        The type of material used
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:simpleType name='FamilyIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -2249,72 +2241,64 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='ExportControlType'>
+  <xs:simpleType name='CustomerLocationType'>
     <xs:annotation>
       <xs:documentation>
-        A flag
+        A customer location
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='ProgramNameType'>
+  <xs:complexType name='InspectionReferenceType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        A program name
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:complexType name='QualityType' abstract='true'>
-    <xs:annotation>
-      <xs:documentation>
-        The quality reference
+        The inspection reference
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='QualityIdType'>
+      <xs:extension base='InspectionIdType'>
         <xs:attribute name='href' type='SourceType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element abstract='true' name='Quality' type='QualityType'>
+  <xs:element abstract='true' name='InspectionReference' type='InspectionReferenceType'>
     <xs:annotation>
       <xs:documentation>
-        The quality reference
+        The inspection reference
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='QualityPlanType'>
+  <xs:complexType name='InspectionPlanReferenceType'>
     <xs:annotation>
       <xs:documentation>
-        The quality reference
+        The inspection reference
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='QualityType'/>
+      <xs:extension base='InspectionReferenceType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='QualityPlan' type='QualityPlanType' substitutionGroup='Quality'>
+  <xs:element name='InspectionPlanReference' type='InspectionPlanReferenceType' substitutionGroup='InspectionReference'>
     <xs:annotation>
       <xs:documentation>
-        The quality reference
+        The inspection reference
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='QualityResultType'>
+  <xs:complexType name='InspectionResultReferenceType'>
     <xs:annotation>
       <xs:documentation>
-        The quality reference
+        The inspection reference
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='QualityType'/>
+      <xs:extension base='InspectionReferenceType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='QualityResult' type='QualityResultType' substitutionGroup='Quality'>
+  <xs:element name='InspectionResultReference' type='InspectionResultReferenceType' substitutionGroup='InspectionReference'>
     <xs:annotation>
       <xs:documentation>
-        The quality reference
+        The inspection reference
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -2344,7 +2328,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='ProcessSteps' type='ProcessStepsType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The process steps involved in making a part
+                The process steps
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='AlternativeProcessSteps' type='AlternativeProcessStepsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                A set of alternative flows
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -2385,6 +2376,80 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:simpleType name='StandardType'>
+    <xs:annotation>
+      <xs:documentation>
+        The hardness convention
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ScaleType'>
+    <xs:annotation>
+      <xs:documentation>
+        The hardness scale being used – default: Rockwell
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='HardnessType'>
+    <xs:annotation>
+      <xs:documentation>
+        The hardness range
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='MeasurementValueType'>
+        <xs:attribute name='scale' type='ScaleType' use='optional' default='ROCKWELL'/>
+        <xs:attribute name='minimum' type='MinimumType' use='optional'/>
+        <xs:attribute name='maximum' type='MaximumType' use='optional'/>
+        <xs:attribute name='nominal' type='NominalType' use='optional'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name='MaterialTypeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The type of the material in a given material master
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='MaterialType'>
+    <xs:annotation>
+      <xs:documentation>
+        The type of material
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='MaterialTypeValueType'>
+        <xs:attribute name='standard' type='StandardType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='RawMaterialType'>
+    <xs:annotation>
+      <xs:documentation>
+        Description of raw material
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Hardness' type='HardnessType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The hardness on the scale of the raw material
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='MaterialType' type='MaterialType'>
+        <xs:annotation>
+          <xs:documentation>
+            The type of material
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name='CustomersType'>
     <xs:annotation>
       <xs:documentation>
@@ -2415,6 +2480,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Location' type='CustomerLocationType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The customer location
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -2424,6 +2496,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
     <xs:attribute name='customerId' type='CustomerIdType' use='required'/>
+  </xs:complexType>
+  <xs:complexType name='AlternativeProcessStepsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Alternative process flows
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='ProcessSteps' type='ProcessStepsType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A list of process steps
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name='ProcessStepsType'>
     <xs:annotation>
@@ -2440,6 +2528,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+    <xs:attribute name='name' type='NameType' use='optional'/>
   </xs:complexType>
   <xs:simpleType name='TargetLocationTypeValueType'>
     <xs:annotation>
@@ -2514,7 +2603,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Tools' type='ToolsType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='CuttingTools' type='CuttingToolsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A collection of tools
@@ -2528,10 +2617,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='QualityPlan' type='QualityPlanType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='InspectionPlan' type='InspectionPlanReferenceType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            A reference to an asset ID that has a quality plan
+            A reference to an asset ID that has a inspection plan
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2561,6 +2650,30 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:choice>
   </xs:complexType>
+  <xs:simpleType name='RestrictionsType'>
+    <xs:annotation>
+      <xs:documentation>
+        An indicator of the restriction on this program
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ProgramNameType'>
+    <xs:annotation>
+      <xs:documentation>
+        A program name
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='SignatureType'>
+    <xs:annotation>
+      <xs:documentation>
+        A GUID signature
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:complexType name='ControlProgramsType'>
     <xs:annotation>
       <xs:documentation>
@@ -2605,21 +2718,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Signature' type='SignatureType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A secure signature
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='name' type='ProgramNameType' use='required'/>
     <xs:attribute name='programName' type='ProgramNameType' use='required'/>
     <xs:attribute name='revisionId' type='RevisionIdType' use='required'/>
     <xs:attribute name='timestamp' type='TimestampType' use='optional'/>
-    <xs:attribute name='exportControl' type='ExportControlType' use='optional'/>
+    <xs:attribute name='restrictions' type='RestrictionsType' use='optional'/>
   </xs:complexType>
-  <xs:complexType name='ToolsType'>
+  <xs:complexType name='CuttingToolsType'>
     <xs:annotation>
       <xs:documentation>
         A collection of tooling
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='ToolSetup' type='ToolSetupType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='CuttingToolSetup' type='CuttingToolSetupType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             A Cutting tool tool asset id
@@ -2636,14 +2756,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:complexType name='ToolSetupType'>
+  <xs:complexType name='CuttingToolSetupType'>
     <xs:annotation>
       <xs:documentation>
         A specification of how a cutting tool will be used in a process step
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='ToolAssetId' type='ToolAssetIdType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='CuttingToolAssetId' type='CuttingToolAssetIdType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The refernce to the tool sequence number
@@ -2688,7 +2808,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='sequence' type='SequenceNumberType' use='optional'/>
   </xs:complexType>
-  <xs:complexType name='ToolAssetIdType'>
+  <xs:complexType name='CuttingToolAssetIdType'>
     <xs:annotation>
       <xs:documentation>
         A tool asset id
@@ -2750,23 +2870,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='PurchaseOrderType'>
+  <xs:simpleType name='PurchaseOrderIdType'>
     <xs:annotation>
       <xs:documentation>
-        A purchase order
+        A purchase order identifier
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='QualityIdType'>
+  <xs:simpleType name='InspectionIdType'>
     <xs:annotation>
       <xs:documentation>
-        The asset id of the quality doc
+        The asset id of the inspection doc
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:complexType name='PartInstanceType'>
+  <xs:complexType name='PartType'>
     <xs:annotation>
       <xs:documentation>
         A part or group of individual parts that are being from workpieces
@@ -2803,7 +2923,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='ProcessHistory' type='ProcessHistoryType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='ProcessEvents' type='ProcessEventsType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 The history of the process for this part instance
@@ -2814,7 +2934,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='PartInstance' type='PartInstanceType' substitutionGroup='Asset'>
+  <xs:element name='Part' type='PartType' substitutionGroup='Asset'>
     <xs:annotation>
       <xs:documentation>
         A part or group of individual parts that are being from workpieces
@@ -2945,7 +3065,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ExternalPurchaseOrder' type='PurchaseOrderType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='ExternalPurchaseOrderId' type='PurchaseOrderIdType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             An identifier of the purchase order
@@ -3015,7 +3135,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='ProcessHistoryStateType'>
+  <xs:simpleType name='ProcessEventStateType'>
     <xs:annotation>
       <xs:documentation>
         The state of the process
@@ -3030,14 +3150,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='COMPLETE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name='ProcessHistoryType'>
+  <xs:complexType name='ProcessEventsType'>
     <xs:annotation>
       <xs:documentation>
         This history of this part
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='ProcessHistoryItem' type='ProcessHistoryItemType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='ProcessEvent' type='ProcessEventType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             The steps in the history
@@ -3056,7 +3176,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='UuidType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='ProcessHistoryItemType'>
+  <xs:simpleType name='YieldType'>
+    <xs:annotation>
+      <xs:documentation>
+        The yeild of the process
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:complexType name='ProcessEventType'>
     <xs:annotation>
       <xs:documentation>
         This history of this part
@@ -3084,32 +3212,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='PalletId' type='PalletIdType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='Yield' type='YieldType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The pallet identifier
+            The process yield
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='FixtureId' type='FixtureIdType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='InspectionResult' type='InspectionResultReferenceType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The fixture identifier
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='QualityResult' type='QualityResultType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A reference to the quality information
+            A reference to the inspection results
           </xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='state' type='ProcessHistoryStateType' use='required'/>
+    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
+    <xs:attribute name='state' type='ProcessEventStateType' use='required'/>
     <xs:attribute name='stepId' type='StepIdType' use='optional'/>
     <xs:attribute name='revisionId' type='RevisionIdType' use='optional'/>
-    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
   </xs:complexType>
   <xs:complexType name='TransformationsType'>
     <xs:annotation>

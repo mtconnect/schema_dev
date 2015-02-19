@@ -318,6 +318,10 @@ class Schema
       mem.attribute = false
       @members << mem
     end
+    
+    def value(annotation, type, &block)
+      @members << Member.new(@schema, :Value, annotation, nil, type, &block)
+    end
 
     def all_subtypes(base, occurrence = 0..INF)
       @members << Subtypes.new(@schema, base, occurrence)
