@@ -71,7 +71,7 @@ class Schema
     root.add_attribute('targetNamespace',@urn)
     root.add_attribute('elementFormDefault', "qualified")
     root.add_attribute('attributeFormDefault', "unqualified")
-    root.add_attribute('vc:minVersion', xsd_version)
+    root.add_attribute('vc:minVersion', xsd_version) if xsd_version == '1.1'
     
     @imports.each do |imp|
       root.add_namespace(imp.namespace, imp.urn)
