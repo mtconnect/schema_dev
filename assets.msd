@@ -2,24 +2,28 @@
 package :Assets, 'Mobile Assets' do
   range = "(\\d+|\\d+-\\d+)(,(\\d+|\\d+-\\d+))*"
   
+  float = '[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?'
+  optional_float = "#{float}|"
+  
   basic_type :LocationValue, 'The tool location', :integer
   basic_type :ProgramToolNumber, 'The number referenced in the program for this tool', :integer
   basic_type :ReconditionCountValue, 'The number of times the cutter has been reconditioned', :integer
   basic_type :ConnectionCodeMachineSide, 'The code for the connection to the machine'
   basic_type :ProgramToolGroup, 'The tool group associated with the tool'
+  basic_type(:Speed, 'A speed in RPM or mm/s') { pattern optional_float }
+  basic_type(:MeasurementValue, 'A measurement value') { pattern optional_float }
   
   attr :LocationSize, 'The number of location units required to hold this tool', :integer
+  attr :MeasurementAttr, 'A measurement value', :float
   attr :ToolId, 'The identifier of the tool type', :NMTOKEN
   attr :EdgeCount, 'The number of cutting edges', :integer
   attr :Overlap, 'The number of additional locations taken by a tool', :integer
   attr :ToolLifeValue, 'The life of the tool in time, wear, or parts', :float
   attr :ItemId, 'An identifier for the insert', :NMTOKEN
   attr(:IndexRange, 'A single or range of indexes. A range can be a comma separated set of individual elements as in "1,2,3,4", or as a inclusive range of values as in "1-10" or multiple ranges "1-4,6-10"') { pattern range }
-  attr :MeasurementValue, 'A measurement value', :float
   attr :Minimum, 'A minimum value', :float  
   attr :Maximum, 'A maximum value', :float
   attr :Nominal, 'A nominal value', :float
-  attr :Speed, 'A speed in RPM or mm/s', :float
   attr :Grade, 'The material for a cutting item'
   attr :MaximumCount, 'A maximum count value', :integer
   attr :Code, 'A application specific code'
@@ -209,10 +213,10 @@ package :Assets, 'Mobile Assets' do
     member :Units, 'The units for the measurement. This will be defined by MTConnect', 0..1
     member :NativeUnits, 'The native units for the measurement, if different from units', 0..1
     member :Code, 'The shop or application specific code for this measurement', 0..1
-    member :Maximum, 'The maximum tolerance value', 0..1, :MeasurementValue
-    member :Minimum, 'The minimum tolerance value', 0..1, :MeasurementValue
-    member :Nominal, 'The nominal value', 0..1, :MeasurementValue
-    member :Value, 'The actual measurement', 0..1, :MeasurementValue
+    member :Maximum, 'The maximum tolerance value', 0..1, :MeasurementAttr
+    member :Minimum, 'The minimum tolerance value', 0..1, :MeasurementAttr
+    member :Nominal, 'The nominal value', 0..1, :MeasurementAttr
+    member :Value, 'The actual measurement', :MeasurementValue
   end
   
   type :CommonMeasurement, 'Measurements for both the assembly and the cutting item', :Measurement do
