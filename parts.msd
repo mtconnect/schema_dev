@@ -12,16 +12,16 @@ package :Parts, 'Parts' do
   basic_type :CustomerName, 'A customer name'
   basic_type :CustomerLocation, 'A customer location'
     
-  type :InspectionReference, 'The inspection reference' do
+  type :InspectionRef, 'The inspection reference' do
     abstract
     member :Href, 'A url to the inspection doc', 0..1, :Source
     member :Value, 'The id of the inspection doc', :InspectionId
   end  
     
-  type :InspectionPlanReference, 'The inspection reference', :InspectionReference do
+  type :InspectionArchetypeReference, 'The inspection reference', :InspectionRef do
   end  
   
-  type :InspectionResultReference, 'The inspection reference', :InspectionReference do
+  type :InspectionReference, 'The inspection reference', :InspectionRef do
   end  
       
   type :PartArchetype, 'Common information regarding a part kind', :Asset do
@@ -101,7 +101,7 @@ package :Parts, 'Parts' do
     member :TargetTeardownTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
     member :CuttingTools, 'A collection of tools', 0..1
     member :WorkHoldings, 'A collection of work holdings', 0..1
-    member :InspectionPlan, 'A reference to an asset ID that has a inspection plan', 0..1, :InspectionPlanReference
+    member :InspectionArchetype, 'A reference to an asset ID that has a inspection plan', 0..1, :InspectionArchetypeReference
   end
   
   type :Targets, 'A list of target devices or locations' do
@@ -267,6 +267,6 @@ package :Parts, 'Parts' do
 #    member :FixtureId, 'The fixture identifier', 0..1
     member :RevisionId, 'The revision of the process used', 0..1
     member :Yield, 'The process yield', 0..1
-    member :InspectionResult, 'A reference to the inspection results', 0..1, :InspectionResultReference
+    member :Inspection, 'A reference to the inspection results', 0..1, :InspectionReference
   end
 end

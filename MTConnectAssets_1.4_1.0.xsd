@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectAssets:1.4' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.4' targetNamespace='urn:mtconnect.org:MTConnectAssets:1.4' elementFormDefault='qualified' attributeFormDefault='unqualified' vc:minVersion='1.0'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectAssets:1.4' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.4' targetNamespace='urn:mtconnect.org:MTConnectAssets:1.4' elementFormDefault='qualified' attributeFormDefault='unqualified'>
   <xs:element name='MTConnectAssets' type='MTConnectAssetsType'>
     <xs:annotation>
       <xs:documentation>
@@ -2228,7 +2228,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:complexType name='InspectionReferenceType' abstract='true'>
+  <xs:complexType name='InspectionRefType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
         The inspection reference
@@ -2240,41 +2240,41 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element abstract='true' name='InspectionReference' type='InspectionReferenceType'>
+  <xs:element abstract='true' name='InspectionRef' type='InspectionRefType'>
     <xs:annotation>
       <xs:documentation>
         The inspection reference
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='InspectionPlanReferenceType'>
+  <xs:complexType name='InspectionArchetypeReferenceType'>
     <xs:annotation>
       <xs:documentation>
         The inspection reference
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='InspectionReferenceType'/>
+      <xs:extension base='InspectionRefType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='InspectionPlanReference' type='InspectionPlanReferenceType' substitutionGroup='InspectionReference'>
+  <xs:element name='InspectionArchetypeReference' type='InspectionArchetypeReferenceType' substitutionGroup='InspectionRef'>
     <xs:annotation>
       <xs:documentation>
         The inspection reference
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='InspectionResultReferenceType'>
+  <xs:complexType name='InspectionReferenceType'>
     <xs:annotation>
       <xs:documentation>
         The inspection reference
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='InspectionReferenceType'/>
+      <xs:extension base='InspectionRefType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='InspectionResultReference' type='InspectionResultReferenceType' substitutionGroup='InspectionReference'>
+  <xs:element name='InspectionReference' type='InspectionReferenceType' substitutionGroup='InspectionRef'>
     <xs:annotation>
       <xs:documentation>
         The inspection reference
@@ -2596,7 +2596,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='InspectionPlan' type='InspectionPlanReferenceType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='InspectionArchetype' type='InspectionArchetypeReferenceType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A reference to an asset ID that has a inspection plan
@@ -3198,7 +3198,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='InspectionResult' type='InspectionResultReferenceType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='Inspection' type='InspectionReferenceType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A reference to the inspection results
@@ -3324,4 +3324,70 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='name' type='NameType' use='required'/>
   </xs:complexType>
+  <xs:simpleType name='InspectionStandardType'>
+    <xs:annotation>
+      <xs:documentation>
+        The inspection standard
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='InspectionArchetypeType'>
+    <xs:annotation>
+      <xs:documentation>
+        Inspection Asset containing QIF or other standards for inspection plan
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetType'>
+        <xs:sequence>
+          <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
+            <xs:annotation>
+              <xs:documentation>
+                Any elements
+              </xs:documentation>
+            </xs:annotation>
+          </xs:any>
+        </xs:sequence>
+        <xs:attribute name='inspectionStandard' type='InspectionStandardType' use='optional'/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='InspectionArchetype' type='InspectionArchetypeType' substitutionGroup='Asset'>
+    <xs:annotation>
+      <xs:documentation>
+        Inspection Asset containing QIF or other standards for inspection plan
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='InspectionType'>
+    <xs:annotation>
+      <xs:documentation>
+        Inspection Asset containing QIF or other standards for inspection
+        results
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetType'>
+        <xs:sequence>
+          <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
+            <xs:annotation>
+              <xs:documentation>
+                Any elements
+              </xs:documentation>
+            </xs:annotation>
+          </xs:any>
+        </xs:sequence>
+        <xs:attribute name='inspectionStandard' type='InspectionStandardType' use='optional'/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Inspection' type='InspectionType' substitutionGroup='Asset'>
+    <xs:annotation>
+      <xs:documentation>
+        Inspection Asset containing QIF or other standards for inspection
+        results
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
 </xs:schema>
