@@ -2741,7 +2741,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='WorkholdingId' type='WorkholdingIdType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='WorkholdingRef' type='WorkholdingRefType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             A workholding tool asset id
@@ -2750,7 +2750,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name='WorkholdingIdType'>
+  <xs:complexType name='WorkholdingRefType'>
     <xs:annotation>
       <xs:documentation>
         A workholding asset id
@@ -3033,14 +3033,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='FixtureIdType'>
-    <xs:annotation>
-      <xs:documentation>
-        The fixture used
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:simpleType name='PartLocationType'>
     <xs:annotation>
       <xs:documentation>
@@ -3185,7 +3177,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='WorkholdingId' type='WorkholdingIdType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='PalletId' type='PalletIdType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The pallet identifier
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='WorkholdingRef' type='WorkholdingRefType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The workholding identifier

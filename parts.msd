@@ -150,10 +150,10 @@ package :Parts, 'Parts' do
   end
 
   type :WorkHoldings, 'A collection of workholding' do
-    member :WorkholdingId, 'A workholding tool asset id', 1..INF
+    member :WorkholdingRef, 'A workholding tool asset id', 1..INF
   end
   
-  type :WorkholdingId, 'A workholding asset id'do
+  type :WorkholdingRef, 'A workholding asset id'do
     member :Value, 'The asset id', :AssetId
   end
     
@@ -231,7 +231,6 @@ package :Parts, 'Parts' do
   
   basic_type :OperatorId, 'An operator Id'
   basic_type :PalletId, 'The pallet used in this process'
-  basic_type :FixtureId, 'The fixture used'
   basic_type :PartLocation, 'The location of the part if not on the machine'
   
   enum :ProcessEventState, 'The state of the process' do
@@ -276,7 +275,8 @@ package :Parts, 'Parts' do
     member :StepId, 'The step this history is associated with', 0..1
     member :OperatorId, 'The identifier of the operator', 0..1
     member :ControlPrograms, 'The control programs used in this event', 0..1
-    member :WorkholdingId, 'The workholding identifier', 0..1
+    member :PalletId, 'The pallet identifier', 0..1
+    member :WorkholdingRef, 'The workholding identifier', 0..1
     member :RevisionId, 'The revision of the process used', 0..1
     member :Yield, 'The process yield', 0..1
     member :Inspections, 'A reference to the inspection results', 0..1
