@@ -1,3 +1,4 @@
+# coding: utf-8
 package :Parts, 'Parts' do
   attr :CustomerId, 'A customer ID'
   attr :FamilyId, 'The family this part belongs to'
@@ -18,12 +19,6 @@ package :Parts, 'Parts' do
     member :Value, 'The id of the inspection doc', :InspectionId
   end  
     
-  type :InspectionArchetypeReference, 'The inspection reference', :InspectionRef do
-  end  
-  
-  type :InspectionReference, 'The inspection reference', :InspectionRef do
-  end  
-      
   type :PartArchetype, 'Common information regarding a part kind', :Asset do
     member :Description, 'The description of the part (freeform)', 0..1, :AssetDescription
     member :FamilyId, 'A group this part belongs to', 0..1
@@ -101,7 +96,7 @@ package :Parts, 'Parts' do
     member :TargetTeardownTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
     member :CuttingTools, 'A collection of tools', 0..1
     member :WorkHoldings, 'A collection of work holdings', 0..1
-    member :InspectionArchetype, 'A reference to an asset ID that has a inspection plan', 0..1, :InspectionArchetypeReference
+    member :InspectionArchetypeRef, 'A reference to an asset ID that has a inspection plan', 0..1, :InspectionRef
   end
   
   type :Targets, 'A list of target devices or locations' do
@@ -136,9 +131,11 @@ package :Parts, 'Parts' do
   end
   
   attr :SequenceNumber, 'The  number indication the sequence of the operaton', :integer
+  attr :OperationId, 'The identifier of the operation associated with this cutting tool', :string
   
   type :CuttingToolSetup, 'A specification of how a cutting tool will be used in a process step' do
     member :Sequence, 'The sequence number of the tool', 0..1, :SequenceNumber
+    member :OperationId, 'The operation id', 0..1
     member :CuttingToolAssetId, 'The refernce to the tool sequence number', 0..1
     member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
     member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
@@ -254,8 +251,23 @@ package :Parts, 'Parts' do
     member :Value, 'The uuid', :Uuid
   end
   
-  basic_type :Yield, 'The yeild of the process', :integer
+  basic_type :Yield, 'The yield of the process', :integer
+  basic_type :AnnotationValue, 'An annotation', :string
+
+  type :Annotations, 'A set of annotations' do
+    member :Annotation, 'An annotation', 1..INF
+  end
+
+  type :Annotation, 'An annotation' do
+    member :Timestamp, 'The time the annotation was recorded', 0..1, :Timestamp
+    member :Value, 'The annotation', :AnnotationValue
+  end
+
+  type :Inspections, 'A set of inspections' do
+    member :InspectionRef, 'An inspection', 1..INF
+  end
   
+
   type :ProcessEvent, 'This history of this part' do
     member :Timestamp, 'The timestamp'
     member :DeviceUuid, 'The unique identifier of the device this process was performed on', 0..1
@@ -263,10 +275,11 @@ package :Parts, 'Parts' do
     member :State, 'The process state', :ProcessEventState
     member :StepId, 'The step this history is associated with', 0..1
     member :OperatorId, 'The identifier of the operator', 0..1
-#    member :PalletId, 'The pallet identifier', 0..1
-#    member :FixtureId, 'The fixture identifier', 0..1
+    member :ControlPrograms, 'The control programs used in this event', 0..1
+    member :WorkholdingId, 'The workholding identifier', 0..1
     member :RevisionId, 'The revision of the process used', 0..1
     member :Yield, 'The process yield', 0..1
-    member :Inspection, 'A reference to the inspection results', 0..1, :InspectionReference
+    member :Inspections, 'A reference to the inspection results', 0..1
+    member :Annotations, 'A set of annotations associated with the event', 0..1
   end
 end

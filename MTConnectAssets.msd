@@ -26,7 +26,6 @@ end
 
 load 'assets.msd'
 load 'tools.msd'
-load 'qif.msd'
 load 'parts.msd'
 load 'transforms.msd'
 load 'inspection.msd'

@@ -2107,60 +2107,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='grade' type='GradeType' use='optional'/>
     <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
   </xs:complexType>
-  <xs:complexType name='InspectionPlanType'>
-    <xs:annotation>
-      <xs:documentation>
-        An inspection plan
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AssetType'>
-        <xs:sequence>
-          <xs:any processContents='lax' minOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                Any elements
-              </xs:documentation>
-            </xs:annotation>
-          </xs:any>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='InspectionPlan' type='InspectionPlanType' substitutionGroup='Asset'>
-    <xs:annotation>
-      <xs:documentation>
-        An inspection plan
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='InspectionResultType'>
-    <xs:annotation>
-      <xs:documentation>
-        An inspection result
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AssetType'>
-        <xs:sequence>
-          <xs:any processContents='lax' minOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                Any elements
-              </xs:documentation>
-            </xs:annotation>
-          </xs:any>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='InspectionResult' type='InspectionResultType' substitutionGroup='Asset'>
-    <xs:annotation>
-      <xs:documentation>
-        An inspection result
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:simpleType name='CustomerIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -2261,47 +2207,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element abstract='true' name='InspectionRef' type='InspectionRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        The inspection reference
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='InspectionArchetypeReferenceType'>
-    <xs:annotation>
-      <xs:documentation>
-        The inspection reference
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='InspectionRefType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='InspectionArchetypeReference' type='InspectionArchetypeReferenceType' substitutionGroup='InspectionRef'>
-    <xs:annotation>
-      <xs:documentation>
-        The inspection reference
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='InspectionReferenceType'>
-    <xs:annotation>
-      <xs:documentation>
-        The inspection reference
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='InspectionRefType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='InspectionReference' type='InspectionReferenceType' substitutionGroup='InspectionRef'>
-    <xs:annotation>
-      <xs:documentation>
-        The inspection reference
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:complexType name='PartArchetypeType'>
     <xs:annotation>
       <xs:documentation>
@@ -2617,7 +2522,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='InspectionArchetype' type='InspectionArchetypeReferenceType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='InspectionArchetypeRef' type='InspectionRefType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A reference to an asset ID that has a inspection plan
@@ -2756,6 +2661,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
+  <xs:simpleType name='OperationIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the operation associated with this cutting tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:complexType name='CuttingToolSetupType'>
     <xs:annotation>
       <xs:documentation>
@@ -2807,6 +2720,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
     <xs:attribute name='sequence' type='SequenceNumberType' use='optional'/>
+    <xs:attribute name='operationId' type='OperationIdType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='CuttingToolAssetIdType'>
     <xs:annotation>
@@ -3179,11 +3093,63 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='YieldType'>
     <xs:annotation>
       <xs:documentation>
-        The yeild of the process
+        The yield of the process
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
+  <xs:simpleType name='AnnotationValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        An annotation
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='AnnotationsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of annotations
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Annotation' type='AnnotationType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            An annotation
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='AnnotationType'>
+    <xs:annotation>
+      <xs:documentation>
+        An annotation
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='AnnotationValueType'>
+        <xs:attribute name='timestamp' type='TimestampType' use='optional'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='InspectionsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of inspections
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='InspectionRef' type='InspectionRefType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            An inspection
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name='ProcessEventType'>
     <xs:annotation>
       <xs:documentation>
@@ -3212,6 +3178,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='ControlPrograms' type='ControlProgramsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The control programs used in this event
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='WorkholdingId' type='WorkholdingIdType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The workholding identifier
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='Yield' type='YieldType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -3219,10 +3199,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Inspection' type='InspectionReferenceType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='Inspections' type='InspectionsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A reference to the inspection results
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Annotations' type='AnnotationsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A set of annotations associated with the event
           </xs:documentation>
         </xs:annotation>
       </xs:element>
