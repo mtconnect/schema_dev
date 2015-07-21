@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectAssets xmlns="urn:mtconnect.org:MTConnectAssets:1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectAssets:1.4 ../MTConnectAssets_1.4.xsd">
+	<Header version="1.4" creationTime="2015-01-04T12:23:00Z" instanceId="1" sender="localhost" assetBufferSize="1024" assetCount="100"/>
+	<Assets>
+		<Part assetId="4145T44G01-BCM95620" timestamp="2005-10-05T00:00:00Z">
+			<Description>HPT Inner Case</Description>
+			<PartArchetypeRef>4145T33G01-A</PartArchetypeRef>
+			<PartIdentifiers>
+				<UniqueIdentifier type="SERIAL_NUMBER" timestamp="2005-10-05T00:00:00Z">Serial</UniqueIdentifier>
+			</PartIdentifiers>
+			<Workorder workorderId="815885">
+				<TotalCount>15</TotalCount>
+			</Workorder>
+			<ProcessEvents>
+				<ProcessEvent stepId="1" timestamp="2005-10-05T00:00:00Z" state="IN_PROCESS">
+					<DeviceUuid>Machine Number</DeviceUuid>
+					<OperatorId>XXX</OperatorId>
+					<Inspection>ABC</Inspection>
+				</ProcessEvent>
+			</ProcessEvents>
+		</Part>
+	</Assets>
+</MTConnectAssets>

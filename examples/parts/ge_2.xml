@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectAssets xmlns="urn:mtconnect.org:MTConnectAssets:1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectAssets:1.4 ../MTConnectAssets_1.4.xsd">
+	<Header version="1.4" creationTime="2015-01-04T12:23:00Z" instanceId="1" sender="localhost" assetBufferSize="1024" assetCount="100"/>
+	<Assets>
+		<PartArchetype assetId="4145T33G01-A" timestamp="2004-10-05T12:00:00Z" revisionId="7">
+			<Description></Description>
+			<Characteristics>
+				<RawMaterial>
+					<MaterialType standard="INTERNAL">718</MaterialType>
+				</RawMaterial>
+				<Customers>
+					<Customer customerId="GE-AIRCRA">
+						<Name>GE Aircraft</Name>
+					</Customer>
+				</Customers>
+			</Characteristics>
+			<ProcessSteps>
+				<ProcessStep stepId="1">
+					<Description></Description>
+					<Targets>
+						<TargetDevice>XXX</TargetDevice>
+					</Targets>
+					<ControlPrograms>
+						<ControlProgram name="O1234" programName="Program Number" revisionId="Snumb Number">
+							<Description>...</Description>
+						</ControlProgram>
+					</ControlPrograms>
+					<WorkHoldings>
+						<WorkholdingId>Fixture Number</WorkholdingId>
+					</WorkHoldings>
+					<InspectionArchetype>ID</InspectionArchetype>
+				</ProcessStep>
+			</ProcessSteps>
+		</PartArchetype>
+	</Assets>
+</MTConnectAssets>
