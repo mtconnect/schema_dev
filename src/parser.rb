@@ -34,6 +34,7 @@ class Schema
     @urn = ''
     @types = []
     @imports = []
+    @xsimports = []
     @type_map = { }
     @derived = Set.new
     @top = nil
@@ -71,6 +72,10 @@ class Schema
   # Import another schema
   def import(name, location)
     @imports << ImportedSchema.new(self, name, location)
+  end
+
+  def xsimport(name, namespace, location)
+    @xsimports << [name, namespace, location]
   end
 
   def add_type(name, type)
@@ -397,7 +402,8 @@ class Schema
     include Comparable
     
     attr_reader :name, :type
-    attr_accessor :occurrence, :annotation, :default, :notQName, :processContents, :namespace, :notNamespace
+    attr_accessor :occurrence, :annotation, :default, :notQName, :processContents, :namespace, :notNamespace,
+      :fixed
     
     INF = 0xFFFFFFFF
 
@@ -419,7 +425,7 @@ class Schema
     end
 
     def resolve_type
-      if @type == :any
+      if @type == :any or @type.to_s.include?(':')
         res = @type 
       else
         res = @schema.type(@type)

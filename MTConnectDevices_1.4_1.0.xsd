@@ -769,6 +769,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='SubElements' type='SubElementsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A list of sub comonents
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='id' type='IDType' use='required'/>
     <xs:attribute name='nativeName' type='NameType' use='optional'/>
@@ -981,6 +988,93 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='SubElementType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract element
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Description' type='ComponentDescriptionType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The descriptive information about this sub element
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='id' type='IDType' use='required'/>
+    <xs:attribute name='name' type='NameType' use='optional'/>
+  </xs:complexType>
+  <xs:element abstract='true' name='SubElement' type='SubElementType'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract element
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SubElementInstType'>
+    <xs:annotation>
+      <xs:documentation>
+        A filter
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SubElementType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='SubElementInst' type='SubElementInstType' substitutionGroup='SubElement'>
+    <xs:annotation>
+      <xs:documentation>
+        A filter
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SubElementsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A collection of sub elements
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='Filter' type='SubElementInstType'>
+        <xs:annotation>
+          <xs:documentation>
+            A filter
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Door' type='SubElementInstType'>
+        <xs:annotation>
+          <xs:documentation>
+            A filter
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Pump' type='SubElementInstType'>
+        <xs:annotation>
+          <xs:documentation>
+            A filter
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Actuator' type='SubElementInstType'>
+        <xs:annotation>
+          <xs:documentation>
+            A filter
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Motor' type='SubElementInstType'>
+        <xs:annotation>
+          <xs:documentation>
+            A filter
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref='SubElement' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:choice>
+  </xs:complexType>
   <xs:simpleType name='CalibrationDateType'>
     <xs:annotation>
       <xs:documentation>

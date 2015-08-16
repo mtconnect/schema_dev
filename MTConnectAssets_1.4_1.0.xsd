@@ -31,7 +31,8 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectAssets:1.4' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.4' targetNamespace='urn:mtconnect.org:MTConnectAssets:1.4' elementFormDefault='qualified' attributeFormDefault='unqualified'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectAssets:1.4' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.4' targetNamespace='urn:mtconnect.org:MTConnectAssets:1.4' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <xs:import namespace='http://www.w3.org/1999/xlink' schemaLocation='http://www.w3.org/1999/xlink.xsd'/>
   <xs:element name='MTConnectAssets' type='MTConnectAssetsType'>
     <xs:annotation>
       <xs:documentation>
@@ -2110,6 +2111,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='DrawingIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The drawing identifier associated with this part
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='StepIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -2118,18 +2127,46 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
+  <xs:simpleType name='RoutingIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the step
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='PrecedenceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The priority of a thing. A numberic indicator of the relative order of
+        options.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='TargetIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the target
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='DiscretionaryType'>
+    <xs:annotation>
+      <xs:documentation>
+        An optional item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='YES'/>
+      <xs:enumeration value='NO'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name='StepDescriptionType'>
     <xs:annotation>
       <xs:documentation>
         The description of the step
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:simpleType name='TargetDeviceType'>
-    <xs:annotation>
-      <xs:documentation>
-        A device UUID
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -2209,22 +2246,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='ProcessSteps' type='ProcessStepsType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='Routings' type='RoutingsType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The process steps
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='AlternativeProcessSteps' type='AlternativeProcessStepsType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                A set of alternative flows
+                The possible collections of process steps to make a part
               </xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:sequence>
         <xs:attribute name='familyId' type='FamilyIdType' use='optional'/>
+        <xs:attribute name='drawingId' type='DrawingIdType' use='optional'/>
         <xs:attribute name='revisionId' type='RevisionIdType' use='required'/>
       </xs:extension>
     </xs:complexContent>
@@ -2236,6 +2267,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='RoutingsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of possible process steps
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Routing' type='RoutingType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            The process steps for a particular routing
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name='CharacteristicsType'>
     <xs:annotation>
       <xs:documentation>
@@ -2299,6 +2346,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='MaterialSourceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The description of the source of the material
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='BAR_STOCK'/>
+      <xs:enumeration value='FORGING'/>
+      <xs:enumeration value='CASTING'/>
+      <xs:enumeration value='POWDER'/>
+      <xs:enumeration value='ROD'/>
+      <xs:enumeration value='FILIMENT'/>
+      <xs:enumeration value='BAR_STOCK'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='MaterialType'>
     <xs:annotation>
       <xs:documentation>
@@ -2308,6 +2371,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='MaterialTypeValueType'>
         <xs:attribute name='standard' type='StandardType' use='required'/>
+        <xs:attribute name='source' type='MaterialSourceType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -2381,23 +2445,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='customerId' type='CustomerIdType' use='required'/>
   </xs:complexType>
-  <xs:complexType name='AlternativeProcessStepsType'>
-    <xs:annotation>
-      <xs:documentation>
-        Alternative process flows
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='ProcessSteps' type='ProcessStepsType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            A list of process steps
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name='ProcessStepsType'>
+  <xs:complexType name='RoutingType'>
     <xs:annotation>
       <xs:documentation>
         A collection of process steps
@@ -2407,41 +2455,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='ProcessStep' type='ProcessStepType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            An operation
+            A process step
           </xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='name' type='NameType' use='optional'/>
-  </xs:complexType>
-  <xs:simpleType name='TargetLocationTypeValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The set of possible locations
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='EXTERNAL'/>
-      <xs:enumeration value='STOCK'/>
-      <xs:enumeration value='INVENTORY'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name='TargetLocationType'>
-    <xs:annotation>
-      <xs:documentation>
-        The non-device location of a step
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='xs:string'>
-        <xs:attribute name='type' type='TargetLocationTypeValueType' use='required'/>
-      </xs:extension>
-    </xs:simpleContent>
+    <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
+    <xs:attribute name='routingId' type='RoutingIdType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='ProcessStepType'>
     <xs:annotation>
       <xs:documentation>
-        An individual operation in the manufacturing process
+        An individual step in the manufacturing process
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -2487,10 +2512,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='CuttingTools' type='CuttingToolsType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='Activities' type='ActivitiesType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            A collection of tools
+            A collection activites
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2510,6 +2535,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
     <xs:attribute name='stepId' type='StepIdType' use='required'/>
+    <xs:attribute name='discretionary' type='DiscretionaryType' use='optional' default='NO'/>
   </xs:complexType>
   <xs:complexType name='TargetsType'>
     <xs:annotation>
@@ -2517,22 +2543,52 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         A list of target devices or locations
       </xs:documentation>
     </xs:annotation>
-    <xs:choice minOccurs='1'>
-      <xs:element name='TargetDevice' type='TargetDeviceType' minOccurs='1' maxOccurs='unbounded'>
+    <xs:sequence>
+      <xs:element name='Target' type='TargetType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            The UUID of the device this step is intended for
+            Where this process step will be done
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetLocation' type='TargetLocationType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            The Location the step will be performed if not on a device
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='TargetTypeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The set of possible locations
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='EXTERNAL'/>
+      <xs:enumeration value='STOCK'/>
+      <xs:enumeration value='INVENTORY'/>
+      <xs:enumeration value='QUEUE'/>
+      <xs:enumeration value='DEVICE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='TargetValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The target value. For a device it is the UUID, for a location it is a
+        description or UUID
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='TargetType'>
+    <xs:annotation>
+      <xs:documentation>
+        The device or location something can be done at
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='TargetValueType'>
+        <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
+        <xs:attribute name='targetId' type='TargetIdType' use='required'/>
+        <xs:attribute name='type' type='TargetTypeValueType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:simpleType name='RestrictionsType'>
     <xs:annotation>
@@ -2595,13 +2651,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Checksum' type='ChecksumType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The checksum of the program
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
       <xs:element name='Signature' type='SignatureType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -2613,20 +2662,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='name' type='ProgramNameType' use='required'/>
     <xs:attribute name='programName' type='ProgramNameType' use='required'/>
     <xs:attribute name='revisionId' type='RevisionIdType' use='required'/>
+    <xs:attribute name='targetId' type='TargetIdType' use='optional'/>
     <xs:attribute name='timestamp' type='TimestampType' use='optional'/>
     <xs:attribute name='restrictions' type='RestrictionsType' use='optional'/>
   </xs:complexType>
-  <xs:complexType name='CuttingToolsType'>
+  <xs:complexType name='ActivitiesType'>
     <xs:annotation>
       <xs:documentation>
-        A collection of tooling
+        A collection of activities
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='CuttingToolSetup' type='CuttingToolSetupType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='Activity' type='ActivityType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            A Cutting tool tool asset id
+            A process activity
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2640,15 +2690,100 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='OperationIdType'>
+  <xs:simpleType name='ActivityIdType'>
     <xs:annotation>
       <xs:documentation>
-        The identifier of the operation associated with this cutting tool
+        The identifier of the activity associated with this cutting tool
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:complexType name='CuttingToolSetupType'>
+  <xs:complexType name='ActivityType'>
+    <xs:annotation>
+      <xs:documentation>
+        An activity within a Process Step
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Targets' type='TargetsType'>
+        <xs:annotation>
+          <xs:documentation>
+            The locations or target devices
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='CuttingToolActivities' type='CuttingToolActivitiesType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A Cutting tool tool asset id
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='WorkholdingRef' type='WorkholdingRefType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A workholding tool asset id
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='InspectionArchetypeRef' type='InspectionRefType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to the inspection of the activity
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProcessSpindleSpeed' type='ProcessSpindleSpeedType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The tools constrained process target spindle speed
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProcessFeedRate' type='ProcessFeedRateType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The tools constrained process target feed rate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='TargetExecutionTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The amount of time this part is supposed to take
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Activities' type='ActivitiesType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            Sub activities
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='sequence' type='SequenceNumberType' use='optional'/>
+    <xs:attribute name='discretionary' type='DiscretionaryType' use='optional' default='NO'/>
+    <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
+    <xs:attribute name='activityId' type='ActivityIdType' use='optional'/>
+  </xs:complexType>
+  <xs:complexType name='CuttingToolActivitiesType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tooling used for thi activity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='CuttingToolActivity' type='CuttingToolActivityType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            Cutting tool activity
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='CuttingToolActivityType'>
     <xs:annotation>
       <xs:documentation>
         A specification of how a cutting tool will be used in a process step
@@ -2676,30 +2811,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ProcessSpindleSpeed' type='ProcessSpindleSpeedType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The tools constrained process target spindle speed
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='ProcessFeedRate' type='ProcessFeedRateType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The tools constrained process target feed rate
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='TargetExecutionTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The amount of time this part is supposed to take
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
     </xs:sequence>
-    <xs:attribute name='sequence' type='SequenceNumberType' use='optional'/>
-    <xs:attribute name='operationId' type='OperationIdType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='CuttingToolAssetIdType'>
     <xs:annotation>
@@ -2824,6 +2936,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:annotation>
           </xs:element>
         </xs:sequence>
+        <xs:attribute name='revisionId' type='RevisionIdType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -3177,6 +3290,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='ActivityEvents' type='ActivityEventsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A set of activities associated with the process event
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='Inspections' type='InspectionsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -3194,8 +3314,58 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
     <xs:attribute name='state' type='ProcessEventStateType' use='required'/>
+    <xs:attribute name='routingId' type='RoutingIdType' use='required'/>
     <xs:attribute name='stepId' type='StepIdType' use='optional'/>
     <xs:attribute name='revisionId' type='RevisionIdType' use='optional'/>
+  </xs:complexType>
+  <xs:complexType name='ActivityEventsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Activity events
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='ActivityEvent' type='ActivityEventType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            An activity event
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='ActivityEventType'>
+    <xs:annotation>
+      <xs:documentation>
+        An event associated with a ProcessStep Operaiton
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='InspectionRef' type='InspectionRefType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            An inspection
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Characteristics' type='CharacteristicsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The characteristics of this part
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Annotations' type='AnnotationsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A set of annotations associated with the event
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
+    <xs:attribute name='sequenceNumber' type='SequenceNumberType' use='optional'/>
+    <xs:attribute name='activityId' type='ActivityIdType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='TransformationsType'>
     <xs:annotation>
@@ -3376,4 +3546,150 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='VersionIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The version of the file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='FileMimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The mime type of the file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='FileSizeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The size in bytes of the file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='FileNameType'>
+    <xs:annotation>
+      <xs:documentation>
+        The name of the file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='FileType'>
+    <xs:annotation>
+      <xs:documentation>
+        Common information regarding a file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetType'>
+        <xs:sequence>
+          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The description of the file (freeform)
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Location' type='FileLocationType'>
+            <xs:annotation>
+              <xs:documentation>
+                The file location
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Signature' type='SignatureType'>
+            <xs:annotation>
+              <xs:documentation>
+                The file&apos;s signature
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Versions' type='FileVersionsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The file version information
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name='versionId' type='VersionIdType' use='optional'/>
+        <xs:attribute name='type' type='FileMimeType' use='required'/>
+        <xs:attribute name='size' type='FileSizeType' use='required'/>
+        <xs:attribute name='name' type='FileNameType' use='required'/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='File' type='FileType' substitutionGroup='Asset'>
+    <xs:annotation>
+      <xs:documentation>
+        Common information regarding a file
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FileVersionsType'>
+    <xs:annotation>
+      <xs:documentation>
+        File version information
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Version' type='FileVersionType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            Version info
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='FileCommentType'>
+    <xs:annotation>
+      <xs:documentation>
+        The log entry
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='FileVersionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The file version info
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Location' type='FileLocationType'>
+        <xs:annotation>
+          <xs:documentation>
+            The file location
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Comment' type='FileCommentType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The file comment
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='versionId' type='VersionIdType' use='required'/>
+    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
+  </xs:complexType>
+  <xs:complexType name='FileLocationType'>
+    <xs:annotation>
+      <xs:documentation>
+        XLink to file location
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute name='href' type='xlink:hrefType' use='required'/>
+        <xs:attribute name='type' type='xlink:typeType' use='required' fixed='locator'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 </xs:schema>

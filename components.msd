@@ -7,7 +7,7 @@ package :Component, 'Top Level Components Package' do
   type :Devices, 'The top level components' do
     member :Device, 'A piece of equipment', 1..INF
   end
-
+  
   type :Component, "An abstract component type. This is a placeholder for all components" do
     abstract
     member :id, 'The data item identifier', :ID
@@ -18,6 +18,7 @@ package :Component, 'Top Level Components Package' do
     member :Configuration, 'The configuration information about this component', 0..1, :ComponentConfiguration
     member :DataItems, 'The component\'s Data Items', 0..1
     member :Components, 'The sub components', 0..1
+    member :SubElements, 'A list of sub comonents', 0..1
   end
 
   type :ComponentDescription, 'The descriptive information for this component. This can be manufacturer specific' do
@@ -66,6 +67,25 @@ package :Component, 'Top Level Components Package' do
   type :Actuator, 'A component that causes motion', :CommonComponent
   type :Door, 'A door on the machine', :CommonComponent  
 
+  type :SubElement, "An abstract element" do
+    abstract
+    member :id, 'The data item identifier', :ID
+    member :Name, 'The data item identifier', 0..1
+    member :Description, 'The descriptive information about this sub element', 0..1, :ComponentDescription
+  end
+  
+  type :SubElementInst, 'A filter', :SubElement
+  
+  type :SubElements, "A collection of sub elements" do
+    choice 1..INF do
+      member :Filter, 'A filter', :SubElementInst
+      member :Door, 'A filter', :SubElementInst
+      member :Pump, 'A filter', :SubElementInst
+      member :Actuator, 'A filter', :SubElementInst
+      member :Motor, 'A filter', :SubElementInst
+      member :SubElement, 'Subelements', 1..INF
+    end
+  end
 end
 
 load 'sensors'

@@ -72,13 +72,24 @@ class Schema
     root.add_attribute('elementFormDefault', "qualified")
     root.add_attribute('attributeFormDefault', "unqualified")
     root.add_attribute('vc:minVersion', xsd_version) if xsd_version == '1.1'
-    
+        
+    @xsimports.each do |name, namespace, location|
+      root.add_namespace(name, namespace)
+    end
+
     @imports.each do |imp|
       root.add_namespace(imp.namespace, imp.urn)
     end
     
     doc << root
             
+    @xsimports.each do |name, namespace, location| 
+      element = REXML::Element.new('xs:import')
+      element.add_attribute('namespace', namespace);
+      element.add_attribute('schemaLocation', location);
+      root << element      
+    end
+
     @imports.each do |imp|
       element = REXML::Element.new('xs:import')
       element.add_attribute('namespace', imp.urn);
@@ -466,7 +477,7 @@ class Schema
         if @default
           element.add_attribute('default', @default.to_s)
         end
-      
+              
         # If this is an abstract object with a parent or if it
         # has subclasses, we will need to create substitution groups
         # so add a reference instead of a name and type.
@@ -507,6 +518,10 @@ class Schema
       
       if @default
         attrs['default'] = @default
+      end
+      
+      if @fixed
+        attrs['fixed'] = @fixed
       end
       
       # If the extension was specified, add to the extension otherwise
