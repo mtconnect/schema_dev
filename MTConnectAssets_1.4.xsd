@@ -2224,23 +2224,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='CustomerLocationType'>
+  <xs:simpleType name='CustomerAddressType'>
     <xs:annotation>
       <xs:documentation>
-        A customer location
+        A customer address
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:complexType name='InspectionRefType' abstract='true'>
+  <xs:complexType name='InspectionRefType'>
     <xs:annotation>
       <xs:documentation>
         The inspection reference
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='InspectionIdType'>
-        <xs:attribute name='href' type='SourceType' use='optional'/>
+      <xs:extension base='xs:string'>
+        <xs:attribute ref='xlink:href' use='required'/>
+        <xs:attribute ref='xlink:type' use='required' fixed='locator'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -2449,7 +2450,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Location' type='CustomerLocationType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='Address' type='CustomerAddressType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The customer location
@@ -2484,6 +2485,132 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
     <xs:attribute name='routingId' type='RoutingIdType' use='optional'/>
   </xs:complexType>
+  <xs:complexType name='AssetArchetypeRelationsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The assets used in this activity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref='AssetArchetypeRelation' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='AssetArchetypeRelationType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        An archetype reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name='assetIdRef' type='AssetIdType' use='required'/>
+    <xs:attribute ref='xlink:href' use='required'/>
+    <xs:attribute ref='xlink:type' use='required' fixed='locator'/>
+  </xs:complexType>
+  <xs:element abstract='true' name='AssetArchetypeRelation' type='AssetArchetypeRelationType'>
+    <xs:annotation>
+      <xs:documentation>
+        An archetype reference
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='CuttingToolArchetypeRelationType'>
+    <xs:annotation>
+      <xs:documentation>
+        A specification of how a cutting tool will be used in a process step
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetArchetypeRelationType'>
+        <xs:sequence>
+          <xs:element name='ProgramToolGroup' type='ProgramToolGroupType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The number used to identify this tool in the program
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='ProgramToolNumber' type='ProgramToolNumberType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The number used to identify this tool in the program
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='ProcessSpindleSpeed' type='ProcessSpindleSpeedType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The tools constrained process target spindle speed
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='ProcessFeedRate' type='ProcessFeedRateType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The tools constrained process target feed rate
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='CuttingToolArchetypeRelation' type='CuttingToolArchetypeRelationType' substitutionGroup='AssetArchetypeRelation'>
+    <xs:annotation>
+      <xs:documentation>
+        A specification of how a cutting tool will be used in a process step
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='WorkholdingArchetypeRelationType'>
+    <xs:annotation>
+      <xs:documentation>
+        A workholding reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetArchetypeRelationType'>
+        <xs:sequence>
+          <xs:element name='WorkholdingSetupTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The amount of time this part is supposed to take
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='WorkholdingTeardownTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The amount of time this part is supposed to take
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='WorkholdingArchetypeRelation' type='WorkholdingArchetypeRelationType' substitutionGroup='AssetArchetypeRelation'>
+    <xs:annotation>
+      <xs:documentation>
+        A workholding reference
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='InspectionArchetypeRelationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The inspection archetype associated with this activity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetArchetypeRelationType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='InspectionArchetypeRelation' type='InspectionArchetypeRelationType' substitutionGroup='AssetArchetypeRelation'>
+    <xs:annotation>
+      <xs:documentation>
+        The inspection archetype associated with this activity
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='ProcessStepType'>
     <xs:annotation>
       <xs:documentation>
@@ -2512,27 +2639,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetExecutionTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The amount of time this part is supposed to take
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='TargetSetupTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The amount of time this part is supposed to take
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='TargetTeardownTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The amount of time this part is supposed to take
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
       <xs:element name='Activities' type='ActivitiesType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -2540,17 +2646,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='WorkHoldings' type='WorkHoldingsType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='AssetArchetypeRelations' type='AssetArchetypeRelationsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            A collection of work holdings
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='InspectionArchetypeRef' type='InspectionRefType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A reference to an asset ID that has a inspection plan
+            A collection of assets used in this process step
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2588,7 +2687,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DEVICE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='TargetValueType'>
+  <xs:simpleType name='TargetDeviceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The target value. For a device it is the UUID, for a location it is a
+        description or UUID
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='TargetLocationType'>
     <xs:annotation>
       <xs:documentation>
         The target value. For a device it is the UUID, for a location it is a
@@ -2603,13 +2711,48 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The device or location something can be done at
       </xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='TargetValueType'>
-        <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
-        <xs:attribute name='targetId' type='TargetIdType' use='required'/>
-        <xs:attribute name='type' type='TargetTypeValueType' use='required'/>
-      </xs:extension>
-    </xs:simpleContent>
+    <xs:sequence>
+      <xs:element name='TargetExecutionTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The amount of time this part is supposed to take
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='TargetSetupTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The amount of time this part is supposed to take
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='TargetTeardownTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The amount of time this part is supposed to take
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:choice minOccurs='1'>
+        <xs:element name='TargetDevice' type='TargetDeviceType'>
+          <xs:annotation>
+            <xs:documentation>
+              The deviceidentifier or description
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name='TargetLocation' type='TargetLocationType'>
+          <xs:annotation>
+            <xs:documentation>
+              The location identifier or description
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
+    <xs:attribute name='targetId' type='TargetIdType' use='required'/>
+    <xs:attribute name='type' type='TargetTypeValueType' use='required'/>
   </xs:complexType>
   <xs:simpleType name='RestrictionsType'>
     <xs:annotation>
@@ -2651,6 +2794,35 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name='TargetIdRefsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The targets this activity is valid for
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='TargetIdRef' type='TargetIdType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            The target id reference
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='FileAssetRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to the asset file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='AssetIdType'>
+        <xs:attribute ref='xlink:href' use='required'/>
+        <xs:attribute ref='xlink:type' use='required' fixed='locator'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='ControlProgramType'>
     <xs:annotation>
       <xs:documentation>
@@ -2662,6 +2834,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The description of the program
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='FileAssetRef' type='FileAssetRefType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to the file asset
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='TargetIdRefs' type='TargetIdRefsType'>
+        <xs:annotation>
+          <xs:documentation>
+            The associated target identifier. When DEVICE type
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2683,7 +2869,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='name' type='ProgramNameType' use='required'/>
     <xs:attribute name='programName' type='ProgramNameType' use='required'/>
     <xs:attribute name='revisionId' type='RevisionIdType' use='required'/>
-    <xs:attribute name='targetId' type='TargetIdType' use='optional'/>
     <xs:attribute name='timestamp' type='TimestampType' use='optional'/>
     <xs:attribute name='restrictions' type='RestrictionsType' use='optional'/>
   </xs:complexType>
@@ -2726,45 +2911,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Targets' type='TargetsType'>
+      <xs:element name='TargetIdRefs' type='TargetIdRefsType'>
         <xs:annotation>
           <xs:documentation>
             The locations or target devices
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='CuttingToolActivities' type='CuttingToolActivitiesType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A Cutting tool tool asset id
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='WorkholdingRef' type='WorkholdingRefType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A workholding tool asset id
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='InspectionArchetypeRef' type='InspectionRefType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A reference to the inspection of the activity
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='ProcessSpindleSpeed' type='ProcessSpindleSpeedType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The tools constrained process target spindle speed
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='ProcessFeedRate' type='ProcessFeedRateType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The tools constrained process target feed rate
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2772,6 +2922,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The amount of time this part is supposed to take
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='AssetArchetypeRelations' type='AssetArchetypeRelationsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            Assets that are used in this activity
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2787,90 +2944,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='discretionary' type='DiscretionaryType' use='optional' default='NO'/>
     <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
     <xs:attribute name='activityId' type='ActivityIdType' use='optional'/>
-  </xs:complexType>
-  <xs:complexType name='CuttingToolActivitiesType'>
-    <xs:annotation>
-      <xs:documentation>
-        The tooling used for thi activity
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='CuttingToolActivity' type='CuttingToolActivityType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            Cutting tool activity
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name='CuttingToolActivityType'>
-    <xs:annotation>
-      <xs:documentation>
-        A specification of how a cutting tool will be used in a process step
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='CuttingToolAssetId' type='CuttingToolAssetIdType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The refernce to the tool sequence number
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='ProgramToolGroup' type='ProgramToolGroupType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The number used to identify this tool in the program
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='ProgramToolNumber' type='ProgramToolNumberType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The number used to identify this tool in the program
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name='CuttingToolAssetIdType'>
-    <xs:annotation>
-      <xs:documentation>
-        A tool asset id
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='AssetIdType'>
-        <xs:attribute name='href' type='SourceType' use='optional'/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name='WorkHoldingsType'>
-    <xs:annotation>
-      <xs:documentation>
-        A collection of workholding
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='WorkholdingRef' type='WorkholdingRefType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            A workholding tool asset id
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name='WorkholdingRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        A workholding asset id
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='AssetIdType'/>
-    </xs:simpleContent>
   </xs:complexType>
   <xs:simpleType name='WorkorderIdType'>
     <xs:annotation>
@@ -2912,6 +2985,132 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:complexType name='AssetRelationsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The assets used in this activity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref='AssetRelation' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='AssetRelationType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        An archetype reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name='assetIdRef' type='AssetIdType' use='required'/>
+    <xs:attribute ref='xlink:href' use='required'/>
+    <xs:attribute ref='xlink:type' use='required' fixed='locator'/>
+  </xs:complexType>
+  <xs:element abstract='true' name='AssetRelation' type='AssetRelationType'>
+    <xs:annotation>
+      <xs:documentation>
+        An archetype reference
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='CuttingToolRelationType'>
+    <xs:annotation>
+      <xs:documentation>
+        A specification of how a cutting tool will be used in a process step
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetRelationType'>
+        <xs:sequence>
+          <xs:element name='ProgramToolGroup' type='ProgramToolGroupType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The number used to identify this tool in the program
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='ProgramToolNumber' type='ProgramToolNumberType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The number used to identify this tool in the program
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='ProcessSpindleSpeed' type='ProcessSpindleSpeedType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The tools constrained process target spindle speed
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='ProcessFeedRate' type='ProcessFeedRateType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The tools constrained process target feed rate
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='CuttingToolRelation' type='CuttingToolRelationType' substitutionGroup='AssetRelation'>
+    <xs:annotation>
+      <xs:documentation>
+        A specification of how a cutting tool will be used in a process step
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='WorkholdingRelationType'>
+    <xs:annotation>
+      <xs:documentation>
+        A workholding reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetRelationType'>
+        <xs:sequence>
+          <xs:element name='WorkholdingSetupTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The amount of time this part is supposed to take
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='WorkholdingTeardownTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The amount of time this part is supposed to take
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='WorkholdingRelation' type='WorkholdingRelationType' substitutionGroup='AssetRelation'>
+    <xs:annotation>
+      <xs:documentation>
+        A workholding reference
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='InspectionRelationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The inspection archetype associated with this activity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetRelationType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='InspectionRelation' type='InspectionRelationType' substitutionGroup='AssetRelation'>
+    <xs:annotation>
+      <xs:documentation>
+        The inspection archetype associated with this activity
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='PartType'>
     <xs:annotation>
       <xs:documentation>
@@ -2976,7 +3175,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='AssetIdType'>
-        <xs:attribute name='href' type='SourceType' use='optional'/>
+        <xs:attribute ref='xlink:href' use='required'/>
+        <xs:attribute ref='xlink:type' use='required' fixed='locator'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -3297,7 +3497,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='WorkholdingRef' type='WorkholdingRefType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='AssetRelations' type='AssetRelationsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The workholding identifier
@@ -3315,13 +3515,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A set of activities associated with the process event
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Inspections' type='InspectionsType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A reference to the inspection results
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -3708,8 +3901,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='xs:string'>
-        <xs:attribute name='href' type='xlink:hrefType' use='required'/>
-        <xs:attribute name='type' type='xlink:typeType' use='required' fixed='locator'/>
+        <xs:attribute ref='xlink:href' use='required'/>
+        <xs:attribute ref='xlink:type' use='required' fixed='locator'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

@@ -483,7 +483,9 @@ class Schema
         # so add a reference instead of a name and type.
         type = resolve_type
         if references_abstract?
-          element.add_attribute('ref', "#{type.name}")
+          element.add_attribute('ref', type.name.to_s)
+        elsif @name.to_s.include?(':')
+          element.add_attribute('ref', @name.to_s)
         else
           element.add_attribute('name', @name.to_s)
           element.add_attribute('type', type_as_xsd_type(true))
@@ -507,7 +509,12 @@ class Schema
     end
 
     def generate_attribute(element)
-      attrs = {'name' => camel_name, 'type' => type_as_xsd_type(true)}
+      if @name.to_s.include?(':')
+        attrs = { 'ref' => @name.to_s }
+      else
+        attrs = {'name' => camel_name, 'type' => type_as_xsd_type(true)}
+      end
+      
       # Always specify the use of the attribute.
       # puts "#{@name} #{@occurrence.inspect}"
       if @occurrence.nil? || @occurrence == 1
