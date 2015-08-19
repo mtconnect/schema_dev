@@ -44,7 +44,7 @@ package :DataItems, 'Data Items Package' do
     member :NativeUnits, 'The units as expressed by the machine', 0..1
     member :NativeScale, 'The units as expressed by the machine', 0..1
     member :Category, 'The category of the data item'
-    member :Source, 'Additional information about the component, channel, register, etc... that collects the data.', 0..1
+    member :Source, 'Additional information about the component, channel, register, etc... that collects the data.', 0..1, :DataItemSource
     member :CoordinateSystem, 'The coordinate system used for the positions', 0..1
     member :SampleRate, 'Used as the default sample rate for waveforms', 0..1
     member(:Representation, 'The data item\'s representation', 0..1) { self.default = :VALUE } 
@@ -60,6 +60,7 @@ package :DataItems, 'Data Items Package' do
       set do
         member :Minimum, 'A minimum value for this data item.', :DataItemValue
         member :Maximum, 'A maximum value for this data item.', :DataItemValue
+        member :Nominal, 'A maximum value for this data item.', :DataItemValue
       end
     end
     member :Filter, 'A limit on the amount of data by specifying the minimal delta required.', 0..1, :DataItemFilter
@@ -74,7 +75,7 @@ package :DataItems, 'Data Items Package' do
     member :Type, 'The type of filter, ABSOLUTE or PERCENT', :FilterType
   end
   
-  type :Source, 'A native data source' do
+  type :DataItemSource, 'A native data source' do
     member :ComponentId, 'The component that is collecting the data associated with this data item', 0..1, :SourceComponentId
     member :DataItemId, 'The optional data item within the source component that provides the underlying data', 0..1, :SourceDataItemId
     member :Value, 'The source or channel for this data', :ItemSource

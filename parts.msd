@@ -1,3 +1,5 @@
+load 'data_items.msd'
+
 # coding: utf-8
 package :Parts, 'Parts' do
   attr :CustomerId, 'A customer ID'
@@ -8,6 +10,7 @@ package :Parts, 'Parts' do
   attr :RoutingId, 'The identifier of the step', :NMTOKEN
   attr :Precedence, 'The priority of a thing. A numberic indicator of the relative order of options.', :integer
   attr :TargetId, 'The identifier of the target', :NMTOKEN
+  attr :ConstraintGroupId, 'A unique constraint identifier', :NMTOKEN
   
   
   enum :Discretionary, 'An optional item' do
@@ -21,12 +24,7 @@ package :Parts, 'Parts' do
   basic_type :Checksum, 'A checksum as a 32 bit unsigned value', :integer
   basic_type :CustomerName, 'A customer name'
   basic_type :CustomerAddress, 'A customer address'
-    
-  type :InspectionRef, 'The inspection reference' do
-    attribute :'xlink:href', 'Reference to the asset', :'xlink:href', 0..1
-    attribute(:'xlink:type', 'Type of href', :'xlink:type') { self.fixed = 'locator' }
-  end
-    
+      
   type :PartArchetype, 'Common information regarding a part kind', :Asset do
     member :Description, 'The description of the part (freeform)', 0..1, :AssetDescription
     member :FamilyId, 'A group this part belongs to', 0..1
@@ -95,33 +93,60 @@ package :Parts, 'Parts' do
     member :RoutingId, 'The identifier of this routing', 0..1
     member :ProcessStep, 'A process step', 1..INF
   end
-    
-  type :AssetArchetypeRelations, 'The assets used in this activity' do
-    member :AssetArchetypeRelation, 'An asset reference that is associated with this activity. These will be archetypes', 1..INF
+  
+  type :AssetRefs, 'The assets used in this activity' do
+    member :AssetRef, 'An asset reference that is associated with this activity. These will be archetypes', 1..INF
   end
   
-  type :AssetArchetypeRelation, 'An archetype reference' do
-    abstract
-    member :AssetIdRef, 'The reference to the underlying asset id', :AssetId
+  type :AssetRef, 'An archetype reference' do
     attribute :'xlink:href', 'Reference to the asset', :'xlink:href', 0..1
     attribute(:'xlink:type', 'Type of href', :'xlink:type') { self.fixed = 'locator' }
+    member :AssetType, 'The type of asset that changed', :AssetAttrType
+    member :Value, 'The reference to the underlying asset id', :AssetId
   end
     
-  type :CuttingToolArchetypeRelation, 'A specification of how a cutting tool will be used in a process step', :AssetArchetypeRelation do
-    member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
-    member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
-    member :ProcessSpindleSpeed, 'The tools constrained process target spindle speed', 0..1
-    member :ProcessFeedRate, 'The tools constrained process target feed rate', 0..1
+  type :AssetArchetypeRefs, 'The assets used in this activity' do
+    member :AssetArchetypeRef, 'An asset reference that is associated with this activity. These will be archetypes', 1..INF, :AssetRef
+  end
+      
+  type :ProcessConstraints, 'A set of constraints for various process data or parameters' do
+    member :ProcessConstraintGroup, 'The process parameters of a type', 1..INF    
+  end
+  
+  basic_type(:ConstraintGroupExt, 'An extension point for data item types') do
+    pattern 'x:[A-Z_0-9]+'
+  end
+  
+  enum :ConstraintGroupEnum, 'The type of constraint' do
+    extensible :ConstraintGroupExt
+    
+    value :CUTTING_TOOL, 'Cutting tool constraints'
+    value :WORKHOLDING, 'Workholding constraints'
+    value :INSPECTION, 'Inspection constraints'
+  end
+  
+  
+  type :ProcessConstraintGroup, 'The process data' do
+    abstract
+    member :type, 'The type of constraint', :ConstraintGroupEnum
+    member :ConstraintGroupId, 'A constraint identifier'
+    member :Sequence, 'The sequence number of the activity', 0..1, :SequenceNumber
+    member :DataItemConstraint, 'A set of data item constaints', 1..INF
+  end
+  
+  enum :PartDataItemTypes, 'Extended Data Item Types', :DataItemEnum do
+    value :SETUP_TIME, 'The time to setup the asset'
+    value :TEARDOWN_TIME, 'The time to teardown the asset'
+  end
+  
+  type :DataItemConstraint, 'A abstract measurement' do
+    member :Type, 'The type of measurement', :PartDataItemTypes
+    member :SubType, 'The sub type for the measurement', 0..1, :DataItemSubEnum
+    member :Units, 'The units of the measurement', 0..1
+    member :Category, 'The category of the data item'
+    member :Constraints, 'Limits on the set of possible values', :DataItemConstraints
   end
     
-  type :WorkholdingArchetypeRelation, 'A workholding reference', :AssetArchetypeRelation do
-    member :WorkholdingSetupTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-    member :WorkholdingTeardownTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-  end
-  
-  type :InspectionArchetypeRelation, 'The inspection archetype associated with this activity', :AssetArchetypeRelation do
-  end
-  
   type :ProcessStep, 'An individual step in the manufacturing process' do
     member :StepId, 'The identifier of this step'
     member(:Discretionary, 'This process step is discretionary', 0..1) { self.default = 'NO' }
@@ -129,7 +154,27 @@ package :Parts, 'Parts' do
     member :Targets, 'The locations or target devices'
     member :ControlPrograms, 'The names of the programs that are required for this step', 0..1
     member :Activities, 'A collection activites', 0..1
-    member :AssetArchetypeRelations, 'A collection of assets used in this process step', 0..1
+    member :ProcessConstraints, 'The process constraints', 0..1
+    member :AssetArchetypeRefs, 'A collection of assets used in this process step', 0..1
+  end
+  
+  type :Activities, 'A collection of activities' do
+    member :Activity, 'A process activity', 1..INF
+  end
+  
+  attr :SequenceNumber, 'The  number indication the sequence of the operaton', :integer
+  attr :ActivityId, 'The identifier of the activity associated with this cutting tool', :string
+    
+  type :Activity, 'An activity within a Process Step' do
+    member :Sequence, 'The sequence number of the activity', 0..1, :SequenceNumber
+    member(:Discretionary, 'This process step is discretionary', 0..1) { self.default = 'NO' }
+    member :Precedence, 'The precedence of this activity if multiple activities have the same sequence', 0..1
+    member :ActivityId, 'The activity id', 0..1
+    member :TargetIdRefs, 'The locations or target devices'
+    member :TargetExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
+    member :ProcessConstraints, 'The process constraints', 0..1
+    member :AssetArchetypeRefs, 'Assets that are used in this activity', 0..1
+    member :Activities, 'Sub activities', 0..1
   end
   
   type :Targets, 'A list of target devices or locations' do
@@ -191,60 +236,17 @@ package :Parts, 'Parts' do
     member :Signature, 'A secure signature', 0..1
   end
     
-  type :Activities, 'A collection of activities' do
-    member :Activity, 'A process activity', 1..INF
-  end
   
-  attr :SequenceNumber, 'The  number indication the sequence of the operaton', :integer
-  attr :ActivityId, 'The identifier of the activity associated with this cutting tool', :string
-    
-  type :Activity, 'An activity within a Process Step' do
-    member :Sequence, 'The sequence number of the tool', 0..1, :SequenceNumber
-    member(:Discretionary, 'This process step is discretionary', 0..1) { self.default = 'NO' }
-    member :Precedence, 'The precedence of this activity if multiple activities have the same sequence', 0..1
-    member :ActivityId, 'The activity id', 0..1
-    member :TargetIdRefs, 'The locations or target devices'
-    member :TargetExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-    member :AssetArchetypeRelations, 'Assets that are used in this activity', 0..1
-    member :Activities, 'Sub activities', 0..1
-  end
-  
-
+  ################ ################ ################ ################ ################ ################
   # Part Starts Here...
+  ################ ################ ################ ################ ################ ################
 
   attr :WorkorderId, 'The identifier of this workorder'
   attr :SubCountLabel, 'The label of a sub count', :NMTOKEN
   basic_type :PartCount, 'The number of parts in this workorder', :integer
   basic_type :PurchaseOrderId, 'A purchase order identifier'
   basic_type :InspectionId, 'The asset id of the inspection doc'
-  
-  type :AssetRelations, 'The assets used in this activity' do
-    member :AssetRelation, 'An asset reference that is associated with this activity. These will be archetypes', 1..INF
-  end
-  
-  type :AssetRelation, 'An archetype reference' do
-    abstract
-    member :AssetIdRef, 'The reference to the underlying asset id', :AssetId
-    attribute :'xlink:href', 'Reference to the asset', :'xlink:href', 0..1
-    attribute(:'xlink:type', 'Type of href', :'xlink:type') { self.fixed = 'locator' }
-  end
-    
-  type :CuttingToolRelation, 'A specification of how a cutting tool will be used in a process step', :AssetRelation do
-    member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
-    member :ProgramToolNumber, 'The number used to identify this tool in the program', 0..1
-    member :ProcessSpindleSpeed, 'The tools constrained process target spindle speed', 0..1
-    member :ProcessFeedRate, 'The tools constrained process target feed rate', 0..1
-  end
-    
-  type :WorkholdingRelation, 'A workholding reference', :AssetRelation do
-    member :WorkholdingSetupTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-    member :WorkholdingTeardownTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-  end
-  
-  type :InspectionRelation, 'The inspection archetype associated with this activity', :AssetRelation do
-  end
-  
-    
+        
   type :Part, 'A part or group of individual parts that are being from workpieces', :Asset do
     member :Description, 'The description of the part (freeform)', 0..1, :AssetDescription
     member :PartArchetypeRef, 'A reference to the archetype for this part', 0..1
@@ -346,11 +348,6 @@ package :Parts, 'Parts' do
     member :Value, 'The annotation', :AnnotationValue
   end
 
-  type :Inspections, 'A set of inspections' do
-    member :InspectionRef, 'An inspection', 1..INF
-  end
-  
-
   type :ProcessEvent, 'This history of this part' do
     member :Timestamp, 'The timestamp'
     member :DeviceUuid, 'The unique identifier of the device this process was performed on', 0..1
@@ -360,8 +357,7 @@ package :Parts, 'Parts' do
     member :StepId, 'The step this history is associated with', 0..1
     member :OperatorId, 'The identifier of the operator', 0..1
     member :ControlPrograms, 'The control programs used in this event', 0..1
-    member :PalletId, 'The pallet identifier', 0..1
-    member :AssetRelations, 'The workholding identifier', 0..1
+    member :AssetRefs, 'The workholding identifier', 0..1
     member :RevisionId, 'The revision of the process used', 0..1
     member :Yield, 'The process yield', 0..1
     member :ActivityEvents, 'A set of activities associated with the process event', 0..1
@@ -376,8 +372,8 @@ package :Parts, 'Parts' do
     member :Timestamp, 'The timestamp'
     member :SequenceNumber, 'The  number indication the sequence of the operaton', 0..1
     member :ActivityId, 'The activity id', 0..1
-    member :InspectionRef, 'An inspection', 1..INF
     member :Characteristics, 'The characteristics of this part', 0..1
+    member :AssetRefs, 'The workholding identifier', 0..1
     member :Annotations, 'A set of annotations associated with the event', 0..1
   end
 end

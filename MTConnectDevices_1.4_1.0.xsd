@@ -1550,7 +1550,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Source' type='SourceType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='Source' type='DataItemSourceType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             Additional information about the component, channel, register,
@@ -1613,6 +1613,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:element name='Nominal' type='DataItemValueType'>
+            <xs:annotation>
+              <xs:documentation>
+                A maximum value for this data item.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
         </xs:sequence>
       </xs:choice>
       <xs:element name='Filter' type='DataItemFilterType' minOccurs='0' maxOccurs='1'>
@@ -1647,7 +1654,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='SourceType'>
+  <xs:complexType name='DataItemSourceType'>
     <xs:annotation>
       <xs:documentation>
         A native data source
