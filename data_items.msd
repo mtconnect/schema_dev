@@ -6,6 +6,7 @@ package :DataItems, 'Data Items Package' do
   attr :DataItemValue, 'The constrained value for this data item'
   attr :SourceComponentId, 'An idref to the component id', :IDREF
   attr :SourceDataItemId, 'An idref to the data item id', :IDREF
+  attr :ComponentName, 'The name of a related component', :NMTOKEN
   basic_type :FilterValue, 'The minimum limit on the change in a value', :float
   
   # Measurement types

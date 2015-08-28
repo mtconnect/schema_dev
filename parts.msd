@@ -99,12 +99,13 @@ package :Parts, 'Parts' do
   end
   
   type :AssetRef, 'An archetype reference' do
-    attribute :'xlink:href', 'Reference to the asset', :'xlink:href', 0..1
-    attribute(:'xlink:type', 'Type of href', :'xlink:type') { self.fixed = 'locator' }
+    attribute :'xlink:href', 'Reference to the asset', 0..1, :'xlink:href'
+    attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
     member :AssetType, 'The type of asset that changed', :AssetAttrType
     member :Value, 'The reference to the underlying asset id', :AssetId
   end
     
+  # TODO: Handle targets!
   type :AssetArchetypeRefs, 'The assets used in this activity' do
     member :AssetArchetypeRef, 'An asset reference that is associated with this activity. These will be archetypes', 1..INF, :AssetRef
   end
@@ -127,16 +128,18 @@ package :Parts, 'Parts' do
   
   
   type :ProcessConstraintGroup, 'The process data' do
-    abstract
     member :type, 'The type of constraint', :ConstraintGroupEnum
     member :ConstraintGroupId, 'A constraint identifier'
     member :Sequence, 'The sequence number of the activity', 0..1, :SequenceNumber
+    member :ComponentName, 'The name of a component if required', 0..1
+    member :Component, 'The type of the component',  0..1, :Name
     member :DataItemConstraint, 'A set of data item constaints', 1..INF
   end
   
   enum :PartDataItemTypes, 'Extended Data Item Types', :DataItemEnum do
     value :SETUP_TIME, 'The time to setup the asset'
     value :TEARDOWN_TIME, 'The time to teardown the asset'
+    value :EXECUTION_TIME, 'The target execution of the process'
   end
   
   type :DataItemConstraint, 'A abstract measurement' do
@@ -166,12 +169,12 @@ package :Parts, 'Parts' do
   attr :ActivityId, 'The identifier of the activity associated with this cutting tool', :string
     
   type :Activity, 'An activity within a Process Step' do
-    member :Sequence, 'The sequence number of the activity', 0..1, :SequenceNumber
+    member :Sequence, 'The sequence number of the activity', :SequenceNumber
     member(:Discretionary, 'This process step is discretionary', 0..1) { self.default = 'NO' }
     member :Precedence, 'The precedence of this activity if multiple activities have the same sequence', 0..1
-    member :ActivityId, 'The activity id', 0..1
-    member :TargetIdRefs, 'The locations or target devices'
-    member :TargetExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
+    member :ActivityId, 'The activity id'
+    member :Description, 'The description of the step', 0..1, :StepDescription
+    member :TargetIdRefs, 'The locations or target devices', 0..1
     member :ProcessConstraints, 'The process constraints', 0..1
     member :AssetArchetypeRefs, 'Assets that are used in this activity', 0..1
     member :Activities, 'Sub activities', 0..1
@@ -218,8 +221,8 @@ package :Parts, 'Parts' do
   end
   
   type :FileAssetRef, 'A reference to the asset file' do
-    attribute :'xlink:href', 'Reference to the asset', :'xlink:href', 0..1
-    attribute(:'xlink:type', 'Type of href', :'xlink:type') { self.fixed = 'locator' }
+    attribute :'xlink:href', 'Reference to the asset', 0..1, :'xlink:href'
+    attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
     member :Value, 'Asset id of file', :AssetId
   end
   
@@ -257,8 +260,8 @@ package :Parts, 'Parts' do
   end
   
   type :PartArchetypeRef, 'A reference to the part archetype' do
-    attribute :'xlink:href', 'Reference to the file', :'xlink:href'
-    attribute(:'xlink:type', 'Type of href', :'xlink:type') { self.fixed = 'locator' }
+    attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
+    attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
     member :Value, 'The architype id', :AssetId
   end
   
@@ -353,8 +356,8 @@ package :Parts, 'Parts' do
     member :DeviceUuid, 'The unique identifier of the device this process was performed on', 0..1
     member :Location, 'The location of the part if not on the machine', 0..1, :PartLocation
     member :State, 'The process state', :ProcessEventState
-    member :RoutingId, 'The name of the routing'
-    member :StepId, 'The step this history is associated with', 0..1
+    member :RoutingId, 'The name of the routing', 0..1
+    member :StepId, 'The step this history is associated with'
     member :OperatorId, 'The identifier of the operator', 0..1
     member :ControlPrograms, 'The control programs used in this event', 0..1
     member :AssetRefs, 'The workholding identifier', 0..1
@@ -371,9 +374,28 @@ package :Parts, 'Parts' do
   type :ActivityEvent, 'An event associated with a ProcessStep Operaiton' do
     member :Timestamp, 'The timestamp'
     member :SequenceNumber, 'The  number indication the sequence of the operaton', 0..1
+    member :State, 'The process state', :ProcessEventState
     member :ActivityId, 'The activity id', 0..1
     member :Characteristics, 'The characteristics of this part', 0..1
     member :AssetRefs, 'The workholding identifier', 0..1
     member :Annotations, 'A set of annotations associated with the event', 0..1
   end
+  
+  # TODO: Access
+  # Travel with the part:
+  #  Collected once... analyzed.
+  #  Events as they happen...
+  #  Activity corelation – In the shop – nothing done.
+  #  How do we associate with the r/t streaming data?
+  #  Interoperability – can we use a standardized document structure?
+  #  
+  # Very little in the parts asset model that will directly apply to any machine tool
+  # The information will flow down to the machine ... work with the model. 
+  #
+  # Interface to the machine... 
+  #   Information Model to Define The Routing Planning
+  #   Instance as part is being processed
+  #   
+  # Protocol
+  #   Change protocol to be device specific
 end

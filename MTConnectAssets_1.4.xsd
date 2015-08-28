@@ -367,8 +367,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SINGLE_BLOCK'/>
       <xs:enumeration value='DRY_RUN'/>
       <xs:enumeration value='OPTIONAL_STOP'/>
-      <xs:enumeration value='MACHINE_LOCK'/>
-      <xs:enumeration value='BLOCK_NUMBER'/>
+      <xs:enumeration value='MACHINE_AXIS_LOCK'/>
+      <xs:enumeration value='TOOL_CHANGE_STOP'/>
+      <xs:enumeration value='LINE_NUMBER'/>
+      <xs:enumeration value='LINE_LABEL'/>
+      <xs:enumeration value='BLOCK_COUNT'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -425,6 +428,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TOOL'/>
       <xs:enumeration value='ABSOLUTE'/>
       <xs:enumeration value='RELATIVE'/>
+      <xs:enumeration value='TOOL_EDGE'/>
+      <xs:enumeration value='TOOL_GROUP'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -959,6 +964,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POT'/>
       <xs:enumeration value='STATION'/>
       <xs:enumeration value='CRIB'/>
+      <xs:enumeration value='STANDBY'/>
       <xs:enumeration value='SPINDLE'/>
       <xs:enumeration value='REJECT'/>
     </xs:restriction>
@@ -2156,6 +2162,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:IDREF'/>
   </xs:simpleType>
+  <xs:simpleType name='ComponentNameType'>
+    <xs:annotation>
+      <xs:documentation>
+        The name of a related component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:simpleType name='FilterValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -2743,8 +2757,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='AssetIdType'>
-        <xs:attribute ref='xlink:href' use='required'/>
-        <xs:attribute ref='xlink:type' use='required' fixed='locator'/>
+        <xs:attribute ref='xlink:href' use='optional'/>
+        <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
         <xs:attribute name='assetType' type='AssetAttrType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
@@ -2812,7 +2826,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:union memberTypes='ConstraintGroupEnumTypeEnum ConstraintGroupExtType'/>
   </xs:simpleType>
-  <xs:complexType name='ProcessConstraintGroupType' abstract='true'>
+  <xs:complexType name='ProcessConstraintGroupType'>
     <xs:annotation>
       <xs:documentation>
         The process data
@@ -2830,6 +2844,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='type' type='ConstraintGroupEnumType' use='required'/>
     <xs:attribute name='constraintGroupId' type='ConstraintGroupIdType' use='required'/>
     <xs:attribute name='sequence' type='SequenceNumberType' use='optional'/>
+    <xs:attribute name='componentName' type='ComponentNameType' use='optional'/>
+    <xs:attribute name='component' type='NameType' use='optional'/>
   </xs:complexType>
   <xs:simpleType name='PartDataItemTypes'>
     <xs:annotation>
@@ -2946,10 +2962,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SINGLE_BLOCK'/>
       <xs:enumeration value='DRY_RUN'/>
       <xs:enumeration value='OPTIONAL_STOP'/>
-      <xs:enumeration value='MACHINE_LOCK'/>
-      <xs:enumeration value='BLOCK_NUMBER'/>
+      <xs:enumeration value='MACHINE_AXIS_LOCK'/>
+      <xs:enumeration value='TOOL_CHANGE_STOP'/>
+      <xs:enumeration value='LINE_NUMBER'/>
+      <xs:enumeration value='LINE_LABEL'/>
+      <xs:enumeration value='BLOCK_COUNT'/>
       <xs:enumeration value='SETUP_TIME'/>
       <xs:enumeration value='TEARDOWN_TIME'/>
+      <xs:enumeration value='EXECUTION_TIME'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='DataItemConstraintType'>
@@ -3064,17 +3084,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='TargetIdRefs' type='TargetIdRefsType'>
+      <xs:element name='Description' type='StepDescriptionType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The locations or target devices
+            The description of the step
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetExecutionTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='TargetIdRefs' type='TargetIdRefsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The amount of time this part is supposed to take
+            The locations or target devices
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -3100,10 +3120,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='sequence' type='SequenceNumberType' use='optional'/>
+    <xs:attribute name='sequence' type='SequenceNumberType' use='required'/>
     <xs:attribute name='discretionary' type='DiscretionaryType' use='optional' default='NO'/>
     <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
-    <xs:attribute name='activityId' type='ActivityIdType' use='optional'/>
+    <xs:attribute name='activityId' type='ActivityIdType' use='required'/>
   </xs:complexType>
   <xs:complexType name='TargetsType'>
     <xs:annotation>
@@ -3266,8 +3286,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='AssetIdType'>
-        <xs:attribute ref='xlink:href' use='required'/>
-        <xs:attribute ref='xlink:type' use='required' fixed='locator'/>
+        <xs:attribute ref='xlink:href' use='optional'/>
+        <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -3424,8 +3444,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='AssetIdType'>
-        <xs:attribute ref='xlink:href' use='required'/>
-        <xs:attribute ref='xlink:type' use='required' fixed='locator'/>
+        <xs:attribute ref='xlink:href' use='optional'/>
+        <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -3754,8 +3774,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
     <xs:attribute name='state' type='ProcessEventStateType' use='required'/>
-    <xs:attribute name='routingId' type='RoutingIdType' use='required'/>
-    <xs:attribute name='stepId' type='StepIdType' use='optional'/>
+    <xs:attribute name='routingId' type='RoutingIdType' use='optional'/>
+    <xs:attribute name='stepId' type='StepIdType' use='required'/>
     <xs:attribute name='revisionId' type='RevisionIdType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='ActivityEventsType'>
@@ -3805,6 +3825,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
     <xs:attribute name='sequenceNumber' type='SequenceNumberType' use='optional'/>
+    <xs:attribute name='state' type='ProcessEventStateType' use='required'/>
     <xs:attribute name='activityId' type='ActivityIdType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='TransformationsType'>
@@ -4018,6 +4039,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='FileApplicationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The application of this file. Maybe we should use an enum?
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:complexType name='FileType'>
     <xs:annotation>
       <xs:documentation>
@@ -4034,21 +4063,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Location' type='FileLocationType'>
+          <xs:element name='Targets' type='TargetsType'>
             <xs:annotation>
               <xs:documentation>
-                The file location
+                The targets of this file
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Signature' type='SignatureType'>
-            <xs:annotation>
-              <xs:documentation>
-                The file&apos;s signature
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Versions' type='FileVersionsType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='FileVersions' type='FileVersionsType' minOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 The file version information
@@ -4056,10 +4078,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:annotation>
           </xs:element>
         </xs:sequence>
-        <xs:attribute name='versionId' type='VersionIdType' use='optional'/>
-        <xs:attribute name='type' type='FileMimeType' use='required'/>
-        <xs:attribute name='size' type='FileSizeType' use='required'/>
         <xs:attribute name='name' type='FileNameType' use='required'/>
+        <xs:attribute name='type' type='FileMimeType' use='required'/>
+        <xs:attribute name='applicationType' type='FileApplicationType' use='optional'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -4077,7 +4098,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Version' type='FileVersionType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='FileVersion' type='FileVersionType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             Version info
@@ -4101,10 +4122,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Location' type='FileLocationType'>
+      <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The file location
+            The description of the file (freeform)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='TargetIdRefs' type='TargetIdRefsType'>
+        <xs:annotation>
+          <xs:documentation>
+            The targets of this file
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -4115,7 +4143,29 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Location' type='FileLocationType'>
+        <xs:annotation>
+          <xs:documentation>
+            The file location
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Signature' type='SignatureType'>
+        <xs:annotation>
+          <xs:documentation>
+            The file&apos;s signature
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='FileProperties' type='FilePropertiesType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A set of file properties
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
+    <xs:attribute name='size' type='FileSizeType' use='required'/>
     <xs:attribute name='versionId' type='VersionIdType' use='required'/>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
   </xs:complexType>
@@ -4129,6 +4179,42 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='xs:string'>
         <xs:attribute ref='xlink:href' use='required'/>
         <xs:attribute ref='xlink:type' use='required' fixed='locator'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='FilePropertiesType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of associated properties
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='FileProperty' type='FilePropertyType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A file property
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='FilePropertyValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value of a file property
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='FilePropertyType'>
+    <xs:annotation>
+      <xs:documentation>
+        A property of a file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='FilePropertyValueType'>
+        <xs:attribute name='name' type='NameType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

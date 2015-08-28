@@ -64,6 +64,7 @@ package :Tools, 'Cutting tools' do
     value :POT, 'Pot location of tool'
     value :STATION, 'The station on a turning machine'
     value :CRIB, 'The crib location of the tool'
+    value :STANDBY, 'The tool is ready to be used'
     value :SPINDLE, 'The spindle the tool currently resides in'
     value :REJECT, 'The tool is in a reject pot location'
   end

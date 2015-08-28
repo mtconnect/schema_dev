@@ -69,7 +69,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :PATH_FEEDRATE, 'The feedrate for the path'
     value :PATH_POSITION, 'The three space position X, Y, Z'
     value :PATH_MODE, 'The mode of the path'
-    value :LINE, 'The line of the program being executed'
+    value :LINE, 'DEPRECATED 1.4: The line of the program being executed – often referred to as the N number'
     value :CONTROLLER_MODE, 'The CNC\'s mode'
     value :LOAD, 'The load on the component as a percentage of rated'
     value :MESSAGE, 'A uninterpreted message'
@@ -164,13 +164,18 @@ package :common, 'Common attributes and elements for all schemas' do
     value :MATERIAL_UNLOAD, 'Unload material into a device'
     
     # For 1.4
+    # Additional controller states
     value :TRANSFORMATION, 'A coordinate system transformation. References a transformation asset'
     value :SINGLE_BLOCK, 'Controller is single stepping through program'
     value :DRY_RUN, 'The controller is executing the program but suppressing motion'
     value :OPTIONAL_STOP, 'Indicator if the optional stop setting on the machine indicating if it is enabled'
-    value :MACHINE_LOCK, 'The controller is in the machine lock state'
+    value :MACHINE_AXIS_LOCK, 'The controller is in the machine axis lock state'
+    value :TOOL_CHANGE_STOP, 'The setting to disable the halting of the program when the tool needs to be changed'
     
-    value :BLOCK_NUMBER, 'The absolute or relative block number position in the program'
+    # Lines and block positions. LINE is now deprecated. Do we need a base #?
+    value :LINE_NUMBER, 'The absolute or relative block number position in the program. Relative is relative to a line label.'
+    value :LINE_LABEL, 'The label or N number of the position within the program'
+    value :BLOCK_COUNT, 'The number of blocks executed since the cycle start'    
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
@@ -228,8 +233,13 @@ package :common, 'Common attributes and elements for all schemas' do
     value :FIXTURE, 'Fixture coordinates are being transformed.'
     value :TOOL, 'Tool coordinates are being transformed.'
     
+    # For Block Number
     value :ABSOLUTE, 'The absolute physical position in the program '
     value :RELATIVE, 'The relative position in the program to the last line (N) number'
+    
+    # For tooling
+    value :TOOL_EDGE, 'The current tool edge or suffix – should map to cutting item index'
+    value :TOOL_GROUP, 'The current tool group being used'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
