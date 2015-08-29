@@ -1,6 +1,6 @@
 package :Transforms, 'Transforms for coordinates or dimensions' do
   
-  type :Transformations, 'A set of named transformations associated with a device', :Asset do
+  type :Transformations, 'A set of named transformations associated with a device', :AssetInstance do
     member :Transformation, 'A named transformation', 1..INF
   end
 

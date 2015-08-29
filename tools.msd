@@ -78,12 +78,10 @@ package :Tools, 'Cutting tools' do
   end       
   
   # Cutting tool definition
-  type :CuttingTool, 'A cutting tool', :Asset do
-    member :Description, 'The description of the asset (freeform)', 0..1, :AssetDescription
+  type :CuttingTool, 'A cutting tool', :AssetInstance do
     member :SerialNumber, 'The serial number of the asset'
     member :Manufacturers, 'The manufacturer of this asset', 0..1
     member :ToolId, 'The Identifier of the tool type'
-    member :CuttingToolArchetypeReference, 'The reference to the cutting tool archetype', 0..1
     
     at_least_one do 
       member :CuttingToolDefinition, 'DEPRECATED: Description of tool - now only in Archetype'
@@ -92,9 +90,8 @@ package :Tools, 'Cutting tools' do
   end
   
   # Archetype 
-  type :CuttingToolArchetype, 'A Archetypical cutting tool', :Asset do
+  type :CuttingToolArchetype, 'A Archetypical cutting tool', :AssetArchetype do
     member :ToolId, 'The Identifier of the tool type'
-    member :Description, 'The description of the asset (freeform)', 0..1, :AssetDescription
 
     at_least_one do 
       member :CuttingToolDefinition, 'Description of tool'

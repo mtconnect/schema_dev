@@ -9,37 +9,15 @@ package :Files, 'Files or Documents' do
   attr :FileName, 'The name of the file'
   attr :FileApplicationType, 'The application of this file. Maybe we should use an enum?'
   
-  type :File, 'Common information regarding a file', :Asset do
+  # Archetype
+  type :FileArchetype, 'Common information regarding a file', :AssetArchetype do
     member :Name, 'The file name', :FileName
     member :Type, 'The mime type of the file', :FileMimeType
     member :ApplicationType, 'The classification of this file', 0..1, :FileApplicationType
-    member :Description, 'The description of the file (freeform)', 0..1, :AssetDescription
-    member :Targets, 'The targets of this file'
-    member :FileVersions, 'The file version information', 1, :FileVersions
-  end
-  
-  type :FileVersions, 'File version information' do
-    member :FileVersion, 'Version info', 1..INF
-  end
-  
-  basic_type :FileComment, 'The log entry'
-  type :FileVersion, 'The file version info' do
-    member :Size, 'The size in bytes', :FileSize
-    member :VersionId, 'The version identifier'
-    member :Timestamp, 'The version timestamp'
-    member :Description, 'The description of the file (freeform)', 0..1, :AssetDescription
-    member :TargetIdRefs, 'The targets of this file'
-    member :Comment, 'The file comment', 0..1, :FileComment
-    member :Location, 'The file location', :FileLocation
-    member :Signature, 'The file\'s signature'  
     member :FileProperties, 'A set of file properties', 0..1
   end
   
-  type :FileLocation, 'XLink to file location' do
-    attribute :'xlink:href', 'Reference to the file', :'xlink:href'
-    attribute(:'xlink:type', 'Type of href', :'xlink:type') { self.fixed = 'locator' }
-  end
-  
+  # Common
   type :FileProperties, 'A set of associated properties' do
     member :FileProperty, 'A file property', 1..INF
   end
@@ -48,6 +26,29 @@ package :Files, 'Files or Documents' do
   type :FileProperty, 'A property of a file' do
     member :Name, 'The name of the property', :Name
     member :Value, 'Property value', :FilePropertyValue
+  end
+  
+  # File Instance
+  enum :FileState, 'File state' do
+    value :EXPERIMENTAL, 'exp file'
+    value :PRODUCTION, 'production file'
+  end
+  
+  basic_type :FileComment, 'The log entry'
+  type :File, 'The file version info', :AssetInstance do
+    member :Size, 'The size in bytes', :FileSize
+    member :VersionId, 'The version identifier'
+    member :Name, 'The file name', :FileName
+    member :State, 'The file state', 0..1, :FileState
+    member :TargetIdRefs, 'The targets of this file', 0..1
+    member :Location, 'The file location', :FileLocation
+    member :Signature, 'The file\'s signature'  
+    member :FileProperties, 'A set of file properties', 0..1
+  end
+  
+  type :FileLocation, 'XLink to file location' do
+    attribute :'xlink:href', 'Reference to the file', :'xlink:href'
+    attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
   end
   
 end

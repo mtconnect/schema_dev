@@ -25,8 +25,7 @@ package :Parts, 'Parts' do
   basic_type :CustomerName, 'A customer name'
   basic_type :CustomerAddress, 'A customer address'
       
-  type :PartArchetype, 'Common information regarding a part kind', :Asset do
-    member :Description, 'The description of the part (freeform)', 0..1, :AssetDescription
+  type :PartArchetype, 'Common information regarding a part kind', :AssetArchetype do
     member :FamilyId, 'A group this part belongs to', 0..1
     member :DrawingId, 'A drawing associated with this part', 0..1
     member :RevisionId, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
@@ -180,6 +179,7 @@ package :Parts, 'Parts' do
     member :Activities, 'Sub activities', 0..1
   end
   
+=begin
   type :Targets, 'A list of target devices or locations' do
     member :Target, 'Where this process step will be done', 1..INF
   end
@@ -206,7 +206,8 @@ package :Parts, 'Parts' do
       member :TargetDevice, 'The  deviceidentifier or description'
       member :TargetLocation, 'The location identifier or description'
     end
-  end  
+  end 
+=end
   
   attr :Restrictions, 'An indicator of the restriction on this program'
   attr :ProgramName, 'A program name'
@@ -250,9 +251,7 @@ package :Parts, 'Parts' do
   basic_type :PurchaseOrderId, 'A purchase order identifier'
   basic_type :InspectionId, 'The asset id of the inspection doc'
         
-  type :Part, 'A part or group of individual parts that are being from workpieces', :Asset do
-    member :Description, 'The description of the part (freeform)', 0..1, :AssetDescription
-    member :PartArchetypeRef, 'A reference to the archetype for this part', 0..1
+  type :Part, 'A part or group of individual parts that are being from workpieces', :AssetInstance do
     member :PartIdentifiers, 'The part identifiers'
     member :RevisionId, 'An identifier for the current revision of the part.'
     member :Workorder, 'A workorder for this part instance', 0..1

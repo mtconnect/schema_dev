@@ -715,6 +715,169 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='AssetInstanceType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract asset instance
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetType'>
+        <xs:sequence>
+          <xs:element name='ArchetypeRef' type='ArchetypeRefType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                A reference to the asset architype for instances
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The description of the file (freeform)
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Targets' type='TargetsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The targets for this asset
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element abstract='true' name='AssetInstance' type='AssetInstanceType' substitutionGroup='Asset'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract asset instance
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ArchetypeRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to the part archetype
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='AssetIdType'>
+        <xs:attribute ref='xlink:href' use='optional'/>
+        <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='AssetArchetypeType'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract asset archetype
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetType'>
+        <xs:sequence>
+          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The description of the file (freeform)
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Targets' type='TargetsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The targets for this asset
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='AssetArchetype' type='AssetArchetypeType' substitutionGroup='Asset'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract asset archetype
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='TargetsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A list of target devices or locations
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Target' type='TargetType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            Where this process step will be done
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='TargetTypeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The set of possible locations
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='EXTERNAL'/>
+      <xs:enumeration value='STOCK'/>
+      <xs:enumeration value='INVENTORY'/>
+      <xs:enumeration value='QUEUE'/>
+      <xs:enumeration value='DEVICE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='TargetDeviceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The target value. For a device it is the UUID, for a location it is a
+        description or UUID
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='TargetLocationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The target value. For a device it is the UUID, for a location it is a
+        description or UUID
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='TargetType'>
+    <xs:annotation>
+      <xs:documentation>
+        The device or location something can be done at
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs='1'>
+      <xs:element name='TargetDevice' type='TargetDeviceType'>
+        <xs:annotation>
+          <xs:documentation>
+            The deviceidentifier or description
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='TargetLocation' type='TargetLocationType'>
+        <xs:annotation>
+          <xs:documentation>
+            The location identifier or description
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+    <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
+    <xs:attribute name='targetId' type='TargetIdType' use='required'/>
+    <xs:attribute name='name' type='NameType' use='optional'/>
+    <xs:attribute name='type' type='TargetTypeValueType' use='required'/>
+  </xs:complexType>
   <xs:simpleType name='LocationValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -993,22 +1156,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AssetType'>
+      <xs:extension base='AssetInstanceType'>
         <xs:sequence>
-          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The description of the asset (freeform)
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='CuttingToolArchetypeReference' type='CuttingToolArchetypeReferenceType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The reference to the cutting tool archetype
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
           <xs:choice minOccurs='1'>
             <xs:sequence minOccurs='1'>
               <xs:element name='CuttingToolDefinition' type='CuttingToolDefinitionType'>
@@ -1041,7 +1190,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='CuttingTool' type='CuttingToolType' substitutionGroup='Asset'>
+  <xs:element name='CuttingTool' type='CuttingToolType' substitutionGroup='AssetInstance'>
     <xs:annotation>
       <xs:documentation>
         A cutting tool
@@ -1055,15 +1204,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AssetType'>
+      <xs:extension base='AssetArchetypeType'>
         <xs:sequence>
-          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The description of the asset (freeform)
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
           <xs:choice minOccurs='1'>
             <xs:sequence minOccurs='1'>
               <xs:element name='CuttingToolDefinition' type='CuttingToolDefinitionType'>
@@ -1094,7 +1236,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='CuttingToolArchetype' type='CuttingToolArchetypeType' substitutionGroup='Asset'>
+  <xs:element name='CuttingToolArchetype' type='CuttingToolArchetypeType' substitutionGroup='AssetArchetype'>
     <xs:annotation>
       <xs:documentation>
         A Archetypical cutting tool
@@ -2478,15 +2620,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AssetType'>
+      <xs:extension base='AssetArchetypeType'>
         <xs:sequence>
-          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The description of the part (freeform)
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
           <xs:element name='Characteristics' type='CharacteristicsType'>
             <xs:annotation>
               <xs:documentation>
@@ -2508,7 +2643,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='PartArchetype' type='PartArchetypeType' substitutionGroup='Asset'>
+  <xs:element name='PartArchetype' type='PartArchetypeType' substitutionGroup='AssetArchetype'>
     <xs:annotation>
       <xs:documentation>
         Common information regarding a part kind
@@ -3104,103 +3239,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
     <xs:attribute name='activityId' type='ActivityIdType' use='required'/>
   </xs:complexType>
-  <xs:complexType name='TargetsType'>
-    <xs:annotation>
-      <xs:documentation>
-        A list of target devices or locations
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Target' type='TargetType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            Where this process step will be done
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:simpleType name='TargetTypeValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The set of possible locations
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='EXTERNAL'/>
-      <xs:enumeration value='STOCK'/>
-      <xs:enumeration value='INVENTORY'/>
-      <xs:enumeration value='QUEUE'/>
-      <xs:enumeration value='DEVICE'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='TargetDeviceType'>
-    <xs:annotation>
-      <xs:documentation>
-        The target value. For a device it is the UUID, for a location it is a
-        description or UUID
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:simpleType name='TargetLocationType'>
-    <xs:annotation>
-      <xs:documentation>
-        The target value. For a device it is the UUID, for a location it is a
-        description or UUID
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:complexType name='TargetType'>
-    <xs:annotation>
-      <xs:documentation>
-        The device or location something can be done at
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='TargetExecutionTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The amount of time this part is supposed to take
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='TargetSetupTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The amount of time this part is supposed to take
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='TargetTeardownTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The amount of time this part is supposed to take
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:choice minOccurs='1'>
-        <xs:element name='TargetDevice' type='TargetDeviceType'>
-          <xs:annotation>
-            <xs:documentation>
-              The deviceidentifier or description
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element name='TargetLocation' type='TargetLocationType'>
-          <xs:annotation>
-            <xs:documentation>
-              The location identifier or description
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-      </xs:choice>
-    </xs:sequence>
-    <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
-    <xs:attribute name='targetId' type='TargetIdType' use='required'/>
-    <xs:attribute name='type' type='TargetTypeValueType' use='required'/>
-  </xs:complexType>
   <xs:simpleType name='RestrictionsType'>
     <xs:annotation>
       <xs:documentation>
@@ -3366,22 +3404,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AssetType'>
+      <xs:extension base='AssetInstanceType'>
         <xs:sequence>
-          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The description of the part (freeform)
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='PartArchetypeRef' type='PartArchetypeRefType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                A reference to the archetype for this part
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
           <xs:element name='PartIdentifiers' type='PartIdentifiersType'>
             <xs:annotation>
               <xs:documentation>
@@ -3408,7 +3432,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Part' type='PartType' substitutionGroup='Asset'>
+  <xs:element name='Part' type='PartType' substitutionGroup='AssetInstance'>
     <xs:annotation>
       <xs:documentation>
         A part or group of individual parts that are being from workpieces
@@ -3814,7 +3838,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AssetType'>
+      <xs:extension base='AssetInstanceType'>
         <xs:sequence>
           <xs:element name='Transformation' type='TransformationType' minOccurs='1' maxOccurs='unbounded'>
             <xs:annotation>
@@ -3827,7 +3851,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Transformations' type='TransformationsType' substitutionGroup='Asset'>
+  <xs:element name='Transformations' type='TransformationsType' substitutionGroup='AssetInstance'>
     <xs:annotation>
       <xs:documentation>
         A set of named transformations associated with a device
@@ -3935,7 +3959,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AssetType'>
+      <xs:extension base='AssetArchetypeType'>
         <xs:sequence>
           <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
             <xs:annotation>
@@ -3949,7 +3973,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='InspectionArchetype' type='InspectionArchetypeType' substitutionGroup='Asset'>
+  <xs:element name='InspectionArchetype' type='InspectionArchetypeType' substitutionGroup='AssetArchetype'>
     <xs:annotation>
       <xs:documentation>
         Inspection Asset containing QIF or other standards for inspection plan
@@ -3964,7 +3988,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AssetType'>
+      <xs:extension base='AssetInstanceType'>
         <xs:sequence>
           <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
             <xs:annotation>
@@ -3978,7 +4002,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Inspection' type='InspectionType' substitutionGroup='Asset'>
+  <xs:element name='Inspection' type='InspectionType' substitutionGroup='AssetInstance'>
     <xs:annotation>
       <xs:documentation>
         Inspection Asset containing QIF or other standards for inspection
@@ -4026,33 +4050,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:complexType name='FileType'>
+  <xs:complexType name='FileArchetypeType'>
     <xs:annotation>
       <xs:documentation>
         Common information regarding a file
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AssetType'>
+      <xs:extension base='AssetArchetypeType'>
         <xs:sequence>
-          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='FileProperties' type='FilePropertiesType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The description of the file (freeform)
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Targets' type='TargetsType'>
-            <xs:annotation>
-              <xs:documentation>
-                The targets of this file
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='FileVersions' type='FileVersionsType' minOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The file version information
+                A set of file properties
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -4063,104 +4073,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='File' type='FileType' substitutionGroup='Asset'>
+  <xs:element name='FileArchetype' type='FileArchetypeType' substitutionGroup='AssetArchetype'>
     <xs:annotation>
       <xs:documentation>
         Common information regarding a file
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='FileVersionsType'>
-    <xs:annotation>
-      <xs:documentation>
-        File version information
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='FileVersion' type='FileVersionType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            Version info
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:simpleType name='FileCommentType'>
-    <xs:annotation>
-      <xs:documentation>
-        The log entry
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:complexType name='FileVersionType'>
-    <xs:annotation>
-      <xs:documentation>
-        The file version info
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The description of the file (freeform)
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='TargetIdRefs' type='TargetIdRefsType'>
-        <xs:annotation>
-          <xs:documentation>
-            The targets of this file
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Comment' type='FileCommentType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The file comment
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Location' type='FileLocationType'>
-        <xs:annotation>
-          <xs:documentation>
-            The file location
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Signature' type='SignatureType'>
-        <xs:annotation>
-          <xs:documentation>
-            The file&apos;s signature
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='FileProperties' type='FilePropertiesType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A set of file properties
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-    <xs:attribute name='size' type='FileSizeType' use='required'/>
-    <xs:attribute name='versionId' type='VersionIdType' use='required'/>
-    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
-  </xs:complexType>
-  <xs:complexType name='FileLocationType'>
-    <xs:annotation>
-      <xs:documentation>
-        XLink to file location
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='xs:string'>
-        <xs:attribute ref='xlink:href' use='required'/>
-        <xs:attribute ref='xlink:type' use='required' fixed='locator'/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
   <xs:complexType name='FilePropertiesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4194,6 +4113,90 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='FilePropertyValueType'>
         <xs:attribute name='name' type='NameType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name='FileStateType'>
+    <xs:annotation>
+      <xs:documentation>
+        File state
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='EXPERIMENTAL'/>
+      <xs:enumeration value='PRODUCTION'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='FileCommentType'>
+    <xs:annotation>
+      <xs:documentation>
+        The log entry
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='FileType'>
+    <xs:annotation>
+      <xs:documentation>
+        The file version info
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetInstanceType'>
+        <xs:sequence>
+          <xs:element name='TargetIdRefs' type='TargetIdRefsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The targets of this file
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Location' type='FileLocationType'>
+            <xs:annotation>
+              <xs:documentation>
+                The file location
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Signature' type='SignatureType'>
+            <xs:annotation>
+              <xs:documentation>
+                The file&apos;s signature
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='FileProperties' type='FilePropertiesType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                A set of file properties
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name='size' type='FileSizeType' use='required'/>
+        <xs:attribute name='versionId' type='VersionIdType' use='required'/>
+        <xs:attribute name='name' type='FileNameType' use='required'/>
+        <xs:attribute name='state' type='FileStateType' use='optional'/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='File' type='FileType' substitutionGroup='AssetInstance'>
+    <xs:annotation>
+      <xs:documentation>
+        The file version info
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FileLocationType'>
+    <xs:annotation>
+      <xs:documentation>
+        XLink to file location
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute ref='xlink:href' use='required'/>
+        <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
