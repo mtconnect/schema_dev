@@ -245,15 +245,13 @@ class Schema
   end
 
   class Element < Type
-    attr_reader :members, :parent
+    attr_reader :members, :parent, :polymorphic
     attr_accessor :force_element
 
     def initialize(schema, name, annotation, parent = nil, &block)
       super(schema, name, annotation, parent)
       @name, @annotation, @parent = name, annotation, parent
-      @abstract = false
-      @mixed = false
-      @force_element = false
+      @polymorphic = @mixed = @force_element = @abstract = false
       @members = []
       @children = []
       @schema.derived << @parent if @parent and @parent != :abstract
@@ -263,9 +261,14 @@ class Schema
     def to_s
       "Element: #{@name}:#{@parent} #{@annotation}"
     end
+    
+    def polymorphic
+      @polymorphic = true
+    end
 
     def abstract
       @abstract = true
+      @polymorphic = true
     end
     
     def mixed
@@ -274,6 +277,10 @@ class Schema
 
     def abstract?
       @abstract
+    end
+    
+    def polymorphic?
+      @polymorphic
     end
     
     def mixed?
@@ -303,6 +310,15 @@ class Schema
         pnt = pnt.resolve_parent
       end
       false
+    end
+    
+    def polymorphic_parent?
+      pnt = resolve_parent
+      while pnt
+        return true if pnt.polymorphic?
+        pnt = pnt.resolve_parent
+      end
+      false      
     end
 
     def member(name, annotation, occurrence = nil, type = nil, &block)
@@ -391,6 +407,9 @@ class Schema
         end
         @schema.type(@parent).add_child(self)
       end
+    rescue
+      puts "Could not add child to '#{@parent.inspect}' for '#{self.name}' "
+      raise
     end
     
     def resolve
@@ -455,10 +474,10 @@ class Schema
     def attribute=(a)
       @attribute = a
     end
-
-    def references_abstract?
+    
+    def references_polymorphic?
       type = resolve_type
-      type and type.is_a? Element and type.abstract? and (type.subtype? or type.has_subtypes?)
+      type and type.is_a? Element and type.polymorphic? and (type.subtype? or type.has_subtypes?)
     end
     
     def resolve

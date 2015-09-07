@@ -3,7 +3,7 @@ package :Assets, 'Mobile Assets' do
   attr :Source, 'A URI reference', :anyURI
   attr :Removed, 'A flag indicating the item has been removed', :boolean
   
-  type :AssetDescription, 'The description of an asset, can be freeform text or elemenrts' do
+  type :AssetDescription, 'The description of an asset, can be free form text or elements' do
     mixed
     member :any, 'Any elements', 0..INF
   end  
@@ -56,8 +56,7 @@ package :Assets, 'Mobile Assets' do
   basic_type :TargetDevice, 'The target value. For a device it is the UUID, for a location it is a description or UUID'
   basic_type :TargetLocation, 'The target value. For a device it is the UUID, for a location it is a description or UUID'
   
-  type :Target, 'The device or location something can be done at' do
-    member :Precedence, 'The precedence of this activity if multiple activities have the same sequence', 0..1
+  type :Target, 'The device or location something can be done at' do    
     member :TargetId, 'The identifier of this target', 1
     member :Name, 'The identifier of this target', 0..1
     member :Type, 'The type of the target', :TargetTypeValue

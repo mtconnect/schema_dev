@@ -1,4 +1,3 @@
-load 'data_items.msd'
 
 # coding: utf-8
 package :Parts, 'Parts' do
@@ -40,6 +39,10 @@ package :Parts, 'Parts' do
   type :Characteristics, 'Characteristics of a part archetype' do
     member :RawMaterial, 'Raw material'
     member :Customers, 'A customer identifier.  The combination of a Part ID and Customer ID can reference a customer Part Number', 0..1
+    member :any, 'Any additional properties', 0..INF do
+      self.notNamespace = "##targetNamespace"
+      self.processContents = 'strict'
+    end
   end
   
   attr :Standard, 'The hardness convention'
@@ -89,7 +92,7 @@ package :Parts, 'Parts' do
     
   type :Routing, 'A collection of process steps' do
     member :Precedence, 'The priority of this routing', 0..1
-    member :RoutingId, 'The identifier of this routing', 0..1
+    member :RoutingId, 'The identifier of this routing'
     member :ProcessStep, 'A process step', 1..INF
   end
   
@@ -153,14 +156,31 @@ package :Parts, 'Parts' do
     member :StepId, 'The identifier of this step'
     member(:Discretionary, 'This process step is discretionary', 0..1) { self.default = 'NO' }
     member :Description, 'The description of the step', 0..1, :StepDescription
-    member :Targets, 'The locations or target devices'
+    member :Prerequisites, 'A required set of steps for this step to begin', 0..1
+    member :TargetIdRefs, 'The locations or target devices', 0..1
     member :ControlPrograms, 'The names of the programs that are required for this step', 0..1
     member :Activities, 'A collection activites', 0..1
     member :ProcessConstraints, 'The process constraints', 0..1
     member :AssetArchetypeRefs, 'A collection of assets used in this process step', 0..1
   end
   
+  type :Prerequisites, 'A list of required steps for this step to begin' do
+    member :Prerequisite, 'A reference to a previous step', 1..INF
+  end
+  
+  type :Prerequisite, 'A reference to a previous process step. TODO: do we need to consider routing?' do
+    member :RoutingId, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing', 0..1
+    member :Value, 'A reference to the previous process step identifier', :StepId
+  end
+  
   type :Activities, 'A collection of activities' do
+    member :ActivityGroup, 'A process activity', 1..INF
+  end
+  
+  attr :ActivityGroupName, 'Activity group name'
+  type :ActivityGroup, 'A collection of activities' do
+    member :Name, 'The activity group name', 0..1, :ActivityGroupName
+    member :TargetId, 'The target for this activity', 0..1
     member :Activity, 'A process activity', 1..INF
   end
   
@@ -173,41 +193,13 @@ package :Parts, 'Parts' do
     member :Precedence, 'The precedence of this activity if multiple activities have the same sequence', 0..1
     member :ActivityId, 'The activity id'
     member :Description, 'The description of the step', 0..1, :StepDescription
-    member :TargetIdRefs, 'The locations or target devices', 0..1
     member :ProcessConstraints, 'The process constraints', 0..1
     member :AssetArchetypeRefs, 'Assets that are used in this activity', 0..1
     member :Activities, 'Sub activities', 0..1
   end
-  
-=begin
-  type :Targets, 'A list of target devices or locations' do
-    member :Target, 'Where this process step will be done', 1..INF
-  end
-  
-  enum :TargetTypeValue, 'The set of possible locations' do
-    value :EXTERNAL, 'The step will be performed outside this facility'
-    value :STOCK, 'The step will involve only manipulation of raw material'
-    value :INVENTORY, 'The part or material will be placed in storage'
-    value :QUEUE, 'The part or material will be placed in a queue'
-    value :DEVICE, 'The target is a device'
-  end
-  
-  basic_type :TargetDevice, 'The target value. For a device it is the UUID, for a location it is a description or UUID'
-  basic_type :TargetLocation, 'The target value. For a device it is the UUID, for a location it is a description or UUID'
-  
-  type :Target, 'The device or location something can be done at' do
-    member :Precedence, 'The precedence of this activity if multiple activities have the same sequence', 0..1
-    member :TargetId, 'The identifier of this target', 1
-    member :Type, 'The type of the target', :TargetTypeValue
-    member :TargetExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-    member :TargetSetupTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-    member :TargetTeardownTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-    choice do
-      member :TargetDevice, 'The  deviceidentifier or description'
-      member :TargetLocation, 'The location identifier or description'
-    end
+    
+  type :ProcessTarget, 'The device or location something can be done at', :Target do
   end 
-=end
   
   attr :Restrictions, 'An indicator of the restriction on this program'
   attr :ProgramName, 'A program name'
@@ -217,8 +209,17 @@ package :Parts, 'Parts' do
     member :ControlProgram, 'A program', 1..INF
   end
   
+  type :TargetIdRef, "A reference to a target id" do
+    member :Precedence, 'The precedence of this activity if multiple activities have the same sequence', 0..1
+    member :TargetExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
+    member :TargetSetupTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
+    member :TargetTeardownTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
+    member :TargetId, "The target id reference", 1..INF
+  end
+    
+  
   type :TargetIdRefs, "The targets this activity is valid for" do
-    element :TargetIdRef, "The target id reference", 1..INF, :TargetId
+    element :TargetIdRef, "The target id reference", 1..INF
   end
   
   type :FileAssetRef, 'A reference to the asset file' do
@@ -247,7 +248,7 @@ package :Parts, 'Parts' do
 
   attr :WorkorderId, 'The identifier of this workorder'
   attr :SubCountLabel, 'The label of a sub count', :NMTOKEN
-  basic_type :PartCount, 'The number of parts in this workorder', :integer
+  basic_type :TotalPartCount, 'The number of parts in this workorder', :integer
   basic_type :PurchaseOrderId, 'A purchase order identifier'
   basic_type :InspectionId, 'The asset id of the inspection doc'
         
@@ -303,7 +304,7 @@ package :Parts, 'Parts' do
   type :Workorder, 'A workorder for the part' do
     member :WorkorderId, 'The workorder id'
     member :Customer, 'The customer for this part', 0..1
-    member :TotalCount, 'The total number of parts in this work order', 0..1, :PartCount
+    member :TotalCount, 'The total number of parts in this work order', 0..1, :TotalPartCount
     member :SubCounts, 'A collection of sub-counts', 0..1
     member :ExternalPurchaseOrderId, 'An identifier of the purchase order', 0..1, :PurchaseOrderId
   end
@@ -314,11 +315,10 @@ package :Parts, 'Parts' do
   
   type :SubCount, 'A sub count' do
     member :Label, 'A subcount label', :SubCountLabel
-    member :Value, 'A count for this group', :PartCount
+    member :Value, 'A count for this group', :TotalPartCount
   end
   
-  basic_type :OperatorId, 'An operator Id'
-  basic_type :PalletId, 'The pallet used in this process'
+  basic_type :PartOperatorId, 'An operator Id'
   basic_type :PartLocation, 'The location of the part if not on the machine'
   
   enum :ProcessEventState, 'The state of the process' do
@@ -338,16 +338,9 @@ package :Parts, 'Parts' do
     member :Value, 'The uuid', :Uuid
   end
   
-  basic_type :Yield, 'The yield of the process', :integer
-  basic_type :AnnotationValue, 'An annotation', :string
-
-  type :Annotations, 'A set of annotations' do
-    member :Annotation, 'An annotation', 1..INF
-  end
-
-  type :Annotation, 'An annotation' do
+  type :ProcessData, 'Process data collected for a process step or an activity' do
     member :Timestamp, 'The time the annotation was recorded', 0..1, :Timestamp
-    member :Value, 'The annotation', :AnnotationValue
+    member :Result, 'The recorded value'
   end
 
   type :ProcessEvent, 'This history of this part' do
@@ -357,13 +350,12 @@ package :Parts, 'Parts' do
     member :State, 'The process state', :ProcessEventState
     member :RoutingId, 'The name of the routing', 0..1
     member :StepId, 'The step this history is associated with'
-    member :OperatorId, 'The identifier of the operator', 0..1
+    member :OperatorId, 'The identifier of the operator', 0..1, :PartOperatorId
     member :ControlPrograms, 'The control programs used in this event', 0..1
     member :AssetRefs, 'The workholding identifier', 0..1
     member :RevisionId, 'The revision of the process used', 0..1
-    member :Yield, 'The process yield', 0..1
     member :ActivityEvents, 'A set of activities associated with the process event', 0..1
-    member :Annotations, 'A set of annotations associated with the event', 0..1
+    member :ProcessData, 'A set of annotations associated with the event', 0..1
   end
   
   type :ActivityEvents, 'Activity events' do
@@ -375,9 +367,8 @@ package :Parts, 'Parts' do
     member :SequenceNumber, 'The  number indication the sequence of the operaton', 0..1
     member :State, 'The process state', :ProcessEventState
     member :ActivityId, 'The activity id', 0..1
-    member :Characteristics, 'The characteristics of this part', 0..1
     member :AssetRefs, 'The workholding identifier', 0..1
-    member :Annotations, 'A set of annotations associated with the event', 0..1
+    member :ProcessData, 'A set of annotations associated with the event', 0..1
   end
   
   # TODO: Access

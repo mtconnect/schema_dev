@@ -13,7 +13,7 @@ package :Component, 'Top Level Components Package' do
     member :id, 'The data item identifier', :ID
     member :NativeName, 'The device manufacturer component name', 0..1, :Name
     member :SampleInterval, 'The rate at which the data is sampled from the component', 0..1
-    member :SampleRate, 'DEPRECATED: The rate at which the data is sampled from the component', 0..1
+    member :SampleRate, 'DEPRECATED: The rate at which the data is sampled from the component', 0..1, :DataItemSampleRate
     member :Description, 'The descriptive information about this component', 0..1, :ComponentDescription
     member :Configuration, 'The configuration information about this component', 0..1, :ComponentConfiguration
     member :DataItems, 'The component\'s Data Items', 0..1

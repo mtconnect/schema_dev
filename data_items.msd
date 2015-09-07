@@ -1,7 +1,7 @@
 
 package :DataItems, 'Data Items Package' do
   attr :SampleInterval, 'The interval between adjacent sampleing of data', :float
-  attr :SampleRate, 'The frequency a measurement is sampled', :float
+  attr :DataItemSampleRate, 'The frequency a measurement is sampled', :float
   attr :DataItemOption, 'The constrained value for this data item'
   attr :DataItemValue, 'The constrained value for this data item'
   attr :SourceComponentId, 'An idref to the component id', :IDREF
@@ -47,7 +47,7 @@ package :DataItems, 'Data Items Package' do
     member :Category, 'The category of the data item'
     member :Source, 'Additional information about the component, channel, register, etc... that collects the data.', 0..1, :DataItemSource
     member :CoordinateSystem, 'The coordinate system used for the positions', 0..1
-    member :SampleRate, 'Used as the default sample rate for waveforms', 0..1
+    member :SampleRate, 'Used as the default sample rate for waveforms', 0..1, :DataItemSampleRate
     member(:Representation, 'The data item\'s representation', 0..1) { self.default = :VALUE } 
     member :SignificantDigits, 'The number of significant digits for this data item', 0..1, :SignificantDigitsValue
     member :Constraints, 'Limits on the set of possible values', 0..1, :DataItemConstraints

@@ -40,7 +40,6 @@ package :Files, 'Files or Documents' do
     member :VersionId, 'The version identifier'
     member :Name, 'The file name', :FileName
     member :State, 'The file state', 0..1, :FileState
-    member :TargetIdRefs, 'The targets of this file', 0..1
     member :Location, 'The file location', :FileLocation
     member :Signature, 'The file\'s signature'  
     member :FileProperties, 'A set of file properties', 0..1

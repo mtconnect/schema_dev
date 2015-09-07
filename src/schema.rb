@@ -130,7 +130,7 @@ class Schema
     def simple?
       value = @members.find { |m| m.is_value? }
       return true if value
-      return true if @parent.nil? and !abstract?
+      return true if @parent.nil? and !polymorphic?
       return resolve_parent.simple? if @parent
       false
     end
@@ -291,6 +291,10 @@ class Schema
       (extension || complex_type) << sequence
 
       complex_type
+      
+    rescue
+      puts "Error when generating schema for #{@name}: #{$!}"
+      raise
     end
 
     def add_attributes
@@ -321,7 +325,7 @@ class Schema
       # substitution group will allow one level of subclassing below
       # the abstract level. This may need to be extended later.
       element = create_element
-      if subtype? and abstract_parent?
+      if subtype? and polymorphic_parent?
         name = @parent
         par = @schema.type(@parent)
         name = "#{par.imported.namespace}:#{name}" if par.imported
@@ -352,7 +356,8 @@ class Schema
 
       # Check for abstract superclasses with derrived children or children
       # with abstract parents.
-      if abstract_parent? or (abstract? and has_subtypes?)
+      # puts "#{name} is polymorphic" if polymorphic?
+      if polymorphic_parent? or (polymorphic? and has_subtypes?)
         elements << create_substitution_group
       end
                   
@@ -482,7 +487,7 @@ class Schema
         # has subclasses, we will need to create substitution groups
         # so add a reference instead of a name and type.
         type = resolve_type
-        if references_abstract?
+        if references_polymorphic?
           element.add_attribute('ref', type.name.to_s)
         elsif @name.to_s.include?(':')
           element.add_attribute('ref', @name.to_s)

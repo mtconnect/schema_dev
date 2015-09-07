@@ -25,8 +25,13 @@ package :MTC, 'MTC Top Level Package' do
 end
 
 load 'assets.msd'
+load 'data_items.msd'
+load 'streams.msd'
+load 'events.msd'
+load 'samples.msd'
+load 'condition.msd'
+
 load 'tools.msd'
 load 'parts.msd'
-load 'transforms.msd'
 load 'inspection.msd'
 load 'files.msd'

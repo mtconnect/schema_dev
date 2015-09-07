@@ -785,7 +785,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='id' type='IDType' use='required'/>
     <xs:attribute name='nativeName' type='NameType' use='optional'/>
     <xs:attribute name='sampleInterval' type='SampleIntervalType' use='optional'/>
-    <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
+    <xs:attribute name='sampleRate' type='DataItemSampleRateType' use='optional'/>
   </xs:complexType>
   <xs:element abstract='true' name='Component' type='ComponentType'>
     <xs:annotation>
@@ -1442,7 +1442,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:simpleType name='SampleRateType'>
+  <xs:simpleType name='DataItemSampleRateType'>
     <xs:annotation>
       <xs:documentation>
         The frequency a measurement is sampled
@@ -1589,7 +1589,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='nativeScale' type='NativeScaleType' use='optional'/>
     <xs:attribute name='category' type='CategoryType' use='required'/>
     <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'/>
-    <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
+    <xs:attribute name='sampleRate' type='DataItemSampleRateType' use='optional'/>
     <xs:attribute name='representation' type='RepresentationType' use='optional' default='VALUE'/>
     <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'/>
   </xs:complexType>

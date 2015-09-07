@@ -8,7 +8,7 @@ package :Tools, 'Cutting tools' do
   basic_type :ProgramToolGroup, 'The tool group associated with the tool'
   
   attr :LocationSize, 'The number of location units required to hold this tool', :integer
-  attr :ToolId, 'The identifier of the tool type', :NMTOKEN
+  attr :CuttingToolId, 'The identifier of the tool type', :NMTOKEN
   attr :EdgeCount, 'The number of cutting edges', :integer
   attr :Overlap, 'The number of additional locations taken by a tool', :integer
   attr :ToolLifeValue, 'The life of the tool in time, wear, or parts', :float
@@ -21,7 +21,7 @@ package :Tools, 'Cutting tools' do
   attr :Speed, 'A speed in RPM or mm/s', :float
   attr :Grade, 'The material for a cutting item'
   attr :MaximumCount, 'A maximum count value', :integer
-  attr :Code, 'A application specific code'
+  attr :MeasurementCode, 'An application specific code'
   attr :Manufacturers, 'A comman delimited list of manufactures'
   attr :TurretLocation, 'The turret for a lathe or machine tool'
     
@@ -81,7 +81,7 @@ package :Tools, 'Cutting tools' do
   type :CuttingTool, 'A cutting tool', :AssetInstance do
     member :SerialNumber, 'The serial number of the asset'
     member :Manufacturers, 'The manufacturer of this asset', 0..1
-    member :ToolId, 'The Identifier of the tool type'
+    member :CuttingToolId, 'The Identifier of the tool type'
     
     at_least_one do 
       member :CuttingToolDefinition, 'DEPRECATED: Description of tool - now only in Archetype'
@@ -91,7 +91,7 @@ package :Tools, 'Cutting tools' do
   
   # Archetype 
   type :CuttingToolArchetype, 'A Archetypical cutting tool', :AssetArchetype do
-    member :ToolId, 'The Identifier of the tool type'
+    member :CuttingToolId, 'The Identifier of the tool type'
 
     at_least_one do 
       member :CuttingToolDefinition, 'Description of tool'
@@ -188,7 +188,7 @@ package :Tools, 'Cutting tools' do
     member :SignificantDigits, "The number of significant digits", 0..1, :SignificantDigitsValue
     member :Units, 'The units for the measurement. This will be defined by MTConnect', 0..1
     member :NativeUnits, 'The native units for the measurement, if different from units', 0..1
-    member :Code, 'The shop or application specific code for this measurement', 0..1
+    member :Code, 'The shop or application specific code for this measurement', 0..1, :MeasurementCode
     member :Maximum, 'The maximum tolerance value', 0..1, :MeasurementValue
     member :Minimum, 'The minimum tolerance value', 0..1, :MeasurementValue
     member :Nominal, 'The nominal value', 0..1, :MeasurementValue
