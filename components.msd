@@ -74,16 +74,17 @@ package :Component, 'Top Level Components Package' do
     member :Description, 'The descriptive information about this sub element', 0..1, :ComponentDescription
   end
   
-  type :SubElementInst, 'A filter', :SubElement
+  type :SubElementInst, 'A sub element instance', :SubElement
+  type :Filter, 'A sub element instance', :SubElement
+  type :Pump, 'A sub element instance', :SubElement
+  type :Amplifier, 'A sub element instance', :SubElement
+  type :Motor, 'A sub element instance', :SubElement
   
   type :SubElements, "A collection of sub elements" do
     choice 1..INF do
-      member :Filter, 'A filter', :SubElementInst
-      member :Door, 'A filter', :SubElementInst
-      member :Pump, 'A filter', :SubElementInst
-      member :Actuator, 'A filter', :SubElementInst
-      member :Motor, 'A filter', :SubElementInst
-      member :SubElement, 'Subelements', 1..INF
+      member :Actuator, 'An actuator sub element', :SubElementInst
+      member :Door, 'A door subelement', :SubElementInst
+      member :SubElement, 'Sub elements', 1..INF
     end
   end
 end

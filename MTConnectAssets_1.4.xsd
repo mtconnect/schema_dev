@@ -973,7 +973,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DISCRETE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='FilterType'>
+  <xs:simpleType name='DataItemFilterEnumType'>
     <xs:annotation>
       <xs:documentation>
         The type of filter
@@ -1106,10 +1106,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='FilterValueType'>
-        <xs:attribute name='type' type='FilterType' use='required'/>
+        <xs:attribute name='type' type='DataItemFilterEnumType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:simpleType name='SubElementIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The subelement this data item is associated with
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:ID'/>
+  </xs:simpleType>
   <xs:complexType name='DataItemSourceType'>
     <xs:annotation>
       <xs:documentation>
@@ -1120,6 +1128,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ItemSourceType'>
         <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
         <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
+        <xs:attribute name='subElementId' type='SubElementIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1135,6 +1144,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The item&apos;s unique ID that references the data item id from probe
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='SubElementIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The item&apos;s unique ID that references the sub element id from probe
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
@@ -1259,6 +1276,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
+        <xs:attribute name='subElementId' type='SubElementIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -4531,6 +4549,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
+        <xs:attribute name='subElementId' type='SubElementIdType' use='optional'/>
         <xs:attribute name='type' type='DataItemEnumType' use='required'/>
         <xs:attribute name='nativeCode' type='NativeCodeType' use='optional'/>
         <xs:attribute name='nativeSeverity' type='NativeSeverityType' use='optional'/>

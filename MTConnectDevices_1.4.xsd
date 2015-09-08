@@ -1021,7 +1021,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SubElementInstType'>
     <xs:annotation>
       <xs:documentation>
-        A filter
+        A sub element instance
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1031,7 +1031,75 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='SubElementInst' type='SubElementInstType' substitutionGroup='SubElement'>
     <xs:annotation>
       <xs:documentation>
-        A filter
+        A sub element instance
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FilterType'>
+    <xs:annotation>
+      <xs:documentation>
+        A sub element instance
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SubElementType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Filter' type='FilterType' substitutionGroup='SubElement'>
+    <xs:annotation>
+      <xs:documentation>
+        A sub element instance
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PumpType'>
+    <xs:annotation>
+      <xs:documentation>
+        A sub element instance
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SubElementType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Pump' type='PumpType' substitutionGroup='SubElement'>
+    <xs:annotation>
+      <xs:documentation>
+        A sub element instance
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AmplifierType'>
+    <xs:annotation>
+      <xs:documentation>
+        A sub element instance
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SubElementType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Amplifier' type='AmplifierType' substitutionGroup='SubElement'>
+    <xs:annotation>
+      <xs:documentation>
+        A sub element instance
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='MotorType'>
+    <xs:annotation>
+      <xs:documentation>
+        A sub element instance
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SubElementType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Motor' type='MotorType' substitutionGroup='SubElement'>
+    <xs:annotation>
+      <xs:documentation>
+        A sub element instance
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -1042,38 +1110,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:choice minOccurs='1' maxOccurs='unbounded'>
-      <xs:element name='Filter' type='SubElementInstType'>
+      <xs:element name='Actuator' type='SubElementInstType'>
         <xs:annotation>
           <xs:documentation>
-            A filter
+            An actuator sub element
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='Door' type='SubElementInstType'>
         <xs:annotation>
           <xs:documentation>
-            A filter
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Pump' type='SubElementInstType'>
-        <xs:annotation>
-          <xs:documentation>
-            A filter
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Actuator' type='SubElementInstType'>
-        <xs:annotation>
-          <xs:documentation>
-            A filter
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Motor' type='SubElementInstType'>
-        <xs:annotation>
-          <xs:documentation>
-            A filter
+            A door subelement
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -1537,7 +1584,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DISCRETE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='FilterType'>
+  <xs:simpleType name='DataItemFilterEnumType'>
     <xs:annotation>
       <xs:documentation>
         The type of filter
@@ -1670,10 +1717,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='FilterValueType'>
-        <xs:attribute name='type' type='FilterType' use='required'/>
+        <xs:attribute name='type' type='DataItemFilterEnumType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:simpleType name='SubElementIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The subelement this data item is associated with
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:ID'/>
+  </xs:simpleType>
   <xs:complexType name='DataItemSourceType'>
     <xs:annotation>
       <xs:documentation>
@@ -1684,6 +1739,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ItemSourceType'>
         <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
         <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
+        <xs:attribute name='subElementId' type='SubElementIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

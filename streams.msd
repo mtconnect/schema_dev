@@ -3,6 +3,7 @@ package :Streams, 'Event Package' do
   basic_type :ResultValue, 'An events data'
   
   attr :DataItemId, 'The item\'s unique ID that references the data item id from probe', :NMTOKEN
+  attr :SubElementId, 'The item\'s unique ID that references the sub element id from probe', :NMTOKEN
   attr :NativeCode, 'An Condition code as defined by the component'
 
   type :Streams, 'Event container for all component events' do
@@ -47,5 +48,6 @@ package :Streams, 'Event Package' do
     member :Timestamp, 'The time the event occurred or recorded'
     member :Name, 'The name of the event corresponding to the measurement', 0..1
     member :DataItemId, 'The unique identifier of the item being produced'
+    member :SubElementId, 'The identifier of the sub-element this result is in reference to', 0..1
   end
 end

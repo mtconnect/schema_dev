@@ -25,7 +25,7 @@ package :DataItems, 'Data Items Package' do
     value :DISCRETE, 'A discrete event type that may repeat'
   end
 
-  enum :FilterType, 'The type of filter' do
+  enum :DataItemFilterEnum, 'The type of filter' do
     value :MINIMUM_DELTA, 'A minimum delta'
   end
 
@@ -73,12 +73,14 @@ package :DataItems, 'Data Items Package' do
 
   type :DataItemFilter, 'The filter for the data item' do
     member :Value, 'A numeric value that limits the data depending on it\'s change. Change must be greater than this value.', :FilterValue
-    member :Type, 'The type of filter, ABSOLUTE or PERCENT', :FilterType
+    member :Type, 'The type of filter, ABSOLUTE or PERCENT', :DataItemFilterEnum
   end
   
+  attr :SubElementId, 'The subelement this data item is associated with', :ID
   type :DataItemSource, 'A native data source' do
     member :ComponentId, 'The component that is collecting the data associated with this data item', 0..1, :SourceComponentId
     member :DataItemId, 'The optional data item within the source component that provides the underlying data', 0..1, :SourceDataItemId
+    member :SubElementId, 'The optional sub-element identifier', 0..1
     member :Value, 'The source or channel for this data', :ItemSource
   end
 
