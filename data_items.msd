@@ -76,7 +76,6 @@ package :DataItems, 'Data Items Package' do
     member :Type, 'The type of filter, ABSOLUTE or PERCENT', :DataItemFilterEnum
   end
   
-  attr :SubElementId, 'The subelement this data item is associated with', :ID
   type :DataItemSource, 'A native data source' do
     member :ComponentId, 'The component that is collecting the data associated with this data item', 0..1, :SourceComponentId
     member :DataItemId, 'The optional data item within the source component that provides the underlying data', 0..1, :SourceDataItemId

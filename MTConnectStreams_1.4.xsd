@@ -185,6 +185,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
+  <xs:simpleType name='SubElementIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The item&apos;s unique ID that references the sub element id from probe
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -676,14 +684,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The item&apos;s unique ID that references the data item id from probe
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:NMTOKEN'/>
-  </xs:simpleType>
-  <xs:simpleType name='SubElementIdType'>
-    <xs:annotation>
-      <xs:documentation>
-        The item&apos;s unique ID that references the sub element id from probe
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>

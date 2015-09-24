@@ -25,6 +25,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :ComponentId, 'The id of the component (maps to the id from probe)', :ID
   attr :ID, 'An identifier', :ID
   attr :SignificantDigitsValue, 'The number significant digits', :integer
+  attr :SubElementId, 'The item\'s unique ID that references the sub element id from probe', :NMTOKEN
   
   attr :AssetId, 'The unique id of the asset'
   attr :AssetAttrType, 'An asset type'

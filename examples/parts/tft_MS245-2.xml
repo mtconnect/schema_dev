@@ -4,6 +4,20 @@
 	<Assets>
 		<PartArchetype assetId="f010052a-4b7a-11e5-b2f7-28cfe91a82ef" timestamp="2015-08-25T15:45:10" revisionId="2" drawingId="MS245-2" deviceUuid="ERP_1">
 			<Description>CAP</Description>
+			<Targets>
+				<Target targetId="COLD-SAW" type="DEVICE">
+					<TargetDevice>SAW1</TargetDevice>
+				</Target>
+				<Target targetId="CNC-LATHE1" type="DEVICE">
+					<TargetDevice>OKUMA_LB35III_1</TargetDevice>
+				</Target>
+				<Target targetId="CNC-MILL" type="DEVICE">
+					<TargetDevice>DMU50_1</TargetDevice>
+				</Target>
+				<Target targetId="ANODIZE_VENDOR" type="EXTERNAL">
+					<TargetLocation>OUTSIDE VENDOR</TargetLocation>
+				</Target>
+			</Targets>
 			<Characteristics>
 				<RawMaterial>
 					<MaterialType standard="none" source="BAR_STOCK">R6061R4.50</MaterialType>
@@ -12,223 +26,220 @@
 			<Routings>
 				<Routing routingId="default">
 					<ProcessStep stepId="0009">
-						<Targets>
-							<Target targetId="COLD-SAW" type="DEVICE">
-								<TargetSetupTime>60480</TargetSetupTime>
-								<TargetDevice>SAW1</TargetDevice>
-							</Target>
-						</Targets>
+						<TargetIdRefs>
+							<TargetIdRef targetId="COLD-SAW">
+								<TargetSetupTime>332</TargetSetupTime>
+							</TargetIdRef>
+						</TargetIdRefs>
 					</ProcessStep>
 					<ProcessStep stepId="0010">
-						<Targets>
-							<Target targetId="COLD-SAW" type="DEVICE">
+						<TargetIdRefs>
+							<TargetIdRef targetId="COLD-SAW">
 								<TargetExecutionTime>478.8</TargetExecutionTime>
-								<TargetDevice>SAW1</TargetDevice>
-							</Target>
-						</Targets>
+							</TargetIdRef>
+						</TargetIdRefs>
 					</ProcessStep>
 					<ProcessStep stepId="0019">
-						<Targets>
-							<Target targetId="CNC-LATHE1" type="DEVICE" precedence="1">
+						<TargetIdRefs>
+							<TargetIdRef targetId="CNC-LATHE1" precedence="1">
 								<TargetSetupTime>304560</TargetSetupTime>
-								<TargetDevice>OKUMA_LB35III_1</TargetDevice>
-							</Target>
-						</Targets>
+							</TargetIdRef>
+						</TargetIdRefs>
 					</ProcessStep>
 					<ProcessStep stepId="0020">
-						<Targets>
-							<Target targetId="CNC-LATHE1" type="DEVICE" precedence="1">
+						<TargetIdRefs>
+							<TargetIdRef targetId="CNC-LATHE1" precedence="1">
 								<TargetExecutionTime>10821.6</TargetExecutionTime>
-								<TargetDevice>OKUMA_LB35III_1</TargetDevice>
-							</Target>
-						</Targets>
+							</TargetIdRef>
+						</TargetIdRefs>
 						<Activities>
-							<Activity activityId="ps20a1" sequence="1">
-								<Description>1" O.D. RIGHT HAND 80 DEGREE - KENNAMETAL</Description>
-								<ProcessConstraints>
-									<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g1" sequence="1" component="Path" componentName="P1">
-										<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
-											<Constraints>
-												<Value>1</Value>
-											</Constraints>
-										</DataItemConstraint>
-									</ProcessConstraintGroup>
-								</ProcessConstraints>
-								<AssetArchetypeRefs>
-									<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0004175_TOOLP0005015</AssetArchetypeRef>
-								</AssetArchetypeRefs>
-							</Activity>
-							<Activity activityId="ps20a2" sequence="2">
-								<Description>1" O.D. RIGHT HAND GROOVER - ISCAR</Description>
-								<ProcessConstraints>
-									<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g2" sequence="1" component="Path" componentName="P1">
-										<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
-											<Constraints>
-												<Value>2</Value>
-											</Constraints>
-										</DataItemConstraint>
-									</ProcessConstraintGroup>
-								</ProcessConstraints>
-								<AssetArchetypeRefs>
-									<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0003029_TOOLP0002121</AssetArchetypeRef>
-								</AssetArchetypeRefs>
-							</Activity>
-							<Activity activityId="ps20a3" sequence="3">
-								<Description>1" O.D. RIGHT HAND 35 DEGREE - KENNAMETAL</Description>
-								<ProcessConstraints>
-									<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g3" sequence="1" component="Path" componentName="P1">
-										<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
-											<Constraints>
-												<Value>3</Value>
-											</Constraints>
-										</DataItemConstraint>
-									</ProcessConstraintGroup>
-								</ProcessConstraints>
-								<AssetArchetypeRefs>
-									<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0004174_TOOLP0003275</AssetArchetypeRef>
-								</AssetArchetypeRefs>
-							</Activity>
-							<Activity activityId="ps20a4" sequence="4">
-								<Description>15/16” 4XD INSERT DRILL - SANDVIK</Description>
-								<ProcessConstraints>
-									<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g4" sequence="1" component="Path" componentName="P2">
-										<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
-											<Constraints>
-												<Value>6</Value>
-											</Constraints>
-										</DataItemConstraint>
-									</ProcessConstraintGroup>
-								</ProcessConstraints>
-								<AssetArchetypeRefs>
-									<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0001656_TOOLP0004249_TOOLP0004250</AssetArchetypeRef>
-								</AssetArchetypeRefs>
-							</Activity>
-							<Activity activityId="ps20a5" sequence="5">
-								<Description>1/2" I.D. RIGHT HAND 60 DEGREE - SANDVIK</Description>
-								<ProcessConstraints>
-									<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g5" sequence="1" component="Path" componentName="P2">
-										<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
-											<Constraints>
-												<Value>7</Value>
-											</Constraints>
-										</DataItemConstraint>
-									</ProcessConstraintGroup>
-								</ProcessConstraints>
-								<AssetArchetypeRefs>
-									<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0001904_TOOLP0003277</AssetArchetypeRef>
-								</AssetArchetypeRefs>
-							</Activity>
-							<Activity activityId="ps20a6" sequence="6">
-								<Description>.750 I.D. RIGHT HAND-THREADER-SNAP-TAP</Description>
-								<ProcessConstraints>
-									<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g6" sequence="1" component="Path" componentName="P2">
-										<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
-											<Constraints>
-												<Value>8</Value>
-											</Constraints>
-										</DataItemConstraint>
-									</ProcessConstraintGroup>
-								</ProcessConstraints>
-								<AssetArchetypeRefs>
-									<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0001978_TOOLP0002168</AssetArchetypeRef>
-								</AssetArchetypeRefs>
-							</Activity>
-							<Activity activityId="ps20a7" sequence="7">
-								<Description>.750" I.D. RIGHT HAND GROOVER-ISCAR</Description>
-								<ProcessConstraints>
-									<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g7" sequence="1" component="Path" componentName="P2">
-										<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
-											<Constraints>
-												<Value>10</Value>
-											</Constraints>
-										</DataItemConstraint>
-									</ProcessConstraintGroup>
-								</ProcessConstraints>
-								<AssetArchetypeRefs>
-									<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0001941_TOOLP0004424</AssetArchetypeRef>
-								</AssetArchetypeRefs>
-							</Activity>
+							<ActivityGroup name="tool setup">
+								<Activity activityId="ps20a1" sequence="1">
+									<Description>1" O.D. RIGHT HAND 80 DEGREE - KENNAMETAL</Description>
+									<ProcessConstraints>
+										<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g1" sequence="1" component="Path" componentName="P1">
+											<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
+												<Constraints>
+													<Value>1</Value>
+												</Constraints>
+											</DataItemConstraint>
+										</ProcessConstraintGroup>
+									</ProcessConstraints>
+									<AssetArchetypeRefs>
+										<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0004175_TOOLP0005015</AssetArchetypeRef>
+									</AssetArchetypeRefs>
+								</Activity>
+								<Activity activityId="ps20a2" sequence="2">
+									<Description>1" O.D. RIGHT HAND GROOVER - ISCAR</Description>
+									<ProcessConstraints>
+										<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g2" sequence="1" component="Path" componentName="P1">
+											<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
+												<Constraints>
+													<Value>2</Value>
+												</Constraints>
+											</DataItemConstraint>
+										</ProcessConstraintGroup>
+									</ProcessConstraints>
+									<AssetArchetypeRefs>
+										<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0003029_TOOLP0002121</AssetArchetypeRef>
+									</AssetArchetypeRefs>
+								</Activity>
+								<Activity activityId="ps20a3" sequence="3">
+									<Description>1" O.D. RIGHT HAND 35 DEGREE - KENNAMETAL</Description>
+									<ProcessConstraints>
+										<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g3" sequence="1" component="Path" componentName="P1">
+											<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
+												<Constraints>
+													<Value>3</Value>
+												</Constraints>
+											</DataItemConstraint>
+										</ProcessConstraintGroup>
+									</ProcessConstraints>
+									<AssetArchetypeRefs>
+										<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0004174_TOOLP0003275</AssetArchetypeRef>
+									</AssetArchetypeRefs>
+								</Activity>
+								<Activity activityId="ps20a4" sequence="4">
+									<Description>15/16” 4XD INSERT DRILL - SANDVIK</Description>
+									<ProcessConstraints>
+										<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g4" sequence="1" component="Path" componentName="P2">
+											<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
+												<Constraints>
+													<Value>6</Value>
+												</Constraints>
+											</DataItemConstraint>
+										</ProcessConstraintGroup>
+									</ProcessConstraints>
+									<AssetArchetypeRefs>
+										<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0001656_TOOLP0004249_TOOLP0004250</AssetArchetypeRef>
+									</AssetArchetypeRefs>
+								</Activity>
+								<Activity activityId="ps20a5" sequence="5">
+									<Description>1/2" I.D. RIGHT HAND 60 DEGREE - SANDVIK</Description>
+									<ProcessConstraints>
+										<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g5" sequence="1" component="Path" componentName="P2">
+											<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
+												<Constraints>
+													<Value>7</Value>
+												</Constraints>
+											</DataItemConstraint>
+										</ProcessConstraintGroup>
+									</ProcessConstraints>
+									<AssetArchetypeRefs>
+										<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0001904_TOOLP0003277</AssetArchetypeRef>
+									</AssetArchetypeRefs>
+								</Activity>
+								<Activity activityId="ps20a6" sequence="6">
+									<Description>.750 I.D. RIGHT HAND-THREADER-SNAP-TAP</Description>
+									<ProcessConstraints>
+										<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g6" sequence="1" component="Path" componentName="P2">
+											<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
+												<Constraints>
+													<Value>8</Value>
+												</Constraints>
+											</DataItemConstraint>
+										</ProcessConstraintGroup>
+									</ProcessConstraints>
+									<AssetArchetypeRefs>
+										<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0001978_TOOLP0002168</AssetArchetypeRef>
+									</AssetArchetypeRefs>
+								</Activity>
+								<Activity activityId="ps20a7" sequence="7">
+									<Description>.750" I.D. RIGHT HAND GROOVER-ISCAR</Description>
+									<ProcessConstraints>
+										<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="ps20g7" sequence="1" component="Path" componentName="P2">
+											<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
+												<Constraints>
+													<Value>10</Value>
+												</Constraints>
+											</DataItemConstraint>
+										</ProcessConstraintGroup>
+									</ProcessConstraints>
+									<AssetArchetypeRefs>
+										<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0001941_TOOLP0004424</AssetArchetypeRef>
+									</AssetArchetypeRefs>
+								</Activity>
+							</ActivityGroup>
 						</Activities>
 					</ProcessStep>
 					<ProcessStep stepId="0029">
-						<Targets>
-							<Target targetId="CNC-LATHE2" type="DEVICE">
+						<TargetIdRefs>
+							<TargetIdRef targetId="CNC-LATHE2">
 								<TargetSetupTime>380160</TargetSetupTime>
-								<TargetDevice>MAZAK_QT250_4</TargetDevice>
-							</Target>
-						</Targets>
+							</TargetIdRef>
+						</TargetIdRefs>
 					</ProcessStep>
 					<ProcessStep stepId="0030">
-						<Targets>
-							<Target targetId="CNC-LATHE2" type="DEVICE">
+						<TargetIdRefs>
+							<TargetIdRef targetId="CNC-LATHE2">
 								<TargetExecutionTime>10821.6</TargetExecutionTime>
-								<TargetDevice>MAZAK_QT250_4</TargetDevice>
-							</Target>
-						</Targets>
+							</TargetIdRef>
+						</TargetIdRefs>
 						<Activities>
-							<Activity activityId="ps30a1" sequence="1">
-								<Description>1" O.D. RIGHT HAND 80 DEGREE - KENNAMETAL</Description>
-								<ProcessConstraints>
-									<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="cg30a1" component="Path" componentName="P1">
-										<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
-											<Constraints>
-												<Value>1</Value>
-											</Constraints>
-										</DataItemConstraint>
-									</ProcessConstraintGroup>
-								</ProcessConstraints>
-								<AssetArchetypeRefs>
-									<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0004175_ TOOLP0005015</AssetArchetypeRef>
-								</AssetArchetypeRefs>
-							</Activity>
-							<Activity activityId="ps30a2" sequence="2">
-								<Description>1" O.D. RIGHT HAND 35 DEGREE - KENNAMETAL</Description>
-								<ProcessConstraints>
-									<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="cg30a2" component="Path" componentName="P1">
-										<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
-											<Constraints>
-												<Value>3</Value>
-											</Constraints>
-										</DataItemConstraint>
-									</ProcessConstraintGroup>
-								</ProcessConstraints>
-								<AssetArchetypeRefs>
-									<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0004174_TOOLP0002809</AssetArchetypeRef>
-								</AssetArchetypeRefs>
-							</Activity>
-							<Activity activityId="ps30a3" sequence="3">
-								<Description>1/2" I.D. RIGHT HAND 60 DEGREE - SANDVIK</Description>
-								<ProcessConstraints>
-									<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="cg30a3" component="Path" componentName="P2">
-										<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
-											<Constraints>
-												<Value>7</Value>
-											</Constraints>
-										</DataItemConstraint>
-									</ProcessConstraintGroup>
-								</ProcessConstraints>
-								<AssetArchetypeRefs>
-									<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0001904_TOOLP0003277</AssetArchetypeRef>
-								</AssetArchetypeRefs>
-							</Activity>
+							<ActivityGroup name="tool_setup">
+								<Activity activityId="ps30a1" sequence="1">
+									<Description>1" O.D. RIGHT HAND 80 DEGREE - KENNAMETAL</Description>
+									<ProcessConstraints>
+										<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="cg30a1" component="Path" componentName="P1">
+											<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
+												<Constraints>
+													<Value>1</Value>
+												</Constraints>
+											</DataItemConstraint>
+										</ProcessConstraintGroup>
+									</ProcessConstraints>
+									<AssetArchetypeRefs>
+										<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0004175_ TOOLP0005015</AssetArchetypeRef>
+									</AssetArchetypeRefs>
+								</Activity>
+								<Activity activityId="ps30a2" sequence="2">
+									<Description>1" O.D. RIGHT HAND 35 DEGREE - KENNAMETAL</Description>
+									<ProcessConstraints>
+										<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="cg30a2" component="Path" componentName="P1">
+											<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
+												<Constraints>
+													<Value>3</Value>
+												</Constraints>
+											</DataItemConstraint>
+										</ProcessConstraintGroup>
+									</ProcessConstraints>
+									<AssetArchetypeRefs>
+										<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0004174_TOOLP0002809</AssetArchetypeRef>
+									</AssetArchetypeRefs>
+								</Activity>
+								<Activity activityId="ps30a3" sequence="3">
+									<Description>1/2" I.D. RIGHT HAND 60 DEGREE - SANDVIK</Description>
+									<ProcessConstraints>
+										<ProcessConstraintGroup type="CUTTING_TOOL" constraintGroupId="cg30a3" component="Path" componentName="P2">
+											<DataItemConstraint type="TOOL_NUMBER" category="EVENT">
+												<Constraints>
+													<Value>7</Value>
+												</Constraints>
+											</DataItemConstraint>
+										</ProcessConstraintGroup>
+									</ProcessConstraints>
+									<AssetArchetypeRefs>
+										<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0001904_TOOLP0003277</AssetArchetypeRef>
+									</AssetArchetypeRefs>
+								</Activity>
+							</ActivityGroup>
 						</Activities>
 					</ProcessStep>
 					<ProcessStep stepId="0039">
-						<Targets>
-							<Target targetId="CNC-MILL" type="DEVICE" precedence="1">
+						<TargetIdRefs>
+							<TargetIdRef targetId="CNC-MILL" precedence="1">
 								<TargetSetupTime>622080</TargetSetupTime>
-								<TargetDevice>DMU50_1</TargetDevice>
-							</Target>
-						</Targets>
+							</TargetIdRef>
+						</TargetIdRefs>
 					</ProcessStep>
 					<ProcessStep stepId="0040">
-						<Targets>
-							<Target targetId="CNC-MILL" type="DEVICE">
+						<TargetIdRefs>
+							<TargetIdRef targetId="CNC-MILL" precedence="1">
 								<TargetExecutionTime>11696.4</TargetExecutionTime>
-								<TargetDevice>DMU50_1</TargetDevice>
-							</Target>
-						</Targets>
+							</TargetIdRef>
+						</TargetIdRefs>
 						<Activities>
+						<ActivityGroup name="tool setup">
 							<Activity activityId="ps40a1" sequence="1">
 								<Description>3/4" DIA. x 120 DEG. POINT SPOT DRILL</Description>
 								<ProcessConstraints>
@@ -289,15 +300,14 @@
 									<AssetArchetypeRef assetType="CuttingToolArchetype">TOOLP0004143</AssetArchetypeRef>
 								</AssetArchetypeRefs>
 							</Activity>
+						</ActivityGroup>
 						</Activities>
 					</ProcessStep>
 					<ProcessStep stepId="0060">
 						<Description>Anodizing using external vendor</Description>
-						<Targets>
-							<Target targetId="ANODIZE_VENDOR" type="EXTERNAL">
-								<TargetLocation>OUTSIDE VENDOR</TargetLocation>
-							</Target>
-						</Targets>
+						<TargetIdRefs>
+							<TargetIdRef targetId="ANODIZE_VENDOR"/>
+						</TargetIdRefs>
 					</ProcessStep>
 				</Routing>
 			</Routings>

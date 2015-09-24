@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MTConnectAssets xmlns="urn:mtconnect.org:MTConnectAssets:1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectAssets:1.4 file:///Z:/projects/MTConnect/schema/MTConnectAssets_1.4.xsd">
+<MTConnectAssets xmlns="urn:mtconnect.org:MTConnectAssets:1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectAssets:1.4 ../../MTConnectAssets_1.4.xsd">
 	<Header version="1.4" creationTime="2015-01-04T12:23:00Z" instanceId="1" sender="localhost" assetBufferSize="1024" assetCount="100"/>
 	<Assets>
-		<Part assetId="4145T44G01-BCM95620" timestamp="2005-10-05T00:00:00Z">
+		<Part assetId="4145T44G01-BCM95620" timestamp="2005-10-05T00:00:00Z" revisionId="23" deviceUuid="XXX">
+			<ArchetypeRef>f010052a-4b7a-11e5-b2f7-28cfe91a82ef</ArchetypeRef>
 			<Description>HPT Inner Case</Description>
-			<PartArchetypeRef>4145T33G01-A</PartArchetypeRef>
 			<PartIdentifiers>
 				<GroupIdentifier stepId="5" type="HEAT_ID" timestamp="2005-06-09T12:52:00Z">WHP35320</GroupIdentifier>
 				<GroupIdentifier stepId="10" type="BATCH_ID" timestamp="2005-06-09T12:52:00Z">BCM95630</GroupIdentifier>
@@ -28,6 +28,9 @@
 				<ProcessEvent stepId="20" state="IN_PROCESS" timestamp="2005-06-13T13:24:00Z">
 					<DeviceUuid>SL-65</DeviceUuid>
 					<OperatorId>E-LAFLAM</OperatorId>
+					<ProcessData>
+						<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">70</PathFeedrateOverride>
+					</ProcessData>
 				</ProcessEvent>
 				<ProcessEvent stepId="20" state="COMPLETE" timestamp="2005-06-13T13:24:00Z">
 					<DeviceUuid>SL-65</DeviceUuid>
