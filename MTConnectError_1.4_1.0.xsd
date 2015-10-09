@@ -185,7 +185,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='SubElementIdType'>
+  <xs:simpleType name='AssemblyIdType'>
     <xs:annotation>
       <xs:documentation>
         The item&apos;s unique ID that references the sub element id from probe

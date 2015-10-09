@@ -185,7 +185,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='SubElementIdType'>
+  <xs:simpleType name='AssemblyIdType'>
     <xs:annotation>
       <xs:documentation>
         The item&apos;s unique ID that references the sub element id from probe
@@ -782,7 +782,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='SubElements' type='SubElementsType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='Assemblies' type='AssembliesType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A list of sub comonents
@@ -1001,7 +1001,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='SubElementType' abstract='true'>
+  <xs:complexType name='AssemblyType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
         An abstract element
@@ -1019,121 +1019,107 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='id' type='IDType' use='required'/>
     <xs:attribute name='name' type='NameType' use='optional'/>
   </xs:complexType>
-  <xs:element abstract='true' name='SubElement' type='SubElementType'>
+  <xs:element abstract='true' name='Assembly' type='AssemblyType'>
     <xs:annotation>
       <xs:documentation>
         An abstract element
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='SubElementInstType'>
+  <xs:complexType name='BallscrewType'>
     <xs:annotation>
       <xs:documentation>
-        A sub element instance
+        A motor
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='SubElementType'/>
+      <xs:extension base='AssemblyType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='SubElementInst' type='SubElementInstType' substitutionGroup='SubElement'>
+  <xs:element name='Ballscrew' type='BallscrewType' substitutionGroup='Assembly'>
     <xs:annotation>
       <xs:documentation>
-        A sub element instance
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='FilterType'>
-    <xs:annotation>
-      <xs:documentation>
-        A sub element instance
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SubElementType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Filter' type='FilterType' substitutionGroup='SubElement'>
-    <xs:annotation>
-      <xs:documentation>
-        A sub element instance
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='PumpType'>
-    <xs:annotation>
-      <xs:documentation>
-        A sub element instance
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SubElementType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Pump' type='PumpType' substitutionGroup='SubElement'>
-    <xs:annotation>
-      <xs:documentation>
-        A sub element instance
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AmplifierType'>
-    <xs:annotation>
-      <xs:documentation>
-        A sub element instance
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SubElementType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Amplifier' type='AmplifierType' substitutionGroup='SubElement'>
-    <xs:annotation>
-      <xs:documentation>
-        A sub element instance
+        A motor
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='MotorType'>
     <xs:annotation>
       <xs:documentation>
-        A sub element instance
+        A motor
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='SubElementType'/>
+      <xs:extension base='AssemblyType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Motor' type='MotorType' substitutionGroup='SubElement'>
+  <xs:element name='Motor' type='MotorType' substitutionGroup='Assembly'>
     <xs:annotation>
       <xs:documentation>
-        A sub element instance
+        A motor
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='SubElementsType'>
+  <xs:complexType name='EncoderType'>
+    <xs:annotation>
+      <xs:documentation>
+        A motor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssemblyType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Encoder' type='EncoderType' substitutionGroup='Assembly'>
+    <xs:annotation>
+      <xs:documentation>
+        A motor
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PowerSupplyType'>
+    <xs:annotation>
+      <xs:documentation>
+        A motor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssemblyType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='PowerSupply' type='PowerSupplyType' substitutionGroup='Assembly'>
+    <xs:annotation>
+      <xs:documentation>
+        A motor
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AmplifierType'>
+    <xs:annotation>
+      <xs:documentation>
+        A motor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssemblyType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Amplifier' type='AmplifierType' substitutionGroup='Assembly'>
+    <xs:annotation>
+      <xs:documentation>
+        A motor
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AssembliesType'>
     <xs:annotation>
       <xs:documentation>
         A collection of sub elements
       </xs:documentation>
     </xs:annotation>
-    <xs:choice minOccurs='1' maxOccurs='unbounded'>
-      <xs:element name='Actuator' type='SubElementInstType'>
-        <xs:annotation>
-          <xs:documentation>
-            An actuator sub element
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Door' type='SubElementInstType'>
-        <xs:annotation>
-          <xs:documentation>
-            A door subelement
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element ref='SubElement' minOccurs='1' maxOccurs='unbounded'/>
-    </xs:choice>
+    <xs:sequence>
+      <xs:element ref='Assembly' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:sequence>
   </xs:complexType>
   <xs:simpleType name='CalibrationDateType'>
     <xs:annotation>
@@ -1528,6 +1514,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='DataItemNumericValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The constrained value for this data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
   <xs:simpleType name='SourceComponentIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -1640,6 +1634,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='InitialValue' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The initial value for counters
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ResetTrigger' type='DataItemResetValueType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The event that triggers the resetting of this counter
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='name' type='NameType' use='optional'/>
     <xs:attribute name='id' type='IDType' use='required'/>
@@ -1667,31 +1675,31 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='Value' type='DataItemValueElementType' minOccurs='1' maxOccurs='unbounded'>
             <xs:annotation>
               <xs:documentation>
-                An possible value for this data item. Used for controlled
+                A possible value for this data item. Used for controlled
                 vocabularies.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:sequence>
         <xs:sequence minOccurs='1'>
-          <xs:element name='Minimum' type='DataItemValueType'>
+          <xs:element name='Minimum' type='DataItemNumericValueType'>
             <xs:annotation>
               <xs:documentation>
                 A minimum value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Maximum' type='DataItemValueType'>
+          <xs:element name='Maximum' type='DataItemNumericValueType'>
             <xs:annotation>
               <xs:documentation>
                 A maximum value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Nominal' type='DataItemValueType'>
+          <xs:element name='Nominal' type='DataItemNumericValueType'>
             <xs:annotation>
               <xs:documentation>
-                A maximum value for this data item.
+                A nominal value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -1707,6 +1715,30 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name='DataItemBaseType'>
+    <xs:annotation>
+      <xs:documentation>
+        A starting point for a data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='DataItemValueType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name='DataItemResetValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The reset intervals
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='DAY'/>
+      <xs:enumeration value='LIFE'/>
+      <xs:enumeration value='OPERATION'/>
+      <xs:enumeration value='RUNNING'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='DataItemValueElementType'>
     <xs:annotation>
       <xs:documentation>
@@ -1739,7 +1771,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ItemSourceType'>
         <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
         <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
-        <xs:attribute name='subElementId' type='SubElementIdType' use='optional'/>
+        <xs:attribute name='assemblyId' type='AssemblyIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

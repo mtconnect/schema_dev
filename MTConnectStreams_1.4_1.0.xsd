@@ -185,7 +185,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='SubElementIdType'>
+  <xs:simpleType name='AssemblyIdType'>
     <xs:annotation>
       <xs:documentation>
         The item&apos;s unique ID that references the sub element id from probe
@@ -808,7 +808,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
-        <xs:attribute name='subElementId' type='SubElementIdType' use='optional'/>
+        <xs:attribute name='assemblyId' type='AssemblyIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -4081,7 +4081,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
-        <xs:attribute name='subElementId' type='SubElementIdType' use='optional'/>
+        <xs:attribute name='assemblyId' type='AssemblyIdType' use='optional'/>
         <xs:attribute name='type' type='DataItemEnumType' use='required'/>
         <xs:attribute name='nativeCode' type='NativeCodeType' use='optional'/>
         <xs:attribute name='nativeSeverity' type='NativeSeverityType' use='optional'/>

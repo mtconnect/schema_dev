@@ -18,7 +18,7 @@ package :Component, 'Top Level Components Package' do
     member :Configuration, 'The configuration information about this component', 0..1, :ComponentConfiguration
     member :DataItems, 'The component\'s Data Items', 0..1
     member :Components, 'The sub components', 0..1
-    member :SubElements, 'A list of sub comonents', 0..1
+    member :Assemblies, 'A list of sub comonents', 0..1
   end
 
   type :ComponentDescription, 'The descriptive information for this component. This can be manufacturer specific' do
@@ -67,25 +67,21 @@ package :Component, 'Top Level Components Package' do
   type :Actuator, 'A component that causes motion', :CommonComponent
   type :Door, 'A door on the machine', :CommonComponent  
 
-  type :SubElement, "An abstract element" do
+  type :Assembly, "An abstract element" do
     abstract
     member :id, 'The data item identifier', :ID
     member :Name, 'The data item identifier', 0..1
     member :Description, 'The descriptive information about this sub element', 0..1, :ComponentDescription
   end
   
-  type :SubElementInst, 'A sub element instance', :SubElement
-  type :Filter, 'A sub element instance', :SubElement
-  type :Pump, 'A sub element instance', :SubElement
-  type :Amplifier, 'A sub element instance', :SubElement
-  type :Motor, 'A sub element instance', :SubElement
-  
-  type :SubElements, "A collection of sub elements" do
-    choice 1..INF do
-      member :Actuator, 'An actuator sub element', :SubElementInst
-      member :Door, 'A door subelement', :SubElementInst
-      member :SubElement, 'Sub elements', 1..INF
-    end
+  type :Ballscrew, 'A motor', :Assembly
+  type :Motor, 'A motor', :Assembly
+  type :Encoder, 'A motor', :Assembly
+  type :PowerSupply, 'A motor', :Assembly
+  type :Amplifier, 'A motor', :Assembly
+    
+  type :Assemblies, "A collection of sub elements" do
+    member :Assembly, 'An assembly of a component', 1..INF
   end
 end
 
