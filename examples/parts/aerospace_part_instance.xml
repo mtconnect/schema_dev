@@ -28,8 +28,27 @@
 				<ProcessEvent stepId="20" state="IN_PROCESS" timestamp="2005-06-13T13:24:00Z">
 					<DeviceUuid>SL-65</DeviceUuid>
 					<OperatorId>E-LAFLAM</OperatorId>
+					<ActivityEvents>
+						<ActivityEvent timestamp="2005-06-13T13:24:00Z" state="IN_PROCESS">
+							<ProcessData>
+								<Events>
+									<Message  sequence="1" timestamp="2005-06-13T13:24:00Z" dataItemId="message">Tool broken</Message>
+								</Events>
+							</ProcessData>
+						</ActivityEvent>
+					</ActivityEvents>
 					<ProcessData>
-						<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">70</PathFeedrateOverride>
+						<Events>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">70</PathFeedrateOverride>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">80</PathFeedrateOverride>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">100</PathFeedrateOverride>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">75</PathFeedrateOverride>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">90</PathFeedrateOverride>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">95</PathFeedrateOverride>
+						</Events>
+						<Condition>
+							<Fault sequence="123" timestamp="2005-06-13T13:24:00Z" dataItemId="system" type="TEMPERATURE">Spindle over temperature</Fault>
+						</Condition>
 					</ProcessData>
 				</ProcessEvent>
 				<ProcessEvent stepId="20" state="COMPLETE" timestamp="2005-06-13T13:24:00Z">

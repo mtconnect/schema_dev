@@ -5,8 +5,11 @@
 		<PartArchetype assetId="f010052a-4b7a-11e5-b2f7-28cfe91a82ef" timestamp="2015-08-25T15:45:10" revisionId="2" drawingId="MS245-2" deviceUuid="ERP_1">
 			<Description>CAP</Description>
 			<Targets>
-				<Target targetId="COLD-SAW" type="DEVICE">
+				<Target targetId="COLD-SAW1" type="DEVICE">
 					<TargetDevice>SAW1</TargetDevice>
+				</Target>
+				<Target targetId="COLD-SAW2" type="DEVICE">
+					<TargetDevice>SAW2</TargetDevice>
 				</Target>
 				<Target targetId="CNC-LATHE1" type="DEVICE">
 					<TargetDevice>OKUMA_LB35III_1</TargetDevice>
@@ -24,15 +27,22 @@
 				</RawMaterial>
 			</Characteristics>
 			<Routings>
+				<Routing routingId="1">
+					<ProcessStep stepId="100">
+					</ProcessStep>
+				</Routing>
 				<Routing routingId="default">
 					<ProcessStep stepId="0009">
 						<TargetIdRefs>
-							<TargetIdRef targetId="COLD-SAW">
+							<TargetIdRef targetId="COLD-SAW1" precedence="2">
 								<TargetSetupTime>332</TargetSetupTime>
+							</TargetIdRef>
+							<TargetIdRef targetId="COLD-SAW2" precedence="1">
+								<TargetSetupTime>362</TargetSetupTime>
 							</TargetIdRef>
 						</TargetIdRefs>
 					</ProcessStep>
-					<ProcessStep stepId="0010">
+					<ProcessStep stepId="0010" discretionary="YES">
 						<TargetIdRefs>
 							<TargetIdRef targetId="COLD-SAW">
 								<TargetExecutionTime>478.8</TargetExecutionTime>
@@ -40,6 +50,10 @@
 						</TargetIdRefs>
 					</ProcessStep>
 					<ProcessStep stepId="0019">
+						<Prerequisites>
+							<Prerequisite routingId="1">100</Prerequisite>
+							<Prerequisite routingId="default">0010</Prerequisite>
+						</Prerequisites>
 						<TargetIdRefs>
 							<TargetIdRef targetId="CNC-LATHE1" precedence="1">
 								<TargetSetupTime>304560</TargetSetupTime>
@@ -53,7 +67,7 @@
 							</TargetIdRef>
 						</TargetIdRefs>
 						<Activities>
-							<ActivityGroup name="tool setup">
+							<ActivityGroup name="tooling">
 								<Activity activityId="ps20a1" sequence="1">
 									<Description>1" O.D. RIGHT HAND 80 DEGREE - KENNAMETAL</Description>
 									<ProcessConstraints>
@@ -215,6 +229,9 @@
 												<Constraints>
 													<Value>7</Value>
 												</Constraints>
+											</DataItemConstraint>
+											<DataItemConstraint type="ROTARY_VELOCITY" category="SAMPLE" subType="ACTUAL" units="REVOLUTION/MINUTE">
+												<Constraints><Value>1000</Value></Constraints>
 											</DataItemConstraint>
 										</ProcessConstraintGroup>
 									</ProcessConstraints>

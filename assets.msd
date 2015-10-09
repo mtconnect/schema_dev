@@ -14,7 +14,6 @@ package :Assets, 'Mobile Assets' do
     end
   end
   
-  # TODO: Create a subtype of Asset for Architype and instance
   type :Asset, 'An abstract mobile asset' do
     abstract
     member :AssetId, 'The unique identifier of the asset'
@@ -56,6 +55,8 @@ package :Assets, 'Mobile Assets' do
   basic_type :TargetDevice, 'The target value. For a device it is the UUID, for a location it is a description or UUID'
   basic_type :TargetLocation, 'The target value. For a device it is the UUID, for a location it is a description or UUID'
   
+  attr :TargetId, 'The identifier of the target', :NMTOKEN
+  
   type :Target, 'The device or location something can be done at' do    
     member :TargetId, 'The identifier of this target', 1
     member :Name, 'The identifier of this target', 0..1
@@ -64,6 +65,23 @@ package :Assets, 'Mobile Assets' do
       member :TargetDevice, 'The  deviceidentifier or description'
       member :TargetLocation, 'The location identifier or description'
     end
-  end  
+  end
+  
+  type :TargetGroups, 'A set of groups of target references' do
+    member :TargetGroup, 'A reference to a target', 1..INF
+  end
+  
+  attr :TargetGroupId, 'An identifier for a target group', :NMTOKEN
+  type :TargetGroup, 'A group of targets' do
+    member :TargetGroupId, 'The identifier of this target', 1
+    member :TargetIdRef, 'A reference to a target', 1..INF
+  end
+  
+  type :TargetIdRef, 'A reference to a target' do
+    member :TargetId, 'The identifier of this target', 1
+  end
+  type :TargetGroupIdRef, 'A reference to a target' do
+    member :TargetGroupId, 'The identifier of this target', 1
+  end
   
 end

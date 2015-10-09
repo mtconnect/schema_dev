@@ -8,7 +8,6 @@ package :Parts, 'Parts' do
   attr :StepId, 'The identifier of the step', :NMTOKEN
   attr :RoutingId, 'The identifier of the step', :NMTOKEN
   attr :Precedence, 'The priority of a thing. A numberic indicator of the relative order of options.', :integer
-  attr :TargetId, 'The identifier of the target', :NMTOKEN
   attr :ConstraintGroupId, 'A unique constraint identifier', :NMTOKEN
   
   
@@ -28,6 +27,8 @@ package :Parts, 'Parts' do
     member :FamilyId, 'A group this part belongs to', 0..1
     member :DrawingId, 'A drawing associated with this part', 0..1
     member :RevisionId, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
+    
+    member :TargetGroups, 'The target groups for this asset', 0..1
     member :Characteristics, 'The characteristics of a part'
     member :Routings, 'The possible collections of process steps to make a part', 0..1
   end
@@ -157,7 +158,7 @@ package :Parts, 'Parts' do
     member(:Discretionary, 'This process step is discretionary', 0..1) { self.default = 'NO' }
     member :Description, 'The description of the step', 0..1, :StepDescription
     member :Prerequisites, 'A required set of steps for this step to begin', 0..1
-    member :TargetIdRefs, 'The locations or target devices', 0..1
+    member :ProcessTargets, 'The locations or target devices', 0..1
     member :ControlPrograms, 'The names of the programs that are required for this step', 0..1
     member :Activities, 'A collection activites', 0..1
     member :ProcessConstraints, 'The process constraints', 0..1
@@ -170,7 +171,7 @@ package :Parts, 'Parts' do
   
   type :Prerequisite, 'A reference to a previous process step. TODO: do we need to consider routing?' do
     member :RoutingId, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing', 0..1
-    member :Value, 'A reference to the previous process step identifier', :StepId
+    member :StepId, 'A reference to the previous process step identifier'
   end
   
   type :Activities, 'A collection of activities' do
@@ -180,7 +181,7 @@ package :Parts, 'Parts' do
   attr :ActivityGroupName, 'Activity group name'
   type :ActivityGroup, 'A collection of activities' do
     member :Name, 'The activity group name', 0..1, :ActivityGroupName
-    member :TargetId, 'The target for this activity', 0..1
+    member :ActivityTargets, 'The target for this activity', 0..1, :ProcessTargetRef
     member :Activity, 'A process activity', 1..INF
   end
   
@@ -197,10 +198,7 @@ package :Parts, 'Parts' do
     member :AssetArchetypeRefs, 'Assets that are used in this activity', 0..1
     member :Activities, 'Sub activities', 0..1
   end
-    
-  type :ProcessTarget, 'The device or location something can be done at', :Target do
-  end 
-  
+      
   attr :Restrictions, 'An indicator of the restriction on this program'
   attr :ProgramName, 'A program name'
   basic_type :Signature, 'A GUID signature'
@@ -209,17 +207,30 @@ package :Parts, 'Parts' do
     member :ControlProgram, 'A program', 1..INF
   end
   
-  type :TargetIdRef, "A reference to a target id" do
+  type :ProcessTargets, 'A set of targets where this process can be run' do
+    member :ProcessTarget, 'A set of target references with expected target times', 1..INF
+  end
+  
+  attr :ProcessTargetId, 'A process target', :NMTOKEN
+  type :ProcessTarget, "A reference to a target id" do
     member :Precedence, 'The precedence of this activity if multiple activities have the same sequence', 0..1
+    member :ProcessTargetId, 'The process target id'
     member :TargetExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
     member :TargetSetupTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
     member :TargetTeardownTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-    member :TargetId, "The target id reference", 1..INF
+    member :TargetRefs, "The target id reference"
   end
     
   
-  type :TargetIdRefs, "The targets this activity is valid for" do
-    element :TargetIdRef, "The target id reference", 1..INF
+  type :TargetRefs, "The targets this activity is valid for" do
+    choice do
+      member :TargetIdRef, "The target id reference", 1..INF
+      member :TargetGroupIdRef, "The target id reference", 1..INF
+    end
+  end
+  
+  type :ProcessTargetRef, 'A reference to a process target' do
+    member :ProcessTargetId, 'The process target id'
   end
   
   type :FileAssetRef, 'A reference to the asset file' do
@@ -234,7 +245,7 @@ package :Parts, 'Parts' do
     member :RevisionId, 'The revision of this program'
     member :Description, 'The description of the program', 0..1, :StepDescription
     member :FileAssetRef, 'A reference to the file asset', 0..1
-    member :TargetIdRefs, 'The associated target identifier. When DEVICE type'
+    member :ProcessTargetRef, 'The associated target identifier. When DEVICE type'
     member :Size, 'The size of the program in bytes', 0..1, :ProgramSize
     member :Timestamp, 'The time the program was last updated', 0..1, :Timestamp
     member :Restrictions, 'Indicator if this is ITAR controlled', 0..1
@@ -340,7 +351,9 @@ package :Parts, 'Parts' do
   
   type :ProcessData, 'Process data collected for a process step or an activity' do
     member :Timestamp, 'The time the annotation was recorded', 0..1, :Timestamp
-    member :Result, 'The recorded value'
+    member :Samples, 'A collection of samples', 0..1
+    member :Events, 'A collection of events', 0..1
+    member :Condition, 'The representation of the devices condition', 0..1, :ConditionList
   end
 
   type :ProcessEvent, 'This history of this part' do

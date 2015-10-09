@@ -186,7 +186,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='SubElementIdType'>
+  <xs:simpleType name='AssemblyIdType'>
     <xs:annotation>
       <xs:documentation>
         The item&apos;s unique ID that references the sub element id from probe
@@ -859,6 +859,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='TargetIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the target
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:complexType name='TargetType'>
     <xs:annotation>
       <xs:documentation>
@@ -884,6 +892,71 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='targetId' type='TargetIdType' use='required'/>
     <xs:attribute name='name' type='NameType' use='optional'/>
     <xs:attribute name='type' type='TargetTypeValueType' use='required'/>
+  </xs:complexType>
+  <xs:complexType name='TargetGroupsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of groups of target references
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='TargetGroup' type='TargetGroupType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to a target
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='TargetGroupIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        An identifier for a target group
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:complexType name='TargetGroupType'>
+    <xs:annotation>
+      <xs:documentation>
+        A group of targets
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='TargetIdRef' type='TargetIdRefType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to a target
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='targetGroupId' type='TargetGroupIdType' use='required'/>
+  </xs:complexType>
+  <xs:complexType name='TargetIdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to a target
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute name='targetId' type='TargetIdType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='TargetGroupIdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to a target
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute name='targetGroupId' type='TargetGroupIdType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:simpleType name='SampleIntervalType'>
     <xs:annotation>
@@ -916,6 +989,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemNumericValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The constrained value for this data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
   </xs:simpleType>
   <xs:simpleType name='SourceComponentIdType'>
     <xs:annotation>
@@ -1029,6 +1110,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='InitialValue' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The initial value for counters
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ResetTrigger' type='DataItemResetValueType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The event that triggers the resetting of this counter
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='name' type='NameType' use='optional'/>
     <xs:attribute name='id' type='IDType' use='required'/>
@@ -1056,31 +1151,31 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='Value' type='DataItemValueElementType' minOccurs='1' maxOccurs='unbounded'>
             <xs:annotation>
               <xs:documentation>
-                An possible value for this data item. Used for controlled
+                A possible value for this data item. Used for controlled
                 vocabularies.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:sequence>
         <xs:sequence minOccurs='1'>
-          <xs:element name='Minimum' type='DataItemValueType'>
+          <xs:element name='Minimum' type='DataItemNumericValueType'>
             <xs:annotation>
               <xs:documentation>
                 A minimum value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Maximum' type='DataItemValueType'>
+          <xs:element name='Maximum' type='DataItemNumericValueType'>
             <xs:annotation>
               <xs:documentation>
                 A maximum value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Nominal' type='DataItemValueType'>
+          <xs:element name='Nominal' type='DataItemNumericValueType'>
             <xs:annotation>
               <xs:documentation>
-                A maximum value for this data item.
+                A nominal value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -1096,6 +1191,30 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name='DataItemBaseType'>
+    <xs:annotation>
+      <xs:documentation>
+        A starting point for a data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='DataItemValueType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name='DataItemResetValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The reset intervals
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='DAY'/>
+      <xs:enumeration value='LIFE'/>
+      <xs:enumeration value='OPERATION'/>
+      <xs:enumeration value='RUNNING'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='DataItemValueElementType'>
     <xs:annotation>
       <xs:documentation>
@@ -1128,7 +1247,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ItemSourceType'>
         <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
         <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
-        <xs:attribute name='subElementId' type='SubElementIdType' use='optional'/>
+        <xs:attribute name='assemblyId' type='AssemblyIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1268,7 +1387,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
-        <xs:attribute name='subElementId' type='SubElementIdType' use='optional'/>
+        <xs:attribute name='assemblyId' type='AssemblyIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -4541,7 +4660,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
-        <xs:attribute name='subElementId' type='SubElementIdType' use='optional'/>
+        <xs:attribute name='assemblyId' type='AssemblyIdType' use='optional'/>
         <xs:attribute name='type' type='DataItemEnumType' use='required'/>
         <xs:attribute name='nativeCode' type='NativeCodeType' use='optional'/>
         <xs:attribute name='nativeSeverity' type='NativeSeverityType' use='optional'/>
@@ -6050,14 +6169,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='TargetIdType'>
-    <xs:annotation>
-      <xs:documentation>
-        The identifier of the target
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:NMTOKEN'/>
-  </xs:simpleType>
   <xs:simpleType name='ConstraintGroupIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -6134,6 +6245,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetArchetypeType'>
         <xs:sequence>
+          <xs:element name='TargetGroups' type='TargetGroupsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The target groups for this asset
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
           <xs:element name='Characteristics' type='CharacteristicsType'>
             <xs:annotation>
               <xs:documentation>
@@ -6639,7 +6757,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetIdRefs' type='TargetIdRefsType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='ProcessTargets' type='ProcessTargetsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The locations or target devices
@@ -6702,8 +6820,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StepIdType'>
+      <xs:extension base='xs:string'>
         <xs:attribute name='routingId' type='RoutingIdType' use='optional'/>
+        <xs:attribute name='stepId' type='StepIdType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -6738,6 +6857,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
+      <xs:element name='ActivityTargets' type='ProcessTargetRefType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The target for this activity
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='Activity' type='ActivityType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
@@ -6747,7 +6873,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
     <xs:attribute name='name' type='ActivityGroupNameType' use='optional'/>
-    <xs:attribute name='targetId' type='TargetIdType' use='optional'/>
   </xs:complexType>
   <xs:simpleType name='SequenceNumberType'>
     <xs:annotation>
@@ -6806,16 +6931,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
     <xs:attribute name='activityId' type='ActivityIdType' use='required'/>
   </xs:complexType>
-  <xs:complexType name='ProcessTargetType'>
-    <xs:annotation>
-      <xs:documentation>
-        The device or location something can be done at
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='TargetType'/>
-    </xs:simpleContent>
-  </xs:complexType>
   <xs:simpleType name='RestrictionsType'>
     <xs:annotation>
       <xs:documentation>
@@ -6856,7 +6971,31 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name='TargetIdRefType'>
+  <xs:complexType name='ProcessTargetsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of targets where this process can be run
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='ProcessTarget' type='ProcessTargetType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A set of target references with expected target times
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='ProcessTargetIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        A process target
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:complexType name='ProcessTargetType'>
     <xs:annotation>
       <xs:documentation>
         A reference to a target id
@@ -6884,18 +7023,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-    </xs:sequence>
-    <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
-    <xs:attribute name='targetId' type='TargetIdType' use='optional'/>
-  </xs:complexType>
-  <xs:complexType name='TargetIdRefsType'>
-    <xs:annotation>
-      <xs:documentation>
-        The targets this activity is valid for
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='TargetIdRef' type='TargetIdRefType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='TargetRefs' type='TargetRefsType'>
         <xs:annotation>
           <xs:documentation>
             The target id reference
@@ -6903,6 +7031,43 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+    <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
+    <xs:attribute name='processTargetId' type='ProcessTargetIdType' use='required'/>
+  </xs:complexType>
+  <xs:complexType name='TargetRefsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The targets this activity is valid for
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs='1'>
+      <xs:element name='TargetIdRef' type='TargetIdRefType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            The target id reference
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='TargetGroupIdRef' type='TargetGroupIdRefType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            The target id reference
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name='ProcessTargetRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to a process target
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute name='processTargetId' type='ProcessTargetIdType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name='FileAssetRefType'>
     <xs:annotation>
@@ -6938,7 +7103,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetIdRefs' type='TargetIdRefsType'>
+      <xs:element name='ProcessTargetRef' type='ProcessTargetRefType'>
         <xs:annotation>
           <xs:documentation>
             The associated target identifier. When DEVICE type
@@ -7275,7 +7440,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element ref='Result'/>
+      <xs:element name='Samples' type='SamplesType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A collection of samples
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Events' type='EventsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A collection of events
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Condition' type='ConditionListType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The representation of the devices condition
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='timestamp' type='TimestampType' use='optional'/>
   </xs:complexType>
