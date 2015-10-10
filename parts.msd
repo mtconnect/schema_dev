@@ -129,6 +129,23 @@ package :Parts, 'Parts' do
     value :INSPECTION, 'Inspection constraints'
   end
   
+  type :ProcessDataRequests, 'A set request to have certain process data logged' do
+    member :ProcessDataRequest, 'A process data request', 1..INF
+  end
+  
+  type :ProcessDataRequest, 'A request to collect process data' do
+    member :DataItemRequest, 'A request to log a certain data item', 1..INF
+  end
+  
+  type :DataItemRequest, 'A request to log data' do
+    member :ComponentName, 'The component name', 0..1
+    member :Component, 'The type of the component', :Name
+    member :Type, 'The type of measurement', :DataItemEnum
+    member :SubType, 'The sub type for the measurement', 0..1, :DataItemSubEnum
+    member :Category, 'The category of the data item'
+    member :Statistic, 'The statistical operation on this data', 0..1, :DataItemStatistics
+    member :Filter, 'A limit on the amount of data by specifying the minimal delta required.', 0..1, :DataItemFilter
+  end
   
   type :ProcessConstraintGroup, 'The process data' do
     member :type, 'The type of constraint', :ConstraintGroupEnum
@@ -162,6 +179,7 @@ package :Parts, 'Parts' do
     member :ControlPrograms, 'The names of the programs that are required for this step', 0..1
     member :Activities, 'A collection activites', 0..1
     member :ProcessConstraints, 'The process constraints', 0..1
+    member :ProcessDataRequests, 'Requests to log data', 0..1
     member :AssetArchetypeRefs, 'A collection of assets used in this process step', 0..1
   end
   
@@ -195,6 +213,7 @@ package :Parts, 'Parts' do
     member :ActivityId, 'The activity id'
     member :Description, 'The description of the step', 0..1, :StepDescription
     member :ProcessConstraints, 'The process constraints', 0..1
+    member :ProcessDataRequests, 'Requests to log data', 0..1
     member :AssetArchetypeRefs, 'Assets that are used in this activity', 0..1
     member :Activities, 'Sub activities', 0..1
   end

@@ -6598,6 +6598,61 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:union memberTypes='ConstraintGroupEnumTypeEnum ConstraintGroupExtType'/>
   </xs:simpleType>
+  <xs:complexType name='ProcessDataRequestsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set request to have certain process data logged
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='ProcessDataRequest' type='ProcessDataRequestType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A process data request
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='ProcessDataRequestType'>
+    <xs:annotation>
+      <xs:documentation>
+        A request to collect process data
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='DataItemRequest' type='DataItemRequestType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A request to log a certain data item
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='DataItemRequestType'>
+    <xs:annotation>
+      <xs:documentation>
+        A request to log data
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Filter' type='DataItemFilterType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A limit on the amount of data by specifying the minimal delta
+            required.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='componentName' type='ComponentNameType' use='optional'/>
+    <xs:attribute name='component' type='NameType' use='required'/>
+    <xs:attribute name='type' type='DataItemEnumType' use='required'/>
+    <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'/>
+    <xs:attribute name='category' type='CategoryType' use='required'/>
+    <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
+  </xs:complexType>
   <xs:complexType name='ProcessConstraintGroupType'>
     <xs:annotation>
       <xs:documentation>
@@ -6813,6 +6868,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='ProcessDataRequests' type='ProcessDataRequestsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            Requests to log data
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='AssetArchetypeRefs' type='AssetArchetypeRefsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -6936,6 +6998,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The process constraints
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProcessDataRequests' type='ProcessDataRequestsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            Requests to log data
           </xs:documentation>
         </xs:annotation>
       </xs:element>
