@@ -6577,26 +6577,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='ProcessDataRequest' type='ProcessDataRequestType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            A process data request
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name='ProcessDataRequestType'>
-    <xs:annotation>
-      <xs:documentation>
-        A request to collect process data
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
       <xs:element name='DataItemRequest' type='DataItemRequestType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            A request to log a certain data item
+            A process data request
           </xs:documentation>
         </xs:annotation>
       </xs:element>

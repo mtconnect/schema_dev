@@ -130,11 +130,7 @@ package :Parts, 'Parts' do
   end
   
   type :ProcessDataRequests, 'A set request to have certain process data logged' do
-    member :ProcessDataRequest, 'A process data request', 1..INF
-  end
-  
-  type :ProcessDataRequest, 'A request to collect process data' do
-    member :DataItemRequest, 'A request to log a certain data item', 1..INF
+    member :DataItemRequest, 'A process data request', 1..INF
   end
   
   type :DataItemRequest, 'A request to log data' do
