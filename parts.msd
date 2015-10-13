@@ -230,10 +230,10 @@ package :Parts, 'Parts' do
   type :ProcessTarget, "A reference to a target id" do
     member :Precedence, 'The precedence of this activity if multiple activities have the same sequence', 0..1
     member :ProcessTargetId, 'The process target id'
+    member :TargetRefs, "The target id reference"
     member :TargetExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
     member :TargetSetupTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
     member :TargetTeardownTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-    member :TargetRefs, "The target id reference"
   end
     
   

@@ -7083,6 +7083,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
+      <xs:element name='TargetRefs' type='TargetRefsType'>
+        <xs:annotation>
+          <xs:documentation>
+            The target id reference
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='TargetExecutionTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -7101,13 +7108,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The amount of time this part is supposed to take
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='TargetRefs' type='TargetRefsType'>
-        <xs:annotation>
-          <xs:documentation>
-            The target id reference
           </xs:documentation>
         </xs:annotation>
       </xs:element>
