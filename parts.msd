@@ -121,21 +121,13 @@ package :Parts, 'Parts' do
     pattern 'x:[A-Z_0-9]+'
   end
   
-  enum :ConstraintGroupEnum, 'The type of constraint' do
-    extensible :ConstraintGroupExt
-    
-    value :CUTTING_TOOL, 'Cutting tool constraints'
-    value :WORKHOLDING, 'Workholding constraints'
-    value :INSPECTION, 'Inspection constraints'
-  end
-  
   type :ProcessDataRequests, 'A set request to have certain process data logged' do
+    member :ComponentName, 'The component name', 0..1
+    member :Component, 'The type of the component', :Name
     member :DataItemRequest, 'A process data request', 1..INF
   end
   
   type :DataItemRequest, 'A request to log data' do
-    member :ComponentName, 'The component name', 0..1
-    member :Component, 'The type of the component', :Name
     member :Type, 'The type of measurement', :DataItemEnum
     member :SubType, 'The sub type for the measurement', 0..1, :DataItemSubEnum
     member :Category, 'The category of the data item'
@@ -144,7 +136,6 @@ package :Parts, 'Parts' do
   end
   
   type :ProcessConstraintGroup, 'The process data' do
-    member :type, 'The type of constraint', :ConstraintGroupEnum
     member :ConstraintGroupId, 'A constraint identifier'
     member :Sequence, 'The sequence number of the activity', 0..1, :SequenceNumber
     member :ComponentName, 'The name of a component if required', 0..1
@@ -230,10 +221,10 @@ package :Parts, 'Parts' do
   type :ProcessTarget, "A reference to a target id" do
     member :Precedence, 'The precedence of this activity if multiple activities have the same sequence', 0..1
     member :ProcessTargetId, 'The process target id'
-    member :TargetRefs, "The target id reference"
-    member :TargetExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-    member :TargetSetupTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
-    member :TargetTeardownTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
+    member :TargetRefs, "The target id or group references"
+    member :ExecutionTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
+    member :SetupTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
+    member :TeardownTime, 'The amount of time this part is supposed to take', 0..1, :TargetTime
   end
     
   
@@ -260,7 +251,7 @@ package :Parts, 'Parts' do
     member :RevisionId, 'The revision of this program'
     member :Description, 'The description of the program', 0..1, :StepDescription
     member :FileAssetRef, 'A reference to the file asset', 0..1
-    member :ProcessTargetRef, 'The associated target identifier. When DEVICE type'
+    member :TargetRefs, "The target id or group references"
     member :Size, 'The size of the program in bytes', 0..1, :ProgramSize
     member :Timestamp, 'The time the program was last updated', 0..1, :Timestamp
     member :Restrictions, 'Indicator if this is ITAR controlled', 0..1
@@ -373,7 +364,7 @@ package :Parts, 'Parts' do
 
   type :ProcessEvent, 'This history of this part' do
     member :Timestamp, 'The timestamp'
-    member :DeviceUuid, 'The unique identifier of the device this process was performed on', 0..1
+    member :TargetIdRef, 'The unique identifier of the device this process was performed on', 0..1
     member :Location, 'The location of the part if not on the machine', 0..1, :PartLocation
     member :State, 'The process state', :ProcessEventState
     member :RoutingId, 'The name of the routing', 0..1

@@ -6550,26 +6550,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='x:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='ConstraintGroupEnumTypeEnum'>
-    <xs:annotation>
-      <xs:documentation>
-        The type of constraint
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='CUTTING_TOOL'/>
-      <xs:enumeration value='WORKHOLDING'/>
-      <xs:enumeration value='INSPECTION'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='ConstraintGroupEnumType'>
-    <xs:annotation>
-      <xs:documentation>
-        The type of constraint
-      </xs:documentation>
-    </xs:annotation>
-    <xs:union memberTypes='ConstraintGroupEnumTypeEnum ConstraintGroupExtType'/>
-  </xs:simpleType>
   <xs:complexType name='ProcessDataRequestsType'>
     <xs:annotation>
       <xs:documentation>
@@ -6585,6 +6565,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+    <xs:attribute name='componentName' type='ComponentNameType' use='optional'/>
+    <xs:attribute name='component' type='NameType' use='required'/>
   </xs:complexType>
   <xs:complexType name='DataItemRequestType'>
     <xs:annotation>
@@ -6602,8 +6584,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='componentName' type='ComponentNameType' use='optional'/>
-    <xs:attribute name='component' type='NameType' use='required'/>
     <xs:attribute name='type' type='DataItemEnumType' use='required'/>
     <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'/>
     <xs:attribute name='category' type='CategoryType' use='required'/>
@@ -6624,7 +6604,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='type' type='ConstraintGroupEnumType' use='required'/>
     <xs:attribute name='constraintGroupId' type='ConstraintGroupIdType' use='required'/>
     <xs:attribute name='sequence' type='SequenceNumberType' use='optional'/>
     <xs:attribute name='componentName' type='ComponentNameType' use='optional'/>
@@ -7058,25 +7037,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='TargetRefs' type='TargetRefsType'>
         <xs:annotation>
           <xs:documentation>
-            The target id reference
+            The target id or group references
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetExecutionTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='ExecutionTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The amount of time this part is supposed to take
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetSetupTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='SetupTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The amount of time this part is supposed to take
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetTeardownTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='TeardownTime' type='TargetTimeType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The amount of time this part is supposed to take
@@ -7156,10 +7135,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ProcessTargetRef' type='ProcessTargetRefType'>
+      <xs:element name='TargetRefs' type='TargetRefsType'>
         <xs:annotation>
           <xs:documentation>
-            The associated target identifier. When DEVICE type
+            The target id or group references
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -7524,7 +7503,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='DeviceUuid' type='DeviceUuidType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='TargetIdRef' type='TargetIdRefType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The unique identifier of the device this process was performed on
