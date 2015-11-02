@@ -7880,7 +7880,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:element>
         </xs:sequence>
         <xs:attribute name='name' type='FileNameType' use='required'/>
-        <xs:attribute name='type' type='FileMimeType' use='required'/>
+        <xs:attribute name='mediaType' type='FileMimeType' use='required'/>
         <xs:attribute name='applicationCategory' type='ApplicationCategoryType' use='required'/>
         <xs:attribute name='applicationType' type='ApplicationType' use='required'/>
       </xs:extension>
@@ -7983,6 +7983,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='versionId' type='VersionIdType' use='required'/>
         <xs:attribute name='name' type='FileNameType' use='required'/>
         <xs:attribute name='state' type='FileStateType' use='optional'/>
+        <xs:attribute name='mediaType' type='FileMimeType' use='optional'/>
         <xs:attribute name='applicationCategory' type='ApplicationCategoryType' use='optional'/>
         <xs:attribute name='applicationType' type='ApplicationType' use='optional'/>
       </xs:extension>

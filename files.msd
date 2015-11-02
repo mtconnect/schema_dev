@@ -39,7 +39,7 @@ package :Files, 'Files or Documents' do
   # Archetype
   type :FileArchetype, 'Common information regarding a file', :AssetArchetype do
     member :Name, 'The file name', :FileName
-    member :Type, 'The mime type of the file', :FileMimeType
+    member :MediaType, 'The mime type of the file', :FileMimeType
     member :ApplicationCategory, 'The classification of this file'
     member :ApplicationType, 'The sub classification of this file'
     member :FileProperties, 'A set of file properties', 0..1
@@ -68,6 +68,7 @@ package :Files, 'Files or Documents' do
     member :VersionId, 'The version identifier'
     member :Name, 'The file name', :FileName
     member :State, 'The file state', 0..1, :FileState
+    member :MediaType, 'The mime type of the file', 0..1, :FileMimeType
     member :ApplicationCategory, 'The classification of this file', 0..1
     member :ApplicationType, 'The sub classification of this file', 0..1
     member :Location, 'The file location', :FileLocation
