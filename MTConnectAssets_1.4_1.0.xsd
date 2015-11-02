@@ -931,6 +931,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Description' type='AssetDescriptionType'>
+        <xs:annotation>
+          <xs:documentation>
+            The description of the target group
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='targetGroupId' type='TargetGroupIdType' use='required'/>
   </xs:complexType>
@@ -6160,6 +6167,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
+  <xs:simpleType name='VendorIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the vendor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:simpleType name='PrecedenceType'>
     <xs:annotation>
       <xs:documentation>
@@ -6228,6 +6243,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='VendorNameType'>
+    <xs:annotation>
+      <xs:documentation>
+        A vendor name
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='CustomerAddressType'>
     <xs:annotation>
       <xs:documentation>
@@ -6252,7 +6275,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Characteristics' type='CharacteristicsType'>
+          <xs:element name='RawMaterial' type='RawMaterialType'>
+            <xs:annotation>
+              <xs:documentation>
+                Raw material
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Customers' type='CustomersType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                A customer identifier. The combination of a Part ID and Customer
+                ID can reference a customer Part Number
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Characteristics' type='CharacteristicsType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 The characteristics of a part
@@ -6302,24 +6340,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         Characteristics of a part archetype
       </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name='RawMaterial' type='RawMaterialType'>
-        <xs:annotation>
-          <xs:documentation>
-            Raw material
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Customers' type='CustomersType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A customer identifier. The combination of a Part ID and Customer ID
-            can reference a customer Part Number
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
+    <xs:sequence/>
   </xs:complexType>
+  <xs:simpleType name='ScaleExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for hardness scales
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name='StandardType'>
     <xs:annotation>
       <xs:documentation>
@@ -6328,13 +6360,29 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='ScaleTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The hardness scale being used – default: Rockwell
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ROCKWELL'/>
+      <xs:enumeration value='BRINELL'/>
+      <xs:enumeration value='VICKERS'/>
+      <xs:enumeration value='KNOOP'/>
+      <xs:enumeration value='LEEB'/>
+      <xs:enumeration value='SCEROSCOPE'/>
+      <xs:enumeration value='SUPERFICIAL'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name='ScaleType'>
     <xs:annotation>
       <xs:documentation>
         The hardness scale being used – default: Rockwell
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:string'/>
+    <xs:union memberTypes='ScaleTypeEnum ScaleExtType'/>
   </xs:simpleType>
   <xs:complexType name='HardnessType'>
     <xs:annotation>
@@ -6388,6 +6436,30 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:complexType name='VendorType'>
+    <xs:annotation>
+      <xs:documentation>
+        The vendor of the raw material
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Name' type='VendorNameType'>
+        <xs:annotation>
+          <xs:documentation>
+            The vendor name
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Description' type='AssetDescriptionType'>
+        <xs:annotation>
+          <xs:documentation>
+            The description of the vendor as freeform text
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='vendorId' type='VendorIdType' use='required'/>
+  </xs:complexType>
   <xs:complexType name='RawMaterialType'>
     <xs:annotation>
       <xs:documentation>
@@ -6395,6 +6467,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
+      <xs:element name='MaterialType' type='MaterialType'>
+        <xs:annotation>
+          <xs:documentation>
+            The type of material
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='Hardness' type='HardnessType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -6402,10 +6481,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='MaterialType' type='MaterialType'>
+      <xs:element name='Vendor' type='VendorType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The type of material
+            The vendor of the raw material
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -6789,7 +6868,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Activities' type='ActivitiesType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='ActivityGroups' type='ActivityGroupsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A collection activites
@@ -6851,7 +6930,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='ActivitiesType'>
+  <xs:complexType name='ActivityGroupsType'>
     <xs:annotation>
       <xs:documentation>
         A collection of activities
@@ -6915,6 +6994,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:complexType name='ActivitiesType'>
+    <xs:annotation>
+      <xs:documentation>
+        A collection of activities
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Activity' type='ActivityType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A process activity
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name='ActivityType'>
     <xs:annotation>
       <xs:documentation>
@@ -7700,13 +7795,72 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='FileApplicationType'>
+  <xs:simpleType name='ApplicationCategoryExtType'>
     <xs:annotation>
       <xs:documentation>
-        The application of this file. Maybe we should use an enum?
+        An extension point for application category
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:string'/>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='x:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ApplicationCategoryTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The category of application that will use this file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ASSEMBLY'/>
+      <xs:enumeration value='DEVICE'/>
+      <xs:enumeration value='HANDLING'/>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='PART'/>
+      <xs:enumeration value='PROCESS'/>
+      <xs:enumeration value='INSPECTION'/>
+      <xs:enumeration value='SETUP'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ApplicationCategoryType'>
+    <xs:annotation>
+      <xs:documentation>
+        The category of application that will use this file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='ApplicationCategoryTypeEnum ApplicationCategoryExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='ApplicationTypeExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for application sub-category
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='x:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ApplicationTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The type classification of a file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='DESIGN'/>
+      <xs:enumeration value='DATA'/>
+      <xs:enumeration value='DOCUMENTATION'/>
+      <xs:enumeration value='INSTRUCTIONS'/>
+      <xs:enumeration value='PROGRAM'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ApplicationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The type classification of a file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='ApplicationTypeEnum ApplicationTypeExtType'/>
   </xs:simpleType>
   <xs:complexType name='FileArchetypeType'>
     <xs:annotation>
@@ -7727,7 +7881,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:sequence>
         <xs:attribute name='name' type='FileNameType' use='required'/>
         <xs:attribute name='type' type='FileMimeType' use='required'/>
-        <xs:attribute name='applicationType' type='FileApplicationType' use='optional'/>
+        <xs:attribute name='applicationCategory' type='ApplicationCategoryType' use='required'/>
+        <xs:attribute name='applicationType' type='ApplicationType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -7828,6 +7983,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='versionId' type='VersionIdType' use='required'/>
         <xs:attribute name='name' type='FileNameType' use='required'/>
         <xs:attribute name='state' type='FileStateType' use='optional'/>
+        <xs:attribute name='applicationCategory' type='ApplicationCategoryType' use='optional'/>
+        <xs:attribute name='applicationType' type='ApplicationType' use='optional'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

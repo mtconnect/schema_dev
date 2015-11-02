@@ -7,13 +7,41 @@ package :Files, 'Files or Documents' do
   attr :FileMimeType, 'The mime type of the file'
   attr :FileSize, 'The size in bytes of the file', :integer
   attr :FileName, 'The name of the file'
-  attr :FileApplicationType, 'The application of this file. Maybe we should use an enum?'
+  
+  basic_type(:ApplicationCategoryExt, 'An extension point for application category') do
+    pattern 'x:[A-Z_0-9]+'
+  end
+  enum :ApplicationCategory, 'The category of application that will use this file' do
+    extensible :ApplicationCategoryExt
+    value :ASSEMBLY, "Files regarding the fully assembled product"
+    value :DEVICE, 'Device related files'
+    value :HANDLING, 'Files relating to the handling of material'
+    value :MAINTENANCE, 'File relating to equipment maintenance'
+    value :PART, 'Files relating to a part'
+    value :PROCESS, 'Files related to the manufacturing process'
+    value :INSPECTION, 'Files related to the quality inspection'
+    value :SETUP, 'Files related to the setup of a process'
+  end
+  
+  basic_type(:ApplicationTypeExt, 'An extension point for application sub-category') do
+    pattern 'x:[A-Z_0-9]+'
+  end
+  enum :ApplicationType, 'The type classification of a file' do
+    extensible :ApplicationTypeExt
+    value :DESIGN, 'Computer aided design files or drawings'
+    value :DATA, 'Generic data'
+    value :DOCUMENTATION, 'Documentation regarding for a category of file'
+    value :INSTRUCTIONS, 'Instructions regarding the execution of a task'
+    value :PROGRAM, 'Machine instructions to perform a process'
+  end
+  
   
   # Archetype
   type :FileArchetype, 'Common information regarding a file', :AssetArchetype do
     member :Name, 'The file name', :FileName
     member :Type, 'The mime type of the file', :FileMimeType
-    member :ApplicationType, 'The classification of this file', 0..1, :FileApplicationType
+    member :ApplicationCategory, 'The classification of this file'
+    member :ApplicationType, 'The sub classification of this file'
     member :FileProperties, 'A set of file properties', 0..1
   end
   
@@ -40,6 +68,8 @@ package :Files, 'Files or Documents' do
     member :VersionId, 'The version identifier'
     member :Name, 'The file name', :FileName
     member :State, 'The file state', 0..1, :FileState
+    member :ApplicationCategory, 'The classification of this file', 0..1
+    member :ApplicationType, 'The sub classification of this file', 0..1
     member :Location, 'The file location', :FileLocation
     member :Signature, 'The file\'s signature'  
     member :FileProperties, 'A set of file properties', 0..1

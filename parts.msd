@@ -7,6 +7,7 @@ package :Parts, 'Parts' do
   attr :DrawingId, 'The drawing identifier associated with this part'
   attr :StepId, 'The identifier of the step', :NMTOKEN
   attr :RoutingId, 'The identifier of the step', :NMTOKEN
+  attr :VendorId, 'The identifier of the vendor', :NMTOKEN
   attr :Precedence, 'The priority of a thing. A numberic indicator of the relative order of options.', :integer
   attr :ConstraintGroupId, 'A unique constraint identifier', :NMTOKEN
   
@@ -21,6 +22,7 @@ package :Parts, 'Parts' do
   basic_type :ProgramSize, 'A size in bytes', :integer
   basic_type :Checksum, 'A checksum as a 32 bit unsigned value', :integer
   basic_type :CustomerName, 'A customer name'
+  basic_type :VendorName, 'A vendor name'
   basic_type :CustomerAddress, 'A customer address'
       
   type :PartArchetype, 'Common information regarding a part kind', :AssetArchetype do
@@ -29,7 +31,9 @@ package :Parts, 'Parts' do
     member :RevisionId, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
     
     member :TargetGroups, 'The target groups for this asset', 0..1
-    member :Characteristics, 'The characteristics of a part'
+    member :RawMaterial, 'Raw material'
+    member :Customers, 'A customer identifier.  The combination of a Part ID and Customer ID can reference a customer Part Number', 0..1
+    member :Characteristics, 'The characteristics of a part', 0..1
     member :Routings, 'The possible collections of process steps to make a part', 0..1
   end
   
@@ -38,16 +42,29 @@ package :Parts, 'Parts' do
   end
   
   type :Characteristics, 'Characteristics of a part archetype' do
-    member :RawMaterial, 'Raw material'
-    member :Customers, 'A customer identifier.  The combination of a Part ID and Customer ID can reference a customer Part Number', 0..1
     member :any, 'Any additional properties', 0..INF do
       self.notNamespace = "##targetNamespace"
       self.processContents = 'strict'
     end
   end
   
+  
+  basic_type(:ScaleExt, 'An extension point for hardness scales') do
+    pattern '[a-ln-z]:[A-Z_0-9]+'
+  end
+  
   attr :Standard, 'The hardness convention'
-  attr :Scale, 'The hardness scale being used – default: Rockwell'
+  enum :Scale, 'The hardness scale being used – default: Rockwell' do
+    extensible :ScaleExt
+    
+    value :ROCKWELL, 'The Rockwell Scale'
+    value :BRINELL, 'The Brinell Scale'
+    value :VICKERS, 'The Vickers Scale'
+    value :KNOOP, 'The Knoop Scale'
+    value :LEEB, 'The Leeb Scale'
+    value :SCEROSCOPE, 'The Sceroscope Scale'
+    value :SUPERFICIAL, 'The Suoerficial Scale'
+  end
   
   type :Hardness, 'The hardness range' do
     member(:Scale, 'The hardness scale being used', 0..1) { self.default = 'ROCKWELL' }
@@ -75,9 +92,16 @@ package :Parts, 'Parts' do
     value 'The type of material in the given standard', :MaterialTypeValue
   end
   
+  type :Vendor, 'The vendor of the raw material' do
+    member :VendorId, 'The vendor identifier'
+    member :Name, 'The vendor name', :VendorName
+    member :Description, 'The description of the vendor as freeform text', :AssetDescription, 0..1
+  end
+  
   type :RawMaterial, 'Description of raw material' do
-    member :Hardness, 'The hardness on the  scale of the raw material', 0..1
     member :MaterialType, 'The type of material'
+    member :Hardness, 'The hardness on the  scale of the raw material', 0..1
+    member :Vendor, 'The vendor of the raw material', 0..1
   end
   
   type :Customers, 'A list of customer ids' do
@@ -164,7 +188,7 @@ package :Parts, 'Parts' do
     member :Prerequisites, 'A required set of steps for this step to begin', 0..1
     member :ProcessTargets, 'The locations or target devices', 0..1
     member :ControlPrograms, 'The names of the programs that are required for this step', 0..1
-    member :Activities, 'A collection activites', 0..1
+    member :ActivityGroups, 'A collection activites', 0..1
     member :ProcessConstraints, 'The process constraints', 0..1
     member :ProcessDataRequests, 'Requests to log data', 0..1
     member :AssetArchetypeRefs, 'A collection of assets used in this process step', 0..1
@@ -179,7 +203,7 @@ package :Parts, 'Parts' do
     member :StepId, 'A reference to the previous process step identifier'
   end
   
-  type :Activities, 'A collection of activities' do
+  type :ActivityGroups, 'A collection of activities' do
     member :ActivityGroup, 'A process activity', 1..INF
   end
   
@@ -192,6 +216,11 @@ package :Parts, 'Parts' do
   
   attr :SequenceNumber, 'The  number indication the sequence of the operaton', :integer
   attr :ActivityId, 'The identifier of the activity associated with this cutting tool', :string
+  
+  type :Activities, 'A collection of activities' do
+    member :Activity, 'A process activity', 1..INF
+  end
+  
     
   type :Activity, 'An activity within a Process Step' do
     member :Sequence, 'The sequence number of the activity', :SequenceNumber
@@ -254,7 +283,7 @@ package :Parts, 'Parts' do
     member :TargetRefs, "The target id or group references"
     member :Size, 'The size of the program in bytes', 0..1, :ProgramSize
     member :Timestamp, 'The time the program was last updated', 0..1, :Timestamp
-    member :Restrictions, 'Indicator if this is ITAR controlled', 0..1
+    member :Restrictions, 'Indicator if this is controlled by some regulatory body', 0..1
     member :Signature, 'A secure signature', 0..1
   end
     
