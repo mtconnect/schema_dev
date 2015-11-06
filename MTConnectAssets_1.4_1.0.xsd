@@ -771,9 +771,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='AssetIdType'>
+      <xs:extension base='xs:string'>
         <xs:attribute ref='xlink:href' use='optional'/>
         <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
+        <xs:attribute name='assetId' type='AssetIdType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -6420,7 +6421,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POWDER'/>
       <xs:enumeration value='ROD'/>
       <xs:enumeration value='FILIMENT'/>
-      <xs:enumeration value='BAR_STOCK'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='MaterialType'>

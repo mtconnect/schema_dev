@@ -83,7 +83,6 @@ package :Parts, 'Parts' do
     value :POWDER, 'The material is a powder'
     value :ROD, 'The material is a rod'
     value :FILIMENT, 'The material is a filiment'
-    value :BAR_STOCK, 'The material is a bar stack'
   end
 
   type :MaterialType, 'The type of material' do

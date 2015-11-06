@@ -32,7 +32,7 @@ package :Assets, 'Mobile Assets' do
   type :ArchetypeRef, 'A reference to the part archetype' do
     attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
     attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
-    member :Value, 'The architype id', :AssetId
+    member :AssetId, 'The architype id'
   end
   
   type :AssetArchetype, 'An abstract asset archetype', :Asset do

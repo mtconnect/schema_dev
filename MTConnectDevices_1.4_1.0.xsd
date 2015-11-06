@@ -782,10 +782,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Assemblies' type='AssembliesType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='Compositions' type='CompositionsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            A list of sub comonents
+            A list of composition elements
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -1001,7 +1001,74 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AssemblyType' abstract='true'>
+  <xs:complexType name='CompositionsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A collection of sub elements
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Composition' type='CompositionType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            An assembly of a component
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='CompositionTypeExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for Composition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='CompositionEnumTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The vocab for the type of composition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTUATOR'/>
+      <xs:enumeration value='AMPLIFIER'/>
+      <xs:enumeration value='BALLSCREW'/>
+      <xs:enumeration value='BATTERY'/>
+      <xs:enumeration value='BELT'/>
+      <xs:enumeration value='CIRCUIT_BREAKER'/>
+      <xs:enumeration value='CHAIN'/>
+      <xs:enumeration value='CHUCK'/>
+      <xs:enumeration value='CHUTE'/>
+      <xs:enumeration value='CLAMP'/>
+      <xs:enumeration value='COMPRESSON'/>
+      <xs:enumeration value='DOON'/>
+      <xs:enumeration value='FAN'/>
+      <xs:enumeration value='FILTER'/>
+      <xs:enumeration value='GRIPPER'/>
+      <xs:enumeration value='HOPPER'/>
+      <xs:enumeration value='MOTOR'/>
+      <xs:enumeration value='PUMP'/>
+      <xs:enumeration value='POSITION_FEEDBACK'/>
+      <xs:enumeration value='POWER_SUPPLY'/>
+      <xs:enumeration value='SWITCH'/>
+      <xs:enumeration value='TANK'/>
+      <xs:enumeration value='TRANSFORMER'/>
+      <xs:enumeration value='VALVE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='CompositionEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The vocab for the type of composition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='CompositionEnumTypeEnum CompositionTypeExtType'/>
+  </xs:simpleType>
+  <xs:complexType name='CompositionType'>
     <xs:annotation>
       <xs:documentation>
         An abstract element
@@ -1018,108 +1085,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='id' type='IDType' use='required'/>
     <xs:attribute name='name' type='NameType' use='optional'/>
-  </xs:complexType>
-  <xs:element abstract='true' name='Assembly' type='AssemblyType'>
-    <xs:annotation>
-      <xs:documentation>
-        An abstract element
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='BallscrewType'>
-    <xs:annotation>
-      <xs:documentation>
-        A motor
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AssemblyType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Ballscrew' type='BallscrewType' substitutionGroup='Assembly'>
-    <xs:annotation>
-      <xs:documentation>
-        A motor
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='MotorType'>
-    <xs:annotation>
-      <xs:documentation>
-        A motor
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AssemblyType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Motor' type='MotorType' substitutionGroup='Assembly'>
-    <xs:annotation>
-      <xs:documentation>
-        A motor
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='EncoderType'>
-    <xs:annotation>
-      <xs:documentation>
-        A motor
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AssemblyType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Encoder' type='EncoderType' substitutionGroup='Assembly'>
-    <xs:annotation>
-      <xs:documentation>
-        A motor
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='PowerSupplyType'>
-    <xs:annotation>
-      <xs:documentation>
-        A motor
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AssemblyType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='PowerSupply' type='PowerSupplyType' substitutionGroup='Assembly'>
-    <xs:annotation>
-      <xs:documentation>
-        A motor
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AmplifierType'>
-    <xs:annotation>
-      <xs:documentation>
-        A motor
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AssemblyType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Amplifier' type='AmplifierType' substitutionGroup='Assembly'>
-    <xs:annotation>
-      <xs:documentation>
-        A motor
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AssembliesType'>
-    <xs:annotation>
-      <xs:documentation>
-        A collection of sub elements
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element ref='Assembly' minOccurs='1' maxOccurs='unbounded'/>
-    </xs:sequence>
+    <xs:attribute name='type' type='CompositionEnumType' use='required'/>
   </xs:complexType>
   <xs:simpleType name='CalibrationDateType'>
     <xs:annotation>

@@ -18,7 +18,7 @@ package :Component, 'Top Level Components Package' do
     member :Configuration, 'The configuration information about this component', 0..1, :ComponentConfiguration
     member :DataItems, 'The component\'s Data Items', 0..1
     member :Components, 'The sub components', 0..1
-    member :Assemblies, 'A list of sub comonents', 0..1
+    member :Compositions, 'A list of composition elements', 0..1
   end
 
   type :ComponentDescription, 'The descriptive information for this component. This can be manufacturer specific' do
@@ -67,22 +67,48 @@ package :Component, 'Top Level Components Package' do
   type :Actuator, 'A component that causes motion', :CommonComponent
   type :Door, 'A door on the machine', :CommonComponent  
 
-  type :Assembly, "An abstract element" do
-    abstract
-    member :id, 'The data item identifier', :ID
-    member :Name, 'The data item identifier', 0..1
-    member :Description, 'The descriptive information about this sub element', 0..1, :ComponentDescription
+  type :Compositions, "A collection of sub elements" do
+    member :Composition, 'An assembly of a component', 1..INF
+  end
+
+  basic_type(:CompositionTypeExt, 'An extension point for Composition') do
+    pattern '[a-ln-z]:[A-Z_0-9]+'
+  end
+  enum :CompositionEnumType, 'The vocab for the type of composition' do
+    extensible :CompositionTypeExt
+    value :ACTUATOR, 'A mechanism for moving or controlling a mechanical part of a piece of equipment'
+    value :AMPLIFIER, 'An electronic component or circuit for amplifying power, current, or voltage'
+    value :BALLSCREW, 'A mechanical structure for transforming rotary motion into linear motion'
+    value :BATTERY, 'A storage device that stores and produces electrical engergy'
+    value :BELT, 'An endless flexible band used to transmit motion for a piece of equipment or to convey materials and objects'
+    value :CIRCUIT_BREAKER, 'A mechanism for interrupting an electric circuit'
+    value :CHAIN, 'An interconnected series of objects that band together and used to transmit motion for a piece of equipment or to convey materials and objects.'
+    value :CHUCK, 'A mechanism that holds a part, stock material, or any other item in place'
+    value :CHUTE, 'An inclined channel for conveying material'
+    value :CLAMP, 'A mechanism used to strengthen, support, or fasten objects in place'
+    value :COMPRESSON, 'A pump or other mechanism for reducing volume and increasing pressure of gases in order to condense the gases  to drive pneumatically powered pieces of equipment'
+    value :DOON, 'Amechanical mechanism or closure that can cover an access portal into a piece of equipment.'
+    value :FAN, 'Any device for producing a current of air'
+    value :FILTER, 'Any substance or structure through which liquids or gases are passed to remove suspended impurities or to recover solids.'
+    value :GRIPPER, 'A mechanism that holds a part, stock material, or any other item in place'
+    value :HOPPER, 'A chamber or bin in which materials are stored temporarily, being filled through the top and dispensed through the bottom.'
+    value :MOTOR, 'A mechanism that converts electrical, pneumatic, or hydraulic energy into mechanical energy'
+    value :PUMP, 'An apparatus raising, driving, exhausting, or compressing fluids or gases by means of a piston, plunger, or set of rotating vanes.'
+    value :POSITION_FEEDBACK, 'A mechanism that measures motion or position'
+    value :POWER_SUPPLY, 'A device that provides power to electric mechanisms'
+    value :SWITCH, 'A mechanism for turning on or off an electric current or for making or breaking a circuit.'
+    value :TANK, 'A receptacle or container for holding material'
+    value :TRANSFORMER, 'A mechanism through which transforms electric energy from a source to a secondary circuit'
+    value :VALVE, 'Any mechanism for halting or controlling the flow of a liquid, gas, or other material through a passage, pipe, inlet, or outlet,'
   end
   
-  type :Ballscrew, 'A motor', :Assembly
-  type :Motor, 'A motor', :Assembly
-  type :Encoder, 'A motor', :Assembly
-  type :PowerSupply, 'A motor', :Assembly
-  type :Amplifier, 'A motor', :Assembly
-    
-  type :Assemblies, "A collection of sub elements" do
-    member :Assembly, 'An assembly of a component', 1..INF
-  end
+
+  type :Composition, "An abstract element" do
+    member :id, 'The data item identifier', :ID
+    member :Name, 'The data item identifier', 0..1
+    member :Type, 'The type of composition', :CompositionEnumType
+    member :Description, 'The descriptive information about this sub element', 0..1, :ComponentDescription
+  end  
 end
 
 load 'sensors'
