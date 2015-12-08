@@ -73,9 +73,9 @@ package :Assets, 'Mobile Assets' do
   
   attr :TargetGroupId, 'An identifier for a target group', :NMTOKEN
   type :TargetGroup, 'A group of targets' do
+    member :Description, 'The description of the target group', 0..1, :AssetDescription
     member :TargetGroupId, 'The identifier of this target', 1
     member :TargetIdRef, 'A reference to a target', 1..INF
-    member :Description, 'The description of the target group', :AssetDescription, 0..1
   end
   
   type :TargetIdRef, 'A reference to a target' do
