@@ -46,6 +46,7 @@ package :DataItems, 'Data Items Package' do
     member :NativeUnits, 'The units as expressed by the machine', 0..1
     member :NativeScale, 'The units as expressed by the machine', 0..1
     member :Category, 'The category of the data item'
+    member :ComponentId, 'The component that is collecting the data associated with this data item', 0..1, :SourceComponentId
     member :CoordinateSystem, 'The coordinate system used for the positions', 0..1
     member :SampleRate, 'Used as the default sample rate for waveforms', 0..1, :DataItemSampleRate
     member(:Representation, 'The data item\'s representation', 0..1) { self.default = :VALUE } 
@@ -93,7 +94,6 @@ package :DataItems, 'Data Items Package' do
   end
   
   type :DataItemSource, 'A native data source' do
-    member :ComponentId, 'The component that is collecting the data associated with this data item', 0..1, :SourceComponentId
     member :DataItemId, 'The optional data item within the source component that provides the underlying data', 0..1, :SourceDataItemId
     member :AssemblyId, 'The optional sub-element identifier', 0..1
     member :Value, 'The source or channel for this data', :ItemSource

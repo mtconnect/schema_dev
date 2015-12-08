@@ -21,16 +21,10 @@
 					<TargetLocation>OUTSIDE VENDOR</TargetLocation>
 				</Target>
 			</Targets>
-			<Characteristics>
-				<RawMaterial>
-					<MaterialType standard="none" source="BAR_STOCK">R6061R4.50</MaterialType>
-				</RawMaterial>
-			</Characteristics>
+			<RawMaterial>
+				<MaterialType standard="none" source="BAR_STOCK">R6061R4.50</MaterialType>
+			</RawMaterial>
 			<Routings>
-				<Routing routingId="1">
-					<ProcessStep stepId="100">
-					</ProcessStep>
-				</Routing>
 				<Routing routingId="default">
 					<ProcessStep stepId="0009">
 						<TargetIdRefs>

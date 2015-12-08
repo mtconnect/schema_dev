@@ -1617,6 +1617,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'/>
     <xs:attribute name='nativeScale' type='NativeScaleType' use='optional'/>
     <xs:attribute name='category' type='CategoryType' use='required'/>
+    <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
     <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'/>
     <xs:attribute name='sampleRate' type='DataItemSampleRateType' use='optional'/>
     <xs:attribute name='representation' type='RepresentationType' use='optional' default='VALUE'/>
@@ -1728,7 +1729,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='ItemSourceType'>
-        <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
         <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
         <xs:attribute name='assemblyId' type='AssemblyIdType' use='optional'/>
       </xs:extension>
