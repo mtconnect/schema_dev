@@ -186,10 +186,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='AssemblyIdType'>
+  <xs:simpleType name='CompositionIdType'>
     <xs:annotation>
       <xs:documentation>
-        The item&apos;s unique ID that references the sub element id from probe
+        The item&apos;s reference to the Device model composition
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
@@ -732,7 +732,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetType'>
         <xs:sequence>
-          <xs:element name='ArchetypeRef' type='ArchetypeRefType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='AssetArchetypeRef' type='AssetArchetypeRefType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 A reference to the asset architype for instances
@@ -764,7 +764,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ArchetypeRefType'>
+  <xs:complexType name='AssetArchetypeRefType'>
     <xs:annotation>
       <xs:documentation>
         A reference to the part archetype
@@ -778,6 +778,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:complexType name='ParentArchetypeRefsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Parent assets architype references
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='AssetArchetypeRef' type='AssetArchetypeRefType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to the parent
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name='AssetArchetypeType'>
     <xs:annotation>
       <xs:documentation>
@@ -787,6 +803,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetType'>
         <xs:sequence>
+          <xs:element name='ParentArchetypeRefs' type='ParentArchetypeRefsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                Parent assset references
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
           <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
@@ -932,7 +955,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetIdRef' type='TargetIdRefType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='TargetRef' type='TargetRefType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             A reference to a target
@@ -942,7 +965,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='targetGroupId' type='TargetGroupIdType' use='required'/>
   </xs:complexType>
-  <xs:complexType name='TargetIdRefType'>
+  <xs:complexType name='TargetRefType'>
     <xs:annotation>
       <xs:documentation>
         A reference to a target
@@ -954,7 +977,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='TargetGroupIdRefType'>
+  <xs:complexType name='TargetGroupRefType'>
     <xs:annotation>
       <xs:documentation>
         A reference to a target
@@ -1142,7 +1165,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'/>
     <xs:attribute name='nativeScale' type='NativeScaleType' use='optional'/>
     <xs:attribute name='category' type='CategoryType' use='required'/>
-    <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
     <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'/>
     <xs:attribute name='sampleRate' type='DataItemSampleRateType' use='optional'/>
     <xs:attribute name='representation' type='RepresentationType' use='optional' default='VALUE'/>
@@ -1255,7 +1277,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='ItemSourceType'>
         <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
-        <xs:attribute name='assemblyId' type='AssemblyIdType' use='optional'/>
+        <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
+        <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1395,7 +1418,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
-        <xs:attribute name='assemblyId' type='AssemblyIdType' use='optional'/>
+        <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -4668,7 +4691,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
-        <xs:attribute name='assemblyId' type='AssemblyIdType' use='optional'/>
+        <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
         <xs:attribute name='type' type='DataItemEnumType' use='required'/>
         <xs:attribute name='nativeCode' type='NativeCodeType' use='optional'/>
         <xs:attribute name='nativeSeverity' type='NativeSeverityType' use='optional'/>
@@ -6555,6 +6578,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
     <xs:attribute name='routingId' type='RoutingIdType' use='required'/>
   </xs:complexType>
+  <xs:complexType name='RoutingRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to a routing
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='ProcessStepRef' type='ProcessStepRefType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to a process step
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='routingId' type='RoutingIdType' use='required'/>
+  </xs:complexType>
   <xs:complexType name='AssetRefsType'>
     <xs:annotation>
       <xs:documentation>
@@ -6900,6 +6940,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='stepId' type='StepIdType' use='required'/>
     <xs:attribute name='discretionary' type='DiscretionaryType' use='optional' default='NO'/>
   </xs:complexType>
+  <xs:complexType name='ProcessStepRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to a process step
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute name='stepId' type='StepIdType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='PrerequisitesType'>
     <xs:annotation>
       <xs:documentation>
@@ -6923,12 +6975,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         routing?
       </xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='xs:string'>
-        <xs:attribute name='routingId' type='RoutingIdType' use='optional'/>
-        <xs:attribute name='stepId' type='StepIdType' use='required'/>
-      </xs:extension>
-    </xs:simpleContent>
+    <xs:choice minOccurs='1'>
+      <xs:element name='RoutingRef' type='RoutingRefType'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to the routing id. We may want to remove... if not
+            given, detaults to the current routing
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProcessStepRef' type='ProcessStepRefType'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to the routing id. We may want to remove... if not
+            given, detaults to the current routing
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
   </xs:complexType>
   <xs:complexType name='ActivityGroupsType'>
     <xs:annotation>
@@ -7058,6 +7122,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='precedence' type='PrecedenceType' use='optional'/>
     <xs:attribute name='activityId' type='ActivityIdType' use='required'/>
   </xs:complexType>
+  <xs:complexType name='ActivityRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to an activity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'/>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:simpleType name='RestrictionsType'>
     <xs:annotation>
       <xs:documentation>
@@ -7168,14 +7242,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:choice minOccurs='1'>
-      <xs:element name='TargetIdRef' type='TargetIdRefType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='TargetRef' type='TargetRefType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             The target id reference
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='TargetGroupIdRef' type='TargetGroupIdRefType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='TargetGroupRef' type='TargetGroupRefType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             The target id reference
@@ -7203,9 +7277,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='AssetIdType'>
+      <xs:extension base='xs:string'>
         <xs:attribute ref='xlink:href' use='optional'/>
         <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
+        <xs:attribute name='assetId' type='AssetIdType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -7340,19 +7415,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='PartArchetypeRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        A reference to the part archetype
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='AssetIdType'>
-        <xs:attribute ref='xlink:href' use='optional'/>
-        <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
   <xs:complexType name='PartIdentifiersType'>
     <xs:annotation>
       <xs:documentation>
@@ -7598,7 +7660,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='TargetIdRef' type='TargetIdRefType' minOccurs='0' maxOccurs='1'>
+      <xs:choice minOccurs='1'>
+        <xs:element name='RoutingRef' type='RoutingRefType'>
+          <xs:annotation>
+            <xs:documentation>
+              The name of the routing
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name='ProcessStepRef' type='ProcessStepRefType'>
+          <xs:annotation>
+            <xs:documentation>
+              A reference to a process step if there is a single routing
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      <xs:element name='TargetRef' type='TargetRefType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The unique identifier of the device this process was performed on
@@ -7650,8 +7728,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
     <xs:attribute name='state' type='ProcessEventStateType' use='required'/>
-    <xs:attribute name='routingId' type='RoutingIdType' use='optional'/>
-    <xs:attribute name='stepId' type='StepIdType' use='required'/>
     <xs:attribute name='revisionId' type='RevisionIdType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='ActivityEventsType'>
@@ -7677,6 +7753,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
+      <xs:element name='ActivityRef' type='ActivityRefType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The activity id
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='AssetRefs' type='AssetRefsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -7695,7 +7778,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
     <xs:attribute name='sequenceNumber' type='SequenceNumberType' use='optional'/>
     <xs:attribute name='state' type='ProcessEventStateType' use='required'/>
-    <xs:attribute name='activityId' type='ActivityIdType' use='optional'/>
   </xs:complexType>
   <xs:simpleType name='InspectionStandardType'>
     <xs:annotation>

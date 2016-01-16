@@ -185,10 +185,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='AssemblyIdType'>
+  <xs:simpleType name='CompositionIdType'>
     <xs:annotation>
       <xs:documentation>
-        The item&apos;s unique ID that references the sub element id from probe
+        The item&apos;s reference to the Device model composition
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>

@@ -24,18 +24,23 @@ package :Assets, 'Mobile Assets' do
   
   type :AssetInstance, 'An abstract asset instance', :Asset do
     abstract
-    member :ArchetypeRef, 'A reference to the asset architype for instances', 0..1
+    member :AssetArchetypeRef, 'A reference to the asset architype for instances', 0..1
     member :Description, 'The description of the file (freeform)', 0..1, :AssetDescription
     member :Targets, 'The targets for this asset', 0..1
   end
   
-  type :ArchetypeRef, 'A reference to the part archetype' do
+  type :AssetArchetypeRef, 'A reference to the part archetype' do
     attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
     attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
     member :AssetId, 'The architype id'
   end
   
+  type :ParentArchetypeRefs, 'Parent assets architype references' do
+    member :AssetArchetypeRef, 'A reference to the parent', 1..INF
+  end
+  
   type :AssetArchetype, 'An abstract asset archetype', :Asset do
+    member :ParentArchetypeRefs, 'Parent assset references', 0..1
     member :Description, 'The description of the file (freeform)', 0..1, :AssetDescription
     member :Targets, 'The targets for this asset', 0..1
   end
@@ -75,13 +80,13 @@ package :Assets, 'Mobile Assets' do
   type :TargetGroup, 'A group of targets' do
     member :Description, 'The description of the target group', 0..1, :AssetDescription
     member :TargetGroupId, 'The identifier of this target', 1
-    member :TargetIdRef, 'A reference to a target', 1..INF
+    member :TargetRef, 'A reference to a target', 1..INF
   end
   
-  type :TargetIdRef, 'A reference to a target' do
+  type :TargetRef, 'A reference to a target' do
     member :TargetId, 'The identifier of this target', 1
   end
-  type :TargetGroupIdRef, 'A reference to a target' do
+  type :TargetGroupRef, 'A reference to a target' do
     member :TargetGroupId, 'The identifier of this target', 1
   end
   

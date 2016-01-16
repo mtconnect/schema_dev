@@ -185,10 +185,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='AssemblyIdType'>
+  <xs:simpleType name='CompositionIdType'>
     <xs:annotation>
       <xs:documentation>
-        The item&apos;s unique ID that references the sub element id from probe
+        The item&apos;s reference to the Device model composition
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
@@ -1617,7 +1617,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'/>
     <xs:attribute name='nativeScale' type='NativeScaleType' use='optional'/>
     <xs:attribute name='category' type='CategoryType' use='required'/>
-    <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
     <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'/>
     <xs:attribute name='sampleRate' type='DataItemSampleRateType' use='optional'/>
     <xs:attribute name='representation' type='RepresentationType' use='optional' default='VALUE'/>
@@ -1730,7 +1729,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='ItemSourceType'>
         <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
-        <xs:attribute name='assemblyId' type='AssemblyIdType' use='optional'/>
+        <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
+        <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

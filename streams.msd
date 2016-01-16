@@ -47,6 +47,6 @@ package :Streams, 'Event Package' do
     member :Timestamp, 'The time the event occurred or recorded'
     member :Name, 'The name of the event corresponding to the measurement', 0..1
     member :DataItemId, 'The unique identifier of the item being produced'
-    member :AssemblyId, 'The identifier of the sub-element this result is in reference to', 0..1
+    member :CompositionId, 'The identifier of the sub-element this result is in reference to', 0..1
   end
 end

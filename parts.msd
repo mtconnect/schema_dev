@@ -120,6 +120,11 @@ package :Parts, 'Parts' do
     member :ProcessStep, 'A process step', 1..INF
   end
   
+  type :RoutingRef, 'A reference to a routing' do
+    member :RoutingId, 'The identifier of this routing'
+    member :ProcessStepRef, 'A reference to a process step', 1..INF
+  end
+  
   type :AssetRefs, 'The assets used in this activity' do
     member :AssetRef, 'An asset reference that is associated with this activity. These will be archetypes', 1..INF
   end
@@ -193,13 +198,19 @@ package :Parts, 'Parts' do
     member :AssetArchetypeRefs, 'A collection of assets used in this process step', 0..1
   end
   
+  type :ProcessStepRef, 'A reference to a process step' do
+    member :StepId, 'The identifier of this step'
+  end
+  
   type :Prerequisites, 'A list of required steps for this step to begin' do
     member :Prerequisite, 'A reference to a previous step', 1..INF
   end
   
   type :Prerequisite, 'A reference to a previous process step. TODO: do we need to consider routing?' do
-    member :RoutingId, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing', 0..1
-    member :StepId, 'A reference to the previous process step identifier'
+    choice do
+      member :RoutingRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing'
+      member :ProcessStepRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing'
+    end
   end
   
   type :ActivityGroups, 'A collection of activities' do
@@ -232,6 +243,9 @@ package :Parts, 'Parts' do
     member :AssetArchetypeRefs, 'Assets that are used in this activity', 0..1
     member :Activities, 'Sub activities', 0..1
   end
+  
+  type :ActivityRef, 'A reference to an activity' do
+  end
       
   attr :Restrictions, 'An indicator of the restriction on this program'
   attr :ProgramName, 'A program name'
@@ -258,8 +272,8 @@ package :Parts, 'Parts' do
   
   type :TargetRefs, "The targets this activity is valid for" do
     choice do
-      member :TargetIdRef, "The target id reference", 1..INF
-      member :TargetGroupIdRef, "The target id reference", 1..INF
+      member :TargetRef, "The target id reference", 1..INF
+      member :TargetGroupRef, "The target id reference", 1..INF
     end
   end
   
@@ -270,7 +284,7 @@ package :Parts, 'Parts' do
   type :FileAssetRef, 'A reference to the asset file' do
     attribute :'xlink:href', 'Reference to the asset', 0..1, :'xlink:href'
     attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
-    member :Value, 'Asset id of file', :AssetId
+    member :AssetId, 'Asset id of file'
   end
   
   type :ControlProgram, 'A control program' do
@@ -303,13 +317,7 @@ package :Parts, 'Parts' do
     member :Workorder, 'A workorder for this part instance', 0..1
     member :ProcessEvents, 'The history of the process for this part instance', 0..1
   end
-  
-  type :PartArchetypeRef, 'A reference to the part archetype' do
-    attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
-    attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
-    member :Value, 'The architype id', :AssetId
-  end
-  
+    
   type :PartIdentifiers, 'A collection of identifiers' do
     choice 1..INF do
       member :UniqueIdentifier, 'A unique serialized part identifier'
@@ -391,12 +399,14 @@ package :Parts, 'Parts' do
   end
 
   type :ProcessEvent, 'This history of this part' do
+    choice do
+      member :RoutingRef, 'The name of the routing'
+      member :ProcessStepRef, 'A reference to a process step if there is a single routing'
+    end
     member :Timestamp, 'The timestamp'
-    member :TargetIdRef, 'The unique identifier of the device this process was performed on', 0..1
+    member :TargetRef, 'The unique identifier of the device this process was performed on', 0..1
     member :Location, 'The location of the part if not on the machine', 0..1, :PartLocation
     member :State, 'The process state', :ProcessEventState
-    member :RoutingId, 'The name of the routing', 0..1
-    member :StepId, 'The step this history is associated with'
     member :OperatorId, 'The identifier of the operator', 0..1, :PartOperatorId
     member :ControlPrograms, 'The control programs used in this event', 0..1
     member :AssetRefs, 'The workholding identifier', 0..1
@@ -410,10 +420,10 @@ package :Parts, 'Parts' do
   end
   
   type :ActivityEvent, 'An event associated with a ProcessStep Operaiton' do
+    member :ActivityRef, 'The activity id', 0..1
     member :Timestamp, 'The timestamp'
     member :SequenceNumber, 'The  number indication the sequence of the operaton', 0..1
     member :State, 'The process state', :ProcessEventState
-    member :ActivityId, 'The activity id', 0..1
     member :AssetRefs, 'The workholding identifier', 0..1
     member :ProcessData, 'A set of annotations associated with the event', 0..1
   end
