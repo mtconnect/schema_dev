@@ -29,20 +29,33 @@ package :Assets, 'Mobile Assets' do
     member :Targets, 'The targets for this asset', 0..1
   end
   
-  type :AssetArchetypeRef, 'A reference to the part archetype' do
+  type :AssetArchetypeRef, 'A reference to the archetype' do
     attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
     attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
-    member :AssetId, 'The architype id'
+    member :AssetType, 'The type of asset that changed', 0..1, :AssetAttrType
+    member :AssetId, 'The architype id reference'
   end
   
-  type :ParentArchetypeRefs, 'Parent assets architype references' do
+  type :AssetArchetypeRefs, 'Parent assets architype references' do
     member :AssetArchetypeRef, 'A reference to the parent', 1..INF
   end
-  
+    
   type :AssetArchetype, 'An abstract asset archetype', :Asset do
-    member :ParentArchetypeRefs, 'Parent assset references', 0..1
+    member :ParentAssetArchetypeRef, 'Parent assset references', 0..1, :AssetArchetypeRef
     member :Description, 'The description of the file (freeform)', 0..1, :AssetDescription
     member :Targets, 'The targets for this asset', 0..1
+  end
+  
+  
+  type :AssetRef, 'A reference to an asset' do
+    attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
+    attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
+    member :AssetType, 'The type of asset that changed', 0..1, :AssetAttrType
+    member :AssetId, 'The architype id reference'
+  end
+  
+  type :AssetRefs, 'Asset  references' do
+    member :AssetRef, 'A reference to the asset', 1..INF
   end
   
   type :Targets, 'A list of target devices or locations' do

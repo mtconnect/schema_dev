@@ -767,18 +767,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AssetArchetypeRefType'>
     <xs:annotation>
       <xs:documentation>
-        A reference to the part archetype
+        A reference to the archetype
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='xs:string'>
         <xs:attribute ref='xlink:href' use='optional'/>
         <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
+        <xs:attribute name='assetType' type='AssetAttrType' use='optional'/>
         <xs:attribute name='assetId' type='AssetIdType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='ParentArchetypeRefsType'>
+  <xs:complexType name='AssetArchetypeRefsType'>
     <xs:annotation>
       <xs:documentation>
         Parent assets architype references
@@ -803,7 +804,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetType'>
         <xs:sequence>
-          <xs:element name='ParentArchetypeRefs' type='ParentArchetypeRefsType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='ParentAssetArchetypeRef' type='AssetArchetypeRefType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 Parent assset references
@@ -835,6 +836,37 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='AssetRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to an asset
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute ref='xlink:href' use='optional'/>
+        <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
+        <xs:attribute name='assetType' type='AssetAttrType' use='optional'/>
+        <xs:attribute name='assetId' type='AssetIdType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='AssetRefsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Asset references
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='AssetRef' type='AssetRefType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to the asset
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name='TargetsType'>
     <xs:annotation>
       <xs:documentation>
@@ -6594,54 +6626,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
     <xs:attribute name='routingId' type='RoutingIdType' use='required'/>
-  </xs:complexType>
-  <xs:complexType name='AssetRefsType'>
-    <xs:annotation>
-      <xs:documentation>
-        The assets used in this activity
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='AssetRef' type='AssetRefType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            An asset reference that is associated with this activity. These will
-            be archetypes
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name='AssetRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        An archetype reference
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='AssetIdType'>
-        <xs:attribute ref='xlink:href' use='optional'/>
-        <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
-        <xs:attribute name='assetType' type='AssetAttrType' use='required'/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name='AssetArchetypeRefsType'>
-    <xs:annotation>
-      <xs:documentation>
-        The assets used in this activity
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='AssetArchetypeRef' type='AssetRefType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            An asset reference that is associated with this activity. These will
-            be archetypes
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
   </xs:complexType>
   <xs:complexType name='ProcessConstraintsType'>
     <xs:annotation>

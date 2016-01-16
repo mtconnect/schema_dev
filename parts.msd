@@ -124,23 +124,7 @@ package :Parts, 'Parts' do
     member :RoutingId, 'The identifier of this routing'
     member :ProcessStepRef, 'A reference to a process step', 1..INF
   end
-  
-  type :AssetRefs, 'The assets used in this activity' do
-    member :AssetRef, 'An asset reference that is associated with this activity. These will be archetypes', 1..INF
-  end
-  
-  type :AssetRef, 'An archetype reference' do
-    attribute :'xlink:href', 'Reference to the asset', 0..1, :'xlink:href'
-    attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
-    member :AssetType, 'The type of asset that changed', :AssetAttrType
-    member :Value, 'The reference to the underlying asset id', :AssetId
-  end
-    
-  # TODO: Handle targets!
-  type :AssetArchetypeRefs, 'The assets used in this activity' do
-    member :AssetArchetypeRef, 'An asset reference that is associated with this activity. These will be archetypes', 1..INF, :AssetRef
-  end
-      
+              
   type :ProcessConstraints, 'A set of constraints for various process data or parameters' do
     member :ProcessConstraintGroup, 'The process parameters of a type', 1..INF    
   end
