@@ -1618,6 +1618,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='nativeScale' type='NativeScaleType' use='optional'/>
     <xs:attribute name='category' type='CategoryType' use='required'/>
     <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'/>
+    <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
     <xs:attribute name='sampleRate' type='DataItemSampleRateType' use='optional'/>
     <xs:attribute name='representation' type='RepresentationType' use='optional' default='VALUE'/>
     <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'/>
@@ -1730,7 +1731,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ItemSourceType'>
         <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
         <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
-        <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
