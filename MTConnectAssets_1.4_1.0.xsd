@@ -622,6 +622,45 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WORK'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for reset types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The reset intervals
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTIVITY'/>
+      <xs:enumeration value='ACTIVITY_GROUP'/>
+      <xs:enumeration value='PROCESS_STEP'/>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='DAY'/>
+      <xs:enumeration value='LIFE'/>
+      <xs:enumeration value='ANNUAL'/>
+      <xs:enumeration value='MONTH'/>
+      <xs:enumeration value='WEEK'/>
+      <xs:enumeration value='LAST_OPERATION'/>
+      <xs:enumeration value='POWER_ON'/>
+      <xs:enumeration value='PROCESS'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The reset intervals
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='DataItemResetValueTypeEnum DataItemResetValueExtType'/>
+  </xs:simpleType>
   <xs:complexType name='HeaderType'>
     <xs:annotation>
       <xs:documentation>
@@ -1281,20 +1320,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='DataItemValueType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:simpleType name='DataItemResetValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The reset intervals
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='MAINTENANCE'/>
-      <xs:enumeration value='DAY'/>
-      <xs:enumeration value='LIFE'/>
-      <xs:enumeration value='OPERATION'/>
-      <xs:enumeration value='RUNNING'/>
-    </xs:restriction>
-  </xs:simpleType>
   <xs:complexType name='DataItemValueElementType'>
     <xs:annotation>
       <xs:documentation>
@@ -1353,14 +1378,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:simpleType name='ResetType'>
-    <xs:annotation>
-      <xs:documentation>
-        Indicates the sample or event was reset
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
   <xs:complexType name='StreamsType'>
     <xs:annotation>
@@ -1475,7 +1492,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
         <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
-        <xs:attribute name='reset' type='ResetType' use='optional'/>
+        <xs:attribute name='reset' type='DataItemResetValueType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -6401,13 +6418,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Prerequisites' type='PrerequisitesType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                A required set of steps for this step to begin
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
         </xs:sequence>
         <xs:attribute name='family' type='FamilyType' use='optional'/>
         <xs:attribute name='drawing' type='DrawingType' use='optional'/>
@@ -6926,6 +6936,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Prerequisites' type='PrerequisitesType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A required set of steps for this step to begin
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='ControlPrograms' type='ControlProgramsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -7001,23 +7018,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:choice minOccurs='1'>
-      <xs:element name='OfRoutingRef' type='RoutingRefType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A reference to the routing id. We may want to remove... if not
-            given, detaults to the current routing
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='OfProcessStepRef' type='ProcessStepRefType'>
-        <xs:annotation>
-          <xs:documentation>
-            A reference to the routing id. We may want to remove... if not
-            given, detaults to the current routing
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='RoutingRef' type='RoutingRefType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='RoutingRef' type='RoutingRefType'>
         <xs:annotation>
           <xs:documentation>
             A reference to the routing id. We may want to remove... if not
@@ -7511,7 +7512,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'>
-      <xs:enumeration value='RAW_MATERIAL_ID'/>
+      <xs:enumeration value='RAW_MATERIAL'/>
       <xs:enumeration value='SERIAL_NUMBER'/>
     </xs:restriction>
   </xs:simpleType>
@@ -7535,11 +7536,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         An identifier
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:NMTOKEN'>
-      <xs:enumeration value='HEAT_ID'/>
-      <xs:enumeration value='BATCH_ID'/>
-      <xs:enumeration value='LOT_ID'/>
-      <xs:enumeration value='RAW_MATERIAL_ID'/>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='HEAT'/>
+      <xs:enumeration value='BATCH'/>
+      <xs:enumeration value='LOT'/>
+      <xs:enumeration value='RAW_MATERIAL'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='GroupIdentifierType'>
@@ -7710,6 +7711,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='timestamp' type='TimestampType' use='optional'/>
   </xs:complexType>
+  <xs:simpleType name='BatchItemType'>
+    <xs:annotation>
+      <xs:documentation>
+        The process index
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:complexType name='ProcessEventType'>
     <xs:annotation>
       <xs:documentation>
@@ -7721,6 +7730,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The location of the part if not on the machine
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='BatchItem' type='BatchItemType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The item of the batch
           </xs:documentation>
         </xs:annotation>
       </xs:element>

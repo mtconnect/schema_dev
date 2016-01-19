@@ -37,7 +37,6 @@ package :Parts, 'Parts' do
     member :Customers, 'A customer identifier.  The combination of a Part ID and Customer ID can reference a customer Part Number', 0..1
     member :Characteristics, 'The characteristics of a part', 0..1
     member :Routings, 'The possible collections of process steps to make a part', 0..1
-    member :Prerequisites, 'A required set of steps for this step to begin', 0..1
   end
   
   type :Routings, 'A set of possible process steps' do
@@ -177,6 +176,7 @@ package :Parts, 'Parts' do
     member(:Discretionary, 'This process step is discretionary', 0..1) { self.default = 'NO' }
     member :Description, 'The description of the step', 0..1, :StepDescription
     member :ProcessTargets, 'The locations or target devices', 0..1
+    member :Prerequisites, 'A required set of steps for this step to begin', 0..1
     member :ControlPrograms, 'The names of the programs that are required for this step', 0..1
     member :ActivityGroups, 'A collection activites', 0..1
     member :ProcessConstraints, 'The process constraints', 0..1
@@ -194,9 +194,7 @@ package :Parts, 'Parts' do
   
   type :Prerequisite, 'A reference to a previous process step. TODO: do we need to consider routing?' do
     choice do
-      member :OfRoutingRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing', 0..1, :RoutingRef
-      member :OfProcessStepRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing', :ProcessStepRef
-      member :RoutingRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing', 0..1
+      member :RoutingRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing'
       member :ProcessStepRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing'
     end
   end
@@ -318,7 +316,7 @@ package :Parts, 'Parts' do
   basic_type :PartIdentifier, 'An identifier of a part', :NMTOKEN
   
   enum :TypeOfUinqueIdentifier, 'An identifier' do
-    value :RAW_MATERIAL_ID, 'A raw material id'
+    value :RAW_MATERIAL, 'A raw material id'
     value :SERIAL_NUMBER, 'A serial number'
   end
   
@@ -330,10 +328,10 @@ package :Parts, 'Parts' do
   end
   
   enum :TypeOfGroupIdentifier, 'An identifier' do
-    value :HEAT_ID, 'A heat id'
-    value :BATCH_ID, 'A batch id'
-    value :LOT_ID, 'A lot id'
-    value :RAW_MATERIAL_ID, 'A raw material id'
+    value :HEAT, 'A heat id'
+    value :BATCH, 'A batch id'
+    value :LOT, 'A lot id'
+    value :RAW_MATERIAL, 'A raw material id'
   end  
 
   type :GroupIdentifier, 'A unique part' do
@@ -387,14 +385,17 @@ package :Parts, 'Parts' do
     member :Events, 'A collection of events', 0..1
     member :Condition, 'The representation of the devices condition', 0..1, :ConditionList
   end
+  
+  basic_type :BatchItem, 'The process index'
 
   type :ProcessEvent, 'This history of this part' do
     member :StepIdRef, 'A reference to the step id'
     member :RoutingIdRef, 'A reference to the routing id'
     member :Timestamp, 'The timestamp'
     member :TargetIdRef, 'The unique identifier of the device this process was performed on'
-    member :Location, 'The location of the part if not on the machine', 0..1, :PartLocation
     member :State, 'The process state', :ProcessEventState
+    member :Location, 'The location of the part if not on the machine', 0..1, :PartLocation
+    member :BatchItem, 'The item of the batch', 0..1
     member :User, 'The identifier of the operator', 0..1, :PartUser
     member :ControlPrograms, 'The control programs used in this event', 0..1
     member :AssetRefs, 'The workholding identifier', 0..1

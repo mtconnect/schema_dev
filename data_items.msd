@@ -75,15 +75,7 @@ package :DataItems, 'Data Items Package' do
   type :DataItemBase, 'A starting point for a data item' do
     member :Value, 'The base value', :DataItemValue
   end
-  
-  enum :DataItemResetValue, 'The reset intervals' do
-    value :MAINTENANCE, 'Reset when Maintainence occurs'
-    value :DAY, 'Reset every day'
-    value :LIFE, 'Counter starts at the beginning of the life of the machine'
-    value :OPERATION, 'Count starts at the beginning of an operation'
-    value :RUNNING, 'Count starts at the beginning of an operation'
-  end
-    
+          
   type :DataItemValueElement, 'The value element' do
     member :Value, 'A possible value for this data item', :DataItemOption
   end

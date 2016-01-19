@@ -621,6 +621,45 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WORK'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for reset types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The reset intervals
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTIVITY'/>
+      <xs:enumeration value='ACTIVITY_GROUP'/>
+      <xs:enumeration value='PROCESS_STEP'/>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='DAY'/>
+      <xs:enumeration value='LIFE'/>
+      <xs:enumeration value='ANNUAL'/>
+      <xs:enumeration value='MONTH'/>
+      <xs:enumeration value='WEEK'/>
+      <xs:enumeration value='LAST_OPERATION'/>
+      <xs:enumeration value='POWER_ON'/>
+      <xs:enumeration value='PROCESS'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The reset intervals
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='DataItemResetValueTypeEnum DataItemResetValueExtType'/>
+  </xs:simpleType>
   <xs:complexType name='HeaderType'>
     <xs:annotation>
       <xs:documentation>

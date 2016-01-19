@@ -338,4 +338,25 @@ package :common, 'Common attributes and elements for all schemas' do
     value :WORK, 'The position that acts as the origin for a particular workpiece'
   end
   
+  basic_type(:DataItemResetValueExt, 'An extension point for reset types') do
+    pattern '[a-ln-z]:[A-Z_0-9]+'
+  end
+  
+  enum :DataItemResetValue, 'The reset intervals' do
+    extensible :DataItemResetValueExt
+    
+    value :ACTIVITY, 'The item was reset at the beginning of an activity'
+    value :ACTIVITY_GROUP, 'The item was reset at the beginning of an activity group'
+    value :PROCESS_STEP, 'The item was reset at the beginning of a process step'
+    value :MAINTENANCE, 'Reset when Maintainence occurs'
+    value :DAY, 'Reset every day'
+    value :LIFE, 'Counter starts at the beginning of the life of the machine'
+    value :ANNUAL, 'Counter starts at the beginning of a yearly cycle'
+    value :MONTH, 'Counter starts at the beginning of a montly cycle'
+    value :WEEK, 'Counter starts at the beginning of a weekly cycle'
+    value :LAST_OPERATION, 'Count starts at the beginning of an operation'
+    value :POWER_ON, 'Count starts at time the machine powers on'
+    value :PROCESS, 'Count starts at the beginning of a process'
+  end
+  
 end
