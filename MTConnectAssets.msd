@@ -33,5 +33,5 @@ load 'condition.msd'
 
 load 'tools.msd'
 load 'parts.msd'
-load 'inspection.msd'
+#load 'inspection.msd'
 load 'files.msd'

@@ -923,6 +923,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
+  <xs:simpleType name='TargetIdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the target
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:complexType name='TargetType'>
     <xs:annotation>
       <xs:documentation>
@@ -973,6 +981,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
+  <xs:simpleType name='TargetGroupIdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        An identifier for a target group
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:complexType name='TargetGroupType'>
     <xs:annotation>
       <xs:documentation>
@@ -1005,7 +1021,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='xs:string'>
-        <xs:attribute name='targetId' type='TargetIdType' use='required'/>
+        <xs:attribute name='targetIdRef' type='TargetIdRefType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1017,7 +1033,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='xs:string'>
-        <xs:attribute name='targetGroupId' type='TargetGroupIdType' use='required'/>
+        <xs:attribute name='targetGroupIdRef' type='TargetGroupIdRefType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1338,6 +1354,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='ResetType'>
+    <xs:annotation>
+      <xs:documentation>
+        Indicates the sample or event was reset
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:complexType name='StreamsType'>
     <xs:annotation>
       <xs:documentation>
@@ -1451,6 +1475,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
         <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
+        <xs:attribute name='reset' type='ResetType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -6204,7 +6229,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='FamilyIdType'>
+  <xs:simpleType name='FamilyType'>
     <xs:annotation>
       <xs:documentation>
         The family this part belongs to
@@ -6212,7 +6237,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='RevisionIdType'>
+  <xs:simpleType name='RevisionType'>
     <xs:annotation>
       <xs:documentation>
         The revision of the part type
@@ -6220,7 +6245,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='DrawingIdType'>
+  <xs:simpleType name='DrawingType'>
     <xs:annotation>
       <xs:documentation>
         The drawing identifier associated with this part
@@ -6244,7 +6269,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
-  <xs:simpleType name='VendorIdType'>
+  <xs:simpleType name='PartVendorType'>
     <xs:annotation>
       <xs:documentation>
         The identifier of the vendor
@@ -6265,6 +6290,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         A unique constraint identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='StepIdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the step
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='RoutingIdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the step
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
@@ -6381,10 +6422,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:element name='Prerequisites' type='PrerequisitesType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                A required set of steps for this step to begin
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
         </xs:sequence>
-        <xs:attribute name='familyId' type='FamilyIdType' use='optional'/>
-        <xs:attribute name='drawingId' type='DrawingIdType' use='optional'/>
-        <xs:attribute name='revisionId' type='RevisionIdType' use='required'/>
+        <xs:attribute name='family' type='FamilyType' use='optional'/>
+        <xs:attribute name='drawing' type='DrawingType' use='optional'/>
+        <xs:attribute name='revision' type='RevisionType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -6542,7 +6590,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='vendorId' type='VendorIdType' use='required'/>
+    <xs:attribute name='vendor' type='PartVendorType' use='required'/>
   </xs:complexType>
   <xs:complexType name='RawMaterialType'>
     <xs:annotation>
@@ -6654,7 +6702,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='routingId' type='RoutingIdType' use='required'/>
+    <xs:attribute name='routingIdRef' type='RoutingIdRefType' use='required'/>
   </xs:complexType>
   <xs:complexType name='ProcessConstraintsType'>
     <xs:annotation>
@@ -6900,13 +6948,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='Prerequisites' type='PrerequisitesType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A required set of steps for this step to begin
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
       <xs:element name='ProcessTargets' type='ProcessTargetsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -6961,7 +7002,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='xs:string'>
-        <xs:attribute name='stepId' type='StepIdType' use='required'/>
+        <xs:attribute name='stepIdRef' type='StepIdRefType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -6989,7 +7030,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:choice minOccurs='1'>
-      <xs:element name='RoutingRef' type='RoutingRefType'>
+      <xs:element name='OfRoutingRef' type='RoutingRefType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to the routing id. We may want to remove... if not
+            given, detaults to the current routing
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='OfProcessStepRef' type='ProcessStepRefType'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to the routing id. We may want to remove... if not
+            given, detaults to the current routing
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='RoutingRef' type='RoutingRefType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A reference to the routing id. We may want to remove... if not
@@ -7064,6 +7121,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
   <xs:simpleType name='ActivityIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the activity associated with this cutting tool
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ActivityIdRefType'>
     <xs:annotation>
       <xs:documentation>
         The identifier of the activity associated with this cutting tool
@@ -7209,6 +7274,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
+  <xs:simpleType name='ProcessTargetIdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A process target
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:complexType name='ProcessTargetType'>
     <xs:annotation>
       <xs:documentation>
@@ -7279,7 +7352,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='xs:string'>
-        <xs:attribute name='processTargetId' type='ProcessTargetIdType' use='required'/>
+        <xs:attribute name='processTargetIdRef' type='ProcessTargetIdRefType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -7342,7 +7415,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='name' type='ProgramNameType' use='required'/>
     <xs:attribute name='programName' type='ProgramNameType' use='required'/>
-    <xs:attribute name='revisionId' type='RevisionIdType' use='required'/>
+    <xs:attribute name='revision' type='RevisionType' use='required'/>
     <xs:attribute name='timestamp' type='TimestampType' use='optional'/>
     <xs:attribute name='restrictions' type='RestrictionsType' use='optional'/>
   </xs:complexType>
@@ -7417,7 +7490,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:annotation>
           </xs:element>
         </xs:sequence>
-        <xs:attribute name='revisionId' type='RevisionIdType' use='required'/>
+        <xs:attribute name='revision' type='RevisionType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -7480,7 +7553,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='PartIdentifierType'>
         <xs:attribute name='type' type='TypeOfUinqueIdentifierType' use='required'/>
-        <xs:attribute name='stepId' type='StepIdType' use='optional'/>
+        <xs:attribute name='stepIdRef' type='StepIdRefType' use='optional'/>
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
@@ -7507,7 +7580,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='PartIdentifierType'>
         <xs:attribute name='type' type='TypeOfGroupIdentifierType' use='required'/>
-        <xs:attribute name='stepId' type='StepIdType' use='optional'/>
+        <xs:attribute name='stepIdRef' type='StepIdRefType' use='optional'/>
         <xs:attribute name='timestamp' type='TimestampType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
@@ -7578,7 +7651,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:simpleType name='PartOperatorIdType'>
+  <xs:simpleType name='PartUserType'>
     <xs:annotation>
       <xs:documentation>
         An operator Id
@@ -7673,29 +7746,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:choice minOccurs='1'>
-        <xs:element name='RoutingRef' type='RoutingRefType'>
-          <xs:annotation>
-            <xs:documentation>
-              The name of the routing
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element name='ProcessStepRef' type='ProcessStepRefType'>
-          <xs:annotation>
-            <xs:documentation>
-              A reference to a process step if there is a single routing
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-      </xs:choice>
-      <xs:element name='TargetRef' type='TargetRefType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The unique identifier of the device this process was performed on
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
       <xs:element name='Location' type='PartLocationType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -7703,7 +7753,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='OperatorId' type='PartOperatorIdType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='User' type='PartUserType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             The identifier of the operator
@@ -7739,9 +7789,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+    <xs:attribute name='stepIdRef' type='StepIdRefType' use='required'/>
+    <xs:attribute name='routingIdRef' type='RoutingIdRefType' use='required'/>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
+    <xs:attribute name='targetIdRef' type='TargetIdRefType' use='required'/>
     <xs:attribute name='state' type='ProcessEventStateType' use='required'/>
-    <xs:attribute name='revisionId' type='RevisionIdType' use='optional'/>
+    <xs:attribute name='revision' type='RevisionType' use='optional'/>
   </xs:complexType>
   <xs:complexType name='ActivityEventsType'>
     <xs:annotation>
@@ -7766,13 +7819,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='ActivityRef' type='ActivityRefType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The activity id
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
       <xs:element name='AssetRefs' type='AssetRefsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -7788,76 +7834,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+    <xs:attribute name='activityIdRef' type='ActivityIdRefType' use='optional'/>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
     <xs:attribute name='sequenceNumber' type='SequenceNumberType' use='optional'/>
     <xs:attribute name='state' type='ProcessEventStateType' use='required'/>
   </xs:complexType>
-  <xs:simpleType name='InspectionStandardType'>
-    <xs:annotation>
-      <xs:documentation>
-        The inspection standard
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:complexType name='InspectionArchetypeType'>
-    <xs:annotation>
-      <xs:documentation>
-        Inspection Asset containing QIF or other standards for inspection plan
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AssetArchetypeType'>
-        <xs:sequence>
-          <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
-            <xs:annotation>
-              <xs:documentation>
-                Any elements
-              </xs:documentation>
-            </xs:annotation>
-          </xs:any>
-        </xs:sequence>
-        <xs:attribute name='inspectionStandard' type='InspectionStandardType' use='optional'/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='InspectionArchetype' type='InspectionArchetypeType' substitutionGroup='AssetArchetype'>
-    <xs:annotation>
-      <xs:documentation>
-        Inspection Asset containing QIF or other standards for inspection plan
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='InspectionType'>
-    <xs:annotation>
-      <xs:documentation>
-        Inspection Asset containing QIF or other standards for inspection
-        results
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AssetInstanceType'>
-        <xs:sequence>
-          <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
-            <xs:annotation>
-              <xs:documentation>
-                Any elements
-              </xs:documentation>
-            </xs:annotation>
-          </xs:any>
-        </xs:sequence>
-        <xs:attribute name='inspectionStandard' type='InspectionStandardType' use='optional'/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Inspection' type='InspectionType' substitutionGroup='AssetInstance'>
-    <xs:annotation>
-      <xs:documentation>
-        Inspection Asset containing QIF or other standards for inspection
-        results
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:simpleType name='VersionIdType'>
     <xs:annotation>
       <xs:documentation>

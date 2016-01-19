@@ -2,14 +2,16 @@
 # coding: utf-8
 package :Parts, 'Parts' do
   attr :CustomerId, 'A customer ID'
-  attr :FamilyId, 'The family this part belongs to'
-  attr :RevisionId, 'The revision of the part type'
-  attr :DrawingId, 'The drawing identifier associated with this part'
+  attr :Family, 'The family this part belongs to'
+  attr :Revision, 'The revision of the part type'
+  attr :Drawing, 'The drawing identifier associated with this part'
   attr :StepId, 'The identifier of the step', :NMTOKEN
   attr :RoutingId, 'The identifier of the step', :NMTOKEN
-  attr :VendorId, 'The identifier of the vendor', :NMTOKEN
+  attr :PartVendor, 'The identifier of the vendor', :NMTOKEN
   attr :Precedence, 'The priority of a thing. A numberic indicator of the relative order of options.', :integer
   attr :ConstraintGroupId, 'A unique constraint identifier', :NMTOKEN
+  attr :StepIdRef, 'The identifier of the step', :NMTOKEN
+  attr :RoutingIdRef, 'The identifier of the step', :NMTOKEN
   
   
   enum :Discretionary, 'An optional item' do
@@ -26,15 +28,16 @@ package :Parts, 'Parts' do
   basic_type :CustomerAddress, 'A customer address'
       
   type :PartArchetype, 'Common information regarding a part kind', :AssetArchetype do
-    member :FamilyId, 'A group this part belongs to', 0..1
-    member :DrawingId, 'A drawing associated with this part', 0..1
-    member :RevisionId, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
+    member :Family, 'A group this part belongs to', 0..1
+    member :Drawing, 'A drawing associated with this part', 0..1
+    member :Revision, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
     
     member :TargetGroups, 'The target groups for this asset', 0..1
     member :RawMaterial, 'Raw material'
     member :Customers, 'A customer identifier.  The combination of a Part ID and Customer ID can reference a customer Part Number', 0..1
     member :Characteristics, 'The characteristics of a part', 0..1
     member :Routings, 'The possible collections of process steps to make a part', 0..1
+    member :Prerequisites, 'A required set of steps for this step to begin', 0..1
   end
   
   type :Routings, 'A set of possible process steps' do
@@ -92,7 +95,7 @@ package :Parts, 'Parts' do
   end
   
   type :Vendor, 'The vendor of the raw material' do
-    member :VendorId, 'The vendor identifier'
+    member :Vendor, 'The vendor identifier', :PartVendor
     member :Name, 'The vendor name', :VendorName
     member :Description, 'The description of the vendor as freeform text', :AssetDescription, 0..1
   end
@@ -121,7 +124,7 @@ package :Parts, 'Parts' do
   end
   
   type :RoutingRef, 'A reference to a routing' do
-    member :RoutingId, 'The identifier of this routing'
+    member :RoutingIdRef, 'The identifier of this routing'
     member :ProcessStepRef, 'A reference to a process step', 1..INF
   end
               
@@ -173,7 +176,6 @@ package :Parts, 'Parts' do
     member :StepId, 'The identifier of this step'
     member(:Discretionary, 'This process step is discretionary', 0..1) { self.default = 'NO' }
     member :Description, 'The description of the step', 0..1, :StepDescription
-    member :Prerequisites, 'A required set of steps for this step to begin', 0..1
     member :ProcessTargets, 'The locations or target devices', 0..1
     member :ControlPrograms, 'The names of the programs that are required for this step', 0..1
     member :ActivityGroups, 'A collection activites', 0..1
@@ -183,7 +185,7 @@ package :Parts, 'Parts' do
   end
   
   type :ProcessStepRef, 'A reference to a process step' do
-    member :StepId, 'The identifier of this step'
+    member :StepIdRef, 'The identifier of this step'
   end
   
   type :Prerequisites, 'A list of required steps for this step to begin' do
@@ -192,7 +194,9 @@ package :Parts, 'Parts' do
   
   type :Prerequisite, 'A reference to a previous process step. TODO: do we need to consider routing?' do
     choice do
-      member :RoutingRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing'
+      member :OfRoutingRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing', 0..1, :RoutingRef
+      member :OfProcessStepRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing', :ProcessStepRef
+      member :RoutingRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing', 0..1
       member :ProcessStepRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing'
     end
   end
@@ -210,6 +214,7 @@ package :Parts, 'Parts' do
   
   attr :SequenceNumber, 'The  number indication the sequence of the operaton', :integer
   attr :ActivityId, 'The identifier of the activity associated with this cutting tool', :string
+  attr :ActivityIdRef, 'The identifier of the activity associated with this cutting tool', :string
   
   type :Activities, 'A collection of activities' do
     member :Activity, 'A process activity', 1..INF
@@ -244,6 +249,7 @@ package :Parts, 'Parts' do
   end
   
   attr :ProcessTargetId, 'A process target', :NMTOKEN
+  attr :ProcessTargetIdRef, 'A process target', :NMTOKEN
   type :ProcessTarget, "A reference to a target id" do
     member :Precedence, 'The precedence of this activity if multiple activities have the same sequence', 0..1
     member :ProcessTargetId, 'The process target id'
@@ -262,7 +268,7 @@ package :Parts, 'Parts' do
   end
   
   type :ProcessTargetRef, 'A reference to a process target' do
-    member :ProcessTargetId, 'The process target id'
+    member :ProcessTargetIdRef, 'The process target id'
   end
   
   type :FileAssetRef, 'A reference to the asset file' do
@@ -274,7 +280,7 @@ package :Parts, 'Parts' do
   type :ControlProgram, 'A control program' do
     member :Name, 'The program name', :ProgramName
     member :ProgramName, 'The name of the program on the machine'
-    member :RevisionId, 'The revision of this program'
+    member :Revision, 'The revision of this program'
     member :Description, 'The description of the program', 0..1, :StepDescription
     member :FileAssetRef, 'A reference to the file asset', 0..1
     member :TargetRefs, "The target id or group references"
@@ -297,7 +303,7 @@ package :Parts, 'Parts' do
         
   type :Part, 'A part or group of individual parts that are being from workpieces', :AssetInstance do
     member :PartIdentifiers, 'The part identifiers'
-    member :RevisionId, 'An identifier for the current revision of the part.'
+    member :Revision, 'An identifier for the current revision of the part.'
     member :Workorder, 'A workorder for this part instance', 0..1
     member :ProcessEvents, 'The history of the process for this part instance', 0..1
   end
@@ -318,7 +324,7 @@ package :Parts, 'Parts' do
   
   type :UniqueIdentifier, 'A unique part' do
     member :Type, 'The serial number of an individual part', :TypeOfUinqueIdentifier
-    member :StepId, 'The step this id is associated with', 0..1
+    member :StepIdRef, 'The step this id is associated with', 0..1
     member :Value, 'The identifier', :PartIdentifier
     member :Timestamp, 'The timestamp'
   end
@@ -332,7 +338,7 @@ package :Parts, 'Parts' do
 
   type :GroupIdentifier, 'A unique part' do
     member :Type, 'The serial number of an individual part', :TypeOfGroupIdentifier
-    member :StepId, 'The step this id is associated with', 0..1
+    member :StepIdRef, 'The step this id is associated with', 0..1
     member :Value, 'The identifier', :PartIdentifier
     member :Timestamp, 'The timestamp'
   end
@@ -355,7 +361,7 @@ package :Parts, 'Parts' do
     member :Value, 'A count for this group', :TotalPartCount
   end
   
-  basic_type :PartOperatorId, 'An operator Id'
+  basic_type :PartUser, 'An operator Id'
   basic_type :PartLocation, 'The location of the part if not on the machine'
   
   enum :ProcessEventState, 'The state of the process' do
@@ -383,18 +389,16 @@ package :Parts, 'Parts' do
   end
 
   type :ProcessEvent, 'This history of this part' do
-    choice do
-      member :RoutingRef, 'The name of the routing'
-      member :ProcessStepRef, 'A reference to a process step if there is a single routing'
-    end
+    member :StepIdRef, 'A reference to the step id'
+    member :RoutingIdRef, 'A reference to the routing id'
     member :Timestamp, 'The timestamp'
-    member :TargetRef, 'The unique identifier of the device this process was performed on', 0..1
+    member :TargetIdRef, 'The unique identifier of the device this process was performed on'
     member :Location, 'The location of the part if not on the machine', 0..1, :PartLocation
     member :State, 'The process state', :ProcessEventState
-    member :OperatorId, 'The identifier of the operator', 0..1, :PartOperatorId
+    member :User, 'The identifier of the operator', 0..1, :PartUser
     member :ControlPrograms, 'The control programs used in this event', 0..1
     member :AssetRefs, 'The workholding identifier', 0..1
-    member :RevisionId, 'The revision of the process used', 0..1
+    member :Revision, 'The revision of the process used', 0..1
     member :ActivityEvents, 'A set of activities associated with the process event', 0..1
     member :ProcessData, 'A set of annotations associated with the event', 0..1
   end
@@ -404,7 +408,7 @@ package :Parts, 'Parts' do
   end
   
   type :ActivityEvent, 'An event associated with a ProcessStep Operaiton' do
-    member :ActivityRef, 'The activity id', 0..1
+    member :ActivityIdRef, 'The activity id', 0..1
     member :Timestamp, 'The timestamp'
     member :SequenceNumber, 'The  number indication the sequence of the operaton', 0..1
     member :State, 'The process state', :ProcessEventState

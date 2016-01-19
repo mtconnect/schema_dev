@@ -74,6 +74,7 @@ package :Assets, 'Mobile Assets' do
   basic_type :TargetLocation, 'The target value. For a device it is the UUID, for a location it is a description or UUID'
   
   attr :TargetId, 'The identifier of the target', :NMTOKEN
+  attr :TargetIdRef, 'The identifier of the target', :NMTOKEN
   
   type :Target, 'The device or location something can be done at' do    
     member :TargetId, 'The identifier of this target', 1
@@ -90,6 +91,7 @@ package :Assets, 'Mobile Assets' do
   end
   
   attr :TargetGroupId, 'An identifier for a target group', :NMTOKEN
+  attr :TargetGroupIdRef, 'An identifier for a target group', :NMTOKEN
   type :TargetGroup, 'A group of targets' do
     member :Description, 'The description of the target group', 0..1, :AssetDescription
     member :TargetGroupId, 'The identifier of this target', 1
@@ -97,10 +99,10 @@ package :Assets, 'Mobile Assets' do
   end
   
   type :TargetRef, 'A reference to a target' do
-    member :TargetId, 'The identifier of this target', 1
+    member :TargetIdRef, 'The identifier of this target', 1
   end
   type :TargetGroupRef, 'A reference to a target' do
-    member :TargetGroupId, 'The identifier of this target', 1
+    member :TargetGroupIdRef, 'The identifier of this target', 1
   end
   
 end
