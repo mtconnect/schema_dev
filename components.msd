@@ -8,6 +8,22 @@ package :Component, 'Top Level Components Package' do
     member :Device, 'A piece of equipment', 1..INF
   end
   
+  # Data Item References for Streams
+  attr :IdRef, 'A reference to an identifier', :IDREF
+  
+  type :Reference, 'An abstract reference type' do
+    abstract
+    member :IdRef, 'A reference to an id in the MTConnectDevices model'
+    member :Name, 'An optional name of the referenced item, used for documentation', 0..1
+  end
+  
+  type :References, 'A list of references' do
+    member :Reference, 'A reference to another part of the model', 1..INF
+  end
+  
+  type :DataItemRef, 'A data item reference', :Reference
+  type :ComponentRef, 'A data item reference', :Reference
+  
   type :Component, "An abstract component type. This is a placeholder for all components" do
     abstract
     member :id, 'The data item identifier', :ID
@@ -19,6 +35,7 @@ package :Component, 'Top Level Components Package' do
     member :DataItems, 'The component\'s Data Items', 0..1
     member :Components, 'The sub components', 0..1
     member :Compositions, 'A list of composition elements', 0..1
+    member :References, 'A list of references', 0..1
   end
 
   type :ComponentDescription, 'The descriptive information for this component. This can be manufacturer specific' do
@@ -40,7 +57,7 @@ package :Component, 'Top Level Components Package' do
     
     member :Configuration,  'Configuration types', 0..1, :AbstractConfiguration
   end
-  
+    
   type :CommonComponent, "An abstract component that has an optional uuid", :Component do 
     member :Uuid, 'The components universally unique id. This can be composed of the manufactures id or name and the serial number.', 0..1
     member :Name, 'The components name', 0..1

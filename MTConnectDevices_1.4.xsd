@@ -786,6 +786,74 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:simpleType name='IdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to an identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
+  <xs:complexType name='ReferenceType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract reference type
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name='idRef' type='IdRefType' use='required'/>
+    <xs:attribute name='name' type='NameType' use='optional'/>
+  </xs:complexType>
+  <xs:element abstract='true' name='Reference' type='ReferenceType'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract reference type
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ReferencesType'>
+    <xs:annotation>
+      <xs:documentation>
+        A list of references
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref='Reference' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='DataItemRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A data item reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ReferenceType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='DataItemRef' type='DataItemRefType' substitutionGroup='Reference'>
+    <xs:annotation>
+      <xs:documentation>
+        A data item reference
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ComponentRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A data item reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ReferenceType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ComponentRef' type='ComponentRefType' substitutionGroup='Reference'>
+    <xs:annotation>
+      <xs:documentation>
+        A data item reference
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='ComponentType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -825,6 +893,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A list of composition elements
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='References' type='ReferencesType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A list of references
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -1783,43 +1858,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name='IdrefType'>
-    <xs:annotation>
-      <xs:documentation>
-        A reference to an identifier
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:IDREF'/>
-  </xs:simpleType>
-  <xs:complexType name='DataItemRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        A reference to a data item
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='xs:string'>
-        <xs:attribute name='dataItemId' type='IdrefType' use='required'/>
-        <xs:attribute name='name' type='NameType' use='optional'/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name='DataItemRefsType'>
-    <xs:annotation>
-      <xs:documentation>
-        A list of references
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='DataItemRef' type='DataItemRefType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            A reference to a data item or component
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name='InterfaceType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -1827,17 +1865,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='CommonComponentType'>
-        <xs:sequence>
-          <xs:element name='DataItemRefs' type='DataItemRefsType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                A list of referenced components and data items
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
+      <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
   <xs:element abstract='true' name='Interface' type='InterfaceType' substitutionGroup='CommonComponent'>
