@@ -41,7 +41,6 @@ package :Assets, 'Mobile Assets' do
   end
     
   type :AssetArchetype, 'An abstract asset archetype', :Asset do
-    member :ParentAssetArchetypeRef, 'Parent assset references', 0..1, :AssetArchetypeRef
     member :Description, 'The description of the file (freeform)', 0..1, :AssetDescription
     member :Targets, 'The targets for this asset', 0..1
   end

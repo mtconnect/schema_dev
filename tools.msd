@@ -1,30 +1,34 @@
 package :Tools, 'Cutting tools' do
   range = "(\\d+|\\d+-\\d+)(,(\\d+|\\d+-\\d+))*"
   
-  basic_type :LocationValue, 'The tool location'
+  float = '[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?'
+  optional_float = "#{float}|"
+  
+  basic_type :LocationValue, 'The tool location', :integer
   basic_type :ProgramToolNumber, 'The number referenced in the program for this tool', :integer
   basic_type :ReconditionCountValue, 'The number of times the cutter has been reconditioned', :integer
   basic_type :ConnectionCodeMachineSide, 'The code for the connection to the machine'
   basic_type :ProgramToolGroup, 'The tool group associated with the tool'
+  basic_type(:Speed, 'A speed in RPM or mm/s') { pattern optional_float }
+  basic_type(:MeasurementValue, 'A measurement value') { pattern optional_float }
   
   attr :LocationSize, 'The number of location units required to hold this tool', :integer
-  attr :CuttingToolId, 'The identifier of the tool type', :NMTOKEN
+  attr :MeasurementAttr, 'A measurement value', :float
+  attr :CuttingToolId, 'DEPRECATED: The identifier of the tool type', :NMTOKEN
   attr :EdgeCount, 'The number of cutting edges', :integer
   attr :Overlap, 'The number of additional locations taken by a tool', :integer
   attr :ToolLifeValue, 'The life of the tool in time, wear, or parts', :float
   attr :ItemId, 'An identifier for the insert', :NMTOKEN
   attr(:IndexRange, 'A single or range of indexes. A range can be a comma separated set of individual elements as in "1,2,3,4", or as a inclusive range of values as in "1-10" or multiple ranges "1-4,6-10"') { pattern range }
-  attr :MeasurementValue, 'A measurement value', :float
   attr :Minimum, 'A minimum value', :float  
   attr :Maximum, 'A maximum value', :float
   attr :Nominal, 'A nominal value', :float
-  attr :Speed, 'A speed in RPM or mm/s', :float
   attr :Grade, 'The material for a cutting item'
   attr :MaximumCount, 'A maximum count value', :integer
-  attr :MeasurementCode, 'An application specific code'
+  attr :MeasurementCode, 'A application specific code'
   attr :Manufacturers, 'A comman delimited list of manufactures'
   attr :TurretLocation, 'The turret for a lathe or machine tool'
-    
+  
   enum :DefinitionFormat, 'The format of the definition' do
     value :EXPRESS, 'The definition will be provided in EXPRESS format'
     value :XML, 'The definition will be provided in XML'
@@ -68,15 +72,15 @@ package :Tools, 'Cutting tools' do
     value :SPINDLE, 'The spindle the tool currently resides in'
     value :REJECT, 'The tool is in a reject pot location'
   end
-  
+
   type :CuttingToolDefinition, 'The description of an asset, can be freeform text or elemenrts' do
     mixed
     member :format, 'The format of the data in the definition', 0..1, :DefinitionFormat do
       default = 'XML'
     end
     member :any, 'Any elements', 0..INF
-  end       
-  
+  end 
+
   # Cutting tool definition
   type :CuttingTool, 'A cutting tool', :AssetInstance do
     member :SerialNumber, 'The serial number of the asset'
@@ -101,7 +105,7 @@ package :Tools, 'Cutting tools' do
   
   type :CuttingToolLifeCycleArchetype, 'A archetypical cutting tool life cycle definition' do
     member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
-    member :ToolLife, 'The life of the cutting tool assembly', 0..3, :Life
+    member :CuttingToolLife, 'The life of the cutting tool assembly', 0..3, :Life
     
     # Properties
     member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
@@ -126,7 +130,7 @@ package :Tools, 'Cutting tools' do
     # Status
     member :CutterStatus, 'The state of the tool assembly - only for Instance (not archetype)', 1 
     member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
-    member :ToolLife, 'The life of the cutting tool assembly', 0..3, :Life
+    member :CuttingToolLife, 'The life of the cutting tool assembly', 0..3, :Life
     
     # Properties
     member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
@@ -189,10 +193,10 @@ package :Tools, 'Cutting tools' do
     member :Units, 'The units for the measurement. This will be defined by MTConnect', 0..1
     member :NativeUnits, 'The native units for the measurement, if different from units', 0..1
     member :Code, 'The shop or application specific code for this measurement', 0..1, :MeasurementCode
-    member :Maximum, 'The maximum tolerance value', 0..1, :MeasurementValue
-    member :Minimum, 'The minimum tolerance value', 0..1, :MeasurementValue
-    member :Nominal, 'The nominal value', 0..1, :MeasurementValue
-    member :Value, 'The actual measurement', 0..1, :MeasurementValue
+    member :Maximum, 'The maximum tolerance value', 0..1, :MeasurementAttr
+    member :Minimum, 'The minimum tolerance value', 0..1, :MeasurementAttr
+    member :Nominal, 'The nominal value', 0..1, :MeasurementAttr
+    member :Value, 'The actual measurement', :MeasurementValue
   end
   
   type :CommonMeasurement, 'Measurements for both the assembly and the cutting item', :Measurement do
@@ -271,7 +275,7 @@ package :Tools, 'Cutting tools' do
     member :Count, 'The number of edges', :EdgeCount
     member :CuttingItem, 'An edge', 1..INF
   end
-      
+    
   type :CuttingItem, 'An edge into a tool assembly' do
     member :Indices, 'The unique identifier of this insert in this assembly', :IndexRange
     member :ItemId, 'The manufacturer identifier of this cutting item ', 0..1    

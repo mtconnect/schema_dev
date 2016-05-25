@@ -54,6 +54,7 @@ package :DataItems, 'Data Items Package' do
     
     member :Source, 'Additional information about the component, channel, register, etc... that collects the data.', 0..1, :DataItemSource
     member :Constraints, 'Limits on the set of possible values', 0..1, :DataItemConstraints
+    member :Filters, 'Limits on the set of possible values', 0..1, :Filters
     element :InitialValue, 'The initial value for counters', 0..1, :DataItemNumericValue
     element :ResetTrigger, 'The event that triggers the resetting of this counter', 0..1, :DataItemResetValue
   end
@@ -69,7 +70,11 @@ package :DataItems, 'Data Items Package' do
         member :Nominal, 'A nominal value for this data item.', :DataItemNumericValue
       end
     end
-    member :Filter, 'A limit on the amount of data by specifying the minimal delta required.', 0..1, :DataItemFilter
+    member :Filter, 'DEPRECATED: A limit on the amount of data by specifying the minimal delta required.', 0..1, :DataItemFilter
+  end
+  
+  type :Filters, 'A set of filters' do
+    member :Filter, 'A limit on the amount of data by specifying the minimal delta required.', 1..INF, :DataItemFilter
   end
   
   type :DataItemBase, 'A starting point for a data item' do
@@ -88,6 +93,7 @@ package :DataItems, 'Data Items Package' do
   type :DataItemSource, 'A native data source' do
     member :DataItemId, 'The optional data item within the source component that provides the underlying data', 0..1, :SourceDataItemId
     member :ComponentId, 'The component that is collecting the data associated with this data item', 0..1, :SourceComponentId
+    member :CompositionId, 'The optional composition identifier for the source of this data item', 0..1
     member :Value, 'The source or channel for this data', :ItemSource
   end
 

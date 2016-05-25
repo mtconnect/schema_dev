@@ -1714,6 +1714,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Filters' type='FiltersType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            Limits on the set of possible values
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='InitialValue' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -1789,6 +1796,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Filter' type='DataItemFilterType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
+            DEPRECATED: A limit on the amount of data by specifying the minimal
+            delta required.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='FiltersType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of filters
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Filter' type='DataItemFilterType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
             A limit on the amount of data by specifying the minimal delta
             required.
           </xs:documentation>
@@ -1838,6 +1862,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ItemSourceType'>
         <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
         <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
+        <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
