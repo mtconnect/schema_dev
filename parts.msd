@@ -1,6 +1,9 @@
 # coding: utf-8
 
 package :Parts, 'Parts' do
+  attr :Family, 'The family this part belongs to'
+  attr :Revision, 'The revision of the part type'
+  attr :Drawing, 'The drawing identifier associated with this part'
   attr :CustomerId, 'A customer ID'
   attr :PartVendor, 'The identifier of the vendor', :NMTOKEN
   attr :StepIdRef, 'The identifier of the step', :NMTOKEN
@@ -80,7 +83,11 @@ package :Parts, 'Parts' do
     member :Vendor, 'The vendor of the raw material', 0..1
   end
 
-  type :PartArchitype, 'A part or group of individual parts that are being from workpieces', :AssetInstance do
+  type :PartArchitype, 'A part or group of individual parts that are being from workpieces', :AssetArchetype do
+    member :Family, 'A group this part belongs to', 0..1
+    member :Drawing, 'A drawing associated with this part', 0..1
+    member :Revision, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
+
     member :RawMaterial, 'Raw material'
     member :Customers, 'A customer identifier.  The combination of a Part ID and Customer ID can reference a customer Part Number', 0..1    
     member :Characteristics, 'The characteristics of a part', 0..1
@@ -93,8 +100,11 @@ package :Parts, 'Parts' do
   basic_type :InspectionId, 'The asset id of the inspection doc'
         
   type :Part, 'A part or group of individual parts that are being from workpieces', :AssetInstance do
+    member :Family, 'A group this part belongs to', 0..1
+    member :Drawing, 'A drawing associated with this part', 0..1
+    member :Revision, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
+
     member :PartIdentifiers, 'The part identifiers'
-    member :Revision, 'An identifier for the current revision of the part.'
     member :Workorder, 'A workorder for this part instance', 0..1
     member :ProcessEvents, 'The history of the process for this part instance', 0..1
   end

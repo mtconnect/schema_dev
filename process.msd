@@ -1,9 +1,6 @@
 # coding: utf-8
 
 package :Process, 'Process' do
-  attr :Family, 'The family this part belongs to'
-  attr :Revision, 'The revision of the part type'
-  attr :Drawing, 'The drawing identifier associated with this part'
   attr :StepId, 'The identifier of the step', :NMTOKEN
   attr :RoutingId, 'The identifier of the step', :NMTOKEN
   attr :Precedence, 'The priority of a thing. A numberic indicator of the relative order of options.', :integer
@@ -23,8 +20,6 @@ package :Process, 'Process' do
   basic_type :CustomerAddress, 'A customer address'
 
   type :ProcessArchetype, 'Common information regarding a part kind', :AssetArchetype do
-    member :Family, 'A group this part belongs to', 0..1
-    member :Drawing, 'A drawing associated with this part', 0..1
     member :Revision, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
     
     member :TargetGroups, 'The target groups for this asset', 0..1
@@ -32,8 +27,6 @@ package :Process, 'Process' do
   end
 
   type :Process, 'Common information regarding a part kind', :AssetInstance do
-    member :Family, 'A group this part belongs to', 0..1
-    member :Drawing, 'A drawing associated with this part', 0..1
     member :Revision, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
     
     member :TargetGroups, 'The target groups for this asset', 0..1

@@ -6247,30 +6247,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='grade' type='GradeType' use='optional'/>
     <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
   </xs:complexType>
-  <xs:simpleType name='FamilyType'>
-    <xs:annotation>
-      <xs:documentation>
-        The family this part belongs to
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:simpleType name='RevisionType'>
-    <xs:annotation>
-      <xs:documentation>
-        The revision of the part type
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:simpleType name='DrawingType'>
-    <xs:annotation>
-      <xs:documentation>
-        The drawing identifier associated with this part
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:simpleType name='StepIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -6395,8 +6371,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:annotation>
           </xs:element>
         </xs:sequence>
-        <xs:attribute name='family' type='FamilyType' use='optional'/>
-        <xs:attribute name='drawing' type='DrawingType' use='optional'/>
         <xs:attribute name='revision' type='RevisionType' use='required'/>
       </xs:extension>
     </xs:complexContent>
@@ -6432,8 +6406,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:annotation>
           </xs:element>
         </xs:sequence>
-        <xs:attribute name='family' type='FamilyType' use='optional'/>
-        <xs:attribute name='drawing' type='DrawingType' use='optional'/>
         <xs:attribute name='revision' type='RevisionType' use='required'/>
       </xs:extension>
     </xs:complexContent>
@@ -7218,6 +7190,30 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='timestamp' type='TimestampType' use='optional'/>
     <xs:attribute name='restrictions' type='RestrictionsType' use='optional'/>
   </xs:complexType>
+  <xs:simpleType name='FamilyType'>
+    <xs:annotation>
+      <xs:documentation>
+        The family this part belongs to
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='RevisionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The revision of the part type
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='DrawingType'>
+    <xs:annotation>
+      <xs:documentation>
+        The drawing identifier associated with this part
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
   <xs:simpleType name='CustomerIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -7459,7 +7455,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AssetInstanceType'>
+      <xs:extension base='AssetArchetypeType'>
         <xs:sequence>
           <xs:element name='RawMaterial' type='RawMaterialType'>
             <xs:annotation>
@@ -7484,10 +7480,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:annotation>
           </xs:element>
         </xs:sequence>
+        <xs:attribute name='family' type='FamilyType' use='optional'/>
+        <xs:attribute name='drawing' type='DrawingType' use='optional'/>
+        <xs:attribute name='revision' type='RevisionType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='PartArchitype' type='PartArchitypeType' substitutionGroup='AssetInstance'>
+  <xs:element name='PartArchitype' type='PartArchitypeType' substitutionGroup='AssetArchetype'>
     <xs:annotation>
       <xs:documentation>
         A part or group of individual parts that are being from workpieces
@@ -7565,6 +7564,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:annotation>
           </xs:element>
         </xs:sequence>
+        <xs:attribute name='family' type='FamilyType' use='optional'/>
+        <xs:attribute name='drawing' type='DrawingType' use='optional'/>
         <xs:attribute name='revision' type='RevisionType' use='required'/>
       </xs:extension>
     </xs:complexContent>
