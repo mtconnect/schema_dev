@@ -59,8 +59,8 @@ package :Component, 'Top Level Components Package' do
   end
     
   type :CommonComponent, "An abstract component that has an optional uuid", :Component do 
-    member :Uuid, 'The components universally unique id. This can be composed of the manufactures id or name and the serial number.', 0..1
-    member :Name, 'The components name', 0..1
+    member :Uuid, 'The component\'s universally unique id.', 0..1
+    member :Name, 'The component\'s name', 0..1
   end
 
   type :Components, 'A list of generic components' do
@@ -122,6 +122,7 @@ package :Component, 'Top Level Components Package' do
 
   type :Composition, "An abstract element" do
     member :id, 'The data item identifier', :ID
+    member :Uuid, 'The composition\'s universally unique id.', 0..1
     member :Name, 'The data item identifier', 0..1
     member :Type, 'The type of composition', :CompositionEnumType
     member :Description, 'The descriptive information about this sub element', 0..1, :ComponentDescription
