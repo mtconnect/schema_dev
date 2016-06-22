@@ -38,14 +38,14 @@ package :Component, 'Top Level Components Package' do
     member :References, 'A list of references', 0..1
   end
 
-  type :ComponentDescription, 'The descriptive information for this component. This can be manufacturer specific' do
+  type :ComponentDescription, 'The descriptive information. This can be manufacturer specific' do
     mixed
     
-    member :Manufacturer, 'The manufacturer of this component', 0..1, :Name
-    member :Model, 'The manufacturer of this component', 0..1
-    member :SerialNumber, 'The serial number of the component', 0..1
-    member :Station, 'The location of this component', 0..1
-    member :any, 'Any desciptive schema like calibration', 0..INF
+    member :Manufacturer, 'The manufacturer', 0..1, :Name
+    member :Model, 'The model', 0..1
+    member :SerialNumber, 'The serial number', 0..1
+    member :Station, 'The station location', 0..1
+    member :any, 'The content of the description can text or XML elements', 0..INF
   end
   
   type :AbstractConfiguration, 'Abstract configuration' do
