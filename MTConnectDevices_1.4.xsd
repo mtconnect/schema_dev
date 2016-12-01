@@ -1886,7 +1886,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='InterfaceType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        A component representing all the interfaces in a device.
+        A component representing an interface in a device.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1896,11 +1896,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element abstract='true' name='Interface' type='InterfaceType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
-        A component representing all the interfaces in a device.
+        A component representing an interface in a device.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='BarFeederType'>
+  <xs:complexType name='BarFeederInterfaceType'>
     <xs:annotation>
       <xs:documentation>
         An interface to a bar feeder device
@@ -1910,14 +1910,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='InterfaceType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='BarFeeder' type='BarFeederType' substitutionGroup='Interface'>
+  <xs:element name='BarFeederInterface' type='BarFeederInterfaceType' substitutionGroup='Interface'>
     <xs:annotation>
       <xs:documentation>
         An interface to a bar feeder device
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='MaterialHandlerType'>
+  <xs:complexType name='MaterialHandlerInterfaceType'>
     <xs:annotation>
       <xs:documentation>
         An interface to a device that can load and unload material
@@ -1927,7 +1927,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='InterfaceType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='MaterialHandler' type='MaterialHandlerType' substitutionGroup='Interface'>
+  <xs:element name='MaterialHandlerInterface' type='MaterialHandlerInterfaceType' substitutionGroup='Interface'>
     <xs:annotation>
       <xs:documentation>
         An interface to a device that can load and unload material

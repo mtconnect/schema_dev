@@ -20,6 +20,19 @@ package :Parts, 'Parts' do
     pattern '[a-ln-z]:[A-Z_0-9]+'
   end
   
+  type :ProcessArchetypeAssetRef, 'A reference to the process archetype' do
+    attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
+    attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
+    member :AssetId, 'The architype id reference'
+  end
+
+  type :ProcessAssetRef, 'A reference to the process archetype' do
+    attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
+    attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
+    member :AssetId, 'The architype id reference'
+  end
+  
+  
   attr :Standard, 'The hardness convention'
   enum :Scale, 'The hardness scale being used – default: Rockwell' do
     extensible :ScaleExt
@@ -88,6 +101,7 @@ package :Parts, 'Parts' do
     member :Drawing, 'A drawing associated with this part', 0..1
     member :Revision, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
 
+    member :ProcessArchetypeAssetRef,'The part architype reference'
     member :RawMaterial, 'Raw material'
     member :Customers, 'A customer identifier.  The combination of a Part ID and Customer ID can reference a customer Part Number', 0..1    
     member :Characteristics, 'The characteristics of a part', 0..1
@@ -104,6 +118,7 @@ package :Parts, 'Parts' do
     member :Drawing, 'A drawing associated with this part', 0..1
     member :Revision, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
 
+    member :ProcessAssetRef,'The part  reference'
     member :PartIdentifiers, 'The part identifiers'
     member :Workorder, 'A workorder for this part instance', 0..1
     member :ProcessEvents, 'The history of the process for this part instance', 0..1

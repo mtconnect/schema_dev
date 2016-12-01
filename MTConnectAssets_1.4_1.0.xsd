@@ -7264,6 +7264,34 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:complexType name='ProcessArchetypeAssetRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to the process archetype
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute ref='xlink:href' use='optional'/>
+        <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
+        <xs:attribute name='assetId' type='AssetIdType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='ProcessAssetRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to the process archetype
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute ref='xlink:href' use='optional'/>
+        <xs:attribute ref='xlink:type' use='optional' fixed='locator'/>
+        <xs:attribute name='assetId' type='AssetIdType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:simpleType name='StandardType'>
     <xs:annotation>
       <xs:documentation>
@@ -7457,6 +7485,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetArchetypeType'>
         <xs:sequence>
+          <xs:element name='ProcessArchetypeAssetRef' type='ProcessArchetypeAssetRefType'>
+            <xs:annotation>
+              <xs:documentation>
+                The part architype reference
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
           <xs:element name='RawMaterial' type='RawMaterialType'>
             <xs:annotation>
               <xs:documentation>
@@ -7542,6 +7577,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetInstanceType'>
         <xs:sequence>
+          <xs:element name='ProcessAssetRef' type='ProcessAssetRefType'>
+            <xs:annotation>
+              <xs:documentation>
+                The part reference
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
           <xs:element name='PartIdentifiers' type='PartIdentifiersType'>
             <xs:annotation>
               <xs:documentation>
