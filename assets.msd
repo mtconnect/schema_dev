@@ -1,3 +1,4 @@
+xsimport 'xlink', 'http://www.w3.org/1999/xlink', 'http://www.w3.org/1999/xlink.xsd'
 
 package :Assets, 'Mobile Assets' do
   attr :Source, 'A URI reference', :anyURI

@@ -793,7 +793,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Condition' type='ConditionListType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The representation of the devices condition
+            The representation of the components condition
           </xs:documentation>
         </xs:annotation>
       </xs:element>
