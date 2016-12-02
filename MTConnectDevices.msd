@@ -1,9 +1,9 @@
 
-self.urn = 'urn:mtconnect.org:MTConnectDevices:1.4'
+self.urn = 'urn:mtconnect.org:MTConnectDevices:1.5'
 self.namespace = 'mt'
 self.top = :MTConnectDevices
 self.license = File.read('license.txt')
-self.version = '1.4'
+self.version = '1.5'
 
 load 'common'
 
