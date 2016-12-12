@@ -638,18 +638,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='ACTIVITY'/>
-      <xs:enumeration value='ACTIVITY_GROUP'/>
-      <xs:enumeration value='PROCESS_STEP'/>
-      <xs:enumeration value='MAINTENANCE'/>
-      <xs:enumeration value='DAY'/>
-      <xs:enumeration value='LIFE'/>
+      <xs:enumeration value='ACTION_COMPLETE'/>
       <xs:enumeration value='ANNUAL'/>
+      <xs:enumeration value='DAY'/>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='MANUAL'/>
       <xs:enumeration value='MONTH'/>
-      <xs:enumeration value='WEEK'/>
-      <xs:enumeration value='LAST_OPERATION'/>
       <xs:enumeration value='POWER_ON'/>
-      <xs:enumeration value='PROCESS'/>
+      <xs:enumeration value='SHIFT'/>
+      <xs:enumeration value='WEEK'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemResetValueType'>
