@@ -742,7 +742,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='DeviceStream' type='DeviceStreamType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='DeviceStream' type='DeviceStreamType' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             The data from a device

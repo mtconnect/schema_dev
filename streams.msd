@@ -6,7 +6,7 @@ package :Streams, 'Event Package' do
   attr :NativeCode, 'An Condition code as defined by the component'
 
   type :Streams, 'Event container for all component events' do
-    member :DeviceStream, 'The data from a device', 1..INF
+    member :DeviceStream, 'The data from a device', 0..INF
   end
 
   type :DeviceStream, 'Data related to a single device' do
