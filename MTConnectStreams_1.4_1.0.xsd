@@ -845,7 +845,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
         <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
-        <xs:attribute name='reset' type='DataItemResetValueType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1241,6 +1240,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='ResultType'>
         <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
+        <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'/>
         <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
         <xs:attribute name='duration' type='DurationTimeType' use='optional'/>
       </xs:extension>
@@ -2952,7 +2952,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='ResultType'/>
+      <xs:extension base='ResultType'>
+        <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'/>
+      </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:element abstract='true' name='Event' type='EventType' substitutionGroup='Result'>

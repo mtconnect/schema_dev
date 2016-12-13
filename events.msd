@@ -1,3 +1,4 @@
+# coding: utf-8
 
 package :Events, 'Event Package' do
   integer_value = '[+-]?\d+|UNAVAILABLE'
@@ -120,6 +121,7 @@ package :Events, 'Event Package' do
 
   type :Event, 'An abstract event', :Result do
     abstract
+    attribute :ResetTriggered, 'An optional indicator that the event or sample was reset', 0..1, :DataItemResetValue
   end
 
   type :Code, 'DEPRECATED: The program code', :Event do

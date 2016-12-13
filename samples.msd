@@ -48,6 +48,7 @@ package :Samlpes, 'The samples' do
     abstract
     
     attribute :SampleRate, 'The rate the waveform was sampled at, default back to the value given in the data item', 0..1
+    attribute :ResetTriggered, 'An optional indicator that the event or sample was reset', 0..1, :DataItemResetValue
     member :Statistic, 'The statistical operation on this data', 0..1, :DataItemStatistics
     member :Duration, 'The number of seconds since the reset of the statistic', 0..1, :DurationTime
   end
