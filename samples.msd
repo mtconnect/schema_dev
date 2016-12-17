@@ -41,6 +41,7 @@ package :Samlpes, 'The samples' do
   basic_type(:FillLevelValue, 'The fill level of a tank') { pattern float_value }
   basic_type(:SampleRate, 'The sampling rate in samples per second') { pattern float_value }
   basic_type(:LengthValue, 'The length in millimeters') { pattern float_value }
+  basic_type(:ClockTime, 'The length in millimeters') { pattern float_value }
   
   attr :DurationTime, 'A length of time in seconds', :float
   

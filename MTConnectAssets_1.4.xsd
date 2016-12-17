@@ -333,6 +333,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
       <xs:enumeration value='VISCOSITY'/>
+      <xs:enumeration value='CLOCK_TIME'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>

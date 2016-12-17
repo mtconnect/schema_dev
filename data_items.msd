@@ -28,6 +28,7 @@ package :DataItems, 'Data Items Package' do
 
   enum :DataItemFilterEnum, 'The type of filter' do
     value :MINIMUM_DELTA, 'A minimum delta'
+    value :PERIOD, 'Indicates a filter with an absolute value reported in seconds representing the time between reported samples of the value of the data item'
   end
 
   # Measurement types

@@ -119,6 +119,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :VOLT_AMPERE_REACTIVE, 'The measurement of measure reactive power in an AC electrical circuit'
     value :WATT_SECOND, 'The measure of watts for one second, equivilent to joules'
     value :VISCOSITY, 'viscosity'
+    value :CLOCK_TIME, 'Clock time as an ISO 8601 Time'
 
     # Condition types
     value :COMMUNICATIONS, 'The communications system'

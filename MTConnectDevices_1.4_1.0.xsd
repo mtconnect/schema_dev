@@ -333,6 +333,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
       <xs:enumeration value='VISCOSITY'/>
+      <xs:enumeration value='CLOCK_TIME'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -1663,8 +1664,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The type of filter
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:NMTOKEN'>
+    <xs:restriction base='xs:string'>
       <xs:enumeration value='MINIMUM_DELTA'/>
+      <xs:enumeration value='PERIOD'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='DataItemsType'>
