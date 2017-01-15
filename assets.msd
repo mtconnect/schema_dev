@@ -18,13 +18,13 @@ package :Assets, 'Mobile Assets' do
     abstract
     member :AssetId, 'The unique identifier of the asset'
     member :Timestamp, 'The time asset information was recorded'
-    member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
+    member :DeviceUuid, 'The uuid this tool is associated with', :Uuid
     member :Removed, 'The asset has been marked as removed', 0..1
   end
   
   type :AssetInstance, 'An abstract asset instance', :Asset do
     abstract
-    member :AssetArchetypeRef, 'A reference to the asset architype for instances', 0..1
+    member :AssetArchetypeRef, 'A reference to the asset archetype for instances', 0..1
     member :Description, 'The description of the file (freeform)', 0..1, :AssetDescription
     member :Targets, 'The targets for this asset', 0..1
   end
@@ -33,10 +33,10 @@ package :Assets, 'Mobile Assets' do
     attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
     attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
     member :AssetType, 'The type of asset that changed', 0..1, :AssetAttrType
-    member :AssetId, 'The architype id reference'
+    member :AssetId, 'The archetype id reference'
   end
   
-  type :AssetArchetypeRefs, 'Parent assets architype references' do
+  type :AssetArchetypeRefs, 'Parent assets archetype references' do
     member :AssetArchetypeRef, 'A reference to the parent', 1..INF
   end
     
@@ -50,7 +50,7 @@ package :Assets, 'Mobile Assets' do
     attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
     attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
     member :AssetType, 'The type of asset that changed', 0..1, :AssetAttrType
-    member :AssetId, 'The architype id reference'
+    member :AssetId, 'The archetype id reference'
   end
   
   type :AssetRefs, 'Asset  references' do

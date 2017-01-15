@@ -151,7 +151,7 @@ package :Tools, 'Cutting tools' do
   end
   
   type :CuttingToolArchetypeReference, 'A reference to the cutting tool archetype' do
-    member :source, 'A uri representing where to get the cutting tool architype', 0..1, :Source
+    member :source, 'A uri representing where to get the cutting tool archetype', 0..1, :Source
     member :Value, 'The asset id of the archetype', :AssetId
   end
   

@@ -23,13 +23,13 @@ package :Parts, 'Parts' do
   type :ProcessArchetypeAssetRef, 'A reference to the process archetype' do
     attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
     attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
-    member :AssetId, 'The architype id reference'
+    member :AssetId, 'The archetype id reference'
   end
 
   type :ProcessAssetRef, 'A reference to the process archetype' do
     attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
     attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
-    member :AssetId, 'The architype id reference'
+    member :AssetId, 'The archetype id reference'
   end
   
   
@@ -96,12 +96,12 @@ package :Parts, 'Parts' do
     member :Vendor, 'The vendor of the raw material', 0..1
   end
 
-  type :PartArchitype, 'A part or group of individual parts that are being from workpieces', :AssetArchetype do
+  type :PartArchetype, 'A part or group of individual parts that are being from workpieces', :AssetArchetype do
     member :Family, 'A group this part belongs to', 0..1
     member :Drawing, 'A drawing associated with this part', 0..1
     member :Revision, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
 
-    member :ProcessArchetypeAssetRef,'The part architype reference'
+    member :ProcessArchetypeAssetRef,'The part archetype reference'
     member :RawMaterial, 'Raw material'
     member :Customers, 'A customer identifier.  The combination of a Part ID and Customer ID can reference a customer Part Number', 0..1    
     member :Characteristics, 'The characteristics of a part', 0..1

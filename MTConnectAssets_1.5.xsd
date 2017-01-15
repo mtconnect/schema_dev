@@ -752,7 +752,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:attribute name='assetId' type='AssetIdType' use='required'/>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
-    <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
+    <xs:attribute name='deviceUuid' type='UuidType' use='required'/>
     <xs:attribute name='removed' type='RemovedType' use='optional'/>
   </xs:complexType>
   <xs:element abstract='true' name='Asset' type='AssetType'>
@@ -774,7 +774,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='AssetArchetypeRef' type='AssetArchetypeRefType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                A reference to the asset architype for instances
+                A reference to the asset archetype for instances
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -821,7 +821,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AssetArchetypeRefsType'>
     <xs:annotation>
       <xs:documentation>
-        Parent assets architype references
+        Parent assets archetype references
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -7505,7 +7505,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name='PartArchitypeType'>
+  <xs:complexType name='PartArchetypeType'>
     <xs:annotation>
       <xs:documentation>
         A part or group of individual parts that are being from workpieces
@@ -7517,7 +7517,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='ProcessArchetypeAssetRef' type='ProcessArchetypeAssetRefType'>
             <xs:annotation>
               <xs:documentation>
-                The part architype reference
+                The part archetype reference
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -7550,7 +7550,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='PartArchitype' type='PartArchitypeType' substitutionGroup='AssetArchetype'>
+  <xs:element name='PartArchetype' type='PartArchetypeType' substitutionGroup='AssetArchetype'>
     <xs:annotation>
       <xs:documentation>
         A part or group of individual parts that are being from workpieces
