@@ -194,6 +194,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
+  <xs:simpleType name='DurationTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A length of time in seconds
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -438,6 +446,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='RELATIVE'/>
       <xs:enumeration value='TOOL_EDGE'/>
       <xs:enumeration value='TOOL_GROUP'/>
+      <xs:enumeration value='MAIN'/>
+      <xs:enumeration value='ACTIVE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -3310,14 +3320,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:restriction base='xs:string'>
       <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='DurationTimeType'>
-    <xs:annotation>
-      <xs:documentation>
-        A length of time in seconds
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:float'/>
   </xs:simpleType>
   <xs:complexType name='SampleType' abstract='true'>
     <xs:annotation>

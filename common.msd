@@ -26,6 +26,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :ID, 'An identifier', :ID
   attr :SignificantDigitsValue, 'The number significant digits', :integer
   attr :CompositionId, 'The item\'s reference to the Device model composition', :NMTOKEN
+  attr :DurationTime, 'A length of time in seconds', :float
   
   attr :AssetId, 'The unique id of the asset'
   attr :AssetAttrType, 'An asset type'
@@ -241,6 +242,11 @@ package :common, 'Common attributes and elements for all schemas' do
     # For tooling
     value :TOOL_EDGE, 'The current tool edge or suffix – should map to cutting item index'
     value :TOOL_GROUP, 'The current tool group being used'
+    
+    # subtypes for PROGRAM
+    value :MAIN, 'The main program'
+    value :ACTIVE, 'The sub/active-program of the program'
+    # value :SUB, 'The sub/active-program of the program'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
