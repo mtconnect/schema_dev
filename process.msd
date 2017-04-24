@@ -22,23 +22,18 @@ package :Process, 'Process' do
   type :ProcessArchetype, 'Common information regarding a part kind', :AssetArchetype do
     member :Revision, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
     
-    member :TargetGroups, 'The target groups for this asset', 0..1
-    member :Routings, 'The possible collections of process steps to make a part', 0..1
+    member :ActivityGroups, 'A collection activites', 0..1
   end
 
   type :Process, 'Common information regarding a part kind', :AssetInstance do
     member :Revision, 'An identifier for the current revision of the part.  A Revision ID can change over time. Historical Revision IDs are not a property of a Part.  (Historical Revision IDs may be stored by an application.)'
     
     member :TargetGroups, 'The target groups for this asset', 0..1
-    member :Routings, 'The possible collections of process steps to make a part', 0..1, :InstanceRoutings
+    member :Routings, 'The possible collections of process steps to make a part', 0..1
   end
 
   type :Routings, 'A set of possible process steps' do
     member :Routing, 'The process steps for a particular routing', 1..INF
-  end
-
-  type :InstanceRoutings, 'The routings for an instance' do
-    member :Routing, 'The process steps for a particular routing'
   end
 
   type :Routing, 'A collection of process steps' do
@@ -95,6 +90,9 @@ package :Process, 'Process' do
     member :Category, 'The category of the data item'
     member :Constraints, 'Limits on the set of possible values', :DataItemConstraints
   end
+
+  basic_type :StartTime, 'A starting time', :dateTime
+  basic_type :ProcessDuration, 'The duration of a process step', :float
     
   type :ProcessStep, 'An individual step in the manufacturing process' do
     member :StepId, 'The identifier of this step'
@@ -107,6 +105,10 @@ package :Process, 'Process' do
     member :ProcessConstraints, 'The process constraints', 0..1
     member :ProcessDataRequests, 'Requests to log data', 0..1
     member :AssetArchetypeRefs, 'A collection of assets used in this process step', 0..1
+
+    # For Part estimate start and stop
+    member :StartTime, 'The estimated time the process will start', 0..1
+    member :Duration, 'The duration of the process', 0..1, :ProcessDuration
   end
   
   type :ProcessStepRef, 'A reference to a process step' do
@@ -123,7 +125,21 @@ package :Process, 'Process' do
       member :ProcessStepRef, 'A reference to the routing id. We may want to remove... if not given, detaults to the current routing'
     end
   end
-  
+
+  attr :SequenceNumber, 'The  number indication the sequence of the operaton', :integer
+  attr :ActivityId, 'The identifier of the activity', :NMTOKEN
+  attr :ActivityGroupId, 'The identifier of the activity', :NMTOKEN
+  attr :ActivityIdRef, 'The reference to an identifier of the activity', :NMTOKEN
+  attr :ActivityGroupIdRef, 'A reference to an identifier for an activity group', :NMTOKEN
+
+  type :GroupPrerequisite, 'A reference to a previous activity group' do
+    member :Value, 'The identity of the prerequisite', :ActivityGroupIdRef
+  end
+
+  type :GroupPrerequisites, 'A list of required steps for this step to begin' do
+    member :Prerequisite, 'A reference to a required activity group', 1..INF, :GroupPrerequisite
+  end
+
   type :ActivityGroups, 'A collection of activities' do
     member :ActivityGroup, 'A process activity', 1..INF
   end
@@ -131,13 +147,11 @@ package :Process, 'Process' do
   attr :ActivityGroupName, 'Activity group name'
   type :ActivityGroup, 'A collection of activities' do
     member :Name, 'The activity group name', 0..1, :ActivityGroupName
-    member :ActivityTargets, 'The target for this activity', 0..1, :ProcessTargetRef
+    member :ActivityGroupId, 'The id for this group'
+    member :Prerequisites, 'The prerequisite of this activity group', 0..1, :GroupPrerequisites
     member :Activity, 'A process activity', 1..INF
   end
   
-  attr :SequenceNumber, 'The  number indication the sequence of the operaton', :integer
-  attr :ActivityId, 'The identifier of the activity associated with this cutting tool', :string
-  attr :ActivityIdRef, 'The identifier of the activity associated with this cutting tool', :string
   
   type :Activities, 'A collection of activities' do
     member :Activity, 'A process activity', 1..INF

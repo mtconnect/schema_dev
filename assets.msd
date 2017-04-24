@@ -60,7 +60,7 @@ package :Assets, 'Mobile Assets' do
   end
   
   type :Targets, 'A list of target devices or locations' do
-    member :Target, 'Where this process step will be done', 1..INF
+    member :Target, 'Where this asset applies', 1..INF
   end
   
   enum :TargetTypeValue, 'The set of possible locations' do

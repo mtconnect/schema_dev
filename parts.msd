@@ -121,6 +121,7 @@ package :Parts, 'Parts' do
     member :ProcessAssetRef,'The part  reference'
     member :PartIdentifiers, 'The part identifiers'
     member :Workorder, 'A workorder for this part instance', 0..1
+    member :Routing, 'The routing for this part', 0..1
     member :ProcessEvents, 'The history of the process for this part instance', 0..1
   end
     

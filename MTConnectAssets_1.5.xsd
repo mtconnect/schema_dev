@@ -929,7 +929,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Target' type='TargetType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            Where this process step will be done
+            Where this asset applies
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -6389,17 +6389,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetArchetypeType'>
         <xs:sequence>
-          <xs:element name='TargetGroups' type='TargetGroupsType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='ActivityGroups' type='ActivityGroupsType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The target groups for this asset
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Routings' type='RoutingsType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The possible collections of process steps to make a part
+                A collection activites
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -6431,7 +6424,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Routings' type='InstanceRoutingsType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='Routings' type='RoutingsType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 The possible collections of process steps to make a part
@@ -6458,22 +6451,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:sequence>
       <xs:element name='Routing' type='RoutingType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            The process steps for a particular routing
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name='InstanceRoutingsType'>
-    <xs:annotation>
-      <xs:documentation>
-        The routings for an instance
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Routing' type='RoutingType'>
         <xs:annotation>
           <xs:documentation>
             The process steps for a particular routing
@@ -6748,6 +6725,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='units' type='UnitsType' use='optional'/>
     <xs:attribute name='category' type='CategoryType' use='required'/>
   </xs:complexType>
+  <xs:simpleType name='StartTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A starting time
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:dateTime'/>
+  </xs:simpleType>
+  <xs:simpleType name='ProcessDurationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The duration of a process step
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
   <xs:complexType name='ProcessStepType'>
     <xs:annotation>
       <xs:documentation>
@@ -6811,6 +6804,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='StartTime' type='StartTimeType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The estimated time the process will start
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Duration' type='ProcessDurationType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The duration of the process
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='stepId' type='StepIdType' use='required'/>
     <xs:attribute name='discretionary' type='DiscretionaryType' use='optional' default='NO'/>
@@ -6869,6 +6876,72 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:choice>
   </xs:complexType>
+  <xs:simpleType name='SequenceNumberType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number indication the sequence of the operaton
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='ActivityIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the activity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='ActivityGroupIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the activity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='ActivityIdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        The reference to an identifier of the activity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:simpleType name='ActivityGroupIdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to an identifier for an activity group
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
+  <xs:complexType name='GroupPrerequisiteType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to a previous activity group
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ActivityGroupIdRefType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='GroupPrerequisitesType'>
+    <xs:annotation>
+      <xs:documentation>
+        A list of required steps for this step to begin
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Prerequisite' type='GroupPrerequisiteType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to a required activity group
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name='ActivityGroupsType'>
     <xs:annotation>
       <xs:documentation>
@@ -6900,10 +6973,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='ActivityTargets' type='ProcessTargetRefType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='Prerequisites' type='GroupPrerequisitesType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The target for this activity
+            The prerequisite of this activity group
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -6916,31 +6989,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
     <xs:attribute name='name' type='ActivityGroupNameType' use='optional'/>
+    <xs:attribute name='activityGroupId' type='ActivityGroupIdType' use='required'/>
   </xs:complexType>
-  <xs:simpleType name='SequenceNumberType'>
-    <xs:annotation>
-      <xs:documentation>
-        The number indication the sequence of the operaton
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:integer'/>
-  </xs:simpleType>
-  <xs:simpleType name='ActivityIdType'>
-    <xs:annotation>
-      <xs:documentation>
-        The identifier of the activity associated with this cutting tool
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:simpleType name='ActivityIdRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        The identifier of the activity associated with this cutting tool
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:complexType name='ActivitiesType'>
     <xs:annotation>
       <xs:documentation>
@@ -7637,6 +7687,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             <xs:annotation>
               <xs:documentation>
                 A workorder for this part instance
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Routing' type='RoutingType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The routing for this part
               </xs:documentation>
             </xs:annotation>
           </xs:element>
