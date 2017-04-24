@@ -388,6 +388,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE_NUMBER'/>
       <xs:enumeration value='LINE_LABEL'/>
       <xs:enumeration value='BLOCK_COUNT'/>
+      <xs:enumeration value='SURFACE_VELOCITY'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -728,6 +729,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:boolean'/>
   </xs:simpleType>
+  <xs:simpleType name='NativeIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        An identifier used by the host system to identify this entity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:complexType name='AssetDescriptionType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
@@ -761,6 +770,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:attribute name='assetId' type='AssetIdType' use='required'/>
+    <xs:attribute name='nativeId' type='NativeIdType' use='optional'/>
     <xs:attribute name='timestamp' type='TimestampType' use='required'/>
     <xs:attribute name='deviceUuid' type='UuidType' use='required'/>
     <xs:attribute name='removed' type='RemovedType' use='optional'/>
@@ -6691,6 +6701,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE_NUMBER'/>
       <xs:enumeration value='LINE_LABEL'/>
       <xs:enumeration value='BLOCK_COUNT'/>
+      <xs:enumeration value='SURFACE_VELOCITY'/>
       <xs:enumeration value='SETUP_TIME'/>
       <xs:enumeration value='TEARDOWN_TIME'/>
       <xs:enumeration value='EXECUTION_TIME'/>

@@ -3,7 +3,7 @@
 <MTConnectAssets xsi:schemaLocation="urn:mtconnect.org:MTConnectAssets:1.2 ../MTConnectAssets_1.2.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mt="urn:mtconnect.org:MTConnectAssets:1.2" xmlns="urn:mtconnect.org:MTConnectAssets:1.2">
 	<Header creationTime="2001-12-17T09:30:47Z" testIndicator="true" sender="String" version="1.2" bufferSize="0" instanceId="12324414321">String</Header>
 	<Assets>
-		<CuttingTool timestamp="2001-12-17T09:30:47Z" serialNumber="123444XXX" toolId="123444" assetId="123444XXX" >
+		<CuttingTool timestamp="2001-12-17T09:30:47Z" serialNumber="123444XXX" toolId="123444" assetId="fd9a38a2-e1cc-11e6-86b4-28cfe91a82ef" >
 			<Description>Assembly Description</Description>
 			<ToolType>END_MILL</ToolType>
 			<OperationType>BALL_MILLING</OperationType>

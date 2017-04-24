@@ -2,6 +2,7 @@
 package :Assets, 'Mobile Assets' do
   attr :Source, 'A URI reference', :anyURI
   attr :Removed, 'A flag indicating the item has been removed', :boolean
+  attr :NativeId, 'An identifier used by the host system to identify this entity', :NMTOKEN
   
   type :AssetDescription, 'The description of an asset, can be free form text or elements' do
     mixed
@@ -17,6 +18,7 @@ package :Assets, 'Mobile Assets' do
   type :Asset, 'An abstract mobile asset' do
     abstract
     member :AssetId, 'The unique identifier of the asset'
+    member :NativeId, 'The identifier in the host system for this asset', 0..1
     member :Timestamp, 'The time asset information was recorded'
     member :DeviceUuid, 'The uuid this tool is associated with', :Uuid
     member :Removed, 'The asset has been marked as removed', 0..1

@@ -1,3 +1,4 @@
+# coding: utf-8
 
 
 package :common, 'Common attributes and elements for all schemas' do
@@ -177,7 +178,11 @@ package :common, 'Common attributes and elements for all schemas' do
     # Lines and block positions. LINE is now deprecated. Do we need a base #?
     value :LINE_NUMBER, 'The absolute or relative block number position in the program. Relative is relative to a line label.'
     value :LINE_LABEL, 'The label or N number of the position within the program'
-    value :BLOCK_COUNT, 'The number of blocks executed since the cycle start'    
+    value :BLOCK_COUNT, 'The number of blocks executed since the cycle start'
+
+    # Version 1.5
+    value :SURFACE_VELOCITY, 'When operating in constant surface speed, the velocity relative to the surface'
+    
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
@@ -242,11 +247,11 @@ package :common, 'Common attributes and elements for all schemas' do
     # For tooling
     value :TOOL_EDGE, 'The current tool edge or suffix – should map to cutting item index'
     value :TOOL_GROUP, 'The current tool group being used'
-    
+
+    # For 1.5
     # subtypes for PROGRAM
     value :MAIN, 'The main program'
     value :ACTIVE, 'The sub/active-program of the program'
-    # value :SUB, 'The sub/active-program of the program'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
