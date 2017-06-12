@@ -134,6 +134,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :PART_ASSET_ID, 'The identifier of the part loaded'
     value :PROGRAM_EDIT, 'The state of the devices editor'
     value :PROGRAM_EDIT_NAME, 'The name of the program being edited'
+    value :CLOCK_TIME, 'The wall clock time'
     
     # 1.3 additions
     value :CHUCK_STATE, 'A state of a chuck'
