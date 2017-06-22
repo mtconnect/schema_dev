@@ -4,7 +4,7 @@ package :Events, 'Event Package' do
   integer_value = '[+-]?\d+|UNAVAILABLE'
   float = '[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?'
   float_value = "#{float}|UNAVAILABLE"
-  line_pattern = "[A-Za-z0-9]+|UNAVAILABLE"
+  line_pattern = "[A-Za-z0-9]*|UNAVAILABLE"
   
   basic_type(:PartCountValue, 'The number of parts') { pattern integer_value }
   basic_type :BlockValue, 'Code block value'

@@ -2717,7 +2717,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[A-Za-z0-9]+|UNAVAILABLE'/>
+      <xs:pattern value='[A-Za-z0-9]*|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ToolIdValueType'>
@@ -3017,7 +3017,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='EventType'>
-        <xs:pattern value='[A-Za-z0-9]+|UNAVAILABLE'/>
+        <xs:pattern value='[A-Za-z0-9]*|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
