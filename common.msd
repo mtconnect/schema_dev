@@ -214,6 +214,10 @@ package :common, 'Common attributes and elements for all schemas' do
     value :AUXILIARY, 'The auxiliary value for this data item'
 
     value :MANUAL_UNCLAMP, 'The component cannot be manually unclamped'
+
+    # For direction
+    value :ROTARY, 'The rotational direction of a rotary device using the right hand rule convention'
+    value :LINEAR, 'The direction of motion of a linear device'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
