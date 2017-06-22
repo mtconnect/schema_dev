@@ -41,11 +41,15 @@ package :Samlpes, 'The samples' do
   basic_type(:FillLevelValue, 'The fill level of a tank') { pattern float_value }
   basic_type(:SampleRate, 'The sampling rate in samples per second') { pattern float_value }
   basic_type(:LengthValue, 'The length in millimeters') { pattern float_value }
-    
+  basic_type(:ClockTime, 'The length in millimeters') { pattern float_value }
+  
+  attr :DurationTime, 'A length of time in seconds', :float
+  
   type :Sample, 'An abstract sample', :Result do
     abstract
     
     attribute :SampleRate, 'The rate the waveform was sampled at, default back to the value given in the data item', 0..1
+    attribute :ResetTriggered, 'An optional indicator that the event or sample was reset', 0..1, :DataItemResetValue
     member :Statistic, 'The statistical operation on this data', 0..1, :DataItemStatistics
     member :Duration, 'The number of seconds since the reset of the statistic', 0..1, :DurationTime
   end

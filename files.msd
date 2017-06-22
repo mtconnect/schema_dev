@@ -1,4 +1,3 @@
-xsimport 'xlink', 'http://www.w3.org/1999/xlink', 'http://www.w3.org/1999/xlink.xsd'
 
 # coding: utf-8
 package :Files, 'Files or Documents' do

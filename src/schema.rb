@@ -65,18 +65,17 @@ class Schema
     # Root schema node.
     root = REXML::Element.new('xs:schema')
     root.add_namespace('xs', 'http://www.w3.org/2001/XMLSchema')
-    root.add_namespace('vc', 'http://www.w3.org/2007/XMLSchema-versioning') if xsd_version == '1.1'
     root.add_namespace(@urn)
     root.add_namespace(@namespace, @urn)
     root.add_attribute('targetNamespace',@urn)
     root.add_attribute('elementFormDefault', "qualified")
     root.add_attribute('attributeFormDefault', "unqualified")
-    root.add_attribute('vc:minVersion', xsd_version) if xsd_version == '1.1'
-        
-    @xsimports.each do |name, namespace, location|
-      root.add_namespace(name, namespace)
+    
+    if xsd_version == '1.1'
+      root.add_namespace('vc', 'http://www.w3.org/2007/XMLSchema-versioning') 
+      root.add_attribute('vc:minVersion', xsd_version)
     end
-
+    
     @imports.each do |imp|
       root.add_namespace(imp.namespace, imp.urn)
     end

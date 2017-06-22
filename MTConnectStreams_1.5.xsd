@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' xmlns='urn:mtconnect.org:MTConnectStreams:1.5' xmlns:mt='urn:mtconnect.org:MTConnectStreams:1.5' targetNamespace='urn:mtconnect.org:MTConnectStreams:1.5' elementFormDefault='qualified' attributeFormDefault='unqualified' vc:minVersion='1.1'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectStreams:1.5' xmlns:mt='urn:mtconnect.org:MTConnectStreams:1.5' targetNamespace='urn:mtconnect.org:MTConnectStreams:1.5' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' vc:minVersion='1.1'>
   <xs:element name='MTConnectStreams' type='MTConnectStreamsType'>
     <xs:annotation>
       <xs:documentation>
@@ -341,6 +341,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
       <xs:enumeration value='VISCOSITY'/>
+      <xs:enumeration value='CLOCK_TIME'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -649,18 +650,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='ACTIVITY'/>
-      <xs:enumeration value='ACTIVITY_GROUP'/>
-      <xs:enumeration value='PROCESS_STEP'/>
-      <xs:enumeration value='MAINTENANCE'/>
-      <xs:enumeration value='DAY'/>
-      <xs:enumeration value='LIFE'/>
+      <xs:enumeration value='ACTION_COMPLETE'/>
       <xs:enumeration value='ANNUAL'/>
+      <xs:enumeration value='DAY'/>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='MANUAL'/>
       <xs:enumeration value='MONTH'/>
-      <xs:enumeration value='WEEK'/>
-      <xs:enumeration value='LAST_OPERATION'/>
       <xs:enumeration value='POWER_ON'/>
-      <xs:enumeration value='PROCESS'/>
+      <xs:enumeration value='SHIFT'/>
+      <xs:enumeration value='WEEK'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemResetValueType'>
@@ -753,7 +751,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='DeviceStream' type='DeviceStreamType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='DeviceStream' type='DeviceStreamType' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             The data from a device
@@ -804,7 +802,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Condition' type='ConditionListType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The representation of the devices condition
+            The representation of the components condition
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -859,7 +857,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
         <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
-        <xs:attribute name='reset' type='DataItemResetValueType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1238,6 +1235,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='ClockTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The length in millimeters
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DurationTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A length of time in seconds
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
   <xs:complexType name='SampleType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -1247,6 +1262,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='ResultType'>
         <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
+        <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'/>
         <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
         <xs:attribute name='duration' type='DurationTimeType' use='optional'/>
       </xs:extension>
@@ -2712,7 +2728,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[A-Za-z0-9]+|UNAVAILABLE'/>
+      <xs:pattern value='[A-Za-z0-9]*|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ToolIdValueType'>
@@ -2958,7 +2974,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='ResultType'/>
+      <xs:extension base='ResultType'>
+        <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'/>
+      </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:element abstract='true' name='Event' type='EventType' substitutionGroup='Result'>
@@ -3010,7 +3028,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='EventType'>
-        <xs:pattern value='[A-Za-z0-9]+|UNAVAILABLE'/>
+        <xs:pattern value='[A-Za-z0-9]*|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>

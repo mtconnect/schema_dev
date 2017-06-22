@@ -120,6 +120,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :VOLT_AMPERE_REACTIVE, 'The measurement of measure reactive power in an AC electrical circuit'
     value :WATT_SECOND, 'The measure of watts for one second, equivilent to joules'
     value :VISCOSITY, 'viscosity'
+    value :CLOCK_TIME, 'Clock time as an ISO 8601 Time'
 
     # Condition types
     value :COMMUNICATIONS, 'The communications system'
@@ -356,18 +357,15 @@ package :common, 'Common attributes and elements for all schemas' do
   enum :DataItemResetValue, 'The reset intervals' do
     extensible :DataItemResetValueExt
     
-    value :ACTIVITY, 'The item was reset at the beginning of an activity'
-    value :ACTIVITY_GROUP, 'The item was reset at the beginning of an activity group'
-    value :PROCESS_STEP, 'The item was reset at the beginning of a process step'
-    value :MAINTENANCE, 'Reset when Maintainence occurs'
-    value :DAY, 'Reset every day'
-    value :LIFE, 'Counter starts at the beginning of the life of the machine'
+    value :ACTION_COMPLETE, 'The item was reset at the beginning of an activity'
     value :ANNUAL, 'Counter starts at the beginning of a yearly cycle'
+    value :DAY, 'Reset every day'
+    value :MAINTENANCE, 'Reset when Maintainence occurs'
+    value :MANUAL, 'Reset manually'
     value :MONTH, 'Counter starts at the beginning of a montly cycle'
-    value :WEEK, 'Counter starts at the beginning of a weekly cycle'
-    value :LAST_OPERATION, 'Count starts at the beginning of an operation'
     value :POWER_ON, 'Count starts at time the machine powers on'
-    value :PROCESS, 'Count starts at the beginning of a process'
+    value :SHIFT, 'Counter starts at the beginning of a shift'
+    value :WEEK, 'Counter starts at the beginning of a weekly cycle'
   end
   
 end

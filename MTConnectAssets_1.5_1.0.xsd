@@ -31,8 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectAssets:1.5' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.5' targetNamespace='urn:mtconnect.org:MTConnectAssets:1.5' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xlink='http://www.w3.org/1999/xlink'>
-  <xs:import namespace='http://www.w3.org/1999/xlink' schemaLocation='http://www.w3.org/1999/xlink.xsd'/>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectAssets:1.5' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.5' targetNamespace='urn:mtconnect.org:MTConnectAssets:1.5' elementFormDefault='qualified' attributeFormDefault='unqualified'>
   <xs:element name='MTConnectAssets' type='MTConnectAssetsType'>
     <xs:annotation>
       <xs:documentation>
@@ -342,6 +341,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
       <xs:enumeration value='VISCOSITY'/>
+      <xs:enumeration value='CLOCK_TIME'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -650,18 +650,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='ACTIVITY'/>
-      <xs:enumeration value='ACTIVITY_GROUP'/>
-      <xs:enumeration value='PROCESS_STEP'/>
-      <xs:enumeration value='MAINTENANCE'/>
-      <xs:enumeration value='DAY'/>
-      <xs:enumeration value='LIFE'/>
+      <xs:enumeration value='ACTION_COMPLETE'/>
       <xs:enumeration value='ANNUAL'/>
+      <xs:enumeration value='DAY'/>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='MANUAL'/>
       <xs:enumeration value='MONTH'/>
-      <xs:enumeration value='WEEK'/>
-      <xs:enumeration value='LAST_OPERATION'/>
       <xs:enumeration value='POWER_ON'/>
-      <xs:enumeration value='PROCESS'/>
+      <xs:enumeration value='SHIFT'/>
+      <xs:enumeration value='WEEK'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemResetValueType'>
@@ -1199,8 +1196,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The type of filter
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:NMTOKEN'>
+    <xs:restriction base='xs:string'>
       <xs:enumeration value='MINIMUM_DELTA'/>
+      <xs:enumeration value='PERIOD'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='DataItemsType'>
@@ -1424,7 +1422,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='DeviceStream' type='DeviceStreamType' minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='DeviceStream' type='DeviceStreamType' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
             The data from a device
@@ -1475,7 +1473,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Condition' type='ConditionListType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The representation of the devices condition
+            The representation of the components condition
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -1530,7 +1528,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='name' type='NameType' use='optional'/>
         <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
         <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
-        <xs:attribute name='reset' type='DataItemResetValueType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1590,7 +1587,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[A-Za-z0-9]+|UNAVAILABLE'/>
+      <xs:pattern value='[A-Za-z0-9]*|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='ToolIdValueType'>
@@ -1836,7 +1833,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='ResultType'/>
+      <xs:extension base='ResultType'>
+        <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'/>
+      </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:element abstract='true' name='Event' type='EventType' substitutionGroup='Result'>
@@ -1888,7 +1887,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base='EventType'>
-        <xs:pattern value='[A-Za-z0-9]+|UNAVAILABLE'/>
+        <xs:pattern value='[A-Za-z0-9]*|UNAVAILABLE'/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -3331,6 +3330,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='ClockTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The length in millimeters
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DurationTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A length of time in seconds
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
   <xs:complexType name='SampleType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -3340,6 +3357,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='ResultType'>
         <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
+        <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'/>
         <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
         <xs:attribute name='duration' type='DurationTimeType' use='optional'/>
       </xs:extension>
@@ -5180,7 +5198,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AssetInstanceType'>
+      <xs:extension base='AssetType'>
         <xs:sequence>
           <xs:choice minOccurs='1'>
             <xs:sequence minOccurs='1'>
@@ -5214,7 +5232,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='CuttingTool' type='CuttingToolType' substitutionGroup='AssetInstance'>
+  <xs:element name='CuttingTool' type='CuttingToolType' substitutionGroup='Asset'>
     <xs:annotation>
       <xs:documentation>
         A cutting tool
@@ -5228,7 +5246,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AssetArchetypeType'>
+      <xs:extension base='AssetType'>
         <xs:sequence>
           <xs:choice minOccurs='1'>
             <xs:sequence minOccurs='1'>
@@ -5260,7 +5278,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='CuttingToolArchetype' type='CuttingToolArchetypeType' substitutionGroup='AssetArchetype'>
+  <xs:element name='CuttingToolArchetype' type='CuttingToolArchetypeType' substitutionGroup='Asset'>
     <xs:annotation>
       <xs:documentation>
         A Archetypical cutting tool
@@ -6632,6 +6650,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
       <xs:enumeration value='VISCOSITY'/>
+      <xs:enumeration value='CLOCK_TIME'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -6755,7 +6774,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ActivityGroups' type='ActivityGroupsType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='ActivityGroups' type='PSActivityGroupsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             A collection activites
@@ -6936,6 +6955,42 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='ActivityGroupRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to an activity group
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute name='name' type='ActivityGroupNameType' use='optional'/>
+        <xs:attribute name='activityGroupIdRef' type='ActivityGroupIdRefType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='PSActivityGroupsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Process Steps Activity Groups
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs='1' maxOccurs='unbounded'>
+      <xs:element name='ActivityGroup' type='ActivityGroupType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A process activity group
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ActivityGroupRef' type='ActivityGroupRefType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A process activity reference
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
   </xs:complexType>
   <xs:simpleType name='ActivityGroupNameType'>
     <xs:annotation>

@@ -101,7 +101,7 @@ package :Process, 'Process' do
     member :ProcessTargets, 'The locations or target devices', 0..1
     member :Prerequisites, 'A required set of steps for this step to begin', 0..1
     member :ControlPrograms, 'The names of the programs that are required for this step', 0..1
-    member :ActivityGroups, 'A collection activites', 0..1
+    member :ActivityGroups, 'A collection activites', 0..1, :PSActivityGroups
     member :ProcessConstraints, 'The process constraints', 0..1
     member :ProcessDataRequests, 'Requests to log data', 0..1
     member :AssetArchetypeRefs, 'A collection of assets used in this process step', 0..1
@@ -142,6 +142,18 @@ package :Process, 'Process' do
 
   type :ActivityGroups, 'A collection of activities' do
     member :ActivityGroup, 'A process activity', 1..INF
+  end
+
+  type :ActivityGroupRef, 'A reference to an activity group' do
+    member :Name, 'The name of the activity group', 0..1, :ActivityGroupName
+    member :ActivityGroupIdRef, 'The activity group'
+  end
+
+  type :PSActivityGroups, 'Process Steps Activity Groups' do
+    choice 1..INF do
+      member :ActivityGroup, 'A process activity group', 1..INF
+      member :ActivityGroupRef, 'A process activity reference', 1..INF
+    end
   end
   
   attr :ActivityGroupName, 'Activity group name'

@@ -1,9 +1,10 @@
+# coding: utf-8
 
 package :Events, 'Event Package' do
   integer_value = '[+-]?\d+|UNAVAILABLE'
   float = '[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?'
   float_value = "#{float}|UNAVAILABLE"
-  line_pattern = "[A-Za-z0-9]+|UNAVAILABLE"
+  line_pattern = "[A-Za-z0-9]*|UNAVAILABLE"
   
   basic_type(:PartCountValue, 'The number of parts') { pattern integer_value }
   basic_type :BlockValue, 'Code block value'
@@ -120,6 +121,7 @@ package :Events, 'Event Package' do
 
   type :Event, 'An abstract event', :Result do
     abstract
+    attribute :ResetTriggered, 'An optional indicator that the event or sample was reset', 0..1, :DataItemResetValue
   end
 
   type :Code, 'DEPRECATED: The program code', :Event do
