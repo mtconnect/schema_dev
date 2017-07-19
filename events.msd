@@ -345,4 +345,7 @@ package :Events, 'Event Package' do
     member :Order, 'The order in which the transformation will be applied', 0..1
     member :Value, 'Transformation name', :TransformationValue
   end
+
+  type :User, 'The identifier of the person currently responsible for operating the piece of equipment', :Event
+  type :PartNumber, 'An identifier of a part or product moving through the manufacturing process', :Event
 end

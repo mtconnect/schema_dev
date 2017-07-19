@@ -380,6 +380,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE_NUMBER'/>
       <xs:enumeration value='LINE_LABEL'/>
       <xs:enumeration value='BLOCK_COUNT'/>
+      <xs:enumeration value='USER'/>
+      <xs:enumeration value='PART_NUMBER'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -4089,6 +4091,44 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         A geometric transformation
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='UserType'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the person currently responsible for operating the
+        piece of equipment
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='EventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='User' type='UserType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The identifier of the person currently responsible for operating the
+        piece of equipment
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PartNumberType'>
+    <xs:annotation>
+      <xs:documentation>
+        An identifier of a part or product moving through the manufacturing
+        process
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='EventType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PartNumber' type='PartNumberType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        An identifier of a part or product moving through the manufacturing
+        process
       </xs:documentation>
     </xs:annotation>
   </xs:element>

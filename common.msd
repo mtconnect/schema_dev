@@ -178,7 +178,10 @@ package :common, 'Common attributes and elements for all schemas' do
     # Lines and block positions. LINE is now deprecated. Do we need a base #?
     value :LINE_NUMBER, 'The absolute or relative block number position in the program. Relative is relative to a line label.'
     value :LINE_LABEL, 'The label or N number of the position within the program'
-    value :BLOCK_COUNT, 'The number of blocks executed since the cycle start'    
+    value :BLOCK_COUNT, 'The number of blocks executed since the cycle start'
+
+    value :USER, 'The user of the device or applicaiton'
+    value :PART_NUMBER, 'An identifier of a part or product moving through the manufacturing process'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
