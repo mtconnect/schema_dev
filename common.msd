@@ -103,7 +103,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :CONCENTRATION, 'Percentage of one component within a mixture of components'
     value :CONDUCTIVITY, 'The conductivity of a piece of material'
     value :DISPLACEMENT, 'The displacement as measured from zero to peak'
-    value :ELECTRICAL_POWER, 'Electrical power as measured in Watt-Seconds'
+    value :ELECTRICAL_ENERGY, 'Electrical power as measured in Watt-Seconds'
     value :FILL_LEVEL, 'The measurement of the amount of a substance remaining compared to the planned maximum amount of that substance'
     value :FLOW, 'The rate of flow of a fluid'
     value :LINEAR_FORCE, 'The measure of the push or pull introduced by an actuator or exerted on an object'
@@ -137,6 +137,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :PART_ASSET_ID, 'The identifier of the part loaded'
     value :PROGRAM_EDIT, 'The state of the devices editor'
     value :PROGRAM_EDIT_NAME, 'The name of the program being edited'
+    value :CLOCK_TIME, 'The wall clock time'
     
     # 1.3 additions
     value :CHUCK_STATE, 'A state of a chuck'
@@ -246,6 +247,10 @@ package :common, 'Common attributes and elements for all schemas' do
     # For tooling
     value :TOOL_EDGE, 'The current tool edge or suffix – should map to cutting item index'
     value :TOOL_GROUP, 'The current tool group being used'
+
+    # For direction
+    value :ROTARY, 'The rotational direction of a rotary device using the right hand rule convention'
+    value :LINEAR, 'The direction of motion of a linear device'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
