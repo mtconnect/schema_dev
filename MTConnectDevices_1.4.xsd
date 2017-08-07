@@ -929,7 +929,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            The content of the description can text or XML elements
+            The content of the description can be text or XML elements
           </xs:documentation>
         </xs:annotation>
       </xs:any>
