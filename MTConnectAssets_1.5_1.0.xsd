@@ -389,6 +389,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE_LABEL'/>
       <xs:enumeration value='BLOCK_COUNT'/>
       <xs:enumeration value='SURFACE_VELOCITY'/>
+      <xs:enumeration value='USEFUL_LIFE'/>
+      <xs:enumeration value='EQUIPMENT_TIMER'/>
+      <xs:enumeration value='CAPABILITY_ROTARY_VELOCITY'/>
+      <xs:enumeration value='CAPABILITY_PATH_POSITION'/>
+      <xs:enumeration value='KINEMATIC'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -449,6 +454,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TOOL_GROUP'/>
       <xs:enumeration value='MAIN'/>
       <xs:enumeration value='ACTIVE'/>
+      <xs:enumeration value='INTERVAL'/>
+      <xs:enumeration value='OPERATING'/>
+      <xs:enumeration value='WORKING'/>
+      <xs:enumeration value='POWERED'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -6698,6 +6707,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE_LABEL'/>
       <xs:enumeration value='BLOCK_COUNT'/>
       <xs:enumeration value='SURFACE_VELOCITY'/>
+      <xs:enumeration value='USEFUL_LIFE'/>
+      <xs:enumeration value='EQUIPMENT_TIMER'/>
+      <xs:enumeration value='CAPABILITY_ROTARY_VELOCITY'/>
+      <xs:enumeration value='CAPABILITY_PATH_POSITION'/>
+      <xs:enumeration value='KINEMATIC'/>
       <xs:enumeration value='SETUP_TIME'/>
       <xs:enumeration value='TEARDOWN_TIME'/>
       <xs:enumeration value='EXECUTION_TIME'/>

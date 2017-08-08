@@ -28,7 +28,8 @@ package :Specificaitons, 'Device and component specificaitons' do
   
   type :Maximum, 'The maximum value', :ConstraintLimit  
   type :Minimum, 'The minimum value', :ConstraintLimit    
-  type :Nominal, 'The minimum value', :ConstraintLimit
+  type :Nominal, 'The nominal value', :ConstraintLimit
+  type :Value, 'The value of the constraint', :ConstraintLimit
   
   type :DutyCycle, 'The duty cycle', :Constraint do 
     member :Duration, 'The duration of the duty cycle', :DurationTime

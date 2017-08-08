@@ -389,6 +389,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE_LABEL'/>
       <xs:enumeration value='BLOCK_COUNT'/>
       <xs:enumeration value='SURFACE_VELOCITY'/>
+      <xs:enumeration value='USEFUL_LIFE'/>
+      <xs:enumeration value='EQUIPMENT_TIMER'/>
+      <xs:enumeration value='CAPABILITY_ROTARY_VELOCITY'/>
+      <xs:enumeration value='CAPABILITY_PATH_POSITION'/>
+      <xs:enumeration value='KINEMATIC'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -449,6 +454,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TOOL_GROUP'/>
       <xs:enumeration value='MAIN'/>
       <xs:enumeration value='ACTIVE'/>
+      <xs:enumeration value='INTERVAL'/>
+      <xs:enumeration value='OPERATING'/>
+      <xs:enumeration value='WORKING'/>
+      <xs:enumeration value='POWERED'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumType'>
@@ -2110,7 +2119,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='NominalType'>
     <xs:annotation>
       <xs:documentation>
-        The minimum value
+        The nominal value
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -2120,7 +2129,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Nominal' type='NominalType' substitutionGroup='ConstraintLimit'>
     <xs:annotation>
       <xs:documentation>
-        The minimum value
+        The nominal value
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value of the constraint
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintLimitType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Value' type='ValueType' substitutionGroup='ConstraintLimit'>
+    <xs:annotation>
+      <xs:documentation>
+        The value of the constraint
       </xs:documentation>
     </xs:annotation>
   </xs:element>

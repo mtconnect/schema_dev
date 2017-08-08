@@ -183,7 +183,11 @@ package :common, 'Common attributes and elements for all schemas' do
 
     # Version 1.5
     value :SURFACE_VELOCITY, 'When operating in constant surface speed, the velocity relative to the surface'
-    
+    value :USEFUL_LIFE, 'The useful life, remaining or interval'
+    value :EQUIPMENT_TIMER, 'The equipment timers'
+    value :CAPABILITY_ROTARY_VELOCITY, 'The rotary velocity capability'
+    value :CAPABILITY_PATH_POSITION, 'The ability to hold position'
+    value :KINEMATIC, 'For specifications'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
@@ -253,6 +257,11 @@ package :common, 'Common attributes and elements for all schemas' do
     # subtypes for PROGRAM
     value :MAIN, 'The main program'
     value :ACTIVE, 'The sub/active-program of the program'
+    
+    value :INTERVAL, 'The value over the last time interval'
+    value :OPERATING, 'The time operating'
+    value :WORKING, 'The time working'
+    value :POWERED, 'The time the device is powered on'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
