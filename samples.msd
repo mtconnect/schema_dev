@@ -43,8 +43,6 @@ package :Samlpes, 'The samples' do
   basic_type(:LengthValue, 'The length in millimeters') { pattern float_value }
   basic_type(:ClockTime, 'The length in millimeters') { pattern float_value }
   
-  attr :DurationTime, 'A length of time in seconds', :float
-  
   type :Sample, 'An abstract sample', :Result do
     abstract
     

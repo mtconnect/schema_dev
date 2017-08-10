@@ -31,7 +31,8 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectAssets:1.5' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.5' targetNamespace='urn:mtconnect.org:MTConnectAssets:1.5' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' vc:minVersion='1.1'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectAssets:1.5' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.5' targetNamespace='urn:mtconnect.org:MTConnectAssets:1.5' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' vc:minVersion='1.1' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <xs:import namespace='http://www.w3.org/1999/xlink' schemaLocation='xlink.xsd'/>
   <xs:element name='MTConnectAssets' type='MTConnectAssetsType'>
     <xs:annotation>
       <xs:documentation>
@@ -2815,6 +2816,93 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='UsefulLifeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of seconds of life
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='UsefulLifeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The amount of time left on a device or component for active operation
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:pattern value='[+-]?\d+|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='UsefulLife' type='UsefulLifeType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The amount of time left on a device or component for active operation
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='RotaryVelocityVelocityValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value for a rotary velocity
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='CapabilityRotaryVelocityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The capability to spin
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='CapabilityRotaryVelocity' type='CapabilityRotaryVelocityType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The capability to spin
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='CapabilityPathPositionValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value for a accuracy
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='CapabilityPathPositionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The capability to move accurately
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='CapabilityPathPosition' type='CapabilityPathPositionType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        The capability to move accurately
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='PartCountDiscreteType'>
     <xs:annotation>
       <xs:documentation>
@@ -3348,14 +3436,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:restriction base='xs:string'>
       <xs:pattern value='[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?|UNAVAILABLE'/>
     </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='DurationTimeType'>
-    <xs:annotation>
-      <xs:documentation>
-        A length of time in seconds
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:float'/>
   </xs:simpleType>
   <xs:complexType name='SampleType' abstract='true'>
     <xs:annotation>

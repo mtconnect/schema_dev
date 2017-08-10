@@ -330,6 +330,21 @@ package :Events, 'Event Package' do
   type :ProgramEditName, 'The name of the program being edited', :Event do
       member :Value, 'The name of the program being edited', :ProgramValue
   end
+  
+  basic_type(:UsefulLifeValue, 'The number of seconds of life') { pattern integer_value }
+  type :UsefulLife, 'The amount of time left on a device or component for active operation', :Event do
+    member :Value, 'The number of seconds of life', :UsefulLifeValue
+  end
+  
+  basic_type(:RotaryVelocityVelocityValue, 'The value for a rotary velocity') { pattern float_value }
+  type :CapabilityRotaryVelocity, 'The capability to spin', :Event do
+    member :Value, 'The value for spinning', :RotaryVelocityVelocityValue
+  end
+
+  basic_type(:CapabilityPathPositionValue, 'The value for a accuracy') { pattern float_value }
+  type :CapabilityPathPosition, 'The capability to move accurately', :Event do
+    member :Value, 'The value for accuracy', :CapabilityPathPositionValue
+  end
 
   # Create discrete events for non-state events
   %w{PartCount ToolId ToolNumber ToolAssetId PalletId Message Block}.map do |s| 

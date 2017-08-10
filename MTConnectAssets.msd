@@ -5,6 +5,9 @@ self.top = :MTConnectAssets
 self.license = File.read('license.txt')
 self.version = '1.5'
 
+xsimport "xlink", 'http://www.w3.org/1999/xlink', 'xlink.xsd'
+
+
 load 'common'
 
 package :MTC, 'MTC Top Level Package' do  

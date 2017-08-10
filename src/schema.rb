@@ -80,6 +80,10 @@ class Schema
       root.add_namespace(imp.namespace, imp.urn)
     end
     
+    @xsimports.each do |name, namespace, location|
+      root.add_namespace(name, namespace)
+    end
+    
     doc << root
             
     @xsimports.each do |name, namespace, location| 
