@@ -1775,21 +1775,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:element>
         </xs:sequence>
         <xs:sequence minOccurs='1'>
-          <xs:element name='Minimum' type='DataItemNumericValueType'>
+          <xs:element name='Minimum' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 A minimum value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Maximum' type='DataItemNumericValueType'>
+          <xs:element name='Maximum' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 A maximum value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Nominal' type='DataItemNumericValueType'>
+          <xs:element name='Nominal' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 A nominal value for this data item.

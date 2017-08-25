@@ -9,7 +9,7 @@ package :Assets, 'Mobile Assets' do
   
   type :Assets, 'The collection of mobile assets' do
     choice(0..INF) do
-      member :Asset, 'A tool assembly'
+      member :Asset, 'An asset'
     end
   end
   
