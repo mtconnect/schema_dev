@@ -132,7 +132,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         A universally unique id that uniquely identifies the element for
-        its entire life
+        it&apos;s entire life
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'/>
@@ -188,7 +188,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='CompositionIdType'>
     <xs:annotation>
       <xs:documentation>
-        The item's reference to the Device model composition
+        The item&apos;s reference to the Device model composition
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
@@ -881,7 +881,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='DataItems' type='DataItemsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The component's Data Items
+            The component&apos;s Data Items
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -929,7 +929,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            The content of the description can be text or XML elements
+            The content of the description can text or XML elements
           </xs:documentation>
         </xs:annotation>
       </xs:any>
