@@ -17,7 +17,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :Timestamp, 'The time the sample was reported', :dateTime
   attr :OccurrenceTime, 'The time a sample occurred', :dateTime
   attr :Version, 'A version number', :NMTOKEN
-  attr :Name, 'A short name for any element'
+  attr :Name, 'A short name for any element', :NMTOKEN
   attr :Uuid, 'A universally unique id that uniquely identifies the element for it\'s entire life'
   attr :SerialNumber, 'A serial number for a piece of equipment'
   attr :ItemSource, 'The measurement source'
