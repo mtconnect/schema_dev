@@ -130,7 +130,7 @@ package :Tools, 'Cutting tools' do
     # Status
     member :CutterStatus, 'The state of the tool assembly - only for Instance (not archetype)', 1 
     member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
-    member :CuttingToolLife, 'The life of the cutting tool assembly', 0..3, :Life
+    member :ToolLife, 'The life of the cutting tool assembly', 0..3, :Life
     
     # Properties
     member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1

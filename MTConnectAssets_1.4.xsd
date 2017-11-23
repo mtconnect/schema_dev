@@ -126,7 +126,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         A short name for any element
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:string'/>
+    <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
   <xs:simpleType name='UuidType'>
     <xs:annotation>
@@ -1242,7 +1242,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='CuttingToolLife' type='LifeType' minOccurs='0' maxOccurs='3'>
+      <xs:element name='ToolLife' type='LifeType' minOccurs='0' maxOccurs='3'>
         <xs:annotation>
           <xs:documentation>
             The life of the cutting tool assembly
