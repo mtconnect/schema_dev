@@ -20,7 +20,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :Version, 'A version number', :NMTOKEN
   attr :Name, 'A short name for any element', :NMTOKEN
   attr :Uuid, 'A universally unique id that uniquely identifies the element for it\'s entire life'
-  attr :SerialNumber, 'A serial number for a piece of equipment'
+  attr :SerialNumberAttr, 'A serial number for a piece of equipment'
   attr :ItemSource, 'The measurement source'
   attr :Rate, 'A sample rate in milliseconds per sample', :float
   attr :ComponentId, 'The id of the component (maps to the id from probe)', :ID
@@ -88,7 +88,6 @@ package :common, 'Common attributes and elements for all schemas' do
     value :TILT, 'micrometer/meter (alignment errors of axes or spindle errors)'    
     value :TORQUE, 'The torque - force times distance'
     value :VELOCITY, 'The velocity of the component'
-    value :VIBRATION, 'The status indicator'
     value :VISCOSITY, 'viscosity'
     value :VOLTAGE, 'The voltage'
     value :VOLT_AMPERE, 'The measure of the apparent power in an electrical circuit, equal to the product of root-mean-square (RMS) voltage and RMS current'
@@ -194,69 +193,74 @@ package :common, 'Common attributes and elements for all schemas' do
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
     extensible :DataItemExt
     
+    value :ABSOLUTE, 'The absolute physical position in the program '
     value :ACTUAL, 'The actual position with absolute coordinates'
+    value :ACTION, 'An indication of the operating condition of a mechanism represented by a Composition type element'
+    value :ALL, 'Inclusive of all items'
+    value :ALTERNATING, 'Corresponds to an alternating current'
+    value :AUXILIARY, 'The auxiliary value for this data item'
+    value :A_SCALE, 'A Scale weighting factor.   This is the default weighting factor if no factor is specified'
+    value :BAD, 'The bad count'
+    value :BRINELL, 'A scale to measure the resistance to deformation of a surface'
+    value :B_SCALE, 'B Scale weighting factor'
     value :COMMANDED, 'The expected value from the controller'
+    value :CONTROL, 'The low voltage subtype for power state'
+    value :C_SCALE, 'C Scale weighting factor'
+    value :DELAY,'Measurement of the time that a piece of equipment is waiting for an event'
+    value :DIRECT, 'Corresponds to an alternating current'
+    value :DRY_RUN, 'A setting or operator selection used to execute a test mode to confirm the execution of machine functions'
+    value :DYNAMIC, 'Dynamic viscosity'
+    value :D_SCALE, 'D Scale weighting factor'
+    value :FIXTURE, 'Fixture coordinates are being transformed.'
+    value :GOOD, 'The good count'
+    value :JOG, 'Manual movement'
+    value :INCREMENTAL, 'The position of a block of program code relative to the occurrence of the last LINE_LABEL encountered in the control program'
+    value :KINETIC, 'Kenetic viscosity'
+    value :LATERAL, 'An indication of the position of a mechanism that may move in a lateral direction'
+    value :LEEB, 'A scale to measure the resistance to deformation of a surface'
+    value :LENGTH, 'A reference to a length type tool offset variable'
+    value :LINE, 'The high voltage subtype for power state'
+    value :LINEAR, 'The direction of motion of a linear device'
+    value :LOADED, 'Measurement of the time that the sub-parts of a piece of equipment are under load'
+    value :MACHINE_AXIS_LOCK, 'A setting or operator selection that changes the behavior of the controller on a piece of equipment'
+    value :MAINTENANCE, 'The identifier of the person currently responsible for performing maintenance'
+    value :MANUAL_UNCLAMP, 'The component cannot be manually unclamped'
     value :MAXIMUM, 'The maximum value for this measurement'
     value :MINIMUM, 'The minimum value for this measurement'
-    value :OTHER, 'An extension point'
-    value :OVERRIDE, 'DEPRECATED 1.3: The override for the measurement'
-    value :PROBE, 'The position given by a probe'
-    value :TARGET, 'The target position'
-    value :GOOD, 'The good count'
-    value :BAD, 'The bad count'
-    value :ALL, 'Inclusive of all items'
-    value :LINE, 'The high voltage subtype for power state'
-    value :CONTROL, 'The low voltage subtype for power state'
-    
-    value :ALTERNATING, 'Corresponds to an alternating current'
-    value :DIRECT, 'Corresponds to an alternating current'
-    
-    # For 1.2
-    value :WEIGHT, 'Concentration in weight'
-    value :VOLUME, 'Concentration in volume'
+    value :MOHS, 'A scale to measure the resistance to deformation of a surface'
     value :MOLE, 'Concentration in mole'
-    value :KINETIC, 'Kenetic viscosity'
-    value :DYNAMIC, 'Dynamic viscosity'
-
-    # For 1.2 sound level
+    value :MOTION, 'An indication of the open or closed state of a mechanism'
     value :NO_SCALE, 'No weighting factor on the frequency scale'
-    value :A_SCALE, 'A Scale weighting factor.   This is the default weighting factor if no factor is specified'
-    value :B_SCALE, 'B Scale weighting factor'
-    value :C_SCALE, 'C Scale weighting factor'
-    value :D_SCALE, 'D Scale weighting factor'
-    
-    # For 1.3 Interface
+    value :OPERATOR, 'The identifier of the person currently responsible for operating'
+    value :OPERATING, 'Measurement of the time that the major sub-parts of a piece of equipment are powered or performing an activity'
+    value :OPTIONAL_STOP, 'A setting or operator selection that changes the behavior of the controller on a piece of equipment'
+    value :TOOL_CHANGE_STOP, 'A setting or operator selection that changes the behavior of the controller on a piece of equipment'
+    value :OVERRIDE, 'DEPRECATED 1.3: The override for the measurement'
+    value :PRIMARY, 'The primary value for this data item'
+    value :PROBE, 'The position given by a probe'
+    value :PROGRAMMED, 'A programmed position or override effecting the given value'
+    value :POWERED, 'The measurement of time that primary power is applied to the piece of equipment'
+    value :PROCESS, 'The measurement of the time from the beginning of production of a part or product'
+    value :RADIAL, 'A reference to a length type tool offset variable'
+    value :RAPID, 'Rapid movement'
+    value :RELATIVE, 'The relative position in the program to the last line (N) number'
+    value :REMAINING, 'The measurement represents the amount remaining'
     value :REQUEST, 'The request side of the interface'
     value :RESPONSE, 'The response side of the interface'
-    value :REMAINING, 'The measurement represents the amount remaining'
-    
-    # For 1.3 overrides
-    value :JOG, 'Manual movement'
-    value :RAPID, 'Rapid movement'
-    value :PROGRAMMED, 'A programmed position or override effecting the given value'
-
-    # For end of bar
-    value :PRIMARY, 'The primary value for this data item'
-    value :AUXILIARY, 'The auxiliary value for this data item'
-
-    value :MANUAL_UNCLAMP, 'The component cannot be manually unclamped'
-    
-    # For 1.4
-    value :WORKPIECE, 'Workpiece coordinates are being transformed.'
-    value :FIXTURE, 'Fixture coordinates are being transformed.'
-    value :TOOL, 'Tool coordinates are being transformed.'
-    
-    # For Block Number
-    value :ABSOLUTE, 'The absolute physical position in the program '
-    value :RELATIVE, 'The relative position in the program to the last line (N) number'
-    
-    # For tooling
-    value :TOOL_EDGE, 'The current tool edge or suffix – should map to cutting item index'
-    value :TOOL_GROUP, 'The current tool group being used'
-
-    # For direction
+    value :ROCKWELL, 'A scale to measure the resistance to deformation of a surface'
     value :ROTARY, 'The rotational direction of a rotary device using the right hand rule convention'
-    value :LINEAR, 'The direction of motion of a linear device'
+    value :SET_UP, 'The identifier of the person currently responsible for setting up'
+    value :SHORE, 'A scale to measure the resistance to deformation of a surface.'
+    value :SINGLE_BLOCK, 'A setting or operator selection that changes the behavior of the controller on a piece of equipment'
+    value :STANDARD, 'The standard or original length of an object'
+    value :SWITCHED, 'An indication of the activation state of a mechanism represented by a Composition type component'
+    value :TARGET, 'The target position'
+    value :TOOL, 'Tool coordinates are being transformed.'
+    value :USABLE, 'The remaining useable length of an object'
+    value :VERTICAL, 'An indication of the position of a mechanism that may move in a vertical direction'
+    value :VICKERS, 'A scale to measure the resistance to deformation of a surface'
+    value :VOLUME, 'Concentration in volume'
+    value :WORKING, 'Measurement of the time that a piece of equipment is performing any activity'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
