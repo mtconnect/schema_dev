@@ -80,6 +80,10 @@ class Schema
       root.add_namespace(imp.namespace, imp.urn)
     end
     
+    @xsimports.each do |name, namespace, location|
+      root.add_namespace(name, namespace)
+    end
+    
     doc << root
             
     @xsimports.each do |name, namespace, location| 
@@ -443,7 +447,7 @@ class Schema
 
     def add_occurrence(element)
       case @occurrence
-      when Fixnum
+      when Integer
         element.add_attribute('minOccurs', @occurrence.to_s)
 
       when Range

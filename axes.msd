@@ -9,4 +9,5 @@ package :Axes, 'The axes package' do
   type :Linear, 'A linear axis', :Axis
   type :Rotary, 'A rotary axis that moves in a rotational manor', :Axis
   type :Spindle, 'DEPRECATED: A spindle axis that spins', :Axis
+  type :Chuck, 'A component that represents a mechanism that holds a part or stock material in place.', :CommonComponent
 end

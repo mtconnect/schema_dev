@@ -40,8 +40,11 @@ package :MTC, 'MTC Top Level Package' do
 end
 
 load 'components'
+load 'compositions'
 load 'axes'
 load 'systems'
+load 'auxiliaries'
+load 'resources'
 load 'data_items'
 load 'interface'
 
