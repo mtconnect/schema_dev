@@ -1,3 +1,4 @@
+# coding: utf-8
 
 
 package :common, 'Common attributes and elements for all schemas' do
@@ -25,6 +26,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :ComponentId, 'The id of the component (maps to the id from probe)', :ID
   attr :ID, 'An identifier', :ID
   attr :SignificantDigitsValue, 'The number significant digits', :integer
+  attr :CompositionId, 'The item\'s reference to the Device model composition', :NMTOKEN
   
   attr :AssetId, 'The unique id of the asset'
   attr :AssetAttrType, 'An asset type'
@@ -69,7 +71,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :PATH_FEEDRATE, 'The feedrate for the path'
     value :PATH_POSITION, 'The three space position X, Y, Z'
     value :PATH_MODE, 'The mode of the path'
-    value :LINE, 'The line of the program being executed'
+    value :LINE, 'DEPRECATED 1.4: The line of the program being executed – often referred to as the N number'
     value :CONTROLLER_MODE, 'The CNC\'s mode'
     value :LOAD, 'The load on the component as a percentage of rated'
     value :MESSAGE, 'A uninterpreted message'
@@ -117,6 +119,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :VOLT_AMPERE_REACTIVE, 'The measurement of measure reactive power in an AC electrical circuit'
     value :WATT_SECOND, 'The measure of watts for one second, equivilent to joules'
     value :VISCOSITY, 'viscosity'
+    value :CLOCK_TIME, 'Clock time as an ISO 8601 Time'
 
     # Condition types
     value :COMMUNICATIONS, 'The communications system'
@@ -163,6 +166,23 @@ package :common, 'Common attributes and elements for all schemas' do
     value :CLOSE_CHUCK, 'Close a chuck'
     value :MATERIAL_LOAD, 'Load material into a device'
     value :MATERIAL_UNLOAD, 'Unload material into a device'
+    
+    # For 1.4
+    # Additional controller states
+    value :TRANSFORMATION, 'A coordinate system transformation. References a transformation asset'
+    value :SINGLE_BLOCK, 'Controller is single stepping through program'
+    value :DRY_RUN, 'The controller is executing the program but suppressing motion'
+    value :OPTIONAL_STOP, 'Indicator if the optional stop setting on the machine indicating if it is enabled'
+    value :MACHINE_AXIS_LOCK, 'The controller is in the machine axis lock state'
+    value :TOOL_CHANGE_STOP, 'The setting to disable the halting of the program when the tool needs to be changed'
+    
+    # Lines and block positions. LINE is now deprecated. Do we need a base #?
+    value :LINE_NUMBER, 'The absolute or relative block number position in the program. Relative is relative to a line label.'
+    value :LINE_LABEL, 'The label or N number of the position within the program'
+    value :BLOCK_COUNT, 'The number of blocks executed since the cycle start'
+
+    value :USER, 'The user of the device or applicaiton'
+    value :PART_NUMBER, 'An identifier of a part or product moving through the manufacturing process'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
@@ -214,6 +234,19 @@ package :common, 'Common attributes and elements for all schemas' do
     value :AUXILIARY, 'The auxiliary value for this data item'
 
     value :MANUAL_UNCLAMP, 'The component cannot be manually unclamped'
+    
+    # For 1.4
+    value :WORKPIECE, 'Workpiece coordinates are being transformed.'
+    value :FIXTURE, 'Fixture coordinates are being transformed.'
+    value :TOOL, 'Tool coordinates are being transformed.'
+    
+    # For Block Number
+    value :ABSOLUTE, 'The absolute physical position in the program '
+    value :RELATIVE, 'The relative position in the program to the last line (N) number'
+    
+    # For tooling
+    value :TOOL_EDGE, 'The current tool edge or suffix – should map to cutting item index'
+    value :TOOL_GROUP, 'The current tool group being used'
 
     # For direction
     value :ROTARY, 'The rotational direction of a rotary device using the right hand rule convention'
@@ -313,6 +346,24 @@ package :common, 'Common attributes and elements for all schemas' do
   enum :CoordinateSystem, 'The coordinate system to be used for the position' do
     value :MACHINE, '	An unchangeable coordinate system that has machine zero as its origin'
     value :WORK, 'The position that acts as the origin for a particular workpiece'
+  end
+  
+  basic_type(:DataItemResetValueExt, 'An extension point for reset types') do
+    pattern '[a-ln-z]:[A-Z_0-9]+'
+  end
+  
+  enum :DataItemResetValue, 'The reset intervals' do
+    extensible :DataItemResetValueExt
+    
+    value :ACTION_COMPLETE, 'The item was reset at the beginning of an activity'
+    value :ANNUAL, 'Counter starts at the beginning of a yearly cycle'
+    value :DAY, 'Reset every day'
+    value :MAINTENANCE, 'Reset when Maintainence occurs'
+    value :MANUAL, 'Reset manually'
+    value :MONTH, 'Counter starts at the beginning of a montly cycle'
+    value :POWER_ON, 'Count starts at time the machine powers on'
+    value :SHIFT, 'Counter starts at the beginning of a shift'
+    value :WEEK, 'Counter starts at the beginning of a weekly cycle'
   end
   
 end

@@ -6,7 +6,7 @@ package :Streams, 'Event Package' do
   attr :NativeCode, 'An Condition code as defined by the component'
 
   type :Streams, 'Event container for all component events' do
-    member :DeviceStream, 'The data from a device', 1..INF
+    member :DeviceStream, 'The data from a device', 0..INF
   end
 
   type :DeviceStream, 'Data related to a single device' do
@@ -23,7 +23,7 @@ package :Streams, 'Event Package' do
     member :Uuid, 'The unque identifier for this component', 0..1
     member :Samples, 'A collection of samples', 0..1
     member :Events, 'A collection of events', 0..1
-    member :Condition, 'The representation of the devices condition', 0..1, :ConditionList
+    member :Condition, 'The representation of the components condition', 0..1, :ConditionList
   end
 
   type :Samples, 'A collection of samples for this component' do
@@ -47,5 +47,6 @@ package :Streams, 'Event Package' do
     member :Timestamp, 'The time the event occurred or recorded'
     member :Name, 'The name of the event corresponding to the measurement', 0..1
     member :DataItemId, 'The unique identifier of the item being produced'
+    member :CompositionId, 'The identifier of the sub-element this result is in reference to', 0..1
   end
 end

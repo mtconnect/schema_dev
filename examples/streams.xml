@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectStreams xmlns="urn:mtconnect.org:MTConnectStreams:1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectStreams:1.4 ../MTConnectStreams_1.4.xsd">
+	<Header version="1.4" creationTime="2015-01-17T12:00:00Z" nextSequence="1" lastSequence="1" firstSequence="1" instanceId="1" sender="local" bufferSize="1024"/>
+	<Streams>
+		<DeviceStream name="Dev" uuid="Dev">
+			<ComponentStream componentId="path" component="Path">
+				<Events>
+					<Transformation sequence="123" timestamp="2015-01-17T12:00:00Z" dataItemId="xfor" name="xfor-1" order="1" subType="WORKPIECE">G54</Transformation>
+					<Transformation sequence="123" timestamp="2015-01-17T12:00:00Z" dataItemId="xfor" name="xfor-1" order="2" subType="FIXTURE">G55</Transformation>
+				</Events>
+			</ComponentStream>
+		</DeviceStream>
+	</Streams>
+</MTConnectStreams>

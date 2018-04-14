@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectDevices:1.3' xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.3' targetNamespace='urn:mtconnect.org:MTConnectDevices:1.3' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' vc:minVersion='1.1'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectDevices:1.4' xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.4' targetNamespace='urn:mtconnect.org:MTConnectDevices:1.4' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' vc:minVersion='1.1'>
   <xs:element name='MTConnectDevices' type='MTConnectDevicesType'>
     <xs:annotation>
       <xs:documentation>
@@ -185,6 +185,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
+  <xs:simpleType name='CompositionIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The item&apos;s reference to the Device model composition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -325,6 +333,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
       <xs:enumeration value='VISCOSITY'/>
+      <xs:enumeration value='CLOCK_TIME'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -363,6 +372,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CLOSE_CHUCK'/>
       <xs:enumeration value='MATERIAL_LOAD'/>
       <xs:enumeration value='MATERIAL_UNLOAD'/>
+      <xs:enumeration value='TRANSFORMATION'/>
+      <xs:enumeration value='SINGLE_BLOCK'/>
+      <xs:enumeration value='DRY_RUN'/>
+      <xs:enumeration value='OPTIONAL_STOP'/>
+      <xs:enumeration value='MACHINE_AXIS_LOCK'/>
+      <xs:enumeration value='TOOL_CHANGE_STOP'/>
+      <xs:enumeration value='LINE_NUMBER'/>
+      <xs:enumeration value='LINE_LABEL'/>
+      <xs:enumeration value='BLOCK_COUNT'/>
+      <xs:enumeration value='USER'/>
+      <xs:enumeration value='PART_NUMBER'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -414,6 +434,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PRIMARY'/>
       <xs:enumeration value='AUXILIARY'/>
       <xs:enumeration value='MANUAL_UNCLAMP'/>
+      <xs:enumeration value='WORKPIECE'/>
+      <xs:enumeration value='FIXTURE'/>
+      <xs:enumeration value='TOOL'/>
+      <xs:enumeration value='ABSOLUTE'/>
+      <xs:enumeration value='RELATIVE'/>
+      <xs:enumeration value='TOOL_EDGE'/>
+      <xs:enumeration value='TOOL_GROUP'/>
       <xs:enumeration value='ROTARY'/>
       <xs:enumeration value='LINEAR'/>
     </xs:restriction>
@@ -600,6 +627,42 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WORK'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for reset types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The reset intervals
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTION_COMPLETE'/>
+      <xs:enumeration value='ANNUAL'/>
+      <xs:enumeration value='DAY'/>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='MANUAL'/>
+      <xs:enumeration value='MONTH'/>
+      <xs:enumeration value='POWER_ON'/>
+      <xs:enumeration value='SHIFT'/>
+      <xs:enumeration value='WEEK'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The reset intervals
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='DataItemResetValueTypeEnum DataItemResetValueExtType'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetCountValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -726,6 +789,74 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:simpleType name='IdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to an identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
+  <xs:complexType name='ReferenceType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract reference type
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name='idRef' type='IdRefType' use='required'/>
+    <xs:attribute name='name' type='NameType' use='optional'/>
+  </xs:complexType>
+  <xs:element abstract='true' name='Reference' type='ReferenceType'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract reference type
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ReferencesType'>
+    <xs:annotation>
+      <xs:documentation>
+        A list of references
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref='Reference' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='DataItemRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A data item reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ReferenceType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='DataItemRef' type='DataItemRefType' substitutionGroup='Reference'>
+    <xs:annotation>
+      <xs:documentation>
+        A data item reference
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ComponentRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A data item reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ReferenceType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ComponentRef' type='ComponentRefType' substitutionGroup='Reference'>
+    <xs:annotation>
+      <xs:documentation>
+        A data item reference
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='ComponentType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -761,11 +892,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Compositions' type='CompositionsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A list of composition elements
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='References' type='ReferencesType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            A list of references
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='id' type='IDType' use='required'/>
     <xs:attribute name='nativeName' type='NameType' use='optional'/>
     <xs:attribute name='sampleInterval' type='SampleIntervalType' use='optional'/>
-    <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
+    <xs:attribute name='sampleRate' type='DataItemSampleRateType' use='optional'/>
   </xs:complexType>
   <xs:element abstract='true' name='Component' type='ComponentType'>
     <xs:annotation>
@@ -777,15 +922,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ComponentDescriptionType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
-        The descriptive information for this component. This can be manufacturer
-        specific
+        The descriptive information. This can be manufacturer specific
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            Any desciptive schema like calibration
+            The content of the description can text or XML elements
           </xs:documentation>
         </xs:annotation>
       </xs:any>
@@ -861,6 +1005,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='iso841Class' type='Iso841ClassType' use='optional'/>
         <xs:attribute name='uuid' type='UuidType' use='required'/>
         <xs:attribute name='name' type='NameType' use='required'/>
+        <xs:attribute name='version' type='VersionType' use='optional'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -973,6 +1118,93 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='CompositionsType'>
+    <xs:annotation>
+      <xs:documentation>
+        A collection of sub elements
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Composition' type='CompositionType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            An assembly of a component
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='CompositionTypeExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for Composition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='CompositionEnumTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The vocab for the type of composition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTUATOR'/>
+      <xs:enumeration value='AMPLIFIER'/>
+      <xs:enumeration value='BALLSCREW'/>
+      <xs:enumeration value='BATTERY'/>
+      <xs:enumeration value='BELT'/>
+      <xs:enumeration value='CIRCUIT_BREAKER'/>
+      <xs:enumeration value='CHAIN'/>
+      <xs:enumeration value='CHUCK'/>
+      <xs:enumeration value='CHUTE'/>
+      <xs:enumeration value='CLAMP'/>
+      <xs:enumeration value='COMPRESSON'/>
+      <xs:enumeration value='DOON'/>
+      <xs:enumeration value='FAN'/>
+      <xs:enumeration value='FILTER'/>
+      <xs:enumeration value='GRIPPER'/>
+      <xs:enumeration value='HOPPER'/>
+      <xs:enumeration value='MOTOR'/>
+      <xs:enumeration value='PUMP'/>
+      <xs:enumeration value='POSITION_FEEDBACK'/>
+      <xs:enumeration value='POWER_SUPPLY'/>
+      <xs:enumeration value='SWITCH'/>
+      <xs:enumeration value='TANK'/>
+      <xs:enumeration value='TRANSFORMER'/>
+      <xs:enumeration value='VALVE'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='CompositionEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The vocab for the type of composition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='CompositionEnumTypeEnum CompositionTypeExtType'/>
+  </xs:simpleType>
+  <xs:complexType name='CompositionType'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract element
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Description' type='ComponentDescriptionType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The descriptive information about this sub element
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='id' type='IDType' use='required'/>
+    <xs:attribute name='uuid' type='UuidType' use='optional'/>
+    <xs:attribute name='name' type='NameType' use='optional'/>
+    <xs:attribute name='type' type='CompositionEnumType' use='required'/>
+  </xs:complexType>
   <xs:simpleType name='CalibrationDateType'>
     <xs:annotation>
       <xs:documentation>
@@ -1342,7 +1574,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:simpleType name='SampleRateType'>
+  <xs:simpleType name='DataItemSampleRateType'>
     <xs:annotation>
       <xs:documentation>
         The frequency a measurement is sampled
@@ -1366,6 +1598,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='DataItemNumericValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The constrained value for this data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
   <xs:simpleType name='SourceComponentIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -1381,6 +1621,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
+  <xs:simpleType name='ComponentNameType'>
+    <xs:annotation>
+      <xs:documentation>
+        The name of a related component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
   <xs:simpleType name='FilterValueType'>
     <xs:annotation>
@@ -1422,14 +1670,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DISCRETE'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='FilterType'>
+  <xs:simpleType name='DataItemFilterEnumType'>
     <xs:annotation>
       <xs:documentation>
         The type of filter
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:NMTOKEN'>
+    <xs:restriction base='xs:string'>
       <xs:enumeration value='MINIMUM_DELTA'/>
+      <xs:enumeration value='PERIOD'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='DataItemsType'>
@@ -1455,7 +1704,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name='Source' type='SourceType' minOccurs='0' maxOccurs='1'>
+      <xs:element name='Source' type='DataItemSourceType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
             Additional information about the component, channel, register,
@@ -1470,6 +1719,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Filters' type='FiltersType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            Limits on the set of possible values
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='InitialValue' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The initial value for counters
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ResetTrigger' type='DataItemResetValueType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The event that triggers the resetting of this counter
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='name' type='NameType' use='optional'/>
     <xs:attribute name='id' type='IDType' use='required'/>
@@ -1481,7 +1751,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='nativeScale' type='NativeScaleType' use='optional'/>
     <xs:attribute name='category' type='CategoryType' use='required'/>
     <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'/>
-    <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
+    <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
+    <xs:attribute name='sampleRate' type='DataItemSampleRateType' use='optional'/>
     <xs:attribute name='representation' type='RepresentationType' use='optional' default='VALUE'/>
     <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'/>
   </xs:complexType>
@@ -1497,24 +1768,31 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='Value' type='DataItemValueElementType' minOccurs='1' maxOccurs='unbounded'>
             <xs:annotation>
               <xs:documentation>
-                An possible value for this data item. Used for controlled
+                A possible value for this data item. Used for controlled
                 vocabularies.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:sequence>
         <xs:sequence minOccurs='1'>
-          <xs:element name='Minimum' type='DataItemValueType'>
+          <xs:element name='Minimum' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 A minimum value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='Maximum' type='DataItemValueType'>
+          <xs:element name='Maximum' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 A maximum value for this data item.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Nominal' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                A nominal value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -1523,12 +1801,39 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Filter' type='DataItemFilterType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
+            DEPRECATED: A limit on the amount of data by specifying the minimal
+            delta required.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='FiltersType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of filters
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Filter' type='DataItemFilterType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
             A limit on the amount of data by specifying the minimal delta
             required.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='DataItemBaseType'>
+    <xs:annotation>
+      <xs:documentation>
+        A starting point for a data item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='DataItemValueType'/>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name='DataItemValueElementType'>
     <xs:annotation>
@@ -1548,11 +1853,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='FilterValueType'>
-        <xs:attribute name='type' type='FilterType' use='required'/>
+        <xs:attribute name='type' type='DataItemFilterEnumType' use='required'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='SourceType'>
+  <xs:complexType name='DataItemSourceType'>
     <xs:annotation>
       <xs:documentation>
         A native data source
@@ -1560,8 +1865,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='ItemSourceType'>
-        <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
         <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
+        <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
+        <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1582,71 +1888,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name='IdrefType'>
-    <xs:annotation>
-      <xs:documentation>
-        A reference to an identifier
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:IDREF'/>
-  </xs:simpleType>
-  <xs:complexType name='ReferenceType'>
-    <xs:annotation>
-      <xs:documentation>
-        A reference to a data item
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='xs:string'>
-        <xs:attribute name='dataItemId' type='IdrefType' use='required'/>
-        <xs:attribute name='name' type='NameType' use='optional'/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name='ReferencesType'>
-    <xs:annotation>
-      <xs:documentation>
-        A list of references
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Reference' type='ReferenceType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            A reference to a data item or component
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name='InterfaceType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        A component representing all the interfaces in a device.
+        A component representing an interface in a device.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='CommonComponentType'>
-        <xs:sequence>
-          <xs:element name='References' type='ReferencesType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                A list of referenced components and data items
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
+      <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
   <xs:element abstract='true' name='Interface' type='InterfaceType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
-        A component representing all the interfaces in a device.
+        A component representing an interface in a device.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='BarFeederType'>
+  <xs:complexType name='BarFeederInterfaceType'>
     <xs:annotation>
       <xs:documentation>
         An interface to a bar feeder device
@@ -1656,14 +1915,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='InterfaceType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='BarFeeder' type='BarFeederType' substitutionGroup='Interface'>
+  <xs:element name='BarFeederInterface' type='BarFeederInterfaceType' substitutionGroup='Interface'>
     <xs:annotation>
       <xs:documentation>
         An interface to a bar feeder device
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='MaterialHandlerType'>
+  <xs:complexType name='MaterialHandlerInterfaceType'>
     <xs:annotation>
       <xs:documentation>
         An interface to a device that can load and unload material
@@ -1673,7 +1932,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='InterfaceType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='MaterialHandler' type='MaterialHandlerType' substitutionGroup='Interface'>
+  <xs:element name='MaterialHandlerInterface' type='MaterialHandlerInterfaceType' substitutionGroup='Interface'>
     <xs:annotation>
       <xs:documentation>
         An interface to a device that can load and unload material

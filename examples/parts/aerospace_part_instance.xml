@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectAssets xmlns="urn:mtconnect.org:MTConnectAssets:1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectAssets:1.4 ../../MTConnectAssets_1.4.xsd">
+	<Header version="1.4" creationTime="2015-01-04T12:23:00Z" instanceId="1" sender="localhost" assetBufferSize="1024" assetCount="100"/>
+	<Assets>
+		<Part assetId="4145T44G01-BCM95620" timestamp="2005-10-05T00:00:00Z" revision="XXX" deviceUuid="xxx">
+			<AssetArchetypeRef assetId="f010052a-4b7a-11e5-b2f7-28cfe91a82ef"/>
+			<Description>HPT Inner Case</Description>
+			<PartIdentifiers>
+				<GroupIdentifier stepIdRef="5" type="HEAT" timestamp="2005-06-09T12:52:00Z">WHP35320</GroupIdentifier>
+				<GroupIdentifier stepIdRef="10" type="BATCH" timestamp="2005-06-09T12:52:00Z">BCM95630</GroupIdentifier>
+				<GroupIdentifier stepIdRef="25" type="BATCH" timestamp="2005-06-16T11:25:00Z">731553</GroupIdentifier>
+			</PartIdentifiers>
+			<Workorder workorderId="815885">
+				<TotalCount>15</TotalCount>
+			</Workorder>
+			<ProcessEvents>
+				<ProcessEvent targetIdRef="123" routingIdRef="default" stepIdRef="5" state="RAW" timestamp="2005-06-09T12:52:00Z">
+					<ProcessData>
+						<Events>
+							<OperatorId sequence="123" timestamp="2005-06-09T12:52:00Z" dataItemId="op">STOCK Guy</OperatorId>
+						</Events>
+					</ProcessData>
+				</ProcessEvent>
+				<ProcessEvent targetIdRef="123" routingIdRef="default" stepIdRef="10" state="IN_PROCESS" timestamp="2005-06-09T11:24:00Z">
+					<ProcessData>
+						<Events>
+							<OperatorId sequence="123" timestamp="2005-06-09T12:52:00Z" dataItemId="op">ABC</OperatorId>
+						</Events>
+					</ProcessData>
+				</ProcessEvent>
+				<ProcessEvent targetIdRef="123" routingIdRef="default" stepIdRef="10" state="COMPLETE" timestamp="2005-06-09T13:24:00Z">
+					<ProcessData>
+						<Events>
+							<OperatorId sequence="123" timestamp="2005-06-09T12:52:00Z" dataItemId="op">E-LAFLAM</OperatorId>
+						</Events>
+					</ProcessData>
+				</ProcessEvent>
+				<ProcessEvent targetIdRef="123" routingIdRef="default" stepIdRef="20" state="IN_PROCESS" timestamp="2005-06-13T13:24:00Z">
+					<ActivityEvents>
+						<ActivityEvent timestamp="2005-06-13T13:24:00Z" state="IN_PROCESS">
+							<ProcessData>
+								<Events>
+									<Message  sequence="1" timestamp="2005-06-13T13:24:00Z" dataItemId="message">Tool broken</Message>
+								</Events>
+							</ProcessData>
+						</ActivityEvent>
+					</ActivityEvents>
+					<ProcessData>
+						<Events>
+							<OperatorId sequence="123" timestamp="2005-06-09T12:52:00Z" dataItemId="op">E-LAFLAM</OperatorId>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">70</PathFeedrateOverride>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">80</PathFeedrateOverride>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">100</PathFeedrateOverride>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">75</PathFeedrateOverride>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">90</PathFeedrateOverride>
+							<PathFeedrateOverride sequence="134298234" timestamp="2005-06-13T13:24:00Z" dataItemId="pft1">95</PathFeedrateOverride>
+						</Events>
+						<Condition>
+							<Fault sequence="123" timestamp="2005-06-13T13:24:00Z" dataItemId="system" type="TEMPERATURE">Spindle over temperature</Fault>
+						</Condition>
+					</ProcessData>
+				</ProcessEvent>
+				<ProcessEvent routingIdRef="default" targetIdRef="123"  stepIdRef="20" state="COMPLETE" timestamp="2005-06-13T13:24:00Z">
+					<ProcessData>
+						<Events>
+							<OperatorId sequence="123" timestamp="2005-06-09T12:52:00Z" dataItemId="op">E-LAFLAM</OperatorId>
+						</Events>
+					</ProcessData>
+				</ProcessEvent>
+				<ProcessEvent routingIdRef="default" targetIdRef="123" stepIdRef="25" state="IN_PROCESS" timestamp="2005-06-16T13:24:00Z"/>
+			</ProcessEvents>
+		</Part>
+	</Assets>
+</MTConnectAssets>

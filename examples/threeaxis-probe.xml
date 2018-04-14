@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MTConnectDevices xmlns="urn:mtconnect.org:MTConnectDevices:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.2 ../MTConnectDevices_1.2.xsd">
-  <Header bufferSize="130000" instanceId="1" creationTime="2009-11-13T02:31:40" sender="local" version="1.2"/>
+<MTConnectDevices xmlns="urn:mtconnect.org:MTConnectDevices:1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.4 ../MTConnectDevices_1.4.xsd">
+  <Header bufferSize="130000" instanceId="1" creationTime="2009-11-13T02:31:40" sender="local" version="1.4" assetBufferSize="1024" assetCount="10"/>
   <Devices>
     <Device id="d1" uuid="HM1" name="HMC_3Axis">
       <Description>3 Axis Mill</Description>
@@ -14,6 +14,9 @@
               <DataItems>
                 <DataItem type="POSITION" subType="ACTUAL" id="yp" category="SAMPLE" name="Yact" units="MILLIMETER" nativeUnits="MILLIMETER" coordinateSystem="MACHINE"/>
               </DataItems>
+              <SubElements>
+				 <FilterElement id="fil" name="y_filter"/>
+			  </SubElements>
             </Linear>
             <Linear id="x" name="X">
               <DataItems>
@@ -35,7 +38,7 @@
                   </Constraints>
                 </DataItem>
                 <DataItem type="TEMPERATURE" category="SAMPLE" name="Ctemp" id="ct" units="CELSIUS" statistic="AVERAGE">
-					<Source componentId="s1">channel:1</Source>
+					<Source componentId="sensor">channel:1</Source>
                 </DataItem>
               </DataItems>
             </Rotary>
@@ -76,6 +79,10 @@
 			</DataItems>
         </Sensor>
       </Components>
+	  <SubElements>
+		 <DoorElement id="door"/>
+      </SubElements>
+
     </Device>
   </Devices>
 </MTConnectDevices>

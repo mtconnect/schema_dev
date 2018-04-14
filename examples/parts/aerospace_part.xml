@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectAssets xmlns="urn:mtconnect.org:MTConnectAssets:1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectAssets:1.4 ../MTConnectAssets_1.4.xsd">
+  <Header version="1.4" creationTime="2015-01-04T12:23:00Z" instanceId="1" sender="localhost" assetBufferSize="1024" assetCount="100"/>
+  <Assets>
+    <PartArchetype assetId="4145T33G01-A" timestamp="2004-10-05T12:00:00Z" revisionId="7">
+      <Characteristics>
+        <RawMaterial>
+          <MaterialType standard="INTERNAL">718</MaterialType>
+        </RawMaterial>
+        <Customers>
+          <Customer customerId="GE-AIRCRA">
+            <Name>GE Aircraft</Name>
+          </Customer>
+        </Customers>
+      </Characteristics>
+      <ProcessSteps>
+        <ProcessStep stepId="5">
+          <Description>Release Material</Description>
+          <Targets>
+            <TargetLocation type="STOCK">INSP</TargetLocation>
+          </Targets>
+        </ProcessStep>
+        <ProcessStep stepId="10">
+          <Description>ROUGH AFT</Description>
+          <Targets>
+            <TargetDevice>SL-65</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>308</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="10-1">
+          <Targets>
+            <TargetLocation type="INVENTORY">After SL-65</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>24540</TargetExecutionTime>
+        </ProcessStep>
+        <ProcessStep stepId="20">
+          <Description>ROUGH FWD</Description>
+          <Targets>
+            <TargetDevice>SL-65</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>484</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="20-1">
+          <Targets>
+            <TargetLocation type="INVENTORY">After SL-65</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>42600</TargetExecutionTime>
+        </ProcessStep>
+        <ProcessStep stepId="25">
+          <Description>Heat Treat</Description>
+          <Targets>
+            <TargetLocation type="EXTERNAL">Accurate Brazing</TargetLocation>
+          </Targets>
+        </ProcessStep>
+        <ProcessStep stepId="30">
+          <Description>TOOL PREP</Description>
+          <Targets>
+            <TargetDevice>E.L.</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>84</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="30-1">
+          <Targets>
+            <TargetLocation type="INVENTORY">After E.L</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>15720</TargetExecutionTime>
+        </ProcessStep>
+        <ProcessStep stepId="40">
+          <Description>FINISH FWD</Description>
+          <Targets>
+            <TargetDevice>SL-75</TargetDevice>
+          </Targets>
+          <ControlPrograms>
+            <ControlProgram name="Finish Fwd" programName="152440" revisionId="2"/>
+          </ControlPrograms>
+          <TargetExecutionTime>1036</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+          <CuttingTools>
+            <CuttingToolSetup sequence="1">
+              <CuttingToolAssetId>CRGPL-203V-RPGN-3V</CuttingToolAssetId>
+            </CuttingToolSetup>
+            <CuttingToolSetup sequence="2">
+              <CuttingToolAssetId>NSL203D-NR3047L</CuttingToolAssetId>
+            </CuttingToolSetup>
+            <CuttingToolSetup sequence="3">
+              <CuttingToolAssetId>MCLNL-204-CNMG-432</CuttingToolAssetId>
+            </CuttingToolSetup>
+            <CuttingToolSetup sequence="4">
+              <CuttingToolAssetId>NEL-163D-SR203-056FLCA</CuttingToolAssetId>
+            </CuttingToolSetup>
+            <CuttingToolSetup sequence="5">
+              <CuttingToolAssetId>A24-CTFPL3-TPG322</CuttingToolAssetId>
+            </CuttingToolSetup>
+            <CuttingToolSetup sequence="6">
+              <CuttingToolAssetId>DVJNL-204-VNGA-331</CuttingToolAssetId>
+            </CuttingToolSetup>
+          </CuttingTools>
+          <WorkHoldings>
+            <WorkholdingId>T1460-1B</WorkholdingId>
+          </WorkHoldings>
+        </ProcessStep>
+        <ProcessStep stepId="40-1">
+          <Targets>
+            <TargetLocation type="INVENTORY">After SL-75</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>2580</TargetExecutionTime>
+        </ProcessStep>
+        <ProcessStep stepId="80">
+          <Description>FINISH AFT FLANGE</Description>
+          <Targets>
+            <TargetDevice>SL-75</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>912</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="80-1">
+          <Targets>
+            <TargetLocation type="INVENTORY">After SL-75</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>2580</TargetExecutionTime>
+        </ProcessStep>
+        <ProcessStep stepId="90">
+          <Description>FINISH MIDDLE I.D.</Description>
+          <Targets>
+            <TargetDevice>SL-75</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>352</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="100">
+          <Description>FINISH FORWARD</Description>
+          <Targets>
+            <TargetDevice>SL-75</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>772</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="100-1">
+          <Targets>
+            <TargetLocation type="INVENTORY">After SL-75</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>7800</TargetExecutionTime>
+        </ProcessStep>
+        <ProcessStep stepId="110">
+          <Description>MILL POCKETS AFT FLAGE</Description>
+          <Targets>
+            <TargetDevice>Kitamura</TargetDevice>
+          </Targets>
+          <ControlPrograms>
+            <ControlProgram name="POCKETS" programName="332409" revisionId="1"/>
+          </ControlPrograms>
+          <TargetExecutionTime>628</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+          <CuttingTools>
+            <CuttingToolSetup sequence="1">
+              <ProgramToolNumber>14</ProgramToolNumber>
+            </CuttingToolSetup>
+            <CuttingToolSetup sequence="2">
+              <ProgramToolNumber>15</ProgramToolNumber>
+            </CuttingToolSetup>
+            <CuttingToolSetup sequence="3">
+              <ProgramToolNumber>16</ProgramToolNumber>
+            </CuttingToolSetup>
+            <CuttingToolSetup sequence="4">
+              <ProgramToolNumber>17</ProgramToolNumber>
+            </CuttingToolSetup>
+            <CuttingToolSetup sequence="5">
+              <ProgramToolNumber>18</ProgramToolNumber>
+            </CuttingToolSetup>
+            <CuttingToolSetup sequence="6">
+              <ProgramToolNumber>19</ProgramToolNumber>
+            </CuttingToolSetup>
+          </CuttingTools>
+          <WorkHoldings>
+            <WorkholdingId>T1443-7</WorkholdingId>
+          </WorkHoldings>
+        </ProcessStep>
+        <ProcessStep stepId="120">
+          <Description>MILL &amp; DRILL AFT FLAGE</Description>
+          <Targets>
+            <TargetDevice>Kitamura</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>532</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="120-1">
+          <Targets>
+            <TargetLocation type="INVENTORY">After Kitamurra</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>10920</TargetExecutionTime>
+        </ProcessStep>
+        <ProcessStep stepId="130">
+          <Description>FINAL MARK</Description>
+          <Targets>
+            <TargetDevice>MARK</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>84</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="140">
+          <Description>MILL &amp; DRILL PERIPHERY</Description>
+          <Targets>
+            <TargetDevice>Kitamura</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>1244</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="150">
+          <Description>DEBURR COMPLETE</Description>
+          <Targets>
+            <TargetDevice>Deburr</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>256</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="150-1">
+          <Targets>
+            <TargetLocation type="INVENTORY">After Deburr</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>21360</TargetExecutionTime>
+        </ProcessStep>
+        <ProcessStep stepId="160">
+          <Description>FINISH O.D.</Description>
+          <Targets>
+            <TargetDevice>SL-75</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>336</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="170">
+          <Description>FINISH I.D. AFT GROOVES</Description>
+          <Targets>
+            <TargetDevice>SL-75</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>480</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="170-1">
+          <Targets>
+            <TargetLocation type="INVENTORY">After &gt;SL-75</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>19980</TargetExecutionTime>
+        </ProcessStep>
+        <ProcessStep stepId="175">
+          <Description>Laser Drill Holes</Description>
+          <Targets>
+            <TargetLocation type="EXTERNAL">Laserfare</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>960</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="180">
+          <Description>DRILL I.D. PIN HOLE</Description>
+          <Targets>
+            <TargetDevice>Kitamura</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>492</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="180-1">
+          <Targets>
+            <TargetLocation type="INVENTORY">After Kitamurra</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>2700</TargetExecutionTime>
+        </ProcessStep>
+        <ProcessStep stepId="190">
+          <Description>LOCAL BENCH</Description>
+          <Targets>
+            <TargetDevice>Deburr</TargetDevice>
+          </Targets>
+          <TargetExecutionTime>432</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+        </ProcessStep>
+        <ProcessStep stepId="190-1">
+          <Targets>
+            <TargetLocation type="INVENTORY">After Deburr</TargetLocation>
+          </Targets>
+          <TargetExecutionTime>29700</TargetExecutionTime>
+        </ProcessStep>
+      </ProcessSteps>
+    </PartArchetype>
+  </Assets>
+</MTConnectAssets>

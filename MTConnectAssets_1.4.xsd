@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectAssets:1.3' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.3' targetNamespace='urn:mtconnect.org:MTConnectAssets:1.3' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' vc:minVersion='1.1'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectAssets:1.4' xmlns:mt='urn:mtconnect.org:MTConnectAssets:1.4' targetNamespace='urn:mtconnect.org:MTConnectAssets:1.4' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' vc:minVersion='1.1'>
   <xs:element name='MTConnectAssets' type='MTConnectAssetsType'>
     <xs:annotation>
       <xs:documentation>
@@ -185,6 +185,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
+  <xs:simpleType name='CompositionIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The item&apos;s reference to the Device model composition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -325,6 +333,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'/>
       <xs:enumeration value='WATT_SECOND'/>
       <xs:enumeration value='VISCOSITY'/>
+      <xs:enumeration value='CLOCK_TIME'/>
       <xs:enumeration value='COMMUNICATIONS'/>
       <xs:enumeration value='LOGIC_PROGRAM'/>
       <xs:enumeration value='MOTION_PROGRAM'/>
@@ -363,6 +372,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CLOSE_CHUCK'/>
       <xs:enumeration value='MATERIAL_LOAD'/>
       <xs:enumeration value='MATERIAL_UNLOAD'/>
+      <xs:enumeration value='TRANSFORMATION'/>
+      <xs:enumeration value='SINGLE_BLOCK'/>
+      <xs:enumeration value='DRY_RUN'/>
+      <xs:enumeration value='OPTIONAL_STOP'/>
+      <xs:enumeration value='MACHINE_AXIS_LOCK'/>
+      <xs:enumeration value='TOOL_CHANGE_STOP'/>
+      <xs:enumeration value='LINE_NUMBER'/>
+      <xs:enumeration value='LINE_LABEL'/>
+      <xs:enumeration value='BLOCK_COUNT'/>
+      <xs:enumeration value='USER'/>
+      <xs:enumeration value='PART_NUMBER'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -414,6 +434,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PRIMARY'/>
       <xs:enumeration value='AUXILIARY'/>
       <xs:enumeration value='MANUAL_UNCLAMP'/>
+      <xs:enumeration value='WORKPIECE'/>
+      <xs:enumeration value='FIXTURE'/>
+      <xs:enumeration value='TOOL'/>
+      <xs:enumeration value='ABSOLUTE'/>
+      <xs:enumeration value='RELATIVE'/>
+      <xs:enumeration value='TOOL_EDGE'/>
+      <xs:enumeration value='TOOL_GROUP'/>
       <xs:enumeration value='ROTARY'/>
       <xs:enumeration value='LINEAR'/>
     </xs:restriction>
@@ -600,6 +627,42 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WORK'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for reset types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The reset intervals
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTION_COMPLETE'/>
+      <xs:enumeration value='ANNUAL'/>
+      <xs:enumeration value='DAY'/>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='MANUAL'/>
+      <xs:enumeration value='MONTH'/>
+      <xs:enumeration value='POWER_ON'/>
+      <xs:enumeration value='SHIFT'/>
+      <xs:enumeration value='WEEK'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemResetValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The reset intervals
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='DataItemResetValueTypeEnum DataItemResetValueExtType'/>
+  </xs:simpleType>
   <xs:complexType name='HeaderType'>
     <xs:annotation>
       <xs:documentation>
@@ -641,6 +704,66 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:simpleType name='SourceType'>
+    <xs:annotation>
+      <xs:documentation>
+        A URI reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:anyURI'/>
+  </xs:simpleType>
+  <xs:simpleType name='RemovedType'>
+    <xs:annotation>
+      <xs:documentation>
+        A flag indicating the item has been removed
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:boolean'/>
+  </xs:simpleType>
+  <xs:complexType name='AssetDescriptionType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        The description of an asset, can be free form text or elements
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            Any elements
+          </xs:documentation>
+        </xs:annotation>
+      </xs:any>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='AssetsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The collection of mobile assets
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs='0' maxOccurs='unbounded'>
+      <xs:element ref='Asset'/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name='AssetType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract mobile asset
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name='assetId' type='AssetIdType' use='required'/>
+    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
+    <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
+    <xs:attribute name='removed' type='RemovedType' use='optional'/>
+  </xs:complexType>
+  <xs:element abstract='true' name='Asset' type='AssetType'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract mobile asset
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:simpleType name='LocationValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -717,10 +840,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:simpleType name='ToolIdType'>
+  <xs:simpleType name='CuttingToolIdType'>
     <xs:annotation>
       <xs:documentation>
-        The identifier of the tool type
+        DEPRECATED: The identifier of the tool type
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
@@ -809,7 +932,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:integer'/>
   </xs:simpleType>
-  <xs:simpleType name='CodeType'>
+  <xs:simpleType name='MeasurementCodeType'>
     <xs:annotation>
       <xs:documentation>
         A application specific code
@@ -825,21 +948,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='SourceType'>
+  <xs:simpleType name='TurretLocationType'>
     <xs:annotation>
       <xs:documentation>
-        A URI reference
+        The turret for a lathe or machine tool
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:anyURI'/>
-  </xs:simpleType>
-  <xs:simpleType name='RemovedType'>
-    <xs:annotation>
-      <xs:documentation>
-        A flag indicating the item has been removed
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:boolean'/>
+    <xs:restriction base='xs:string'/>
   </xs:simpleType>
   <xs:simpleType name='DefinitionFormatType'>
     <xs:annotation>
@@ -910,24 +1025,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POT'/>
       <xs:enumeration value='STATION'/>
       <xs:enumeration value='CRIB'/>
+      <xs:enumeration value='STANDBY'/>
+      <xs:enumeration value='SPINDLE'/>
+      <xs:enumeration value='REJECT'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name='AssetDescriptionType' mixed='true'>
-    <xs:annotation>
-      <xs:documentation>
-        The description of an asset, can be freeform text or elemenrts
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            Any elements
-          </xs:documentation>
-        </xs:annotation>
-      </xs:any>
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name='CuttingToolDefinitionType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
@@ -945,34 +1047,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attribute name='format' type='DefinitionFormatType' use='optional'/>
   </xs:complexType>
-  <xs:complexType name='AssetsType'>
-    <xs:annotation>
-      <xs:documentation>
-        The collection of mobile assets
-      </xs:documentation>
-    </xs:annotation>
-    <xs:choice minOccurs='0' maxOccurs='unbounded'>
-      <xs:element ref='Asset'/>
-    </xs:choice>
-  </xs:complexType>
-  <xs:complexType name='AssetType' abstract='true'>
-    <xs:annotation>
-      <xs:documentation>
-        An abstract mobile asset
-      </xs:documentation>
-    </xs:annotation>
-    <xs:attribute name='assetId' type='AssetIdType' use='required'/>
-    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
-    <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
-    <xs:attribute name='removed' type='RemovedType' use='optional'/>
-  </xs:complexType>
-  <xs:element abstract='true' name='Asset' type='AssetType'>
-    <xs:annotation>
-      <xs:documentation>
-        An abstract mobile asset
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:complexType name='CuttingToolType'>
     <xs:annotation>
       <xs:documentation>
@@ -982,20 +1056,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetType'>
         <xs:sequence>
-          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The description of the asset (freeform)
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='CuttingToolArchetypeReference' type='CuttingToolArchetypeReferenceType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The reference to the cutting tool archetype
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
           <xs:choice minOccurs='1'>
             <xs:sequence minOccurs='1'>
               <xs:element name='CuttingToolDefinition' type='CuttingToolDefinitionType'>
@@ -1024,7 +1084,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:sequence>
         <xs:attribute name='serialNumber' type='SerialNumberType' use='required'/>
         <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
-        <xs:attribute name='toolId' type='ToolIdType' use='required'/>
+        <xs:attribute name='cuttingToolId' type='CuttingToolIdType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -1044,13 +1104,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetType'>
         <xs:sequence>
-          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The description of the asset (freeform)
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
           <xs:choice minOccurs='1'>
             <xs:sequence minOccurs='1'>
               <xs:element name='CuttingToolDefinition' type='CuttingToolDefinitionType'>
@@ -1077,7 +1130,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:element>
           </xs:choice>
         </xs:sequence>
-        <xs:attribute name='toolId' type='ToolIdType' use='required'/>
+        <xs:attribute name='cuttingToolId' type='CuttingToolIdType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -1102,7 +1155,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name='ToolLife' type='LifeType' minOccurs='0' maxOccurs='3'>
+      <xs:element name='CuttingToolLife' type='LifeType' minOccurs='0' maxOccurs='3'>
         <xs:annotation>
           <xs:documentation>
             The life of the cutting tool assembly
@@ -1300,8 +1353,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='LocationValueType'>
         <xs:attribute name='type' type='LocationsType' use='required'/>
-        <xs:attribute name='negativeOverlap' type='OverlapType' use='required'/>
-        <xs:attribute name='positiveOverlap' type='OverlapType' use='required'/>
+        <xs:attribute name='negativeOverlap' type='OverlapType' use='optional'/>
+        <xs:attribute name='positiveOverlap' type='OverlapType' use='optional'/>
+        <xs:attribute name='turret' type='TurretLocationType' use='optional'/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1356,7 +1410,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'/>
         <xs:attribute name='units' type='UnitsType' use='optional'/>
         <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'/>
-        <xs:attribute name='code' type='CodeType' use='optional'/>
+        <xs:attribute name='code' type='MeasurementCodeType' use='optional'/>
         <xs:attribute name='maximum' type='MeasurementAttrType' use='optional'/>
         <xs:attribute name='minimum' type='MeasurementAttrType' use='optional'/>
         <xs:attribute name='nominal' type='MeasurementAttrType' use='optional'/>
@@ -2052,6 +2106,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='CutterStatus' type='CutterStatusType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The status of an individual cutting item
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='Locus' type='LocusType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
@@ -2063,6 +2124,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The life of an edge
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='ProgramToolGroup' type='ProgramToolGroupType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The number used to identify this tool in the program
           </xs:documentation>
         </xs:annotation>
       </xs:element>

@@ -1,3 +1,4 @@
+# coding: utf-8
 
 package :Events, 'Event Package' do
   integer_value = '[+-]?\d+|UNAVAILABLE'
@@ -120,6 +121,7 @@ package :Events, 'Event Package' do
 
   type :Event, 'An abstract event', :Result do
     abstract
+    attribute :ResetTriggered, 'An optional indicator that the event or sample was reset', 0..1, :DataItemResetValue
   end
 
   type :Code, 'DEPRECATED: The program code', :Event do
@@ -335,4 +337,15 @@ package :Events, 'Event Package' do
   end.each do |type|
     self.type "#{type.name}Discrete".to_sym, "Discrete of #{type.annotation}", type.name
   end
+  
+  attr :Order, 'The order in which something will be done', :integer
+  basic_type :TransformationValue, 'The transformation name'
+  
+  type :Transformation, 'A geometric transformation', :Event do
+    member :Order, 'The order in which the transformation will be applied', 0..1
+    member :Value, 'Transformation name', :TransformationValue
+  end
+
+  type :User, 'The identifier of the person currently responsible for operating the piece of equipment', :Event
+  type :PartNumber, 'An identifier of a part or product moving through the manufacturing process', :Event
 end

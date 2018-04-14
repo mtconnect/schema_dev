@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectAssets xmlns="urn:mtconnect.org:MTConnectAssets:1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectAssets:1.4 file:///Z:/projects/MTConnect/schema_dev/MTConnectAssets_1.4.xsd">
+  <Header version="1.4" creationTime="2015-01-04T12:23:00Z" instanceId="1" sender="localhost" assetBufferSize="1024" assetCount="100"/>
+  <Assets>
+    <PartArchetype assetId="4145T33G01-A" timestamp="2004-10-05T12:00:00Z" revisionId="7">
+      <Characteristics>
+        <RawMaterial><MaterialType standard="INTERNAL">718</MaterialType></RawMaterial>
+        <Customers>
+          <Customer customerId="GE-AIRCRA"><Name>GE Aircraft</Name></Customer>
+        </Customers>
+      </Characteristics>
+      <ProcessSteps>
+        <!-- ... -->
+        <ProcessStep stepId="40">
+          <Description>FINISH FWD</Description>
+          <Targets><TargetDevice>SL-75</TargetDevice></Targets>
+          <ControlPrograms><ControlProgram name="Finish Fwd" programName="152440" revisionId="2"/></ControlPrograms>
+          <TargetExecutionTime>1036</TargetExecutionTime>
+          <TargetSetupTime>600</TargetSetupTime>
+          <CuttingTools>
+            <CuttingToolSetup sequence="1"><CuttingToolAssetId>CRGPL-203V-RPGN-3V</CuttingToolAssetId></CuttingToolSetup>
+            <CuttingToolSetup sequence="2"><CuttingToolAssetId>NSL203D-NR3047L</CuttingToolAssetId></CuttingToolSetup>
+            <CuttingToolSetup sequence="3"><CuttingToolAssetId>MCLNL-204-CNMG-432</CuttingToolAssetId></CuttingToolSetup>
+            <CuttingToolSetup sequence="4"><CuttingToolAssetId>NEL-163D-SR203-056FLCA</CuttingToolAssetId></CuttingToolSetup>
+            <CuttingToolSetup sequence="5"><CuttingToolAssetId>A24-CTFPL3-TPG322</CuttingToolAssetId></CuttingToolSetup>
+            <CuttingToolSetup sequence="6"><CuttingToolAssetId>DVJNL-204-VNGA-331</CuttingToolAssetId></CuttingToolSetup>
+          </CuttingTools>
+          <WorkHoldings><WorkholdingId>T1460-1B</WorkholdingId></WorkHoldings>
+        </ProcessStep>
+        <ProcessStep stepId="40-1">
+          <Targets><TargetLocation type="INVENTORY">After SL-75</TargetLocation></Targets>
+          <TargetExecutionTime>2580</TargetExecutionTime>
+        </ProcessStep>
+        <!-- ... -->
+      </ProcessSteps>
+    </PartArchetype>
+  </Assets>
+</MTConnectAssets>
