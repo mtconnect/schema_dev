@@ -262,15 +262,15 @@ package :common, 'Common attributes and elements for all schemas' do
   enum :DataItemStatistics, 'Statistical operations on data' do
     extensible :DataItemStatsExt
     
-    value :MINIMUM, 'The minimum value'
-    value :MAXIMUM, 'The maximum value'
-    value :AVERAGE, 'The average'
-    value :STANDARD_DEVIATION, 'The standard deviation'
-    value :ROOT_MEAN_SQUARE, 'The root mean square'
-    value :MEAN, 'The mean average'
-    value :MODE, 'The mode of the sample'
-    value :RANGE, 'The difference between the maximum and minimum value during the calculated period'
+    value :AVERAGE, 'The average'    
     value :KURTOSIS, 'In probability theory and statistics, kurtosis is a measure of the "peakedness" of the probability distribution'
+    value :MAXIMUM, 'The maximum value'
+    value :MEDIAN, 'The middle number of a series'
+    value :MODE, 'The mode of the sample'
+    value :MINIMUM, 'The minimum value'
+    value :RANGE, 'The difference between the maximum and minimum value during the calculated period'
+    value :ROOT_MEAN_SQUARE, 'The root mean square'
+    value :STANDARD_DEVIATION, 'The standard deviation'
   end
   
   # Common Units
@@ -284,6 +284,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :AMPERE, 'The electrical current'
     value :CELSIUS, 'Degrees Celcius'
     value :COUNT, 'A counted event'
+    value :DECIBEL, 'Sound level    '
     value :DEGREE, 'Angle in degrees'
     value :'DEGREE/SECOND', 'Degrees per  second'
     value :'DEGREE/SECOND^2', 'Degrees per second squared'
@@ -292,30 +293,27 @@ package :common, 'Common attributes and elements for all schemas' do
     value :KILOGRAM, 'Kilograms'
     value :LITER, 'Liters'
     value :'LITER/SECOND', 'Liters per second'
+    value :MICRO_RADIAN, 'Angular motion for tilt'
     value :MILLIMETER, 'Millimeters'
     value :'MILLIMETER/SECOND', 'Millimeters per second'
     value :'MILLIMETER/SECOND^2', 'Acceleration at millimeters per second squared'
     value :MILLIMETER_3D, '3D Millimeters'
     value :NEWTON, 'Force in Newtons'
     value :NEWTON_METER, 'A unit for force times distance. The SI units will be used in Newton meters.'
+    value :OHM, 'Electrical resistance'
     value :PASCAL, 'Pressure in Newtons per square meter'
+    value :PASCAL_SECOND, 'Measure of viscosity'
     value :PERCENT, 'A percentage'
     value :PH, 'pH is a measure of hydrogen ion concentration; a measure of the acidity or alkalinity of a solution.'
     value :'REVOLUTION/MINUTE', 'Revolutions per minute'
     value :SECOND, 'Seconds'
-    value :VOLT, 'The voltage'
-    value :WATT, 'The wattage'
-    
-    # For 1.2
-    value :OHM, 'Electrical resistance'
-    value :SOUND_LEVEL, 'Sound pressure - a sound pressure level of .0002 microbar'
     value :'SIEMENS/METER', 'Conductivity'
-    value :'MICRO_RADIAN', 'Angular motion for tilt'
-    value :'PASCAL_SECOND', 'Measure of viscosity'
+    value :SOUND_LEVEL, 'Sound pressure - a sound pressure level of .0002 microbar'
+    value :VOLT, 'The voltage'
     value :VOLT_AMPERE, 'A volt ampere'
     value :VOLT_AMPERE_REACTIVE, 'A volt ampere reactive'
+    value :WATT, 'The wattage'
     value :WATT_SECOND, 'A measure of energy equivilent to one Joule or 1/3,600,000 kilowatt hour'
-    value :DECIBEL, 'Sound level    '
   end
 
   enum :NativeUnits, 'The units supported for the source equipment that can be converted into MTC Units.', :Units do
