@@ -14,11 +14,11 @@ package :Specificaitons, 'Device and component specificaitons' do
     member :CompositionId, 'The optional composition identifier', 0..1
     member :DataItemId, 'The optional data item identifier', 0..1, :SourceDataItemId
     member :Constraint, 'The set of constraints', 1..INF
+    member :Units, 'The units', 0..1
   end
 
   type :Constraint, 'an abstract constraint' do
     abstract
-    member :Units, 'The units', 0..1
     member :Value, 'The value', :ConstraintValue
   end
     
@@ -29,7 +29,7 @@ package :Specificaitons, 'Device and component specificaitons' do
   type :Maximum, 'The maximum value', :ConstraintLimit  
   type :Minimum, 'The minimum value', :ConstraintLimit    
   type :Nominal, 'The nominal value', :ConstraintLimit
-  type :Value, 'The value of the constraint', :ConstraintLimit
+  type :Rated, 'The value of the constraint', :ConstraintLimit
   
   type :DutyCycle, 'The duty cycle', :Constraint do 
     member :Duration, 'The duration of the duty cycle', :DurationTime

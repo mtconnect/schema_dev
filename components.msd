@@ -120,7 +120,6 @@ package :Component, 'Top Level Components Package' do
     value :VALVE, 'Any mechanism for halting or controlling the flow of a liquid, gas, or other material through a passage, pipe, inlet, or outlet,'
   end
   
-
   type :Composition, "An abstract element" do
     member :id, 'The data item identifier', :ID
     member :Uuid, 'The composition\'s universally unique id.', 0..1
@@ -131,3 +130,4 @@ package :Component, 'Top Level Components Package' do
 end
 
 load 'sensors'
+load 'specifications'

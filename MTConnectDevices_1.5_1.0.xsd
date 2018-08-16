@@ -1370,6 +1370,194 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='number' type='ChannelNumberType' use='required'/>
     <xs:attribute name='name' type='NameType' use='optional'/>
   </xs:complexType>
+  <xs:simpleType name='LimitValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The limit of a value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
+  <xs:simpleType name='PeakType'>
+    <xs:annotation>
+      <xs:documentation>
+        The peak value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
+  <xs:simpleType name='ConstraintValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value of the constraint
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='SpecificationsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Calibration data for a sensor
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AbstractConfigurationType'>
+        <xs:sequence>
+          <xs:element name='Specification' type='SpecificationType' minOccurs='1' maxOccurs='unbounded'>
+            <xs:annotation>
+              <xs:documentation>
+                A Specification
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Specifications' type='SpecificationsType' substitutionGroup='AbstractConfiguration'>
+    <xs:annotation>
+      <xs:documentation>
+        Calibration data for a sensor
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SpecificationType'>
+    <xs:annotation>
+      <xs:documentation>
+        A specification
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref='Constraint' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:sequence>
+    <xs:attribute name='type' type='DataItemEnumType' use='required'/>
+    <xs:attribute name='id' type='IDType' use='required'/>
+    <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
+    <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
+    <xs:attribute name='units' type='UnitsType' use='optional'/>
+  </xs:complexType>
+  <xs:complexType name='ConstraintType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        an abstract constraint
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintValueType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element abstract='true' name='Constraint' type='ConstraintType'>
+    <xs:annotation>
+      <xs:documentation>
+        an abstract constraint
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ConstraintLimitType'>
+    <xs:annotation>
+      <xs:documentation>
+        The limit of a constraint
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='ConstraintType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ConstraintLimit' type='ConstraintLimitType' substitutionGroup='Constraint'>
+    <xs:annotation>
+      <xs:documentation>
+        The limit of a constraint
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='MaximumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The maximum value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintLimitType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Maximum' type='MaximumType' substitutionGroup='ConstraintLimit'>
+    <xs:annotation>
+      <xs:documentation>
+        The maximum value
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='MinimumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The minimum value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintLimitType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Minimum' type='MinimumType' substitutionGroup='ConstraintLimit'>
+    <xs:annotation>
+      <xs:documentation>
+        The minimum value
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='NominalType'>
+    <xs:annotation>
+      <xs:documentation>
+        The nominal value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintLimitType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Nominal' type='NominalType' substitutionGroup='ConstraintLimit'>
+    <xs:annotation>
+      <xs:documentation>
+        The nominal value
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='RatedType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value of the constraint
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintLimitType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Rated' type='RatedType' substitutionGroup='ConstraintLimit'>
+    <xs:annotation>
+      <xs:documentation>
+        The value of the constraint
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DutyCycleType'>
+    <xs:annotation>
+      <xs:documentation>
+        The duty cycle
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintType'>
+        <xs:attribute name='duration' type='DurationTimeType' use='required'/>
+        <xs:attribute name='peak' type='LimitValueType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='DutyCycle' type='DutyCycleType' substitutionGroup='Constraint'>
+    <xs:annotation>
+      <xs:documentation>
+        The duty cycle
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='AxesType'>
     <xs:annotation>
       <xs:documentation>
@@ -1978,195 +2166,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         An interface to control a chuck
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:simpleType name='LimitValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The limit of a value
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:float'/>
-  </xs:simpleType>
-  <xs:simpleType name='PeakType'>
-    <xs:annotation>
-      <xs:documentation>
-        The peak value
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:float'/>
-  </xs:simpleType>
-  <xs:simpleType name='ConstraintValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The value of the constraint
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:complexType name='SpecificationsType'>
-    <xs:annotation>
-      <xs:documentation>
-        Calibration data for a sensor
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AbstractConfigurationType'>
-        <xs:sequence>
-          <xs:element name='Specification' type='SpecificationType' minOccurs='1' maxOccurs='unbounded'>
-            <xs:annotation>
-              <xs:documentation>
-                A Specification
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Specifications' type='SpecificationsType' substitutionGroup='AbstractConfiguration'>
-    <xs:annotation>
-      <xs:documentation>
-        Calibration data for a sensor
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='SpecificationType'>
-    <xs:annotation>
-      <xs:documentation>
-        A specification
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element ref='Constraint' minOccurs='1' maxOccurs='unbounded'/>
-    </xs:sequence>
-    <xs:attribute name='type' type='DataItemEnumType' use='required'/>
-    <xs:attribute name='id' type='IDType' use='required'/>
-    <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
-    <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
-  </xs:complexType>
-  <xs:complexType name='ConstraintType' abstract='true'>
-    <xs:annotation>
-      <xs:documentation>
-        an abstract constraint
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ConstraintValueType'>
-        <xs:attribute name='units' type='UnitsType' use='optional'/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element abstract='true' name='Constraint' type='ConstraintType'>
-    <xs:annotation>
-      <xs:documentation>
-        an abstract constraint
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ConstraintLimitType'>
-    <xs:annotation>
-      <xs:documentation>
-        The limit of a constraint
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:restriction base='ConstraintType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='ConstraintLimit' type='ConstraintLimitType' substitutionGroup='Constraint'>
-    <xs:annotation>
-      <xs:documentation>
-        The limit of a constraint
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='MaximumType'>
-    <xs:annotation>
-      <xs:documentation>
-        The maximum value
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ConstraintLimitType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Maximum' type='MaximumType' substitutionGroup='ConstraintLimit'>
-    <xs:annotation>
-      <xs:documentation>
-        The maximum value
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='MinimumType'>
-    <xs:annotation>
-      <xs:documentation>
-        The minimum value
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ConstraintLimitType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Minimum' type='MinimumType' substitutionGroup='ConstraintLimit'>
-    <xs:annotation>
-      <xs:documentation>
-        The minimum value
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='NominalType'>
-    <xs:annotation>
-      <xs:documentation>
-        The nominal value
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ConstraintLimitType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Nominal' type='NominalType' substitutionGroup='ConstraintLimit'>
-    <xs:annotation>
-      <xs:documentation>
-        The nominal value
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The value of the constraint
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ConstraintLimitType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Value' type='ValueType' substitutionGroup='ConstraintLimit'>
-    <xs:annotation>
-      <xs:documentation>
-        The value of the constraint
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='DutyCycleType'>
-    <xs:annotation>
-      <xs:documentation>
-        The duty cycle
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ConstraintType'>
-        <xs:attribute name='duration' type='DurationTimeType' use='required'/>
-        <xs:attribute name='peak' type='LimitValueType' use='required'/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='DutyCycle' type='DutyCycleType' substitutionGroup='Constraint'>
-    <xs:annotation>
-      <xs:documentation>
-        The duty cycle
       </xs:documentation>
     </xs:annotation>
   </xs:element>

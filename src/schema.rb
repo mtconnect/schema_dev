@@ -447,7 +447,7 @@ class Schema
 
     def add_occurrence(element)
       case @occurrence
-      when Fixnum
+      when Integer
         element.add_attribute('minOccurs', @occurrence.to_s)
 
       when Range
