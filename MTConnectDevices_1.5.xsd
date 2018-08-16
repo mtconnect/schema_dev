@@ -394,6 +394,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CAPABILITY_ROTARY_VELOCITY'/>
       <xs:enumeration value='CAPABILITY_PATH_POSITION'/>
       <xs:enumeration value='KINEMATIC'/>
+      <xs:enumeration value='LINEAR_FORCE'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -1562,6 +1563,41 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The duty cycle
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='GearNumberType'>
+    <xs:annotation>
+      <xs:documentation>
+        The number of the gear
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='GearRatioType'>
+    <xs:annotation>
+      <xs:documentation>
+        The ratio for the gear
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:float'/>
+  </xs:simpleType>
+  <xs:complexType name='GearSpecificationType'>
+    <xs:annotation>
+      <xs:documentation>
+        A power transmission gearing, ratio given as CDATA
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintType'>
+        <xs:attribute name='number' type='GearNumberType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='GearSpecification' type='GearSpecificationType' substitutionGroup='Constraint'>
+    <xs:annotation>
+      <xs:documentation>
+        A power transmission gearing, ratio given as CDATA
       </xs:documentation>
     </xs:annotation>
   </xs:element>

@@ -1,6 +1,6 @@
 package :Specificaitons, 'Device and component specificaitons' do
   attr :LimitValue, 'The limit of a value', :float
-  attr :Peak, 'The peak value', :float  
+  attr :Peak, 'The peak value', :float
   
   basic_type :ConstraintValue, 'The value of the constraint'
   
@@ -35,6 +35,13 @@ package :Specificaitons, 'Device and component specificaitons' do
     member :Duration, 'The duration of the duty cycle', :DurationTime
     member :Peak, 'The peak value of the duty cycle', :LimitValue
     member :Value, 'The duty cycle', :LimitValue
+  end
+
+  attr :GearNumber, 'The number of the gear', :integer
+  basic_type :GearRatio, 'The ratio for the gear', :float
+
+  type :GearSpecification, 'A power transmission gearing, ratio given as CDATA', :Constraint do
+    member :Number, 'The gear number', :GearNumber
   end
   
 end

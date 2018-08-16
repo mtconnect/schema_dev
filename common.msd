@@ -188,6 +188,7 @@ package :common, 'Common attributes and elements for all schemas' do
     value :CAPABILITY_ROTARY_VELOCITY, 'The rotary velocity capability'
     value :CAPABILITY_PATH_POSITION, 'The ability to hold position'
     value :KINEMATIC, 'For specifications'
+    value :LINEAR_FORCE, 'Linear force specification'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
