@@ -70,6 +70,7 @@ class Schema
     root.add_attribute('targetNamespace',@urn)
     root.add_attribute('elementFormDefault', "qualified")
     root.add_attribute('attributeFormDefault', "unqualified")
+    
     if xsd_version == '1.1'
       root.add_namespace('vc', 'http://www.w3.org/2007/XMLSchema-versioning') 
       root.add_attribute('vc:minVersion', xsd_version)
@@ -79,8 +80,19 @@ class Schema
       root.add_namespace(imp.namespace, imp.urn)
     end
     
+    @xsimports.each do |name, namespace, location|
+      root.add_namespace(name, namespace)
+    end
+    
     doc << root
             
+    @xsimports.each do |name, namespace, location| 
+      element = REXML::Element.new('xs:import')
+      element.add_attribute('namespace', namespace);
+      element.add_attribute('schemaLocation', location);
+      root << element      
+    end
+
     @imports.each do |imp|
       element = REXML::Element.new('xs:import')
       element.add_attribute('namespace', imp.urn);
@@ -121,7 +133,7 @@ class Schema
     def simple?
       value = @members.find { |m| m.is_value? }
       return true if value
-      return true if @parent.nil? and !abstract?
+      return true if @parent.nil? and !polymorphic?
       return resolve_parent.simple? if @parent
       false
     end
@@ -282,6 +294,10 @@ class Schema
       (extension || complex_type) << sequence
 
       complex_type
+      
+    rescue
+      puts "Error when generating schema for #{@name}: #{$!}"
+      raise
     end
 
     def add_attributes
@@ -312,7 +328,7 @@ class Schema
       # substitution group will allow one level of subclassing below
       # the abstract level. This may need to be extended later.
       element = create_element
-      if subtype? and abstract_parent?
+      if subtype? and polymorphic_parent?
         name = @parent
         par = @schema.type(@parent)
         name = "#{par.imported.namespace}:#{name}" if par.imported
@@ -343,7 +359,8 @@ class Schema
 
       # Check for abstract superclasses with derrived children or children
       # with abstract parents.
-      if abstract_parent? or (abstract? and has_subtypes?)
+      # puts "#{name} is polymorphic" if polymorphic?
+      if polymorphic_parent? or (polymorphic? and has_subtypes?)
         elements << create_substitution_group
       end
                   
@@ -430,7 +447,7 @@ class Schema
 
     def add_occurrence(element)
       case @occurrence
-      when Fixnum
+      when Integer
         element.add_attribute('minOccurs', @occurrence.to_s)
 
       when Range
@@ -468,13 +485,15 @@ class Schema
         if @default
           element.add_attribute('default', @default.to_s)
         end
-      
+              
         # If this is an abstract object with a parent or if it
         # has subclasses, we will need to create substitution groups
         # so add a reference instead of a name and type.
         type = resolve_type
-        if references_abstract?
-          element.add_attribute('ref', "#{type.name}")
+        if references_polymorphic?
+          element.add_attribute('ref', type.name.to_s)
+        elsif @name.to_s.include?(':')
+          element.add_attribute('ref', @name.to_s)
         else
           element.add_attribute('name', @name.to_s)
           element.add_attribute('type', type_as_xsd_type(true))
@@ -498,7 +517,12 @@ class Schema
     end
 
     def generate_attribute(element)
-      attrs = {'name' => camel_name, 'type' => type_as_xsd_type(true)}
+      if @name.to_s.include?(':')
+        attrs = { 'ref' => @name.to_s }
+      else
+        attrs = {'name' => camel_name, 'type' => type_as_xsd_type(true)}
+      end
+      
       # Always specify the use of the attribute.
       # puts "#{@name} #{@occurrence.inspect}"
       if @occurrence.nil? || @occurrence == 1
@@ -509,6 +533,10 @@ class Schema
       
       if @default
         attrs['default'] = @default
+      end
+      
+      if @fixed
+        attrs['fixed'] = @fixed
       end
       
       # If the extension was specified, add to the extension otherwise

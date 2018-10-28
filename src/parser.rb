@@ -34,6 +34,7 @@ class Schema
     @urn = ''
     @types = []
     @imports = []
+    @xsimports = []
     @type_map = { }
     @derived = Set.new
     @top = nil
@@ -71,6 +72,10 @@ class Schema
   # Import another schema
   def import(name, location)
     @imports << ImportedSchema.new(self, name, location)
+  end
+
+  def xsimport(name, namespace, location)
+    @xsimports << [name, namespace, location]
   end
 
   def add_type(name, type)
@@ -240,15 +245,13 @@ class Schema
   end
 
   class Element < Type
-    attr_reader :members, :parent
+    attr_reader :members, :parent, :polymorphic
     attr_accessor :force_element
 
     def initialize(schema, name, annotation, parent = nil, &block)
       super(schema, name, annotation, parent)
       @name, @annotation, @parent = name, annotation, parent
-      @abstract = false
-      @mixed = false
-      @force_element = false
+      @polymorphic = @mixed = @force_element = @abstract = false
       @members = []
       @children = []
       @schema.derived << @parent if @parent and @parent != :abstract
@@ -258,9 +261,14 @@ class Schema
     def to_s
       "Element: #{@name}:#{@parent} #{@annotation}"
     end
+    
+    def polymorphic
+      @polymorphic = true
+    end
 
     def abstract
       @abstract = true
+      @polymorphic = true
     end
     
     def mixed
@@ -269,6 +277,10 @@ class Schema
 
     def abstract?
       @abstract
+    end
+    
+    def polymorphic?
+      @polymorphic
     end
     
     def mixed?
@@ -299,6 +311,15 @@ class Schema
       end
       false
     end
+    
+    def polymorphic_parent?
+      pnt = resolve_parent
+      while pnt
+        return true if pnt.polymorphic?
+        pnt = pnt.resolve_parent
+      end
+      false      
+    end
 
     def member(name, annotation, occurrence = nil, type = nil, &block)
       type, occurrence = occurrence, nil if Symbol === occurrence
@@ -317,6 +338,10 @@ class Schema
       mem = Member.new(@schema, name, annotation, occurrence, type, &block)
       mem.attribute = false
       @members << mem
+    end
+    
+    def value(annotation, type, &block)
+      @members << Member.new(@schema, :Value, annotation, nil, type, &block)
     end
 
     def all_subtypes(base, occurrence = 0..INF)
@@ -382,6 +407,9 @@ class Schema
         end
         @schema.type(@parent).add_child(self)
       end
+    rescue
+      puts "Could not add child to '#{@parent.inspect}' for '#{self.name}' "
+      raise
     end
     
     def resolve
@@ -393,7 +421,8 @@ class Schema
     include Comparable
     
     attr_reader :name, :type
-    attr_accessor :occurrence, :annotation, :default, :notQName, :processContents, :namespace, :notNamespace
+    attr_accessor :occurrence, :annotation, :default, :notQName, :processContents, :namespace, :notNamespace,
+      :fixed
     
     INF = 0xFFFFFFFF
 
@@ -415,7 +444,7 @@ class Schema
     end
 
     def resolve_type
-      if @type == :any
+      if @type == :any or @type.to_s.include?(':')
         res = @type 
       else
         res = @schema.type(@type)
@@ -445,10 +474,10 @@ class Schema
     def attribute=(a)
       @attribute = a
     end
-
-    def references_abstract?
+    
+    def references_polymorphic?
       type = resolve_type
-      type and type.is_a? Element and type.abstract? and (type.subtype? or type.has_subtypes?)
+      type and type.is_a? Element and type.polymorphic? and (type.subtype? or type.has_subtypes?)
     end
     
     def resolve

@@ -1,3 +1,4 @@
+# coding: utf-8
 
 package :Events, 'Event Package' do
   integer_value = '[+-]?\d+|UNAVAILABLE'
@@ -40,7 +41,7 @@ package :Events, 'Event Package' do
     value :FEED_HOLD, 'The machine is in feed hold - spindle spinning/axis stopped'    
     value :PROGRAM_COMPLETED, 'The program has completed execution'
     value :PROGRAM_STOPPED, 'The program has stopped'
-    value :OPTIONAL_STOP, 'The program has been intentionally optionally stopped using an M01 or similar code'
+    value :PROGRAM_OPTIONAL_STOP, 'The program has been intentionally optionally stopped using an M01 or similar code'
     value :UNAVAILABLE, 'The value is indeterminate'
   end
   
