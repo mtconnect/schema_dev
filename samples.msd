@@ -3,6 +3,7 @@ package :Samlpes, 'The samples' do
   float = '[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?'
   float_value = "#{float}|UNAVAILABLE"
   vector_value = "(#{float}( )*)+|UNAVAILABLE"
+  date_value = '(-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?|(24:00:00(\.0+)?))(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)|UNAVAILABLE'
   
   basic_type :SampleValue, 'An floating point value or array of floating point values'
   basic_type(:PositionValue, 'The value for the position') { pattern float_value }
@@ -41,6 +42,7 @@ package :Samlpes, 'The samples' do
   basic_type(:FillLevelValue, 'The fill level of a tank') { pattern float_value }
   basic_type(:SampleRate, 'The sampling rate in samples per second') { pattern float_value }
   basic_type(:LengthValue, 'The length in millimeters') { pattern float_value }
+  basic_type(:ClockTimeValue, 'The time in seconds') { pattern date_value }
   
   attr :DurationTime, 'A length of time in seconds', :float
   
@@ -205,6 +207,10 @@ package :Samlpes, 'The samples' do
     member :Value, 'Length', :LengthValue
   end
 
+  type :ClockTime, 'The reading of a timing device a specific point in time', :Sample do
+    member :Value, 'Clock time', :ClockTimeValue
+  end
+
   type :AbsTimeSeries, 'The abstract waveform', :Sample do
     abstract
     
@@ -216,7 +222,6 @@ package :Samlpes, 'The samples' do
     
     member :Value, 'The time series representation', :TimeSeriesValue
   end
-
 
   # Create waveforms for all the samples:
   self.elements.each do |type|
