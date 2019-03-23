@@ -83,7 +83,7 @@ package :Tools, 'Cutting tools' do
 
   # Cutting tool definition
   type :CuttingTool, 'A cutting tool', :Asset do
-    member :SerialNumber, 'The serial number of the asset', :SerialNumberAttr
+    member :SerialNumber, 'The serial number of the asset'
     member :Manufacturers, 'The manufacturer of this asset', 0..1
     member :CuttingToolId, 'The Identifier of the tool type'
     
@@ -130,7 +130,7 @@ package :Tools, 'Cutting tools' do
     # Status
     member :CutterStatus, 'The state of the tool assembly - only for Instance (not archetype)', 1 
     member :ReconditionCount, 'The number of times the cutter has been reconditioned', 0..1
-    member :CuttingToolLife, 'The life of the cutting tool assembly', 0..3, :Life
+    member :ToolLife, 'The life of the cutting tool assembly', 0..3, :Life
     
     # Properties
     member :ProgramToolGroup, 'The number used to identify this tool in the program', 0..1
@@ -151,7 +151,7 @@ package :Tools, 'Cutting tools' do
   end
   
   type :CuttingToolArchetypeReference, 'A reference to the cutting tool archetype' do
-    member :source, 'A uri representing where to get the cutting tool archetype', 0..1, :Source
+    member :source, 'A uri representing where to get the cutting tool architype', 0..1, :Source
     member :Value, 'The asset id of the archetype', :AssetId
   end
   
