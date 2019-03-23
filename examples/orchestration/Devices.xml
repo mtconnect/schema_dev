@@ -1,0 +1,66 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<MTConnectDevices xmlns="urn:mtconnect.org:MTConnectDevices:1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.5 ../../MTConnectDevices_1.5.xsd">
+	<Header version="1.5" creationTime="2017-11-10T12:00:00" instanceId="1" sender="localhost" bufferSize="131031" assetBufferSize="1024" assetCount="0"/>
+	<Devices>
+		<Device id="cnc" uuid="426cc68e-c732-11e7-ab5c-0050b6c35501" name="cnc">
+			<DataItems>
+				<DataItem id="cavail" type="AVAILABILITY" category="EVENT" />
+				<DataItem id="cachg" type="ASSET_CHANGED" category="EVENT" />
+				<DataItem id="carm" type="ASSET_REMOVED" category="EVENT" />
+			</DataItems>
+			<Components>
+				<Interfaces id="cint">
+					<Components>
+						<MaterialHandlerInterface id="cmat">
+							<DataItems>
+								<DataItem id="cbind" type="x:BINDING" category="EVENT" />
+								<DataItem id="cmatl" type="MATERIAL_LOAD" category="EVENT" subType="REQUEST"/>
+								<DataItem id="cmatu" type="MATERIAL_UNLOAD" category="EVENT" subType="REQUEST"/>
+							</DataItems>
+						</MaterialHandlerInterface>
+					</Components>
+				</Interfaces>
+			</Components>
+		</Device>
+		<Device id="cmm" uuid="426cc68e-c732-11e7-ab5c-0050b6c35501" name="cmm">
+			<DataItems>
+				<DataItem id="mavail" type="AVAILABILITY" category="EVENT" />
+				<DataItem id="machg" type="ASSET_CHANGED" category="EVENT" />
+				<DataItem id="marm" type="ASSET_REMOVED" category="EVENT" />
+			</DataItems>
+			<Components>
+				<Interfaces id="mint">
+					<Components>
+						<MaterialHandlerInterface id="mmat">
+							<DataItems>
+								<DataItem id="mbind" type="x:BINDING" category="EVENT"/>
+								<DataItem id="mmatl" type="MATERIAL_LOAD" category="EVENT" subType="REQUEST"/>
+								<DataItem id="mmatu" type="MATERIAL_UNLOAD" category="EVENT" subType="REQUEST"/>
+							</DataItems>
+						</MaterialHandlerInterface>
+					</Components>
+				</Interfaces>
+			</Components>
+		</Device>
+		<Device id="robot" uuid="adca94b2-c730-11e7-88a1-0050b6c35501" name="robot">
+			<DataItems>
+				<DataItem id="ravail" type="AVAILABILITY" category="EVENT" />
+				<DataItem id="rachg" type="ASSET_CHANGED" category="EVENT" />
+				<DataItem id="rarm" type="ASSET_REMOVED" category="EVENT" />
+			</DataItems>
+			<Components>
+				<Interfaces id="rint">
+					<Components>
+						<MaterialHandlerInterface id="rmat">
+							<DataItems>
+								<DataItem id="rbind" type="x:BINDING" category="EVENT"/>
+								<DataItem id="rmatl" type="MATERIAL_LOAD" category="EVENT" subType="RESPONSE"/>
+								<DataItem id="rmatu" type="MATERIAL_UNLOAD" category="EVENT" subType="RESPONSE"/>
+							</DataItems>
+						</MaterialHandlerInterface>
+					</Components>
+				</Interfaces>
+			</Components>
+		</Device>
+	</Devices>
+</MTConnectDevices>

@@ -575,7 +575,10 @@ class Schema
     def add_enumeration(restriction)
       # Special case for a single empty type
       @values.each do |val|
-        restriction.add_element('xs:enumeration', {'value' => val.name})
+        enum = restriction.add_element('xs:enumeration', {'value' => val.name})
+        unless val.annotation.empty?
+          enum.add_element('xs:annotation').add_element('xs:documentation').text = val.annotation
+        end
       end
     end
 

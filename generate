@@ -2,10 +2,15 @@
 
 $: << File.dirname(__FILE__) + '/src'
 require 'schema'
+require 'latex_parser'
 
 puts "Generating schema for #{ARGV[0]}"
+Glossary = LatexParser.new
+path = File.expand_path('mtc-terms.tex', File.join(File.dirname(__FILE__))) # , '..', 'MTConnectPart2'))
+Glossary.parse_glossary(path)
 schema = Schema.new File.read(ARGV[0])
 version = ARGV[1]
+
 doc = schema.generate_xsd(version || "1.1")
 ver = "_#{version}" if version
 out = ARGV[2] || "#{File.basename(ARGV[0], '.msd')}_#{schema.version}#{ver}.xsd"

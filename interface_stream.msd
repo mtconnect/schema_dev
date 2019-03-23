@@ -1,5 +1,6 @@
 
 package :InterfaceStream, 'A stream of interfaces' do
+=begin
   # Interface events
   enum :InterfaceEventValues, 'The possible values for an interface event' do
     value :UNAVAILABLE, 'The value is unavailable'
@@ -36,6 +37,6 @@ package :InterfaceStream, 'A stream of interfaces' do
     member :Value, 'The states of the interface', :InterfaceStates
   end
 
-
+=end
 end
 

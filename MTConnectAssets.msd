@@ -33,9 +33,10 @@ load 'streams.msd'
 load 'events.msd'
 load 'samples.msd'
 load 'condition.msd'
-
 load 'tools.msd'
-load 'process.msd'
-load 'parts.msd'
+
+# Deferred to 1.6
+#load 'process.msd'
+#load 'parts.msd'
 #load 'inspection.msd'
-load 'files.msd'
+#load 'files.msd'

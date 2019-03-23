@@ -83,7 +83,7 @@ package :Tools, 'Cutting tools' do
 
   # Cutting tool definition
   type :CuttingTool, 'A cutting tool', :Asset do
-    member :SerialNumber, 'The serial number of the asset'
+    member :SerialNumber, 'The serial number of the asset', :SerialNumberAttr
     member :Manufacturers, 'The manufacturer of this asset', 0..1
     member :CuttingToolId, 'The Identifier of the tool type'
     

@@ -43,7 +43,7 @@ package :Component, 'Top Level Components Package' do
     
     member :Manufacturer, 'The manufacturer', 0..1, :Name
     member :Model, 'The model', 0..1
-    member :SerialNumber, 'The serial number', 0..1
+    member :SerialNumber, 'The serial number', 0..1, :SerialNumberAttr
     member :Station, 'The station location', 0..1
     member :any, 'The content of the description can text or XML elements', 0..INF
   end
@@ -66,8 +66,8 @@ package :Component, 'Top Level Components Package' do
   type :Components, 'A list of generic components' do
     member :Component, 'Any component', 1..INF
   end
-  
-  type :Device, 'The top level component managed by the agent', :Component do
+
+  type :Device, :Component do
     standards :OMAC => 'resources'
     member :Iso841Class, 'DEPRECATED: The device\'s ISO-841 classification', 0..1
     member :Uuid, 'The components universally unique id. This can be composed of the manufactures id or name and the serial number.'
@@ -75,15 +75,15 @@ package :Component, 'Top Level Components Package' do
     member :Version, 'The MTConnect Version this Device implements', 0..1
   end
 
-  type :Controller, 'A controller', :CommonComponent do
+  type :Controller, :CommonComponent do
     standards :OMAC => 'CNC'
   end
 
-  type :Power, 'DEPRECATED: A power measuring component', :CommonComponent
-  type :Sensor, 'A sensor, this is not abstract to allow for easy extensibility.', :CommonComponent
-  type :Path, 'A path component', :CommonComponent
-  type :Actuator, 'A component that causes motion', :CommonComponent
-  type :Door, 'A door on the machine', :CommonComponent  
+  type :Power, :CommonComponent
+  type :Sensor, :CommonComponent
+  type :Path, :CommonComponent
+  type :Actuator, :CommonComponent
+  type :Door, :CommonComponent  
 
   type :Compositions, "A collection of sub elements" do
     member :Composition, 'An assembly of a component', 1..INF

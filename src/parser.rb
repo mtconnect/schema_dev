@@ -1,5 +1,6 @@
 
 require 'set'
+require 'latex_parser'
 
 INF = 0xFFFFFFFF
 
@@ -221,7 +222,20 @@ class Schema
       instance_eval &block
     end
 
-    def type(name, annotation, parent = nil, &block)
+    def type(name, annotation = nil, parent = nil, &block)
+      if Symbol === annotation
+        parent = annotation
+        annotation = nil
+      end
+      if annotation.nil?
+        e = Glossary[name.to_s.downcase]
+        if e
+          annotation = e.description
+        else
+          puts "Cannot find annotation for #{name}"
+          annotation = "Missing description"
+        end
+      end
       @elements << Element.new(@schema, name, annotation, parent, &block)
     end
     

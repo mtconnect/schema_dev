@@ -20,7 +20,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :Version, 'A version number', :NMTOKEN
   attr :Name, 'A short name for any element'
   attr :Uuid, 'A universally unique id that uniquely identifies the element for it\'s entire life'
-  attr :SerialNumber, 'A serial number for a piece of equipment'
+  attr :SerialNumberAttr, 'A serial number for a piece of equipment'
   attr :ItemSource, 'The measurement source'
   attr :Rate, 'A sample rate in milliseconds per sample', :float
   attr :ComponentId, 'The id of the component (maps to the id from probe)', :ID
@@ -50,219 +50,26 @@ package :common, 'Common attributes and elements for all schemas' do
   
   enum :DataItemEnum, 'The types of measurements available' do
     extensible :DataItemExt
-    
-    value :ACCELERATION, 'The accelleration of the component'
-    value :ACTIVE_AXES, 'The list of axes currently in use in this path'
-    value :ALARM, 'DEPRECATED: An alarm'
-    value :AMPERAGE, 'The electrical current'
-    value :ANGLE, 'The position as given in degrees'
-    value :ANGULAR_ACCELERATION, 'The accelleration of the component'
-    value :ANGULAR_VELOCITY, 'The velocity of the component'
-    value :AVAILABILITY, 'The components availability'
-    value :AXIS_FEEDRATE, 'The feedrate for the axis'
-    value :BLOCK, 'The current executing block'
-    value :CODE, 'The current executing code'
-    value :DIRECTION, 'The direction of rotation or linear motion'
-    value :DOOR_STATE, 'The open/closed state of the door'
-    value :EMERGENCY_STOP, 'The state of the ESTOP button'
-    value :EXECUTION, 'The programs execution state'
-    value :FREQUENCY, 'The frequency as measure in cycles per second'
-    value :PART_COUNT, 'A count of the parts'
-    value :PART_ID, 'The identifier of the part loaded'
-    value :PATH_FEEDRATE, 'The feedrate for the path'
-    value :PATH_POSITION, 'The three space position X, Y, Z'
-    value :PATH_MODE, 'The mode of the path'
-    value :LINE, 'DEPRECATED 1.4: The line of the program being executed – often referred to as the N number'
-    value :CONTROLLER_MODE, 'The CNC\'s mode'
-    value :LOAD, 'The load on the component as a percentage of rated'
-    value :MESSAGE, 'A uninterpreted message'
-    value :POSITION, 'The position as given in mm'
-    value :POWER_STATUS, 'DEPRECATED: The power status of the component'
-    value :POWER_STATE, 'The power state of the component'
-    value :PRESSURE, 'The current pressure'
-    value :RESET, 'The statistical reset event'
-    value :PROGRAM, 'The name of the program being run'
-    value :PROGRAM_COMMENT, 'A comment in the control program'
-    value :ROTARY_MODE, 'The function of the rotary axis'
-    value :COUPLED_AXES, 'The axes to which this axis is associated'
-    value :AXIS_COUPLING, 'The method the axes are coupled together'
-    value :SPINDLE_SPEED, 'DEPRECATED: The velocity of the spindle'
-    value :TEMPERATURE, 'The temperature of the component'
-    value :TORQUE, 'The torque - force times distance'
-    value :TOOL_ASSET_ID, 'The unique asset identifier of the tool in use'
-    value :TOOL_ID, 'DEPRECATED: Use TOOL_ASSET_ID'
-    value :TOOL_NUMBER, 'The number of the tool as represented by the contoller T#'
-    value :VELOCITY, 'The velocity of the component'
-    value :VIBRATION, 'The status indicator'
-    value :VOLTAGE, 'The voltage'
-    value :WATTAGE, 'The wattage'
 
-    # Types for 1.2
-    value :ACCUMULATED_TIME, 'The non-contiguous accumulation of time'
-    value :ACTUATOR_STATE, 'The state of the actuator. ACTIVE or INACTIVE.'
-    value :ASSET_CHANGED, 'A new asset has been added'
-    value :CONCENTRATION, 'Percentage of one component within a mixture of components'
-    value :CONDUCTIVITY, 'The conductivity of a piece of material'
-    value :DISPLACEMENT, 'The displacement as measured from zero to peak'
-    value :ELECTRICAL_POWER, 'Electrical power as measured in Watt-Seconds'
-    value :FILL_LEVEL, 'The measurement of the amount of a substance remaining compared to the planned maximum amount of that substance'
-    value :FLOW, 'The rate of flow of a fluid'
-    value :LINEAR_FORCE, 'The measure of the push or pull introduced by an actuator or exerted on an object'
-    value :MASS, 'The weight of some object in kilograms'
-    value :PH, 'The measure of ion concentration in a substance; a measure of the acidity or alkalinity of a solution.'
-    value :POWER_FACTOR, 'The ratio of the real power flowing in a circuit to the apparent power in the circuit'
-    value :RESISTANCE, 'The measurement of the degree to which an object opposes an electric current through it'
-    value :ROTARY_VELOCITY, 'The rotational speed of a rotary axis.'
-    value :SOUND_PRESSURE, 'Measurement of acoustic pressure'
-    value :STRAIN, 'Inches / Inch - dimensional change - measured under pressure or tension. micro change in length'
-    value :TILT, 'micrometer/meter (alignment errors of axes or spindle errors)'
-    value :VOLT_AMPERE, 'The measure of the apparent power in an electrical circuit, equal to the product of root-mean-square (RMS) voltage and RMS current'
-    value :VOLT_AMPERE_REACTIVE, 'The measurement of measure reactive power in an AC electrical circuit'
-    value :WATT_SECOND, 'The measure of watts for one second, equivilent to joules'
-    value :VISCOSITY, 'viscosity'
-    value :CLOCK_TIME, 'Clock time as an ISO 8601 Time'
+    Glossary.events.each do |e|
+      value(e.keys['name'], e.keys['description'])
+    end
 
-    # Condition types
-    value :COMMUNICATIONS, 'The communications system'
-    value :LOGIC_PROGRAM, 'The logic program'
-    value :MOTION_PROGRAM, 'The motion program'
-    value :HARDWARE, 'The computer hardware has failed'
-    value :SYSTEM, 'A system level condition'
-    value :LEVEL, 'The level of a resource'
-    value :ACTUATOR, 'An actuator related condition'
-    
-    # 1.3 general changes
-    value :ROTARY_VELOCITY_OVERRIDE, 'The override percent for the spindle speed'
-    value :PATH_FEEDRATE_OVERRIDE, 'The override percent for the spindle speed'
-    value :AXIS_FEEDRATE_OVERRIDE, 'The override percent for the spindle speed'
-    value :PART_ASSET_ID, 'The identifier of the part loaded'
-    value :PROGRAM_EDIT, 'The state of the devices editor'
-    value :PROGRAM_EDIT_NAME, 'The name of the program being edited'
-    
-    # 1.3 additions
-    value :CHUCK_STATE, 'A state of a chuck'
-    value :END_OF_BAR, 'Indicator that the end of material has been reached'
-    value :AUXILIARY_END_OF_BAR, 'Indicator that the end of material has been reached, but more material remains'
-    value :AXIS_INTERLOCK, 'Spindle interlock indicator'
-    value :MANUAL_CHUCK_UNCLAMP_INTERLOCK, 'Prevent the chuck from unclamping'
-    value :LENGTH, 'Represents the length of the material'
-    value :AXIS_STATE, 'The home or travel state of the axis'
-    value :INTERFACE_STATE, 'The state of the interface'
-    value :FUNCTIONAL_MODE, 'The current function of the device'
-    value :WORKHOLDING_ID, 'The workholding identifier'
-    value :PALLET_ID, 'The identifier of the pallet currently being used'
-    value :OPERATOR_ID, 'The identifier of the operator'
-    value :ASSET_REMOVED, 'The asset event when an asset is removed'
-    value :PROGRAM_HEADER, 'The header of a program'
+    Glossary.samples.each do |e|
+      value(e.keys['name'], e.keys['description'])
+    end
 
-    # 1.3 Interfaces
-    value :MATERIAL_FEED, 'Feed material'
-    value :MATERIAL_CHANGE, 'Change the material'
-    value :MATERIAL_RETRACT, 'Change the material'
-    value :PART_CHANGE, 'Change the part on the bar feeder - changes the job being run'
-    value :OPEN_DOOR, 'Open a door'
-    value :CLOSE_DOOR, 'Close a door'
-    value :OPEN_CHUCK, 'Open a chuck'
-    value :CLOSE_CHUCK, 'Close a chuck'
-    value :MATERIAL_LOAD, 'Load material into a device'
-    value :MATERIAL_UNLOAD, 'Unload material into a device'
-    
-    # For 1.4
-    # Additional controller states
-    value :TRANSFORMATION, 'A coordinate system transformation. References a transformation asset'
-    value :SINGLE_BLOCK, 'Controller is single stepping through program'
-    value :DRY_RUN, 'The controller is executing the program but suppressing motion'
-    value :OPTIONAL_STOP, 'Indicator if the optional stop setting on the machine indicating if it is enabled'
-    value :MACHINE_AXIS_LOCK, 'The controller is in the machine axis lock state'
-    value :TOOL_CHANGE_STOP, 'The setting to disable the halting of the program when the tool needs to be changed'
-    
-    # Lines and block positions. LINE is now deprecated. Do we need a base #?
-    value :LINE_NUMBER, 'The absolute or relative block number position in the program. Relative is relative to a line label.'
-    value :LINE_LABEL, 'The label or N number of the position within the program'
-    value :BLOCK_COUNT, 'The number of blocks executed since the cycle start'
-
-    # Version 1.5
-    value :SURFACE_VELOCITY, 'When operating in constant surface speed, the velocity relative to the surface'
-    value :USEFUL_LIFE, 'The useful life, remaining or interval'
-    value :EQUIPMENT_TIMER, 'The equipment timers'
-    value :CAPABILITY_ROTARY_VELOCITY, 'The rotary velocity capability'
-    value :CAPABILITY_PATH_POSITION, 'The ability to hold position'
-    value :KINEMATIC, 'For specifications'
-    value :LINEAR_FORCE, 'Linear force specification'
+    Glossary.conditions.each do |e|
+      value(e.keys['name'], e.keys['description'])
+    end
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
     extensible :DataItemExt
     
-    value :ACTUAL, 'The actual position with absolute coordinates'
-    value :COMMANDED, 'The expected value from the controller'
-    value :MAXIMUM, 'The maximum value for this measurement'
-    value :MINIMUM, 'The minimum value for this measurement'
-    value :OTHER, 'An extension point'
-    value :OVERRIDE, 'DEPRECATED 1.3: The override for the measurement'
-    value :PROBE, 'The position given by a probe'
-    value :TARGET, 'The target position'
-    value :GOOD, 'The good count'
-    value :BAD, 'The bad count'
-    value :ALL, 'Inclusive of all items'
-    value :LINE, 'The high voltage subtype for power state'
-    value :CONTROL, 'The low voltage subtype for power state'
-    
-    value :ALTERNATING, 'Corresponds to an alternating current'
-    value :DIRECT, 'Corresponds to an alternating current'
-    
-    # For 1.2
-    value :WEIGHT, 'Concentration in weight'
-    value :VOLUME, 'Concentration in volume'
-    value :MOLE, 'Concentration in mole'
-    value :KINETIC, 'Kenetic viscosity'
-    value :DYNAMIC, 'Dynamic viscosity'
-
-    # For 1.2 sound level
-    value :NO_SCALE, 'No weighting factor on the frequency scale'
-    value :A_SCALE, 'A Scale weighting factor.   This is the default weighting factor if no factor is specified'
-    value :B_SCALE, 'B Scale weighting factor'
-    value :C_SCALE, 'C Scale weighting factor'
-    value :D_SCALE, 'D Scale weighting factor'
-    
-    # For 1.3 Interface
-    value :REQUEST, 'The request side of the interface'
-    value :RESPONSE, 'The response side of the interface'
-    value :REMAINING, 'The measurement represents the amount remaining'
-    
-    # For 1.3 overrides
-    value :JOG, 'Manual movement'
-    value :RAPID, 'Rapid movement'
-    value :PROGRAMMED, 'A programmed position or override effecting the given value'
-
-    # For end of bar
-    value :PRIMARY, 'The primary value for this data item'
-    value :AUXILIARY, 'The auxiliary value for this data item'
-
-    value :MANUAL_UNCLAMP, 'The component cannot be manually unclamped'
-    
-    # For 1.4
-    value :WORKPIECE, 'Workpiece coordinates are being transformed.'
-    value :FIXTURE, 'Fixture coordinates are being transformed.'
-    value :TOOL, 'Tool coordinates are being transformed.'
-    
-    # For Block Number
-    value :ABSOLUTE, 'The absolute physical position in the program '
-    value :RELATIVE, 'The relative position in the program to the last line (N) number'
-    
-    # For tooling
-    value :TOOL_EDGE, 'The current tool edge or suffix – should map to cutting item index'
-    value :TOOL_GROUP, 'The current tool group being used'
-
-    # For 1.5
-    # subtypes for PROGRAM
-    value :MAIN, 'The main program'
-    value :ACTIVE, 'The sub/active-program of the program'
-    
-    value :INTERVAL, 'The value over the last time interval'
-    value :OPERATING, 'The time operating'
-    value :WORKING, 'The time working'
-    value :POWERED, 'The time the device is powered on'
+    Glossary.subtypes.each do |e|
+      value(e.keys['name'], e.keys['description'])
+    end
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
