@@ -81,16 +81,16 @@ module Latex
       @keys
     end
 
-    def element_name
+    def name_property
       keys['name']
     end
 
-    def description
-      keys['description']
-    end
-
     def method_missing(method, *args, &block)
-      keys[method.to_s]
+      if !keys.include(method.to_s)
+        super
+      else
+        keys[method.to_s]
+      end
     end
     
     def dump

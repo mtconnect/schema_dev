@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectDevices:1.5' xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.5' targetNamespace='urn:mtconnect.org:MTConnectDevices:1.5' elementFormDefault='qualified' attributeFormDefault='unqualified'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectDevices:1.5' xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.5' targetNamespace='urn:mtconnect.org:MTConnectDevices:1.5' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' vc:minVersion='1.1'>
   <xs:element name='MTConnectDevices' type='MTConnectDevicesType'>
     <xs:annotation>
       <xs:documentation>
@@ -3432,6 +3432,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:any processContents='strict' notNamespace='##targetNamespace' minOccurs='0' maxOccurs='unbounded'>
+            <xs:annotation>
+              <xs:documentation>
+                Any additional properties
+              </xs:documentation>
+            </xs:annotation>
+          </xs:any>
           <xs:element name='Channels' type='ChannelsType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
