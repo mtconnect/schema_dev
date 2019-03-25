@@ -186,11 +186,6 @@ class Schema
             # of indirection.
             simple = extension.add_element('xs:simpleType').
                        add_element('xs:restriction', {'base' => type.name_as_xsd_type(true)})
-#            if BasicType === type
-#              type.add_facet(simple)
-#            elsif ControlledVocabulary === type
-#              type.add_enumeration(simple)
-#            end
           else
             @attr_elem = extension = REXML::Element.new('xs:extension')
             # puts "Adding base of #{parent_as_xsd_type(true)} for #{@name}"
@@ -432,7 +427,7 @@ class Schema
 
     def base_type(name)
       n = name.to_s
-      if n =~ /^(integer|ID|NMTOKEN|float|dateTime|boolean|string)$/
+      if n =~ /^(integer|ID|NMTOKEN|float|dateTime|boolean|string|date|IDREF)$/
         "xs:#{n}"
       elsif n =~ /:/
         n

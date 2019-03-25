@@ -1,5 +1,5 @@
 package :Specificaitons, 'Device and component specificaitons' do
-  attr :LimitValue, 'The limit of a value', :float
+  basic_type :LimitValue, 'The limit of a value', :float
   attr :Peak, 'The peak value', :float
   
   basic_type :ConstraintValue, 'The value of the constraint'
@@ -19,7 +19,7 @@ package :Specificaitons, 'Device and component specificaitons' do
 
   type :Constraint, 'an abstract constraint' do
     abstract
-    member :Value, 'The value', :ConstraintValue
+    mixed
   end
     
   type :ConstraintLimit, 'The limit of a constraint', :Constraint do
@@ -31,7 +31,8 @@ package :Specificaitons, 'Device and component specificaitons' do
   type :Nominal, 'The nominal value', :ConstraintLimit
   type :Rated, 'The value of the constraint', :ConstraintLimit
   
-  type :DutyCycle, 'The duty cycle', :Constraint do 
+  type :DutyCycle, 'The duty cycle', :Constraint do
+    mixed
     member :Duration, 'The duration of the duty cycle', :DurationTime
     member :Peak, 'The peak value of the duty cycle', :LimitValue
     member :Value, 'The duty cycle', :LimitValue

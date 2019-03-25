@@ -136,7 +136,7 @@ class Schema
   
   class Type
     attr_reader :name, :parent, :imported
-    attr_reader :annotation, :attr, :schema
+    attr_reader :attr, :schema
     attr_accessor :version
 
     include Standards
@@ -151,6 +151,14 @@ class Schema
     end
     
     def resolve
+    end
+
+    def annotation
+      e = Glossary[name.to_s.downcase]
+      if e and !e.description.empty?
+        @annotation = e.description
+      end
+      @annotation
     end
     
     def build_hierarchy
@@ -238,15 +246,6 @@ class Schema
       if Symbol === annotation
         parent = annotation
         annotation = nil
-      end
-      if annotation.nil?
-        e = Glossary[name.to_s.downcase]
-        if e
-          annotation = e.description
-        else
-          puts "Cannot find annotation for #{name}"
-          annotation = "Missing description"
-        end
       end
       @elements << Element.new(@schema, name, annotation, parent, &block)
     end

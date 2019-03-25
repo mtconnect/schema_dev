@@ -3396,7 +3396,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='PHType'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the acidity or alkalinity.
+        A measure of the acidity or alkalinity of a solution
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3406,7 +3406,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='PH' type='PHType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the acidity or alkalinity.
+        A measure of the acidity or alkalinity of a solution
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3684,9 +3684,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='VoltAmpereType'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the apparent power in an electrical circuit, equal to
-        the product of root-mean-square (RMS) voltage and RMS current (commonly
-        referred to as VA).
+        Volt-Ampere (VA)
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3696,17 +3694,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='VoltAmpere' type='VoltAmpereType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the apparent power in an electrical circuit, equal to
-        the product of root-mean-square (RMS) voltage and RMS current (commonly
-        referred to as VA).
+        Volt-Ampere (VA)
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='VoltAmpereReactiveType'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of reactive power in an AC electrical circuit (commonly
-        referred to as VAR).
+        Volt-Ampere Reactive (VAR)
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3716,8 +3711,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='VoltAmpereReactive' type='VoltAmpereReactiveType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of reactive power in an AC electrical circuit (commonly
-        referred to as VAR).
+        Volt-Ampere Reactive (VAR)
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4219,7 +4213,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='PHTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The measurement of the acidity or alkalinity.
+        Time series of A measure of the acidity or alkalinity of a solution
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4229,7 +4223,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='PHTimeSeries' type='PHTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The measurement of the acidity or alkalinity.
+        Time series of A measure of the acidity or alkalinity of a solution
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4515,9 +4509,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='VoltAmpereTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The measurement of the apparent power in an electrical
-        circuit, equal to the product of root-mean-square (RMS) voltage and RMS
-        current (commonly referred to as VA).
+        Time series of Volt-Ampere (VA)
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4527,17 +4519,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='VoltAmpereTimeSeries' type='VoltAmpereTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The measurement of the apparent power in an electrical
-        circuit, equal to the product of root-mean-square (RMS) voltage and RMS
-        current (commonly referred to as VA).
+        Time series of Volt-Ampere (VA)
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='VoltAmpereReactiveTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The measurement of reactive power in an AC electrical
-        circuit (commonly referred to as VAR).
+        Time series of Volt-Ampere Reactive (VAR)
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4547,8 +4536,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='VoltAmpereReactiveTimeSeries' type='VoltAmpereReactiveTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The measurement of reactive power in an AC electrical
-        circuit (commonly referred to as VAR).
+        Time series of Volt-Ampere Reactive (VAR)
       </xs:documentation>
     </xs:annotation>
   </xs:element>

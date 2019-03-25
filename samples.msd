@@ -21,8 +21,8 @@ package :Samples, 'The samples' do
     mixed
     member :Observation, 'The attributes for all observations'
     
-    attribute :SampleRate, 'The rate the waveform was sampled at, default back to the value given in the data item', 0..1
-    attribute :ResetTriggered, 'An optional indicator that the event or sample was reset', 0..1, :DataItemResetValue
+    member :SampleRate, 'The rate the waveform was sampled at, default back to the value given in the data item', 0..1
+    member :ResetTriggered, 'An optional indicator that the event or sample was reset', 0..1, :DataItemResetValue
     member :Statistic, 'The statistical operation on this data', 0..1, :DataItemStatistics
     member :Duration, 'The number of seconds since the reset of the statistic', 0..1, :DurationTime
   end
@@ -33,8 +33,7 @@ package :Samples, 'The samples' do
 
   type :ThreeSpaceSample, 'A sample with a three tuple floating point value', :Sample do
     member :Value, 'A floating ppint value', :ThreeSpaceSampleValue
-  end
-    
+  end    
 
   Glossary.samples.each do |sample|
     if sample.units =~ /3d$/

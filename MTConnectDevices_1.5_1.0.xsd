@@ -2986,10 +2986,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:complexType name='DeviceType'>
     <xs:annotation>
-      <xs:documentation>
-        The primary container element for each piece of equipment. device is
-        organized within the device container.
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='ComponentType'>
@@ -3002,16 +2999,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='Device' type='DeviceType' substitutionGroup='Component'>
     <xs:annotation>
-      <xs:documentation>
-        The primary container element for each piece of equipment. device is
-        organized within the device container.
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='ControllerType'>
     <xs:annotation>
-      <xs:documentation>
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='CommonComponentType'/>
@@ -3019,15 +3012,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='Controller' type='ControllerType' substitutionGroup='CommonComponent'>
     <xs:annotation>
-      <xs:documentation>
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='PowerType'>
     <xs:annotation>
-      <xs:documentation>
-        Missing description
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='CommonComponentType'/>
@@ -3035,15 +3025,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='Power' type='PowerType' substitutionGroup='CommonComponent'>
     <xs:annotation>
-      <xs:documentation>
-        Missing description
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='SensorType'>
     <xs:annotation>
-      <xs:documentation>
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='CommonComponentType'/>
@@ -3051,14 +3038,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='Sensor' type='SensorType' substitutionGroup='CommonComponent'>
     <xs:annotation>
-      <xs:documentation>
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='PathType'>
     <xs:annotation>
-      <xs:documentation>
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='CommonComponentType'/>
@@ -3066,14 +3051,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='Path' type='PathType' substitutionGroup='CommonComponent'>
     <xs:annotation>
-      <xs:documentation>
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='ActuatorType'>
     <xs:annotation>
-      <xs:documentation>
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='CommonComponentType'/>
@@ -3081,17 +3064,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='Actuator' type='ActuatorType' substitutionGroup='CommonComponent'>
     <xs:annotation>
-      <xs:documentation>
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='DoorType'>
     <xs:annotation>
-      <xs:documentation>
-        A mechanical mechanism or closure that can cover a physical access
-        portal into a piece of equipment allowing or restricting access to other
-        parts of the equipment.
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='CommonComponentType'/>
@@ -3099,11 +3077,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='Door' type='DoorType' substitutionGroup='CommonComponent'>
     <xs:annotation>
-      <xs:documentation>
-        A mechanical mechanism or closure that can cover a physical access
-        portal into a piece of equipment allowing or restricting access to other
-        parts of the equipment.
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='CompositionsType'>
@@ -3571,15 +3545,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
     <xs:attribute name='units' type='UnitsType' use='optional'/>
   </xs:complexType>
-  <xs:complexType name='ConstraintType' abstract='true'>
+  <xs:complexType name='ConstraintType' abstract='true' mixed='true'>
     <xs:annotation>
       <xs:documentation>
         an abstract constraint
       </xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ConstraintValueType'/>
-    </xs:simpleContent>
   </xs:complexType>
   <xs:element abstract='true' name='Constraint' type='ConstraintType'>
     <xs:annotation>
@@ -3595,7 +3566,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:restriction base='ConstraintType'/>
+      <xs:restriction base='ConstraintType'>
+        <xs:simpleType>
+          <xs:restriction base='LimitValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
   <xs:element name='ConstraintLimit' type='ConstraintLimitType' substitutionGroup='Constraint'>
@@ -3673,18 +3648,33 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='DutyCycleType'>
+  <xs:complexType name='DutyCycleType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
         The duty cycle
       </xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
+    <xs:complexContent>
       <xs:extension base='ConstraintType'>
+        <xs:sequence>
+          <xs:element name='Peak' type='LimitValueType'>
+            <xs:annotation>
+              <xs:documentation>
+                The peak value of the duty cycle
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Value' type='LimitValueType'>
+            <xs:annotation>
+              <xs:documentation>
+                The duty cycle
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
         <xs:attribute name='duration' type='DurationTimeType' use='required'/>
-        <xs:attribute name='peak' type='LimitValueType' use='required'/>
       </xs:extension>
-    </xs:simpleContent>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name='DutyCycle' type='DutyCycleType' substitutionGroup='Constraint'>
     <xs:annotation>
@@ -3715,11 +3705,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         A power transmission gearing, ratio given as CDATA
       </xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
+    <xs:complexContent>
       <xs:extension base='ConstraintType'>
         <xs:attribute name='number' type='GearNumberType' use='required'/>
       </xs:extension>
-    </xs:simpleContent>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name='GearSpecification' type='GearSpecificationType' substitutionGroup='Constraint'>
     <xs:annotation>
@@ -4291,10 +4281,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:complexType name='InterfacesType'>
     <xs:annotation>
-      <xs:documentation>
-        MTCPart5 provides an interaction model for coordinating activities
-        between manufacturing devices
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='CommonComponentType'/>
@@ -4302,10 +4289,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='Interfaces' type='InterfacesType' substitutionGroup='CommonComponent'>
     <xs:annotation>
-      <xs:documentation>
-        MTCPart5 provides an interaction model for coordinating activities
-        between manufacturing devices
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='InterfaceType' abstract='true'>
@@ -4327,10 +4311,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:element>
   <xs:complexType name='BarFeederInterfaceType'>
     <xs:annotation>
-      <xs:documentation>
-        barfeederinterface provides the set of information used to coordinate
-        the operations between a Bar Feeder and another piece of equipment. 
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='InterfaceType'/>
@@ -4338,21 +4319,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='BarFeederInterface' type='BarFeederInterfaceType' substitutionGroup='Interface'>
     <xs:annotation>
-      <xs:documentation>
-        barfeederinterface provides the set of information used to coordinate
-        the operations between a Bar Feeder and another piece of equipment. 
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='MaterialHandlerInterfaceType'>
     <xs:annotation>
-      <xs:documentation>
-        materialhandlerinterface provides the set of information used to
-        coordinate the operations between a piece of equipment and another
-        associated piece of equipment used to automatically handle various types
-        of materials or services associated with the original piece of
-        equipment. 
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='InterfaceType'/>
@@ -4360,22 +4332,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='MaterialHandlerInterface' type='MaterialHandlerInterfaceType' substitutionGroup='Interface'>
     <xs:annotation>
-      <xs:documentation>
-        materialhandlerinterface provides the set of information used to
-        coordinate the operations between a piece of equipment and another
-        associated piece of equipment used to automatically handle various types
-        of materials or services associated with the original piece of
-        equipment. 
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='DoorInterfaceType'>
     <xs:annotation>
-      <xs:documentation>
-        doorinterface provides the set of information used to coordinate the
-        operations between two pieces of equipment, one of which controls the
-        operation of a door. 
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='InterfaceType'/>
@@ -4383,20 +4345,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='DoorInterface' type='DoorInterfaceType' substitutionGroup='Interface'>
     <xs:annotation>
-      <xs:documentation>
-        doorinterface provides the set of information used to coordinate the
-        operations between two pieces of equipment, one of which controls the
-        operation of a door. 
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='ChuckInterfaceType'>
     <xs:annotation>
-      <xs:documentation>
-        chuckinterface provides the set of information used to coordinate the
-        operations between two pieces of equipment, one of which controls the
-        operation of a chuck. 
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='InterfaceType'/>
@@ -4404,11 +4358,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='ChuckInterface' type='ChuckInterfaceType' substitutionGroup='Interface'>
     <xs:annotation>
-      <xs:documentation>
-        chuckinterface provides the set of information used to coordinate the
-        operations between two pieces of equipment, one of which controls the
-        operation of a chuck. 
-      </xs:documentation>
+      <xs:documentation/>
     </xs:annotation>
   </xs:element>
 </xs:schema>
