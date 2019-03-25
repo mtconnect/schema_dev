@@ -427,7 +427,7 @@ class Schema
 
     def base_type(name)
       n = name.to_s
-      if n =~ /^(integer|ID|NMTOKEN|float|dateTime|boolean|string|date|IDREF)$/
+      if n =~ /^(integer|ID|NMTOKEN|float|dateTime|boolean|string|date|IDREF|anyURI)$/
         "xs:#{n}"
       elsif n =~ /:/
         n
