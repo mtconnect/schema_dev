@@ -179,22 +179,23 @@ class Schema
         if @parent
           if @members.length == 1
             @attr_elem = extension = REXML::Element.new('xs:restriction')
+            # Since extension by restriction does not allow us
+            # to restrict the content based on a simple type,
+            # we pull the facets into the schema here. This is
+            # not ideal, but allows us to skip an extra level
+            # of indirection.
+            simple = extension.add_element('xs:simpleType').
+                       add_element('xs:restriction', {'base' => type.name_as_xsd_type(true)})
+#            if BasicType === type
+#              type.add_facet(simple)
+#            elsif ControlledVocabulary === type
+#              type.add_enumeration(simple)
+#            end
           else
             @attr_elem = extension = REXML::Element.new('xs:extension')
+            # puts "Adding base of #{parent_as_xsd_type(true)} for #{@name}"
           end
-          # puts "Adding base of #{parent_as_xsd_type(true)} for #{@name}"
           extension.add_attribute('base', parent_as_xsd_type(true))
-          
-          # Since extension by restriction does not allow us
-          # to restrict the content based on a simple type,
-          # we pull the facets into the schema here. This is
-          # not ideal, but allows us to skip an extra level
-          # of indirection.
-          if BasicType === type
-            type.add_facet(extension)
-          elsif ControlledVocabulary === type
-            type.add_enumeration(extension)
-          end
         else
           # Value is a special flag for a simple content object.
           # Take the type and copy as the parent for the extension.
@@ -378,6 +379,18 @@ class Schema
       @attrs, @elems = @members.partition { |ele| ele.attribute? }
     end
   end
+
+  class AttributeGroup
+    def create_type_no_elements
+      @attr_elem = REXML::Element.new('xs:attributeGroup')
+      @attr_elem.add_attribute('name', name_as_xsd_type)
+      @attr_elem
+    end
+
+    def generate_xsd(xsd_version)
+      super
+    end
+  end
   
   # Basic type extension.
   class BasicType
@@ -385,8 +398,7 @@ class Schema
     def add_facet(restriction)
       if @pattern
         restriction.add_element('xs:pattern', {'value' => @pattern})
-      end
-      if @facet
+      elsif @facet
         facets = @facet.split(';')
         facets.map { |f| f.split('=') }.each do |f, v|
           case f
@@ -418,6 +430,17 @@ class Schema
       end
     end
 
+    def base_type(name)
+      n = name.to_s
+      if n =~ /^(integer|ID|NMTOKEN|float|dateTime|boolean|string)$/
+        "xs:#{n}"
+      elsif n =~ /:/
+        n
+      else
+        type_name(n, false)
+      end
+    end
+
     def generate_xsd(xsd_version)
       return [] if @imported
       
@@ -430,14 +453,25 @@ class Schema
       anno << docs
       simple_type << anno
 
-      restriction = REXML::Element.new('xs:restriction')
-      restriction.add_attribute('base', "xs:#{@parent}")
-      add_facet(restriction)
-      simple_type << restriction
+      if @union
+        names = @union.map { |n| base_type(n) }.join(' ')
+        simple_type.add_element('xs:union', {'memberTypes' => names})
+      elsif @list
+        n = base_type(@list)
+        simple_type.add_element('xs:list').
+          add_element('xs:simpleType').
+          add_element('xs:restriction', { 'base' => n })
+      else
+        restriction = REXML::Element.new('xs:restriction')
+        n = base_type(@parent)
+        restriction.add_attribute('base', n)
+        add_facet(restriction)
+        simple_type << restriction
+      end
       
       [simple_type]
     rescue
-      puts "Error on: #{self.inspect}"
+      puts "Error on: #{@name}"
       raise
     end
   end
@@ -474,22 +508,19 @@ class Schema
         element.add_attribute('notNamespace', @notNamespace) if @notNamespace          
         
         # Put the documention here as well
-        anno = REXML::Element.new('xs:annotation')
-        docs = REXML::Element.new('xs:documentation')
-        docs.text = @annotation
-        anno << docs
-        element << anno
+        element.add_element('xs:annotation').
+          add_element('xs:documentation').text = @annotation
       else
+        type = resolve_type
         element = REXML::Element.new('xs:element')
-      
+        
         if @default
           element.add_attribute('default', @default.to_s)
         end
-              
+        
         # If this is an abstract object with a parent or if it
         # has subclasses, we will need to create substitution groups
         # so add a reference instead of a name and type.
-        type = resolve_type
         if references_polymorphic?
           element.add_attribute('ref', type.name.to_s)
         elsif @name.to_s.include?(':')
@@ -497,16 +528,13 @@ class Schema
         else
           element.add_attribute('name', @name.to_s)
           element.add_attribute('type', type_as_xsd_type(true))
-        
+          
           # Add annotation to make sure the element is documented. This is not
           # necessary for references.
           if type
             #puts "#{name} #{type.name}"
-            anno = REXML::Element.new('xs:annotation')
-            docs = REXML::Element.new('xs:documentation')
-            docs.text = @annotation
-            anno << docs
-            element << anno
+            element.add_element('xs:annotation').
+              add_element('xs:documentation').text = @annotation
           end
         end
       end
@@ -517,31 +545,38 @@ class Schema
     end
 
     def generate_attribute(element)
-      if @name.to_s.include?(':')
-        attrs = { 'ref' => @name.to_s }
+      type = resolve_type
+
+      if AttributeGroup === type
+        element.add_element('xs:attributeGroup',
+                            'ref' => type_as_xsd_type(true))
       else
-        attrs = {'name' => camel_name, 'type' => type_as_xsd_type(true)}
+        if @name.to_s.include?(':')
+          attrs = { 'ref' => @name.to_s }
+        else
+          attrs = {'name' => camel_name, 'type' => type_as_xsd_type(true)}
+        end
+        
+        # Always specify the use of the attribute.
+        # puts "#{@name} #{@occurrence.inspect}"
+        if @occurrence.nil? || @occurrence == 1
+          attrs['use'] = 'required'
+        else
+          attrs['use'] = 'optional'
+        end
+        
+        if @default
+          attrs['default'] = @default
+        end
+        
+        if @fixed
+          attrs['fixed'] = @fixed
+        end
+        
+        # If the extension was specified, add to the extension otherwise
+        # add directly tot he complex type.
+        element.add_element('xs:attribute', attrs)
       end
-      
-      # Always specify the use of the attribute.
-      # puts "#{@name} #{@occurrence.inspect}"
-      if @occurrence.nil? || @occurrence == 1
-        attrs['use'] = 'required'
-      else
-        attrs['use'] = 'optional'
-      end
-      
-      if @default
-        attrs['default'] = @default
-      end
-      
-      if @fixed
-        attrs['fixed'] = @fixed
-      end
-      
-      # If the extension was specified, add to the extension otherwise
-      # add directly tot he complex type.
-      element.add_element('xs:attribute', attrs)
     end
   end
 

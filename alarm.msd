@@ -1,6 +1,5 @@
 
 package :Alarm, 'Alarms Package, these are types of events' do
-=begin
   basic_type :NotifcationDescription, 'DEPRECATED: The description of the Notifcation'
   attr :NativeNotifcationCode, 'DEPRECATED: An Notifcation code as defined by the component'
   
@@ -29,12 +28,12 @@ package :Alarm, 'Alarms Package, these are types of events' do
     value :INFORMATION, 'This notification is for information purposes only'
   end
 
-  type :Alarm, 'DEPRECATED: An Notifcation event', :Event do
-    member :Code, 'The Notifcation type', :NotifcationCode
-    member :Severity, 'The severity', 0..1
-    member :State, 'The state', 0..1, :AlarmState
-    member :NativeCode, 'The component specific Notifcation code', :NativeNotifcationCode
-    member :Value, 'The Notifcation\'s description', :NotifcationDescription
-  end
-=end
+
+#  type :Alarm, 'DEPRECATED: An Notifcation event', :Event do
+#    member :Code, 'The Notifcation type', :NotifcationCode
+#    member :Severity, 'The severity', 0..1
+#    member :State, 'The state', 0..1, :AlarmState
+#    member :NativeCode, 'The component specific Notifcation code', :NativeNotifcationCode
+#    member :Value, 'The Notifcation\'s description', :NotifcationDescription
+#  end
 end

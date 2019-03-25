@@ -158,7 +158,7 @@ class Schema
   end
 
   class BasicType < Type
-    attr_reader :annotation, :pattern, :facet, :attr
+    attr_reader :annotation, :pattern, :facet, :attr, :union, :list
 
     def initialize(schema, name, annotation, parent = 'string', attr = true, &block)
       super(schema, name, annotation, parent)
@@ -172,6 +172,14 @@ class Schema
 
     def pattern(value)
       @pattern = value
+    end
+
+    def union(*types)
+      @union = types
+    end
+
+    def list(type)
+      @list = type
     end
   end
 
@@ -202,6 +210,10 @@ class Schema
     end
 
     def value(name, annotation, &block)
+      unless annotation
+        raise "Cannot find annotation for #{name}"
+      end
+        
       @values << Value.new(@schema, name, annotation, &block)
     end
   end
@@ -256,6 +268,10 @@ class Schema
     def enum(name, annotation, parent = 'NMTOKEN', attr = true, &block)
       @enums << ControlledVocabulary.new(@schema, name, annotation, parent, attr, &block)
     end
+
+    def attrs(name, annotation = nil, parent = nil, &block)
+      @elements << AttributeGroup.new(@schema, name, annotation, parent, &block)
+    end  
   end
 
   class Element < Type
@@ -430,6 +446,18 @@ class Schema
       @members.each { |m| m.resolve }
     end
   end
+
+  class AttributeGroup < Element
+    def initialize(schema, name, annotation, parent = nil, &block)
+      super
+      @attr = true
+    end      
+    
+    def attribute(name, annotation, occurrence = nil, type = nil, &block)
+      super
+    end
+    alias member attribute
+  end
   
   class Member
     include Comparable
@@ -480,7 +508,8 @@ class Schema
     def attribute?
       if !defined?(@attribute)
         type = @schema.type(@type)
-        @attribute = (@name != :Value and @name != :any and (type.nil? or type.attr))
+        @attribute = (@name != :Value and @name != :any and
+                      (type.nil? or type.attr))
       end
       @attribute
     end

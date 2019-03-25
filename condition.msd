@@ -10,17 +10,13 @@ package :Condition, 'The condition of the device' do
   
   type :Condition, 'An abstract indicator of the device\'s condition' do
     abstract
-    member :Sequence, 'The events sequence number'
-    member :Timestamp, 'The time the event occurred'
-    member :Name, 'The name of the event corresponding to the measurement', 0..1
-    member :DataItemId, 'The unique identifier of the item being produced'
-    member :CompositionId, 'The identifier of the sub-element this result is in reference to', 0..1
+    
+    member :Observation, 'Common attributes'
     member :type, 'The type of condition', :DataItemEnum
     member :NativeCode, 'The component specific Notifcation code', 0..1
     member :NativeSeverity, 'The component specific Notifcation code', 0..1
     member :Qualifier, 'An optional attribute that helps qualify the condition', 0..1
     member :Statistic, 'The statistical operation on this data', 0..1, :DataItemStatistics
-    member :SubType, 'The event subtype corresponding to the measurement subtype', 0..1, :DataItemSubEnum
     member :Value, 'The description of the condition', :ConditionDescription
   end
   

@@ -76,20 +76,23 @@ module Latex
 
     def keys
       if !defined? @keys
-        @keys = Hash[properties.elements.map(&:value).compact]
+        @keys = Hash.new
+        properties.elements.map(&:value).compact.each do |k, v|
+          @keys[k.to_sym] = v
+        end
       end
       @keys
     end
 
     def name_property
-      keys['name']
+      keys[:name]
     end
 
     def method_missing(method, *args, &block)
-      if !keys.include(method.to_s)
+      if !keys.include?(method)
         super
       else
-        keys[method.to_s]
+        keys[method]
       end
     end
     

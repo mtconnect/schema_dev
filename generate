@@ -10,14 +10,14 @@ puts "Loading Glossary: #{File.basename(path)}"
 Glossary.parse_glossary(path)
 
 ARGV.each do |file|
-  puts "Parsing schema for #{ARGV[0]}"
+  puts "Parsing schema for #{file}"
   schema = Schema.new File.read(file)
 
-  %w{1.0 1.1}.each do |version|
-    puts "  Generating schema for #{ARGV[0]} #{version}"
+  ['1.0', nil].each do |version|
+    puts "  Generating schema for #{file} #{version}"
     doc = schema.generate_xsd(version)
     ver = "_#{version}" if version
-    out = "#{File.basename(ARGV[0], '.msd')}_#{schema.version}#{ver}.xsd"
+    out = "#{File.basename(file, '.msd')}_#{schema.version}#{ver}.xsd"
     puts "    Writing schema document: #{out}"
     File.open(out, 'w') { |f| doc.write(f, 2) }
   end

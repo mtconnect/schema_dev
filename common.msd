@@ -52,15 +52,15 @@ package :common, 'Common attributes and elements for all schemas' do
     extensible :DataItemExt
 
     Glossary.events.each do |e|
-      value(e.keys['name'], e.keys['description'])
+      value(e.name_property, e.description)
     end
 
     Glossary.samples.each do |e|
-      value(e.keys['name'], e.keys['description'])
+      value(e.name_property, e.description)
     end
 
     Glossary.conditions.each do |e|
-      value(e.keys['name'], e.keys['description'])
+      value(e.name_property, e.description)
     end
   end
 
@@ -68,7 +68,7 @@ package :common, 'Common attributes and elements for all schemas' do
     extensible :DataItemExt
     
     Glossary.subtypes.each do |e|
-      value(e.keys['name'], e.keys['description'])
+      value(e.name_property, e.description)
     end
   end
   
