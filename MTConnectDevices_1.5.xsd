@@ -3018,9 +3018,220 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation/>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='ActuatorType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Actuator' type='ActuatorType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AuxiliaryType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Auxiliary' type='AuxiliaryType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AuxiliariesType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Auxiliaries' type='AuxiliariesType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AxisType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Axis' type='AxisType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AxesType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Axes' type='AxesType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='InterfaceType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Interface' type='InterfaceType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='InterfacesType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Interfaces' type='InterfacesType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LinearType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AxisType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Linear' type='LinearType' substitutionGroup='Axis'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ResourceType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Resource' type='ResourceType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ResourcesType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Resources' type='ResourcesType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='RotaryType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AxisType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Rotary' type='RotaryType' substitutionGroup='Axis'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SensorType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AuxiliaryType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Sensor' type='SensorType' substitutionGroup='Auxiliary'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SystemType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='System' type='SystemType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SystemsType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Systems' type='SystemsType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='ControllerType'>
     <xs:annotation>
-      <xs:documentation/>
+      <xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='CommonComponentType'/>
@@ -3028,7 +3239,38 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   </xs:complexType>
   <xs:element name='Controller' type='ControllerType' substitutionGroup='CommonComponent'>
     <xs:annotation>
-      <xs:documentation/>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ChuckType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AxisType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Chuck' type='ChuckType' substitutionGroup='Axis'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DoorType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Door' type='DoorType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='PowerType'>
@@ -3040,58 +3282,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:complexContent>
   </xs:complexType>
   <xs:element name='Power' type='PowerType' substitutionGroup='CommonComponent'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='SensorType'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Sensor' type='SensorType' substitutionGroup='CommonComponent'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='PathType'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Path' type='PathType' substitutionGroup='CommonComponent'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ActuatorType'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Actuator' type='ActuatorType' substitutionGroup='CommonComponent'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='DoorType'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Door' type='DoorType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation/>
     </xs:annotation>
@@ -3133,15 +3323,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A mechanism for moving or controlling a mechanical part of a piece
-            of equipment
+            of equipment. It takes energy usually provided by air, electric
+            current, or liquid and converts the energy into some kind of motion.
+            
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='AMPLIFIER'>
         <xs:annotation>
           <xs:documentation>
-            An electronic component or circuit for amplifying power, current, or
-            voltage
+            An electronic component or circuit for amplifying power, electric
+            current, or voltage.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3149,14 +3341,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A mechanical structure for transforming rotary motion into linear
-            motion
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='BATTERY'>
-        <xs:annotation>
-          <xs:documentation>
-            A storage device that stores and produces electrical engergy
+            motion.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3164,23 +3349,32 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             An endless flexible band used to transmit motion for a piece of
-            equipment or to convey materials and objects
+            equipment or to convey materials and objects.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='CIRCUIT_BREAKER'>
+      <xs:enumeration value='BRAKE'>
         <xs:annotation>
           <xs:documentation>
-            A mechanism for interrupting an electric circuit
+            A mechanism for slowing or stopping a moving object by the
+            absorption or transfer of the energy of momentum, usually by means
+            of friction, electrical force, or magnetic force.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='CHAIN'>
         <xs:annotation>
           <xs:documentation>
-            An interconnected series of objects that band together and used to
-            transmit motion for a piece of equipment or to convey materials and
-            objects.
+            An interconnected series of objects that band together and are used
+            to transmit motion for a piece of equipment or to convey materials
+            and objects.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CHOPPER'>
+        <xs:annotation>
+          <xs:documentation>
+            A mechanism used to break material into smaller pieces.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3188,45 +3382,68 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A mechanism that holds a part, stock material, or any other item in
-            place
+            place.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='CHUTE'>
         <xs:annotation>
           <xs:documentation>
-            An inclined channel for conveying material
+            An inclined channel for conveying material.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CIRCUIT_BREAKER'>
+        <xs:annotation>
+          <xs:documentation>
+            A mechanism for interrupting an electric circuit.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='CLAMP'>
         <xs:annotation>
           <xs:documentation>
-            A mechanism used to strengthen, support, or fasten objects in place
+            A mechanism used to strengthen, support, or fasten objects in place.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='COMPRESSON'>
+      <xs:enumeration value='COMPRESSOR'>
         <xs:annotation>
           <xs:documentation>
             A pump or other mechanism for reducing volume and increasing
             pressure of gases in order to condense the gases to drive
-            pneumatically powered pieces of equipment
+            pneumatically powered pieces of equipment.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='DOON'>
+      <xs:enumeration value='DOOR'>
         <xs:annotation>
           <xs:documentation>
-            Amechanical mechanism or closure that can cover an access portal
-            into a piece of equipment.
+            A mechanical mechanism or closure that can cover a physical access
+            portal into a piece of equipment allowing or restricting access to
+            other parts of the equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DRAIN'>
+        <xs:annotation>
+          <xs:documentation>
+            A mechanism that allows material to flow for the purpose of drainage
+            from, for example, a vessel or tank.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ENCODER'>
+        <xs:annotation>
+          <xs:documentation>
+            A mechanism used to measure rotary position.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='FAN'>
         <xs:annotation>
           <xs:documentation>
-            Any device for producing a current of air
+            Any mechanism for producing a current of air.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3242,15 +3459,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A mechanism that holds a part, stock material, or any other item in
-            place
+            place.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='HOPPER'>
         <xs:annotation>
           <xs:documentation>
-            A chamber or bin in which materials are stored temporarily, being
-            filled through the top and dispensed through the bottom.
+            A chamber or bin in which materials are stored temporarily,
+            typically being filled through the top and dispensed through the
+            bottom.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LINEAR_POSITION_FEEDBACK'>
+        <xs:annotation>
+          <xs:documentation>
+            A mechanism that measures linear motion or position.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3258,7 +3483,29 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A mechanism that converts electrical, pneumatic, or hydraulic energy
-            into mechanical energy
+            into mechanical energy.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OIL'>
+        <xs:annotation>
+          <xs:documentation>
+            A viscous liquid.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='POWER_SUPPLY'>
+        <xs:annotation>
+          <xs:documentation>
+            A unit that provides power to electric mechanisms.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PULLEY'>
+        <xs:annotation>
+          <xs:documentation>
+            A mechanism or wheel that turns in a frame or block and serves to
+            change the direction of or to transmit force.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3270,17 +3517,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='POSITION_FEEDBACK'>
+      <xs:enumeration value='SENSING_ELEMENT'>
         <xs:annotation>
           <xs:documentation>
-            A mechanism that measures motion or position
+            A mechanism that provides a signal or measured value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='POWER_SUPPLY'>
+      <xs:enumeration value='STORAGE_BATTERY'>
         <xs:annotation>
           <xs:documentation>
-            A device that provides power to electric mechanisms
+            A component consisting of one or more cells, in which chemical
+            energy is converted into electricity and used as a source of power. 
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3295,15 +3543,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TANK'>
         <xs:annotation>
           <xs:documentation>
-            A receptacle or container for holding material
+            A receptacle or container for holding material.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='TENSIONER'>
+        <xs:annotation>
+          <xs:documentation>
+            A mechanism that provides or applies a stretch or strain to another
+            mechanism.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='TRANSFORMER'>
         <xs:annotation>
           <xs:documentation>
-            A mechanism through which transforms electric energy from a source
-            to a secondary circuit
+            A mechanism that transforms electric energy from a source to a
+            secondary circuit.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3311,7 +3567,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Any mechanism for halting or controlling the flow of a liquid, gas,
-            or other material through a passage, pipe, inlet, or outlet,
+            or other material through a passage, pipe, inlet, or outlet.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='WATER'>
+        <xs:annotation>
+          <xs:documentation>
+            A fluid.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='WIRE'>
+        <xs:annotation>
+          <xs:documentation>
+            A string like piece or filament of relatively rigid or flexible
+            material provided in a variety of diameters.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3741,210 +4012,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AxesType'>
-    <xs:annotation>
-      <xs:documentation>
-        A logical group of Axes representing a structural base
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Axes' type='AxesType' substitutionGroup='CommonComponent'>
-    <xs:annotation>
-      <xs:documentation>
-        A logical group of Axes representing a structural base
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AxisType' abstract='true'>
-    <xs:annotation>
-      <xs:documentation>
-        A abstract machine axis
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element abstract='true' name='Axis' type='AxisType' substitutionGroup='CommonComponent'>
-    <xs:annotation>
-      <xs:documentation>
-        A abstract machine axis
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='LinearType'>
-    <xs:annotation>
-      <xs:documentation>
-        A linear axis
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AxisType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Linear' type='LinearType' substitutionGroup='Axis'>
-    <xs:annotation>
-      <xs:documentation>
-        A linear axis
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='RotaryType'>
-    <xs:annotation>
-      <xs:documentation>
-        A rotary axis that moves in a rotational manor
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AxisType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Rotary' type='RotaryType' substitutionGroup='Axis'>
-    <xs:annotation>
-      <xs:documentation>
-        A rotary axis that moves in a rotational manor
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='SpindleType'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED: A spindle axis that spins
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AxisType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Spindle' type='SpindleType' substitutionGroup='Axis'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED: A spindle axis that spins
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='SystemsType'>
-    <xs:annotation>
-      <xs:documentation>
-        A grouping of all the systems of the device
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Systems' type='SystemsType' substitutionGroup='CommonComponent'>
-    <xs:annotation>
-      <xs:documentation>
-        A grouping of all the systems of the device
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='SystemType'>
-    <xs:annotation>
-      <xs:documentation>
-        A logical group of parts representing sub-system of the device
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='System' type='SystemType' substitutionGroup='CommonComponent'>
-    <xs:annotation>
-      <xs:documentation>
-        A logical group of parts representing sub-system of the device
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='PneumaticType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the pneumatic system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SystemType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Pneumatic' type='PneumaticType' substitutionGroup='System'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the pneumatic system
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='HydraulicType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the hydraulic system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SystemType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Hydraulic' type='HydraulicType' substitutionGroup='System'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the hydraulic system
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='LubricationType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the lubrication system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SystemType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Lubrication' type='LubricationType' substitutionGroup='System'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the lubrication system
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='CoolantType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the coolant system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SystemType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Coolant' type='CoolantType' substitutionGroup='System'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the coolant system
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ElectricType'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the coolant system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SystemType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Electric' type='ElectricType' substitutionGroup='System'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing the coolant system
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:simpleType name='SampleIntervalType'>
     <xs:annotation>
       <xs:documentation>
@@ -4064,24 +4131,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='VALUE'>
+      <xs:enumeration value='DISCRETE'>
         <xs:annotation>
           <xs:documentation>
-            A singluar value or fixed length value is give
+            A data entity where each discrete occurrence of the data may have
+            the same value as the previous occurrence of the data.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='TIME_SERIES'>
         <xs:annotation>
           <xs:documentation>
-            A waveform
+            A series of sampled data. 
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='DISCRETE'>
+      <xs:enumeration value='VALUE'>
         <xs:annotation>
           <xs:documentation>
-            A discrete event type that may repeat
+            The measured value of the sample data.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -4094,22 +4162,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='MINIMUM_DELTA'>
-        <xs:annotation>
-          <xs:documentation>
-            A minimum delta
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PERIOD'>
-        <xs:annotation>
-          <xs:documentation>
-            Indicates a filter with an absolute value reported in seconds
-            representing the time between reported samples of the value of the
-            data item
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
+      <xs:enumeration value='MINIMUM_DELTA'/>
+      <xs:enumeration value='PERIOD'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name='DataItemsType'>
@@ -4302,86 +4356,4 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name='InterfacesType'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Interfaces' type='InterfacesType' substitutionGroup='CommonComponent'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='InterfaceType' abstract='true'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing an interface in a device.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element abstract='true' name='Interface' type='InterfaceType' substitutionGroup='CommonComponent'>
-    <xs:annotation>
-      <xs:documentation>
-        A component representing an interface in a device.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='BarFeederInterfaceType'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='InterfaceType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='BarFeederInterface' type='BarFeederInterfaceType' substitutionGroup='Interface'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='MaterialHandlerInterfaceType'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='InterfaceType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='MaterialHandlerInterface' type='MaterialHandlerInterfaceType' substitutionGroup='Interface'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='DoorInterfaceType'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='InterfaceType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='DoorInterface' type='DoorInterfaceType' substitutionGroup='Interface'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ChuckInterfaceType'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='InterfaceType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='ChuckInterface' type='ChuckInterfaceType' substitutionGroup='Interface'>
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
-  </xs:element>
 </xs:schema>

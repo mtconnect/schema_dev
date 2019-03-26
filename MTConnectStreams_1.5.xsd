@@ -4810,25 +4810,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AlarmType'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED: Replaced with condition category category data items in
-        Version 1.1.0.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Alarm' type='AlarmType' substitutionGroup='StringEvent'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED: Replaced with condition category category data items in
-        Version 1.1.0.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:simpleType name='AvailabilityValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -6815,14 +6796,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name='NotifcationDescriptionType'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED: The description of the Notifcation
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:simpleType name='NativeNotifcationCodeType'>
     <xs:annotation>
       <xs:documentation>
@@ -6963,6 +6936,30 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
+  <xs:complexType name='AlarmType'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED: Replaced with condition category category data items in
+        Version 1.1.0.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='StringEventType'>
+        <xs:attribute name='code' type='NotifcationCodeType' use='required'/>
+        <xs:attribute name='severity' type='SeverityType' use='optional'/>
+        <xs:attribute name='state' type='AlarmStateType' use='optional'/>
+        <xs:attribute name='nativeCode' type='NativeNotifcationCodeType' use='required'/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Alarm' type='AlarmType' substitutionGroup='StringEvent'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED: Replaced with condition category category data items in
+        Version 1.1.0.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:simpleType name='InterfaceEventValuesType'>
     <xs:annotation>
       <xs:documentation>

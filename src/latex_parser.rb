@@ -17,6 +17,8 @@ class LatexParser
 
     @indexes = Hash.new { |h, k| h[k] = [] }        
     @entries = Hash.new
+    @plural = Hash.new
+    @singular = Hash.new
     
     res.elements.each do |e|
       next unless Latex::GlossaryEntry === e
@@ -27,7 +29,16 @@ class LatexParser
         end
       end
 
-      @entries[e.name.join(' ')] = e
+      name = e.name.join(' ')
+      @entries[name] = e
+
+      if e.has_key?(:plural)
+        plural = e.plural.downcase
+        
+        @entries[plural] = e
+        @singular[plural] = name
+        @plural[name] = plural
+      end
     end
 
     puts "Entries: #{@entries.length}"
@@ -36,23 +47,44 @@ class LatexParser
     end
   end
 
-  def method_missing(m, *args, &block)
-    2.times do
-      return @indexes[m] if @indexes.include?(m)
+  def plural(word)
+    return @plural[word] if @plural.include?(word)
+    case word
+    when /(o|s|ss|ch|x)$/
+      "#{word}es"
 
-      ms = m.to_s
-      if ms =~ /s$/
-        # de-pluralize
-        sg = ms.sub(/s$/, '').to_sym
-        return @indexes[sg] if @indexes.include?(sg)
-      else
-        # pluralize
-        pl = "#{ms}s".to_sym
-        return @indexes[pl] if @indexes.include?(pl)
-      end
+    when /y$/
+      "#{words.slice(0...-1)}ies"
+
+    else
+      "#{word}s"
+    end
+  end
+
+  def singular(word)
+    return @singular[word] if @singular.include?(word)
+    case word
+    when /(o|s|ss|ch|x)es$/
+      word.slice(0...-2)
+
+    when /ies$/
+      "#{word.slice(0...-3)}y"
       
-      ms = ms.downcase
-      m = ms.to_sym
+    when /s$/
+      word.slice(0...-1)
+
+    else
+      word
+    end
+  end
+  
+  def method_missing(m, *args, &block)
+    [m, m.to_s.downcase.to_sym].each do |s|
+      return @indexes[s] if @indexes.include?(s)
+      ms = singular(s.to_s).to_sym
+      return @indexes[ms] if @indexes.include?(ms)
+      ms = plural(s.to_s).to_sym
+      return @indexes[ms] if @indexes.include?(ms)
     end
     
     super
@@ -90,6 +122,10 @@ module Latex
         end
       end
       @keys
+    end
+
+    def has_key?(key)
+      keys.include?(key)
     end
 
     def name_property

@@ -21,14 +21,15 @@ package :DataItems, 'Data Items Package' do
 
   # Data item types and sub types have been moved to common.  
   enum :Representation, 'The possible representations of a DataItem' do
-    value :VALUE, 'A singluar value or fixed length value is give'
-    value :TIME_SERIES, 'A waveform'
-    value :DISCRETE, 'A discrete event type that may repeat'
+    Glossary.representations.each do |e|
+      value(e.name_property, e.description) if !e.kind_of?(:subtype)
+    end
   end
 
   enum :DataItemFilterEnum, 'The type of filter' do
-    value :MINIMUM_DELTA, 'A minimum delta'
-    value :PERIOD, 'Indicates a filter with an absolute value reported in seconds representing the time between reported samples of the value of the data item'
+    Glossary.filters.each do |e|
+      value(e.name_property, e.description) if !e.kind_of?(:subtype)
+    end
   end
 
   # Measurement types

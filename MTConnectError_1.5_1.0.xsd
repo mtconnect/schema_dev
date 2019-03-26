@@ -301,7 +301,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='AVAILABILITY'>
         <xs:annotation>
           <xs:documentation>
-            Represents the agent’s ability to communicate with the data source.
+            Represents the agents ability to communicate with the data source.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -611,7 +611,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PROGRAM_EDIT'>
         <xs:annotation>
           <xs:documentation>
-            An indication of the status of the controller component’s program
+            An indication of the status of the controller components program
             editing mode. On many controls, a program can be edited while
             another program is currently being executed.
           </xs:documentation>
@@ -737,7 +737,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:documentation>
             The value of the cdata for the event MUST be the assetid of the
             asset that has been added or changed. There will not be a separate
-            message for new assets. 
+            message for new assets.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -990,7 +990,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The measurement of the feedrate for the axes, or a single axis,
-            associated with a path component– a vector.
+            associated with a path component a vector.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1119,7 +1119,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VISCOSITY'>
         <xs:annotation>
           <xs:documentation>
-            The measurement of a fluid’s resistance to flow.
+            The measurement of a fluids resistance to flow.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1301,7 +1301,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='OVERRIDE'>
         <xs:annotation>
           <xs:documentation>
-            The operator’s overridden value. Percent of commanded. DEPRECATED in
+            The operators overridden value. Percent of commanded. DEPRECATED in
             Version 1.3. See event category category data items.
           </xs:documentation>
         </xs:annotation>
@@ -1367,7 +1367,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Measurement of the time that a piece of equipment is performing any
-            activity – the equipment is active and performing a function under
+            activity the equipment is active and performing a function under
             load or not. Example: For traditional machine tools, this includes
             LOADED, plus rapid moves, tool changes, etc.
           </xs:documentation>
@@ -1775,68 +1775,74 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='MINIMUM'>
-        <xs:annotation>
-          <xs:documentation>
-            The minimum value
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MAXIMUM'>
-        <xs:annotation>
-          <xs:documentation>
-            The maximum value
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value='AVERAGE'>
         <xs:annotation>
           <xs:documentation>
-            The average
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='STANDARD_DEVIATION'>
-        <xs:annotation>
-          <xs:documentation>
-            The standard deviation
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='ROOT_MEAN_SQUARE'>
-        <xs:annotation>
-          <xs:documentation>
-            The root mean square
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MEAN'>
-        <xs:annotation>
-          <xs:documentation>
-            The mean average
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MODE'>
-        <xs:annotation>
-          <xs:documentation>
-            The mode of the sample
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='RANGE'>
-        <xs:annotation>
-          <xs:documentation>
-            The difference between the maximum and minimum value during the
-            calculated period
+            Mathematical Average value calculated for the data item during the
+            calculation period.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='KURTOSIS'>
         <xs:annotation>
           <xs:documentation>
-            In probability theory and statistics, kurtosis is a measure of the
-            &quot;peakedness&quot; of the probability distribution
+            A measure of the peakedness of a probability distribution; i.e., the
+            shape of the distribution curve.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MAXIMUM'>
+        <xs:annotation>
+          <xs:documentation>
+            Maximum or peak value recorded for the data item during the
+            calculation period.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MEDIAN'>
+        <xs:annotation>
+          <xs:documentation>
+            The middle number of a series of numbers.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MINIMUM'>
+        <xs:annotation>
+          <xs:documentation>
+            Minimum value recorded for the data item during the calculation
+            period.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MODE'>
+        <xs:annotation>
+          <xs:documentation>
+            The number in a series of numbers that occurs most often.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='RANGE'>
+        <xs:annotation>
+          <xs:documentation>
+            Difference between the Maximum and Minimum value of a data item
+            during the calculation period. Also represents Peak-to-Peak
+            measurement in a waveform.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ROOT_MEAN_SQUARE'>
+        <xs:annotation>
+          <xs:documentation>
+            Mathematical Root Mean Square (RMS) value calculated for the data
+            item during the calculation period.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='STANDARD_DEVIATION'>
+        <xs:annotation>
+          <xs:documentation>
+            Statistical Standard Deviation value calculated for the data item
+            during the calculation period.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1870,14 +1876,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='AMPERE'>
         <xs:annotation>
           <xs:documentation>
-            The electrical current
+            Amps
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='CELSIUS'>
         <xs:annotation>
           <xs:documentation>
-            Degrees Celcius
+            Degrees Celsius
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1885,6 +1891,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A counted event
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DECIBEL'>
+        <xs:annotation>
+          <xs:documentation>
+            Sound Level
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1898,28 +1911,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DEGREE/SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Degrees per second
+            Angular degrees per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='DEGREE/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Degrees per second squared
+            Angular acceleration in degrees per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='HERTZ'>
         <xs:annotation>
           <xs:documentation>
-            Cycles per second
+            Frequency measured in cycles per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='JOULE'>
         <xs:annotation>
           <xs:documentation>
-            A measure of energy
+            A measurement of energy.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1944,6 +1957,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='MICRO_RADIAN'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of Tilt
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='MILLIMETER'>
         <xs:annotation>
           <xs:documentation>
@@ -1961,14 +1981,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MILLIMETER/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Acceleration at millimeters per second squared
+            Acceleration in millimeters per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='MILLIMETER_3D'>
         <xs:annotation>
           <xs:documentation>
-            3D Millimeters
+            A point in space identified by X, Y, and Z positions and represented
+            by a space-delimited set of numbers each expressed in millimeters.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1982,8 +2003,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='NEWTON_METER'>
         <xs:annotation>
           <xs:documentation>
-            A unit for force times distance. The SI units will be used in Newton
-            meters.
+            Torque, a unit for force times distance.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OHM'>
+        <xs:annotation>
+          <xs:documentation>
+            Measure of Electrical Resistance
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1994,18 +2021,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='PASCAL_SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of Viscosity
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='PERCENT'>
         <xs:annotation>
           <xs:documentation>
-            A percentage
+            Percentage
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='PH'>
         <xs:annotation>
           <xs:documentation>
-            pH is a measure of hydrogen ion concentration; a measure of the
-            acidity or alkalinity of a solution.
+            A measure of the acidity or alkalinity of a solution
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2019,85 +2052,49 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Seconds
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VOLT'>
-        <xs:annotation>
-          <xs:documentation>
-            The voltage
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='WATT'>
-        <xs:annotation>
-          <xs:documentation>
-            The wattage
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='OHM'>
-        <xs:annotation>
-          <xs:documentation>
-            Electrical resistance
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='SOUND_LEVEL'>
-        <xs:annotation>
-          <xs:documentation>
-            Sound pressure - a sound pressure level of .0002 microbar
+            A measurement of time.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='SIEMENS/METER'>
         <xs:annotation>
           <xs:documentation>
-            Conductivity
+            A measurement of Electrical Conductivity
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='MICRO_RADIAN'>
+      <xs:enumeration value='VOLT'>
         <xs:annotation>
           <xs:documentation>
-            Angular motion for tilt
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PASCAL_SECOND'>
-        <xs:annotation>
-          <xs:documentation>
-            Measure of viscosity
+            Volts
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='VOLT_AMPERE'>
         <xs:annotation>
           <xs:documentation>
-            A volt ampere
+            Volt-Ampere (VA)
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'>
         <xs:annotation>
           <xs:documentation>
-            A volt ampere reactive
+            Volt-Ampere Reactive (VAR)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='WATT'>
+        <xs:annotation>
+          <xs:documentation>
+            Watts
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='WATT_SECOND'>
         <xs:annotation>
           <xs:documentation>
-            A measure of energy equivilent to one Joule or 1/3,600,000 kilowatt
-            hour
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='DECIBEL'>
-        <xs:annotation>
-          <xs:documentation>
-            Sound level 
+            Measurement of electrical energy, equal to one Joule
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2122,14 +2119,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='AMPERE'>
         <xs:annotation>
           <xs:documentation>
-            The electrical current
+            Amps
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='CELSIUS'>
         <xs:annotation>
           <xs:documentation>
-            Degrees Celcius
+            Degrees Celsius
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2137,6 +2134,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A counted event
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DECIBEL'>
+        <xs:annotation>
+          <xs:documentation>
+            Sound Level
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2150,28 +2154,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DEGREE/SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Degrees per second
+            Angular degrees per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='DEGREE/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Degrees per second squared
+            Angular acceleration in degrees per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='HERTZ'>
         <xs:annotation>
           <xs:documentation>
-            Cycles per second
+            Frequency measured in cycles per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='JOULE'>
         <xs:annotation>
           <xs:documentation>
-            A measure of energy
+            A measurement of energy.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2196,6 +2200,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='MICRO_RADIAN'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of Tilt
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='MILLIMETER'>
         <xs:annotation>
           <xs:documentation>
@@ -2213,14 +2224,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MILLIMETER/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Acceleration at millimeters per second squared
+            Acceleration in millimeters per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='MILLIMETER_3D'>
         <xs:annotation>
           <xs:documentation>
-            3D Millimeters
+            A point in space identified by X, Y, and Z positions and represented
+            by a space-delimited set of numbers each expressed in millimeters.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2234,8 +2246,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='NEWTON_METER'>
         <xs:annotation>
           <xs:documentation>
-            A unit for force times distance. The SI units will be used in Newton
-            meters.
+            Torque, a unit for force times distance.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OHM'>
+        <xs:annotation>
+          <xs:documentation>
+            Measure of Electrical Resistance
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2246,18 +2264,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='PASCAL_SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of Viscosity
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='PERCENT'>
         <xs:annotation>
           <xs:documentation>
-            A percentage
+            Percentage
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='PH'>
         <xs:annotation>
           <xs:documentation>
-            pH is a measure of hydrogen ion concentration; a measure of the
-            acidity or alkalinity of a solution.
+            A measure of the acidity or alkalinity of a solution
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2271,106 +2295,70 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Seconds
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VOLT'>
-        <xs:annotation>
-          <xs:documentation>
-            The voltage
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='WATT'>
-        <xs:annotation>
-          <xs:documentation>
-            The wattage
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='OHM'>
-        <xs:annotation>
-          <xs:documentation>
-            Electrical resistance
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='SOUND_LEVEL'>
-        <xs:annotation>
-          <xs:documentation>
-            Sound pressure - a sound pressure level of .0002 microbar
+            A measurement of time.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='SIEMENS/METER'>
         <xs:annotation>
           <xs:documentation>
-            Conductivity
+            A measurement of Electrical Conductivity
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='MICRO_RADIAN'>
+      <xs:enumeration value='VOLT'>
         <xs:annotation>
           <xs:documentation>
-            Angular motion for tilt
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PASCAL_SECOND'>
-        <xs:annotation>
-          <xs:documentation>
-            Measure of viscosity
+            Volts
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='VOLT_AMPERE'>
         <xs:annotation>
           <xs:documentation>
-            A volt ampere
+            Volt-Ampere (VA)
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'>
         <xs:annotation>
           <xs:documentation>
-            A volt ampere reactive
+            Volt-Ampere Reactive (VAR)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='WATT'>
+        <xs:annotation>
+          <xs:documentation>
+            Watts
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='WATT_SECOND'>
         <xs:annotation>
           <xs:documentation>
-            A measure of energy equivilent to one Joule or 1/3,600,000 kilowatt
-            hour
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='DECIBEL'>
-        <xs:annotation>
-          <xs:documentation>
-            Sound level 
+            Measurement of electrical energy, equal to one Joule
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='CENTIPOISE'>
         <xs:annotation>
           <xs:documentation>
-            A measure of viscosity
+            A measure of Viscosity
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='DEGREE/MINUTE'>
         <xs:annotation>
           <xs:documentation>
-            Feedrate in degrees per minute
+            Rotational velocity in degrees per minute
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='FAHRENHEIT'>
         <xs:annotation>
           <xs:documentation>
-            Degrees Fahrenheit
+            Temperature in Fahrenheit
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2398,21 +2386,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='FOOT/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Feet per second
+            Acceleration in feet per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='FOOT_3D'>
         <xs:annotation>
           <xs:documentation>
-            3D Foot
+            A point in space identified by X, Y, and Z positions and represented
+            by a space-delimited set of numbers each expressed in feet.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='GALLON/MINUTE'>
         <xs:annotation>
           <xs:documentation>
-            Gallons per minute
+            Gallons per minute.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2440,91 +2429,120 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='INCH/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Inches per second
+            Acceleration in inches per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='INCH_3D'>
         <xs:annotation>
           <xs:documentation>
-            3D Inches
+            A point in space identified by X, Y, and Z positions and represented
+            by a space-delimited set of numbers each expressed in inches.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='INCH_POUND'>
+        <xs:annotation>
+          <xs:documentation>
+            A measure of torque in inch pounds.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='KELVIN'>
+        <xs:annotation>
+          <xs:documentation>
+            A measurement of temperature
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='KILOWATT'>
         <xs:annotation>
           <xs:documentation>
-            Kilowatts
+            A measurement in kilowatt.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='KILOWATT_HOUR'>
         <xs:annotation>
           <xs:documentation>
-            kilowatt hours
+            Kilowatt hours which is 3.6 mega joules.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LITER'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of volume of a fluid
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LITER/MINUTE'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of rate of flow of a fluid
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='MILLIMETER/MINUTE'>
         <xs:annotation>
           <xs:documentation>
-            Feedrate in millimeters per minute
+            Velocity in millimeters per minute
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='OTHER'>
         <xs:annotation>
           <xs:documentation>
-            Other units (Cannot be converted)
+            Unsupported units
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='POUND'>
         <xs:annotation>
           <xs:documentation>
-            Pounds
+            US pounds
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='POUND/INCH^2'>
         <xs:annotation>
           <xs:documentation>
-            Pressure in pounds per square inch
+            Pressure in pounds per square inch (PSI).
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='RADIAN'>
         <xs:annotation>
           <xs:documentation>
-            Radians
+            Angle in radians
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='RADIAN/MINUTE'>
         <xs:annotation>
           <xs:documentation>
-            Radians per minute
+            Velocity in radians per minute.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='RADIAN/SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Radians per second
+            Velocity in radians per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='RADIAN/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Radians per second
+            Rotational acceleration in radian per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='REVOLUTION/SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Spindle speed in revolutions per Second
+            Rotational velocity in revolution per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2546,21 +2564,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='MACHINE'>
-        <xs:annotation>
-          <xs:documentation>
-             An unchangeable coordinate system that has machine zero as its
-            origin
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='WORK'>
-        <xs:annotation>
-          <xs:documentation>
-            The position that acts as the origin for a particular workpiece
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
+      <xs:enumeration value='MACHINE'/>
+      <xs:enumeration value='WORK'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemResetValueExtType'>
@@ -2583,63 +2588,74 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ACTION_COMPLETE'>
         <xs:annotation>
           <xs:documentation>
-            The item was reset at the beginning of an activity
+            The value of the data entity that is measuring an action or
+            operation is to be reset upon completion of that action or
+            operation.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='ANNUAL'>
         <xs:annotation>
           <xs:documentation>
-            Counter starts at the beginning of a yearly cycle
+            The value of the data entity is to be reset at the end of a 12-month
+            period.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='DAY'>
         <xs:annotation>
           <xs:documentation>
-            Reset every day
+            The value of the data entity is to be reset at the end of a 24-hour
+            period.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LIFE'>
+        <xs:annotation>
+          <xs:documentation>
+            The value of the data item is not reset and accumulates for the
+            entire life of the piece of equipment.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='MAINTENANCE'>
         <xs:annotation>
           <xs:documentation>
-            Reset when Maintainence occurs
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MANUAL'>
-        <xs:annotation>
-          <xs:documentation>
-            Reset manually
+            The value of the data item is to be reset upon completion of a
+            maintenance event.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='MONTH'>
         <xs:annotation>
           <xs:documentation>
-            Counter starts at the beginning of a montly cycle
+            The value of the data entity is to be reset at the end of a monthly
+            period.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='POWER_ON'>
         <xs:annotation>
           <xs:documentation>
-            Count starts at time the machine powers on
+            The value of the data entity is to be reset when power was applied
+            to the piece of equipment after a planned or unplanned interruption
+            of power has occurred.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='SHIFT'>
         <xs:annotation>
           <xs:documentation>
-            Counter starts at the beginning of a shift
+            The value of the data entity is to be reset at the end of a work
+            shift.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='WEEK'>
         <xs:annotation>
           <xs:documentation>
-            Counter starts at the beginning of a weekly cycle
+            The value of the data entity is to be reset at the end of a 7-day
+            period.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>

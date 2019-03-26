@@ -46,7 +46,10 @@ package :Events, 'Event Package' do
              "arraystring" => :StringListEvent }
 
   Glossary.events.each do |event|
-    next unless event.kind_of? :type
+    unless event.kind_of?(:type) and event.name_property != "ALARM"
+      next
+    end
+    
     value_type = facets[event.facet]    
     raise "Cannot find type for #{event.facet}" unless value_type    
     # puts "#{event.name}: #{event.facet} #{value_type}"
