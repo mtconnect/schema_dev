@@ -89,8 +89,9 @@ package :Component, 'Top Level Components Package' do
         parent = pe.name_property.to_sym
       end
     end
-    type component.name_property.to_sym, component.description, parent
+    t = type component.name_property.to_sym, component.description, parent
     if component.has_key?(:kindplural) and component.kindplural == "component"
+      t.abstract
       type component.plural.to_sym, component.description, parent
     end
   end

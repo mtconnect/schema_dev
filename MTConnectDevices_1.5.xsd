@@ -3033,7 +3033,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AuxiliaryType'>
+  <xs:complexType name='AuxiliaryType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3042,7 +3042,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Auxiliary' type='AuxiliaryType' substitutionGroup='CommonComponent'>
+  <xs:element abstract='true' name='Auxiliary' type='AuxiliaryType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3063,7 +3063,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AxisType'>
+  <xs:complexType name='AxisType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3072,7 +3072,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Axis' type='AxisType' substitutionGroup='CommonComponent'>
+  <xs:element abstract='true' name='Axis' type='AxisType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3093,7 +3093,97 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='InterfaceType'>
+  <xs:complexType name='ElectricType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Electric' type='ElectricType' substitutionGroup='System'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LoaderType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AuxiliaryType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Loader' type='LoaderType' substitutionGroup='Auxiliary'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='WasteDisposalType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AuxiliaryType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='WasteDisposal' type='WasteDisposalType' substitutionGroup='Auxiliary'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ToolingDeliveryType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AuxiliaryType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ToolingDelivery' type='ToolingDeliveryType' substitutionGroup='Auxiliary'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='EnvironmentalType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AuxiliaryType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Environmental' type='EnvironmentalType' substitutionGroup='Auxiliary'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='BarFeederType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AuxiliaryType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='BarFeeder' type='BarFeederType' substitutionGroup='Auxiliary'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='InterfaceType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3102,7 +3192,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Interface' type='InterfaceType' substitutionGroup='CommonComponent'>
+  <xs:element abstract='true' name='Interface' type='InterfaceType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3138,7 +3228,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ResourceType'>
+  <xs:complexType name='PathType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ControllerType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Path' type='PathType' substitutionGroup='Controller'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ResourceType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3147,7 +3252,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Resource' type='ResourceType' substitutionGroup='CommonComponent'>
+  <xs:element abstract='true' name='Resource' type='ResourceType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3163,6 +3268,51 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:complexContent>
   </xs:complexType>
   <xs:element name='Resources' type='ResourcesType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='MaterialType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ResourceType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Material' type='MaterialType' substitutionGroup='Resource'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='StockType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='MaterialType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Stock' type='StockType' substitutionGroup='Material'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PersonnelType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ResourceType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Personnel' type='PersonnelType' substitutionGroup='Resource'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3198,7 +3348,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='SystemType'>
+  <xs:complexType name='SystemType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3207,7 +3357,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='CommonComponentType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='System' type='SystemType' substitutionGroup='CommonComponent'>
+  <xs:element abstract='true' name='System' type='SystemType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3249,10 +3399,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='AxisType'/>
+      <xs:extension base='RotaryType'/>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Chuck' type='ChuckType' substitutionGroup='Axis'>
+  <xs:element name='Chuck' type='ChuckType' substitutionGroup='Rotary'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>
@@ -3268,6 +3418,141 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:complexContent>
   </xs:complexType>
   <xs:element name='Door' type='DoorType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='HydraulicType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Hydraulic' type='HydraulicType' substitutionGroup='System'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PneumaticType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Pneumatic' type='PneumaticType' substitutionGroup='System'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='CoolantType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Coolant' type='CoolantType' substitutionGroup='System'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LubricationType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Lubrication' type='LubricationType' substitutionGroup='System'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='EnclosureType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Enclosure' type='EnclosureType' substitutionGroup='System'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ProtectiveType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Protective' type='ProtectiveType' substitutionGroup='System'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ProcessPowerType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ProcessPower' type='ProcessPowerType' substitutionGroup='System'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FeederType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Feeder' type='FeederType' substitutionGroup='System'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DielectricType'>
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Dielectric' type='DielectricType' substitutionGroup='System'>
     <xs:annotation>
       <xs:documentation>
       </xs:documentation>

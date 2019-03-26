@@ -247,17 +247,20 @@ class Schema
         parent = annotation
         annotation = nil
       end
-      @elements << Element.new(@schema, name, annotation, parent, &block)
+      @elements << (e = Element.new(@schema, name, annotation, parent, &block))
+      e
     end
     
     def element(name, annotation, parent = nil, &block)
       element = Element.new(@schema, name, annotation, parent, &block)
       element.force_element = true
       @elements << element
+      element
     end
 
     def basic_type(name, annotation, parent = 'string', attr = false, &block)
-      @basic_types << BasicType.new(@schema, name, annotation, parent, attr, &block)
+      @basic_types << (t = BasicType.new(@schema, name, annotation, parent, attr, &block))
+      t
     end
     
     def attr(name, annotation, parent = 'string', attr = true, &block)
@@ -265,11 +268,13 @@ class Schema
     end
   
     def enum(name, annotation, parent = 'NMTOKEN', attr = true, &block)
-      @enums << ControlledVocabulary.new(@schema, name, annotation, parent, attr, &block)
+      @enums << (e = ControlledVocabulary.new(@schema, name, annotation, parent, attr, &block))
+      e
     end
 
     def attrs(name, annotation = nil, parent = nil, &block)
-      @elements << AttributeGroup.new(@schema, name, annotation, parent, &block)
+      @elements << (g = AttributeGroup.new(@schema, name, annotation, parent, &block))
+      g
     end  
   end
 
