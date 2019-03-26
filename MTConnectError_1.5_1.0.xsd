@@ -1869,7 +1869,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='UnitsTypeEnum'>
     <xs:annotation>
       <xs:documentation>
-        The units supported
+        The units for the measurements. 
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -2103,7 +2103,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='UnitsType'>
     <xs:annotation>
       <xs:documentation>
-        The units supported
+        The units for the measurements. 
       </xs:documentation>
     </xs:annotation>
     <xs:union memberTypes='UnitsTypeEnum UnitsExtType'/>
@@ -2111,8 +2111,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='NativeUnitsTypeEnum'>
     <xs:annotation>
       <xs:documentation>
-        The units supported for the source equipment that can be converted into
-        MTC Units.
+        The units the measurement was originally recorded in. 
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -2551,8 +2550,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='NativeUnitsType'>
     <xs:annotation>
       <xs:documentation>
-        The units supported for the source equipment that can be converted into
-        MTC Units.
+        The units the measurement was originally recorded in. 
       </xs:documentation>
     </xs:annotation>
     <xs:union memberTypes='NativeUnitsTypeEnum UnitsExtType'/>
@@ -2680,7 +2678,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='version' type='VersionType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The document version
+              The protocol version number. This is the major and minor version
+              number of the MTConnect Standard being used. For example, if the
+              version number of the Standard used is 10.21.33, the version
+              mtconnectassets will be 10.21.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -2708,7 +2709,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='sender' type='SenderType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The sender of the message
+              The agent identification information. 
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>

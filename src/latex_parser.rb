@@ -22,7 +22,8 @@ class LatexParser
     @singular = Hash.new
     
     res.elements.each do |e|
-      next unless Latex::GlossaryEntry === e
+      next unless Latex::GlossaryEntry === e and e.has_key?(:category) and
+        e.category == 'model'
 
       if e.kind
         e.kind.each do |k|
@@ -32,11 +33,13 @@ class LatexParser
 
       name = e.name
       @entries[name] = e
+      @entries[e.name_property] = e
+      @entries[e.plural] = e if e.has_key?(:plural)
 
       if e.name_list.length == 1 and e.has_key?(:plural)
         plural = e.plural.downcase
-        
         @entries[plural] = e
+        
         @singular[plural] = name
         @plural[name] = plural
       end

@@ -8,7 +8,7 @@ module Annotation
   def annotation
     unless @checked_glossary
       ln = name.to_s.downcase
-      keys = [ln]
+      keys = [name, ln]
       if @parent
         par = @parent.downcase
         keys.concat(["#{ln} #{par}", "#{Glossary.singular(ln)} #{par}"])
@@ -16,12 +16,19 @@ module Annotation
       keys << Glossary.singular(ln)
       
       keys.each do |key|
-        # puts "Checking #{self.class.name} #{@name} #{key}"
+        #puts "Checking #{self.class.name} #{@name} #{key}"
         e = Glossary[key]
-        if !e.nil? and !e.description.empty? and
-             e.has_key?(:category) and e.category == 'model'
-          # puts "-- found #{self.class.name} #{@name} #{e.name} #{e.description}"
-          @annotation = e.description
+        if !e.nil?  and e.has_key?(:category) and e.category == 'model'
+          if e.has_key?(:descriptionplural) and ln =~ /s$/
+            a = e.descriptionplural
+          end
+          if a.nil? or a.empty?
+            a = e.description
+          end
+          unless a.empty?
+            #puts "-- found #{self.class.name} #{@name} #{e.name} #{a}"
+            @annotation = a
+          end
           break
         end
       end
@@ -460,14 +467,12 @@ class Schema
     def build_hierarchy
       if @parent
         unless @schema.type(@parent)
-          puts "Cannot find parent '#{@parent.inspect}' for '#{self.name}'"
-          exit 9
+          raise "Cannot find parent '#{@parent.inspect}' for '#{self.name}'"          
         end
         @schema.type(@parent).add_child(self)
       end
     rescue
-      puts "Could not add child to '#{@parent.inspect}' for '#{self.name}' "
-      raise
+      raise "Could not add child to '#{@parent.inspect}' for '#{self.name}': #{$!} "
     end
     
     def resolve
