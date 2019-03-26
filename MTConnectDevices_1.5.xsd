@@ -1255,7 +1255,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ACTUAL'>
         <xs:annotation>
           <xs:documentation>
-            The measured amperage being delivered from a power source.
+            The measured value of the data item type given by a sensor or
+            encoder.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1869,7 +1870,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='UnitsTypeEnum'>
     <xs:annotation>
       <xs:documentation>
-        The units for the measurements. 
+        The units supported
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -2103,7 +2104,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='UnitsType'>
     <xs:annotation>
       <xs:documentation>
-        The units for the measurements. 
+        The units supported
       </xs:documentation>
     </xs:annotation>
     <xs:union memberTypes='UnitsTypeEnum UnitsExtType'/>
@@ -2111,7 +2112,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='NativeUnitsTypeEnum'>
     <xs:annotation>
       <xs:documentation>
-        The units the measurement was originally recorded in. 
+        The units supported for the source equipment that can be converted into
+        MTC Units.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -2550,7 +2552,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='NativeUnitsType'>
     <xs:annotation>
       <xs:documentation>
-        The units the measurement was originally recorded in. 
+        The units supported for the source equipment that can be converted into
+        MTC Units.
       </xs:documentation>
     </xs:annotation>
     <xs:union memberTypes='NativeUnitsTypeEnum UnitsExtType'/>
@@ -2730,10 +2733,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='version' type='VersionType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The protocol version number. This is the major and minor version
-          number of the MTConnect Standard being used. For example, if the
-          version number of the Standard used is 10.21.33, the version
-          mtconnectassets will be 10.21.
+          The document version
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -2761,7 +2761,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='sender' type='SenderType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The agent identification information. 
+          The sender of the message
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -2936,7 +2936,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ComponentType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        An abstract component type. This is a placeholder for all components
+        An abstract XML element. Replaced in the XML document by types of
+        component elements representing physical parts and logical functions of
+        a piece of equipment.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -3019,7 +3021,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element abstract='true' name='Component' type='ComponentType'>
     <xs:annotation>
       <xs:documentation>
-        An abstract component type. This is a placeholder for all components
+        An abstract XML element. Replaced in the XML document by types of
+        component elements representing physical parts and logical functions of
+        a piece of equipment.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3170,10 +3174,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='version' type='VersionType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The protocol version number. This is the major and minor version
-              number of the MTConnect Standard being used. For example, if the
-              version number of the Standard used is 10.21.33, the version
-              mtconnectassets will be 10.21.
+              The MTConnect Version this Device implements
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -4408,7 +4409,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='units' type='UnitsType' use='optional'>
       <xs:annotation>
         <xs:documentation>
-          The units for the measurements. 
+          The units
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -4451,8 +4452,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='MaximumType'>
     <xs:annotation>
       <xs:documentation>
-        The maximum value for this measurement. Exceeding this value would
-        indicate the tool is not usable.
+        The maximum value
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4462,16 +4462,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Maximum' type='MaximumType' substitutionGroup='ConstraintLimit'>
     <xs:annotation>
       <xs:documentation>
-        The maximum value for this measurement. Exceeding this value would
-        indicate the tool is not usable.
+        The maximum value
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='MinimumType'>
     <xs:annotation>
       <xs:documentation>
-        The minimum value for this measurement. Exceeding this value would
-        indicate the tool is not usable.
+        The minimum value
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4481,15 +4479,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Minimum' type='MinimumType' substitutionGroup='ConstraintLimit'>
     <xs:annotation>
       <xs:documentation>
-        The minimum value for this measurement. Exceeding this value would
-        indicate the tool is not usable.
+        The minimum value
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='NominalType'>
     <xs:annotation>
       <xs:documentation>
-        The as advertised value for this measurement.
+        The nominal value
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4499,7 +4496,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Nominal' type='NominalType' substitutionGroup='ConstraintLimit'>
     <xs:annotation>
       <xs:documentation>
-        The as advertised value for this measurement.
+        The nominal value
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4864,14 +4861,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='units' type='UnitsType' use='optional'>
       <xs:annotation>
         <xs:documentation>
-          The units for the measurements. 
+          The units of the measurement
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'>
       <xs:annotation>
         <xs:documentation>
-          The units the measurement was originally recorded in. 
+          The units as expressed by the machine
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -4953,23 +4950,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='Minimum' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The minimum value for this measurement. Exceeding this value
-                would indicate the tool is not usable.
+                A minimum value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name='Maximum' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The maximum value for this measurement. Exceeding this value
-                would indicate the tool is not usable.
+                A maximum value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name='Nominal' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The as advertised value for this measurement.
+                A nominal value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>

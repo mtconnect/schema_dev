@@ -33,7 +33,7 @@ class LatexParser
 
       name = e.name
       @entries[name] = e
-      @entries[e.name_property] = e
+      @entries[e.name_property] = e unless e.name_property.start_with?(/[a-z]/)
       @entries[e.plural] = e if e.has_key?(:plural)
 
       if e.name_list.length == 1 and e.has_key?(:plural)

@@ -1256,7 +1256,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ACTUAL'>
         <xs:annotation>
           <xs:documentation>
-            The measured amperage being delivered from a power source.
+            The measured value of the data item type given by a sensor or
+            encoder.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1870,7 +1871,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='UnitsTypeEnum'>
     <xs:annotation>
       <xs:documentation>
-        The units for the measurements. 
+        The units supported
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -2104,7 +2105,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='UnitsType'>
     <xs:annotation>
       <xs:documentation>
-        The units for the measurements. 
+        The units supported
       </xs:documentation>
     </xs:annotation>
     <xs:union memberTypes='UnitsTypeEnum UnitsExtType'/>
@@ -2112,7 +2113,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='NativeUnitsTypeEnum'>
     <xs:annotation>
       <xs:documentation>
-        The units the measurement was originally recorded in. 
+        The units supported for the source equipment that can be converted into
+        MTC Units.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -2551,7 +2553,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='NativeUnitsType'>
     <xs:annotation>
       <xs:documentation>
-        The units the measurement was originally recorded in. 
+        The units supported for the source equipment that can be converted into
+        MTC Units.
       </xs:documentation>
     </xs:annotation>
     <xs:union memberTypes='NativeUnitsTypeEnum UnitsExtType'/>
@@ -2679,10 +2682,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='version' type='VersionType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The protocol version number. This is the major and minor version
-              number of the MTConnect Standard being used. For example, if the
-              version number of the Standard used is 10.21.33, the version
-              mtconnectassets will be 10.21.
+              The document version
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -2710,7 +2710,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='sender' type='SenderType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The agent identification information. 
+              The sender of the message
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -2833,8 +2833,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='removed' type='RemovedType' use='optional'>
       <xs:annotation>
         <xs:documentation>
-          This is an indicator that the Cutting Tool has been removed from the
-          piece of equipment. 
+          This is an optional attribute that is an indicator that the mtconnect
+          asset has been removed from the piece of equipment. If the asset is
+          marked as removed, it will not be visible to the client application
+          unless the=true parameter is provided in the URL. If this attribute is
+          not present it MUST be assumed to be false. The value is an
+          xsi:boolean type and MUST be true or false.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -3108,14 +3112,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='units' type='UnitsType' use='optional'>
       <xs:annotation>
         <xs:documentation>
-          The units for the measurements. 
+          The units of the measurement
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'>
       <xs:annotation>
         <xs:documentation>
-          The units the measurement was originally recorded in. 
+          The units as expressed by the machine
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -3197,23 +3201,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='Minimum' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The minimum value for this measurement. Exceeding this value
-                would indicate the tool is not usable.
+                A minimum value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name='Maximum' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The maximum value for this measurement. Exceeding this value
-                would indicate the tool is not usable.
+                A maximum value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name='Nominal' type='DataItemNumericValueType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The as advertised value for this measurement.
+                A nominal value for this data item.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -3454,7 +3456,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='component' type='NameType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The type of the component
+          An abstract XML element. Replaced in the XML document by types of
+          component elements representing physical parts and logical functions
+          of a piece of equipment.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -4098,8 +4102,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CodeType'>
     <xs:annotation>
       <xs:documentation>
-        A shop specific code for this measurement. ISO 13399 codes MAY be used
-        for these codes as well.
+        DEPRECATED in Version 1.1.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4109,8 +4112,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Code' type='CodeType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        A shop specific code for this measurement. ISO 13399 codes MAY be used
-        for these codes as well.
+        DEPRECATED in Version 1.1.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -5684,7 +5686,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SampleType' abstract='true' mixed='true'>
     <xs:annotation>
       <xs:documentation>
-        An abstract sample
+        A XML element that provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of sample category in the mtconnectdevice document. 
       </xs:documentation>
     </xs:annotation>
     <xs:attributeGroup ref='ObservationType'/>
@@ -5728,7 +5732,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element abstract='true' name='Sample' type='SampleType'>
     <xs:annotation>
       <xs:documentation>
-        An abstract sample
+        A XML element that provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of sample category in the mtconnectdevice document. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -7529,7 +7535,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='WarningType'>
     <xs:annotation>
       <xs:documentation>
-        The point at which a tool life warning will be raised.
+        he item being monitored is moving into the abnormal range and should be
+        observed. No action required at this time.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -7539,7 +7546,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Warning' type='WarningType' substitutionGroup='Condition'>
     <xs:annotation>
       <xs:documentation>
-        The point at which a tool life warning will be raised.
+        he item being monitored is moving into the abnormal range and should be
+        observed. No action required at this time.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -8068,7 +8076,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The manufacturers of the Cutting Item. 
+              An optional attribute referring to the manufacturer(s) of this
+              Cutting Tool, for this element, this will reference the Tool Item
+              and Adaptive Items specifically. 
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -8407,23 +8417,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='maximum' type='MaximumType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The maximum value for this measurement. Exceeding this value would
-              indicate the tool is not usable.
+              The maximum speed this tool may operate at
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='minimum' type='MinimumType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The minimum value for this measurement. Exceeding this value would
-              indicate the tool is not usable.
+              The minimum speed this tool may operate at
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='nominal' type='NominalType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The as advertised value for this measurement.
+              The nominal speed this tool may operate at
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -8441,23 +8449,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='maximum' type='MaximumType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The maximum value for this measurement. Exceeding this value would
-              indicate the tool is not usable.
+              The maximum feed rate this tool may operate at
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='minimum' type='MinimumType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The minimum value for this measurement. Exceeding this value would
-              indicate the tool is not usable.
+              The minimum feed rate this tool may operate at
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='nominal' type='NominalType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The as advertised value for this measurement.
+              The nominal feed rate this tool may operate at
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -8482,14 +8488,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='units' type='UnitsType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The units for the measurements. 
+              The units for the measurement. This will be defined by MTConnect
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The units the measurement was originally recorded in. 
+              The native units for the measurement, if different from units
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -8504,23 +8510,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='maximum' type='MeasurementAttrType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The maximum value for this measurement. Exceeding this value would
-              indicate the tool is not usable.
+              The maximum tolerance value
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='minimum' type='MeasurementAttrType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The minimum value for this measurement. Exceeding this value would
-              indicate the tool is not usable.
+              The minimum tolerance value
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='nominal' type='MeasurementAttrType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The as advertised value for this measurement.
+              The nominal value
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -8884,7 +8888,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='warning' type='ToolLifeValueType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The point at which a tool life warning will be raised.
+              Tool life warning level
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -9251,7 +9255,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='count' type='EdgeCountType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The number of Cutting Items. 
+          A counted event
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>

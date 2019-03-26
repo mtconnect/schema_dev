@@ -26,6 +26,14 @@
   description={}
 }
 
+\newglossaryentry{actual subtype}
+{
+  type= mtc,
+  category=model,
+  name={ACTUAL},
+  kind={subtype}
+  description={The measured value of the data item type given by a sensor or encoder.}
+}
 
 \newglossaryentry{auxiliary}
 {
@@ -1961,17 +1969,6 @@
 }
 
 
-\newglossaryentry{actual amperage sample}
-{
-  type=mtc,
-  category=model,
-  name={ACTUAL},
-  description={The measured amperage being delivered from a power source.},
-  units=\cfont{\gls{ampere}},
-  kind={subtype,sample},
-  facet={\gls{float}}
-}
-
 
 \newglossaryentry{alternating amperage sample}
 {
@@ -2018,18 +2015,6 @@
   description={The measurement of angular position.},
   units=\cfont{\gls{degree}},
   kind={type,sample},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{actual angle sample}
-{
-  type=mtc,
-  category=model,
-  name={ACTUAL},
-  description={The actual angular position as read from the physical component.},
-  units=\cfont{\gls{degree}},
-  kind={subtype,sample},
   facet={\gls{float}}
 }
 
@@ -2082,18 +2067,6 @@
   description={The measurement of the feedrate of a linear axis.},
   units=\cfont{\gls{millimeterpersecond}},
   kind={type,sample},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{actual axisfeedrate sample}
-{
-  type=mtc,
-  category=model,
-  name={ACTUAL},
-  description={The measured value of the feedrate of a linear axis.},
-  units=\cfont{\gls{millimeterpersecond}},
-  kind={subtype,sample},
   facet={\gls{float}}
 }
 
@@ -2465,17 +2438,6 @@
 }
 
 
-\newglossaryentry{actual pathfeedrate sample}
-{
-  type=mtc,
-  category=model,
-  name={ACTUAL},
-  description={The measured value of the feedrate of the axes, or a single axis, associated with a path component.},
-  units=\cfont{\gls{millimeterpersecond}},
-  kind={subtype,sample},
-  facet={\gls{float}}
-}
-
 
 \newglossaryentry{commanded pathfeedrate sample}
 {
@@ -2551,18 +2513,6 @@
 }
 
 
-\newglossaryentry{actual pathposition sample}
-{
-  type=mtc,
-  category=model,
-  name={ACTUAL},
-  description={The measured position of the current program control point as reported by the piece of equipment.},
-  units=\cfont{\gls{millimeter3d}},
-  kind={subtype,sample},
-  facet={\gls{array3d}}
-}
-
-
 \newglossaryentry{commanded pathposition sample}
 {
   type=mtc,
@@ -2621,18 +2571,6 @@
   description={A measured or calculated position of a \gls{component} element as reported by a piece of equipment.},
   units=\cfont{\gls{millimeter}},
   kind={type,sample},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{actual position sample}
-{
-  type=mtc,
-  category=model,
-  name={ACTUAL},
-  description={The physical measured position of the control point for a Component.},
-  units=\cfont{\gls{millimeter}},
-  kind={subtype,sample},
   facet={\gls{float}}
 }
 
@@ -2762,18 +2700,6 @@
 }
 
 
-\newglossaryentry{actual rotaryvelocity sample}
-{
-  type=mtc,
-  category=model,
-  name={ACTUAL},
-  description={The measured value of rotational speed that the rotary axis is spinning. },
-  units=\cfont{\gls{revolutionperminute}},
-  kind={subtype,sample},
-  facet={\gls{float}}
-}
-
-
 \newglossaryentry{commanded rotaryvelocity sample}
 {
   type=mtc,
@@ -2895,18 +2821,6 @@
   units={},
   kind={type,sample},
   facet={}
-}
-
-
-\newglossaryentry{actual spindlespeed sample}
-{
-  type=mtc,
-  category=model,
-  name={ACTUAL},
-  description={The rotational speed of a rotary axis.  ROTARY\_MODE \must be SPINDLE.},
-  units=\cfont{\gls{revolutionperminute}},
-  kind={subtype,sample},
-  facet={\gls{float}}
 }
 
 
@@ -3064,18 +2978,6 @@
 }
 
 
-\newglossaryentry{actual voltage sample}
-{
-  type=mtc,
-  category=model,
-  name={ACTUAL},
-  description={The measured voltage being delivered from a power source.},
-  units=\cfont{\gls{volt}},
-  kind={subtype,sample},
-  facet={\gls{float}}
-}
-
-
 \newglossaryentry{alternating voltage sample}
 {
   type=mtc,
@@ -3121,18 +3023,6 @@
   description={The measurement of power flowing through or dissipated by an electrical circuit or piece of equipment.},
   units=\cfont{\gls{watt}},
   kind={type,sample},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{actual wattage sample}
-{
-  type=mtc,
-  category=model,
-  name={ACTUAL},
-  description={The measured wattage being delivered from a power source.},
-  units=\cfont{\gls{watt}},
-  kind={subtype,sample},
   facet={\gls{float}}
 }
 
