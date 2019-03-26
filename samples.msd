@@ -4,10 +4,10 @@ package :Samples, 'The samples' do
   attr :CountValue, 'The number of items in the list', :integer
   
   basic_type(:FloatSampleValue, 'Common floating point sample value') {
-    union(:'xs:float', :UnavailableValue)
+    union(:float, :UnavailableValue)
   }
   basic_type(:FloatListValue, 'Common floating point sample value') {
-    list(:'xs:float')
+    list(:float)
   }
   basic_type(:ThreeSpaceValue, 'A three dimensional value \'X Y Z\' or \'A B C\'', :FloatListValue) {
     facet('max=3;min=3')
@@ -35,14 +35,6 @@ package :Samples, 'The samples' do
     member :Value, 'A floating ppint value', :ThreeSpaceSampleValue
   end    
 
-  Glossary.samples.each do |sample|
-    if sample.units =~ /3d$/
-      type(sample.elementname.to_sym, sample.description, :ThreeSpaceSample)    
-    else
-      type(sample.elementname.to_sym, sample.description, :CommonSample)    
-    end
-  end
-
   type :AbsTimeSeries, 'The abstract waveform', :Sample do
     abstract
     attribute :SampleCount, 'The number of samples', :CountValue    
@@ -53,10 +45,14 @@ package :Samples, 'The samples' do
     member :Value, 'The time series representation', :FloatListValue
   end
 
-  # Create waveforms for all the samples:
-  self.elements.each do |type|
-    if type.parent == :CommonSample 
-      self.type "#{type.name}TimeSeries".to_sym, "Time series of #{type.annotation}", :TimeSeries
+  Glossary.samples.each do |sample|
+    next unless sample.kind_of?(:type)
+    
+    if sample.facet == "array3d"
+      type(sample.elementname.to_sym, sample.description, :ThreeSpaceSample)    
+    else
+      type(sample.elementname.to_sym, sample.description, :CommonSample)    
+      type("#{sample.elementname}TimeSeries".to_sym, "Time series of #{sample.description}", :TimeSeries)
     end
   end
 end

@@ -5,7 +5,7 @@ require 'set'
 Treetop.load 'src/latex'
 
 class LatexParser
-  attr_reader :events, :samples, :conditions, :subtypes, :entries
+  attr_reader :entries
   
   def parse_glossary(file)
     res = parse(File.read(file))
@@ -15,43 +15,47 @@ class LatexParser
       exit
     end
 
+    @indexes = Hash.new { |h, k| h[k] = [] }        
     @entries = Hash.new
-    @events = []
-    @samples = []
-    @conditions = []
-    @subtypes = []
-
-    uniq = Set.new
+    
     res.elements.each do |e|
       next unless Latex::GlossaryEntry === e
 
-      last = e.name.last
-      len = e.name.length
-      if len == 2
-        case last
-        when 'event'
-          @events << e
-
-        when 'sample'
-          @samples << e
-
-        when 'condition'
-          @conditions << e
+      if e.kind
+        e.kind.each do |k|
+          @indexes[k] << e
         end
-      elsif len == 3 and (last == 'event' or last == 'sample') and
-           !uniq.include?(e.name.first)
-        @subtypes << e
-        uniq << e.name.first
       end
 
       @entries[e.name.join(' ')] = e
     end
 
     puts "Entries: #{@entries.length}"
-    puts "  Events: #{@events.length}"
-    puts "  Samples: #{@samples.length}"
-    puts "  Conditions: #{@conditions.length}"
-    puts "  Subtypes: #{@subtypes.length}"
+    @indexes.each do |kind, list|
+      puts "  #{kind}: #{list.count}"
+    end
+  end
+
+  def method_missing(m, *args, &block)
+    2.times do
+      return @indexes[m] if @indexes.include?(m)
+
+      ms = m.to_s
+      if ms =~ /s$/
+        # de-pluralize
+        sg = ms.sub(/s$/, '').to_sym
+        return @indexes[sg] if @indexes.include?(sg)
+      else
+        # pluralize
+        pl = "#{ms}s".to_sym
+        return @indexes[pl] if @indexes.include?(pl)
+      end
+      
+      ms = ms.downcase
+      m = ms.to_sym
+    end
+    
+    super
   end
 
   def [](key)
@@ -65,6 +69,10 @@ module Latex
     
     def initialize(text, range, elements)
       @elements = elements
+    end
+
+    def inspect
+      "\#<#{self.class.name}: #{@name} #{keys.inspect}>"
     end
 
     def name
@@ -85,11 +93,24 @@ module Latex
     end
 
     def name_property
-      keys[:name]
+      keys[:name].gsub('$', '')
     end
 
+    def kind
+      if !defined? @kind
+        kind = keys[:kind]
+        @kind = kind.split(',').map(&:to_sym) if kind
+      end
+      @kind
+    end
+
+    def kind_of?(k)
+      (kind and @kind.include?(k))
+    end
+    
     def method_missing(method, *args, &block)
       if !keys.include?(method)
+        puts "Cannot find entry: #{@name} #{keys.inspect}"      
         super
       else
         keys[method]

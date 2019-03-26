@@ -301,7 +301,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='AVAILABILITY'>
         <xs:annotation>
           <xs:documentation>
-            Represents the agent’s ability to communicate with the data source.
+            Represents the agents ability to communicate with the data source.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -611,7 +611,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PROGRAM_EDIT'>
         <xs:annotation>
           <xs:documentation>
-            An indication of the status of the controller component’s program
+            An indication of the status of the controller components program
             editing mode. On many controls, a program can be edited while
             another program is currently being executed.
           </xs:documentation>
@@ -737,7 +737,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:documentation>
             The value of the cdata for the event MUST be the assetid of the
             asset that has been added or changed. There will not be a separate
-            message for new assets. 
+            message for new assets.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -990,7 +990,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The measurement of the feedrate for the axes, or a single axis,
-            associated with a path component– a vector.
+            associated with a path component a vector.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1119,7 +1119,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='VISCOSITY'>
         <xs:annotation>
           <xs:documentation>
-            The measurement of a fluid’s resistance to flow.
+            The measurement of a fluids resistance to flow.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1301,7 +1301,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='OVERRIDE'>
         <xs:annotation>
           <xs:documentation>
-            The operator’s overridden value. Percent of commanded. DEPRECATED in
+            The operators overridden value. Percent of commanded. DEPRECATED in
             Version 1.3. See event category category data items.
           </xs:documentation>
         </xs:annotation>
@@ -1367,7 +1367,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Measurement of the time that a piece of equipment is performing any
-            activity – the equipment is active and performing a function under
+            activity the equipment is active and performing a function under
             load or not. Example: For traditional machine tools, this includes
             LOADED, plus rapid moves, tool changes, etc.
           </xs:documentation>
@@ -1775,68 +1775,74 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='MINIMUM'>
-        <xs:annotation>
-          <xs:documentation>
-            The minimum value
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MAXIMUM'>
-        <xs:annotation>
-          <xs:documentation>
-            The maximum value
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value='AVERAGE'>
         <xs:annotation>
           <xs:documentation>
-            The average
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='STANDARD_DEVIATION'>
-        <xs:annotation>
-          <xs:documentation>
-            The standard deviation
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='ROOT_MEAN_SQUARE'>
-        <xs:annotation>
-          <xs:documentation>
-            The root mean square
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MEAN'>
-        <xs:annotation>
-          <xs:documentation>
-            The mean average
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MODE'>
-        <xs:annotation>
-          <xs:documentation>
-            The mode of the sample
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='RANGE'>
-        <xs:annotation>
-          <xs:documentation>
-            The difference between the maximum and minimum value during the
-            calculated period
+            Mathematical Average value calculated for the data item during the
+            calculation period.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='KURTOSIS'>
         <xs:annotation>
           <xs:documentation>
-            In probability theory and statistics, kurtosis is a measure of the
-            &quot;peakedness&quot; of the probability distribution
+            A measure of the peakedness of a probability distribution; i.e., the
+            shape of the distribution curve.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MAXIMUM'>
+        <xs:annotation>
+          <xs:documentation>
+            Maximum or peak value recorded for the data item during the
+            calculation period.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MEDIAN'>
+        <xs:annotation>
+          <xs:documentation>
+            The middle number of a series of numbers.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MINIMUM'>
+        <xs:annotation>
+          <xs:documentation>
+            Minimum value recorded for the data item during the calculation
+            period.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MODE'>
+        <xs:annotation>
+          <xs:documentation>
+            The number in a series of numbers that occurs most often.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='RANGE'>
+        <xs:annotation>
+          <xs:documentation>
+            Difference between the Maximum and Minimum value of a data item
+            during the calculation period. Also represents Peak-to-Peak
+            measurement in a waveform.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ROOT_MEAN_SQUARE'>
+        <xs:annotation>
+          <xs:documentation>
+            Mathematical Root Mean Square (RMS) value calculated for the data
+            item during the calculation period.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='STANDARD_DEVIATION'>
+        <xs:annotation>
+          <xs:documentation>
+            Statistical Standard Deviation value calculated for the data item
+            during the calculation period.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1870,14 +1876,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='AMPERE'>
         <xs:annotation>
           <xs:documentation>
-            The electrical current
+            Amps
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='CELSIUS'>
         <xs:annotation>
           <xs:documentation>
-            Degrees Celcius
+            Degrees Celsius
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1885,6 +1891,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A counted event
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DECIBEL'>
+        <xs:annotation>
+          <xs:documentation>
+            Sound Level
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1898,28 +1911,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DEGREE/SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Degrees per second
+            Angular degrees per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='DEGREE/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Degrees per second squared
+            Angular acceleration in degrees per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='HERTZ'>
         <xs:annotation>
           <xs:documentation>
-            Cycles per second
+            Frequency measured in cycles per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='JOULE'>
         <xs:annotation>
           <xs:documentation>
-            A measure of energy
+            A measurement of energy.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1944,6 +1957,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='MICRO_RADIAN'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of Tilt
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='MILLIMETER'>
         <xs:annotation>
           <xs:documentation>
@@ -1961,14 +1981,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MILLIMETER/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Acceleration at millimeters per second squared
+            Acceleration in millimeters per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='MILLIMETER_3D'>
         <xs:annotation>
           <xs:documentation>
-            3D Millimeters
+            A point in space identified by X, Y, and Z positions and represented
+            by a space-delimited set of numbers each expressed in millimeters.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1982,8 +2003,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='NEWTON_METER'>
         <xs:annotation>
           <xs:documentation>
-            A unit for force times distance. The SI units will be used in Newton
-            meters.
+            Torque, a unit for force times distance.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OHM'>
+        <xs:annotation>
+          <xs:documentation>
+            Measure of Electrical Resistance
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1994,18 +2021,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='PASCAL_SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of Viscosity
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='PERCENT'>
         <xs:annotation>
           <xs:documentation>
-            A percentage
+            Percentage
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='PH'>
         <xs:annotation>
           <xs:documentation>
-            pH is a measure of hydrogen ion concentration; a measure of the
-            acidity or alkalinity of a solution.
+            A measure of the acidity or alkalinity of a solution
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2019,85 +2052,49 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Seconds
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VOLT'>
-        <xs:annotation>
-          <xs:documentation>
-            The voltage
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='WATT'>
-        <xs:annotation>
-          <xs:documentation>
-            The wattage
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='OHM'>
-        <xs:annotation>
-          <xs:documentation>
-            Electrical resistance
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='SOUND_LEVEL'>
-        <xs:annotation>
-          <xs:documentation>
-            Sound pressure - a sound pressure level of .0002 microbar
+            A measurement of time.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='SIEMENS/METER'>
         <xs:annotation>
           <xs:documentation>
-            Conductivity
+            A measurement of Electrical Conductivity
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='MICRO_RADIAN'>
+      <xs:enumeration value='VOLT'>
         <xs:annotation>
           <xs:documentation>
-            Angular motion for tilt
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PASCAL_SECOND'>
-        <xs:annotation>
-          <xs:documentation>
-            Measure of viscosity
+            Volts
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='VOLT_AMPERE'>
         <xs:annotation>
           <xs:documentation>
-            A volt ampere
+            Volt-Ampere (VA)
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'>
         <xs:annotation>
           <xs:documentation>
-            A volt ampere reactive
+            Volt-Ampere Reactive (VAR)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='WATT'>
+        <xs:annotation>
+          <xs:documentation>
+            Watts
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='WATT_SECOND'>
         <xs:annotation>
           <xs:documentation>
-            A measure of energy equivilent to one Joule or 1/3,600,000 kilowatt
-            hour
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='DECIBEL'>
-        <xs:annotation>
-          <xs:documentation>
-            Sound level 
+            Measurement of electrical energy, equal to one Joule
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2122,14 +2119,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='AMPERE'>
         <xs:annotation>
           <xs:documentation>
-            The electrical current
+            Amps
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='CELSIUS'>
         <xs:annotation>
           <xs:documentation>
-            Degrees Celcius
+            Degrees Celsius
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2137,6 +2134,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A counted event
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DECIBEL'>
+        <xs:annotation>
+          <xs:documentation>
+            Sound Level
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2150,28 +2154,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DEGREE/SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Degrees per second
+            Angular degrees per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='DEGREE/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Degrees per second squared
+            Angular acceleration in degrees per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='HERTZ'>
         <xs:annotation>
           <xs:documentation>
-            Cycles per second
+            Frequency measured in cycles per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='JOULE'>
         <xs:annotation>
           <xs:documentation>
-            A measure of energy
+            A measurement of energy.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2196,6 +2200,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='MICRO_RADIAN'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of Tilt
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='MILLIMETER'>
         <xs:annotation>
           <xs:documentation>
@@ -2213,14 +2224,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MILLIMETER/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Acceleration at millimeters per second squared
+            Acceleration in millimeters per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='MILLIMETER_3D'>
         <xs:annotation>
           <xs:documentation>
-            3D Millimeters
+            A point in space identified by X, Y, and Z positions and represented
+            by a space-delimited set of numbers each expressed in millimeters.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2234,8 +2246,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='NEWTON_METER'>
         <xs:annotation>
           <xs:documentation>
-            A unit for force times distance. The SI units will be used in Newton
-            meters.
+            Torque, a unit for force times distance.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OHM'>
+        <xs:annotation>
+          <xs:documentation>
+            Measure of Electrical Resistance
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2246,18 +2264,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='PASCAL_SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of Viscosity
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='PERCENT'>
         <xs:annotation>
           <xs:documentation>
-            A percentage
+            Percentage
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='PH'>
         <xs:annotation>
           <xs:documentation>
-            pH is a measure of hydrogen ion concentration; a measure of the
-            acidity or alkalinity of a solution.
+            A measure of the acidity or alkalinity of a solution
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2271,106 +2295,70 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Seconds
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VOLT'>
-        <xs:annotation>
-          <xs:documentation>
-            The voltage
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='WATT'>
-        <xs:annotation>
-          <xs:documentation>
-            The wattage
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='OHM'>
-        <xs:annotation>
-          <xs:documentation>
-            Electrical resistance
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='SOUND_LEVEL'>
-        <xs:annotation>
-          <xs:documentation>
-            Sound pressure - a sound pressure level of .0002 microbar
+            A measurement of time.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='SIEMENS/METER'>
         <xs:annotation>
           <xs:documentation>
-            Conductivity
+            A measurement of Electrical Conductivity
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='MICRO_RADIAN'>
+      <xs:enumeration value='VOLT'>
         <xs:annotation>
           <xs:documentation>
-            Angular motion for tilt
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PASCAL_SECOND'>
-        <xs:annotation>
-          <xs:documentation>
-            Measure of viscosity
+            Volts
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='VOLT_AMPERE'>
         <xs:annotation>
           <xs:documentation>
-            A volt ampere
+            Volt-Ampere (VA)
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='VOLT_AMPERE_REACTIVE'>
         <xs:annotation>
           <xs:documentation>
-            A volt ampere reactive
+            Volt-Ampere Reactive (VAR)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='WATT'>
+        <xs:annotation>
+          <xs:documentation>
+            Watts
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='WATT_SECOND'>
         <xs:annotation>
           <xs:documentation>
-            A measure of energy equivilent to one Joule or 1/3,600,000 kilowatt
-            hour
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='DECIBEL'>
-        <xs:annotation>
-          <xs:documentation>
-            Sound level 
+            Measurement of electrical energy, equal to one Joule
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='CENTIPOISE'>
         <xs:annotation>
           <xs:documentation>
-            A measure of viscosity
+            A measure of Viscosity
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='DEGREE/MINUTE'>
         <xs:annotation>
           <xs:documentation>
-            Feedrate in degrees per minute
+            Rotational velocity in degrees per minute
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='FAHRENHEIT'>
         <xs:annotation>
           <xs:documentation>
-            Degrees Fahrenheit
+            Temperature in Fahrenheit
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2398,21 +2386,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='FOOT/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Feet per second
+            Acceleration in feet per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='FOOT_3D'>
         <xs:annotation>
           <xs:documentation>
-            3D Foot
+            A point in space identified by X, Y, and Z positions and represented
+            by a space-delimited set of numbers each expressed in feet.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='GALLON/MINUTE'>
         <xs:annotation>
           <xs:documentation>
-            Gallons per minute
+            Gallons per minute.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2440,91 +2429,120 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='INCH/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Inches per second
+            Acceleration in inches per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='INCH_3D'>
         <xs:annotation>
           <xs:documentation>
-            3D Inches
+            A point in space identified by X, Y, and Z positions and represented
+            by a space-delimited set of numbers each expressed in inches.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='INCH_POUND'>
+        <xs:annotation>
+          <xs:documentation>
+            A measure of torque in inch pounds.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='KELVIN'>
+        <xs:annotation>
+          <xs:documentation>
+            A measurement of temperature
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='KILOWATT'>
         <xs:annotation>
           <xs:documentation>
-            Kilowatts
+            A measurement in kilowatt.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='KILOWATT_HOUR'>
         <xs:annotation>
           <xs:documentation>
-            kilowatt hours
+            Kilowatt hours which is 3.6 mega joules.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LITER'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of volume of a fluid
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LITER/MINUTE'>
+        <xs:annotation>
+          <xs:documentation>
+            Measurement of rate of flow of a fluid
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='MILLIMETER/MINUTE'>
         <xs:annotation>
           <xs:documentation>
-            Feedrate in millimeters per minute
+            Velocity in millimeters per minute
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='OTHER'>
         <xs:annotation>
           <xs:documentation>
-            Other units (Cannot be converted)
+            Unsupported units
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='POUND'>
         <xs:annotation>
           <xs:documentation>
-            Pounds
+            US pounds
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='POUND/INCH^2'>
         <xs:annotation>
           <xs:documentation>
-            Pressure in pounds per square inch
+            Pressure in pounds per square inch (PSI).
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='RADIAN'>
         <xs:annotation>
           <xs:documentation>
-            Radians
+            Angle in radians
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='RADIAN/MINUTE'>
         <xs:annotation>
           <xs:documentation>
-            Radians per minute
+            Velocity in radians per minute.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='RADIAN/SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Radians per second
+            Velocity in radians per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='RADIAN/SECOND^2'>
         <xs:annotation>
           <xs:documentation>
-            Radians per second
+            Rotational acceleration in radian per second squared
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='REVOLUTION/SECOND'>
         <xs:annotation>
           <xs:documentation>
-            Spindle speed in revolutions per Second
+            Rotational velocity in revolution per second
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2546,21 +2564,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='MACHINE'>
-        <xs:annotation>
-          <xs:documentation>
-             An unchangeable coordinate system that has machine zero as its
-            origin
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='WORK'>
-        <xs:annotation>
-          <xs:documentation>
-            The position that acts as the origin for a particular workpiece
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
+      <xs:enumeration value='MACHINE'/>
+      <xs:enumeration value='WORK'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemResetValueExtType'>
@@ -2583,63 +2588,74 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ACTION_COMPLETE'>
         <xs:annotation>
           <xs:documentation>
-            The item was reset at the beginning of an activity
+            The value of the data entity that is measuring an action or
+            operation is to be reset upon completion of that action or
+            operation.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='ANNUAL'>
         <xs:annotation>
           <xs:documentation>
-            Counter starts at the beginning of a yearly cycle
+            The value of the data entity is to be reset at the end of a 12-month
+            period.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='DAY'>
         <xs:annotation>
           <xs:documentation>
-            Reset every day
+            The value of the data entity is to be reset at the end of a 24-hour
+            period.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LIFE'>
+        <xs:annotation>
+          <xs:documentation>
+            The value of the data item is not reset and accumulates for the
+            entire life of the piece of equipment.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='MAINTENANCE'>
         <xs:annotation>
           <xs:documentation>
-            Reset when Maintainence occurs
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MANUAL'>
-        <xs:annotation>
-          <xs:documentation>
-            Reset manually
+            The value of the data item is to be reset upon completion of a
+            maintenance event.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='MONTH'>
         <xs:annotation>
           <xs:documentation>
-            Counter starts at the beginning of a montly cycle
+            The value of the data entity is to be reset at the end of a monthly
+            period.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='POWER_ON'>
         <xs:annotation>
           <xs:documentation>
-            Count starts at time the machine powers on
+            The value of the data entity is to be reset when power was applied
+            to the piece of equipment after a planned or unplanned interruption
+            of power has occurred.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='SHIFT'>
         <xs:annotation>
           <xs:documentation>
-            Counter starts at the beginning of a shift
+            The value of the data entity is to be reset at the end of a work
+            shift.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='WEEK'>
         <xs:annotation>
           <xs:documentation>
-            Counter starts at the beginning of a weekly cycle
+            The value of the data entity is to be reset at the end of a 7-day
+            period.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2967,790 +2983,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='AccelerationType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the rate of change of velocity.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Acceleration' type='AccelerationType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the rate of change of velocity.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AccumulatedTimeType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of accumulated time for an activity or event.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='AccumulatedTime' type='AccumulatedTimeType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of accumulated time for an activity or event.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AmperageType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of electrical current.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Amperage' type='AmperageType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of electrical current.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AngleType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of angular position.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Angle' type='AngleType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of angular position.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AngularAccelerationType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement rate of change of angular velocity.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='AngularAcceleration' type='AngularAccelerationType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement rate of change of angular velocity.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AngularVelocityType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the rate of change of angular position.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='AngularVelocity' type='AngularVelocityType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the rate of change of angular position.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AxisFeedrateType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the feedrate of a linear axis.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='AxisFeedrate' type='AxisFeedrateType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the feedrate of a linear axis.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ClockTimeType'>
-    <xs:annotation>
-      <xs:documentation>
-        The value provided by a timing device at a specific point in time.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='ClockTime' type='ClockTimeType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The value provided by a timing device at a specific point in time.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ConcentrationType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the percentage of one component within a mixture of
-        components
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Concentration' type='ConcentrationType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the percentage of one component within a mixture of
-        components
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ConductivityType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the ability of a material to conduct electricity.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Conductivity' type='ConductivityType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the ability of a material to conduct electricity.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='DisplacementType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the change in position of an object.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Displacement' type='DisplacementType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the change in position of an object.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ElectricalEnergyType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of electrical energy consumption by a component.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='ElectricalEnergy' type='ElectricalEnergyType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of electrical energy consumption by a component.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='EquipmentTimerType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the amount of time a piece of equipment or a sub-part
-        of a piece of equipment has performed specific activities.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='EquipmentTimer' type='EquipmentTimerType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the amount of time a piece of equipment or a sub-part
-        of a piece of equipment has performed specific activities.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='FillLevelType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the amount of a substance remaining compared to the
-        planned maximum amount of that substance.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='FillLevel' type='FillLevelType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the amount of a substance remaining compared to the
-        planned maximum amount of that substance.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='FlowType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the rate of flow of a fluid.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Flow' type='FlowType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the rate of flow of a fluid.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='FrequencyType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the number of occurrences of a repeating event per
-        unit time.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Frequency' type='FrequencyType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the number of occurrences of a repeating event per
-        unit time.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='GlobalPositionType'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED in Version 1.1
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='GlobalPosition' type='GlobalPositionType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED in Version 1.1
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='LengthType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the length of an object.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Length' type='LengthType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the length of an object.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='LevelType'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED in Version 1.2. See filllevel sample
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Level' type='LevelType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED in Version 1.2. See filllevel sample
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='LinearForceType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the push or pull introduced by an actuator or exerted
-        on an object.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='LinearForce' type='LinearForceType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the push or pull introduced by an actuator or exerted
-        on an object.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='LoadType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the actual versus the standard rating of a piece of
-        equipment.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Load' type='LoadType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the actual versus the standard rating of a piece of
-        equipment.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='MassType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the mass of an object(s) or an amount of material.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Mass' type='MassType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the mass of an object(s) or an amount of material.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='PathFeedrateType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the feedrate for the axes, or a single axis,
-        associated with a path component– a vector.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='PathFeedrate' type='PathFeedrateType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the feedrate for the axes, or a single axis,
-        associated with a path component– a vector.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='PathPositionType'>
-    <xs:annotation>
-      <xs:documentation>
-        A measured or calculated position of a control point associated with a
-        controller element, or path element if provided, of a piece of
-        equipment.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ThreeSpaceSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='PathPosition' type='PathPositionType' substitutionGroup='ThreeSpaceSample'>
-    <xs:annotation>
-      <xs:documentation>
-        A measured or calculated position of a control point associated with a
-        controller element, or path element if provided, of a piece of
-        equipment.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='PHType'>
-    <xs:annotation>
-      <xs:documentation>
-        A measure of the acidity or alkalinity of a solution
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='PH' type='PHType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        A measure of the acidity or alkalinity of a solution
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='PositionType'>
-    <xs:annotation>
-      <xs:documentation>
-        A measured or calculated position of a component element as reported by
-        a piece of equipment.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Position' type='PositionType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        A measured or calculated position of a component element as reported by
-        a piece of equipment.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='PowerFactorType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the ratio of real power flowing to a load to the
-        apparent power in that AC circuit.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='PowerFactor' type='PowerFactorType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the ratio of real power flowing to a load to the
-        apparent power in that AC circuit.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='PressureType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of force per unit area exerted by a gas or liquid.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Pressure' type='PressureType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of force per unit area exerted by a gas or liquid.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ProcessTimerType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the amount of time a piece of equipment has performed
-        different types of activities associated with the process being
-        performed at that piece of equipment.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='ProcessTimer' type='ProcessTimerType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the amount of time a piece of equipment has performed
-        different types of activities associated with the process being
-        performed at that piece of equipment.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ResistanceType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the degree to which a substance opposes the passage
-        of an electric current.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Resistance' type='ResistanceType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the degree to which a substance opposes the passage
-        of an electric current.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='RotaryVelocityType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the rotational speed of a rotary axis.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='RotaryVelocity' type='RotaryVelocityType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the rotational speed of a rotary axis.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='SoundLevelType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of a sound level or sound pressure level relative to
-        atmospheric pressure.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='SoundLevel' type='SoundLevelType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of a sound level or sound pressure level relative to
-        atmospheric pressure.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='SpindleSpeedType'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='SpindleSpeed' type='SpindleSpeedType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='StrainType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the amount of deformation per unit length of an
-        object when a load is applied.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Strain' type='StrainType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the amount of deformation per unit length of an
-        object when a load is applied.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='TemperatureType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of temperature.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Temperature' type='TemperatureType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of temperature.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='TensionType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of a force that stretches or elongates an object.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Tension' type='TensionType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of a force that stretches or elongates an object.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='TiltType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of angular displacement. 
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Tilt' type='TiltType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of angular displacement. 
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='TorqueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the turning force exerted on an object or by an
-        object.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Torque' type='TorqueType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the turning force exerted on an object or by an
-        object.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='VelocityType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the rate of change of position of a component.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Velocity' type='VelocityType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of the rate of change of position of a component.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ViscosityType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of a fluid’s resistance to flow.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Viscosity' type='ViscosityType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of a fluid’s resistance to flow.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='VoltAmpereType'>
-    <xs:annotation>
-      <xs:documentation>
-        Volt-Ampere (VA)
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='VoltAmpere' type='VoltAmpereType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        Volt-Ampere (VA)
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='VoltAmpereReactiveType'>
-    <xs:annotation>
-      <xs:documentation>
-        Volt-Ampere Reactive (VAR)
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='VoltAmpereReactive' type='VoltAmpereReactiveType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        Volt-Ampere Reactive (VAR)
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='VoltageType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of electrical potential between two points.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Voltage' type='VoltageType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of electrical potential between two points.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='WattageType'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of power flowing through or dissipated by an electrical
-        circuit or piece of equipment.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='CommonSampleType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Wattage' type='WattageType' substitutionGroup='CommonSample'>
-    <xs:annotation>
-      <xs:documentation>
-        The measurement of power flowing through or dissipated by an electrical
-        circuit or piece of equipment.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:complexType name='AbsTimeSeriesType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -3791,6 +3023,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='AccelerationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the rate of change of velocity.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Acceleration' type='AccelerationType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the rate of change of velocity.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='AccelerationTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -3805,6 +3054,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The measurement of the rate of change of velocity.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AccumulatedTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of accumulated time for an activity or event.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AccumulatedTime' type='AccumulatedTimeType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of accumulated time for an activity or event.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3827,6 +3093,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='AmperageType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of electrical current.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Amperage' type='AmperageType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of electrical current.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='AmperageTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -3841,6 +3124,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The measurement of electrical current.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AngleType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of angular position.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Angle' type='AngleType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of angular position.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3861,6 +3161,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='AngularAccelerationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement rate of change of angular velocity.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AngularAcceleration' type='AngularAccelerationType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement rate of change of angular velocity.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='AngularAccelerationTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -3875,6 +3192,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The measurement rate of change of angular velocity.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AngularVelocityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the rate of change of angular position.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AngularVelocity' type='AngularVelocityType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the rate of change of angular position.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3897,6 +3231,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='AxisFeedrateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the feedrate of a linear axis.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AxisFeedrate' type='AxisFeedrateType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the feedrate of a linear axis.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='AxisFeedrateTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -3911,6 +3262,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The measurement of the feedrate of a linear axis.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ClockTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value provided by a timing device at a specific point in time.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ClockTime' type='ClockTimeType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The value provided by a timing device at a specific point in time.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3933,6 +3301,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='ConcentrationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the percentage of one component within a mixture of
+        components
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Concentration' type='ConcentrationType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the percentage of one component within a mixture of
+        components
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='ConcentrationTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -3949,6 +3336,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         Time series of The measurement of the percentage of one component within
         a mixture of components
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ConductivityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the ability of a material to conduct electricity.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Conductivity' type='ConductivityType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the ability of a material to conduct electricity.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3971,6 +3375,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='DisplacementType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the change in position of an object.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Displacement' type='DisplacementType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the change in position of an object.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='DisplacementTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -3985,6 +3406,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The measurement of the change in position of an object.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ElectricalEnergyType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of electrical energy consumption by a component.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ElectricalEnergy' type='ElectricalEnergyType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of electrical energy consumption by a component.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4004,6 +3442,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         Time series of The measurement of electrical energy consumption by a
         component.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='EquipmentTimerType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the amount of time a piece of equipment or a sub-part
+        of a piece of equipment has performed specific activities.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='EquipmentTimer' type='EquipmentTimerType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the amount of time a piece of equipment or a sub-part
+        of a piece of equipment has performed specific activities.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4028,6 +3485,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='FillLevelType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the amount of a substance remaining compared to the
+        planned maximum amount of that substance.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='FillLevel' type='FillLevelType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the amount of a substance remaining compared to the
+        planned maximum amount of that substance.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='FillLevelTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4047,6 +3523,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='FlowType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the rate of flow of a fluid.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Flow' type='FlowType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the rate of flow of a fluid.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='FlowTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4061,6 +3554,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The measurement of the rate of flow of a fluid.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FrequencyType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the number of occurrences of a repeating event per
+        unit time.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Frequency' type='FrequencyType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the number of occurrences of a repeating event per
+        unit time.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4083,6 +3595,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='GlobalPositionType'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED in Version 1.1
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='GlobalPosition' type='GlobalPositionType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED in Version 1.1
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='GlobalPositionTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4097,6 +3626,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of DEPRECATED in Version 1.1
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LengthType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the length of an object.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Length' type='LengthType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the length of an object.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4117,6 +3663,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='LevelType'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED in Version 1.2. See filllevel sample
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Level' type='LevelType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED in Version 1.2. See filllevel sample
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='LevelTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4131,6 +3694,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of DEPRECATED in Version 1.2. See filllevel sample
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LinearForceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the push or pull introduced by an actuator or exerted
+        on an object.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='LinearForce' type='LinearForceType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the push or pull introduced by an actuator or exerted
+        on an object.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4153,6 +3735,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='LoadType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the actual versus the standard rating of a piece of
+        equipment.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Load' type='LoadType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the actual versus the standard rating of a piece of
+        equipment.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='LoadTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4169,6 +3770,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         Time series of The measurement of the actual versus the standard rating
         of a piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='MassType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the mass of an object(s) or an amount of material.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Mass' type='MassType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the mass of an object(s) or an amount of material.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4191,11 +3809,30 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='PathFeedrateType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the feedrate for the axes, or a single axis,
+        associated with a path component a vector.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PathFeedrate' type='PathFeedrateType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the feedrate for the axes, or a single axis,
+        associated with a path component a vector.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='PathFeedrateTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
         Time series of The measurement of the feedrate for the axes, or a single
-        axis, associated with a path component– a vector.
+        axis, associated with a path component a vector.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4206,14 +3843,52 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The measurement of the feedrate for the axes, or a single
-        axis, associated with a path component– a vector.
+        axis, associated with a path component a vector.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PathPositionType'>
+    <xs:annotation>
+      <xs:documentation>
+        A measured or calculated position of a control point associated with a
+        controller element, or path element if provided, of a piece of
+        equipment.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ThreeSpaceSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PathPosition' type='PathPositionType' substitutionGroup='ThreeSpaceSample'>
+    <xs:annotation>
+      <xs:documentation>
+        A measured or calculated position of a control point associated with a
+        controller element, or path element if provided, of a piece of
+        equipment.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PHType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the acidity or alkalinity.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PH' type='PHType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the acidity or alkalinity.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='PHTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of A measure of the acidity or alkalinity of a solution
+        Time series of The measurement of the acidity or alkalinity.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4223,7 +3898,26 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='PHTimeSeries' type='PHTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of A measure of the acidity or alkalinity of a solution
+        Time series of The measurement of the acidity or alkalinity.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PositionType'>
+    <xs:annotation>
+      <xs:documentation>
+        A measured or calculated position of a component element as reported by
+        a piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Position' type='PositionType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        A measured or calculated position of a component element as reported by
+        a piece of equipment.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4246,6 +3940,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='PowerFactorType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the ratio of real power flowing to a load to the
+        apparent power in that AC circuit.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='PowerFactor' type='PowerFactorType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the ratio of real power flowing to a load to the
+        apparent power in that AC circuit.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='PowerFactorTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4265,6 +3978,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='PressureType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of force per unit area exerted by a gas or liquid.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Pressure' type='PressureType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of force per unit area exerted by a gas or liquid.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='PressureTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4281,6 +4011,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         Time series of The measurement of force per unit area exerted by a gas
         or liquid.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ProcessTimerType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the amount of time a piece of equipment has performed
+        different types of activities associated with the process being
+        performed at that piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='ProcessTimer' type='ProcessTimerType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the amount of time a piece of equipment has performed
+        different types of activities associated with the process being
+        performed at that piece of equipment.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4305,6 +4056,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='ResistanceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the degree to which a substance opposes the passage
+        of an electric current.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Resistance' type='ResistanceType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the degree to which a substance opposes the passage
+        of an electric current.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='ResistanceTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4324,6 +4094,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='RotaryVelocityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the rotational speed of a rotary axis.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='RotaryVelocity' type='RotaryVelocityType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the rotational speed of a rotary axis.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='RotaryVelocityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4338,6 +4125,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The measurement of the rotational speed of a rotary axis.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SoundLevelType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of a sound level or sound pressure level relative to
+        atmospheric pressure.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='SoundLevel' type='SoundLevelType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of a sound level or sound pressure level relative to
+        atmospheric pressure.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4360,6 +4166,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='SpindleSpeedType'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='SpindleSpeed' type='SpindleSpeedType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='SpindleSpeedTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4376,6 +4199,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         Time series of DEPRECATED in Version 1.2. Replaced by rotaryvelocity
         sample
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='StrainType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the amount of deformation per unit length of an
+        object when a load is applied.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Strain' type='StrainType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the amount of deformation per unit length of an
+        object when a load is applied.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4398,6 +4240,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='TemperatureType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of temperature.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Temperature' type='TemperatureType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of temperature.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='TemperatureTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4412,6 +4271,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The measurement of temperature.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='TensionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of a force that stretches or elongates an object.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Tension' type='TensionType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of a force that stretches or elongates an object.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4434,6 +4310,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='TiltType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of angular displacement. 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Tilt' type='TiltType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of angular displacement. 
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='TiltTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4448,6 +4341,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Time series of The measurement of angular displacement. 
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='TorqueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the turning force exerted on an object or by an
+        object.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Torque' type='TorqueType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the turning force exerted on an object or by an
+        object.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4470,6 +4382,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='VelocityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the rate of change of position of a component.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Velocity' type='VelocityType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the rate of change of position of a component.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='VelocityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4489,10 +4418,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='ViscosityType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of a fluids resistance to flow.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Viscosity' type='ViscosityType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of a fluids resistance to flow.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='ViscosityTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The measurement of a fluid’s resistance to flow.
+        Time series of The measurement of a fluids resistance to flow.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4502,14 +4448,37 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ViscosityTimeSeries' type='ViscosityTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of The measurement of a fluid’s resistance to flow.
+        Time series of The measurement of a fluids resistance to flow.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='VoltAmpereType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the apparent power in an electrical circuit, equal to
+        the product of root-mean-square (RMS) voltage and RMS current (commonly
+        referred to as VA).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='VoltAmpere' type='VoltAmpereType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of the apparent power in an electrical circuit, equal to
+        the product of root-mean-square (RMS) voltage and RMS current (commonly
+        referred to as VA).
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='VoltAmpereTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of Volt-Ampere (VA)
+        Time series of The measurement of the apparent power in an electrical
+        circuit, equal to the product of root-mean-square (RMS) voltage and RMS
+        current (commonly referred to as VA).
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4519,14 +4488,36 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='VoltAmpereTimeSeries' type='VoltAmpereTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of Volt-Ampere (VA)
+        Time series of The measurement of the apparent power in an electrical
+        circuit, equal to the product of root-mean-square (RMS) voltage and RMS
+        current (commonly referred to as VA).
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='VoltAmpereReactiveType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of reactive power in an AC electrical circuit (commonly
+        referred to as VAR).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='VoltAmpereReactive' type='VoltAmpereReactiveType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of reactive power in an AC electrical circuit (commonly
+        referred to as VAR).
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='VoltAmpereReactiveTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of Volt-Ampere Reactive (VAR)
+        Time series of The measurement of reactive power in an AC electrical
+        circuit (commonly referred to as VAR).
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4536,7 +4527,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='VoltAmpereReactiveTimeSeries' type='VoltAmpereReactiveTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of Volt-Ampere Reactive (VAR)
+        Time series of The measurement of reactive power in an AC electrical
+        circuit (commonly referred to as VAR).
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='VoltageType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of electrical potential between two points.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Voltage' type='VoltageType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of electrical potential between two points.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4556,6 +4565,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         Time series of The measurement of electrical potential between two
         points.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='WattageType'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of power flowing through or dissipated by an electrical
+        circuit or piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommonSampleType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='Wattage' type='WattageType' substitutionGroup='CommonSample'>
+    <xs:annotation>
+      <xs:documentation>
+        The measurement of power flowing through or dissipated by an electrical
+        circuit or piece of equipment.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4586,6 +4614,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:union memberTypes='xs:integer UnavailableValueType'/>
   </xs:simpleType>
+  <xs:simpleType name='FloatEventValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Integer event value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='xs:float UnavailableValueType'/>
+  </xs:simpleType>
   <xs:simpleType name='StringEventValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -4594,17 +4630,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:union memberTypes='xs:string UnavailableValueType'/>
   </xs:simpleType>
-  <xs:simpleType name='AxisNameValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        An axis name
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:pattern value='[a-zA-Z][0-9]?'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='AxisNameListValueType'>
+  <xs:simpleType name='StringListValueType'>
     <xs:annotation>
       <xs:documentation>
         A list of axis names
@@ -4612,17 +4638,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:list>
       <xs:simpleType>
-        <xs:restriction base='AxisNameValueType'/>
+        <xs:restriction base='xs:string'/>
       </xs:simpleType>
     </xs:list>
   </xs:simpleType>
-  <xs:simpleType name='AxisNameListEventValueType'>
+  <xs:simpleType name='StringListEventValueType'>
     <xs:annotation>
       <xs:documentation>
         A list of axis for an event
       </xs:documentation>
     </xs:annotation>
-    <xs:union memberTypes='AxisNameListValueType UnavailableValueType'/>
+    <xs:union memberTypes='StringListValueType UnavailableValueType'/>
   </xs:simpleType>
   <xs:complexType name='EventType' abstract='true' mixed='true'>
     <xs:annotation>
@@ -4661,6 +4687,69 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='StringListEventType'>
+    <xs:annotation>
+      <xs:documentation>
+        An unfaceted string event
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='StringListEventValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='StringListEvent' type='StringListEventType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        An unfaceted string event
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='IntegerEventType'>
+    <xs:annotation>
+      <xs:documentation>
+        An event with an integer value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='IntegerEventValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='IntegerEvent' type='IntegerEventType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        An event with an integer value
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FloatEventType'>
+    <xs:annotation>
+      <xs:documentation>
+        An event with an integer value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='FloatEventValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='FloatEvent' type='FloatEventType' substitutionGroup='Event'>
+    <xs:annotation>
+      <xs:documentation>
+        An event with an integer value
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='ActiveAxesType'>
     <xs:annotation>
       <xs:documentation>
@@ -4669,10 +4758,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='StringListEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ActiveAxes' type='ActiveAxesType' substitutionGroup='StringEvent'>
+  <xs:element name='ActiveAxes' type='ActiveAxesType' substitutionGroup='StringListEvent'>
     <xs:annotation>
       <xs:documentation>
         The set of axes currently associated with a path or controller
@@ -4680,6 +4769,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='ActuatorStateValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for ActuatorState
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTIVE'/>
+      <xs:enumeration value='INACTIVE'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='ActuatorStateType'>
     <xs:annotation>
       <xs:documentation>
@@ -4688,10 +4795,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='ActuatorStateValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ActuatorState' type='ActuatorStateType' substitutionGroup='StringEvent'>
+  <xs:element name='ActuatorState' type='ActuatorStateType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         Represents the operational state of an apparatus for moving or
@@ -4718,23 +4829,65 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='AvailabilityValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for Availability
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='AVAILABLE'/>
+      <xs:enumeration value='UNAVAILABLE'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='AvailabilityType'>
     <xs:annotation>
       <xs:documentation>
-        Represents the agent’s ability to communicate with the data source.
+        Represents the agents ability to communicate with the data source.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='AvailabilityValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Availability' type='AvailabilityType' substitutionGroup='StringEvent'>
+  <xs:element name='Availability' type='AvailabilityType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
-        Represents the agent’s ability to communicate with the data source.
+        Represents the agents ability to communicate with the data source.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='AxisCouplingValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for AxisCoupling
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='TANDEM'/>
+      <xs:enumeration value='SYNCHRONOUS'/>
+      <xs:enumeration value='MASTER'/>
+      <xs:enumeration value='SLAVE'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='AxisCouplingType'>
     <xs:annotation>
       <xs:documentation>
@@ -4744,10 +4897,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='AxisCouplingValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AxisCoupling' type='AxisCouplingType' substitutionGroup='StringEvent'>
+  <xs:element name='AxisCoupling' type='AxisCouplingType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         Describes the way the axes will be associated to each other. This is
@@ -4764,10 +4921,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='FloatEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AxisFeedrateOverride' type='AxisFeedrateOverrideType' substitutionGroup='StringEvent'>
+  <xs:element name='AxisFeedrateOverride' type='AxisFeedrateOverrideType' substitutionGroup='FloatEvent'>
     <xs:annotation>
       <xs:documentation>
         The value of a signal or calculation issued to adjust the feedrate of an
@@ -4775,6 +4932,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='AxisInterlockValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for AxisInterlock
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTIVE'/>
+      <xs:enumeration value='INACTIVE'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='AxisInterlockType'>
     <xs:annotation>
       <xs:documentation>
@@ -4783,10 +4958,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='AxisInterlockValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AxisInterlock' type='AxisInterlockType' substitutionGroup='StringEvent'>
+  <xs:element name='AxisInterlock' type='AxisInterlockType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         An indicator of the state of the axis lockout function when power has
@@ -4794,6 +4973,26 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='AxisStateValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for AxisState
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='HOME'/>
+      <xs:enumeration value='TRAVEL'/>
+      <xs:enumeration value='PARKED'/>
+      <xs:enumeration value='STOPPED'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='AxisStateType'>
     <xs:annotation>
       <xs:documentation>
@@ -4802,10 +5001,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='AxisStateValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='AxisState' type='AxisStateType' substitutionGroup='StringEvent'>
+  <xs:element name='AxisState' type='AxisStateType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         An indicator of the controlled state of a linear or rotary component
@@ -4840,10 +5043,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='IntegerEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='BlockCount' type='BlockCountType' substitutionGroup='StringEvent'>
+  <xs:element name='BlockCount' type='BlockCountType' substitutionGroup='IntegerEvent'>
     <xs:annotation>
       <xs:documentation>
         The total count of the number of blocks of program code that have been
@@ -4851,6 +5054,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='ChuckInterlockValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for ChuckInterlock
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTIVE'/>
+      <xs:enumeration value='INACTIVE'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='ChuckInterlockType'>
     <xs:annotation>
       <xs:documentation>
@@ -4860,10 +5081,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='ChuckInterlockValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ChuckInterlock' type='ChuckInterlockType' substitutionGroup='StringEvent'>
+  <xs:element name='ChuckInterlock' type='ChuckInterlockType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         An indication of the state of an interlock function or control logic
@@ -4872,6 +5097,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='ChuckStateValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for ChuckState
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='OPEN'/>
+      <xs:enumeration value='CLOSED'/>
+      <xs:enumeration value='UNLATCHED'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='ChuckStateType'>
     <xs:annotation>
       <xs:documentation>
@@ -4882,10 +5126,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='ChuckStateValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ChuckState' type='ChuckStateType' substitutionGroup='StringEvent'>
+  <xs:element name='ChuckState' type='ChuckStateType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         An indication of the operating state of a mechanism that holds a part or
@@ -4931,6 +5179,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='ControllerModeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for ControllerMode
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='AUTOMATIC'/>
+      <xs:enumeration value='MANUAL'/>
+      <xs:enumeration value='MANUAL_DATA_INPUT'/>
+      <xs:enumeration value='SEMI_AUTOMATIC'/>
+      <xs:enumeration value='EDIT'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='ControllerModeType'>
     <xs:annotation>
       <xs:documentation>
@@ -4938,16 +5207,38 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='ControllerModeValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ControllerMode' type='ControllerModeType' substitutionGroup='StringEvent'>
+  <xs:element name='ControllerMode' type='ControllerModeType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The current operating mode of the controller component.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='ControllerModeOverrideValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for ControllerModeOverride
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ON'/>
+      <xs:enumeration value='OFF'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='ControllerModeOverrideType'>
     <xs:annotation>
       <xs:documentation>
@@ -4956,10 +5247,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='ControllerModeOverrideValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ControllerModeOverride' type='ControllerModeOverrideType' substitutionGroup='StringEvent'>
+  <xs:element name='ControllerModeOverride' type='ControllerModeOverrideType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         A setting or operator selection that changes the behavior of a piece of
@@ -4974,10 +5269,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='StringListEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='CoupledAxes' type='CoupledAxesType' substitutionGroup='StringEvent'>
+  <xs:element name='CoupledAxes' type='CoupledAxesType' substitutionGroup='StringListEvent'>
     <xs:annotation>
       <xs:documentation>
         Refers to the set of associated axes.
@@ -5001,6 +5296,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='DoorStateValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for DoorState
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='CLOSED'/>
+      <xs:enumeration value='CLOSED'/>
+      <xs:enumeration value='UNLATCHED'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='DoorStateType'>
     <xs:annotation>
       <xs:documentation>
@@ -5008,16 +5322,38 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='DoorStateValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='DoorState' type='DoorStateType' substitutionGroup='StringEvent'>
+  <xs:element name='DoorState' type='DoorStateType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The operational state of a door type component or composition element.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='EmergencyStopValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for EmergencyStop
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ARMED'/>
+      <xs:enumeration value='TRIGGERED'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='EmergencyStopType'>
     <xs:annotation>
       <xs:documentation>
@@ -5027,10 +5363,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='EmergencyStopValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='EmergencyStop' type='EmergencyStopType' substitutionGroup='StringEvent'>
+  <xs:element name='EmergencyStop' type='EmergencyStopType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The current state of the emergency stop signal for a piece of equipment,
@@ -5039,6 +5379,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='EndOfBarValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for EndOfBar
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='YES'/>
+      <xs:enumeration value='NO'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='EndOfBarType'>
     <xs:annotation>
       <xs:documentation>
@@ -5047,10 +5405,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='EndOfBarValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='EndOfBar' type='EndOfBarType' substitutionGroup='StringEvent'>
+  <xs:element name='EndOfBar' type='EndOfBarType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         An indication of whether the end of a piece of bar stock being feed by a
@@ -5058,6 +5420,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='EquipmentModeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for EquipmentMode
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ON'/>
+      <xs:enumeration value='OFF'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='EquipmentModeType'>
     <xs:annotation>
       <xs:documentation>
@@ -5066,10 +5446,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='EquipmentModeValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='EquipmentMode' type='EquipmentModeType' substitutionGroup='StringEvent'>
+  <xs:element name='EquipmentMode' type='EquipmentModeType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         An indication that a piece of equipment, or a sub-part of a piece of
@@ -5085,13 +5469,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:enumeration value='READY'/>
-      <xs:enumeration value='INTERRUPTED'/>
       <xs:enumeration value='ACTIVE'/>
-      <xs:enumeration value='STOPPED'/>
+      <xs:enumeration value='INTERRUPTED'/>
       <xs:enumeration value='FEED_HOLD'/>
-      <xs:enumeration value='PROGRAM_COMPLETED'/>
-      <xs:enumeration value='PROGRAM_STOPPED'/>
+      <xs:enumeration value='STOPPED'/>
       <xs:enumeration value='OPTIONAL_STOP'/>
+      <xs:enumeration value='PROGRAM_STOPPED'/>
+      <xs:enumeration value='PROGRAM_COMPLETED'/>
       <xs:enumeration value='UNAVAILABLE'>
         <xs:annotation>
           <xs:documentation>
@@ -5122,6 +5506,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='FunctionalModeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for FunctionalMode
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='PRODUCTION'/>
+      <xs:enumeration value='SETUP'/>
+      <xs:enumeration value='TEARDOWN'/>
+      <xs:enumeration value='MAINTENANCE'/>
+      <xs:enumeration value='PROCESS_DEVELOPMENT'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='FunctionalModeType'>
     <xs:annotation>
       <xs:documentation>
@@ -5129,10 +5534,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='FunctionalModeValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='FunctionalMode' type='FunctionalModeType' substitutionGroup='StringEvent'>
+  <xs:element name='FunctionalMode' type='FunctionalModeType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The current intended production status of the device or component.
@@ -5146,16 +5555,34 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='FloatEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Hardness' type='HardnessType' substitutionGroup='StringEvent'>
+  <xs:element name='Hardness' type='HardnessType' substitutionGroup='FloatEvent'>
     <xs:annotation>
       <xs:documentation>
         The measurement of the hardness of a material.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='InterfaceStateValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for InterfaceState
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ENABLED'/>
+      <xs:enumeration value='DISABLED'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='InterfaceStateType'>
     <xs:annotation>
       <xs:documentation>
@@ -5165,10 +5592,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='InterfaceStateValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='InterfaceState' type='InterfaceStateType' substitutionGroup='StringEvent'>
+  <xs:element name='InterfaceState' type='InterfaceStateType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The current functional or operational state of an interface type element
@@ -5184,10 +5615,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='FloatEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Line' type='LineType' substitutionGroup='StringEvent'>
+  <xs:element name='Line' type='LineType' substitutionGroup='FloatEvent'>
     <xs:annotation>
       <xs:documentation>
         DEPRECATED in Version 1.4.0.
@@ -5219,10 +5650,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='IntegerEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='LineNumber' type='LineNumberType' substitutionGroup='StringEvent'>
+  <xs:element name='LineNumber' type='LineNumberType' substitutionGroup='IntegerEvent'>
     <xs:annotation>
       <xs:documentation>
         A reference to the position of a block of program code within a control
@@ -5312,10 +5743,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='FloatEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PartCount' type='PartCountType' substitutionGroup='StringEvent'>
+  <xs:element name='PartCount' type='PartCountType' substitutionGroup='FloatEvent'>
     <xs:annotation>
       <xs:documentation>
         The current count of parts produced as represented by the controller
@@ -5368,10 +5799,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='FloatEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PathFeedrateOverride' type='PathFeedrateOverrideType' substitutionGroup='StringEvent'>
+  <xs:element name='PathFeedrateOverride' type='PathFeedrateOverrideType' substitutionGroup='FloatEvent'>
     <xs:annotation>
       <xs:documentation>
         The value of a signal or calculation issued to adjust the feedrate for
@@ -5380,6 +5811,26 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='PathModeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for PathMode
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='INDEPENDENT'/>
+      <xs:enumeration value='MASTER'/>
+      <xs:enumeration value='SYNCHRONOUS'/>
+      <xs:enumeration value='MIRROR'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='PathModeType'>
     <xs:annotation>
       <xs:documentation>
@@ -5390,10 +5841,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='PathModeValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PathMode' type='PathModeType' substitutionGroup='StringEvent'>
+  <xs:element name='PathMode' type='PathModeType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         Describes the operational relationship between a path structural element
@@ -5403,6 +5858,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='PowerStateValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for PowerState
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ON'/>
+      <xs:enumeration value='OFF'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='PowerStateType'>
     <xs:annotation>
       <xs:documentation>
@@ -5413,10 +5886,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='PowerStateValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='PowerState' type='PowerStateType' substitutionGroup='StringEvent'>
+  <xs:element name='PowerState' type='PowerStateType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The indication of the status of the source of energy for a structural
@@ -5481,24 +5958,47 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='ProgramEditValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for ProgramEdit
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTIVE'/>
+      <xs:enumeration value='READY'/>
+      <xs:enumeration value='NOT_READY'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='ProgramEditType'>
     <xs:annotation>
       <xs:documentation>
-        An indication of the status of the controller component’s program
-        editing mode. On many controls, a program can be edited while another
-        program is currently being executed.
+        An indication of the status of the controller components program editing
+        mode. On many controls, a program can be edited while another program is
+        currently being executed.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='ProgramEditValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ProgramEdit' type='ProgramEditType' substitutionGroup='StringEvent'>
+  <xs:element name='ProgramEdit' type='ProgramEditType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
-        An indication of the status of the controller component’s program
-        editing mode. On many controls, a program can be edited while another
-        program is currently being executed.
+        An indication of the status of the controller components program editing
+        mode. On many controls, a program can be edited while another program is
+        currently being executed.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -5540,6 +6040,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='RotaryModeValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for RotaryMode
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='SPINDLE'/>
+      <xs:enumeration value='INDEX'/>
+      <xs:enumeration value='CONTOUR'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='RotaryModeType'>
     <xs:annotation>
       <xs:documentation>
@@ -5547,10 +6066,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='RotaryModeValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='RotaryMode' type='RotaryModeType' substitutionGroup='StringEvent'>
+  <xs:element name='RotaryMode' type='RotaryModeType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         The current operating mode for a Rotary type axis.
@@ -5567,10 +6090,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='FloatEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='RotaryVelocityOverride' type='RotaryVelocityOverrideType' substitutionGroup='StringEvent'>
+  <xs:element name='RotaryVelocityOverride' type='RotaryVelocityOverrideType' substitutionGroup='FloatEvent'>
     <xs:annotation>
       <xs:documentation>
         The value of a command issued to adjust the programmed velocity for a
@@ -5599,6 +6122,24 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='SpindleInterlockValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Controlled vocabulary for SpindleInterlock
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACTIVE'/>
+      <xs:enumeration value='INACTIVE'/>
+      <xs:enumeration value='UNAVAILABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            Value is indeterminate
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='SpindleInterlockType'>
     <xs:annotation>
       <xs:documentation>
@@ -5607,10 +6148,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:restriction base='EventType'>
+        <xs:simpleType>
+          <xs:restriction base='SpindleInterlockValueType'/>
+        </xs:simpleType>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='SpindleInterlock' type='SpindleInterlockType' substitutionGroup='StringEvent'>
+  <xs:element name='SpindleInterlock' type='SpindleInterlockType' substitutionGroup='Event'>
     <xs:annotation>
       <xs:documentation>
         An indication of the status of the spindle for a piece of equipment when
@@ -5685,10 +6230,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='FloatEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ToolOffset' type='ToolOffsetType' substitutionGroup='StringEvent'>
+  <xs:element name='ToolOffset' type='ToolOffsetType' substitutionGroup='FloatEvent'>
     <xs:annotation>
       <xs:documentation>
         A reference to the tool offset variables applied to the active cutting
@@ -5744,10 +6289,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='FloatEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='WorkOffset' type='WorkOffsetType' substitutionGroup='StringEvent'>
+  <xs:element name='WorkOffset' type='WorkOffsetType' substitutionGroup='FloatEvent'>
     <xs:annotation>
       <xs:documentation>
         A reference to the offset variables for a work piece or part associated
@@ -5779,7 +6324,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         The value of the cdata for the event MUST be the assetid of the asset
         that has been added or changed. There will not be a separate message for
-        new assets. 
+        new assets.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -5791,7 +6336,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         The value of the cdata for the event MUST be the assetid of the asset
         that has been added or changed. There will not be a separate message for
-        new assets. 
+        new assets.
       </xs:documentation>
     </xs:annotation>
   </xs:element>

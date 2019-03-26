@@ -66,9 +66,9 @@ package :DataItems, 'Data Items Package' do
         member :Value, 'A possible value for this data item. Used for controlled vocabularies.', 1..INF, :DataItemValueElement
       end
       set do
-        member :Minimum, 'A minimum value for this data item.', :DataItemNumericValue
-        member :Maximum, 'A maximum value for this data item.', :DataItemNumericValue
-        member :Nominal, 'A nominal value for this data item.', :DataItemNumericValue
+        member :Minimum, 'A minimum value for this data item.', 0..1, :DataItemNumericValue
+        member :Maximum, 'A maximum value for this data item.', 0..1, :DataItemNumericValue
+        member :Nominal, 'A nominal value for this data item.', 0..1, :DataItemNumericValue
       end
     end
     member :Filter, 'DEPRECATED: A limit on the amount of data by specifying the minimal delta required.', 0..1, :DataItemFilter

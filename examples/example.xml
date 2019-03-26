@@ -4,13 +4,7 @@
   <Devices>
     <Device id="R0QrwWIpqD" iso841Class="6" name="LinuxCNC" sampleInterval="10" uuid="e993d2dc-a9c7-55eb-9e6c-1a2d35d95902">
       <Description manufacturer="NIST"/>
-      <Configuration>
-		  <Specifications>
-			<Specification type="x:LOCATION_MATRIX" id="JZArubvKT_">
-				<Value>ROW 16 COL 2</Value>
-			</Specification>
-		</Specifications>
-      </Configuration>
+ 
       <DataItems>
         <DataItem category="EVENT" id="avail" type="AVAILABILITY"/>
         <DataItem category="EVENT" id="dev_asset_chg" type="ASSET_CHANGED"/>
