@@ -2907,9 +2907,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='component' type='NameType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          An abstract XML element. Replaced in the XML document by types of
-          component elements representing physical parts and logical functions
-          of a piece of equipment.
+          The type of the component
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>

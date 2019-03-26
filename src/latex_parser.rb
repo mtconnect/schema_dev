@@ -108,7 +108,7 @@ module Latex
     end
 
     def inspect
-      "\#<#{self.class.name}: #{@name} #{keys.inspect}>"
+      "\#<#{self.class.name}: #{name.inspect} #{keys.inspect}>"
     end
 
     def name_list

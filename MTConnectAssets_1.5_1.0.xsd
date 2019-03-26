@@ -2747,47 +2747,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Assets' type='AssetsType'>
         <xs:annotation>
           <xs:documentation>
-             General meaning: Typically referred to as an MTConnect Asset. An
-            MTConnect Asset is something that is used in the manufacturing
-            process, but is not permanently associated with a single piece of
-            equipment, can be removed from the piece of equipment without
-            compromising its function, and can be associated with other pieces
-            of equipment during its lifecycle. Used to identify a storage area
-            in an MTConnect Agent: See description of Buffer. Used as an
-            Information Model: Used to describe an Information Model that
-            contains the rules and terminology that describe information that
-            may be included in electronic documents representing MTConnect
-            Assets. The Assets Information Model defines the structure for the
-            Assets Response Document. Individual Information Models describe the
-            structure of the Asset Documents represent each type of MTConnect
-            Asset. Appears in the documents in the following form: Assets
-            Information Model or (asset type) Information Model. Used when
-            referring to an MTConnect Asset: Refers to the information related
-            to an MTConnect Asset or a group of MTConnect Assets. Appears in the
-            documents in the following form: asset or asset. Used as an XML
-            container or element: itemize item When used as an XML container
-            that consists of one or more types of Asset XML elements. Appears in
-            the documents in the following form: Assets. item When used as an
-            abstract XML element. It is replaced in the XML document by types of
-            Asset elements representing individual Asset entities. Appears in
-            the documents in the following form: asset mtconnectassets. itemize
-            Used to describe information stored in an MTConnect Agent:
-            Identifies an electronic document published by a data source and
-            stored in the assets buffer of an MTConnect Agent. Appears in the
-            documents in the following form: Asset Document. Used as an XML
-            representation of an MTConnect Response document: Identifies an
-            electronic document encoded in XML and published by an MTConnect
-            Agent in response to a Request for information from a client
-            software application relating to MTConnect Assets. Appears in the
-            documents in the following form: mtconnectasset. Used as an
-            MTConnect Request: Represents a specific type of communications
-            request between a client software application and an MTConnect Agent
-            regarding MTConnect Assets. Appears in the documents in the
-            following form: Asset Request. Used as part of an HTTP Request: Used
-            in the path portion of an HTTP Request Line, by a client software
-            application, to initiate an Asset Request to an MTConnect Agent to
-            publish an MTConnectAssets document. Appears in the documents in the
-            following form: asset. 
+            An abstract XML element. Replaced in the XML document by types of
+            asset mtconnectassets elements representing entities that are not
+            pieces of equipment.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2828,44 +2790,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AssetsType'>
     <xs:annotation>
       <xs:documentation>
-         General meaning: Typically referred to as an MTConnect Asset. An
-        MTConnect Asset is something that is used in the manufacturing process,
-        but is not permanently associated with a single piece of equipment, can
-        be removed from the piece of equipment without compromising its
-        function, and can be associated with other pieces of equipment during
-        its lifecycle. Used to identify a storage area in an MTConnect Agent:
-        See description of Buffer. Used as an Information Model: Used to
-        describe an Information Model that contains the rules and terminology
-        that describe information that may be included in electronic documents
-        representing MTConnect Assets. The Assets Information Model defines the
-        structure for the Assets Response Document. Individual Information
-        Models describe the structure of the Asset Documents represent each type
-        of MTConnect Asset. Appears in the documents in the following form:
-        Assets Information Model or (asset type) Information Model. Used when
-        referring to an MTConnect Asset: Refers to the information related to an
-        MTConnect Asset or a group of MTConnect Assets. Appears in the documents
-        in the following form: asset or asset. Used as an XML container or
-        element: itemize item When used as an XML container that consists of one
-        or more types of Asset XML elements. Appears in the documents in the
-        following form: Assets. item When used as an abstract XML element. It is
-        replaced in the XML document by types of Asset elements representing
-        individual Asset entities. Appears in the documents in the following
-        form: asset mtconnectassets. itemize Used to describe information stored
-        in an MTConnect Agent: Identifies an electronic document published by a
-        data source and stored in the assets buffer of an MTConnect Agent.
-        Appears in the documents in the following form: Asset Document. Used as
-        an XML representation of an MTConnect Response document: Identifies an
-        electronic document encoded in XML and published by an MTConnect Agent
-        in response to a Request for information from a client software
-        application relating to MTConnect Assets. Appears in the documents in
-        the following form: mtconnectasset. Used as an MTConnect Request:
-        Represents a specific type of communications request between a client
-        software application and an MTConnect Agent regarding MTConnect Assets.
-        Appears in the documents in the following form: Asset Request. Used as
-        part of an HTTP Request: Used in the path portion of an HTTP Request
-        Line, by a client software application, to initiate an Asset Request to
-        an MTConnect Agent to publish an MTConnectAssets document. Appears in
-        the documents in the following form: asset. 
+        The collection of mobile assets
       </xs:documentation>
     </xs:annotation>
     <xs:choice minOccurs='0' maxOccurs='unbounded'>
@@ -2875,44 +2800,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AssetType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-         General meaning: Typically referred to as an MTConnect Asset. An
-        MTConnect Asset is something that is used in the manufacturing process,
-        but is not permanently associated with a single piece of equipment, can
-        be removed from the piece of equipment without compromising its
-        function, and can be associated with other pieces of equipment during
-        its lifecycle. Used to identify a storage area in an MTConnect Agent:
-        See description of Buffer. Used as an Information Model: Used to
-        describe an Information Model that contains the rules and terminology
-        that describe information that may be included in electronic documents
-        representing MTConnect Assets. The Assets Information Model defines the
-        structure for the Assets Response Document. Individual Information
-        Models describe the structure of the Asset Documents represent each type
-        of MTConnect Asset. Appears in the documents in the following form:
-        Assets Information Model or (asset type) Information Model. Used when
-        referring to an MTConnect Asset: Refers to the information related to an
-        MTConnect Asset or a group of MTConnect Assets. Appears in the documents
-        in the following form: asset or asset. Used as an XML container or
-        element: itemize item When used as an XML container that consists of one
-        or more types of Asset XML elements. Appears in the documents in the
-        following form: Assets. item When used as an abstract XML element. It is
-        replaced in the XML document by types of Asset elements representing
-        individual Asset entities. Appears in the documents in the following
-        form: asset mtconnectassets. itemize Used to describe information stored
-        in an MTConnect Agent: Identifies an electronic document published by a
-        data source and stored in the assets buffer of an MTConnect Agent.
-        Appears in the documents in the following form: Asset Document. Used as
-        an XML representation of an MTConnect Response document: Identifies an
-        electronic document encoded in XML and published by an MTConnect Agent
-        in response to a Request for information from a client software
-        application relating to MTConnect Assets. Appears in the documents in
-        the following form: mtconnectasset. Used as an MTConnect Request:
-        Represents a specific type of communications request between a client
-        software application and an MTConnect Agent regarding MTConnect Assets.
-        Appears in the documents in the following form: Asset Request. Used as
-        part of an HTTP Request: Used in the path portion of an HTTP Request
-        Line, by a client software application, to initiate an Asset Request to
-        an MTConnect Agent to publish an MTConnectAssets document. Appears in
-        the documents in the following form: asset. 
+        An abstract mobile asset
       </xs:documentation>
     </xs:annotation>
     <xs:attribute name='assetId' type='AssetIdType' use='required'>
@@ -2958,44 +2846,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element abstract='true' name='Asset' type='AssetType'>
     <xs:annotation>
       <xs:documentation>
-         General meaning: Typically referred to as an MTConnect Asset. An
-        MTConnect Asset is something that is used in the manufacturing process,
-        but is not permanently associated with a single piece of equipment, can
-        be removed from the piece of equipment without compromising its
-        function, and can be associated with other pieces of equipment during
-        its lifecycle. Used to identify a storage area in an MTConnect Agent:
-        See description of Buffer. Used as an Information Model: Used to
-        describe an Information Model that contains the rules and terminology
-        that describe information that may be included in electronic documents
-        representing MTConnect Assets. The Assets Information Model defines the
-        structure for the Assets Response Document. Individual Information
-        Models describe the structure of the Asset Documents represent each type
-        of MTConnect Asset. Appears in the documents in the following form:
-        Assets Information Model or (asset type) Information Model. Used when
-        referring to an MTConnect Asset: Refers to the information related to an
-        MTConnect Asset or a group of MTConnect Assets. Appears in the documents
-        in the following form: asset or asset. Used as an XML container or
-        element: itemize item When used as an XML container that consists of one
-        or more types of Asset XML elements. Appears in the documents in the
-        following form: Assets. item When used as an abstract XML element. It is
-        replaced in the XML document by types of Asset elements representing
-        individual Asset entities. Appears in the documents in the following
-        form: asset mtconnectassets. itemize Used to describe information stored
-        in an MTConnect Agent: Identifies an electronic document published by a
-        data source and stored in the assets buffer of an MTConnect Agent.
-        Appears in the documents in the following form: Asset Document. Used as
-        an XML representation of an MTConnect Response document: Identifies an
-        electronic document encoded in XML and published by an MTConnect Agent
-        in response to a Request for information from a client software
-        application relating to MTConnect Assets. Appears in the documents in
-        the following form: mtconnectasset. Used as an MTConnect Request:
-        Represents a specific type of communications request between a client
-        software application and an MTConnect Agent regarding MTConnect Assets.
-        Appears in the documents in the following form: Asset Request. Used as
-        part of an HTTP Request: Used in the path portion of an HTTP Request
-        Line, by a client software application, to initiate an Asset Request to
-        an MTConnect Agent to publish an MTConnectAssets document. Appears in
-        the documents in the following form: asset. 
+        An abstract mobile asset
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -8190,7 +8041,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='SerialNumber' type='SerialNumberType'>
             <xs:annotation>
               <xs:documentation>
-                The serial number of the asset
+                The unique identifier for this assembly. This is defined as an
+                XML string type and is implementation dependent.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -8473,7 +8325,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='source' type='SourceType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              A uri representing where to get the cutting tool architype
+              The URL of the cuttingtoolarchetype information model.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -8564,21 +8416,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='maximum' type='MaximumType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The maximum speed this tool may operate at
+              The upper bound for the tools target spindle speed.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='minimum' type='MinimumType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The minimum speed this tool may operate at
+              The lower bound for the tools spindle speed.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='nominal' type='NominalType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The nominal speed this tool may operate at
+              The nominal speed the tool is designed to operate at.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -8596,21 +8448,21 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='maximum' type='MaximumType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The maximum feed rate this tool may operate at
+              The upper bound for the tools process target feedrate.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='minimum' type='MinimumType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The minimum feed rate this tool may operate at
+              The lower bound for the tools feedrate.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='nominal' type='NominalType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The nominal feed rate this tool may operate at
+              The nominal feedrate the tool is designed to operate at.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -8628,21 +8480,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The number of significant digits
+              The number of significant digits in the reported value. This is
+              used by applications to determine accuracy of values. This MAY be
+              specified for all numeric values.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='units' type='UnitsType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The units for the measurement. This will be defined by MTConnect
+              The units for the measurements. 
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The native units for the measurement, if different from units
+              The units the measurement was originally recorded in. 
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -8657,21 +8511,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='maximum' type='MeasurementAttrType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The maximum tolerance value
+              The maximum value for this measurement. Exceeding this value would
+              indicate the tool is not usable.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='minimum' type='MeasurementAttrType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The minimum tolerance value
+              The minimum value for this measurement. Exceeding this value would
+              indicate the tool is not usable.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='nominal' type='MeasurementAttrType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The nominal value
+              The as advertised value for this measurement.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>

@@ -6,19 +6,26 @@ INF = 0xFFFFFFFF
 
 module Annotation
   def annotation
-    unless @check_glossary
-      e = Glossary[name.to_s.downcase]
-      if !e.nil? and !e.description.empty?
-        @annotation = e.description
-      elsif e.nil? and defined? @parent and @parent
-        # puts "Checking: '#{name.to_s.downcase} #{@parent.downcase}'"
-        e = Glossary["#{name.to_s.downcase} #{@parent.downcase}"]
-        if !e.nil? and !e.description.empty?
+    unless @checked_glossary
+      ln = name.to_s.downcase
+      keys = [ln]
+      if @parent
+        par = @parent.downcase
+        keys.concat(["#{ln} #{par}", "#{Glossary.singular(ln)} #{par}"])
+      end
+      keys << Glossary.singular(ln)
+      
+      keys.each do |key|
+        # puts "Checking #{self.class.name} #{@name} #{key}"
+        e = Glossary[key]
+        if !e.nil? and !e.description.empty? and
+             e.has_key?(:category) and e.category == 'model'
+          # puts "-- found #{self.class.name} #{@name} #{e.name} #{e.description}"
           @annotation = e.description
+          break
         end
       end
-      
-      @checked_glossary = true
+      @checked_glossaryed = true
     end
     @annotation
   end
