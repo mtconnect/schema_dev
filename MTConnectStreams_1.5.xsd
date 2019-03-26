@@ -393,7 +393,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='GLOBAL_POSITION'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.1
+            DEPRECATED in Version 1.1
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -407,7 +407,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LEVEL'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.2. See filllevel sample
+            DEPRECATED in Version 1.2. See filllevel sample
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -517,8 +517,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SPINDLE_SPEED'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.2. Replaced by rotaryvelocity
-            sample
+            DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -624,8 +623,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALARM'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED: Replaced with condition category category
-            data items in Version 1.1.0.
+            DEPRECATED: Replaced with condition category category data items in
+            Version 1.1.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -707,7 +706,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CODE'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.1.
+            DEPRECATED in Version 1.1.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -814,7 +813,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.4.0.
+            DEPRECATED in Version 1.4.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -919,7 +918,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POWER_STATUS'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.1.0.
+            DEPRECATED in Version 1.1.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1008,8 +1007,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TOOL_ID'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid event. The
-            identifier of the tool currently in use for a given Path.
+            DEPRECATED in Version 1.2.0. See toolassetid event. The identifier
+            of the tool currently in use for a given Path.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3789,7 +3788,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='GlobalPositionType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.1
+        DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3799,14 +3798,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='GlobalPosition' type='GlobalPositionType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.1
+        DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='GlobalPositionTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED: DEPRECATED in Version 1.1
+        Time series of DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3816,7 +3815,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='GlobalPositionTimeSeries' type='GlobalPositionTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED: DEPRECATED in Version 1.1
+        Time series of DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3857,7 +3856,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='LevelType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.2. See filllevel sample
+        DEPRECATED in Version 1.2. See filllevel sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3867,15 +3866,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Level' type='LevelType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.2. See filllevel sample
+        DEPRECATED in Version 1.2. See filllevel sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='LevelTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED: DEPRECATED in Version 1.2. See filllevel
-        sample
+        Time series of DEPRECATED in Version 1.2. See filllevel sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3885,8 +3883,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='LevelTimeSeries' type='LevelTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED: DEPRECATED in Version 1.2. See filllevel
-        sample
+        Time series of DEPRECATED in Version 1.2. See filllevel sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4362,7 +4359,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SpindleSpeedType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
+        DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4372,15 +4369,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='SpindleSpeed' type='SpindleSpeedType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
+        DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='SpindleSpeedTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED: DEPRECATED in Version 1.2. Replaced by
-        rotaryvelocity sample
+        Time series of DEPRECATED in Version 1.2. Replaced by rotaryvelocity
+        sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4390,8 +4387,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='SpindleSpeedTimeSeries' type='SpindleSpeedTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED: DEPRECATED in Version 1.2. Replaced by
-        rotaryvelocity sample
+        Time series of DEPRECATED in Version 1.2. Replaced by rotaryvelocity
+        sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -5331,7 +5328,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CodeType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.1.
+        DEPRECATED in Version 1.1.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -5341,7 +5338,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Code' type='CodeType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.1.
+        DEPRECATED in Version 1.1.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -5796,7 +5793,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='LineType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.4.0.
+        DEPRECATED in Version 1.4.0.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -5806,7 +5803,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Line' type='LineType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.4.0.
+        DEPRECATED in Version 1.4.0.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6091,7 +6088,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='PowerStatusType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.1.0.
+        DEPRECATED in Version 1.1.0.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6101,7 +6098,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='PowerStatus' type='PowerStatusType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.1.0.
+        DEPRECATED in Version 1.1.0.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6370,8 +6367,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ToolIdType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid event. The
-        identifier of the tool currently in use for a given Path.
+        DEPRECATED in Version 1.2.0. See toolassetid event. The identifier of
+        the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6381,8 +6378,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ToolId' type='ToolIdType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid event. The
-        identifier of the tool currently in use for a given Path.
+        DEPRECATED in Version 1.2.0. See toolassetid event. The identifier of
+        the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6746,8 +6743,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ToolIdDiscreteType'>
     <xs:annotation>
       <xs:documentation>
-        Discrete of DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid
-        event. The identifier of the tool currently in use for a given Path.
+        Discrete of DEPRECATED in Version 1.2.0. See toolassetid event. The
+        identifier of the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6757,8 +6754,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ToolIdDiscrete' type='ToolIdDiscreteType' substitutionGroup='ToolId'>
     <xs:annotation>
       <xs:documentation>
-        Discrete of DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid
-        event. The identifier of the tool currently in use for a given Path.
+        Discrete of DEPRECATED in Version 1.2.0. See toolassetid event. The
+        identifier of the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -7171,8 +7168,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AlarmType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED: Replaced with condition category category data
-        items in Version 1.1.0.
+        DEPRECATED: Replaced with condition category category data items in
+        Version 1.1.0.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -7211,8 +7208,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Alarm' type='AlarmType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: DEPRECATED: Replaced with condition category category data
-        items in Version 1.1.0.
+        DEPRECATED: Replaced with condition category category data items in
+        Version 1.1.0.
       </xs:documentation>
     </xs:annotation>
   </xs:element>

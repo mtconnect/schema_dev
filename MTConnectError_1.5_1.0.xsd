@@ -393,7 +393,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='GLOBAL_POSITION'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.1
+            DEPRECATED in Version 1.1
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -407,7 +407,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LEVEL'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.2. See filllevel sample
+            DEPRECATED in Version 1.2. See filllevel sample
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -517,8 +517,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SPINDLE_SPEED'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.2. Replaced by rotaryvelocity
-            sample
+            DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -624,8 +623,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALARM'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED: Replaced with condition category category
-            data items in Version 1.1.0.
+            DEPRECATED: Replaced with condition category category data items in
+            Version 1.1.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -707,7 +706,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CODE'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.1.
+            DEPRECATED in Version 1.1.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -814,7 +813,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.4.0.
+            DEPRECATED in Version 1.4.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -919,7 +918,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POWER_STATUS'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.1.0.
+            DEPRECATED in Version 1.1.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1008,8 +1007,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TOOL_ID'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid event. The
-            identifier of the tool currently in use for a given Path.
+            DEPRECATED in Version 1.2.0. See toolassetid event. The identifier
+            of the tool currently in use for a given Path.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>

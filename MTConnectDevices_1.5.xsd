@@ -393,7 +393,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='GLOBAL_POSITION'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.1
+            DEPRECATED in Version 1.1
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -407,7 +407,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LEVEL'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.2. See filllevel sample
+            DEPRECATED in Version 1.2. See filllevel sample
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -517,8 +517,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SPINDLE_SPEED'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.2. Replaced by rotaryvelocity
-            sample
+            DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -624,8 +623,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALARM'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED: Replaced with condition category category
-            data items in Version 1.1.0.
+            DEPRECATED: Replaced with condition category category data items in
+            Version 1.1.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -707,7 +706,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CODE'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.1.
+            DEPRECATED in Version 1.1.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -814,7 +813,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.4.0.
+            DEPRECATED in Version 1.4.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -919,7 +918,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POWER_STATUS'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.1.0.
+            DEPRECATED in Version 1.1.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1008,8 +1007,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TOOL_ID'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid event. The
-            identifier of the tool currently in use for a given Path.
+            DEPRECATED in Version 1.2.0. See toolassetid event. The identifier
+            of the tool currently in use for a given Path.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3369,6 +3368,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='InterfaceType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
+         General meaning: The exchange of information between pieces of
+        equipment and/or software systems. Appears in the documents in the
+        following form: interface. Used as an Interaction Model: An Interaction
+        Model that describes a method for inter-operations between pieces of
+        equipment. Appears in the documents in the following form: Interface.
+        Used as an XML container or element: itemize item When used as an XML
+        container that consists of one or more types of Interface XML elements.
+        Appears in the documents in the following form: Interfaces. item When
+        used as an abstract XML element. It is replaced in the XML document by
+        types of Interface elements. Appears in the documents in the following
+        form: Interface. itemize 
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3378,12 +3388,34 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element abstract='true' name='Interface' type='InterfaceType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
+         General meaning: The exchange of information between pieces of
+        equipment and/or software systems. Appears in the documents in the
+        following form: interface. Used as an Interaction Model: An Interaction
+        Model that describes a method for inter-operations between pieces of
+        equipment. Appears in the documents in the following form: Interface.
+        Used as an XML container or element: itemize item When used as an XML
+        container that consists of one or more types of Interface XML elements.
+        Appears in the documents in the following form: Interfaces. item When
+        used as an abstract XML element. It is replaced in the XML document by
+        types of Interface elements. Appears in the documents in the following
+        form: Interface. itemize 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='InterfacesType'>
     <xs:annotation>
       <xs:documentation>
+         General meaning: The exchange of information between pieces of
+        equipment and/or software systems. Appears in the documents in the
+        following form: interface. Used as an Interaction Model: An Interaction
+        Model that describes a method for inter-operations between pieces of
+        equipment. Appears in the documents in the following form: Interface.
+        Used as an XML container or element: itemize item When used as an XML
+        container that consists of one or more types of Interface XML elements.
+        Appears in the documents in the following form: Interfaces. item When
+        used as an abstract XML element. It is replaced in the XML document by
+        types of Interface elements. Appears in the documents in the following
+        form: Interface. itemize 
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3393,6 +3425,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Interfaces' type='InterfacesType' substitutionGroup='CommonComponent'>
     <xs:annotation>
       <xs:documentation>
+         General meaning: The exchange of information between pieces of
+        equipment and/or software systems. Appears in the documents in the
+        following form: interface. Used as an Interaction Model: An Interaction
+        Model that describes a method for inter-operations between pieces of
+        equipment. Appears in the documents in the following form: Interface.
+        Used as an XML container or element: itemize item When used as an XML
+        container that consists of one or more types of Interface XML elements.
+        Appears in the documents in the following form: Interfaces. item When
+        used as an abstract XML element. It is replaced in the XML document by
+        types of Interface elements. Appears in the documents in the following
+        form: Interface. itemize 
       </xs:documentation>
     </xs:annotation>
   </xs:element>

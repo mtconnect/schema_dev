@@ -8,9 +8,16 @@ module Annotation
   def annotation
     unless @check_glossary
       e = Glossary[name.to_s.downcase]
-      unless e.nil? or e.description.empty?
+      if !e.nil? and !e.description.empty?
         @annotation = e.description
+      elsif e.nil? and defined? @parent and @parent
+        # puts "Checking: '#{name.to_s.downcase} #{@parent.downcase}'"
+        e = Glossary["#{name.to_s.downcase} #{@parent.downcase}"]
+        if !e.nil? and !e.description.empty?
+          @annotation = e.description
+        end
       end
+      
       @checked_glossary = true
     end
     @annotation
@@ -457,7 +464,7 @@ class Schema
     end
     
     def resolve
-      @members.each { |m| m.resolve }
+      @members.each { |m| m.resolve(self.name) }
     end
   end
 
@@ -538,7 +545,8 @@ class Schema
       type and type.is_a? Element and type.polymorphic? and (type.subtype? or type.has_subtypes?)
     end
     
-    def resolve
+    def resolve(owner)
+      @parent = owner
     end
   end
 
@@ -599,7 +607,8 @@ class Schema
     end
     
     # Add all the members for the type and all the subtypes
-    def resolve
+    def resolve(owner)
+      super
       type = @schema.type(base)      
       children = type.children(true)
       children.each do |child|

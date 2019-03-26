@@ -33,7 +33,7 @@ class LatexParser
       name = e.name
       @entries[name] = e
 
-      if e.has_key?(:plural)
+      if e.name_list.length == 1 and e.has_key?(:plural)
         plural = e.plural.downcase
         
         @entries[plural] = e
@@ -87,7 +87,8 @@ class LatexParser
       ms = plural(s.to_s).to_sym
       return @indexes[ms] if @indexes.include?(ms)
     end
-    
+
+    puts "Cannot resovle '#{m}', tried '#{plural(m.to_s)}' and '#{singular(m.to_s)}'"
     super
   end
 
@@ -128,8 +129,9 @@ module Latex
       if respond_to? :long_description
         kys[:description] = long_description.value
       end
-      if kys.include?(:description) and kys.include?(:deprecated)
-        kys[:description] = "DEPRECATED: #{kys[:description]}"
+      if kys.include?(:description) and kys.include?(:deprecated) and
+            kys[:description] !~ /^DEPRECATED/
+        kys[:description] = "DEPRECATED: #{kys[:description]}" 
       end
       kys
     end

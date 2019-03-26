@@ -159,14 +159,6 @@
 }
 
 
-\newglossaryentry{buffer}
-{
-  type=mtc,
-  name=buffer,
-  description={a set of entities that are stored in memory often limited in size}
-}
-
-
 \newglossaryentry{buffersize}
 {
   type=mtc,
@@ -215,15 +207,6 @@
 }
 
 
-\newglossaryentry{cdata}
-{
-  type=mtc,
-  category=code,
-  name=CDATA,
-  description={The blocks of text that are not parsed by the parser, but are otherwise recognized as markup. The predefined entities such as \&lt;, \&gt;, and \&amp; require typing and are generally difficult to read in the markup}
-}
-
-
 \newglossaryentry{channel}
 {
   type=mtc,
@@ -247,14 +230,6 @@
   description={See \gls{cdata}}
 }
 
-
-\newglossaryentry{child element}
-{
-  type=mtc,
-  name={Child Element},
-  plural={Child Elements},
-  description={}
-}
 
 
 \newglossaryentry{component}
@@ -352,15 +327,6 @@
 }
 
 
-\newglossaryentry{controlled vocabulary}
-{
-  type=mtc,
-  name={Controlled Vocabulary},
-  plural= {Controlled Vocabularies},
-  description= {A restricted set of values that may be published as the \gls{valid data value} for a \gls{data entity}.}
-}
-
-
 \newglossaryentry{configuration}
 {
   type=mtc,
@@ -394,15 +360,6 @@
   category=code,
   name={current},
   description={}
-}
-
-
-\newglossaryentry{data entity}
-{
-  type=mtc,
-  name={Data Entity},
-  plural={Data Entities},
-  description={A primary data modeling element that represents all elements that either describe data items that may be reported by an \gls{agent} or the data items that contain the actual data published by an \gls{agent}.}
 }
 
 
@@ -440,12 +397,6 @@
   description={}
 }
 
-\newglossaryentry{deprecated}
-{
-  type=mtc,
-  name={deprecated},
-  description={Deprecated Element}
-}
 
 \newglossaryentry{description}
 {
@@ -471,15 +422,6 @@
   descriptionplural={The first, or highest level, \gls{structural element} in a \glspl{mtconnectdevice} document.},
   elementsplural={\gls{device}},
   kindplural={element}
-}
-
-
-\newglossaryentry{device information model}
-{
-  type=mtc,
-  name={Device Information Model},
-  plural={Devices Information Model},
-  description={A set of rules and terms that describes the physical and logical configuration for a piece of equipment and the data that may be reported by that equipment.}
 }
 
 
@@ -520,21 +462,6 @@
 }
 
 
-\newglossaryentry{element}
-{
-  name={Element},
-  plural={Elements},
-  description= {An element that defines a set of common characteristics that are shared by a group of elements.}
-}
-
-
-\newglossaryentry{element name}
-{
-  name={Element Name},
-  plural={Element Names},
-  description= {An element that defines a set of common characteristics that are shared by a group of elements.}
-}
-
 
 \newglossaryentry{event}
 {
@@ -544,15 +471,6 @@
   plural={Events},
   description={A XML element which provides the information and data reported from a piece of equipment for those \gls{dataitem} elements defined with a \gls{category} attribute of \gls{event category} in the \glspl{mtconnectdevice} document.},
   descriptionplural={A XML container type element that organizes the data reported in the \glspl{mtconnectstream} document for \gls{dataitem} elements defined in the \glspl{mtconnectdevice} document with a \gls{category} attribute of \gls{event category}.}
-}
-
-
-\newglossaryentry{fault state}
-{
-  type=mtc,
-  name={Fault State},
-  plural={Fault States},
-  description={}
 }
 
 
@@ -632,15 +550,6 @@
   kind={component},
   plural={Interfaces},
   kindplural={component},
-  description={}
-}
-
-
-\newglossaryentry{interface}
-{
-  type=mtc,
-  name={Interface},
-  plural={Interfaces},
   description={}
 }
 
@@ -870,12 +779,6 @@
 }
 
 
-\newglossaryentry{nmtoken}
-{
-  name={NMTOKEN},
-  description={}
-}
-
 
 \newglossaryentry{nominal}
 {
@@ -909,14 +812,6 @@
   type=mtc,
   name=ontology,
   description={logical structure of the terms used to describe a domain of knowledge, including both the definitions of the applicable terms and their relationships ISO 20534:2018}
-}
-
-
-\newglossaryentry{parent element}
-{
-  type=mtc,
-  name={Parent Element},
-  description={}
 }
 
 
@@ -1069,8 +964,8 @@
   type=mtc,
   category=code,
   name={Power},
-    deprecated=true,
   kind={component},
+  deprecated={true},
   description={}
 }
 
@@ -1114,13 +1009,6 @@
   description={}
 }
 
-
-\newglossaryentry{request}
-{
-  type=mtc,
-  name={Request},
-  description={}
-}
 
 
 \newglossaryentry{rotary}
@@ -1265,15 +1153,6 @@
 }
 
 
-\newglossaryentry{sequence number}
-{
-  type=mtc,
-  name={sequence number},
-  plural={sequence numbers},
-  description={}
-}
-
-
 \newglossaryentry{significantdigits}
 {
   type=mtc,
@@ -1339,23 +1218,6 @@
   plural={Streams},
   description={},
   descriptionplural= {The first, or highest, level XML container element in an \glspl{mtconnectstream} \gls{response} Document provided by an \gls{agent} in response to a \gls{sample httprequest} or \gls{current httprequest} HTTP \gls{request}.}
-}
-
-
-\newglossaryentry{streams information model}
-{
-  type=mtc,
-  name={Streams Information Model},
-  description={}
-}
-
-
-\newglossaryentry{structural element}
-{
-  type=mtc,
-  name={Structural Element},
-  plural={Structural Elements},
-  description={An XML element that organizes information that represents the physical and logical parts and sub-parts of a piece of equipment.}
 }
 
 
@@ -1451,13 +1313,6 @@
   description={}
 }
 
-
-\newglossaryentry{valid data value}
-{
-  type=mtc,
-  name={Valid Data Value},
-  description={}
-}
 
 
 \newglossaryentry{value}
@@ -2274,7 +2129,7 @@
   name={OVERRIDE},
   description={The operators overridden value. Percent of commanded.  DEPRECATED in Version 1.3.   See \gls{event category} category data items.},
   units=\cfont{\gls{percent}},
-    deprecated=true,
+  deprecated={true},
   kind={subtype,sample},
   facet={\gls{float}}
 }
@@ -2488,8 +2343,8 @@
   name=\deprecated{GLOBAL\_POSITION},
   elementname=\deprecated{\cfont{GlobalPosition}},
   description={DEPRECATED in Version 1.1},
+  deprecated={true},
   units={},
-    deprecated=true,
   kind={type,sample},
   facet={}
 }
@@ -2551,8 +2406,8 @@
   name={LEVEL},
   elementname=\cfont{Level},
   description={DEPRECATED in Version 1.2.  See \gls{filllevel sample}},
+  deprecated={true},
   units={},
-    deprecated=true,
   kind={type,sample},
   facet={}
 }
@@ -2653,8 +2508,8 @@
   name={OVERRIDE},
   description={The operators overridden value.  Percent of commanded. DEPRECATED in Version 1.3.   See \gls{event category} category \glspl{dataitem}.},
   units=\cfont{\gls{percent}},
-    deprecated=true,
   kind={subtype,sample},
+  deprecated={true},
   facet={\gls{float}}
 }
 
@@ -2938,7 +2793,7 @@
   name={OVERRIDE},
   description={The operators overridden value.  Percent of commanded. DEPRECATED in Version 1.3.   See \gls{event category} category \glspl{dataitem}.},
   units=\cfont{\gls{percent}},
-    deprecated=true,
+  deprecated={true},
   kind={subtype,sample},
   facet={\gls{float}}
 }
@@ -3036,8 +2891,8 @@
   name={\deprecated{SPINDLE\_SPEED}},
   elementname=\deprecated{\cfont{SpindleSpeed}},
   description={DEPRECATED in Version 1.2.  Replaced by \gls{rotaryvelocity sample}},
+  deprecated={true},
   units={},
-    deprecated=true,
   kind={type,sample},
   facet={}
 }
@@ -3326,7 +3181,7 @@
   name=\deprecated{ALARM},
   elementname=\deprecated{\cfont{Alarm}},
   description={DEPRECATED: Replaced with \gls{condition category} category data items in Version 1.1.0.},
-    deprecated=true,
+  deprecated={true},
   kind={type,event},
   facet={}
 }
@@ -3498,7 +3353,7 @@
   name=\deprecated{CODE},
   elementname=\deprecated{\cfont{Code}},
   description={DEPRECATED in Version 1.1.},
-    deprecated=true,
+  deprecated={true},
   kind={type,event},
   facet={}
 }
@@ -3970,7 +3825,7 @@
   name=\deprecated{LINE},
   elementname=\deprecated{\cfont{Line}},
   description={DEPRECATED in Version 1.4.0.},
-    deprecated=true,
+  deprecated={true},
   kind={type,event},
   facet={}
 }
@@ -4286,7 +4141,7 @@
   name=\deprecated{POWER\_STATUS},
   elementname=\deprecated{\cfont{PowerStatus}},
   description={DEPRECATED in Version 1.1.0.},
-    deprecated=true,
+  deprecated={true},
   kind={type,event},
   facet={}
 }
@@ -4422,7 +4277,7 @@
   name={TOOL\_ID},
   elementname=\cfont{ToolId},
   description={DEPRECATED in Version 1.2.0.   See \gls{toolassetid event}. \deprecated{The identifier of the tool currently in use for a given Path.}},
-    deprecated=true,
+  deprecated={true},
   kind={type,event},
   facet={}
 }
@@ -6269,15 +6124,6 @@
 }
 
 
-\newglossaryentry{information model}
-{
-  type=mtc,
-  name={Information Model},
-  plural={Information Models},
-  description={}
-}
-
-
 \newglossaryentry{cutterstatus}
 {
   type=mtc,
@@ -6382,7 +6228,7 @@
   type=mtc,
   category=code,
   name=\deprecated{CuttingToolDefinition},
-  kind={deprecated},
+  deprecated={true},
   description={\DEPRECATED for \gls{cuttingtool} in Version 1.3.0.   \newline \deprecated{Reference to an ISO 13399.}}
 }
 
@@ -7294,14 +7140,6 @@
 }
 
 
-\newglossaryentry{interaction model}
-{
-  type=mtc,
-  name={Interaction Model},
-  description={}
-}
-
-
 \newglossaryentry{publish}
 {
   type=mtc,
@@ -7317,21 +7155,6 @@
   description={}
 }
 
-
-\newglossaryentry{requester}
-{
-  type=mtc,
-  name={Requester},
-  description={}
-}
-
-
-\newglossaryentry{responder}
-{
-  type=mtc,
-  name={Responder},
-  description={}
-}
 
 
 \newglossaryentry{fail value}
@@ -7530,6 +7353,7 @@
 
 \newglossaryentry{integer}
 {
+  type=mtc,
   name={integer},
   description={},
   kind={facet}
@@ -7538,6 +7362,7 @@
 
 \newglossaryentry{string}
 {
+  type=mtc,
   name={string},
   description={},
   kind={facet}
@@ -7546,6 +7371,7 @@
 
 \newglossaryentry{float}
 {
+  type=mtc,
   name={float},
   description={},
   kind={facet}
@@ -7554,6 +7380,7 @@
 
 \newglossaryentry{boolean}
 {
+  type=mtc,
   name={boolean},
   description={},
   kind={facet}
@@ -7562,15 +7389,8 @@
 
 \newglossaryentry{datetime}
 {
+  type=mtc,
   name={datetime},
-  description={},
-  kind={facet}
-}
-
-
-\newglossaryentry{url}
-{
-  name={url},
   description={},
   kind={facet}
 }
@@ -7578,6 +7398,7 @@
 
 \newglossaryentry{array3d}
 {
+  type=mtc,
   name={array3d},
   description={},
   kind={facet},
@@ -7586,6 +7407,7 @@
 
 \newglossaryentry{arraystring}
 {
+  type=mtc,
   name={arraystring},
   description={},
   kind={facet},
@@ -7737,8 +7559,8 @@
 
 \longnewglossaryentry{attribute}
 {
-  name={attribute},
-  plural={attributes}
+  name={Attribute},
+  plural={Attributes}
 }
 {
   A term that is used to provide additional information or properties for an element.
@@ -7756,5 +7578,1430 @@
 
   Appears in the documents in the following form: Base Functional Structure.
 }
+
+\longnewglossaryentry{buffer}
+{
+  name={buffer}
+}
+{
+  \ulheading{General meaning}:
+
+  A section of an MTConnect Agent that provides storage for information published from pieces of equipment.
+
+  \ulheading{Used relative to Streaming Data}:
+
+  A section of an MTConnect Agent that provides storage for information relating to individual pieces of Streaming Data. 
+  
+  Appears in the documents in the following form: buffer.
+
+  \ulheading{Used relative to MTConnect Assets}:
+
+  A section of an MTConnect Agent that provides storage for Asset Documents.
+
+  Appears in the documents in the following form: assets buffer.
+}
+
+\longnewglossaryentry{cdata}
+{
+  name={CDATA}
+}
+{
+  \ulheading{General meaning}:
+
+  An abbreviation for Character Data.
+
+  CDATA is used to describe a value (text or data) published as part of an XML element.
+
+  For example, "This is some text" is the CDATA in the XML element:
+  
+  <Message ...>This is some text</Message>
+
+  Appears in the documents in the following form: CDATA
+}
+
+
+\longnewglossaryentry{child element}
+{
+  name={Child Element},
+  plural={Child Elements}
+}
+{
+  A portion of a data modeling structure that illustrates the relationship between an element and the higher-level Parent Element within which it is contained.
+  
+  Appears in the documents in the following form: Child Element.
+}
+
+
+\longnewglossaryentry{client}
+{
+  name={client}
+}
+{
+  A process or set of processes that send Requests for information to an MTConnect Agent; e.g. software applications or a function that implements the Request portion of an Interface Interaction Model.
+
+  Appears in the documents in the following form: client.
+}
+
+\longnewglossaryentry{component term}
+{
+  name={Component}
+}
+{
+  \ulheading{General meaning}:
+
+  A Structural Element that represents a physical or logical part or subpart of a piece of equipment.
+
+  Appears in the documents in the following form: Component.
+
+  \ulheading{Used in Information Models}:
+
+  A data modeling element used to organize the data being retrieved from a piece of equipment.
+  \begin{itemize}
+      \item When used as an XML container to organize Lower Level Component elements. 
+      
+      Appears in the documents in the following form: Components.
+      \item When used as an abstract XML element. Component is replaced in a data model by a type of Component element. Component is also an XML container used to organize Lower Level Component elements, Data Entities, or both.
+      
+      Appears in the documents in the following form: Component.
+  \end{itemize}
+}
+
+\longnewglossaryentry{composition term}
+{
+  name={Composition}
+}
+{
+  \ulheading{General meaning}:
+
+  Data modeling elements that describe the lowest level basic structural or functional building blocks contained within a Component element.
+
+  Appears in the documents in the following form: Composition Element
+
+  \ulheading{Used in Information Models}:
+
+  A data modeling element used to organize the data being retrieved from a piece of equipment.
+  \begin{itemize}
+      \item When used as an XML container to organize Composition elements. 
+      
+      Appears in the documents in the following form: Compositions
+      \item When used as an abstract XML element. Composition is replaced in a data model by a type of Composition Element. 
+      
+      Appears in the documents in the following form: Composition.
+  \end{itemize}
+}
+
+
+\longnewglossaryentry{condition term}
+{
+  name={Condition}
+}
+{
+	\ulheading{General meaning}:
+
+	An indicator of the health of a piece of equipment or a Component and its ability to function.
+
+	\ulheading{Used as a modeling element}:
+
+	A data modeling element used to organize and communicate information relative to the health of a piece of equipment or Component.
+
+	Appears in the documents in the following form: Condition or as Condition Element(s).
+
+	\ulheading{Used in Information Models}:
+
+	An XML element used to represent Condition Elements.
+
+    \begin{itemize}
+	\item When used as an XML container to organize Lower Level Condition elements.
+
+	Appears in the documents in the following form: Condition.
+
+	\item When used as a Lower Level element, the form Condition is an abstract type XML element.  This Lower Level element is a Data Entity.  Condition is replaced in a data model by type of Condition element.
+
+	Appears in the documents in the following form: Condition.
+	\end{itemize}
+
+	Note: The form Condition is used to represent both above uses.
+}
+
+
+\longnewglossaryentry{controlled vocabulary}
+{
+  name={Controlled Vocabulary},
+  plural={Controlled Vocabularies}
+}
+{
+	A restricted set of values that may be published as the Valid Data Value for a Data Entity.
+
+	Appears in the documents in the following form: Controlled Vocabulary.
+}
+
+
+\longnewglossaryentry{current term}
+{
+  name={Current}
+}
+{
+	\ulheading{General meaning}:
+
+	Meaning 1:  A term describing the most recent occurrence of something.
+
+	Meaning 2:  A term used to describe movement; e.g. electric current or air current.
+
+	Appears in the documents in the following form: current
+
+	\ulheading{Used in reference to an MTConnect Agent}:
+
+	A reference to the most recent information available to an MTConnect Agent.
+
+	Appears in the documents in the following form: current.
+
+	\ulheading{Used as an MTConnect Request}:
+
+	A specific type of communications request between a client software application and an MTConnect Agent regarding Streaming Data.  
+
+	Appears in the documents in the following form: Current Request.
+
+	\ulheading{Used as part of an HTTP Request}:
+
+	Used in the path portion of an HTTP Request Line, by a client software application, to initiate a Current Request to an MTConnect Agent to publish an MTConnectStreams document.
+
+	Appears in the documents in the following form: current.
+}
+
+
+\longnewglossaryentry{data dictionary}
+{
+  name={Data Dictionary}
+}
+{
+	Listing of standardized terms and definitions used in MTConnect Information Models.
+
+	Appears in the documents in the following form: data dictionary.
+}
+
+
+\longnewglossaryentry{data entity}
+{
+  name={Data Entity},
+  plural={Data Entities}
+}
+{
+	A primary data modeling element that represents all elements that either describe data items that may be reported by an MTConnect Agent or the data items that contain the actual data published by an Agent.
+
+	Appears in the documents in the following form: Data Entity.
+}
+
+
+\longnewglossaryentry{data item}
+{
+  name={Data Item}
+}
+{
+	\ulheading{General meaning}:
+
+	Descriptive information or properties and characteristics associated with a Data Entity.
+
+	Appears in the documents in the following form: data item.
+
+	\ulheading{Used in an XML representation of a Data Entity}:
+
+    \begin{itemize}
+	\item When used as an XML container to organize DataItem elements.
+
+	Appears in the documents in the following form: DataItems.
+
+	\item When used to represent a specific Data Entity, the form DataItem is an XML element.  
+
+	Appears in the documents in the following form: DataItem.
+    \end{itemize}
+}
+
+
+\longnewglossaryentry{data source}
+{
+  name={Data Source}
+}
+{
+	Any piece of equipment that can produce data that is published to an MTConnect Agent.
+
+	Appears in the documents in the following form: data source.
+}
+
+
+\longnewglossaryentry{data streaming}
+{
+  name={Data Streaming}
+}
+{
+	A method for an MTConnect Agent to provide a continuous stream of information in response to a single Request from a client software application.
+
+	Appears in the documents in the following form: Data Streaming.
+}
+
+
+\longnewglossaryentry{deprecated}
+{
+  name={Deprecated}
+}
+{
+	An indication that specific content in an MTConnect Document is currently usable but is regarded as being obsolete or superseded.  It is recommended that deprecated content should be avoided.
+
+	Appears in the documents in the following form: DEPRECATED.
+}
+
+
+\longnewglossaryentry{deprecation warning}
+{
+  name={Deprecation Warning}
+}
+{
+	An indicator that specific content in an MTConnect Document may be changed to DEPRECATED in a future release of the standard.
+
+	Appears in the documents in the following form: DEPRECATION WARNING.
+}
+
+
+\longnewglossaryentry{device information model}
+{
+  name={Device Information Model},
+  plural={Devices Information Model}
+}
+{
+	A set of rules and terms that describes the physical and logical configuration for a piece of equipment and the data that may be reported by that equipment.    
+
+	Appears in the documents in the following form: Devices Information Model.
+}
+
+
+\longnewglossaryentry{device term}
+{
+  name={Device}
+}
+{
+	A part of an information model representing a piece of equipment.  
+	\ulheading{Used in an XML representation of a Response Document}:
+
+    \begin{itemize}
+	\item When used as an XML container to organize Device elements.
+
+	Appears in the documents in the following form: Devices.
+
+	\item When used as an XML container to represent a specific piece of equipment and is composed of a set of Structural Elements that organize and provide relevance to data published from that piece of equipment.
+
+	Appears in the documents in the following form: Device.
+	\end{itemize}
+}
+
+
+\longnewglossaryentry{document}
+{
+  name={Document}
+}
+{
+	\ulheading{General meaning}:
+
+	A piece of written, printed, or electronic matter that provides information.
+
+	\ulheading{Used to represent an MTConnect Document}:
+
+	Refers to printed or electronic document(s) that represent a Part(s) of the MTConnect Standard.
+
+	Appears in the documents in the following form: MTConnect Document.
+
+	\ulheading{Used to represent a specific representation of an MTConnect Document}:
+
+	Refers to electronic document(s) associated with an MTConnect Agent that are encoded using XML; Response Documents or Asset Documents.
+
+	Appears in the documents in the following form: MTConnect XML Document.
+
+	\ulheading{Used to describe types of information stored in an MTConnect Agent}:
+
+	In an implementation, the electronic documents that are published from a data source and stored by an MTConnect Agent.
+
+	Appears in the documents in the following form: Asset Document.
+
+	\ulheading{Used to describe information published by an MTConnect Agent}:
+
+	A document published by an MTConnect Agent based upon one of the semantic data models defined in the MTConnect Standard in response to a request from a client.  
+
+	Appears in the documents in the following form: Response Document.
+}
+
+
+\longnewglossaryentry{document body}
+{
+  name={Document Body}
+}
+{
+	The portion of the content of an MTConnect Response Document that is defined by the relative MTConnect Information Model. The Document Body contains the Structural Elements and Data Entities reported in a Response Document.
+
+	Appears in the documents in the following form: Document Body.
+}
+
+
+\longnewglossaryentry{document header}
+{
+  name={Document Header}
+}
+{
+	The portion of the content of an MTConnect Response Document that provides information from an MTConnect Agent defining version information, storage capacity, protocol, and other information associated with the management of the data stored in or retrieved from the Agent.
+	
+	Appears in the documents in the following form: Document Header.
+}
+
+
+\longnewglossaryentry{element}
+{
+  name={Element},
+  plural={Elements}
+}
+{
+	Refers to an XML element.
+
+	An XML element is a logical portion of an XML document or schema that begins with a start-tag and ends with a corresponding end-tag.  
+
+	The information provided between the start-tag and end-tag may contain attributes, other elements (sub-elements), and/or CDATA.
+
+	Note:  Also, an XML element may consist of an empty-element tag.  Refer to Appendix B for more information on element tags.
+
+	Appears in the documents in the following form: element.
+}
+
+
+\longnewglossaryentry{element name}
+{
+  name={Element Name},
+  plural={Element Names}
+}
+{
+	A descriptive identifier contained in both the start-tag and end-tag of an XML element that provides the name of the element.
+
+	Appears in the documents in the following form: element name.
+
+	\ulheading{Used to describe the name for a specific XML element}:
+
+	Reference to the name provided in the start-tag, end-tag, or empty-element tag for an XML element.
+
+	Appears in the documents in the following form: Element Name.
+}
+
+
+\longnewglossaryentry{equipment}
+{
+  name={Equipment}
+}
+{
+	Represents anything that can publish information and is used in the operations of a manufacturing facility shop floor.  Examples of equipment are machine tools, ovens, sensor units, workstations, software applications, and bar feeders.
+
+	Appears in the documents in the following form: equipment or piece of equipment.
+}
+
+
+\longnewglossaryentry{error information model}
+{
+  name={Error Information Model}
+}
+{
+	The rules and terminology that describes the Response Document returned by an MTConnect Agent when it encounters an error while interpreting a Request for information from a client software application or when an Agent experiences an error while publishing the Response to a Request for information.
+
+	Appears in the documents in the following form: Error Information Model.
+}
+
+
+\longnewglossaryentry{event term}
+{
+  name={Event},
+  plural={Events}
+}
+{
+	\ulheading{General meaning}:
+
+	The occurrence of something that happens or takes place.
+
+	Appears in the documents in the following form: event.
+
+	\ulheading{Used as a type of Data Entity}:
+
+	An identification that represents a change in state of information associated with a piece of equipment or an occurrence of an action.  Event also provides a means to publish a message from a piece of equipment.
+
+	Appears in the documents in the following form: Event.
+
+	\ulheading{Used as a category attribute for a Data Entity}:
+
+	Used as a value for the category attribute for an XML dataItem element.
+
+	Appears in the documents in the following form: EVENT.
+
+	\ulheading{Used as an XML container or element}:
+
+    \begin{itemize}
+	\item When used as an XML container that consists of one or more types of Event XML elements.
+
+	Appears in the documents in the following form: Events.
+
+	\item When used as an abstract XML element.  It is replaced in the XML document by types of Event elements.
+
+	Appears in the documents in the following form: Event.
+    \end{itemize}
+}
+
+
+\longnewglossaryentry{extensible}
+{
+  name={Extensible}
+}
+{
+	The ability for an implementer to extend MTConnect Information Models by adding content not currently addressed in the MTConnect Standard.
+}
+
+
+\longnewglossaryentry{fault state}
+{
+  name={Fault State},
+  plural={Fault States}
+}
+{
+	In the MTConnect Standard, a term that indicates the reported status of a Condition category Data Entity.   
+
+	Appears in the documents in the following form: Fault State.
+}
+
+
+\longnewglossaryentry{heartbeat}
+{
+  name={Heartbeat}
+}
+{
+	\ulheading{General meaning}:
+
+	A function that indicates to a client application that the communications connection to an MTConnect Agent is still viable during times when there is no new data available to report – often referred to as a "keep alive" message.
+
+	Appears in the documents in the following form: heartbeat.
+
+	\ulheading{When used as part of an HTTP Request}:
+
+	The form heartbeat is used as a parameter in the query portion of an HTTP Request Line.
+
+	Appears in the documents in the following form: heartbeat.
+}
+
+
+\longnewglossaryentry{http}
+{
+  name={HTTP}
+}
+{
+	Hyper-Text Transport Protocol.  The protocol used by all web browsers and web applications.
+
+	Note:  HTTP is an IETF standard and is defined in RFC 7230.  See https://tools.ietf.org/html/rfc7230 for more information.
+}
+
+
+\longnewglossaryentry{http error message}
+{
+  name={HTTP Error Message}
+}
+{
+	In the MTConnect Standard, a response provided by an MTConnect Agent indicating that an HTTP Request is incorrectly formatted or identifies that the requested data is not available from the Agent.  
+
+	Appears in the documents in the following form: HTTP Error Message.
+}
+
+
+\longnewglossaryentry{http header}
+{
+  name={HTTP Header}
+}
+{
+	In the MTConnect Standard, the content of the Header portion of either an HTTP Request from a client software application or an HTTP Response from an MTConnect Agent.
+
+	Appears in the documents in the following form: HTTP Header.
+}
+
+
+\longnewglossaryentry{http method}
+{
+  name={HTTP Method}
+}
+{
+	In the MTConnect Standard, a portion of a command in an HTTP Request that indicates the desired action to be performed on the identified resource; often referred to as verbs.
+}
+
+
+\longnewglossaryentry{http request}
+{
+  name={HTTP Request}
+}
+{
+	In the MTConnect Standard, a communications command issued by a client software application to an MTConnect Agent requesting information defined in the HTTP Request Line.
+
+	Appears in the documents in the following form: HTTP Request.
+}
+
+
+\longnewglossaryentry{http request line}
+{
+  name={HTTP Request Line}
+}
+{
+	In the MTConnect Standard, the first line of an HTTP Request describing a specific Response Document to be published by an MTConnect Agent.
+
+	Appears in the documents in the following form: HTTP Request Line.
+}
+
+
+\longnewglossaryentry{http response}
+{
+  name={HTTP Response}
+}
+{
+	In the MTConnect Standard, the information published from an MTConnect Agent in reply to an HTTP Request.  An HTTP Response may be either a Response Document or an HTTP Error Message.
+
+	Appears in the documents in the following form: HTTP Response.
+}
+
+
+\longnewglossaryentry{http server}
+{
+  name={HTTP Server}
+}
+{
+	In the MTConnect Standard, a software program that accepts HTTP Requests from client software applications and publishes HTTP Responses as a reply to those Requests.
+
+	Appears in the documents in the following form: HTTP Server.
+}
+
+
+\longnewglossaryentry{http status code}
+{
+  name={HTTP Status Code}
+}
+{
+	In the MTConnect Standard, a numeric code contained in an HTTP Response that defines a status category associated with the Response – either a success status or a category of an HTTP error.  
+
+	Appears in the documents in the following form: HTTP Status Code.
+}
+
+
+\longnewglossaryentry{id term}
+{
+  name={id}
+}
+{
+	\ulheading{General meaning}:
+
+	An identifier used to distinguish a piece of information.
+
+	Appears in the documents in the following form: id.
+
+	\ulheading{Used as an XML attribute}:
+
+	When used as an attribute for an XML element - Structural Element, Data Entity, or Asset.  id provides a unique identity for the element within an XML document.
+
+	Appears in the documents in the following form: id.
+}
+
+
+\longnewglossaryentry{implementation}
+{
+  name={Implementation}
+}
+{
+	A specific instantiation of the MTConnect Standard.
+}
+
+
+\longnewglossaryentry{information model}
+{
+  name={Information Model},
+  plural={Information Models}
+}
+{
+	The rules, relationships, and terminology that are used to define how information is structured.
+
+	For example, an information model is used to define the structure for each MTConnect Response Document; the definition of each piece of information within those documents and the relationship between pieces of information.
+
+	Appears in the documents in the following form: Information Model.
+}
+
+
+\longnewglossaryentry{instance}
+{
+  name={Instance},
+  plural={Instances}
+}
+{
+	Describes a set of Streaming Data in an MTConnect Agent.  Each time an Agent is restarted with an empty buffer, data placed in the buffer represents a new instance of the Agent.
+
+	Appears in the documents in the following form: instance.
+}
+
+
+\longnewglossaryentry{interaction model}
+{
+  name={Interaction Model}
+}
+{
+	The definition of information exchanged to support the interactions between pieces of equipment collaborating to complete a task.
+
+	Appears in the documents in the following form: Interaction Model.
+}
+
+
+\longnewglossaryentry{interface}
+{
+  name={Interface},
+  plural={Interfaces}
+}
+{
+	\ulheading{General meaning}:
+
+	The exchange of information between pieces of equipment and/or software systems.
+
+	Appears in the documents in the following form: interface.
+
+	\ulheading{Used as an Interaction Model}:
+
+	An Interaction Model that describes a method for inter-operations between pieces of equipment.
+
+	Appears in the documents in the following form: Interface.
+
+	\ulheading{Used as an XML container or element}:
+
+    \begin{itemize}
+	\item When used as an XML container that consists of one or more types of Interface XML elements.
+
+	Appears in the documents in the following form: Interfaces.
+
+	\item When used as an abstract XML element.  It is replaced in the XML document by types of Interface elements.
+
+	Appears in the documents in the following form: Interface.
+	\end{itemize}
+}
+
+
+\longnewglossaryentry{message term}
+{
+  name={Message}
+}
+{
+	\ulheading{General meaning}:
+
+	The content of a communication process.
+
+	Appears in the documents in the following form: message.
+
+	\ulheading{Used relative to an MTConnect Agent}:
+
+	Describes the information that is exchanged between an MTConnect Agent and a client software application.  A Message may contain either a Request from a client software application or a Response from an MTConnect Agent.
+
+	Appears in the documents in the following form: Message.
+
+	\ulheading{Used as a type of Data Entity}:
+
+	Describes a type of Data Entity in the Devices Information Model that can contain any text string of information or native code to be transferred from a piece of equipment.
+
+	Appears in the documents in the following form: MESSAGE.
+
+	\ulheading{Used as an Element Name}:
+
+	An Element Name for a Data Entity in the Streams Information Model that can contain any text string of information or native code to be transferred from a piece of equipment.
+
+	Appears in the documents in the following form:  Message.
+}
+
+
+\longnewglossaryentry{metadata}
+{
+  name={Metadata}
+}
+{
+	Data that provides information about other data.
+
+	For example, Equipment Metadata defines both the Structural Elements that represent the physical and logical parts and sub-parts of each piece of equipment, the relationships between those parts and sub-parts, and the definitions of the Data Entities associated with that piece of equipment.
+
+	Appears in the documents in the following form: Metadata or Equipment Metadata.
+}
+
+
+\longnewglossaryentry{mtconnect agent}
+{
+  name={MTConnect Agent}
+}
+{
+	See definition for Agent.
+}
+
+
+\longnewglossaryentry{mtconnectassets response document}
+{
+  name={MTConnectAssets Response Document}
+}
+{
+	An electronic document published by an MTConnect Agent in response to a Request for information from a client software application relating to MTConnect Assets.
+
+	Appears in the documents in the following form: MTConnectAssets Response Document.
+}
+
+
+\longnewglossaryentry{mtconnectdevices response document}
+{
+  name={MTConnectDevices Response Document}
+}
+{
+	An electronic document published by an MTConnect Agent in response to a Request for information from a client software application that includes metadata for one or more pieces of equipment.
+
+	Appears in the documents in the following form: MTConnectDevices Response Document.
+}
+
+
+\longnewglossaryentry{mtconnecterrors response document}
+{
+  name={MTConnectErrors Response Document}
+}
+{
+	An electronic document published by an MTConnect Agent whenever it encounters an error while interpreting a Request for information from a client software application or when an Agent experiences an error while publishing the Response to a Request for information.
+
+	Appears in the documents in the following form: MTConnectErrors Response Document.
+}
+
+
+\longnewglossaryentry{mtconnect request}
+{
+  name={MTConnect Request}
+}
+{
+	A communication request for information issued from a client software application to an MTConnect Agent.
+
+	Appears in the documents in the following form: MTConnect Request.
+}
+
+
+\longnewglossaryentry{mtconnectstreams response document}
+{
+  name={MTConnectStreams Response Document}
+}
+{
+	An electronic document published by an MTConnect Agent in response to a Request for information from a client software application that includes Streaming Data from the Agent.
+
+	Appears in the documents in the following form: MTConnectStreams Response Document.
+}
+
+
+\longnewglossaryentry{nmtoken}
+{
+  name={NMTOKEN}
+}
+{
+	The data type for XML identifiers.
+
+	Note: The identifier must start with a letter, an underscore "\_" or a colon.  The next character must be a letter, a number, or one of the following ".", "-", "\_", ":".  The identifier must not have any spaces or special characters.
+
+	Appears in the documents in the following form: NMTOKEN.
+}
+
+
+\longnewglossaryentry{parameter}
+{
+  name={Parameter}
+}
+{
+	\ulheading{General Meaning}:
+
+	A variable that must be given a value during the execution of a program or a communications command.
+
+	\ulheading{When used as part of an HTTP Request}:
+
+	Represents the content (keys and associated values) provided in the Query portion of an HTTP Request Line that identifies specific information to be returned in a Response Document.
+
+	Appears in the documents in the following form: parameter.
+}
+
+
+\longnewglossaryentry{parent element}
+{
+  name={Parent Element}
+}
+{
+	An XML element used to organize Lower Level child elements that share a common relationship to the Parent Element.
+
+	Appears in the documents in the following form: Parent Element.
+}
+
+
+\longnewglossaryentry{persistence}
+{
+  name={Persistence}
+}
+{
+	A method for retaining or restoring information.
+}
+
+
+\longnewglossaryentry{probe term}
+{
+  name={Probe}
+}
+{
+	\ulheading{General meaning of a physical entity}:
+
+	An instrument commonly used for measuring the physical geometrical characteristics of an object.
+
+    \begin{itemize}
+	\item \ulheading{Used to describe a measurement device}:
+
+	The form probe is used to define a measurement device that provides position information.
+
+	Appears in the documents in the following form: probe. 
+
+	\item \ulheading{Used within a Data Entity}:
+
+	The form PROBE is used to designate a subtype for the Data Entity PATH\_POSITION indicating a measurement position relating to a probe unit.
+
+	Appears in the documents in the following form: PROBE.
+    \end{itemize}
+
+	\ulheading{General meaning for communications with an MTConnect Agent}:
+
+	Probe is used to define a type of communication request. 
+
+    \begin{itemize}
+	\item \ulheading{Used as a type of communication request}:
+
+	The form Probe Request represents a specific type of communications request between a client software application and an MTConnect Agent regarding metadata for one or more pieces of equipment.
+
+	Appears in the documents in the following form: Probe Request.
+
+	\item \ulheading{Used in an HTTP Request Line}:
+
+	The form probe is used to designate a Probe Request in the <Path> portion of an HTTP Request Line.
+
+	Appears in the documents in the following form: probe.
+    \end{itemize}
+}
+
+
+\longnewglossaryentry{protocol}
+{
+  name={Protocol}
+}
+{
+	A set of rules that allow two or more entities to transmit information from one to the other.
+}
+
+
+\longnewglossaryentry{publishsubscribe}
+{
+  name={Publish/Subscribe}
+}
+{
+	In the MTConnect Standard, a communications messaging pattern that may be used to publish Streaming Data from an MTConnect Agent.  When a Publish/Subscribe communication method is established between a client software application and an MTConnect Agent, the Agent will repeatedly publish a specific MTConnectStreams document at a defined period.
+
+	Appears in the documents in the following form: Publish/Subscribe.
+}
+
+
+\longnewglossaryentry{query}
+{
+  name={Query}
+}
+{
+	\ulheading{General Meaning}:
+
+	A portion of a request for information that more precisely defines the specific information to be published in response to the request. 
+
+	Appears in the documents in the following form: Query.
+
+	\ulheading{Used in an HTTP Request Line}:
+
+	The form query includes a string of parameters that define filters used to refine the content of a Response Document published in response to an HTTP Request.
+
+	Appears in the documents in the following form: query.
+}
+
+
+\longnewglossaryentry{requestresponse messaging structure}
+{
+  name={Request /Response Messaging Structure}
+}
+{
+	A communications pattern that supports the transfer of information between an MTConnect Agent and a client software application. In a Request/Response information exchange, a client software application requests specific information from an MTConnect Agent. An MTConnect Agent responds to the Request by publishing a Response Document.   
+
+	Appears in the documents in the following form: Request/Response Messaging Structure.
+}
+
+
+\longnewglossaryentry{request}
+{
+  name={Request}
+}
+{
+	A communications method where a client software application transmits a message to an MTConnect Agent.  That message instructs the Agent to respond with specific information.
+
+	Appears in the documents in the following form: Request.
+}
+
+
+\longnewglossaryentry{requester}
+{
+  name={Requester}
+}
+{
+	An entity that initiates a Request for information in a communications exchange.
+
+	Appears in the documents in the following form: Requester.
+}
+
+
+\longnewglossaryentry{responder}
+{
+  name={Responder}
+}
+{
+	An entity that responds to a Request for information in a communications exchange.
+
+	Appears in the documents in the following form: Responder.
+}
+
+
+\longnewglossaryentry{response document}
+{
+  name={Response Document}
+}
+{
+	See definition of Document.
+}
+
+
+\longnewglossaryentry{rest}
+{
+  name={REST}
+}
+{
+	Stands for REpresentational State Transfer:  A software architecture where a client software application and server move through a series of state transitions based solely on the request from the client and the response from the server. 
+
+	Appears in the documents in the following form: REST.
+}
+
+
+\longnewglossaryentry{root element}
+{
+  name={Root Element}
+}
+{
+	The first Structural Element provided in a Response Document encoded using XML.  The Root Element is an XML container and is the Parent Element for all other XML elements in the document.  The Root Element appears immediately following the XML Declaration.
+
+	Appears in the documents in the following form: Root Element.
+}
+
+
+\longnewglossaryentry{sample term}
+{
+  name={Sample},
+  plural={Samples}
+}
+{
+	\ulheading{General meaning}:
+
+	The collection of one or more pieces of information.  
+
+	\ulheading{Used when referring to the collection of information}:
+
+	When referring to the collection of a piece of information from a data source.
+
+	Appears in the documents in the following form: sample.
+
+	\ulheading{Used as an MTConnect Request}:
+
+	When representing a specific type of communications request between a client software application and an MTConnect Agent regarding Streaming Data.  
+
+	Appears in the documents in the following form: Sample Request.
+
+	\ulheading{Used as part of an HTTP Request}:
+
+	Used in the path portion of an HTTP Request Line, by a client software application, to initiate a Sample Request to an MTConnect Agent to publish an MTConnectStreams document.
+
+	Appears in the documents in the following form: sample.
+
+	\ulheading{Used to describe a Data Entity}:
+
+	Used to define a specific type of Data Entity.  A Sample type Data Entity reports the value for a continuously variable or analog piece of information.
+
+	Appears in the documents in the following form: Sample or Samples.
+
+	\ulheading{Used as an XML container or element}:
+
+    \begin{itemize}
+	\item When used as an XML container that consists of one or more types of Sample XML elements.
+
+	Appears in the documents in the following form: Samples.
+
+	\item When used as an abstract XML element.  It is replaced in the XML document by types of Sample elements representing individual Sample type of Data Entity.
+
+	Appears in the documents in the following form: Sample.
+    \end{itemize}
+}
+
+
+\longnewglossaryentry{schema}
+{
+  name={Schema}
+}
+{
+	\ulheading{General meaning}:
+
+	The definition of the structure, rules, and vocabularies used to define the information published in an electronic document.
+
+	Appears in the documents in the following form: schema.
+
+	\ulheading{Used in association with an MTConnect Response Document}:
+
+	Identifies a specific schema defined for an MTConnect Response Document.
+
+	Appears in the documents in the following form: schema.
+}
+
+
+\longnewglossaryentry{semantic data model}
+{
+  name={Semantic Data Model}
+}
+{
+	A methodology for defining the structure and meaning for data in a specific logical way.  
+
+	It provides the rules for encoding electronic information such that it can be interpreted by a software system.  
+
+	Appears in the documents in the following form: semantic data model.
+}
+
+
+\longnewglossaryentry{sequence number}
+{
+  name={sequence number},
+  plural={sequence numbers}
+}
+{
+	The primary key identifier used to manage and locate a specific piece of Streaming Data in an MTConnect Agent.
+
+	Sequence number is a monotonically increasing number within an instance of an MTConnect Agent.
+
+	Appears in the documents in the following form: sequence number.
+}
+
+
+\longnewglossaryentry{standard}
+{
+  name={Standard}
+}
+{
+	\ulheading{General meaning}:
+
+	A document established by consensus that provides rules, guidelines, or characteristics for activities or their results (as defined in ISO/IEC Guide 2:2004).
+
+	Used when referring to the MTConnect Standard. 
+
+	The MTConnect Standard is a standard that provides the definition and semantic data structure for information published by pieces of equipment.
+
+	Appears in the documents in the following form: Standard or MTConnect Standard.
+}
+
+
+\longnewglossaryentry{streaming data}
+{
+  name={Streaming Data}
+}
+{
+	The values published by a piece of equipment for the Data Entities defined by the Equipment Metadata.
+
+	Appears in the documents in the following form: Streaming Data.
+}
+
+
+\longnewglossaryentry{streams information model}
+{
+  name={Streams Information Model}
+}
+{
+	The rules and terminology (semantic data model) that describes the Streaming Data returned by an MTConnect Agent from a piece of equipment in response to a Sample Request or a Current Request.
+
+	Appears in the documents in the following form: Streams Information Model.
+}
+
+
+\longnewglossaryentry{structural element}
+{
+  name={Structural Element},
+  plural={Structural Elements}
+}
+{
+	\ulheading{General meaning}:
+
+	An XML element that organizes information that represents the physical and logical parts and sub-parts of a piece of equipment.
+
+	Appears in the documents in the following form: Structural Element.
+
+	\ulheading{Used to indicate hierarchy of Components}:
+
+	When used to describe a primary physical or logical construct within a piece of equipment. 
+
+	Appears in the documents in the following form: Top Level Structural Element.
+
+	When used to indicate a Child Element which provides additional detail describing the physical or logical structure of a Top Level Structural Element.
+
+	Appears in the documents in the following form: Lover Level Structural Element.
+}
+
+
+\longnewglossaryentry{subtype term}
+{
+  name={Subtype}
+}
+{
+	\ulheading{General meaning}:
+
+	A secondary or subordinate type of categorization or classification of information.
+
+	In software and data modeling, a subtype is a type of data that is related to another higher-level type of data.
+
+	Appears in the documents in the following form: subtype.
+
+	\ulheading{Used as an attribute for a Data Entity}:
+
+	Used as an attribute that provides a sub-categorization for the type attribute for a piece of information.
+
+	Appears in the documents in the following form: subType.
+}
+
+
+\longnewglossaryentry{time stamp}
+{
+  name={Time Stamp}
+}
+{
+	\ulheading{General meaning}:
+
+	The best available estimate of the time that the value(s) for published or recorded information was measured or determined.
+
+	Appears in the documents as "time stamp".
+
+	\ulheading{Used as an attribute for recorded or published data}:
+
+	An attribute that identifies the time associated with a Data Entity as stored in an MTConnect Agent.
+
+	Appears in the documents in the following form: timestamp.
+}
+
+
+\longnewglossaryentry{type term}
+{
+  name={Type}
+}
+{
+	\ulheading{General meaning}:
+
+	A classification or categorization of information.
+
+	In software and data modeling, a type is a grouping function to identify pieces of information that share common characteristics. 
+
+	Appears in the documents in the following form: type.
+
+	\ulheading{Used as an attribute for a Data Entity}:
+
+	Used as an attribute that provides a categorization for piece of information that share common characteristics.
+
+	Appears in the documents in the following form: type.
+}
+
+
+\longnewglossaryentry{uri}
+{
+  name={URI}
+}
+{
+	Stands for Universal Resource Identifier.  
+
+	See http://www.w3.org/TR/uri-clarification/\#RFC3986  
+}
+
+
+\longnewglossaryentry{url}
+{
+  name={URL},
+  kind={facet}
+}
+{
+	Stands for Uniform Resource Locator.  
+
+	See http://www.w3.org/TR/uri-clarification/\#RFC3986
+}
+
+
+\longnewglossaryentry{urn}
+{
+  name={URN}
+}
+{
+	Stands for Uniform Resource Name.  
+
+	See http://www.w3.org/TR/uri-clarification/\#RFC3986  
+}
+
+
+\longnewglossaryentry{utcgmt}
+{
+  name={UTC/GMT}
+}
+{
+	Stands for Coordinated Universal Time/Greenwich Mean Time.  
+
+	UTC/GMT is the primary time standard by which the world regulates clocks and time.
+
+	The time stamp for all information reported in an MTConnect Response document is provided in UTC/GMT format.
+}
+
+
+\longnewglossaryentry{uuid term}
+{
+  name={UUID}
+}
+{
+	\ulheading{General meaning}:
+
+	Stands for Universally Unique Identifier. (Can also be referred to as a GUID in some literature – Globally Unique Identifier).
+
+	Note:  Defined in RFC 4122 of the IETF.  See https://www.ietf.org/rfc/rfc4122.txt for more information.
+
+	Appears in the documents in the following form: UUID.
+
+	\ulheading{Used as an attribute for an XML element}:
+
+	Used as an attribute that provides a unique identity for a piece of information reported by an MTConnect Agent.
+
+	Appears in the documents in the following form: uuid.
+}
+
+
+\longnewglossaryentry{valid data value}
+{
+  name={Valid Data Value},
+  plural={Valid Data Values}
+}
+{
+	One or more acceptable values or constrained values that can be reported for a Data Entity.
+
+	Appears in the documents in the following form: Valid Data Value(s).
+}
+
+
+\longnewglossaryentry{w3c}
+{
+  name={W3C}
+}
+{
+	Stands for World Wide Web Consortium.
+
+	W3C is an international community of organizations and the public work together to develop internet standards.  
+
+	W3C Standards are used as a guide within the MTConnect Standard.
+}
+
+
+\longnewglossaryentry{warning term}
+{
+  name={WARNING}
+}
+{
+	\ulheading{General Meaning}:
+
+	A statement or action that indicates a possible danger, problem, or other unexpected situation.
+
+	\ulheading{Used relative to changes in an MTConnect Document}:
+
+	Used to indicate that specific content in an MTConnect Document may be changed in a future release of the standard.
+
+	Appears in the documents in the following form: WARNING.
+
+	\ulheading{Used as a Valid Data Value for a Condition}:
+
+	Used as a Valid Data Value for a Condition type Data Entity.
+
+	Appears in the documents in the following form: WARNING.
+
+	\ulheading{Used as an Element Name for a Data Entity}:
+
+	Used as the Element Name for a Condition type Data Entity in an MTConnectStreams Response Document.
+
+	Appears in the documents in the following form: Warning.
+}
+
+
+\longnewglossaryentry{xml}
+{
+  name={XML}
+}
+{
+	Stands for EXtensible Markup Language. 
+
+	XML defines a set of rules for encoding documents that both a human-readable and machine-readable.
+
+	XML is the language used for all code examples in the MTConnect Standard.
+
+	Refer to http://www.w3.org/XML for more information about XML.
+}
+
+
+\longnewglossaryentry{xml container}
+{
+  name={XML Container}
+}
+{
+	In the MTConnect Standard, a type of XML element.
+
+	An XML container is used to organize other XML elements that are logically related to each other.   A container may have either Data Entities or other Structural Elements as Child Elements.
+}
+
+
+\longnewglossaryentry{xml document}
+{
+  name={XML Document}
+}
+{
+	An XML document is a structured text file encoded using XML.
+
+	An XML document is an instantiation of an XML schema.  It has a single root XML element, conforms to the XML specification, and is structured based upon a specific schema.
+
+	MTConnect Response Documents may be encoded as an XML document.
+}
+
+
+\longnewglossaryentry{xml schema}
+{
+  name={XML Schema}
+}
+{
+	In the MTConnect Standard, an instantiation of a schema defining a specific document encoded in XML.
+}
+
+
+\longnewglossaryentry{xpath}
+{
+  name={XPATH}
+}
+{
+	\ulheading{General meaning}:
+
+	XPATH is a command structure that describes a way for a software system to locate information in an XML document.  
+
+	XPATH uses an addressing syntax based on a path through the document's logical structure. 
+
+	See http://www.w3.org/TR/xpath for more information on XPATH.
+
+	Appears in the documents in the following form: XPATH.
+}
+
+
+
+
+
 
 
