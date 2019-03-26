@@ -47,20 +47,11 @@ package :common, 'Common attributes and elements for all schemas' do
     pattern '[a-ln-z]:[A-Z_0-9]+'
   end
   
-  
   enum :DataItemEnum, 'The types of measurements available' do
     extensible :DataItemExt
 
-    Glossary.events.each do |e|
-      value(e.name_property, e.description) if !e.kind_of?(:subtype)
-    end
-
-    Glossary.samples.each do |e|
-      value(e.name_property, e.description) if !e.kind_of?(:subtype)
-    end
-
-    Glossary.conditions.each do |e|
-      value(e.name_property, e.description) if !e.kind_of?(:subtype)
+    Glossary.types.each do |e|
+      value(e.name_property, e.description)
     end
   end
 

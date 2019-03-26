@@ -96,6 +96,7 @@ package :Component, 'Top Level Components Package' do
     end
   end
 
+  # Currently missing from the glossary
   type :Power, :CommonComponent
 
   # Composition Information

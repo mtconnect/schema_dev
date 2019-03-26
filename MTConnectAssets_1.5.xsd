@@ -275,6 +275,336 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
+      <xs:enumeration value='ACCELERATION'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the rate of change of velocity.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ACCUMULATED_TIME'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of accumulated time for an activity or event.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='AMPERAGE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of electrical current.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ANGLE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of angular position.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ANGULAR_ACCELERATION'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement rate of change of angular velocity.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ANGULAR_VELOCITY'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the rate of change of angular position.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='AXIS_FEEDRATE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the feedrate of a linear axis.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CLOCK_TIME'>
+        <xs:annotation>
+          <xs:documentation>
+            The value provided by a timing device at a specific point in time.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CONCENTRATION'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the percentage of one component within a mixture
+            of components
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CONDUCTIVITY'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the ability of a material to conduct electricity.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DISPLACEMENT'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the change in position of an object.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ELECTRICAL_ENERGY'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of electrical energy consumption by a component.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='EQUIPMENT_TIMER'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the amount of time a piece of equipment or a
+            sub-part of a piece of equipment has performed specific activities.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='FILL_LEVEL'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the amount of a substance remaining compared to
+            the planned maximum amount of that substance.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='FLOW'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the rate of flow of a fluid.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='FREQUENCY'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the number of occurrences of a repeating event
+            per unit time.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='GLOBAL_POSITION'>
+        <xs:annotation>
+          <xs:documentation>
+            DEPRECATED in Version 1.1
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LENGTH'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the length of an object.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LEVEL'>
+        <xs:annotation>
+          <xs:documentation>
+            DEPRECATED in Version 1.2. See filllevel sample
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LINEAR_FORCE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the push or pull introduced by an actuator or
+            exerted on an object.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LOAD'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the actual versus the standard rating of a piece
+            of equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MASS'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the mass of an object(s) or an amount of
+            material.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PATH_FEEDRATE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the feedrate for the axes, or a single axis,
+            associated with a path component a vector.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PATH_POSITION'>
+        <xs:annotation>
+          <xs:documentation>
+            A measured or calculated position of a control point associated with
+            a controller element, or path element if provided, of a piece of
+            equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PH'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the acidity or alkalinity.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='POSITION'>
+        <xs:annotation>
+          <xs:documentation>
+            A measured or calculated position of a component element as reported
+            by a piece of equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='POWER_FACTOR'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the ratio of real power flowing to a load to the
+            apparent power in that AC circuit.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PRESSURE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of force per unit area exerted by a gas or liquid.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_TIMER'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the amount of time a piece of equipment has
+            performed different types of activities associated with the process
+            being performed at that piece of equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='RESISTANCE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the degree to which a substance opposes the
+            passage of an electric current.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ROTARY_VELOCITY'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the rotational speed of a rotary axis.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SOUND_LEVEL'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of a sound level or sound pressure level relative to
+            atmospheric pressure.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SPINDLE_SPEED'>
+        <xs:annotation>
+          <xs:documentation>
+            DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='STRAIN'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the amount of deformation per unit length of an
+            object when a load is applied.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='TEMPERATURE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of temperature.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='TENSION'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of a force that stretches or elongates an object.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='TILT'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of angular displacement. 
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='TORQUE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the turning force exerted on an object or by an
+            object.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='VELOCITY'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the rate of change of position of a component.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='VISCOSITY'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of a fluids resistance to flow.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='VOLT_AMPERE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the apparent power in an electrical circuit,
+            equal to the product of root-mean-square (RMS) voltage and RMS
+            current (commonly referred to as VA).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='VOLT_AMPERE_REACTIVE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of reactive power in an AC electrical circuit
+            (commonly referred to as VAR).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='VOLTAGE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of electrical potential between two points.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='WATTAGE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of power flowing through or dissipated by an
+            electrical circuit or piece of equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='ACTIVE_AXES'>
         <xs:annotation>
           <xs:documentation>
@@ -733,6 +1063,86 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='ACTUATOR'>
+        <xs:annotation>
+          <xs:documentation>
+            An indication of a fault associated with an actuator.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CHUCK_INTERLOCK'>
+        <xs:annotation>
+          <xs:documentation>
+            An indication of the operational condition of the interlock function
+            for an electronically controller chuck.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='COMMUNICATIONS'>
+        <xs:annotation>
+          <xs:documentation>
+            An indication that the piece of equipment has experienced a
+            communications failure.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DATA_RANGE'>
+        <xs:annotation>
+          <xs:documentation>
+            An indication that the value of the data associated with a measured
+            value or a calculation is outside of an expected range.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DIRECTION'>
+        <xs:annotation>
+          <xs:documentation>
+            An indication of a fault associated with the direction of motion of
+            a structural element.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='END_OF_BAR'>
+        <xs:annotation>
+          <xs:documentation>
+            An indication that the end of a piece of bar stock has been reached.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='HARDWARE'>
+        <xs:annotation>
+          <xs:documentation>
+            An indication of a fault associated with the hardware subsystem of
+            the structural element.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='INTERFACE_STATE'>
+        <xs:annotation>
+          <xs:documentation>
+            An indication of the operation condition of an interface component
+            component.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LOGIC_PROGRAM'>
+        <xs:annotation>
+          <xs:documentation>
+            An indication that an error occurred in the logic program or
+            programmable logic controller (PLC) associated with a piece of
+            equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MOTION_PROGRAM'>
+        <xs:annotation>
+          <xs:documentation>
+            An indication that an error occurred in the motion program
+            associated with a piece of equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SYSTEM'/>
       <xs:enumeration value='ASSET_CHANGED'>
         <xs:annotation>
           <xs:documentation>
@@ -826,416 +1236,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='ACCELERATION'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the rate of change of velocity.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='ACCUMULATED_TIME'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of accumulated time for an activity or event.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='AMPERAGE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of electrical current.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='ANGLE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of angular position.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='ANGULAR_ACCELERATION'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement rate of change of angular velocity.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='ANGULAR_VELOCITY'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the rate of change of angular position.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='AXIS_FEEDRATE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the feedrate of a linear axis.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CLOCK_TIME'>
-        <xs:annotation>
-          <xs:documentation>
-            The value provided by a timing device at a specific point in time.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CONCENTRATION'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the percentage of one component within a mixture
-            of components
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CONDUCTIVITY'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the ability of a material to conduct electricity.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='DISPLACEMENT'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the change in position of an object.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='ELECTRICAL_ENERGY'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of electrical energy consumption by a component.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='EQUIPMENT_TIMER'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the amount of time a piece of equipment or a
-            sub-part of a piece of equipment has performed specific activities.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='FILL_LEVEL'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the amount of a substance remaining compared to
-            the planned maximum amount of that substance.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='FLOW'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the rate of flow of a fluid.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='FREQUENCY'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the number of occurrences of a repeating event
-            per unit time.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='GLOBAL_POSITION'>
-        <xs:annotation>
-          <xs:documentation>
-            DEPRECATED in Version 1.1
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='LENGTH'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the length of an object.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='LEVEL'>
-        <xs:annotation>
-          <xs:documentation>
-            DEPRECATED in Version 1.2. See filllevel sample
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='LINEAR_FORCE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the push or pull introduced by an actuator or
-            exerted on an object.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='LOAD'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the actual versus the standard rating of a piece
-            of equipment.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MASS'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the mass of an object(s) or an amount of
-            material.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PATH_FEEDRATE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the feedrate for the axes, or a single axis,
-            associated with a path component a vector.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PATH_POSITION'>
-        <xs:annotation>
-          <xs:documentation>
-            A measured or calculated position of a control point associated with
-            a controller element, or path element if provided, of a piece of
-            equipment.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PH'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the acidity or alkalinity.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='POSITION'>
-        <xs:annotation>
-          <xs:documentation>
-            A measured or calculated position of a component element as reported
-            by a piece of equipment.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='POWER_FACTOR'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the ratio of real power flowing to a load to the
-            apparent power in that AC circuit.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PRESSURE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of force per unit area exerted by a gas or liquid.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PROCESS_TIMER'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the amount of time a piece of equipment has
-            performed different types of activities associated with the process
-            being performed at that piece of equipment.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='RESISTANCE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the degree to which a substance opposes the
-            passage of an electric current.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='ROTARY_VELOCITY'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the rotational speed of a rotary axis.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='SOUND_LEVEL'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of a sound level or sound pressure level relative to
-            atmospheric pressure.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='SPINDLE_SPEED'>
-        <xs:annotation>
-          <xs:documentation>
-            DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='STRAIN'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the amount of deformation per unit length of an
-            object when a load is applied.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='TEMPERATURE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of temperature.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='TENSION'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of a force that stretches or elongates an object.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='TILT'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of angular displacement. 
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='TORQUE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the turning force exerted on an object or by an
-            object.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VELOCITY'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the rate of change of position of a component.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VISCOSITY'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of a fluids resistance to flow.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VOLT_AMPERE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the apparent power in an electrical circuit,
-            equal to the product of root-mean-square (RMS) voltage and RMS
-            current (commonly referred to as VA).
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VOLT_AMPERE_REACTIVE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of reactive power in an AC electrical circuit
-            (commonly referred to as VAR).
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VOLTAGE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of electrical potential between two points.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='WATTAGE'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of power flowing through or dissipated by an
-            electrical circuit or piece of equipment.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='ACTUATOR'>
-        <xs:annotation>
-          <xs:documentation>
-            An indication of a fault associated with an actuator.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CHUCK_INTERLOCK'>
-        <xs:annotation>
-          <xs:documentation>
-            An indication of the operational condition of the interlock function
-            for an electronically controller chuck.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='COMMUNICATIONS'>
-        <xs:annotation>
-          <xs:documentation>
-            An indication that the piece of equipment has experienced a
-            communications failure.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='DATA_RANGE'>
-        <xs:annotation>
-          <xs:documentation>
-            An indication that the value of the data associated with a measured
-            value or a calculation is outside of an expected range.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='DIRECTION'>
-        <xs:annotation>
-          <xs:documentation>
-            An indication of a fault associated with the direction of motion of
-            a structural element.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='END_OF_BAR'>
-        <xs:annotation>
-          <xs:documentation>
-            An indication that the end of a piece of bar stock has been reached.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='HARDWARE'>
-        <xs:annotation>
-          <xs:documentation>
-            An indication of a fault associated with the hardware subsystem of
-            the structural element.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='INTERFACE_STATE'>
-        <xs:annotation>
-          <xs:documentation>
-            An indication of the operation condition of an interface component
-            component.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='LOGIC_PROGRAM'>
-        <xs:annotation>
-          <xs:documentation>
-            An indication that an error occurred in the logic program or
-            programmable logic controller (PLC) associated with a piece of
-            equipment.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MOTION_PROGRAM'>
-        <xs:annotation>
-          <xs:documentation>
-            An indication that an error occurred in the motion program
-            associated with a piece of equipment.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='SYSTEM'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>

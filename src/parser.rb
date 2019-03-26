@@ -155,7 +155,7 @@ class Schema
 
     def annotation
       e = Glossary[name.to_s.downcase]
-      if e and !e.description.empty?
+      unless e.nil? or e.description.empty?
         @annotation = e.description
       end
       @annotation
