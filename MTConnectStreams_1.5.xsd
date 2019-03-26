@@ -393,7 +393,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='GLOBAL_POSITION'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.1
+            DEPRECATED: DEPRECATED in Version 1.1
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -407,7 +407,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LEVEL'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.2. See filllevel sample
+            DEPRECATED: DEPRECATED in Version 1.2. See filllevel sample
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -517,7 +517,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SPINDLE_SPEED'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
+            DEPRECATED: DEPRECATED in Version 1.2. Replaced by rotaryvelocity
+            sample
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -623,8 +624,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALARM'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: Replaced with condition category category data items in
-            Version 1.1.0.
+            DEPRECATED: DEPRECATED: Replaced with condition category category
+            data items in Version 1.1.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -706,7 +707,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CODE'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.1.
+            DEPRECATED: DEPRECATED in Version 1.1.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -813,7 +814,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.4.0.
+            DEPRECATED: DEPRECATED in Version 1.4.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -918,7 +919,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POWER_STATUS'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.1.0.
+            DEPRECATED: DEPRECATED in Version 1.1.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1007,8 +1008,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TOOL_ID'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.2.0. See toolassetid event. The identifier
-            of the tool currently in use for a given Path.
+            DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid event. The
+            identifier of the tool currently in use for a given Path.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1301,8 +1302,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='OVERRIDE'>
         <xs:annotation>
           <xs:documentation>
-            The operators overridden value. Percent of commanded. DEPRECATED in
-            Version 1.3. See event category category data items.
+            DEPRECATED: The operators overridden value. Percent of commanded.
+            DEPRECATED in Version 1.3. See event category category data items.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2685,15 +2686,69 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='xs:string'>
-        <xs:attribute name='version' type='VersionType' use='required'/>
-        <xs:attribute name='creationTime' type='CreationTimeType' use='required'/>
-        <xs:attribute name='nextSequence' type='SequenceType' use='required'/>
-        <xs:attribute name='lastSequence' type='SequenceType' use='required'/>
-        <xs:attribute name='firstSequence' type='SequenceType' use='required'/>
-        <xs:attribute name='testIndicator' type='TestIndicatorType' use='optional'/>
-        <xs:attribute name='instanceId' type='InstanceIdType' use='required'/>
-        <xs:attribute name='sender' type='SenderType' use='required'/>
-        <xs:attribute name='bufferSize' type='BufferSizeType' use='required'/>
+        <xs:attribute name='version' type='VersionType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The document version
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='creationTime' type='CreationTimeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The date and time the document was created
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='nextSequence' type='SequenceType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The next sequence number for subsequent requests
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='lastSequence' type='SequenceType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The last sequence number available from the agent
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='firstSequence' type='SequenceType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The first sequence number available from the agent
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='testIndicator' type='TestIndicatorType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              Indicates that this was a test document
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='instanceId' type='InstanceIdType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The unique instance identifier of this agent process
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='sender' type='SenderType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The sender of the message
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='bufferSize' type='BufferSizeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The size of the agent&apos;s buffer.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -2754,7 +2809,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='DeviceStream' type='DeviceStreamType' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            The data from a device
+            A XML container element provided in the stream container in the
+            mtconnectstream document.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2763,39 +2819,60 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='DeviceStreamType'>
     <xs:annotation>
       <xs:documentation>
-        Data related to a single device
+        A XML container element provided in the stream container in the
+        mtconnectstream document.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name='ComponentStream' type='ComponentStreamType' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            The data for each component
+            A XML container type element that organizes data returned from an
+            MTConnect Agent in response to a current or sample HTTP request.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='name' type='NameType' use='required'/>
-    <xs:attribute name='uuid' type='UuidType' use='required'/>
+    <xs:attribute name='name' type='NameType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The component name
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='uuid' type='UuidType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The unque identifier for this device
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name='ComponentStreamType'>
     <xs:annotation>
       <xs:documentation>
-        The stream of data for a component
+        A XML container type element that organizes data returned from an
+        MTConnect Agent in response to a current or sample HTTP request.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name='Samples' type='SamplesType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            A collection of samples
+            A XML element that provides the information and data reported from a
+            piece of equipment for those dataitem elements defined with a
+            category attribute of sample category in the mtconnectdevice
+            document. 
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='Events' type='EventsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            A collection of events
+            A XML element which provides the information and data reported from
+            a piece of equipment for those dataitem elements defined with a
+            category attribute of event category in the mtconnectdevice
+            document.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2807,16 +2884,50 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='componentId' type='ComponentIdType' use='required'/>
-    <xs:attribute name='name' type='NameType' use='optional'/>
-    <xs:attribute name='nativeName' type='NameType' use='optional'/>
-    <xs:attribute name='component' type='NameType' use='required'/>
-    <xs:attribute name='uuid' type='UuidType' use='optional'/>
+    <xs:attribute name='componentId' type='ComponentIdType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The id of the component (maps to the id from probe)
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='name' type='NameType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The component name
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='nativeName' type='NameType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The device manufacturer component name
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='component' type='NameType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          An abstract XML element. Replaced in the XML document by types of
+          component elements representing physical parts and logical functions
+          of a piece of equipment.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='uuid' type='UuidType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The unque identifier for this component
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name='SamplesType'>
     <xs:annotation>
       <xs:documentation>
-        A collection of samples for this component
+        A XML element that provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of sample category in the mtconnectdevice document. 
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -2826,7 +2937,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='EventsType'>
     <xs:annotation>
       <xs:documentation>
-        A collection of events and alarms for this component
+        A XML element which provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of event category in the mtconnectdevice document.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -2860,12 +2973,48 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:restriction>
   </xs:simpleType>
   <xs:attributeGroup name='ObservationType'>
-    <xs:attribute name='sequence' type='SequenceType' use='required'/>
-    <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'/>
-    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
-    <xs:attribute name='name' type='NameType' use='optional'/>
-    <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
-    <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
+    <xs:attribute name='sequence' type='SequenceType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The events sequence number
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The event subtype corresponding to the measurement subtype
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='timestamp' type='TimestampType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The time the event occurred or recorded
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='name' type='NameType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The name of the event corresponding to the measurement
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='dataItemId' type='DataItemIdType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The unique identifier of the item being produced
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='compositionId' type='CompositionIdType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The identifier of the sub-element this result is in reference to
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:attributeGroup>
   <xs:simpleType name='SampleRateType'>
     <xs:annotation>
@@ -2925,19 +3074,55 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SampleType' abstract='true' mixed='true'>
     <xs:annotation>
       <xs:documentation>
-        An abstract sample
+        A XML element that provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of sample category in the mtconnectdevice document. 
       </xs:documentation>
     </xs:annotation>
     <xs:attributeGroup ref='ObservationType'/>
-    <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
-    <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'/>
-    <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
-    <xs:attribute name='duration' type='DurationTimeType' use='optional'/>
+    <xs:attribute name='sampleRate' type='SampleRateType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The rate the waveform was sampled at, default back to the value given
+          in the data item
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          For those dataitem elements that report data that may be periodically
+          reset to an initial value, resettriggered identifies when a reported
+          value has been reset and what has caused that reset to occur.
+          resetTriggered is an optional attribute. resettriggered MUST only be
+          provided for the specific occurrence of a Data Entity reported in the
+          MTConnectStreams document when the reset occurred and MUSTNOT be
+          provided for any other occurrence of the Data Entity reported in a
+          MTConnectStreams document.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The statistical operation on this data
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='duration' type='DurationTimeType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The number of seconds since the reset of the statistic
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:element abstract='true' name='Sample' type='SampleType'>
     <xs:annotation>
       <xs:documentation>
-        An abstract sample
+        A XML element that provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of sample category in the mtconnectdevice document. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -2991,7 +3176,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='SampleType'>
-        <xs:attribute name='sampleCount' type='CountValueType' use='required'/>
+        <xs:attribute name='sampleCount' type='CountValueType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The number of samples
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -3598,7 +3789,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='GlobalPositionType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1
+        DEPRECATED: DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3608,14 +3799,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='GlobalPosition' type='GlobalPositionType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1
+        DEPRECATED: DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='GlobalPositionTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.1
+        Time series of DEPRECATED: DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3625,7 +3816,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='GlobalPositionTimeSeries' type='GlobalPositionTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.1
+        Time series of DEPRECATED: DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3666,7 +3857,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='LevelType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2. See filllevel sample
+        DEPRECATED: DEPRECATED in Version 1.2. See filllevel sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3676,14 +3867,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Level' type='LevelType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2. See filllevel sample
+        DEPRECATED: DEPRECATED in Version 1.2. See filllevel sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='LevelTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.2. See filllevel sample
+        Time series of DEPRECATED: DEPRECATED in Version 1.2. See filllevel
+        sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3693,7 +3885,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='LevelTimeSeries' type='LevelTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.2. See filllevel sample
+        Time series of DEPRECATED: DEPRECATED in Version 1.2. See filllevel
+        sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3871,7 +4064,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='PHType'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the acidity or alkalinity.
+        A measure of the acidity or alkalinity of a solution
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3881,7 +4074,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='PH' type='PHType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the acidity or alkalinity.
+        A measure of the acidity or alkalinity of a solution
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4169,7 +4362,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SpindleSpeedType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
+        DEPRECATED: DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4179,15 +4372,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='SpindleSpeed' type='SpindleSpeedType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
+        DEPRECATED: DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='SpindleSpeedTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.2. Replaced by rotaryvelocity
-        sample
+        Time series of DEPRECATED: DEPRECATED in Version 1.2. Replaced by
+        rotaryvelocity sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4197,8 +4390,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='SpindleSpeedTimeSeries' type='SpindleSpeedTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.2. Replaced by rotaryvelocity
-        sample
+        Time series of DEPRECATED: DEPRECATED in Version 1.2. Replaced by
+        rotaryvelocity sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4455,9 +4648,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='VoltAmpereType'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the apparent power in an electrical circuit, equal to
-        the product of root-mean-square (RMS) voltage and RMS current (commonly
-        referred to as VA).
+        Volt-Ampere (VA)
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4467,9 +4658,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='VoltAmpere' type='VoltAmpereType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the apparent power in an electrical circuit, equal to
-        the product of root-mean-square (RMS) voltage and RMS current (commonly
-        referred to as VA).
+        Volt-Ampere (VA)
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4497,8 +4686,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='VoltAmpereReactiveType'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of reactive power in an AC electrical circuit (commonly
-        referred to as VAR).
+        Volt-Ampere Reactive (VAR)
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4508,8 +4696,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='VoltAmpereReactive' type='VoltAmpereReactiveType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of reactive power in an AC electrical circuit (commonly
-        referred to as VAR).
+        Volt-Ampere Reactive (VAR)
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4653,16 +4840,33 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='EventType' abstract='true' mixed='true'>
     <xs:annotation>
       <xs:documentation>
-        An abstract event
+        A XML element which provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of event category in the mtconnectdevice document.
       </xs:documentation>
     </xs:annotation>
     <xs:attributeGroup ref='ObservationType'/>
-    <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'/>
+    <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          For those dataitem elements that report data that may be periodically
+          reset to an initial value, resettriggered identifies when a reported
+          value has been reset and what has caused that reset to occur.
+          resetTriggered is an optional attribute. resettriggered MUST only be
+          provided for the specific occurrence of a Data Entity reported in the
+          MTConnectStreams document when the reset occurred and MUSTNOT be
+          provided for any other occurrence of the Data Entity reported in a
+          MTConnectStreams document.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:element abstract='true' name='Event' type='EventType'>
     <xs:annotation>
       <xs:documentation>
-        An abstract event
+        A XML element which provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of event category in the mtconnectdevice document.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -5127,7 +5331,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CodeType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1.
+        DEPRECATED: DEPRECATED in Version 1.1.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -5137,7 +5341,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Code' type='CodeType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1.
+        DEPRECATED: DEPRECATED in Version 1.1.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -5592,17 +5796,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='LineType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.4.0.
+        DEPRECATED: DEPRECATED in Version 1.4.0.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='FloatEventType'/>
+      <xs:extension base='StringEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Line' type='LineType' substitutionGroup='FloatEvent'>
+  <xs:element name='Line' type='LineType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.4.0.
+        DEPRECATED: DEPRECATED in Version 1.4.0.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -5887,7 +6091,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='PowerStatusType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1.0.
+        DEPRECATED: DEPRECATED in Version 1.1.0.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -5897,7 +6101,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='PowerStatus' type='PowerStatusType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1.0.
+        DEPRECATED: DEPRECATED in Version 1.1.0.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6166,8 +6370,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ToolIdType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2.0. See toolassetid event. The identifier of
-        the tool currently in use for a given Path.
+        DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid event. The
+        identifier of the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6177,8 +6381,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ToolId' type='ToolIdType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2.0. See toolassetid event. The identifier of
-        the tool currently in use for a given Path.
+        DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid event. The
+        identifier of the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6244,9 +6448,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='WireType'>
     <xs:annotation>
       <xs:documentation>
-        The identifier for the type of wire used as the cutting mechanism in
-        Electrical Discharge Machining or similar processes. The valid data
-        value must be a text string.
+        A string like piece or filament of relatively rigid or flexible material
+        provided in a variety of diameters.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6256,9 +6459,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Wire' type='WireType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        The identifier for the type of wire used as the cutting mechanism in
-        Electrical Discharge Machining or similar processes. The valid data
-        value must be a text string.
+        A string like piece or filament of relatively rigid or flexible material
+        provided in a variety of diameters.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6544,8 +6746,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ToolIdDiscreteType'>
     <xs:annotation>
       <xs:documentation>
-        Discrete of DEPRECATED in Version 1.2.0. See toolassetid event. The
-        identifier of the tool currently in use for a given Path.
+        Discrete of DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid
+        event. The identifier of the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6555,8 +6757,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ToolIdDiscrete' type='ToolIdDiscreteType' substitutionGroup='ToolId'>
     <xs:annotation>
       <xs:documentation>
-        Discrete of DEPRECATED in Version 1.2.0. See toolassetid event. The
-        identifier of the tool currently in use for a given Path.
+        Discrete of DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid
+        event. The identifier of the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6703,11 +6905,41 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='ConditionDescriptionType'>
         <xs:attributeGroup ref='ObservationType'/>
-        <xs:attribute name='type' type='DataItemEnumType' use='required'/>
-        <xs:attribute name='nativeCode' type='NativeCodeType' use='optional'/>
-        <xs:attribute name='nativeSeverity' type='NativeSeverityType' use='optional'/>
-        <xs:attribute name='qualifier' type='QualifierType' use='optional'/>
-        <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
+        <xs:attribute name='type' type='DataItemEnumType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of condition
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='nativeCode' type='NativeCodeType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The component specific Notifcation code
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='nativeSeverity' type='NativeSeverityType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The component specific Notifcation code
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='qualifier' type='QualifierType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              An optional attribute that helps qualify the condition
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The statistical operation on this data
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -6939,24 +7171,48 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AlarmType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: Replaced with condition category category data items in
-        Version 1.1.0.
+        DEPRECATED: DEPRECATED: Replaced with condition category category data
+        items in Version 1.1.0.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='StringEventType'>
-        <xs:attribute name='code' type='NotifcationCodeType' use='required'/>
-        <xs:attribute name='severity' type='SeverityType' use='optional'/>
-        <xs:attribute name='state' type='AlarmStateType' use='optional'/>
-        <xs:attribute name='nativeCode' type='NativeNotifcationCodeType' use='required'/>
+        <xs:attribute name='code' type='NotifcationCodeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The Notifcation type
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='severity' type='SeverityType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The severity
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='state' type='AlarmStateType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The state
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='nativeCode' type='NativeNotifcationCodeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The component specific Notifcation code
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:element name='Alarm' type='AlarmType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: Replaced with condition category category data items in
-        Version 1.1.0.
+        DEPRECATED: DEPRECATED: Replaced with condition category category data
+        items in Version 1.1.0.
       </xs:documentation>
     </xs:annotation>
   </xs:element>

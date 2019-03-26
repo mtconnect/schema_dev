@@ -1,12 +1,18 @@
 
 grammar Latex
   rule top
-    (glossary / whitespace / comment)+
+    (glossary / long_glossary / whitespace / comment)+
   end
 
   rule glossary
     entry '{' name_tokens:( name / whitespace )+ '}' whitespace?
       '{' properties:(property / whitespace)+ '}' <GlossaryEntry>
+  end
+  
+  rule long_glossary
+    long_entry '{' name_tokens:( name / whitespace )+ '}' whitespace?
+      '{' properties:(property / whitespace)+ '}'
+      whitespace? long_description:block <GlossaryEntry>
   end
   
   rule entry
@@ -16,7 +22,15 @@ grammar Latex
       end
     }
   end
-  
+   
+  rule long_entry
+    "\\longnewglossaryentry" {
+      def value
+        "LongGlossaryEntry"
+      end
+    }
+  end
+
   rule newline
     '\\newline' {
       def value

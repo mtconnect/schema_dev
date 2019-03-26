@@ -11,11 +11,11 @@
 
 \newglossaryentry{abstractconfiguration}
 {
+  type=mtc,
   name= {AbstractConfiguration},
   category=code,
   description= {}
 }
-
 
 \newglossaryentry{actuator}
 {
@@ -24,39 +24,6 @@
   name={Actuator},
   kind={component},
   description={}
-}
-
-
-\newglossaryentry{adapter}
-{
-  type=mtc,
-  name= {Adapter},
-  description= {An application that provides data from a piece of equipment to an MTConnect Agent}
-}
-
-
-\newglossaryentry{agent}
-{
-  type=mtc,
-  name= {Agent},
-  description= {The Middleware Broker and Protocol Server for the MTConnect Standard using a REST HTTP Interface}
-}
-
-
-\newglossaryentry{asset}
-{
-  type= mtc,
-  name= {Asset},
-  plural= {Assets},
-  description= {A complex information model relating to an entity in the manufacturing process that does not directly supply data}
-}
-
-
-\newglossaryentry{attribute}
-{
-  name= {Attribute},
-  plural= {Attributes},
-  description= {}
 }
 
 
@@ -473,6 +440,12 @@
   description={}
 }
 
+\newglossaryentry{deprecated}
+{
+  type=mtc,
+  name={deprecated},
+  description={Deprecated Element}
+}
 
 \newglossaryentry{description}
 {
@@ -1088,6 +1061,17 @@
   kindplural={component},
   description={},
   descriptionplural={An XML container used to organize information for \gls{lower level} elements representing types of items, materials, and personnel that support the operation of a piece of equipment or work to be performed at a location. \glspl{resource} also represents materials or other items consumed or transformed by a piece of equipment for production of parts or other types of goods.}
+}
+
+
+\newglossaryentry{power}
+{
+  type=mtc,
+  category=code,
+  name={Power},
+    deprecated=true,
+  kind={component},
+  description={}
 }
 
 
@@ -2290,6 +2274,7 @@
   name={OVERRIDE},
   description={The operators overridden value. Percent of commanded.  DEPRECATED in Version 1.3.   See \gls{event category} category data items.},
   units=\cfont{\gls{percent}},
+    deprecated=true,
   kind={subtype,sample},
   facet={\gls{float}}
 }
@@ -2504,8 +2489,9 @@
   elementname=\deprecated{\cfont{GlobalPosition}},
   description={DEPRECATED in Version 1.1},
   units={},
+    deprecated=true,
   kind={type,sample},
-  facet={\gls{float}}
+  facet={}
 }
 
 
@@ -2566,8 +2552,9 @@
   elementname=\cfont{Level},
   description={DEPRECATED in Version 1.2.  See \gls{filllevel sample}},
   units={},
+    deprecated=true,
   kind={type,sample},
-  facet={\gls{float}}
+  facet={}
 }
 
 
@@ -2666,6 +2653,7 @@
   name={OVERRIDE},
   description={The operators overridden value.  Percent of commanded. DEPRECATED in Version 1.3.   See \gls{event category} category \glspl{dataitem}.},
   units=\cfont{\gls{percent}},
+    deprecated=true,
   kind={subtype,sample},
   facet={\gls{float}}
 }
@@ -2950,6 +2938,7 @@
   name={OVERRIDE},
   description={The operators overridden value.  Percent of commanded. DEPRECATED in Version 1.3.   See \gls{event category} category \glspl{dataitem}.},
   units=\cfont{\gls{percent}},
+    deprecated=true,
   kind={subtype,sample},
   facet={\gls{float}}
 }
@@ -3048,8 +3037,9 @@
   elementname=\deprecated{\cfont{SpindleSpeed}},
   description={DEPRECATED in Version 1.2.  Replaced by \gls{rotaryvelocity sample}},
   units={},
+    deprecated=true,
   kind={type,sample},
-  facet={\gls{float}}
+  facet={}
 }
 
 
@@ -3336,8 +3326,9 @@
   name=\deprecated{ALARM},
   elementname=\deprecated{\cfont{Alarm}},
   description={DEPRECATED: Replaced with \gls{condition category} category data items in Version 1.1.0.},
+    deprecated=true,
   kind={type,event},
-  facet={\gls{string}}
+  facet={}
 }
 
 
@@ -3507,8 +3498,9 @@
   name=\deprecated{CODE},
   elementname=\deprecated{\cfont{Code}},
   description={DEPRECATED in Version 1.1.},
+    deprecated=true,
   kind={type,event},
-  facet={\gls{string}}
+  facet={}
 }
 
 
@@ -3978,8 +3970,9 @@
   name=\deprecated{LINE},
   elementname=\deprecated{\cfont{Line}},
   description={DEPRECATED in Version 1.4.0.},
+    deprecated=true,
   kind={type,event},
-  facet={\gls{float}}
+  facet={}
 }
 
 
@@ -4293,8 +4286,9 @@
   name=\deprecated{POWER\_STATUS},
   elementname=\deprecated{\cfont{PowerStatus}},
   description={DEPRECATED in Version 1.1.0.},
+    deprecated=true,
   kind={type,event},
-  facet={\gls{string}}
+  facet={}
 }
 
 
@@ -4428,8 +4422,9 @@
   name={TOOL\_ID},
   elementname=\cfont{ToolId},
   description={DEPRECATED in Version 1.2.0.   See \gls{toolassetid event}. \deprecated{The identifier of the tool currently in use for a given Path.}},
+    deprecated=true,
   kind={type,event},
-  facet={\gls{string}}
+  facet={}
 }
 
 
@@ -6387,6 +6382,7 @@
   type=mtc,
   category=code,
   name=\deprecated{CuttingToolDefinition},
+  kind={deprecated},
   description={\DEPRECATED for \gls{cuttingtool} in Version 1.3.0.   \newline \deprecated{Reference to an ISO 13399.}}
 }
 
@@ -7595,3 +7591,170 @@
   kind={facet},
   facet={\gls{string}}
 }
+
+\longnewglossaryentry{abstract element}
+{
+  name= {Abstract Element}
+}
+{
+  An element that defines a set of common characteristics that are shared by a group of elements.
+  
+  An abstract element cannot appear in a document. In a specific implementation of a schema, an abstract element is replaced by a derived element that is itself not an abstract element. The characteristics for the derived element are inherited from the abstract element. 
+  
+  Appears in the documents in the following form: abstract.
+}
+
+
+\longnewglossaryentry{adapter}
+{
+  name= {Adapter}
+}
+{
+  An optional piece of hardware or software that transforms information provided by a piece of equipment into a form that can be received by an MTConnect Agent.
+
+  Appears in the documents in the following form: adapter.
+}
+
+
+\longnewglossaryentry{agent}
+{
+  name= {Agent}
+}
+{
+  Refers to an MTConnect Agent. 
+  
+  Software that collects data published from one or more piece(s) of equipment, organizes that data in a structured manner, and responds to requests for data from client software systems by providing a structured response in the form of a Response Document that is constructed using the semantic data models defined in the Standard. 
+  Appears in the documents in the following form: MTConnect Agent or Agent.
+}
+
+
+\longnewglossaryentry{application programming interface}
+{
+  name= {Application Programming Interface}
+}
+{
+  A set of methods to provide communications between software applications.
+
+  The API defined in the MTConnect Standard describes the methods for providing the Request/Response Information Exchange between an MTConnect Agent and client software applications.
+  
+  Appears in the documents in the following forms: Application Programming Interface or API.
+}
+
+
+\longnewglossaryentry{archetype}
+{
+  name={Archetype}
+}
+{
+  \ulheading{General Description of an MTConnect Asset}:
+  
+  Archetype is a class of MTConnect Assets that provides the requirements, constraints, and common properties for a type of MTConnect Asset.
+
+  Appears in the documents in the following form: Archetype.
+
+  \ulheading{Used as an XML term describing an MTConnect Asset}:
+  
+  In an XML representation of the Assets Information Model, Archetype is an abstract element that is replaced by a specific type of Asset \gls{archetype mtconnectassets}. 
+  
+  Appears in the documents in the following form: \gls{archetype mtconnectassets}
+}
+
+
+\newglossaryentry{archetype mtconnectassets}
+{
+  type=mtc,
+  category=code,
+  name={Archetype},
+  description={}
+}
+
+\longnewglossaryentry{asset}
+{
+  name= {Asset},
+  plural= {Assets}
+}
+{
+  \ulheading{General meaning}:
+
+  Typically referred to as an MTConnect Asset.
+
+  An MTConnect Asset is something that is used in the manufacturing process, but is not permanently associated with a single piece of equipment, can be removed from the piece of equipment without compromising its function, and can be associated with other pieces of equipment during its lifecycle.
+
+  \ulheading{Used to identify a storage area in an MTConnect Agent}:
+
+  See description of Buffer.
+
+  \ulheading{Used as an Information Model}:
+
+  Used to describe an Information Model that contains the rules and terminology that describe information that may be included in electronic documents representing MTConnect Assets.
+
+  The Assets Information Model defines the structure for the Assets Response Document.
+
+  Individual Information Models describe the structure of the Asset Documents represent each type of MTConnect Asset. Appears in the documents in the following form: Assets Information Model or (asset type) Information Model.
+  
+  \ulheading{Used when referring to an MTConnect Asset}:
+
+  Refers to the information related to an MTConnect Asset or a group of MTConnect Assets.
+
+  Appears in the documents in the following form: \gls{asset} or \glspl{asset}.
+
+  \ulheading{Used as an XML container or element}:
+
+  \begin{itemize}
+      \item When used as an XML container that consists of one or more types of Asset XML elements.
+      
+      Appears in the documents in the following form: Assets.
+      \item When used as an abstract XML element. It is replaced in the XML document by types of Asset elements representing individual Asset entities.
+      
+      Appears in the documents in the following form: \gls{asset mtconnectassets}.
+  \end{itemize}
+
+  \ulheading{Used to describe information stored in an MTConnect Agent}:
+
+  Identifies an electronic document published by a data source and stored in the assets buffer of an MTConnect Agent.
+  
+  Appears in the documents in the following form: Asset Document.
+  
+  \ulheading{Used as an XML representation of an MTConnect Response document}:
+
+  Identifies an electronic document encoded in XML and published by an MTConnect Agent in response to a Request for information from a client software application relating to MTConnect Assets.
+
+  Appears in the documents in the following form: \glspl{mtconnectasset}.
+
+  \ulheading{Used as an MTConnect Request}:
+
+  Represents a specific type of communications request between a client software application and an MTConnect Agent regarding MTConnect Assets.
+
+  Appears in the documents in the following form: Asset Request.
+
+  \ulheading{Used as part of an HTTP Request}:
+
+  Used in the path portion of an HTTP Request Line, by a client software application, to initiate an Asset Request to an MTConnect Agent to publish an MTConnectAssets document.
+
+  Appears in the documents in the following form: asset.
+}
+
+
+\longnewglossaryentry{attribute}
+{
+  name={attribute},
+  plural={attributes}
+}
+{
+  A term that is used to provide additional information or properties for an element.
+
+  Appears in the documents in the following form: attribute.
+}
+
+
+\longnewglossaryentry{base functional structure}
+{
+  name={Base Functional Structure}
+}
+{
+  A consistent set of functionalities defined by the MTConnect Standard. This functionality includes the protocol(s) used to communicate data to a client software application, the semantic data models defining how that data is organized into Response Documents, and the encoding of those Response Documents.
+
+  Appears in the documents in the following form: Base Functional Structure.
+}
+
+

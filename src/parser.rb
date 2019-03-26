@@ -4,6 +4,20 @@ require 'latex_parser'
 
 INF = 0xFFFFFFFF
 
+module Annotation
+  def annotation
+    unless @check_glossary
+      e = Glossary[name.to_s.downcase]
+      unless e.nil? or e.description.empty?
+        @annotation = e.description
+      end
+      @checked_glossary = true
+    end
+    @annotation
+  end
+end
+    
+
 class Schema
   module Standards
     def all_standards(fill = false)
@@ -140,6 +154,7 @@ class Schema
     attr_accessor :version
 
     include Standards
+    include Annotation
 
     def initialize(schema, name, annotation, parent = nil)
       @name, @annotation, @parent = name, annotation, parent
@@ -153,14 +168,6 @@ class Schema
     def resolve
     end
 
-    def annotation
-      e = Glossary[name.to_s.downcase]
-      unless e.nil? or e.description.empty?
-        @annotation = e.description
-      end
-      @annotation
-    end
-    
     def build_hierarchy
     end
   end
@@ -193,10 +200,12 @@ class Schema
 
   class ControlledVocabulary < Type
     attr_reader :values, :attr, :extensible
+    include Annotation
     
     class Value
       attr_reader :name, :annotation
       include Standards
+      include Annotation
       
       def initialize(schema, name, annotation, &block)
         @schema, @name, @annotation = schema, name, annotation
@@ -281,6 +290,7 @@ class Schema
   class Element < Type
     attr_reader :members, :parent, :polymorphic
     attr_accessor :force_element
+    include Annotation
 
     def initialize(schema, name, annotation, parent = nil, &block)
       super(schema, name, annotation, parent)
@@ -465,9 +475,10 @@ class Schema
   
   class Member
     include Comparable
+    include Annotation
     
     attr_reader :name, :type
-    attr_accessor :occurrence, :annotation, :default, :notQName, :processContents, :namespace, :notNamespace,
+    attr_accessor :occurrence, :default, :notQName, :processContents, :namespace, :notNamespace,
       :fixed
     
     INF = 0xFFFFFFFF

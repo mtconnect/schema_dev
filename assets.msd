@@ -17,7 +17,7 @@ package :Assets, 'Mobile Assets' do
     abstract
     member :AssetId, 'The unique identifier of the asset'
     member :Timestamp, 'The time asset information was recorded'
-    member :DeviceUuid, 'The uuid this tool is associated with', 0..1, :Uuid
+    member :DeviceUuid, 'The uuid this tool is associated with', :Uuid
     member :Removed, 'The asset has been marked as removed', 0..1
   end
 end

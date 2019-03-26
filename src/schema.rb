@@ -142,12 +142,9 @@ class Schema
       # Start out with a complex type.
       complex_type = REXML::Element.new('xs:complexType')
       complex_type.add_attribute('name', name_as_xsd_type)
-      
-      anno = REXML::Element.new('xs:annotation')
-      docs = REXML::Element.new('xs:documentation')
-      docs.text = @annotation
-      anno << docs
-      complex_type << anno
+
+      complex_type.add_element('xs:annotation').
+          add_element('xs:documentation').text = annotation
       
       # Check for a pure abstract class.
       complex_type.add_attribute('abstract', 'true') if abstract?
@@ -310,12 +307,8 @@ class Schema
       element.add_attribute('type', name_as_xsd_type(true))
 
       # Annotate again for XML Spy documentation.
-      anno = REXML::Element.new('xs:annotation')
-      docs = REXML::Element.new('xs:documentation')
-      docs.text = @annotation
-      anno << docs
-      element << anno
-
+      element.add_element('xs:annotation').
+        add_element('xs:documentation').text = annotation
       element
     end
 
@@ -442,11 +435,8 @@ class Schema
       # Basic types are all simple types.
       simple_type = REXML::Element.new('xs:simpleType')
       simple_type.add_attribute('name', name_as_xsd_type)
-      anno = REXML::Element.new('xs:annotation')
-      docs = REXML::Element.new('xs:documentation')
-      docs.text = @annotation
-      anno << docs
-      simple_type << anno
+      simple_type.add_element('xs:annotation').
+          add_element('xs:documentation').text = annotation
 
       if @union
         names = @union.map { |n| base_type(n) }.join(' ')
@@ -504,7 +494,7 @@ class Schema
         
         # Put the documention here as well
         element.add_element('xs:annotation').
-          add_element('xs:documentation').text = @annotation
+          add_element('xs:documentation').text = annotation
       else
         type = resolve_type
         element = REXML::Element.new('xs:element')
@@ -529,7 +519,7 @@ class Schema
           if type
             #puts "#{name} #{type.name}"
             element.add_element('xs:annotation').
-              add_element('xs:documentation').text = @annotation
+              add_element('xs:documentation').text = annotation
           end
         end
       end
@@ -570,7 +560,12 @@ class Schema
         
         # If the extension was specified, add to the extension otherwise
         # add directly tot he complex type.
-        element.add_element('xs:attribute', attrs)
+        a = element.add_element('xs:attribute', attrs)
+        anno = self.annotation
+        if anno
+          a.add_element('xs:annotation').
+            add_element('xs:documentation').text = anno
+        end
       end
     end
   end
@@ -624,11 +619,9 @@ class Schema
       
       simple_type = REXML::Element.new('xs:simpleType')
       simple_type.add_attribute('name', ele_name)
-      anno = REXML::Element.new('xs:annotation')
-      docs = REXML::Element.new('xs:documentation')
-      docs.text = @annotation
-      anno << docs
-      simple_type << anno
+      simple_type.add_element('xs:annotation').
+          add_element('xs:documentation').text = annotation
+      
 
       restriction = REXML::Element.new('xs:restriction')
 
@@ -642,11 +635,11 @@ class Schema
       else
         restriction.add_attribute('base', 'xs:NMTOKEN')
       end
-
+      
       if @parent and (parent_type = @schema.type(@parent))
         parent_type.add_enumeration(restriction)
       end
-
+      
       # Add the enumerations.
       add_enumeration(restriction)
       simple_type << restriction
@@ -658,16 +651,10 @@ class Schema
         
         simple_type = REXML::Element.new('xs:simpleType')
         simple_type.add_attribute('name', name_as_xsd_type)
-        anno = REXML::Element.new('xs:annotation')
-        docs = REXML::Element.new('xs:documentation')
-        docs.text = @annotation
-        anno << docs
-        simple_type << anno
-
-        union = REXML::Element.new('xs:union')
-        union.add_attribute('memberTypes', "#{ele_name} #{@extensible}Type")
-        simple_type << union
+        simple_type.add_element('xs:annotation').
+          add_element('xs:documentation').text = annotation
         
+        simple_type.add_element('xs:union', { 'memberTypes' => "#{ele_name} #{@extensible}Type" })
         elements << simple_type
       end
       

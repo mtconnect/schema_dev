@@ -394,7 +394,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='GLOBAL_POSITION'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.1
+            DEPRECATED: DEPRECATED in Version 1.1
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -408,7 +408,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LEVEL'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.2. See filllevel sample
+            DEPRECATED: DEPRECATED in Version 1.2. See filllevel sample
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -518,7 +518,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SPINDLE_SPEED'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
+            DEPRECATED: DEPRECATED in Version 1.2. Replaced by rotaryvelocity
+            sample
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -624,8 +625,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ALARM'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED: Replaced with condition category category data items in
-            Version 1.1.0.
+            DEPRECATED: DEPRECATED: Replaced with condition category category
+            data items in Version 1.1.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -707,7 +708,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='CODE'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.1.
+            DEPRECATED: DEPRECATED in Version 1.1.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -814,7 +815,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINE'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.4.0.
+            DEPRECATED: DEPRECATED in Version 1.4.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -919,7 +920,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POWER_STATUS'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.1.0.
+            DEPRECATED: DEPRECATED in Version 1.1.0.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1008,8 +1009,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TOOL_ID'>
         <xs:annotation>
           <xs:documentation>
-            DEPRECATED in Version 1.2.0. See toolassetid event. The identifier
-            of the tool currently in use for a given Path.
+            DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid event. The
+            identifier of the tool currently in use for a given Path.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1302,8 +1303,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='OVERRIDE'>
         <xs:annotation>
           <xs:documentation>
-            The operators overridden value. Percent of commanded. DEPRECATED in
-            Version 1.3. See event category category data items.
+            DEPRECATED: The operators overridden value. Percent of commanded.
+            DEPRECATED in Version 1.3. See event category category data items.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2678,13 +2679,55 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='xs:string'>
-        <xs:attribute name='version' type='VersionType' use='required'/>
-        <xs:attribute name='creationTime' type='CreationTimeType' use='required'/>
-        <xs:attribute name='testIndicator' type='TestIndicatorType' use='optional'/>
-        <xs:attribute name='instanceId' type='InstanceIdType' use='required'/>
-        <xs:attribute name='sender' type='SenderType' use='required'/>
-        <xs:attribute name='assetBufferSize' type='AssetBufferSizeType' use='required'/>
-        <xs:attribute name='assetCount' type='AssetCountAttrType' use='required'/>
+        <xs:attribute name='version' type='VersionType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The document version
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='creationTime' type='CreationTimeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The date and time the document was created
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='testIndicator' type='TestIndicatorType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              Indicates that this was a test document
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='instanceId' type='InstanceIdType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The unique instance identifier of this agent process
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='sender' type='SenderType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The sender of the message
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='assetBufferSize' type='AssetBufferSizeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The maximum number of assets
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='assetCount' type='AssetCountAttrType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The number of assets we have
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -2705,7 +2748,47 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Assets' type='AssetsType'>
         <xs:annotation>
           <xs:documentation>
-            The assets
+             General meaning: Typically referred to as an MTConnect Asset. An
+            MTConnect Asset is something that is used in the manufacturing
+            process, but is not permanently associated with a single piece of
+            equipment, can be removed from the piece of equipment without
+            compromising its function, and can be associated with other pieces
+            of equipment during its lifecycle. Used to identify a storage area
+            in an MTConnect Agent: See description of Buffer. Used as an
+            Information Model: Used to describe an Information Model that
+            contains the rules and terminology that describe information that
+            may be included in electronic documents representing MTConnect
+            Assets. The Assets Information Model defines the structure for the
+            Assets Response Document. Individual Information Models describe the
+            structure of the Asset Documents represent each type of MTConnect
+            Asset. Appears in the documents in the following form: Assets
+            Information Model or (asset type) Information Model. Used when
+            referring to an MTConnect Asset: Refers to the information related
+            to an MTConnect Asset or a group of MTConnect Assets. Appears in the
+            documents in the following form: asset or asset. Used as an XML
+            container or element: itemize item When used as an XML container
+            that consists of one or more types of Asset XML elements. Appears in
+            the documents in the following form: Assets. item When used as an
+            abstract XML element. It is replaced in the XML document by types of
+            Asset elements representing individual Asset entities. Appears in
+            the documents in the following form: asset mtconnectassets. itemize
+            Used to describe information stored in an MTConnect Agent:
+            Identifies an electronic document published by a data source and
+            stored in the assets buffer of an MTConnect Agent. Appears in the
+            documents in the following form: Asset Document. Used as an XML
+            representation of an MTConnect Response document: Identifies an
+            electronic document encoded in XML and published by an MTConnect
+            Agent in response to a Request for information from a client
+            software application relating to MTConnect Assets. Appears in the
+            documents in the following form: mtconnectasset. Used as an
+            MTConnect Request: Represents a specific type of communications
+            request between a client software application and an MTConnect Agent
+            regarding MTConnect Assets. Appears in the documents in the
+            following form: Asset Request. Used as part of an HTTP Request: Used
+            in the path portion of an HTTP Request Line, by a client software
+            application, to initiate an Asset Request to an MTConnect Agent to
+            publish an MTConnectAssets document. Appears in the documents in the
+            following form: asset. 
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2746,7 +2829,44 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AssetsType'>
     <xs:annotation>
       <xs:documentation>
-        The collection of mobile assets
+         General meaning: Typically referred to as an MTConnect Asset. An
+        MTConnect Asset is something that is used in the manufacturing process,
+        but is not permanently associated with a single piece of equipment, can
+        be removed from the piece of equipment without compromising its
+        function, and can be associated with other pieces of equipment during
+        its lifecycle. Used to identify a storage area in an MTConnect Agent:
+        See description of Buffer. Used as an Information Model: Used to
+        describe an Information Model that contains the rules and terminology
+        that describe information that may be included in electronic documents
+        representing MTConnect Assets. The Assets Information Model defines the
+        structure for the Assets Response Document. Individual Information
+        Models describe the structure of the Asset Documents represent each type
+        of MTConnect Asset. Appears in the documents in the following form:
+        Assets Information Model or (asset type) Information Model. Used when
+        referring to an MTConnect Asset: Refers to the information related to an
+        MTConnect Asset or a group of MTConnect Assets. Appears in the documents
+        in the following form: asset or asset. Used as an XML container or
+        element: itemize item When used as an XML container that consists of one
+        or more types of Asset XML elements. Appears in the documents in the
+        following form: Assets. item When used as an abstract XML element. It is
+        replaced in the XML document by types of Asset elements representing
+        individual Asset entities. Appears in the documents in the following
+        form: asset mtconnectassets. itemize Used to describe information stored
+        in an MTConnect Agent: Identifies an electronic document published by a
+        data source and stored in the assets buffer of an MTConnect Agent.
+        Appears in the documents in the following form: Asset Document. Used as
+        an XML representation of an MTConnect Response document: Identifies an
+        electronic document encoded in XML and published by an MTConnect Agent
+        in response to a Request for information from a client software
+        application relating to MTConnect Assets. Appears in the documents in
+        the following form: mtconnectasset. Used as an MTConnect Request:
+        Represents a specific type of communications request between a client
+        software application and an MTConnect Agent regarding MTConnect Assets.
+        Appears in the documents in the following form: Asset Request. Used as
+        part of an HTTP Request: Used in the path portion of an HTTP Request
+        Line, by a client software application, to initiate an Asset Request to
+        an MTConnect Agent to publish an MTConnectAssets document. Appears in
+        the documents in the following form: asset. 
       </xs:documentation>
     </xs:annotation>
     <xs:choice minOccurs='0' maxOccurs='unbounded'>
@@ -2756,18 +2876,127 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AssetType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        An abstract mobile asset
+         General meaning: Typically referred to as an MTConnect Asset. An
+        MTConnect Asset is something that is used in the manufacturing process,
+        but is not permanently associated with a single piece of equipment, can
+        be removed from the piece of equipment without compromising its
+        function, and can be associated with other pieces of equipment during
+        its lifecycle. Used to identify a storage area in an MTConnect Agent:
+        See description of Buffer. Used as an Information Model: Used to
+        describe an Information Model that contains the rules and terminology
+        that describe information that may be included in electronic documents
+        representing MTConnect Assets. The Assets Information Model defines the
+        structure for the Assets Response Document. Individual Information
+        Models describe the structure of the Asset Documents represent each type
+        of MTConnect Asset. Appears in the documents in the following form:
+        Assets Information Model or (asset type) Information Model. Used when
+        referring to an MTConnect Asset: Refers to the information related to an
+        MTConnect Asset or a group of MTConnect Assets. Appears in the documents
+        in the following form: asset or asset. Used as an XML container or
+        element: itemize item When used as an XML container that consists of one
+        or more types of Asset XML elements. Appears in the documents in the
+        following form: Assets. item When used as an abstract XML element. It is
+        replaced in the XML document by types of Asset elements representing
+        individual Asset entities. Appears in the documents in the following
+        form: asset mtconnectassets. itemize Used to describe information stored
+        in an MTConnect Agent: Identifies an electronic document published by a
+        data source and stored in the assets buffer of an MTConnect Agent.
+        Appears in the documents in the following form: Asset Document. Used as
+        an XML representation of an MTConnect Response document: Identifies an
+        electronic document encoded in XML and published by an MTConnect Agent
+        in response to a Request for information from a client software
+        application relating to MTConnect Assets. Appears in the documents in
+        the following form: mtconnectasset. Used as an MTConnect Request:
+        Represents a specific type of communications request between a client
+        software application and an MTConnect Agent regarding MTConnect Assets.
+        Appears in the documents in the following form: Asset Request. Used as
+        part of an HTTP Request: Used in the path portion of an HTTP Request
+        Line, by a client software application, to initiate an Asset Request to
+        an MTConnect Agent to publish an MTConnectAssets document. Appears in
+        the documents in the following form: asset. 
       </xs:documentation>
     </xs:annotation>
-    <xs:attribute name='assetId' type='AssetIdType' use='required'/>
-    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
-    <xs:attribute name='deviceUuid' type='UuidType' use='optional'/>
-    <xs:attribute name='removed' type='RemovedType' use='optional'/>
+    <xs:attribute name='assetId' type='AssetIdType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The unique identifier for the mtconnect asset. The identifier MUST be
+          unique with respect to all other asset in an MTConnect installation.
+          The identifier SHOULD be globally unique with respect to all other
+          asset.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='timestamp' type='TimestampType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The time asset information was recorded
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='deviceUuid' type='UuidType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The piece of equipments UUID that supplied this data. This is an
+          optional element references to the UUID attribute given in the device
+          element. This can be any series of numbers and letters as defined by
+          the XML type nmtoken.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='removed' type='RemovedType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          This is an optional attribute that is an indicator that the mtconnect
+          asset has been removed from the piece of equipment. If the asset is
+          marked as removed, it will not be visible to the client application
+          unless the=true parameter is provided in the URL. If this attribute is
+          not present it MUST be assumed to be false. The value is an
+          xsi:boolean type and MUST be true or false.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:element abstract='true' name='Asset' type='AssetType'>
     <xs:annotation>
       <xs:documentation>
-        An abstract mobile asset
+         General meaning: Typically referred to as an MTConnect Asset. An
+        MTConnect Asset is something that is used in the manufacturing process,
+        but is not permanently associated with a single piece of equipment, can
+        be removed from the piece of equipment without compromising its
+        function, and can be associated with other pieces of equipment during
+        its lifecycle. Used to identify a storage area in an MTConnect Agent:
+        See description of Buffer. Used as an Information Model: Used to
+        describe an Information Model that contains the rules and terminology
+        that describe information that may be included in electronic documents
+        representing MTConnect Assets. The Assets Information Model defines the
+        structure for the Assets Response Document. Individual Information
+        Models describe the structure of the Asset Documents represent each type
+        of MTConnect Asset. Appears in the documents in the following form:
+        Assets Information Model or (asset type) Information Model. Used when
+        referring to an MTConnect Asset: Refers to the information related to an
+        MTConnect Asset or a group of MTConnect Assets. Appears in the documents
+        in the following form: asset or asset. Used as an XML container or
+        element: itemize item When used as an XML container that consists of one
+        or more types of Asset XML elements. Appears in the documents in the
+        following form: Assets. item When used as an abstract XML element. It is
+        replaced in the XML document by types of Asset elements representing
+        individual Asset entities. Appears in the documents in the following
+        form: asset mtconnectassets. itemize Used to describe information stored
+        in an MTConnect Agent: Identifies an electronic document published by a
+        data source and stored in the assets buffer of an MTConnect Agent.
+        Appears in the documents in the following form: Asset Document. Used as
+        an XML representation of an MTConnect Response document: Identifies an
+        electronic document encoded in XML and published by an MTConnect Agent
+        in response to a Request for information from a client software
+        application relating to MTConnect Assets. Appears in the documents in
+        the following form: mtconnectasset. Used as an MTConnect Request:
+        Represents a specific type of communications request between a client
+        software application and an MTConnect Agent regarding MTConnect Assets.
+        Appears in the documents in the following form: Asset Request. Used as
+        part of an HTTP Request: Used in the path portion of an HTTP Request
+        Line, by a client software application, to initiate an Asset Request to
+        an MTConnect Agent to publish an MTConnectAssets document. Appears in
+        the documents in the following form: asset. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -2886,7 +3115,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='RepresentationType'>
     <xs:annotation>
       <xs:documentation>
-        The possible representations of a DataItem
+        Description of a means to interpret data consisting of multiple data
+        points or samples reported as a single value. representation is an
+        optional attribute. representation will define a unique format for each
+        set of data. representation for timeseries representation, discrete
+        representation, and value representation are defined below in Section
+        red 7.2.2.12. If representation is not specified, it MUST be determined
+        to be value representation.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -2980,25 +3215,119 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='ResetTrigger' type='DataItemResetValueType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The event that triggers the resetting of this counter
+            resettrigger is an optional XML element that identifies the type of
+            event that may cause a reset to occur. It is additional information
+            regarding the meaning of the data that establishes an understanding
+            of the time frame that the data represents so that the data may be
+            correctly understood by a client software application.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='name' type='NameType' use='optional'/>
-    <xs:attribute name='id' type='IDType' use='required'/>
-    <xs:attribute name='type' type='DataItemEnumType' use='required'/>
-    <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'/>
-    <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
-    <xs:attribute name='units' type='UnitsType' use='optional'/>
-    <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'/>
-    <xs:attribute name='nativeScale' type='NativeScaleType' use='optional'/>
-    <xs:attribute name='category' type='CategoryType' use='required'/>
-    <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'/>
-    <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
-    <xs:attribute name='sampleRate' type='DataItemSampleRateType' use='optional'/>
-    <xs:attribute name='representation' type='RepresentationType' use='optional' default='VALUE'/>
-    <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'/>
+    <xs:attribute name='name' type='NameType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The optional implementors name of the measurement.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='id' type='IDType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The unique identifier for this element.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='type' type='DataItemEnumType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The type of measurement
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The sub type for the measurement
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The statistical operation on this data
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='units' type='UnitsType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The units of the measurement
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The units as expressed by the machine
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='nativeScale' type='NativeScaleType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The units as expressed by the machine
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='category' type='CategoryType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The category of the data item
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The coordinate system used for the positions
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='compositionId' type='CompositionIdType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The optional composition identifier
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='sampleRate' type='DataItemSampleRateType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          Used as the default sample rate for waveforms
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='representation' type='RepresentationType' use='optional' default='VALUE'>
+      <xs:annotation>
+        <xs:documentation>
+          Description of a means to interpret data consisting of multiple data
+          points or samples reported as a single value. representation is an
+          optional attribute. representation will define a unique format for
+          each set of data. representation for timeseries representation,
+          discrete representation, and value representation are defined below in
+          Section red 7.2.2.12. If representation is not specified, it MUST be
+          determined to be value representation.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The number of significant digits for this data item
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name='DataItemConstraintsType'>
     <xs:annotation>
@@ -3097,7 +3426,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='FilterValueType'>
-        <xs:attribute name='type' type='DataItemFilterEnumType' use='required'/>
+        <xs:attribute name='type' type='DataItemFilterEnumType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of filter, ABSOLUTE or PERCENT
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -3109,9 +3444,30 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='ItemSourceType'>
-        <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'/>
-        <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'/>
-        <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
+        <xs:attribute name='dataItemId' type='SourceDataItemIdType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The optional data item within the source component that provides
+              the underlying data
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='componentId' type='SourceComponentIdType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The component that is collecting the data associated with this
+              data item
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='compositionId' type='CompositionIdType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The optional composition identifier for the source of this data
+              item
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -3149,7 +3505,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='DeviceStream' type='DeviceStreamType' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            The data from a device
+            A XML container element provided in the stream container in the
+            mtconnectstream document.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -3158,39 +3515,60 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='DeviceStreamType'>
     <xs:annotation>
       <xs:documentation>
-        Data related to a single device
+        A XML container element provided in the stream container in the
+        mtconnectstream document.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name='ComponentStream' type='ComponentStreamType' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            The data for each component
+            A XML container type element that organizes data returned from an
+            MTConnect Agent in response to a current or sample HTTP request.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='name' type='NameType' use='required'/>
-    <xs:attribute name='uuid' type='UuidType' use='required'/>
+    <xs:attribute name='name' type='NameType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The component name
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='uuid' type='UuidType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The unque identifier for this device
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name='ComponentStreamType'>
     <xs:annotation>
       <xs:documentation>
-        The stream of data for a component
+        A XML container type element that organizes data returned from an
+        MTConnect Agent in response to a current or sample HTTP request.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name='Samples' type='SamplesType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            A collection of samples
+            A XML element that provides the information and data reported from a
+            piece of equipment for those dataitem elements defined with a
+            category attribute of sample category in the mtconnectdevice
+            document. 
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='Events' type='EventsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            A collection of events
+            A XML element which provides the information and data reported from
+            a piece of equipment for those dataitem elements defined with a
+            category attribute of event category in the mtconnectdevice
+            document.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -3202,16 +3580,50 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='componentId' type='ComponentIdType' use='required'/>
-    <xs:attribute name='name' type='NameType' use='optional'/>
-    <xs:attribute name='nativeName' type='NameType' use='optional'/>
-    <xs:attribute name='component' type='NameType' use='required'/>
-    <xs:attribute name='uuid' type='UuidType' use='optional'/>
+    <xs:attribute name='componentId' type='ComponentIdType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The id of the component (maps to the id from probe)
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='name' type='NameType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The component name
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='nativeName' type='NameType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The device manufacturer component name
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='component' type='NameType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          An abstract XML element. Replaced in the XML document by types of
+          component elements representing physical parts and logical functions
+          of a piece of equipment.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='uuid' type='UuidType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The unque identifier for this component
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name='SamplesType'>
     <xs:annotation>
       <xs:documentation>
-        A collection of samples for this component
+        A XML element that provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of sample category in the mtconnectdevice document. 
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -3221,7 +3633,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='EventsType'>
     <xs:annotation>
       <xs:documentation>
-        A collection of events and alarms for this component
+        A XML element which provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of event category in the mtconnectdevice document.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -3255,12 +3669,48 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:restriction>
   </xs:simpleType>
   <xs:attributeGroup name='ObservationType'>
-    <xs:attribute name='sequence' type='SequenceType' use='required'/>
-    <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'/>
-    <xs:attribute name='timestamp' type='TimestampType' use='required'/>
-    <xs:attribute name='name' type='NameType' use='optional'/>
-    <xs:attribute name='dataItemId' type='DataItemIdType' use='required'/>
-    <xs:attribute name='compositionId' type='CompositionIdType' use='optional'/>
+    <xs:attribute name='sequence' type='SequenceType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The events sequence number
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The event subtype corresponding to the measurement subtype
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='timestamp' type='TimestampType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The time the event occurred or recorded
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='name' type='NameType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The name of the event corresponding to the measurement
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='dataItemId' type='DataItemIdType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The unique identifier of the item being produced
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='compositionId' type='CompositionIdType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The identifier of the sub-element this result is in reference to
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:attributeGroup>
   <xs:simpleType name='IntegerEventValueType'>
     <xs:annotation>
@@ -3309,16 +3759,33 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='EventType' abstract='true' mixed='true'>
     <xs:annotation>
       <xs:documentation>
-        An abstract event
+        A XML element which provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of event category in the mtconnectdevice document.
       </xs:documentation>
     </xs:annotation>
     <xs:attributeGroup ref='ObservationType'/>
-    <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'/>
+    <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          For those dataitem elements that report data that may be periodically
+          reset to an initial value, resettriggered identifies when a reported
+          value has been reset and what has caused that reset to occur.
+          resetTriggered is an optional attribute. resettriggered MUST only be
+          provided for the specific occurrence of a Data Entity reported in the
+          MTConnectStreams document when the reset occurred and MUSTNOT be
+          provided for any other occurrence of the Data Entity reported in a
+          MTConnectStreams document.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:element abstract='true' name='Event' type='EventType'>
     <xs:annotation>
       <xs:documentation>
-        An abstract event
+        A XML element which provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of event category in the mtconnectdevice document.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3783,7 +4250,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CodeType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1.
+        DEPRECATED: DEPRECATED in Version 1.1.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -3793,7 +4260,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Code' type='CodeType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1.
+        DEPRECATED: DEPRECATED in Version 1.1.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4248,17 +4715,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='LineType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.4.0.
+        DEPRECATED: DEPRECATED in Version 1.4.0.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='FloatEventType'/>
+      <xs:extension base='StringEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Line' type='LineType' substitutionGroup='FloatEvent'>
+  <xs:element name='Line' type='LineType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.4.0.
+        DEPRECATED: DEPRECATED in Version 1.4.0.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4543,7 +5010,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='PowerStatusType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1.0.
+        DEPRECATED: DEPRECATED in Version 1.1.0.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4553,7 +5020,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='PowerStatus' type='PowerStatusType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1.0.
+        DEPRECATED: DEPRECATED in Version 1.1.0.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4822,8 +5289,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ToolIdType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2.0. See toolassetid event. The identifier of
-        the tool currently in use for a given Path.
+        DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid event. The
+        identifier of the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4833,8 +5300,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ToolId' type='ToolIdType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2.0. See toolassetid event. The identifier of
-        the tool currently in use for a given Path.
+        DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid event. The
+        identifier of the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4900,9 +5367,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='WireType'>
     <xs:annotation>
       <xs:documentation>
-        The identifier for the type of wire used as the cutting mechanism in
-        Electrical Discharge Machining or similar processes. The valid data
-        value must be a text string.
+        A string like piece or filament of relatively rigid or flexible material
+        provided in a variety of diameters.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -4912,9 +5378,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Wire' type='WireType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
-        The identifier for the type of wire used as the cutting mechanism in
-        Electrical Discharge Machining or similar processes. The valid data
-        value must be a text string.
+        A string like piece or filament of relatively rigid or flexible material
+        provided in a variety of diameters.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -5200,8 +5665,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ToolIdDiscreteType'>
     <xs:annotation>
       <xs:documentation>
-        Discrete of DEPRECATED in Version 1.2.0. See toolassetid event. The
-        identifier of the tool currently in use for a given Path.
+        Discrete of DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid
+        event. The identifier of the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -5211,8 +5676,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ToolIdDiscrete' type='ToolIdDiscreteType' substitutionGroup='ToolId'>
     <xs:annotation>
       <xs:documentation>
-        Discrete of DEPRECATED in Version 1.2.0. See toolassetid event. The
-        identifier of the tool currently in use for a given Path.
+        Discrete of DEPRECATED: DEPRECATED in Version 1.2.0. See toolassetid
+        event. The identifier of the tool currently in use for a given Path.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -5369,19 +5834,55 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SampleType' abstract='true' mixed='true'>
     <xs:annotation>
       <xs:documentation>
-        An abstract sample
+        A XML element that provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of sample category in the mtconnectdevice document. 
       </xs:documentation>
     </xs:annotation>
     <xs:attributeGroup ref='ObservationType'/>
-    <xs:attribute name='sampleRate' type='SampleRateType' use='optional'/>
-    <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'/>
-    <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
-    <xs:attribute name='duration' type='DurationTimeType' use='optional'/>
+    <xs:attribute name='sampleRate' type='SampleRateType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The rate the waveform was sampled at, default back to the value given
+          in the data item
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='resetTriggered' type='DataItemResetValueType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          For those dataitem elements that report data that may be periodically
+          reset to an initial value, resettriggered identifies when a reported
+          value has been reset and what has caused that reset to occur.
+          resetTriggered is an optional attribute. resettriggered MUST only be
+          provided for the specific occurrence of a Data Entity reported in the
+          MTConnectStreams document when the reset occurred and MUSTNOT be
+          provided for any other occurrence of the Data Entity reported in a
+          MTConnectStreams document.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The statistical operation on this data
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='duration' type='DurationTimeType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The number of seconds since the reset of the statistic
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:element abstract='true' name='Sample' type='SampleType'>
     <xs:annotation>
       <xs:documentation>
-        An abstract sample
+        A XML element that provides the information and data reported from a
+        piece of equipment for those dataitem elements defined with a category
+        attribute of sample category in the mtconnectdevice document. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -5435,7 +5936,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='SampleType'>
-        <xs:attribute name='sampleCount' type='CountValueType' use='required'/>
+        <xs:attribute name='sampleCount' type='CountValueType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The number of samples
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -6042,7 +6549,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='GlobalPositionType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1
+        DEPRECATED: DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6052,14 +6559,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='GlobalPosition' type='GlobalPositionType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.1
+        DEPRECATED: DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='GlobalPositionTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.1
+        Time series of DEPRECATED: DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6069,7 +6576,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='GlobalPositionTimeSeries' type='GlobalPositionTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.1
+        Time series of DEPRECATED: DEPRECATED in Version 1.1
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6110,7 +6617,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='LevelType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2. See filllevel sample
+        DEPRECATED: DEPRECATED in Version 1.2. See filllevel sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6120,14 +6627,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Level' type='LevelType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2. See filllevel sample
+        DEPRECATED: DEPRECATED in Version 1.2. See filllevel sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='LevelTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.2. See filllevel sample
+        Time series of DEPRECATED: DEPRECATED in Version 1.2. See filllevel
+        sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6137,7 +6645,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='LevelTimeSeries' type='LevelTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.2. See filllevel sample
+        Time series of DEPRECATED: DEPRECATED in Version 1.2. See filllevel
+        sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6315,7 +6824,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='PHType'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the acidity or alkalinity.
+        A measure of the acidity or alkalinity of a solution
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6325,7 +6834,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='PH' type='PHType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the acidity or alkalinity.
+        A measure of the acidity or alkalinity of a solution
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6613,7 +7122,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SpindleSpeedType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
+        DEPRECATED: DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6623,15 +7132,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='SpindleSpeed' type='SpindleSpeedType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
+        DEPRECATED: DEPRECATED in Version 1.2. Replaced by rotaryvelocity sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='SpindleSpeedTimeSeriesType'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.2. Replaced by rotaryvelocity
-        sample
+        Time series of DEPRECATED: DEPRECATED in Version 1.2. Replaced by
+        rotaryvelocity sample
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6641,8 +7150,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='SpindleSpeedTimeSeries' type='SpindleSpeedTimeSeriesType' substitutionGroup='TimeSeries'>
     <xs:annotation>
       <xs:documentation>
-        Time series of DEPRECATED in Version 1.2. Replaced by rotaryvelocity
-        sample
+        Time series of DEPRECATED: DEPRECATED in Version 1.2. Replaced by
+        rotaryvelocity sample
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6899,9 +7408,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='VoltAmpereType'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the apparent power in an electrical circuit, equal to
-        the product of root-mean-square (RMS) voltage and RMS current (commonly
-        referred to as VA).
+        Volt-Ampere (VA)
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6911,9 +7418,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='VoltAmpere' type='VoltAmpereType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of the apparent power in an electrical circuit, equal to
-        the product of root-mean-square (RMS) voltage and RMS current (commonly
-        referred to as VA).
+        Volt-Ampere (VA)
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6941,8 +7446,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='VoltAmpereReactiveType'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of reactive power in an AC electrical circuit (commonly
-        referred to as VAR).
+        Volt-Ampere Reactive (VAR)
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -6952,8 +7456,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='VoltAmpereReactive' type='VoltAmpereReactiveType' substitutionGroup='CommonSample'>
     <xs:annotation>
       <xs:documentation>
-        The measurement of reactive power in an AC electrical circuit (commonly
-        referred to as VAR).
+        Volt-Ampere Reactive (VAR)
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -7098,11 +7601,41 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:simpleContent>
       <xs:extension base='ConditionDescriptionType'>
         <xs:attributeGroup ref='ObservationType'/>
-        <xs:attribute name='type' type='DataItemEnumType' use='required'/>
-        <xs:attribute name='nativeCode' type='NativeCodeType' use='optional'/>
-        <xs:attribute name='nativeSeverity' type='NativeSeverityType' use='optional'/>
-        <xs:attribute name='qualifier' type='QualifierType' use='optional'/>
-        <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'/>
+        <xs:attribute name='type' type='DataItemEnumType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of condition
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='nativeCode' type='NativeCodeType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The component specific Notifcation code
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='nativeSeverity' type='NativeSeverityType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The component specific Notifcation code
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='qualifier' type='QualifierType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              An optional attribute that helps qualify the condition
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='statistic' type='DataItemStatisticsType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The statistical operation on this data
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -7628,7 +8161,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CuttingToolDefinitionType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
-        The description of an asset, can be freeform text or elemenrts
+        Reference to an ISO 13399.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -7640,7 +8173,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:any>
     </xs:sequence>
-    <xs:attribute name='format' type='DefinitionFormatType' use='optional'/>
+    <xs:attribute name='format' type='DefinitionFormatType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The format of the data in the definition
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name='CuttingToolType'>
     <xs:annotation>
@@ -7663,14 +8202,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               <xs:element name='CuttingToolDefinition' type='CuttingToolDefinitionType'>
                 <xs:annotation>
                   <xs:documentation>
-                    DEPRECATED: Description of tool - now only in Archetype
+                    Reference to an ISO 13399.
                   </xs:documentation>
                 </xs:annotation>
               </xs:element>
               <xs:element name='CuttingToolLifeCycle' type='CuttingToolLifeCycleType' minOccurs='0' maxOccurs='1'>
                 <xs:annotation>
                   <xs:documentation>
-                    the tool lifecycle
+                    Data regarding the use of this tool.
                   </xs:documentation>
                 </xs:annotation>
               </xs:element>
@@ -7678,14 +8217,26 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             <xs:element name='CuttingToolLifeCycle' type='CuttingToolLifeCycleType'>
               <xs:annotation>
                 <xs:documentation>
-                  the tool lifecycle
+                  Data regarding the use of this tool.
                 </xs:documentation>
               </xs:annotation>
             </xs:element>
           </xs:choice>
         </xs:sequence>
-        <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
-        <xs:attribute name='cuttingToolId' type='CuttingToolIdType' use='required'/>
+        <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The manufacturer of this asset
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='cuttingToolId' type='CuttingToolIdType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The Identifier of the tool type
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -7710,14 +8261,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               <xs:element name='CuttingToolDefinition' type='CuttingToolDefinitionType'>
                 <xs:annotation>
                   <xs:documentation>
-                    Description of tool
+                    Reference to an ISO 13399.
                   </xs:documentation>
                 </xs:annotation>
               </xs:element>
               <xs:element name='CuttingToolLifeCycle' type='CuttingToolLifeCycleArchetypeType' minOccurs='0' maxOccurs='1'>
                 <xs:annotation>
                   <xs:documentation>
-                    the tool lifecycle
+                    Data regarding the use of this tool.
                   </xs:documentation>
                 </xs:annotation>
               </xs:element>
@@ -7725,13 +8276,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             <xs:element name='CuttingToolLifeCycle' type='CuttingToolLifeCycleArchetypeType'>
               <xs:annotation>
                 <xs:documentation>
-                  the tool lifecycle
+                  Data regarding the use of this tool.
                 </xs:documentation>
               </xs:annotation>
             </xs:element>
           </xs:choice>
         </xs:sequence>
-        <xs:attribute name='cuttingToolId' type='CuttingToolIdType' use='required'/>
+        <xs:attribute name='cuttingToolId' type='CuttingToolIdType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The Identifier of the tool type
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -7752,7 +8309,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='ReconditionCount' type='ReconditionCountType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The number of times the cutter has been reconditioned
+            The number of times this cutter has been reconditioned.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -7766,36 +8323,37 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='ProgramToolGroup' type='ProgramToolGroupType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The number used to identify this tool in the program
+            The tool group this tool is assigned in the part program.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='ProgramToolNumber' type='ProgramToolNumberType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The number used to identify this tool in the program
+            The number of the tool as referenced in the part program.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='ProcessSpindleSpeed' type='ProcessSpindleSpeedType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The tools constrained process target spindle speed
+            The constrained process spindle speed for this tool.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='ProcessFeedRate' type='ProcessFeedRateType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The tools constrained process target feed rate
+            The constrained process feed rate for this tool in mm/s.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='ConnectionCodeMachineSide' type='ConnectionCodeMachineSideType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            CCMS: identifier for the cabability to connect any component of the
-            cutting tool together, except assembly items, on the machine side
+            Identifier for the capability to connect any component of the
+            Cutting Tool together, except Assembly Items, on the machine side.
+            Code: CCMS
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -7825,71 +8383,72 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CuttingToolLifeCycleType'>
     <xs:annotation>
       <xs:documentation>
-        A defintion of a cutting tool application and life cycle
+        Data regarding the use of this tool.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name='CutterStatus' type='CutterStatusType' minOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The state of the tool assembly - only for Instance (not archetype)
+            The status of this assembly.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='ReconditionCount' type='ReconditionCountType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The number of times the cutter has been reconditioned
+            The number of times this cutter has been reconditioned.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='ToolLife' type='LifeType' minOccurs='0' maxOccurs='3'>
         <xs:annotation>
           <xs:documentation>
-            The life of the cutting tool assembly
+            The Cutting Tool life as related to this assembly.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='ProgramToolGroup' type='ProgramToolGroupType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The number used to identify this tool in the program
+            The tool group this tool is assigned in the part program.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='ProgramToolNumber' type='ProgramToolNumberType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The number used to identify this tool in the program
+            The number of the tool as referenced in the part program.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='Location' type='LocationType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The pocket location
+            The Pot or Spindle this tool currently resides in.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='ProcessSpindleSpeed' type='ProcessSpindleSpeedType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The tools constrained process target spindle speed
+            The constrained process spindle speed for this tool.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='ProcessFeedRate' type='ProcessFeedRateType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The tools constrained process target feed rate
+            The constrained process feed rate for this tool in mm/s.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name='ConnectionCodeMachineSide' type='ConnectionCodeMachineSideType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            CCMS: identifier for the cabability to connect any component of the
-            cutting tool together, except assembly items, on the machine side
+            Identifier for the capability to connect any component of the
+            Cutting Tool together, except Assembly Items, on the machine side.
+            Code: CCMS
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -7919,19 +8478,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CuttingToolArchetypeReferenceType'>
     <xs:annotation>
       <xs:documentation>
-        A reference to the cutting tool archetype
+        The content of this XML element is the assetid cuttingtool of the
+        cuttingtoolarchetype document. It MAY also contain a source attribute
+        that gives the URL of the archetype data as well.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='AssetIdType'>
-        <xs:attribute name='source' type='SourceType' use='optional'/>
+        <xs:attribute name='source' type='SourceType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              A uri representing where to get the cutting tool architype
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name='CutterStatusType'>
     <xs:annotation>
       <xs:documentation>
-        The set of applicatable status for this cutting tool
+        The status of this assembly.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -7947,56 +8514,121 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='LocationType'>
     <xs:annotation>
       <xs:documentation>
-        The location of the tool in the tool changer (pot) or the station of the
-        tool
+        The Pot or Spindle this tool currently resides in.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='LocationValueType'>
-        <xs:attribute name='type' type='LocationsType' use='required'/>
-        <xs:attribute name='negativeOverlap' type='OverlapType' use='optional'/>
-        <xs:attribute name='positiveOverlap' type='OverlapType' use='optional'/>
-        <xs:attribute name='turret' type='TurretLocationType' use='optional'/>
+        <xs:attribute name='type' type='LocationsType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of location
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='negativeOverlap' type='OverlapType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The number of location at lower index values from this location.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='positiveOverlap' type='OverlapType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The number of locations at higher index value from this location.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='turret' type='TurretLocationType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The turret the tool is currently mounted in or on
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name='ReconditionCountType'>
     <xs:annotation>
       <xs:documentation>
-        The number of times this tool has been reconditioned
+        The number of times this cutter has been reconditioned.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='ReconditionCountValueType'>
-        <xs:attribute name='maximumCount' type='MaximumCountType' use='optional'/>
+        <xs:attribute name='maximumCount' type='MaximumCountType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The maximum number of times this tool may be reconditioned.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name='ProcessSpindleSpeedType'>
     <xs:annotation>
       <xs:documentation>
-        The spindle speed properties of this tool
+        The constrained process spindle speed for this tool.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='SpeedType'>
-        <xs:attribute name='maximum' type='MaximumType' use='optional'/>
-        <xs:attribute name='minimum' type='MinimumType' use='optional'/>
-        <xs:attribute name='nominal' type='NominalType' use='optional'/>
+        <xs:attribute name='maximum' type='MaximumType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The maximum speed this tool may operate at
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='minimum' type='MinimumType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The minimum speed this tool may operate at
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='nominal' type='NominalType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The nominal speed this tool may operate at
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name='ProcessFeedRateType'>
     <xs:annotation>
       <xs:documentation>
-        The feed rate properties of this tool in MILLIMETERS/SECOND
+        The constrained process feed rate for this tool in mm/s.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='SpeedType'>
-        <xs:attribute name='maximum' type='MaximumType' use='optional'/>
-        <xs:attribute name='minimum' type='MinimumType' use='optional'/>
-        <xs:attribute name='nominal' type='NominalType' use='optional'/>
+        <xs:attribute name='maximum' type='MaximumType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The maximum feed rate this tool may operate at
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='minimum' type='MinimumType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The minimum feed rate this tool may operate at
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='nominal' type='NominalType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The nominal feed rate this tool may operate at
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -8008,13 +8640,55 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='MeasurementValueType'>
-        <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'/>
-        <xs:attribute name='units' type='UnitsType' use='optional'/>
-        <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'/>
-        <xs:attribute name='code' type='MeasurementCodeType' use='optional'/>
-        <xs:attribute name='maximum' type='MeasurementAttrType' use='optional'/>
-        <xs:attribute name='minimum' type='MeasurementAttrType' use='optional'/>
-        <xs:attribute name='nominal' type='MeasurementAttrType' use='optional'/>
+        <xs:attribute name='significantDigits' type='SignificantDigitsValueType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The number of significant digits
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='units' type='UnitsType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The units for the measurement. This will be defined by MTConnect
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='nativeUnits' type='NativeUnitsType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The native units for the measurement, if different from units
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='code' type='MeasurementCodeType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The shop or application specific code for this measurement
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='maximum' type='MeasurementAttrType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The maximum tolerance value
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='minimum' type='MeasurementAttrType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The minimum tolerance value
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='nominal' type='MeasurementAttrType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The nominal value
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -8090,8 +8764,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ProtrudingLengthType'>
     <xs:annotation>
       <xs:documentation>
-        dimension from the yz-plane to the furthest point of the tool item or
-        adaptive item measured in the -X direction
+        The dimension from the yz-plane to the furthest point of the Tool Item
+        or Adaptive Item measured in the -X direction. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8101,15 +8775,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ProtrudingLength' type='ProtrudingLengthType' substitutionGroup='CommonMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        dimension from the yz-plane to the furthest point of the tool item or
-        adaptive item measured in the -X direction
+        The dimension from the yz-plane to the furthest point of the Tool Item
+        or Adaptive Item measured in the -X direction. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='WeightType'>
     <xs:annotation>
       <xs:documentation>
-        WT: The weight measured in grams
+        The total weight of the Cutting Tool in grams. The force exerted by the
+        mass of the Cutting Tool. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8119,14 +8794,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Weight' type='WeightType' substitutionGroup='CommonMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        WT: The weight measured in grams
+        The total weight of the Cutting Tool in grams. The force exerted by the
+        mass of the Cutting Tool. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='FunctionalLengthType'>
     <xs:annotation>
       <xs:documentation>
-        LF: The furthest distance from the gauge plane.
+        The distance from the gauge plane or from the end of the shank to the
+        furthest point on the tool, if a gauge plane does not exist, to the
+        cutting reference point determined by the main function of the tool. The
+        cuttingtool functional length will be the length of the entire tool, not
+        a single Cutting Item. Each cuttingitem can have an independent
+        functionallength represented in its measurements. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8136,14 +8817,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='FunctionalLength' type='FunctionalLengthType' substitutionGroup='CommonMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        LF: The furthest distance from the gauge plane.
+        The distance from the gauge plane or from the end of the shank to the
+        furthest point on the tool, if a gauge plane does not exist, to the
+        cutting reference point determined by the main function of the tool. The
+        cuttingtool functional length will be the length of the entire tool, not
+        a single Cutting Item. Each cuttingitem can have an independent
+        functionallength represented in its measurements. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='BodyDiameterMaxType'>
     <xs:annotation>
       <xs:documentation>
-        BDX: The largest diameter of the body of a tool item
+        The largest diameter of the body of a Tool Item. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8153,19 +8839,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='BodyDiameterMax' type='BodyDiameterMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        BDX: The largest diameter of the body of a tool item
+        The largest diameter of the body of a Tool Item. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='BodyLengthMaxType'>
     <xs:annotation>
       <xs:documentation>
-        LBX: The distance measured along the X axis from that point of the item
-        closest to the workpiece, including the cutting item for a tool item but
-        excluding a protuding locking mechanism for an adaptive item, to either
+        The distance measured along the X axis from that point of the item
+        closest to the workpiece, including the Cutting Item for a Tool Item but
+        excluding a protruding locking mechanism for an Adaptive Item, to either
         the front of the flange on a flanged body or the beginning of the
         connection interface feature on the machine side for cylindrical or
-        prismatic shanks
+        prismatic shanks.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8175,21 +8861,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='BodyLengthMax' type='BodyLengthMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        LBX: The distance measured along the X axis from that point of the item
-        closest to the workpiece, including the cutting item for a tool item but
-        excluding a protuding locking mechanism for an adaptive item, to either
+        The distance measured along the X axis from that point of the item
+        closest to the workpiece, including the Cutting Item for a Tool Item but
+        excluding a protruding locking mechanism for an Adaptive Item, to either
         the front of the flange on a flanged body or the beginning of the
         connection interface feature on the machine side for cylindrical or
-        prismatic shanks
+        prismatic shanks.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='CuttingDiameterMaxType'>
     <xs:annotation>
       <xs:documentation>
-        DC: The maximum diameter of a circle on which the defined point Pk of
-        each of the master inserts is located on a tool item. The normal of the
-        machined peripheral surface points towards the axis of the cutting tool.
+        The maximum diameter of a circle on which the defined point Pk of each
+        of the master inserts is located on a Tool Item. The normal of the
+        machined peripheral surface points towards the axis of the Cutting Tool.
+        
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8199,17 +8886,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='CuttingDiameterMax' type='CuttingDiameterMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        DC: The maximum diameter of a circle on which the defined point Pk of
-        each of the master inserts is located on a tool item. The normal of the
-        machined peripheral surface points towards the axis of the cutting tool.
+        The maximum diameter of a circle on which the defined point Pk of each
+        of the master inserts is located on a Tool Item. The normal of the
+        machined peripheral surface points towards the axis of the Cutting Tool.
+        
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='FlangeDiameterMaxType'>
     <xs:annotation>
       <xs:documentation>
-        The maxumum dimension between two parallel tangents on the outside edge
-        of a flange
+        The dimension between two parallel tangents on the outside edge of a
+        flange. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8219,16 +8907,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='FlangeDiameterMax' type='FlangeDiameterMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        The maxumum dimension between two parallel tangents on the outside edge
-        of a flange
+        The dimension between two parallel tangents on the outside edge of a
+        flange. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='DepthOfCutMaxType'>
     <xs:annotation>
       <xs:documentation>
-        APMX: The maximum engagement of the cutting edge or edges with the
-        workpiece measured perpendicular to the feed motion.
+        The maximum engagement of the cutting edge or edges with the workpiece
+        measured perpendicular to the feed motion. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8238,16 +8926,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='DepthOfCutMax' type='DepthOfCutMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        APMX: The maximum engagement of the cutting edge or edges with the
-        workpiece measured perpendicular to the feed motion.
+        The maximum engagement of the cutting edge or edges with the workpiece
+        measured perpendicular to the feed motion. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='OverallToolLengthType'>
     <xs:annotation>
       <xs:documentation>
-        OAL: largest length dimension of the tool item including the master
-        insert where applicable
+        The largest length dimension of the Cutting Tool including the master
+        insert where applicable. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8257,16 +8945,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='OverallToolLength' type='OverallToolLengthType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        OAL: largest length dimension of the tool item including the master
-        insert where applicable
+        The largest length dimension of the Cutting Tool including the master
+        insert where applicable. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='ShankDiameterType'>
     <xs:annotation>
       <xs:documentation>
-        DMM: dimension of the diameter of a cylindrical portion of a tool item
-        or an adaptive item that can participate in a connection
+        The dimension of the diameter of a cylindrical portion of a Tool Item or
+        an Adaptive Item that can participate in a connection. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8276,15 +8964,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ShankDiameter' type='ShankDiameterType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        DMM: dimension of the diameter of a cylindrical portion of a tool item
-        or an adaptive item that can participate in a connection
+        The dimension of the diameter of a cylindrical portion of a Tool Item or
+        an Adaptive Item that can participate in a connection. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='ShankHeightType'>
     <xs:annotation>
       <xs:documentation>
-        H: dimension of the height of a shank
+        The dimension of the height of the shank. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8294,14 +8982,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ShankHeight' type='ShankHeightType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        H: dimension of the height of a shank
+        The dimension of the height of the shank. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='ShankLengthType'>
     <xs:annotation>
       <xs:documentation>
-        LS: dimension of the length of a shank
+        The dimension of the length of the shank. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8311,14 +8999,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ShankLength' type='ShankLengthType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        LS: dimension of the length of a shank
+        The dimension of the length of the shank. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='UsableLengthMaxType'>
     <xs:annotation>
       <xs:documentation>
-        The maximum length of a cutting tool that can be used in a particular
+        Maximum length of a Cutting Tool that can be used in a particular
         cutting operation including the non-cutting portions of the tool.
       </xs:documentation>
     </xs:annotation>
@@ -8329,7 +9017,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='UsableLengthMax' type='UsableLengthMaxType' substitutionGroup='AssemblyMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        The maximum length of a cutting tool that can be used in a particular
+        Maximum length of a Cutting Tool that can be used in a particular
         cutting operation including the non-cutting portions of the tool.
       </xs:documentation>
     </xs:annotation>
@@ -8337,16 +9025,48 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='LifeType'>
     <xs:annotation>
       <xs:documentation>
-        Abstract cutter life
+        The value of the data item is not reset and accumulates for the entire
+        life of the piece of equipment.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='ToolLifeValueType'>
-        <xs:attribute name='type' type='ToolLifeType' use='required'/>
-        <xs:attribute name='countDirection' type='ToolLifeDirectionType' use='required'/>
-        <xs:attribute name='warning' type='ToolLifeValueType' use='optional'/>
-        <xs:attribute name='limit' type='ToolLifeValueType' use='required'/>
-        <xs:attribute name='initial' type='ToolLifeValueType' use='required'/>
+        <xs:attribute name='type' type='ToolLifeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              One of time, part count, or wear
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='countDirection' type='ToolLifeDirectionType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              Indicates if the tool life counts from zero to maximum or maximum
+              to zero.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='warning' type='ToolLifeValueType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              Tool life warning level
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='limit' type='ToolLifeValueType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The end of life limit for this tool.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='initial' type='ToolLifeValueType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The initial life of the tool when it is new.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -8364,9 +9084,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CuttingDiameterType'>
     <xs:annotation>
       <xs:documentation>
-        diameter of a circle on which the defined point Pk of each of the master
-        inserts is located on a tool item. The normal of the machined peripheral
-        surface points towards the axis of the cutting tool.
+        The diameter of a circle on which the defined point Pk located on this
+        Cutting Tool. The normal of the machined peripheral surface points
+        towards the axis of the Cutting Tool.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8376,16 +9096,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='CuttingDiameter' type='CuttingDiameterType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        diameter of a circle on which the defined point Pk of each of the master
-        inserts is located on a tool item. The normal of the machined peripheral
-        surface points towards the axis of the cutting tool.
+        The diameter of a circle on which the defined point Pk located on this
+        Cutting Tool. The normal of the machined peripheral surface points
+        towards the axis of the Cutting Tool.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='CornerRadiusType'>
     <xs:annotation>
       <xs:documentation>
-        nominal radius of a rounded corner measured in the XY-plane
+        The nominal radius of a rounded corner measured in the X Y-plane. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8395,15 +9115,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='CornerRadius' type='CornerRadiusType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        nominal radius of a rounded corner measured in the XY-plane
+        The nominal radius of a rounded corner measured in the X Y-plane. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='CuttingEdgeLengthType'>
     <xs:annotation>
       <xs:documentation>
-        theoretical length of the cutting edge of a cutting item over sharp
-        corners
+        The theoretical length of the cutting edge of a Cutting Item over sharp
+        corners.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8413,16 +9133,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='CuttingEdgeLength' type='CuttingEdgeLengthType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        theoretical length of the cutting edge of a cutting item over sharp
-        corners
+        The theoretical length of the cutting edge of a Cutting Item over sharp
+        corners.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='CuttingHeightType'>
     <xs:annotation>
       <xs:documentation>
-        theoretical length of the cutting edge of a cutting item over sharp
-        corners
+        The distance from the basal plane of the Tool Item to the cutting point.
+        
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8432,16 +9152,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='CuttingHeight' type='CuttingHeightType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        theoretical length of the cutting edge of a cutting item over sharp
-        corners
+        The distance from the basal plane of the Tool Item to the cutting point.
+        
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='CuttingReferencePointType'>
     <xs:annotation>
       <xs:documentation>
-        the theoretical sharp point of the cutting tool from which the major
-        functional dimensions are taken
+        The theoretical sharp point of the Cutting Tool from which the major
+        functional dimensions are taken. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8451,15 +9171,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='CuttingReferencePoint' type='CuttingReferencePointType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        the theoretical sharp point of the cutting tool from which the major
-        functional dimensions are taken
+        The theoretical sharp point of the Cutting Tool from which the major
+        functional dimensions are taken. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='FlangeDiameterType'>
     <xs:annotation>
       <xs:documentation>
-        dimension between two parallel tangents on the outside edge of a flange
+        The dimension between two parallel tangents on the outside edge of a
+        flange. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8469,15 +9190,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='FlangeDiameter' type='FlangeDiameterType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        dimension between two parallel tangents on the outside edge of a flange
+        The dimension between two parallel tangents on the outside edge of a
+        flange. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='FunctionalWidthType'>
     <xs:annotation>
       <xs:documentation>
-        distance between the cutting reference point and the rear backing
-        surface of a turning tool or the axis of a boring bar
+        The distance between the cutting reference point and the rear backing
+        surface of a turning tool or the axis of a boring bar.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8487,8 +9209,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='FunctionalWidth' type='FunctionalWidthType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        distance between the cutting reference point and the rear backing
-        surface of a turning tool or the axis of a boring bar
+        The distance between the cutting reference point and the rear backing
+        surface of a turning tool or the axis of a boring bar.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -8514,8 +9236,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='IncribedCircleDiameterType'>
     <xs:annotation>
       <xs:documentation>
-        diameter of a circle to which all edges of a equilateral and round
-        regular insert are tangental
+        The diameter of a circle to which all edges of a equilateral and round
+        regular insert are tangential. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8525,16 +9247,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='IncribedCircleDiameter' type='IncribedCircleDiameterType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        diameter of a circle to which all edges of a equilateral and round
-        regular insert are tangental
+        The diameter of a circle to which all edges of a equilateral and round
+        regular insert are tangential. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='PointAngleType'>
     <xs:annotation>
       <xs:documentation>
-        angle between the major cutting edge and the same cutting edge rotated
-        by 180 degrees about the tool axis
+        The angle between the major cutting edge and the same cutting edge
+        rotated by 180 degrees about the tool axis.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8544,18 +9266,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='PointAngle' type='PointAngleType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        angle between the major cutting edge and the same cutting edge rotated
-        by 180 degrees about the tool axis
+        The angle between the major cutting edge and the same cutting edge
+        rotated by 180 degrees about the tool axis.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='StepDiameterLengthType'>
     <xs:annotation>
       <xs:documentation>
-        length of a portion of a cutting tool that is related to the
-        corresponding cutting diameter. The length is measured from the point
-        &quot;PK&quot; of the corresponging diameter to the next projected point
-        where the diameter starts to change
+        The length of a portion of a stepped tool that is related to a
+        corresponding cutting diameter measured from the cutting reference point
+        of that cutting diameter to the point on the next cutting edge at which
+        the diameter starts to change.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8565,18 +9287,18 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='StepDiameterLength' type='StepDiameterLengthType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        length of a portion of a cutting tool that is related to the
-        corresponding cutting diameter. The length is measured from the point
-        &quot;PK&quot; of the corresponging diameter to the next projected point
-        where the diameter starts to change
+        The length of a portion of a stepped tool that is related to a
+        corresponding cutting diameter measured from the cutting reference point
+        of that cutting diameter to the point on the next cutting edge at which
+        the diameter starts to change.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='StepIncludedAngleType'>
     <xs:annotation>
       <xs:documentation>
-        angle between a major edge on a step of a stepped tool and the same
-        cutting edge rotated 180 degrees about ist tool axis
+        The angle between a major edge on a step of a stepped tool and the same
+        cutting edge rotated 180 degrees about its tool axis.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8586,16 +9308,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='StepIncludedAngle' type='StepIncludedAngleType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        angle between a major edge on a step of a stepped tool and the same
-        cutting edge rotated 180 degrees about ist tool axis
+        The angle between a major edge on a step of a stepped tool and the same
+        cutting edge rotated 180 degrees about its tool axis.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='ToolCuttingEdgeAngleType'>
     <xs:annotation>
       <xs:documentation>
-        angle between the tool cutting edge plane and the tool feed plane
-        measured in a plane parallel the xy-plane
+        The angle between the tool cutting edge plane and the tool feed plane
+        measured in a plane parallel the xy-plane. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8605,16 +9327,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ToolCuttingEdgeAngle' type='ToolCuttingEdgeAngleType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        angle between the tool cutting edge plane and the tool feed plane
-        measured in a plane parallel the xy-plane
+        The angle between the tool cutting edge plane and the tool feed plane
+        measured in a plane parallel the xy-plane. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='ToolLeadAngleType'>
     <xs:annotation>
       <xs:documentation>
-        angle between the tool cutting edge plane and a plane perpendicular to
-        the tool feed plane measured in a plane parallel the xy-plane
+        The angle between the tool cutting edge plane and a plane perpendicular
+        to the tool feed plane measured in a plane parallel the xy-plane. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8624,15 +9346,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ToolLeadAngle' type='ToolLeadAngleType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        angle between the tool cutting edge plane and a plane perpendicular to
-        the tool feed plane measured in a plane parallel the xy-plane
+        The angle between the tool cutting edge plane and a plane perpendicular
+        to the tool feed plane measured in a plane parallel the xy-plane. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='WiperEdgeLengthType'>
     <xs:annotation>
       <xs:documentation>
-        measure of the length of a wiper edge of a cutting item
+        The measure of the length of a wiper edge of a Cutting Item.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8642,15 +9364,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='WiperEdgeLength' type='WiperEdgeLengthType' substitutionGroup='CuttingItemMeasurement'>
     <xs:annotation>
       <xs:documentation>
-        measure of the length of a wiper edge of a cutting item
+        The measure of the length of a wiper edge of a Cutting Item.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name='ToolOrientationType'>
     <xs:annotation>
       <xs:documentation>
-        The orientation as expressed in degrees of the cutting item to the
-        workpiece for this process.
+        The angle of the tool with respect to the workpiece for a given process.
+        The value is application specific. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8660,8 +9382,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='DriveAngleType'>
     <xs:annotation>
       <xs:documentation>
-        Angle between the driving mechanism locator on a tool item and the main
-        cutting edge.
+        Angle between the driving mechanism locator on a Tool Item and the main
+        cutting edge. 
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -8691,7 +9413,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='count' type='EdgeCountType' use='required'/>
+    <xs:attribute name='count' type='EdgeCountType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          A counted event
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name='CuttingItemType'>
     <xs:annotation>
@@ -8710,7 +9438,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='CutterStatus' type='CutterStatusType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The status of an individual cutting item
+            The status of this assembly.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -8731,7 +9459,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='ProgramToolGroup' type='ProgramToolGroupType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The number used to identify this tool in the program
+            The tool group this tool is assigned in the part program.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -8750,9 +9478,33 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='indices' type='IndexRangeType' use='required'/>
-    <xs:attribute name='itemId' type='ItemIdType' use='optional'/>
-    <xs:attribute name='grade' type='GradeType' use='optional'/>
-    <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
+    <xs:attribute name='indices' type='IndexRangeType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The unique identifier of this insert in this assembly
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='itemId' type='ItemIdType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The manufacturer identifier of this cutting item 
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='grade' type='GradeType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The material used for the cutting item
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The manufacturer of this asset
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
 </xs:schema>

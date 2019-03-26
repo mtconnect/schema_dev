@@ -12,7 +12,7 @@ package :Streams, 'Event Package' do
   type :DeviceStream, 'Data related to a single device' do
     member :ComponentStream, 'The data for each component', 0..INF
     member :Name, 'The component name'
-    member :Uuid, 'The unque identifier for this component'
+    member :Uuid, 'The unque identifier for this device'
   end
 
   type :ComponentStream, 'The stream of data for a component' do

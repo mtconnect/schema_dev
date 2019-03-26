@@ -92,12 +92,10 @@ package :Component, 'Top Level Components Package' do
     t = type component.name_property.to_sym, component.description, parent
     if component.has_key?(:kindplural) and component.kindplural == "component"
       t.abstract
-      type component.plural.to_sym, component.description, parent
+      desc = component[:descriptionplural] || component.description
+      type component.plural.to_sym, desc, parent
     end
   end
-
-  # Currently missing from the glossary
-  type :Power, :CommonComponent
 
   # Composition Information
   type :Compositions, "A collection of sub elements" do

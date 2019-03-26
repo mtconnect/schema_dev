@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'treetop'
 require 'set'
+require 'memoist'
 
 Treetop.load 'src/latex'
 
@@ -10,8 +11,8 @@ class LatexParser
   def parse_glossary(file)
     res = parse(File.read(file))
     unless res
-      puts parser.failure_reason
-      puts @parser.terminal_failures.join("\n")
+      puts failure_reason
+      puts terminal_failures.join("\n")
       exit
     end
 
@@ -29,7 +30,7 @@ class LatexParser
         end
       end
 
-      name = e.name.join(' ')
+      name = e.name
       @entries[name] = e
 
       if e.has_key?(:plural)
@@ -97,6 +98,8 @@ end
 
 module Latex
   class GlossaryEntry
+    extend Memoist
+    
     attr_accessor :parent, :elements
     
     def initialize(text, range, elements)
@@ -107,22 +110,30 @@ module Latex
       "\#<#{self.class.name}: #{@name} #{keys.inspect}>"
     end
 
-    def name
-      if !defined? @name
-        @name = name_tokens.elements.map(&:value).compact
-      end
-      @name
+    def name_list
+      name_tokens.elements.map(&:value).compact
     end
+    memoize :name_list
+
+    def name
+      name_list.join(' ')
+    end
+    memoize :name
 
     def keys
-      if !defined? @keys
-        @keys = Hash.new
-        properties.elements.map(&:value).compact.each do |k, v|
-          @keys[k.to_sym] = v
-        end
+      kys = Hash.new
+      properties.elements.map(&:value).compact.each do |k, v|
+        kys[k.to_sym] = v
       end
-      @keys
+      if respond_to? :long_description
+        kys[:description] = long_description.value
+      end
+      if kys.include?(:description) and kys.include?(:deprecated)
+        kys[:description] = "DEPRECATED: #{kys[:description]}"
+      end
+      kys
     end
+    memoize :keys
 
     def has_key?(key)
       keys.include?(key)
@@ -133,15 +144,18 @@ module Latex
     end
 
     def kind
-      if !defined? @kind
-        kind = keys[:kind]
-        @kind = kind.split(',').map(&:to_sym) if kind
-      end
-      @kind
+      k = self.keys[:kind]
+      k = k.split(',').map(&:to_sym) if k
+      k
+    end
+    memoize :kind
+
+    def [](key)
+      keys[key]
     end
 
     def kind_of?(k)
-      (kind and @kind.include?(k))
+      (kind and kind.include?(k))
     end
     
     def method_missing(method, *args, &block)

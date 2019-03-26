@@ -50,10 +50,12 @@ package :Events, 'Event Package' do
       next
     end
     
-    value_type = facets[event.facet]    
-    raise "Cannot find type for #{event.facet}" unless value_type    
-    # puts "#{event.name}: #{event.facet} #{value_type}"
-    
+    value_type = facets[event.facet]
+    unless value_type    
+      puts "Warning: Cannot find facet for '#{event.name}' facet #{event.facet.inspect}, defaulting to string" 
+      value_type = :StringEvent
+    end
+      
     if event.keys.include?(:enumeration)
       values = event.enumeration.split(',').map(&:strip)
       value_type = "#{event.elementname}Value".to_sym
