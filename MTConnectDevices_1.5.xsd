@@ -3057,7 +3057,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute ref='xlink:href' use='optional'>
+        <xs:attribute name='href' type='xlink:hrefType' use='optional'>
           <xs:annotation>
             <xs:documentation>
               Reference to the url of the related device
