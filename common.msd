@@ -38,6 +38,13 @@ package :common, 'Common attributes and elements for all schemas' do
     facet 'minIncl=0;maxExcl=4294967295'    
   end
 
+  basic_type(:FloatListValue, 'Common floating point sample value') {
+    list(:float)
+  }
+  basic_type(:ThreeSpaceValue, 'A three dimensional value \'X Y Z\' or \'A B C\'', :FloatListValue) {
+    facet('max=3;min=3')
+  }
+
   basic_type :DescriptionText, 'A description'
   basic_type(:DataItemExt, 'An extension point for data item types') do
     pattern '[a-ln-z]:[A-Z_0-9]+'

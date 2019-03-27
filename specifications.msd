@@ -1,7 +1,7 @@
 package :Specificaitons, 'Device and component specificaitons' do
   basic_type :LimitValue, 'The limit of a value', :float
   attr :Peak, 'The peak value', :float
-  
+
   basic_type :ConstraintValue, 'The value of the constraint'
   
   type :Specifications, 'Calibration data for a sensor', :AbstractConfiguration do
@@ -44,5 +44,12 @@ package :Specificaitons, 'Device and component specificaitons' do
   type :GearSpecification, 'A power transmission gearing, ratio given as CDATA', :Constraint do
     member :Number, 'The gear number', :GearNumber
   end
+
+  type :FrameOrientation, 'An orientation constraint', :Constraint do
+    member :Value, 'The three space orientation realtive to the parent', :ThreeSpaceValue
+  end
   
+  type :FrameOffset, 'An orientation constraint', :Constraint do
+    member :Value, 'The three space position realtive to the parent', :ThreeSpaceValue
+  end
 end

@@ -6,12 +6,6 @@ package :Samples, 'The samples' do
   basic_type(:FloatSampleValue, 'Common floating point sample value') {
     union(:float, :UnavailableValue)
   }
-  basic_type(:FloatListValue, 'Common floating point sample value') {
-    list(:float)
-  }
-  basic_type(:ThreeSpaceValue, 'A three dimensional value \'X Y Z\' or \'A B C\'', :FloatListValue) {
-    facet('max=3;min=3')
-  }
   basic_type(:ThreeSpaceSampleValue, 'Common floating point sample value') {
     union(:ThreeSpaceValue, :UnavailableValue)
   }  

@@ -239,6 +239,29 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:maxExclusive value='4294967295'/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='FloatListValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        Common floating point sample value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base='xs:float'/>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:simpleType name='ThreeSpaceValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        A three dimensional value &apos;X Y Z&apos; or &apos;A B C&apos;
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='FloatListValueType'>
+      <xs:maxLength value='3'/>
+      <xs:minLength value='3'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name='DescriptionTextType'>
     <xs:annotation>
       <xs:documentation>
