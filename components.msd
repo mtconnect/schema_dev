@@ -41,8 +41,8 @@ package :Component, 'Top Level Components Package' do
   type :ComponentRef, 'A data item reference', :Reference
   type :DeviceRef, 'A data item reference', :Reference do
     member :DeviceUuid, 'The identity of the device'
-    attribute :'xlink:href', 'Reference to the file', 0..1, :'xlink:href'
-    attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
+    attribute :'xlink:href', 'Reference to the url of the related device', 0..1, :'xlink:href'
+    attribute(:'xlink:type', 'Type of href fixed at located', 0..1, :'xlink:type') { self.fixed = 'locator' }
   end
   
   type :Component, "An abstract component type. This is a placeholder for all components" do

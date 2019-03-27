@@ -3060,14 +3060,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute ref='xlink:href' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              Reference to the file
+              Reference to the url of the related device
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute ref='xlink:type' use='optional' fixed='locator'>
           <xs:annotation>
             <xs:documentation>
-              Type of href
+              Type of href fixed at located
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
