@@ -5,7 +5,7 @@
   type=mtc,
   category=model,
   name= {AbsTimeSeries},
-  description= {}
+  description= {It is an abstract type element and will be replaced in the \glspl{mtconnectstream} document by the element name derived from the \gls{type} attribute defined for the associated \gls{dataitem} element defined in the \glspl{mtconnectdevice} document}
 }
 
 
@@ -24,7 +24,7 @@
   category=model,
   name={Actuator},
   kind={component},
-  description={}
+  description={Redefined as a piece of equipment with the ability to be represented as a Lower Level component of a parent Component element or as a Composition element. See \gls{actuator type}}
 }
 
 \newglossaryentry{actual subtype}
@@ -46,14 +46,6 @@
 }
 
 
-\newglossaryentry{available}
-{
-  type= mtc,
-  category=model,
-  name= {AVAILABLE},
-  description= {}
-}
-
 
 \newglossaryentry{axes}
 {
@@ -71,7 +63,7 @@
   category=model,
   name={Electric},
   kind={systems,component},
-  description={}
+  description={\gls{electric} is an XML container that represents the information for the main power supply for device piece of equipment and the distribution of that power throughout the equipment. }
 }
 
 
@@ -81,7 +73,7 @@
   category=model,
   name={Loader},
   kind={auxiliaries,component},
-  description={}
+  description={\gls{loader} is an XML container that represents the information for a unit comprised of all the parts involved in moving and distributing materials, parts, tooling, and other items to or from a piece of equipment.}
 }
 
 
@@ -91,7 +83,8 @@
   category=model,
   name={WasteDisposal},
   kind={auxiliaries,component},
-  description={}
+  description={\gls{wastedisposal} is an XML container that represents the information for a unit comprised of all the parts involved in removing manufacturing byproducts from a piece of equipment.
+}
 }
 
 
@@ -101,7 +94,8 @@
   category=model,
   name={ToolingDelivery},
   kind={auxiliaries,component},
-  description={}
+  description={\gls{toolingdelivery} is an XML container that represents the information for a unit involved in managing, positioning, storing, and delivering tooling within a piece of equipment.
+}
 }
 
 
@@ -111,7 +105,7 @@
   category=model,
   name={Environmental},
   kind={auxiliaries,component},
-  description={}
+  description={\gls{environmental} is an XML container that represents the information for a unit or function involved in monitoring, managing, or conditioning the environment around or within a piece of equipment.}
 }
 
 
@@ -121,16 +115,7 @@
   category=model,
   name={BarFeeder},
   kind={auxiliaries,component},
-  description={}
-}
-
-
-\newglossaryentry{user}
-{
-  type=mtc,
-  category=model,
-  name={User},
-  description={}
+  description={\gls{barfeeder} is an XML container that represents the information for a unit involved in delivering bar stock to a piece of equipment.}
 }
 
 
@@ -140,24 +125,18 @@
   category=model,
   name={units},
   kind={attribute},
-  description={}
+  description={The unit of measurement for the reported value of the data item.}
 }
 
-
-\newglossaryentry{block}
-{
-  type=mtc,
-  category=model,
-  name={Block},
-  description={}
-}
 
 
 \newglossaryentry{buffersize}
 {
   type=mtc,
-  name=buffersize,
-  description={}
+  category=model,
+  name={bufferSize},
+  kind={attribute},
+  description={A value representing the maximum number of \glspl{data entity} that \MAY be retained in the \gls{agent} that published the \gls{response document} at any point in time.}
 }
 
 
@@ -260,7 +239,7 @@
   type=mtc,
   category=model,
   name={component},
-  description={}
+  description={\gls{component componentstream} identifies the \gls{structural element} (\gls{device}, \gls{top level} \gls{component}, or \gls{lower level} \gls{component}) associated with the \gls{componentstream} element.}
 }
 
 
@@ -320,7 +299,7 @@
 {
   type=mtc,
   category=model,
-  name={Conditions},
+  name={Condition},
   description={A XML container type element that organizes the data reported in the \glspl{mtconnectstream} document for \gls{dataitem} elements defined in the \glspl{mtconnectdevice} document with a \gls{category} attribute of \gls{condition category}.}
 }
 
@@ -377,7 +356,7 @@
   type=mtc,
   category=model,
   name={current},
-  description={}
+  description={Used in the path portion of an HTTP Request Line, by a client software application, to initiate a \gls{current request} to an \gls{agent} to publish an \gls{mtconnectstream} document.}
 }
 
 
@@ -460,17 +439,9 @@
   type=mtc,
   category=model,
   name={DeviceStream},
-  description={A XML container element provided in the \glspl{stream} container in the \glspl{mtconnectstream} document.}
+  description={A XML container element provided in the \gls{streams} container in the \glspl{mtconnectstream} document.}
 }
 
-
-\newglossaryentry{device stream}
-{
-  type=mtc,
-  category=model,
-  name={Device Stream},
-  description={}
-}
 
 
 \newglossaryentry{discrete representation}
@@ -488,7 +459,7 @@
   type=mtc,
   category=model,
   name={duration},
-  description={}
+  description={The time-period over which the data was collected.}
 }
 
 
@@ -627,7 +598,7 @@
 {
   type=mtc,
   name={Lower Level},
-  description={A nested element that is below a higher level element}
+  description={A nested element that is below a higher level element.}
 }
 
 
@@ -670,14 +641,6 @@
 }
 
 
-\newglossaryentry{message}
-{
-  type=mtc,
-  category=model,
-  name={Message},
-  description={}
-}
-
 
 \newglossaryentry{minimumdelta}
 {
@@ -685,7 +648,7 @@
   category=model,
   name={MINIMUM\_DELTA},
   kind={filter},
-  description={}
+  description={For \gls{filter} \gls{minimumdelta}, a new value \MUSTNOT be reported for a data item unless the measured value has changed from the last reported value by at least the delta given as the \gls{cdata} of this element.}
 }
 
 
@@ -701,7 +664,7 @@
 {
   type=mtc,
   name=MODBUS,
-  description={Modbus is a communication protocol developed by Modicon systems and is a method used for transmitting information over serial lines between electronic devices}
+  description={Modbus is a communication protocol developed by Modicon systems and is a method used for transmitting information over serial lines between electronic devices.}
 }
 
 
@@ -710,7 +673,7 @@
   type=mtc,
   category=model,
   name={model},
-  description={}
+  description={The model description of the physical part or logical function of a piece of equipment represented by this XML element.}
 }
 
 
@@ -718,9 +681,15 @@
 {
   type=mtc,
   name={MTConnect},
-  description={}
+  description={The name of the standard.}
 }
 
+\newglossaryentry{mtconnect standard}
+{
+  type=mtc,
+  name={MTConnect Standard},
+  description={The name of the standard.}
+}
 
 \newglossaryentry{mtconnect asset}
 {
@@ -736,16 +705,7 @@
   category=model,
   name={MTConnectDevice},
   plural={MTConnectDevices},
-  description={}
-}
-
-
-\newglossaryentry{mtconnect device}
-{
-  type=mtc,
-  name={MTConnect Device},
-  plural={MTConnect Devices},
-  description={}
+  description={XML response document.}
 }
 
 
@@ -755,23 +715,7 @@
   category=model,
   name={MTConnectStream},
   plural={MTConnectStreams},
-  description={}
-}
-
-
-\newglossaryentry{mtconnect stream}
-{
-  type=mtc,
-  name={MTConnect Stream},
-  plural={MTConnect Streams},
-  description={}
-}
-
-
-\newglossaryentry{mtconnect standard}
-{
-  name={MTConnect Standard},
-  description={}
+  description={XML response document}
 }
 
 
@@ -780,7 +724,8 @@
   type=mtc,
   category=model,
   name={name},
-  description={}
+  kind={attribute},
+  description={The name of an element or a piece of equipment.}
 }
 
 
@@ -789,7 +734,7 @@
   type=mtc,
   category=model,
   name={nativeName},
-  description={}
+  description={The common name normally associated with a piece of equipment or an element.}
 }
 
 
@@ -799,7 +744,7 @@
   category=model,
   name={nativeScale},
   kind={attribute},
-  description={}
+  description={\gls{nativescale} \MAY be used to convert the reported value to represent the original measured value.}
 }
 
 
@@ -808,7 +753,7 @@
   type=mtc,
   category=model,
   name={nativeCode},
-  description={}
+  description={The native code (usually an alpha-numeric value) generated by the controller of a piece of equipment or the element.}
 }
 
 
@@ -817,7 +762,7 @@
   type=mtc,
   category=model,
   name={nativeSeverity},
-  description={}
+  description={If the piece of equipment designates a severity level to a fault, \gls{nativeseverity} reports that severity information to a client software application. }
 }
 
 
@@ -826,7 +771,7 @@
   type=mtc,
   category=model,
   name={nativeUnits},
-  description={}
+  description={The native units of measurement for the reported value of the data item.}
 }
 
 
@@ -854,7 +799,7 @@
   type=mtc,
   category=model,
   name={number},
-  description={}
+  description={A unique identifier that will only refer to a specific \gls{sensing element}.}
 }
 
 
@@ -880,7 +825,7 @@
   category=model,
   name={Path},
   kind={controller,component},
-  description= {}
+  description= {\gls{path} is an XML container that represents the information for an independent operation or function within a \gls{controller}.}
 }
 
 
@@ -890,32 +835,17 @@
   category=model,
   name={PERIOD},
   kind={filter},
-  description={}
+  description={The data reported for a data item with this \gls{filter} is provided on a periodic basis.}
 }
 
 
-\newglossaryentry{port}
-{
-  type=mtc,
-  name={Port},
-  description={}
-}
 
-
-\newglossaryentry{position}
-{
-  type=mtc,
-  name={Position},
-  description={}
-}
-
-
-\newglossaryentry{probe}
+\newglossaryentry{probe httprequest}
 {
   type=mtc,
   category=model,
-  name={Probe},
-  description={}
+  name={probe},
+  description={The form \gls{probe httprequest} is used to designate a \gls{probe request} in the path portion of an HTTP Request Line.}
 }
 
 
@@ -941,7 +871,8 @@
   type=mtc,
   category=model,
   name={qualifier},
-  description={}
+  kind={attribute},
+  description={\gls{qualifier} provides additional information regarding a Fault State associated with the measured value of a process variable.}
 }
 
 
@@ -960,7 +891,7 @@
   name={Reference},
   kind={element},
   attributes={\gls{idref},\gls{name}},
-  description={}
+  description={\gls{reference} is a pointer to information that is associated with another \gls{structural element} defined elsewhere in the XML document for a piece of equipment.}
 }
 
 
@@ -1021,19 +952,17 @@
   name={Power},
   kind={component},
   deprecated={true},
-  description={}
+  description={\gls{power} was \DEPRECATED in MTConnect Version 1.1 and was replaced by the \gls{data entity} called \gls{availability event}.}
 }
 
 
-\newglossaryentry{material}
+\newglossaryentry{materials}
 {
   type=mtc,
   category=model,
-  name={Material},
+  name={Materials},
   kind={resources,component},
-  plural={Materials},
-  kindplural={resources},
-  description={}
+  description={\gls{materials} is an XML container that provides information about materials or other items consumed or used by the piece of equipment for production of parts, materials, or other types of goods.}
 }
 
 
@@ -1043,7 +972,7 @@
   category=model,
   name={Stock},
   kind={materials,component},
-  description={}
+  description={Stock is an XML container that represents the information for the material that is used in a manufacturing process and to which work is applied in a machine or piece of equipment to produce parts.}
 }
 
 
@@ -1053,7 +982,8 @@
   category=model,
   name={Personnel},
   kind={resources,component},
-  description={}
+  description={\gls{personnel} is an XML container that provides information about an individual or individuals who either control, support, or otherwise interface with a piece of equipment.
+}
 }
 
 
@@ -1061,9 +991,8 @@
 {
   type=mtc,
   name={Response},
-  description={}
+  description={A response \gls{interface} which responds to a \gls{request}.}
 }
-
 
 
 \newglossaryentry{rotary}
@@ -1072,7 +1001,7 @@
   category=model,
   name={Rotary},
   kind={axes,component},
-  description={}
+  description={A \gls{rotary} axis represents any non-linear or rotary movement of a physical piece of equipment or a portion of the equipment. }
 }
 
 
@@ -1109,7 +1038,7 @@
   type=mtc,
   category=model,
   name={sample},
-  description={}
+  description={Used in the path portion of an HTTP Request Line, by a client software application, to initiate a \gls{sample request} to an \gls{agent} to publish an \gls{mtconnectstream} document.}
 }
 
 
@@ -1118,7 +1047,8 @@
   type=mtc,
   category=model,
   name={sampleCount},
-  description={}
+  kind={attribute},
+  description={The number of readings reported in the data returned for the \gls{dataitem} element defined in the \glspl{mtconnectdevice} document that this \gls{sample} element represents.}
 }
 
 
@@ -1127,7 +1057,8 @@
   type=mtc,
   category=model,
   name={sampleInterval},
-  description={}
+  kind={attribute},
+  description={An optional attribute that is an indication provided by a piece of equipment describing the interval in milliseconds between the completion of the reading of the data associated with the \gls{device} element until the beginning of the next sampling of that data.}
 }
 
 
@@ -1145,7 +1076,7 @@
   category=model,
   name={sampleRate},
   kind={attribute},
-  description={}
+  description={The rate at which successive samples of a data item are recorded by a piece of equipment.}
 }
 
 
@@ -1153,7 +1084,7 @@
 {
   type=mtc,
   name={sensing element},
-  description={},
+  description={A mechanism that provides a signal or measured value.},
   plural={sensing elements}
 }
 
@@ -1163,7 +1094,16 @@
   type=mtc,
   name={sensor element},
   plural={sensor elements},
-  description={}
+  description={A \gls{sensor element} provides a signal or measured value.}
+}
+
+
+\newglossaryentry{sensor term}
+{
+  type=mtc,
+  name={Sensor},
+  plural={Sensors},
+  description= {A \gls{sensor term} is typically comprised of two major components: a \gls{sensor unit} that provides signal processing, conversion, and communications and the \glspl{sensing element} that provides a signal or measured value.}
 }
 
 
@@ -1174,7 +1114,7 @@
   name={Sensor},
   kind={auxiliaries,component},
   plural={Sensors},
-  description= {}
+  description= {The \gls{sensor unit} is modeled as a \gls{lower level} \gls{component} called \gls{sensor}.}
 }
 
 
@@ -1183,7 +1123,7 @@
   type=mtc,
   name={sensor unit},
   plural={sensor units},
-  description= {}
+  description= {A \gls{sensor unit} provides signal processing, conversion, and communications.}
 }
 
 
@@ -1193,7 +1133,7 @@
   name={SensorConfiguration},
   kind={configuration},
   elements={\gls{firmwareversion},\gls{calibrationdate},\gls{nextcalibrationdate},\gls{calibrationinitials},\gls{channels}},
-  description= {}
+  description= {An element that can contain descriptive content defining the configuration information for \gls{sensor}.}
 }
 
 
@@ -1202,7 +1142,8 @@
   type=mtc,
   category=model,
   name={serialNumber},
-  description={}
+  kind={attribute},
+  description={The serial number associated with a piece of equipment. }
 }
 
 
@@ -1211,7 +1152,7 @@
   type=mtc,
   category=model,
   name={sequence},
-  description={}
+  description={A number representing the sequential position of an occurrence of a \gls{category} type in the data buffer of an \gls{agent}. }
 }
 
 
@@ -1221,7 +1162,7 @@
   category=model,
   name={significantDigits},
   kind={attribute},
-  description={}
+  description={The number of significant digits in the reported value.}
 }
 
 
@@ -1239,7 +1180,8 @@
   category=model,
   name={station},
   plural={stations},
-  description={}
+  kind={attribute},
+  description={The station where the physical part or logical function of a piece of equipment is located when it is part of a manufacturing unit or cell with multiple stations.}
 }
 
 
@@ -1250,7 +1192,7 @@
   name={Source},
   kind={element},
   attributes={\gls{componentid},\gls{dataitemid},\gls{compositionid}},
-  description={}
+  description={\gls{source} identifies the \gls{structural element} from which a measured value originates.}
 }
 
 
@@ -1260,7 +1202,7 @@
   category=model,
   name={statistic},
   kind={attribute},
-  description={}
+  description={Describes the type of statistical calculation performed on a series of data samples to provide the reported data value.}
 }
 
 
@@ -1286,7 +1228,7 @@
   type=mtc,
   category=model,
   name={subType},
-  description={}
+  description={A sub-categorization of the data item \gls{type}.}
 }
 
 
@@ -1323,7 +1265,7 @@
   type=mtc,
   category=model,
   name={timestamp},
-  description={}
+  description={The most accurate time available to a piece of equipment that represents the point in time that the data was reported.}
 }
 
 
@@ -1331,7 +1273,7 @@
 {
   type=mtc,
   name={Top Level},
-  description={}
+  description={\glspl{structural element} that represent the most significant physical or logical functions of a piece of equipment.}
 }
 
 
@@ -1340,25 +1282,19 @@
   type=mtc,
   category=model,
   name={type},
+  kind={attribute},
   plural={types},
-  description={}
+  description={The type of either a \gls{structural element} or a \gls{dataitem} being measured.}
 }
 
 
-\newglossaryentry{umlassociation}
-{
-  type=mtc,
-  name=UMLAssociation,
-  description={A relationship between UML Classes}
-}
-
-
-\newglossaryentry{unavailable}
+\newglossaryentry{unavailable value}
 {
   type=mtc,
   category=model,
   name={UNAVAILABLE},
-  description={}
+  kind={enum},
+  description={The value of the \gls{data entity} either when the data is not received or the entity is incapable of providing data.}
 }
 
 
@@ -1367,7 +1303,7 @@
   type=mtc,
   category=model,
   name={uuid},
-  description={}
+  description={The unique identifier for an XML element.}
 }
 
 
@@ -1402,20 +1338,13 @@
 }
 
 
-\newglossaryentry{xs:float}
-{
-  type=mtc,
-  name={xs:float},
-  description={}
-}
-
-
 \newglossaryentry{xs:lang}
 {
   type=mtc,
   category=model,
   name={xs:lang},
-  description={}
+  kind={attribute},
+  description={An optional attribute that specifies the language of the \gls{cdata} returned for the \gls{condition}.}
 }
 
 
@@ -1525,7 +1454,7 @@
   category=model,
   name={Chuck},
   kind={rotary,component},
-  description={}
+  description={Chuck is an XML container that provides the information about a mechanism that holds a part or stock material in place.}
 }
 
 
@@ -1585,7 +1514,7 @@
   category=model,
   name={Door},
   kind={component},
-  description={}
+  description={\gls{door component} is an XML container that represents the information for a mechanical mechanism or closure that can cover.}
 }
 
 
@@ -1655,7 +1584,7 @@
   category=model,
   name={Hydraulic},
   kind={systems,component},
-  description={}
+  description={\gls{hydraulic} is an XML container that represents the information for a system comprised of all the parts involved in moving and distributing pressurized liquid throughout the piece of equipment.}
 }
 
 
@@ -1665,7 +1594,7 @@
   category=model,
   name={Pneumatic},
   kind={systems,component},
-  description={}
+  description={\gls{pneumatic} is an XML container that represents the information for a system comprised of all the parts involved in moving and distributing pressurized gas throughout the piece of equipment.}
 }
 
 
@@ -1675,7 +1604,7 @@
   category=model,
   name={Coolant},
   kind={systems,component},
-  description={}
+  description={\gls{coolant} is an XML container that represents the information for a system comprised of all the parts involved in distribution and management of fluids that remove heat from a piece of equipment.}
 }
 
 
@@ -1685,7 +1614,7 @@
   category=model,
   name={Lubrication},
   kind={systems,component},
-  description={}
+  description={\gls{lubrication} is an XML container that represents the information for a system comprised of all the parts involved in distribution and management of fluids used to lubricate portions of the piece of equipment.}
 }
 
 
@@ -1695,7 +1624,7 @@
   category=model,
   name={Enclosure},
   kind={systems,component},
-  description={}
+  description={\gls{enclosure} is an XML container that represents the information for a structure used to contain or isolate a piece of equipment or area.}
 }
 
 
@@ -1705,7 +1634,7 @@
   category=model,
   name={Protective},
   kind={systems,component},
-  description={}
+  description={Protective is an XML container that represents the information for those functions that detect or prevent harm or damage to equipment or personnel.}
 }
 
 
@@ -1715,7 +1644,7 @@
   category=model,
   name={ProcessPower},
   kind={systems,component},
-  description={}
+  description={\gls{processpower} is an XML container that represents the information for a power source associated with a piece of equipment that supplies energy to the manufacturing process separate from the \gls{electric} system.}
 }
 
 
@@ -1725,7 +1654,7 @@
   category=model,
   name={Feeder},
   kind={systems,component},
-  description={}
+  description={\gls{feeder} is an XML container that represents the information for a system that manages the delivery of materials within a piece of equipment. }
 }
 
 
@@ -1735,7 +1664,7 @@
   category=model,
   name={Dielectric},
   kind={systems,component},
-  description={}
+  description={\gls{dielectric} is an XML container that represents the information for a system that manages a chemical mixture used in a manufacturing process being performed at that piece of equipment.}
 }
 
 
@@ -1879,16 +1808,6 @@
 }
 
 
-\newglossaryentry{wire}
-{
-  type=mtc,
-  category=model,
-  name={WIRE},
-  kind={composition},
-  description={A string like piece or filament of relatively rigid or flexible material provided in a variety of diameters.}
-}
-
-
 \newglossaryentry{average}
 {
   type=mtc,
@@ -2029,15 +1948,13 @@
 }
 
 
-\newglossaryentry{target amperage sample}
+\newglossaryentry{target subtype}
 {
   type=mtc,
   category=model,
   name={TARGET},
-  description={The desired or preset amperage to be delivered from a power source.},
-  units=\cfont{\gls{ampere}},
-  kind={subtype,sample},
-  facet={\gls{float}}
+  description={The desired measure or count for a data item value.},
+  kind={subtype}
 }
 
 
@@ -2116,27 +2033,23 @@
 }
 
 
-\newglossaryentry{programmed axisfeedrate sample}
+\newglossaryentry{programmed subtype}
 {
   type=mtc,
   category=model,
   name={PROGRAMMED},
-  description={The feedrate specified by a logic or motion program or set by a switch for a linear axis.},
-  units=\cfont{\gls{millimeterpersecond}},
-  kind={subtype,sample},
-  facet={\gls{float}}
+  description={The value of a signal or calculation specified by a logic or motion program or set by a switch.},
+  kind={subtype}
 }
 
 
-\newglossaryentry{rapid axisfeedrate sample}
+\newglossaryentry{rapid subtype}
 {
   type=mtc,
   category=model,
   name={RAPID},
-  description={The feedrate specified by a logic or motion program, by a pre-set value, or set by a switch as the feedrate for a linear axis when operating in a rapid positioning mode.},
-  units=\cfont{\gls{millimeterpersecond}},
-  kind={subtype,sample},
-  facet={\gls{float}}
+  description={The value of a signal or calculation issued to adjust the feedrate of a component or composition that is operating in a rapid positioning mode.},
+  kind={subtype}
 }
 
 
@@ -2219,39 +2132,13 @@
 
 
 
-\newglossaryentry{operating equipmenttimer sample}
-{
-  type=mtc,
-  category=model,
-  name={OPERATING},
-  description={Measurement of the time that the major sub-parts of a piece of equipment are powered or performing any activity whether producing a part or product or not.   \newline Example: For traditional machine tools, this includes \gls{working equipmentmode event}, plus idle time.},
-  units=\cfont{\gls{second}},
-  kind={subtype,sample},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{powered equipmenttimer sample}
-{
-  type=mtc,
-  category=model,
-  name={POWERED},
-  description={The measurement of time that primary power is applied to the piece of equipment and, as a minimum, the controller or logic portion of the piece of equipment is powered and functioning or components that are required to remain on are powered.Example: Heaters for an extrusion machine that are required to be powered even when the equipment is turned off.},
-  units=\cfont{\gls{second}},
-  kind={subtype,sample},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{working equipmenttimer sample}
+\newglossaryentry{working subtype}
 {
   type=mtc,
   category=model,
   name={WORKING},
-  description={Measurement of the time that a piece of equipment is performing any activity  the equipment is active and performing a function under load or not. \newline Example: For traditional machine tools, this includes LOADED, plus rapid moves, tool changes, etc.},
-  units=\cfont{\gls{second}},
-  kind={subtype,sample},
-  facet={\gls{float}}
+  description={A piece of equipment performing any activity, the equipment is active and performing a function under load or not.},
+  kind={subtype}
 }
 
 
@@ -2317,18 +2204,6 @@
   description={The measurement of the length of an object.},
   units=\cfont{\gls{millimeter}},
   kind={type,sample,subtype},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{remaining length sample}
-{
-  type=mtc,
-  category=model,
-  name={REMAINING},
-  description={The remaining total length of an object.},
-  units=\cfont{\gls{millimeter}},
-  kind={subtype,sample},
   facet={\gls{float}}
 }
 
@@ -2425,29 +2300,6 @@
 
 
 
-\newglossaryentry{programmed pathfeedrate sample}
-{
-  type=mtc,
-  category=model,
-  name={PROGRAMMED},
-  description={The feedrate specified by a logic or motion program or set by a switch as the feedrate for the axes, or a single axis, associated with a Path.},
-  units=\cfont{\gls{millimeterpersecond}},
-  kind={subtype,sample},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{rapid pathfeedrate sample}
-{
-  type=mtc,
-  category=model,
-  name={RAPID},
-  description={The feedrate specified by a logic or motion program, by a pre-set value, or set by a switch as the feedrate for the axes, or a single axis, associated with a Path when operating in a rapid positioning mode.},
-  units=\cfont{\gls{millimeterpersecond}},
-  kind={subtype,sample},
-  facet={\gls{float}}
-}
-
 
 \newglossaryentry{pathposition sample}
 {
@@ -2474,27 +2326,15 @@
 }
 
 
-\newglossaryentry{target pathposition sample}
-{
-  type=mtc,
-  category=model,
-  name={TARGET},
-  description={The desired end position for a movement or a series of movements. Multiple discrete movements may need to be completed to achieve the final \gls{target position sample} position.  },
-  units=\cfont{\gls{millimeter3d}},
-  kind={subtype,sample},
-  facet={\gls{array3d}}
-}
-
-
 \newglossaryentry{ph sample}
 {
   type=mtc,
   category=model,
   name={PH},
   elementname=\cfont{PH},
-  description={The measurement of the acidity or alkalinity.},
-  units=\cfont{\gls{ph}},
-  kind={type,sample},
+  description={A measure of the acidity or alkalinity of a solution.},
+  units=\cfont{\gls{ph sample}},
+  kind={type,sample,units},
   facet={\gls{float}}
 }
 
@@ -2508,31 +2348,6 @@
   description={A measured or calculated position of a \gls{component} element as reported by a piece of equipment.},
   units=\cfont{\gls{millimeter}},
   kind={type,sample},
-  facet={\gls{float}}
-}
-
-
-
-\newglossaryentry{programmed position sample}
-{
-  type=mtc,
-  category=model,
-  name={PROGRAMMED},
-  description={The position of the control point for a Component specified by a logic or motion program },
-  units=\cfont{\gls{millimeter}},
-  kind={subtype,sample},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{target position sample}
-{
-  type=mtc,
-  category=model,
-  name={TARGET},
-  description={The desired end position of the control point for a Component resulting from a movement or a series of movements.  Multiple discrete movements may need to be completed to achieve the final \gls{target position sample} position.},
-  units=\cfont{\gls{millimeter}},
-  kind={subtype,sample},
   facet={\gls{float}}
 }
 
@@ -2615,17 +2430,6 @@
   facet={\gls{float}}
 }
 
-
-\newglossaryentry{programmed rotaryvelocity sample}
-{
-  type=mtc,
-  category=model,
-  name={PROGRAMMED},
-  description={The rotational velocity specified by a logic or motion program or set by a switch},
-  units=\cfont{\gls{revolutionperminute}},
-  kind={subtype,sample},
-  facet={\gls{float}}
-}
 
 
 \newglossaryentry{soundlevel sample}
@@ -2804,8 +2608,8 @@
   name={VOLT\_AMPERE},
   elementname=\cfont{VoltAmpere},
   description={The measurement of the apparent power in an electrical circuit, equal to the product of root-mean-square (RMS) voltage and RMS current (commonly referred to as VA).},
-  units=\cfont{\gls{voltampere}},
-  kind={type,sample},
+  units=\cfont{\gls{voltampere sample}},
+  kind={type,sample,units},
   facet={\gls{float}}
 }
 
@@ -2817,8 +2621,8 @@
   name={VOLT\_AMPERE\_REACTIVE},
   elementname=\cfont{VoltAmpereReactive},
   description={The measurement of reactive power in an AC electrical circuit (commonly referred to as VAR).},
-  units=\cfont{\gls{voltamperereactive}},
-  kind={type,sample},
+  units=\cfont{\gls{voltamperereactive sample}},
+  kind={type,sample,units},
   facet={\gls{float}}
 }
 
@@ -2846,19 +2650,6 @@
 }
 
 
-
-\newglossaryentry{target voltage sample}
-{
-  type=mtc,
-  category=model,
-  name={TARGET},
-  description={The desired or preset voltage to be delivered from a power source.},
-  units=\cfont{\gls{volt}},
-  kind={subtype,sample},
-  facet={\gls{float}}
-}
-
-
 \newglossaryentry{wattage sample}
 {
   type=mtc,
@@ -2868,18 +2659,6 @@
   description={The measurement of power flowing through or dissipated by an electrical circuit or piece of equipment.},
   units=\cfont{\gls{watt}},
   kind={type,sample},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{target wattage sample}
-{
-  type=mtc,
-  category=model,
-  name={TARGET},
-  description={The desired or preset wattage to be delivered from a power source.},
-  units=\cfont{\gls{watt}},
-  kind={subtype,sample},
   facet={\gls{float}}
 }
 
@@ -2959,27 +2738,6 @@
   facet={\gls{float}}
 }
 
-
-\newglossaryentry{programmed axisfeedrateoverride event}
-{
-  type=mtc,
-  category=model,
-  name={PROGRAMMED},
-  description={The value of a signal or calculation issued to adjust the feedrate of an individual linear type axis that has been specified by a logic or motion program or set by a switch. \newline When the PROGRAMMED subtype of AXIS\_FEEDRATE\_OVERRIDE is applied, the resulting commanded feedrate for the axis is limited to the value of the original PROGRAMMED subtype of the AXIS\_FEEDRATE multiplied by the value of the PROGRAMMED subtype of AXIS\_FEEDRATE\_OVERRIDE.},
-  kind={subtype,event},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{rapid axisfeedrateoverride event}
-{
-  type=mtc,
-  category=model,
-  name={RAPID},
-  description={The value of a signal or calculation issued to adjust the feedrate of an individual linear type axis that is operating in a rapid positioning mode. \newline When the RAPID subtype of AXIS\_FEEDRATE\_OVERRIDE is applied, the resulting commanded feedrate for the axis is limited to the value of the original RAPID subtype of the AXIS\_FEEDRATE multiplied by the value of the RAPID subtype of AXIS\_FEEDRATE\_OVERRIDE.},
-  kind={subtype,event},
-  facet={\gls{float}}
-}
 
 
 \newglossaryentry{axisinterlock event}
@@ -3263,15 +3021,13 @@
 }
 
 
-\newglossaryentry{linear direction event}
+\newglossaryentry{linear subtype}
 {
   type=mtc,
   category=model,
   name={LINEAR},
-  description={The direction of motion of a linear motion.   The \gls{valid data value} \must be POSTIVE or NEGATIVE.},
-  kind={subtype,event},
-  facet={\gls{string}},
-  enumeration={\gls{positive value},\gls{negative value}}
+  description={The direction of motion of a linear motion.},
+  kind={subtype}
 }
 
 
@@ -3366,7 +3122,7 @@
   type=mtc,
   category=model,
   name={DELAY},
-  description={An indication or measurement of time that a piece of equipment is waiting for an event or an action to occur.},
+  description={A piece of equipment waiting for an event or an action to occur.},
   kind={subtype}
 }
 
@@ -3376,45 +3132,30 @@
   type=mtc,
   category=model,
   name={LOADED},
-  description={An indication or measurement of time that subparts of a piece of equipment are under load.},
+  description={Subparts of a piece of equipment are under load.},
   kind={subtype}
 }
 
 
-\newglossaryentry{operating equipmentmode event}
+\newglossaryentry{operating subtype}
 {
   type=mtc,
   category=model,
   name={OPERATING},
-  description={An indication that the major sub-parts of a piece of equipment are powered or performing any activity whether producing a part or product or not.   \newline Example: For traditional machine tools, this includes when the piece of equipment is \gls{working equipmentmode event} or it is idle.The \gls{valid data value} \must be ON or OFF.},
-  kind={subtype,event},
-  facet={\gls{string}},
-  enumeration={\gls{on value},\gls{off value}}
+  description={A piece of equipment are powered or performing any activity.},
+  kind={subtype}
 }
 
 
-\newglossaryentry{powered equipmentmode event}
+\newglossaryentry{powered subtype}
 {
   type=mtc,
   category=model,
   name={POWERED},
-  description={An indication that primary power is applied to the piece of equipment and, as a minimum, the controller or logic portion of the piece of equipment is powered and functioning or components that are required to remain on are powered. Example: Heaters for an extrusion machine that required to be powered even when the equipment is turned off.The \gls{valid data value} \must be ON or OFF.},
-  kind={subtype,event},
-  facet={\gls{string}},
-  enumeration={\gls{on value},\gls{off value}}
+  description={Primary  power is  applied  to the  piece  of  equipment and,  as  a minimum, the controller or logic portion of the piece of equipment is powered and functioning or components that are required to remain on are powered.},
+  kind={subtype}
 }
 
-
-\newglossaryentry{working equipmentmode event}
-{
-  type=mtc,
-  category=model,
-  name={WORKING},
-  description={An indication that a piece of equipment is performing any activity  the equipment is active and performing a function under load or not. \newline Example: For traditional machine tools, this includes when the piece of equipment is LOADED, making rapid moves, executing a tool change, etc.The \gls{valid data value} \must be ON or OFF.},
-  kind={subtype,event},
-  facet={\gls{string}},
-  enumeration={\gls{on value},\gls{off value}}
-}
 
 
 \newglossaryentry{execution event}
@@ -3439,7 +3180,7 @@
   description={The current intended production status of the device or component.},
   kind={type,event},
   facet={\gls{string}},
-  enumeration={\gls{production value},\gls{setup value},\gls{teardown value},\gls{maintenance value},\gls{processdevelopment value}}
+  enumeration={\gls{production value},\gls{setup value},\gls{teardown value},\gls{maintenance},\gls{processdevelopment value}}
 }
 
 
@@ -3636,14 +3377,14 @@
 }
 
 
-\newglossaryentry{partcount event}
+\newglossaryentry{partcount}
 {
   type=mtc,
   category=model,
   name={PART\_COUNT},
   elementname=\cfont{PartCount},
   representation=\cfont{PartCountDiscrete},
-  description={The current count of parts produced as represented by the \gls{controller} component.},
+  description={The count of parts produced.},
   kind={type,event},
   facet={\gls{float}}
 }
@@ -3684,17 +3425,7 @@
   type=mtc,
   category=model,
   name={REMAINING},
-  description={The number of parts remaining in stock or to be produced.},
-  kind={subtype}
-}
-
-
-\newglossaryentry{target subtype}
-{
-  type=mtc,
-  category=model,
-  name={TARGET},
-  description={Indicates the number of parts that are projected or planned to be produced.},
+  description={Remaining measure of an object or an action.},
   kind={subtype}
 }
 
@@ -3742,27 +3473,6 @@
   name={JOG},
   description={The feedrate specified by a logic or motion program, by a pre-set value, or set by a switch as the feedrate for the \gls{axes}. },
   kind={subtype}
-}
-
-\newglossaryentry{programmed pathfeedrateoverride event}
-{
-  type=mtc,
-  category=model,
-  name={PROGRAMMED},
-  description={The value of a signal or calculation issued to adjust the feedrate of the axes associated with a Path component when the axes, or a single axis, are operating as specified by a logic or motion program or set by a switch. \newline When the PROGRAMMED subtype of PATH\_FEEDRATE\_OVERRIDE is applied, the resulting commanded feedrate for the axes, or a single axis, associated with the path are limited to the value of the original PROGRAMMED subtype of the PATH\_FEEDRATE multiplied by the value of the PROGRAMMED subtype of PATH\_FEEDRATE\_OVERRIDE.},
-  kind={subtype,event},
-  facet={\gls{float}}
-}
-
-
-\newglossaryentry{rapid pathfeedrateoverride event}
-{
-  type=mtc,
-  category=model,
-  name={RAPID},
-  description={The value of a signal or calculation issued to adjust the feedrate of the axes associated with a Path component when the axes, or a single axis, are being operated in a rapid positioning mode or method (rapid).   \newline When the RAPID subtype of PATH\_FEEDRATE\_OVERRIDE is applied, the resulting commanded feedrate for the axes, or a single axis, associated with the path are limited to the value of the original RAPID subtype of the PATH\_FEEDRATE multiplied by the value of the RAPID subtype of PATH\_FEEDRATE\_OVERRIDE.},
-  kind={subtype,event},
-  facet={\gls{float}}
 }
 
 
@@ -4045,14 +3755,14 @@
 }
 
 
-\newglossaryentry{wire event}
+\newglossaryentry{wire}
 {
   type=mtc,
   category=model,
   name={WIRE},
   elementname=\cfont{Wire},
-  description={The identifier for the type of wire used as the cutting mechanism in Electrical Discharge Machining or similar processes. \newline The \gls{valid data value} \must be a text string.},
-  kind={type,event},
+  description={A string like piece or filament of relatively rigid or flexible material provided in a variety of diameters.},
+  kind={type,event,composition},
   facet={\gls{string}}
 }
 
@@ -4144,7 +3854,7 @@
   category=model,
   name={SYSTEM},
   elementname=\cfont{System},
-  description={},
+  description={A general purpose indication associated with an electronic component of a piece of equipment or a controller that represents a fault that is not associated with the operator, program, or hardware.},
   kind={type,condition}
 }
 
@@ -4264,7 +3974,7 @@
   type=mtc,
   category=model,
   name={Warning},
-  description={}
+  description={Warning value for a \gls{condition} element.}
 }
 
 
@@ -4273,7 +3983,7 @@
   type=mtc,
   category=model,
   name={Normal},
-  description={}
+  description={Normal value for a \gls{condition} element.}
 }
 
 
@@ -4282,7 +3992,7 @@
   type=mtc,
   category=model,
   name={Fault},
-  description={}
+  description={Fault value for a \gls{condition} element.}
 }
 
 
@@ -4291,7 +4001,7 @@
   type=mtc,
   category=model,
   name={LOW},
-  description={}
+  description={Low \gls{qualifier} value for a \gls{condition} element.}
 }
 
 
@@ -4300,16 +4010,7 @@
   type=mtc,
   category=model,
   name={HIGH},
-  description={}
-}
-
-
-\newglossaryentry{automatic}
-{
-  type=mtc,
-  category=model,
-  name={AUTOMATIC},
-  description={}
+  description={High \gls{qualifier} value for a \gls{condition} element.}
 }
 
 
@@ -4534,16 +4235,6 @@
 }
 
 
-\newglossaryentry{ph}
-{
-  type=mtc,
-  category=model,
-  name={PH},
-  description={A measure of the acidity or alkalinity of a solution},
-  kind={units}
-}
-
-
 \newglossaryentry{revolutionperminute}
 {
   type=mtc,
@@ -4583,25 +4274,6 @@
   kind={units}
 }
 
-
-\newglossaryentry{voltampere}
-{
-  type=mtc,
-  category=model,
-  name={VOLT\_AMPERE},
-  description={Volt-Ampere  (VA)},
-  kind={units}
-}
-
-
-\newglossaryentry{voltamperereactive}
-{
-  type=mtc,
-  category=model,
-  name={VOLT\_AMPERE\_REACTIVE},
-  description={Volt-Ampere Reactive  (VAR)},
-  kind={units}
-}
 
 
 \newglossaryentry{watt}
@@ -4939,17 +4611,7 @@
   type=mtc,
   category=model,
   name={AVAILABLE},
-  description={The value of the \gls{data entity} when the entity is active and capable of providing data.},
-  kind={enum}
-}
-
-
-\newglossaryentry{unavailable value}
-{
-  type=mtc,
-  category=model,
-  name={UNAVAILABLE},
-  description={The value of the \gls{data entity} wither when the data is not received or the entity is incapable of providing data.},
+  description={The value or status of an XML element when it is available.},
   kind={enum}
 }
 
@@ -4959,7 +4621,7 @@
   type=mtc,
   category=model,
   name={TANDEM},
-  description={},
+  description={Elements are physically connected to each other and operate as a single unit.},
   kind={enum}
 }
 
@@ -4969,7 +4631,7 @@
   type=mtc,
   category=model,
   name={SYNCHRONOUS},
-  description={},
+  description={Physical or logical parts which are not physically connected to each other but are operating together.},
   kind={enum}
 }
 
@@ -4979,7 +4641,7 @@
   type=mtc,
   category=model,
   name={MASTER},
-  description={master},
+  description={It provides information or state values that influences the operation of other \gls{dataitem} of similar type.},
   kind={enum}
 }
 
@@ -4989,7 +4651,7 @@
   type=mtc,
   category=model,
   name={SLAVE},
-  description={},
+  description={The axis is a slave to the \gls{coupledaxes event}},
   kind={enum}
 }
 
@@ -4999,7 +4661,7 @@
   type=mtc,
   category=model,
   name={HOME},
-  description={},
+  description={The component at its home position.},
   kind={enum}
 }
 
@@ -5009,7 +4671,7 @@
   type=mtc,
   category=model,
   name={TRAVEL},
-  description={},
+  description={The component is in motion.},
   kind={enum}
 }
 
@@ -5019,7 +4681,7 @@
   type=mtc,
   category=model,
   name={PARKED},
-  description={},
+  description={The component has been moved to a fixed position.},
   kind={enum}
 }
 
@@ -5029,7 +4691,7 @@
   type=mtc,
   category=model,
   name={STOPPED},
-  description={},
+  description={The component is stopped.},
   kind={enum}
 }
 
@@ -5039,7 +4701,7 @@
   type=mtc,
   category=model,
   name={OPEN},
-  description={},
+  description={A component is open to the point of a positive confirmation.},
   kind={enum}
 }
 
@@ -5049,7 +4711,7 @@
   type=mtc,
   category=model,
   name={CLOSED},
-  description={},
+  description={A component is closed to the point of a positive confirmation.},
   kind={enum}
 }
 
@@ -5059,7 +4721,7 @@
   type=mtc,
   category=model,
   name={UNLATCHED},
-  description={},
+  description={An intermediate position.},
   kind={enum}
 }
 
@@ -5069,7 +4731,7 @@
   type=mtc,
   category=model,
   name={RIGHT},
-  description={},
+  description={The position of the Composition element is oriented to the right to the point of a positive confirmation.},
   kind={enum}
 }
 
@@ -5079,7 +4741,7 @@
   type=mtc,
   category=model,
   name={LEFT},
-  description={},
+  description={The position of the Composition element is oriented to the left to the point of a positive confirmation.},
   kind={enum}
 }
 
@@ -5089,7 +4751,7 @@
   type=mtc,
   category=model,
   name={TRANSITIONING},
-  description={},
+  description={It is in an intermediate position of the Composition element.},
   kind={enum}
 }
 
@@ -5099,7 +4761,7 @@
   type=mtc,
   category=model,
   name={ON},
-  description={},
+  description={On state or value.},
   kind={enum}
 }
 
@@ -5109,7 +4771,7 @@
   type=mtc,
   category=model,
   name={OFF},
-  description={},
+  description={Off state or value.},
   kind={enum}
 }
 
@@ -5119,7 +4781,7 @@
   type=mtc,
   category=model,
   name={UP},
-  description={},
+  description={Increase in the behavior of a \gls{structural element}.},
   kind={enum}
 }
 
@@ -5129,7 +4791,7 @@
   type=mtc,
   category=model,
   name={DOWN},
-  description={},
+  description={Reduction in the behavior of a \gls{structural element}.},
   kind={enum}
 }
 
@@ -5139,7 +4801,7 @@
   type=mtc,
   category=model,
   name={AUTOMATIC},
-  description={},
+  description={The \gls{controller} is configured to automatically execute a program.},
   kind={enum}
 }
 
@@ -5149,7 +4811,7 @@
   type=mtc,
   category=model,
   name={MANUAL},
-  description={},
+  description={Operations based on the instructions received from an external source.},
   kind={enum}
 }
 
@@ -5159,7 +4821,7 @@
   type=mtc,
   category=model,
   name={MANUAL\_DATA\_INPUT},
-  description={},
+  description={The operator can enter a series of operations for the controller to perform.},
   kind={enum}
 }
 
@@ -5169,7 +4831,7 @@
   type=mtc,
   category=model,
   name={SEMI\_AUTOMATIC},
-  description={},
+  description={The controller  executes a single set of instructions from an active program and then stops until given a command to execute the next set of instructions.},
   kind={enum}
 }
 
@@ -5179,7 +4841,7 @@
   type=mtc,
   category=model,
   name={EDIT},
-  description={},
+  description={The controller is currently functioning as a programming device and is not capable of executing an active program.},
   kind={enum}
 }
 
@@ -5189,7 +4851,7 @@
   type=mtc,
   category=model,
   name={CLOCKWISE},
-  description={},
+  description={A \gls{rotary direction event} component type rotating in a clockwise fashion using the right-hand rule.},
   kind={enum}
 }
 
@@ -5199,7 +4861,7 @@
   type=mtc,
   category=model,
   name={COUNTER\_CLOCKWISE},
-  description={},
+  description={A \gls{rotary direction event} component type rotating in a counter clockwise fashion using the right-hand rule.},
   kind={enum}
 }
 
@@ -5209,7 +4871,7 @@
   type=mtc,
   category=model,
   name={POSITIVE},
-  description={},
+  description={A \gls{linear subtype} type component is moving in the direction of increasing position value.},
   kind={enum}
 }
 
@@ -5219,7 +4881,7 @@
   type=mtc,
   category=model,
   name={NEGATIVE},
-  description={},
+  description={A \gls{linear subtype} type component is moving in the direction of decreasing position value.},
   kind={enum}
 }
 
@@ -5229,7 +4891,7 @@
   type=mtc,
   category=model,
   name={ARMED},
-  description={},
+  description={The emergency stop circuit is complete and the piece of equipment, component, or composition element is allowed to operate. },
   kind={enum}
 }
 
@@ -5239,7 +4901,7 @@
   type=mtc,
   category=model,
   name={TRIGGERED},
-  description={},
+  description={The operation of the piece of equipment, component, or composition element is inhibited.},
   kind={enum}
 }
 
@@ -5249,7 +4911,7 @@
   type=mtc,
   category=model,
   name={READY},
-  description={},
+  description={A component is ready to engage.},
   kind={enum}
 }
 
@@ -5259,7 +4921,7 @@
   type=mtc,
   category=model,
   name={INTERRUPTED},
-  description={},
+  description={The action of a Component has been suspended due to an external signal.},
   kind={enum}
 }
 
@@ -5269,7 +4931,7 @@
   type=mtc,
   category=model,
   name={FEED\_HOLD},
-  description={},
+  description={Motion of a Component has been commanded to stop at its current position.},
   kind={enum}
 }
 
@@ -5279,7 +4941,7 @@
   type=mtc,
   category=model,
   name={OPTIONAL\_STOP},
-  description={},
+  description={The controller’s program has been intentionally stopped},
   kind={enum}
 }
 
@@ -5289,7 +4951,7 @@
   type=mtc,
   category=model,
   name={PROGRAM\_STOPPED},
-  description={},
+  description={The execution of the \gls{controller}'s program has been stopped by a command from within the program.},
   kind={enum}
 }
 
@@ -5299,7 +4961,7 @@
   type=mtc,
   category=model,
   name={PROGRAM\_COMPLETED},
-  description={},
+  description={The execution of the controller’s program has been stopped by a command from within the program.},
   kind={enum}
 }
 
@@ -5309,7 +4971,7 @@
   type=mtc,
   category=model,
   name={PRODUCTION},
-  description={},
+  description={A \gls{structural element} is currently producing product.},
   kind={enum}
 }
 
@@ -5319,7 +4981,7 @@
   type=mtc,
   category=model,
   name={SETUP},
-  description={},
+  description={A \gls{structural element} is being prepared or modified to begin production of product.},
   kind={enum}
 }
 
@@ -5329,7 +4991,7 @@
   type=mtc,
   category=model,
   name={TEARDOWN},
-  description={},
+  description={Typically, a \gls{structural element} has completed the production of a product and is being modified or returned to a neutral state such that it may then be prepared to begin production of a different product.},
   kind={enum}
 }
 
@@ -5339,7 +5001,7 @@
   type=mtc,
   category=model,
   name={PROCESS\_DEVELOPMENT},
-  description={},
+  description={A \gls{structural element} is being used to prove-out a new process.},
   kind={enum}
 }
 
@@ -5349,7 +5011,7 @@
   type=mtc,
   category=model,
   name={DISABLED},
-  description={},
+  description={A component is currently not operational.},
   kind={enum}
 }
 
@@ -5359,7 +5021,7 @@
   type=mtc,
   category=model,
   name={ENABLED},
-  description={},
+  description={A component is currently operational and performing as expected.},
   kind={enum}
 }
 
@@ -5369,7 +5031,7 @@
   type=mtc,
   category=model,
   name={INDEPENDENT},
-  description={},
+  description={The path is operating independently and without the influence of another path.},
   kind={enum}
 }
 
@@ -5379,7 +5041,7 @@
   type=mtc,
   category=model,
   name={MIRROR},
-  description={},
+  description={The axes associated with the path are mirroring the motion of the \gls{master value} path.},
   kind={enum}
 }
 
@@ -5389,7 +5051,7 @@
   type=mtc,
   category=model,
   name={YES},
-  description={},
+  description={The \gls{endofbar event} has been reached.},
   kind={enum}
 }
 
@@ -5399,7 +5061,7 @@
   type=mtc,
   category=model,
   name={NO},
-  description={},
+  description={The \gls{endofbar event} has not been reached.},
   kind={enum}
 }
 
@@ -5409,7 +5071,7 @@
   type=mtc,
   category=model,
   name={NOT\_READY},
-  description={},
+  description={A component is not ready to engage.},
   kind={enum}
 }
 
@@ -5419,7 +5081,7 @@
   type=mtc,
   category=model,
   name={SPINDLE},
-  description={},
+  description={The axis is functioning as a spindle.},
   kind={enum}
 }
 
@@ -5429,7 +5091,7 @@
   type=mtc,
   category=model,
   name={INDEX},
-  description={},
+  description={The axis is configured to index.},
   kind={enum}
 }
 
@@ -5439,7 +5101,7 @@
   type=mtc,
   category=model,
   name={CONTOUR},
-  description={},
+  description={The position of the axis is being interpolated.},
   kind={enum}
 }
 
@@ -5450,7 +5112,7 @@
   category=model,
   name={MTConnectAsset},
   plural={MTConnectAssets},
-  description={}
+  description={XML response document}
 }
 
 
@@ -5458,7 +5120,7 @@
 {
   type=mtc,
   name={Asset Information Model},
-  description={}
+  description={It associates each electronic MTConnectAssets document with a unique identifier and allows for some predefined mechanisms to find, create, request, updated, and delete these electronic documents in a way that provides for consistency across multiple pieces of equipment.}
 }
 
 
@@ -5581,8 +5243,7 @@
   type=mtc,
   category=model,
   name={removed},
-  description={This is an optional attribute that is an indicator that the \gls{mtconnect asset} has been removed from the piece of equipment. If the \gls{asset} is marked as removed,
-  it will not be visible to the client application unless the=true parameter is provided in the URL. If this attribute is not present it MUST be assumed to be false. The value is an \cfont{xsi:boolean} type and \MUST be \cfont{true} or \cfont{false}.}
+  description={An indicator that the \gls{mtconnect asset} has been removed from the piece of equipment.}
 }
 
 
@@ -5590,7 +5251,7 @@
 {
   type=mtc,
   name={asset buffer},
-  description={}
+  description={A buffer or queue for \gls{assets mtconnectassets}.}
 }
 
 
@@ -5632,7 +5293,7 @@
   type=mtc,
   category=model,
   name={includeRemoved},
-  description={}
+  description={A flag to include removed \gls{assets mtconnectassets} while requesting an \gls{agent} for an \glspl{mtconnectstream} \gls{response document}.}
 }
 
 
@@ -5641,7 +5302,7 @@
   type=mtc,
   category=model,
   name={assetType},
-  description={}
+  description={The type of asset that was updated.}
 }
 
 
@@ -5650,7 +5311,7 @@
   type=mtc,
   category=model,
   name={CuttingToolArchetype},
-  description={}
+  description={The \gls{cuttingtoolarchetype} represent the static Cutting Tool geometries and nominal values as one would expect from a tool catalog.}
 }
 
 
@@ -5659,16 +5320,7 @@
   type=mtc,
   category=model,
   name={assetId},
-  description={The unique identifier of the instance of this tool. This will be the same as the \gls{toolid cuttingtool} and \gls{serialnumber cuttingtool} in most cases. The \gls{assetid cuttingtool} \SHOULD be the combination of the \gls{toolid cuttingtool} and \gls{serialnumber cuttingtool} as in \gls{toolid cuttingtool}. \gls{serialnumber cuttingtool} or an equivalent implementation dependent identification scheme.}
-}
-
-
-\newglossaryentry{serialnumber cuttingtool}
-{
-  type=mtc,
-  category=model,
-  name={serialNumber},
-  description={The unique identifier for this assembly. This is defined as an XML string type and is implementation dependent.}
+  description={The unique identifier of the instance of this tool. This will be the same as the \gls{toolid cuttingtool} and \gls{serialnumber} in most cases. The \gls{assetid cuttingtool} \SHOULD be the combination of the \gls{toolid cuttingtool} and \gls{serialnumber} as in \gls{toolid cuttingtool}. \gls{serialnumber} or an equivalent implementation dependent identification scheme.}
 }
 
 
@@ -5687,15 +5339,6 @@
   category=model,
   name={manufacturers},
   description={An optional attribute referring to the manufacturer(s) of this Cutting Tool, for this element, this will reference the Tool Item and Adaptive Items specifically. }
-}
-
-
-\newglossaryentry{removed cuttingtool}
-{
-  type=mtc,
-  category=model,
-  name={removed},
-  description={This is an indicator that the Cutting Tool has been removed from the piece of equipment. }
 }
 
 
@@ -5851,23 +5494,6 @@
 }
 
 
-\newglossaryentry{available status}
-{
-  type=mtc,
-  category=model,
-  name={AVAILABLE},
-  description={Indicates the tool is available for use. If this is not present, the tool is currently not ready to be used.}
-}
-
-
-\newglossaryentry{unavailable status}
-{
-  type=mtc,
-  category=model,
-  name={UNAVAILABLE},
-  description={Indicates the tool is unavailable for use in metal removal. If this is not present, the tool is currently not ready to be used.}
-}
-
 
 \newglossaryentry{allocated status}
 {
@@ -5995,15 +5621,6 @@
 }
 
 
-\newglossaryentry{partcount type}
-{
-  type=mtc,
-  category=model,
-  name={PART\_COUNT},
-  description={The tool life measured in parts. All units for minimum, maximum, and nominal \MUST be provided as the number of parts.}
-}
-
-
 \newglossaryentry{wear type}
 {
   type=mtc,
@@ -6012,23 +5629,6 @@
   description={The tool life measured in tool wear. Wear \MUST be provided in millimeters as an offset to nominal. All units for minimum, maximum, and nominal \MUST be given as millimeter offsets as well. }
 }
 
-
-\newglossaryentry{up countdirection}
-{
-  type=mtc,
-  category=model,
-  name={UP},
-  description={The tool life counts up from zero to the maximum.}
-}
-
-
-\newglossaryentry{down countdirection}
-{
-  type=mtc,
-  category=model,
-  name={DOWN},
-  description={The tool life counts down from the maximum to zero.}
-}
 
 
 \newglossaryentry{positiveoverlap}
@@ -6085,14 +5685,6 @@
 }
 
 
-\newglossaryentry{source cuttingtoolarchetypereference}
-{
-  type=mtc,
-  category=model,
-  name={Source},
-  description={The URL of the \gls{cuttingtoolarchetype} \gls{information model}.}
-}
-
 
 \newglossaryentry{programtoolgroup}
 {
@@ -6144,7 +5736,7 @@
   type=mtc,
   category=model,
   name={Measurement},
-  description={}
+  description={A measure of a \gls{structural element}.}
 }
 
 \newglossaryentry{measurements}
@@ -6152,7 +5744,7 @@
   type=mtc,
   category=model,
   name={Measurements},
-  description={A collection of measurements for the tool assembly.}
+  description={The \gls{measurements} element is a collection of one or more constrained scalar values associated with this Cutting Tool.}
 }
 
 
@@ -6165,58 +5757,35 @@
 }
 
 
-\newglossaryentry{maximum processspindlespeed}
+\newglossaryentry{maximum attribute}
 {
   type=mtc,
   category=model,
   name={maximum},
-  description={The upper bound for the tools target spindle speed.}
+  kind={attribute},
+  description={The upper bound for the value of a \gls{structural element}.}
 }
 
 
-\newglossaryentry{minimum processspindlespeed}
+\newglossaryentry{minimum attribute}
 {
   type=mtc,
   category=model,
   name={minimum},
-  description={The lower bound for the tools spindle speed.}
+  kind={attribute},
+  description={The lower bound for value of a \gls{structural element}.}
 }
 
 
-\newglossaryentry{nominal processspindlespeed}
+\newglossaryentry{nominal attribute}
 {
   type=mtc,
   category=model,
   name={nominal},
-  description={The nominal speed the tool is designed to operate at.}
+  description={The nominal value for a \gls{structural element}.}
 }
 
 
-\newglossaryentry{maximum processfeedrate}
-{
-  type=mtc,
-  category=model,
-  name={maximum},
-  description={The upper bound for the tools process target feedrate.}
-}
-
-
-\newglossaryentry{minimum processfeedrate}
-{
-  type=mtc,
-  category=model,
-  name={minimum},
-  description={The lower bound for the tools feedrate.}
-}
-
-
-\newglossaryentry{nominal processfeedrate}
-{
-  type=mtc,
-  category=model,
-  name={nominal},
-  description={The nominal feedrate the tool is designed to operate at.}
-}
 
 
 \newglossaryentry{commonmeasurement}
@@ -6224,7 +5793,7 @@
   type=mtc,
   category=model,
   name={CommonMeasurement},
-  description={}
+  description={A subtype of \gls{measurement}.}
 }
 
 
@@ -6233,7 +5802,7 @@
   type=mtc,
   category=model,
   name={AssemblyMeasurement},
-  description={}
+  description={A subtype of \gls{measurement}.}
 }
 
 
@@ -6242,7 +5811,7 @@
   type=mtc,
   category=model,
   name={CuttingItemMeasurement},
-  description={}
+  description={A subtype of \gls{measurement}.}
 }
 
 
@@ -6254,59 +5823,6 @@
   description={A shop specific code for this measurement. ISO 13399 codes \MAY be used for these codes as well.}
 }
 
-
-\newglossaryentry{maximum measurement}
-{
-  type=mtc,
-  category=model,
-  name={maximum},
-  description={The maximum value for this measurement. Exceeding this value would indicate the tool is not usable.}
-}
-
-
-\newglossaryentry{minimum measurement}
-{
-  type=mtc,
-  category=model,
-  name={minimum},
-  description={The minimum value for this measurement. Exceeding this value would indicate the tool is not usable.}
-}
-
-
-\newglossaryentry{nominal measurement}
-{
-  type=mtc,
-  category=model,
-  name={nominal},
-  description={The as advertised value for this measurement.}
-}
-
-
-\newglossaryentry{significantdigits measurement}
-{
-  type=mtc,
-  category=model,
-  name={significantDigits},
-  description={The number of significant digits in the reported value. This is used by applications to determine accuracy of values. This \MAY be specified for all numeric values.}
-}
-
-
-\newglossaryentry{units measurement}
-{
-  type=mtc,
-  category=model,
-  name={units},
-  description={The units for the measurements. }
-}
-
-
-\newglossaryentry{nativeunits measurement}
-{
-  type=mtc,
-  category=model,
-  name={nativeunits},
-  description={The units the measurement was originally recorded in. }
-}
 
 
 \newglossaryentry{bodydiametermax}
@@ -6496,22 +6012,6 @@
   description={The material composition for this Cutting Item.}
 }
 
-
-\newglossaryentry{measurement cuttingitem}
-{
-  type=mtc,
-  category=model,
-  name={Measurement},
-  description={}
-}
-
-\newglossaryentry{measurements cuttingitem}
-{
-  type=mtc,
-  category=model,
-  name={Measurements},
-  description={A collection of measurements relating to this Cutting Item.}
-}
 
 
 \newglossaryentry{locus cuttingitem}
@@ -6756,7 +6256,7 @@
 {
   type=mtc,
   name={Publish},
-  description={}
+  description={Sending of messages in a \gls{publishsubscribe} pattern.}
 }
 
 
@@ -6764,7 +6264,7 @@
 {
   type=mtc,
   name={Subscribe},
-  description={}
+  description={Receiving messages in a \gls{publishsubscribe} pattern.}
 }
 
 
@@ -6774,7 +6274,7 @@
   type=mtc,
   category=model,
   name={FAIL},
-  description={},
+  description={Failure before completion of an action.},
   kind={enum}
 }
 
@@ -6784,7 +6284,7 @@
   type=mtc,
   category=model,
   name={COMPLETE},
-  description={},
+  description={Completion of an action.},
   kind={enum}
 }
 
@@ -6830,7 +6330,7 @@
   type=mtc,
   category=model,
   name={REQUEST},
-  description={}
+  description={A subtype of an \gls{interface} \gls{dataitem} type to communicate a request. }
 }
 
 
@@ -6839,7 +6339,7 @@
   type=mtc,
   category=model,
   name={RESPONSE},
-  description={}
+  description={A subtype of an \gls{interface} \gls{dataitem} type to communicate a response.}
 }
 
 
@@ -6967,7 +6467,7 @@
 {
   type=mtc,
   name={integer},
-  description={},
+  description={Integer data type.},
   kind={facet}
 }
 
@@ -6976,7 +6476,7 @@
 {
   type=mtc,
   name={string},
-  description={},
+  description={String data type.},
   kind={facet}
 }
 
@@ -6985,7 +6485,7 @@
 {
   type=mtc,
   name={float},
-  description={},
+  description={Float data type.},
   kind={facet}
 }
 
@@ -6994,7 +6494,7 @@
 {
   type=mtc,
   name={boolean},
-  description={},
+  description={Boolean data type.},
   kind={facet}
 }
 
@@ -7003,7 +6503,7 @@
 {
   type=mtc,
   name={datetime},
-  description={},
+  description={DateTime (yyyy-mm-ddthh:mm:ss.ffff) data type.},
   kind={facet}
 }
 
@@ -7012,7 +6512,7 @@
 {
   type=mtc,
   name={array3d},
-  description={},
+  description={A three dimensional \gls{float} array.},
   kind={facet},
   facet={\gls{float}}
 }
@@ -7021,7 +6521,7 @@
 {
   type=mtc,
   name={arraystring},
-  description={},
+  description={An array of \glspl{string}.},
   kind={facet},
   facet={\gls{string}}
 }
@@ -7099,7 +6599,7 @@
   type=mtc,
   category=model,
   name={Archetype},
-  description={}
+  description={Model of a domain concept.}
 }
 
 \longnewglossaryentry{asset}

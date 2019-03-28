@@ -23,7 +23,7 @@ package :Streams, 'Event Package' do
     member :Uuid, 'The unque identifier for this component', 0..1
     member :Samples, 'A collection of samples', 0..1
     member :Events, 'A collection of events', 0..1
-    member :Condition, 'The representation of the components condition', 0..1, :ConditionList
+    member :Condition, Glossary['conditions'], 0..1, :ConditionList
   end
 
   type :Samples, 'A collection of samples for this component' do
@@ -34,7 +34,7 @@ package :Streams, 'Event Package' do
     member :Event, 'A subtype of event', 1..INF
   end
   
-  type :ConditionList, 'The condition of the device' do
+  type :ConditionList, Glossary['conditions'] do
     member :Condition, 'A subtype of a condition', 1..INF 
   end
   

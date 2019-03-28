@@ -7,32 +7,36 @@ INF = 0xFFFFFFFF
 module Annotation
   def annotation
     unless @checked_glossary
-      ln = name.to_s.downcase
-      keys = [name, ln]
-      if @parent
-        par = @parent.downcase
-        keys.concat(["#{ln} #{par}", "#{Glossary.singular(ln)} #{par}"])
-      end
-      keys << Glossary.singular(ln)
-      
-      keys.each do |key|
-        #puts "Checking #{self.class.name} #{@name} #{key}"
-        e = Glossary[key]
-        if !e.nil?  and e.has_key?(:category) and e.category == 'model'
-          if e.has_key?(:descriptionplural) and ln =~ /s$/
-            a = e.descriptionplural
+      if Latex::GlossaryEntry === @annotation
+        @annotation = @annotation.description
+      else
+        ln = name.to_s.downcase
+        keys = [name, ln]
+        if @parent
+          par = @parent.downcase
+          keys.concat(["#{ln} #{par}", "#{Glossary.singular(ln)} #{par}"])
+        end
+        keys << Glossary.singular(ln)
+        
+        keys.each do |key|
+          #puts "Checking #{self.class.name} #{@name} #{key}"
+          e = Glossary[key]
+          if !e.nil?  and e.has_key?(:category) and e.category == 'model'
+            if e.has_key?(:descriptionplural) and ln =~ /s$/
+              a = e.descriptionplural
+            end
+            if a.nil? or a.empty?
+              a = e.description
+            end
+            unless a.empty?
+              #puts "-- found #{self.class.name} #{@name} #{e.name} #{a}"
+              @annotation = a
+            end
+            break
           end
-          if a.nil? or a.empty?
-            a = e.description
-          end
-          unless a.empty?
-            #puts "-- found #{self.class.name} #{@name} #{e.name} #{a}"
-            @annotation = a
-          end
-          break
         end
       end
-      @checked_glossaryed = true
+      @checked_glossary = true
     end
     @annotation
   end

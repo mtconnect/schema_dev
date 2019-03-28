@@ -488,7 +488,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PH'>
         <xs:annotation>
           <xs:documentation>
-            The measurement of the acidity or alkalinity.
+            A measure of the acidity or alkalinity of a solution.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -898,8 +898,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PART_COUNT'>
         <xs:annotation>
           <xs:documentation>
-            The current count of parts produced as represented by the controller
-            component.
+            The count of parts produced.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1072,9 +1071,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='WIRE'>
         <xs:annotation>
           <xs:documentation>
-            The identifier for the type of wire used as the cutting mechanism in
-            Electrical Discharge Machining or similar processes. The valid data
-            value must be a text string.
+            A string like piece or filament of relatively rigid or flexible
+            material provided in a variety of diameters.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1135,7 +1133,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='SYSTEM'/>
+      <xs:enumeration value='SYSTEM'>
+        <xs:annotation>
+          <xs:documentation>
+            A general purpose indication associated with an electronic component
+            of a piece of equipment or a controller that represents a fault that
+            is not associated with the operator, program, or hardware.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='ASSET_CHANGED'>
         <xs:annotation>
           <xs:documentation>
@@ -1278,7 +1284,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='TARGET'>
         <xs:annotation>
           <xs:documentation>
-            The desired or preset amperage to be delivered from a power source.
+            The desired measure or count for a data item value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1299,49 +1305,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='PROGRAMMED'>
         <xs:annotation>
           <xs:documentation>
-            The feedrate specified by a logic or motion program or set by a
-            switch for a linear axis.
+            The value of a signal or calculation specified by a logic or motion
+            program or set by a switch.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='RAPID'>
         <xs:annotation>
           <xs:documentation>
-            The feedrate specified by a logic or motion program, by a pre-set
-            value, or set by a switch as the feedrate for a linear axis when
-            operating in a rapid positioning mode.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='OPERATING'>
-        <xs:annotation>
-          <xs:documentation>
-            Measurement of the time that the major sub-parts of a piece of
-            equipment are powered or performing any activity whether producing a
-            part or product or not. Example: For traditional machine tools, this
-            includes working equipmentmode event, plus idle time.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='POWERED'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of time that primary power is applied to the piece
-            of equipment and, as a minimum, the controller or logic portion of
-            the piece of equipment is powered and functioning or components that
-            are required to remain on are powered.Example: Heaters for an
-            extrusion machine that are required to be powered even when the
-            equipment is turned off.
+            The value of a signal or calculation issued to adjust the feedrate
+            of a component or composition that is operating in a rapid
+            positioning mode.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='WORKING'>
         <xs:annotation>
           <xs:documentation>
-            Measurement of the time that a piece of equipment is performing any
-            activity the equipment is active and performing a function under
-            load or not. Example: For traditional machine tools, this includes
-            LOADED, plus rapid moves, tool changes, etc.
+            A piece of equipment performing any activity, the equipment is
+            active and performing a function under load or not.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1349,13 +1331,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The measurement of the length of an object.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='REMAINING'>
-        <xs:annotation>
-          <xs:documentation>
-            The remaining total length of an object.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1563,8 +1538,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINEAR'>
         <xs:annotation>
           <xs:documentation>
-            The direction of motion of a linear motion. The valid data value
-            must be POSTIVE or NEGATIVE.
+            The direction of motion of a linear motion.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1601,16 +1575,31 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DELAY'>
         <xs:annotation>
           <xs:documentation>
-            An indication or measurement of time that a piece of equipment is
-            waiting for an event or an action to occur.
+            A piece of equipment waiting for an event or an action to occur.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='LOADED'>
         <xs:annotation>
           <xs:documentation>
-            An indication or measurement of time that subparts of a piece of
-            equipment are under load.
+            Subparts of a piece of equipment are under load.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OPERATING'>
+        <xs:annotation>
+          <xs:documentation>
+            A piece of equipment are powered or performing any activity.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='POWERED'>
+        <xs:annotation>
+          <xs:documentation>
+            Primary power is applied to the piece of equipment and, as a
+            minimum, the controller or logic portion of the piece of equipment
+            is powered and functioning or components that are required to remain
+            on are powered.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1691,6 +1680,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Indicates the count of correct parts made.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='REMAINING'>
+        <xs:annotation>
+          <xs:documentation>
+            Remaining measure of an object or an action.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1857,10 +1853,34 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='UnitsTypeEnum'>
     <xs:annotation>
       <xs:documentation>
-        The units supported
+        The unit of measurement for the reported value of the data item.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
+      <xs:enumeration value='PH'>
+        <xs:annotation>
+          <xs:documentation>
+            A measure of the acidity or alkalinity of a solution.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='VOLT_AMPERE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the apparent power in an electrical circuit,
+            equal to the product of root-mean-square (RMS) voltage and RMS
+            current (commonly referred to as VA).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='VOLT_AMPERE_REACTIVE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of reactive power in an AC electrical circuit
+            (commonly referred to as VAR).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='AMPERE'>
         <xs:annotation>
           <xs:documentation>
@@ -2016,13 +2036,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='PH'>
-        <xs:annotation>
-          <xs:documentation>
-            A measure of the acidity or alkalinity of a solution
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value='REVOLUTION/MINUTE'>
         <xs:annotation>
           <xs:documentation>
@@ -2048,20 +2061,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Volts
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VOLT_AMPERE'>
-        <xs:annotation>
-          <xs:documentation>
-            Volt-Ampere (VA)
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VOLT_AMPERE_REACTIVE'>
-        <xs:annotation>
-          <xs:documentation>
-            Volt-Ampere Reactive (VAR)
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2091,7 +2090,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='UnitsType'>
     <xs:annotation>
       <xs:documentation>
-        The units supported
+        The unit of measurement for the reported value of the data item.
       </xs:documentation>
     </xs:annotation>
     <xs:union memberTypes='UnitsTypeEnum UnitsExtType'/>
@@ -2099,11 +2098,34 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='NativeUnitsTypeEnum'>
     <xs:annotation>
       <xs:documentation>
-        The units supported for the source equipment that can be converted into
-        MTC Units.
+        The native units of measurement for the reported value of the data item.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
+      <xs:enumeration value='PH'>
+        <xs:annotation>
+          <xs:documentation>
+            A measure of the acidity or alkalinity of a solution.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='VOLT_AMPERE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of the apparent power in an electrical circuit,
+            equal to the product of root-mean-square (RMS) voltage and RMS
+            current (commonly referred to as VA).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='VOLT_AMPERE_REACTIVE'>
+        <xs:annotation>
+          <xs:documentation>
+            The measurement of reactive power in an AC electrical circuit
+            (commonly referred to as VAR).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='AMPERE'>
         <xs:annotation>
           <xs:documentation>
@@ -2259,13 +2281,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='PH'>
-        <xs:annotation>
-          <xs:documentation>
-            A measure of the acidity or alkalinity of a solution
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value='REVOLUTION/MINUTE'>
         <xs:annotation>
           <xs:documentation>
@@ -2291,20 +2306,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Volts
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VOLT_AMPERE'>
-        <xs:annotation>
-          <xs:documentation>
-            Volt-Ampere (VA)
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VOLT_AMPERE_REACTIVE'>
-        <xs:annotation>
-          <xs:documentation>
-            Volt-Ampere Reactive (VAR)
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2539,8 +2540,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='NativeUnitsType'>
     <xs:annotation>
       <xs:documentation>
-        The units supported for the source equipment that can be converted into
-        MTC Units.
+        The native units of measurement for the reported value of the data item.
       </xs:documentation>
     </xs:annotation>
     <xs:union memberTypes='NativeUnitsTypeEnum UnitsExtType'/>
@@ -2720,7 +2720,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='bufferSize' type='BufferSizeType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The size of the agent&apos;s buffer.
+              A value representing the maximum number of data entity that MAY be
+              retained in the agent that published the response document at any
+              point in time.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
