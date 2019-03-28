@@ -36,7 +36,7 @@
                 </Specifications>
               </Configuration>
               <DataItems>
-                <DataItem id="j2a" type="ANGLE" subType="ACTUAL" category="SAMPLE" units="DEGREE"></DataItem>
+                <DataItem id="j2a" type="ANGLE" subType="ACTUAL" category="SAMPLE" units="DEGREE"/>
               </DataItems>
               <References>
                 <ComponentRef idRef="j1" name="J1" relation="PARENT"/>
@@ -72,7 +72,7 @@
                 </Specifications>
               </Configuration>
               <References>
-                <ComponentRef idRef="j3" name="J3" relation="PARENT"/>
+                <ComponentRef idRef="j3" name="J3" relation="PARENT" />
               </References>
             </Linear>
             <Linear id="J5" name="J5">
@@ -90,6 +90,9 @@
               </DataItems>
               <References>
                 <ComponentRef idRef="j3" name="J3" relation="PARENT"/>
+                <DeviceRef deviceUuid="48a2abb0-32fb-0137-20ba-0c85909298d9" 
+                  relation="CHILD" significance="CRITICAL" 
+                  href="http://10.2.33.4:5000/48a2abb0-32fb-0137-20ba-0c85909298d9"/>
               </References>
             </Linear>
             <Linear id="X" name="X1">

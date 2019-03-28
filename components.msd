@@ -8,43 +8,6 @@ package :Component, 'Top Level Components Package' do
     member :Device, 'A piece of equipment', 1..INF
   end
   
-  # Data Item References for Streams
-  attr :IdRef, 'A reference to an identifier', :IDREF
-  attr :DeviceUuid, 'The uuid this tool is associated with', :Uuid
-
-  enum :Relationship, 'relationships' do
-    value :PARENT, 'The reference is to a parent'
-    value :CHILD, 'The reference is to a child'
-    value :PEER, 'The reference is to a peer'
-  end
-
-  enum :Significance, 'The criticalities' do
-    value :REQUIRED, 'The realtion is required'
-    value :OPTIONAL, 'The relation is optional'
-    value :CRITICAL, 'The relation is optional'
-  end
-  
-  type :Reference, 'An abstract reference type' do
-    abstract
-    member :IdRef, 'A reference to an id in the MTConnectDevices model'
-    member :Name, 'An optional name of the referenced item, used for documentation', 0..1
-    member :Relation, 'The relationship to the other item', 0..1, :Relationship
-    member :Significance, 'The criticality of the relationship', 0..1, :Significance
-  end
-  
-  type :References, 'A list of references' do
-    member :Reference, 'A reference to another part of the model', 1..INF
-  end
-  
-  
-  type :DataItemRef, 'A data item reference', :Reference
-  type :ComponentRef, 'A data item reference', :Reference
-  type :DeviceRef, 'A data item reference', :Reference do
-    member :DeviceUuid, 'The identity of the device'
-    attribute :href, 'Reference to the url of the related device', 0..1, :'xlink:href'
-    attribute(:'xlink:type', 'Type of href fixed at located', 0..1, :'xlink:type') { self.fixed = 'locator' }
-  end
-  
   type :Component, "An abstract component type. This is a placeholder for all components" do
     abstract
     member :id, 'The data item identifier', :ID
@@ -145,3 +108,4 @@ end
 
 load 'sensors'
 load 'specifications'
+load 'reference'

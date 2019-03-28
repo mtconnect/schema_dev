@@ -2859,219 +2859,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:simpleType name='IdRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        A reference to an identifier
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:IDREF'/>
-  </xs:simpleType>
-  <xs:simpleType name='DeviceUuidType'>
-    <xs:annotation>
-      <xs:documentation>
-        The uuid this tool is associated with
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='UuidType'/>
-  </xs:simpleType>
-  <xs:simpleType name='RelationshipType'>
-    <xs:annotation>
-      <xs:documentation>
-        relationships
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='PARENT'>
-        <xs:annotation>
-          <xs:documentation>
-            The reference is to a parent
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CHILD'>
-        <xs:annotation>
-          <xs:documentation>
-            The reference is to a child
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PEER'>
-        <xs:annotation>
-          <xs:documentation>
-            The reference is to a peer
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='SignificanceType'>
-    <xs:annotation>
-      <xs:documentation>
-        The criticalities
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='REQUIRED'>
-        <xs:annotation>
-          <xs:documentation>
-            The realtion is required
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='OPTIONAL'>
-        <xs:annotation>
-          <xs:documentation>
-            The relation is optional
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CRITICAL'>
-        <xs:annotation>
-          <xs:documentation>
-            The relation is optional
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name='ReferenceType' abstract='true'>
-    <xs:annotation>
-      <xs:documentation>
-        An abstract reference type
-      </xs:documentation>
-    </xs:annotation>
-    <xs:attribute name='idRef' type='IdRefType' use='required'>
-      <xs:annotation>
-        <xs:documentation>
-          A pointer to the id attribute of an element that contains the
-          information to be associated with this XML element.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='name' type='NameType' use='optional'>
-      <xs:annotation>
-        <xs:documentation>
-          An optional name of the referenced item, used for documentation
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='relation' type='RelationshipType' use='optional'>
-      <xs:annotation>
-        <xs:documentation>
-          The relationship to the other item
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='significance' type='SignificanceType' use='optional'>
-      <xs:annotation>
-        <xs:documentation>
-          The criticality of the relationship
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-  </xs:complexType>
-  <xs:element abstract='true' name='Reference' type='ReferenceType'>
-    <xs:annotation>
-      <xs:documentation>
-        An abstract reference type
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ReferencesType'>
-    <xs:annotation>
-      <xs:documentation>
-        XML container consisting of one or more types of reference XML elements.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element ref='Reference' minOccurs='1' maxOccurs='unbounded'/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name='DataItemRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        dataitemref XML element is a pointer to a data entity associated with
-        another structural element defined elsewhere in the XML document for a
-        piece of equipment.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='ReferenceType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='DataItemRef' type='DataItemRefType' substitutionGroup='Reference'>
-    <xs:annotation>
-      <xs:documentation>
-        dataitemref XML element is a pointer to a data entity associated with
-        another structural element defined elsewhere in the XML document for a
-        piece of equipment.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ComponentRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        componentref XML element is a pointer to all of the information
-        associated with another structural element defined elsewhere in the XML
-        document for a piece of equipment. 
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='ReferenceType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='ComponentRef' type='ComponentRefType' substitutionGroup='Reference'>
-    <xs:annotation>
-      <xs:documentation>
-        componentref XML element is a pointer to all of the information
-        associated with another structural element defined elsewhere in the XML
-        document for a piece of equipment. 
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='DeviceRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        A data item reference
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='ReferenceType'>
-        <xs:attribute name='deviceUuid' type='DeviceUuidType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              The piece of equipments UUID that supplied this data. This is an
-              optional element references to the UUID attribute given in the
-              device element. This can be any series of numbers and letters as
-              defined by the XML type nmtoken.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='href' type='xlink:hrefType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              Reference to the url of the related device
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute ref='xlink:type' use='optional' fixed='locator'>
-          <xs:annotation>
-            <xs:documentation>
-              Type of href fixed at located
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='DeviceRef' type='DeviceRefType' substitutionGroup='Reference'>
-    <xs:annotation>
-      <xs:documentation>
-        A data item reference
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:complexType name='ComponentType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
@@ -4862,6 +4649,245 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The axis motion types
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='IdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to an identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
+  <xs:simpleType name='DeviceUuidType'>
+    <xs:annotation>
+      <xs:documentation>
+        The uuid this tool is associated with
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='UuidType'/>
+  </xs:simpleType>
+  <xs:complexType name='ReferencesType'>
+    <xs:annotation>
+      <xs:documentation>
+        XML container consisting of one or more types of reference XML elements.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref='Reference' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='RelationshipType'>
+    <xs:annotation>
+      <xs:documentation>
+        relationships
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='PARENT'>
+        <xs:annotation>
+          <xs:documentation>
+            The reference is to a parent
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CHILD'>
+        <xs:annotation>
+          <xs:documentation>
+            The reference is to a child
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PEER'>
+        <xs:annotation>
+          <xs:documentation>
+            The reference is to a peer
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='SignificanceType'>
+    <xs:annotation>
+      <xs:documentation>
+        The criticalities
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='REQUIRED'>
+        <xs:annotation>
+          <xs:documentation>
+            The realtion is required
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OPTIONAL'>
+        <xs:annotation>
+          <xs:documentation>
+            The relation is optional
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CRITICAL'>
+        <xs:annotation>
+          <xs:documentation>
+            The relation is critical
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='ReferenceType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract reference type
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name='name' type='NameType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          An optional name of the referenced item, used for documentation
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='significance' type='SignificanceType' use='optional' default='OPTIONAL'>
+      <xs:annotation>
+        <xs:documentation>
+          The criticality of the relationship
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element abstract='true' name='Reference' type='ReferenceType'>
+    <xs:annotation>
+      <xs:documentation>
+        An abstract reference type
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LocalReferenceType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to a data item or component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ReferenceType'>
+        <xs:attribute name='idRef' type='IdRefType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              A pointer to the id attribute of an element that contains the
+              information to be associated with this XML element.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='LocalReference' type='LocalReferenceType' substitutionGroup='Reference'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to a data item or component
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DataItemRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        dataitemref XML element is a pointer to a data entity associated with
+        another structural element defined elsewhere in the XML document for a
+        piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='LocalReferenceType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='DataItemRef' type='DataItemRefType' substitutionGroup='LocalReference'>
+    <xs:annotation>
+      <xs:documentation>
+        dataitemref XML element is a pointer to a data entity associated with
+        another structural element defined elsewhere in the XML document for a
+        piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ComponentRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        componentref XML element is a pointer to all of the information
+        associated with another structural element defined elsewhere in the XML
+        document for a piece of equipment. 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='LocalReferenceType'>
+        <xs:attribute name='relation' type='RelationshipType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The relationship to the other item
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ComponentRef' type='ComponentRefType' substitutionGroup='LocalReference'>
+    <xs:annotation>
+      <xs:documentation>
+        componentref XML element is a pointer to all of the information
+        associated with another structural element defined elsewhere in the XML
+        document for a piece of equipment. 
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DeviceRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A data item reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ReferenceType'>
+        <xs:attribute name='deviceUuid' type='DeviceUuidType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The piece of equipments UUID that supplied this data. This is an
+              optional element references to the UUID attribute given in the
+              device element. This can be any series of numbers and letters as
+              defined by the XML type nmtoken.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='relation' type='RelationshipType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The relationship to the other item
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='href' type='xlink:hrefType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              Reference to the url of the related device
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute ref='xlink:type' use='optional' fixed='locator'>
+          <xs:annotation>
+            <xs:documentation>
+              Type of href fixed at located
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='DeviceRef' type='DeviceRefType' substitutionGroup='Reference'>
+    <xs:annotation>
+      <xs:documentation>
+        A data item reference
       </xs:documentation>
     </xs:annotation>
   </xs:element>
