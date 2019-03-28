@@ -2820,7 +2820,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='DeviceStream' type='DeviceStreamType' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            A XML container element provided in the streams container in the
+            An XML container element provided in the streams container in the
             mtconnectstream document.
           </xs:documentation>
         </xs:annotation>
@@ -2830,7 +2830,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='DeviceStreamType'>
     <xs:annotation>
       <xs:documentation>
-        A XML container element provided in the streams container in the
+        An XML container element provided in the streams container in the
         mtconnectstream document.
       </xs:documentation>
     </xs:annotation>
@@ -2838,7 +2838,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='ComponentStream' type='ComponentStreamType' minOccurs='0' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            A XML container type element that organizes data returned from an
+            An XML container type element that organizes data returned from an
             MTConnect Agent in response to a current or sample HTTP request.
           </xs:documentation>
         </xs:annotation>
@@ -2862,7 +2862,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ComponentStreamType'>
     <xs:annotation>
       <xs:documentation>
-        A XML container type element that organizes data returned from an
+        An XML container type element that organizes data returned from an
         MTConnect Agent in response to a current or sample HTTP request.
       </xs:documentation>
     </xs:annotation>
@@ -2870,8 +2870,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Samples' type='SamplesType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            A XML container type element that organizes the data reported in the
-            mtconnectstream document for dataitem elements defined in the
+            An XML container type element that organizes the data reported in
+            the mtconnectstream document for dataitem elements defined in the
             mtconnectdevice document with a category attribute of sample
             category.
           </xs:documentation>
@@ -2880,8 +2880,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Events' type='EventsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            A XML container type element that organizes the data reported in the
-            mtconnectstream document for dataitem elements defined in the
+            An XML container type element that organizes the data reported in
+            the mtconnectstream document for dataitem elements defined in the
             mtconnectdevice document with a category attribute of event
             category.
           </xs:documentation>
@@ -2890,8 +2890,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Condition' type='ConditionListType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            A XML container type element that organizes the data reported in the
-            mtconnectstream document for dataitem elements defined in the
+            An XML container type element that organizes the data reported in
+            the mtconnectstream document for dataitem elements defined in the
             mtconnectdevice document with a category attribute of condition
             category.
           </xs:documentation>
@@ -2942,7 +2942,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SamplesType'>
     <xs:annotation>
       <xs:documentation>
-        A XML container type element that organizes the data reported in the
+        An XML container type element that organizes the data reported in the
         mtconnectstream document for dataitem elements defined in the
         mtconnectdevice document with a category attribute of sample category.
       </xs:documentation>
@@ -2954,7 +2954,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='EventsType'>
     <xs:annotation>
       <xs:documentation>
-        A XML container type element that organizes the data reported in the
+        An XML container type element that organizes the data reported in the
         mtconnectstream document for dataitem elements defined in the
         mtconnectdevice document with a category attribute of event category.
       </xs:documentation>
@@ -2966,7 +2966,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ConditionListType'>
     <xs:annotation>
       <xs:documentation>
-        A XML container type element that organizes the data reported in the
+        An XML container type element that organizes the data reported in the
         mtconnectstream document for dataitem elements defined in the
         mtconnectdevice document with a category attribute of condition
         category.
@@ -3075,7 +3075,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SampleType' abstract='true' mixed='true'>
     <xs:annotation>
       <xs:documentation>
-        A XML element that provides the information and data reported from a
+        An XML element that provides the information and data reported from a
         piece of equipment for those dataitem elements defined with a category
         attribute of sample category in the mtconnectdevice document. 
       </xs:documentation>
@@ -3122,7 +3122,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element abstract='true' name='Sample' type='SampleType'>
     <xs:annotation>
       <xs:documentation>
-        A XML element that provides the information and data reported from a
+        An XML element that provides the information and data reported from a
         piece of equipment for those dataitem elements defined with a category
         attribute of sample category in the mtconnectdevice document. 
       </xs:documentation>
@@ -4854,7 +4854,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='EventType' abstract='true' mixed='true'>
     <xs:annotation>
       <xs:documentation>
-        A XML element which provides the information and data reported from a
+        An XML element which provides the information and data reported from a
         piece of equipment for those dataitem elements defined with a category
         attribute of event category in the mtconnectdevice document.
       </xs:documentation>
@@ -4878,7 +4878,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element abstract='true' name='Event' type='EventType'>
     <xs:annotation>
       <xs:documentation>
-        A XML element which provides the information and data reported from a
+        An XML element which provides the information and data reported from a
         piece of equipment for those dataitem elements defined with a category
         attribute of event category in the mtconnectdevice document.
       </xs:documentation>
@@ -7313,7 +7313,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ConditionType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        A XML element which provides the information and data reported from a
+        An XML element which provides the information and data reported from a
         piece of equipment for those dataitem elements defined with a category
         attribute of condition category in the mtconnectdevice document.
       </xs:documentation>
@@ -7368,7 +7368,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element abstract='true' name='Condition' type='ConditionType'>
     <xs:annotation>
       <xs:documentation>
-        A XML element which provides the information and data reported from a
+        An XML element which provides the information and data reported from a
         piece of equipment for those dataitem elements defined with a category
         attribute of condition category in the mtconnectdevice document.
       </xs:documentation>
