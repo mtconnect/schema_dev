@@ -14,7 +14,7 @@ package :Tools, 'Cutting tools' do
   
   attr :LocationSize, 'The number of location units required to hold this tool', :integer
   attr :MeasurementAttr, 'A measurement value', :float
-  attr :CuttingToolId, 'DEPRECATED: The identifier of the tool type', :NMTOKEN
+  attr :CuttingToolId, 'The tool identifier', :NMTOKEN
   attr :EdgeCount, 'The number of cutting edges', :integer
   attr :Overlap, 'The number of additional locations taken by a tool', :integer
   attr :ToolLifeValue, 'The life of the tool in time, wear, or parts', :float
@@ -83,9 +83,10 @@ package :Tools, 'Cutting tools' do
 
   # Cutting tool definition
   type :CuttingTool, 'A cutting tool', :Asset do
-    member :SerialNumber, 'The serial number of the asset'
+    member :SerialNumber, 'The serial number of the asset', :SerialNumberAttr
     member :Manufacturers, 'The manufacturer of this asset', 0..1
-    member :CuttingToolId, 'The Identifier of the tool type'
+    member :ToolId, 'The Identifier of the tool type', :CuttingToolId
+    member :Description, 'The description of the cutting tool', 0..1, :AssetDescription
     
     at_least_one do 
       member :CuttingToolDefinition, 'DEPRECATED: Description of tool - now only in Archetype'
@@ -95,7 +96,8 @@ package :Tools, 'Cutting tools' do
   
   # Archetype 
   type :CuttingToolArchetype, 'A Archetypical cutting tool', :Asset do
-    member :CuttingToolId, 'The Identifier of the tool type'
+    member :toolId, 'The Identifier of the tool type', 0..1, :CuttingToolId
+    member :Description, 'The description of the cutting tool', 0..1, :AssetDescription
 
     at_least_one do 
       member :CuttingToolDefinition, 'Description of tool'

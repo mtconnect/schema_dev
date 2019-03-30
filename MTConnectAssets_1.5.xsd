@@ -8090,7 +8090,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='CuttingToolIdType'>
     <xs:annotation>
       <xs:documentation>
-        DEPRECATED: The identifier of the tool type
+        The tool identifier
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
@@ -8478,10 +8478,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetType'>
         <xs:sequence>
-          <xs:element name='SerialNumber' type='SerialNumberType'>
+          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The serial number associated with a piece of equipment. 
+                An XML element that can contain any descriptive content.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -8511,6 +8511,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:element>
           </xs:choice>
         </xs:sequence>
+        <xs:attribute name='serialNumber' type='SerialNumberAttrType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The serial number associated with a piece of equipment. 
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'>
           <xs:annotation>
             <xs:documentation>
@@ -8520,10 +8527,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name='cuttingToolId' type='CuttingToolIdType' use='required'>
+        <xs:attribute name='toolId' type='CuttingToolIdType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The Identifier of the tool type
+              The identifier for a class of Cutting Tools. This is defined as an
+              XML string type and is implementation dependent. 
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -8548,6 +8556,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AssetType'>
         <xs:sequence>
+          <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                An XML element that can contain any descriptive content.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
           <xs:choice minOccurs='1'>
             <xs:sequence minOccurs='1'>
               <xs:element name='CuttingToolDefinition' type='CuttingToolDefinitionType'>
@@ -8574,7 +8589,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:element>
           </xs:choice>
         </xs:sequence>
-        <xs:attribute name='cuttingToolId' type='CuttingToolIdType' use='required'>
+        <xs:attribute name='toolId' type='CuttingToolIdType' use='optional'>
           <xs:annotation>
             <xs:documentation>
               The Identifier of the tool type
