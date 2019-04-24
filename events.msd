@@ -61,7 +61,7 @@ package :Events, 'Event Package' do
       value_type = "#{event.elementname}Value".to_sym
       enum(value_type, "Controlled vocabulary for #{event.elementname}") do
         values.each do |v|
-          entry = Glossary.entries[v]
+          entry = Glossary[v]
           if entry
             value(entry.name_property, entry.description)
           else

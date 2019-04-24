@@ -104,7 +104,7 @@ package :common, 'Common attributes and elements for all schemas' do
     end
   end
   
-  enum :CoordinateSystem, 'The coordinate system to be used for the position' do
+  enum :CoordinateSystemEnum, 'The coordinate system to be used for the position' do
     Glossary.coordinateSystems.each do |e|
       value(e.name_property, e.description)
     end

@@ -35,7 +35,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='MTConnectError' type='MTConnectErrorType'>
     <xs:annotation>
       <xs:documentation>
-        The root node for MTConnect
+        An XML response document.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -472,7 +472,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The measurement of the feedrate for the axes, or a single axis,
-            associated with a path component a vector.
+            associated with a path component-a vector.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -664,7 +664,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='AVAILABILITY'>
         <xs:annotation>
           <xs:documentation>
-            Represents the agents ability to communicate with the data source.
+            Represents the agent&apos;s ability to communicate with the data
+            source.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -921,7 +922,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The value of a signal or calculation issued to adjust the feedrate
-            for the axes associated with a Path component that may represent a
+            for the axes associated with a path component that may represent a
             single axis or the coordinated movement of multiple axes.
           </xs:documentation>
         </xs:annotation>
@@ -997,7 +998,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ROTARY_MODE'>
         <xs:annotation>
           <xs:documentation>
-            The current operating mode for a Rotary type axis.
+            The current operating mode for a rotary type axis.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1005,7 +1006,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The value of a command issued to adjust the programmed velocity for
-            a rotary type axis.This command represents a percentage change to
+            a rotary type axis. This command represents a percentage change to
             the velocity calculated by a logic or motion program or set by a
             switch for a rotary type axis.
           </xs:documentation>
@@ -1014,8 +1015,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SERIAL_NUMBER'>
         <xs:annotation>
           <xs:documentation>
-            The serial number associated with a component, asset, or device. The
-            valid data value must be a text string.
+            The serial number associated with a component, asset
+            mtconnectassets, or device. The valid data value must be a text
+            string.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1039,7 +1041,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             DEPRECATED in Version 1.2.0. See toolassetid event. The identifier
-            of the tool currently in use for a given Path.
+            of the tool currently in use for a given path.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1327,13 +1329,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='LENGTH'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the length of an object.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value='STANDARD'>
         <xs:annotation>
           <xs:documentation>
@@ -1416,9 +1411,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:documentation>
             An indication of the state of an operator controlled interlock that
             can inhibit the ability to initiate an unclamp action of an
-            electronically controlled chuck. The valid data value must be ACTIVE
-            or INACTIVE. When MANUAL_UNCLAMP is ACTIVE, it is expected that a
-            chuck cannot be unclamped until MANUAL_UNCLAMP is set to INACTIVE. 
+            electronically controlled chuck. The valid data value must be active
+            value or inactive value. When manualunclamp subtype is active value,
+            it is expected that a chuck cannot be unclamped until manualunclamp
+            subtype is set to inactive value. 
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1439,8 +1435,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             lateral direction. The mechanism is represented by a composition
             type component. The position information indicates whether the
             composition element is positioned to the right, to the left, or is
-            in transition. The valid data value must be RIGHT, LEFT, or
-            TRANSITIONING.
+            in transition. The valid data value must be right value, left value,
+            or transitioning value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1451,7 +1447,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             mechanism is represented by a composition type component. The
             operating state indicates whether the state of the composition
             element is open, closed, or unlatched. The valid data value must be
-            OPEN, UNLATCHED, or CLOSED.
+            open value, unlatched value, or closed value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1461,7 +1457,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             An indication of the activation state of a mechanism represented by
             a composition type component.The activation state indicates whether
             the composition element is activated or not.The valid data value
-            must be ON or OFF.
+            must be on value or off value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1472,8 +1468,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             vertical direction. The mechanism is represented by a composition
             type component. The position information indicates whether the
             composition element is positioned to the top, to the bottom, or is
-            in transition. The valid data value must be UP, DOWN, or
-            TRANSITIONING.
+            in transition. The valid data value must be up value, down value, or
+            transitioning value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1482,9 +1478,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:documentation>
             A setting or operator selection used to execute a test mode to
             confirm the execution of machine functions. The valid data value
-            must be ON or OFF. When DRY_RUN is ON, the equipment performs all of
-            its normal functions, except no part or product is produced. If the
-            equipment has a spindle, spindle operation is suspended.
+            must be on value or off value. When dryrun subtype is on value, the
+            equipment performs all of its normal functions, except no part or
+            product is produced. If the equipment has a spindle, spindle
+            operation is suspended.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1492,9 +1489,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A setting or operator selection that changes the behavior of the
-            controller on a piece of equipment. The valid data value must be ON
-            or OFF. When MACHINE_AXIS_LOCK is ON, program execution continues
-            normally, but no equipment motion occurs 
+            controller on a piece of equipment. The valid data value must be on
+            value or off value. When machineaxislock subtype is on value,
+            program execution continues normally, but no equipment motion occurs
+            
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1502,13 +1500,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A setting or operator selection that changes the behavior of the
-            controller on a piece of equipment. The valid data value must be ON
-            or OFF.The program execution is stopped after a specific program
-            block is executed when OPTIONAL_STOP is ON. In the case of a G-Code
-            program, a program BLOCK containing a M01 code designates the
-            command for an OPTIONAL_STOP.EXECUTION must change to OPTIONAL_STOP
-            after a program block specifying an optional stop is executed and
-            the OPTIONAL_STOP selection is ON.
+            controller on a piece of equipment. The valid data value must be on
+            value or off value.The program execution is stopped after a specific
+            program block is executed when optionalstop subtype is on value. In
+            the case of a G-Code program, a program block event containing a M01
+            code designates the command for an optionalstop subtype. execution
+            event must change to OPTIONAL_STOP after a program block specifying
+            an optional stop is executed and the optionalstop subtype selection
+            is on value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1516,10 +1515,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A setting or operator selection that changes the behavior of the
-            controller on a piece of equipment. The valid data value must be ON
-            or OFF. Program execution is paused after each BLOCK of code is
-            executed when SINGLE_BLOCK is ON. When SINGLE_BLOCK is ON, EXECUTION
-            must change to INTERRUPTED after completion of each BLOCK of code. 
+            controller on a piece of equipment. The valid data value must be on
+            value or off value. Program execution is paused after each block
+            event of code is executed when singleblock subtype is on value. When
+            singleblock subtype is on value, execution event must change to
+            interrupted value after completion of each block event of code. 
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1527,11 +1527,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A setting or operator selection that changes the behavior of the
-            controller on a piece of equipment. The valid data value must be ON
-            or OFF. Program execution is paused when a command is executed
-            requesting a cutting tool to be changed. EXECUTION must change to
-            INTERRUPTED after completion of the command requesting a cutting
-            tool to be changed and TOOL_CHANGE_STOP is ON.
+            controller on a piece of equipment. The valid data value must be on
+            value or off value. Program execution is paused when a command is
+            executed requesting a cutting tool to be changed. execution event
+            must change to interrupted value after completion of the command
+            requesting a cutting tool to be changed and toolchangestop subtype
+            is on value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1546,8 +1547,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The rotational direction of a rotary motion using the right hand
-            rule convention.The valid data value must be CLOCKWISE or
-            COUNTER_CLOCKWISE.
+            rule convention.The valid data value must be clockwise value or
+            counterclockwise value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1565,10 +1566,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Specific applications MAY reference one or more locations on a piece
-            of bar stock as the indication for the END_OF_BAR. The main or most
-            important location must be designated as the PRIMARY indication for
-            the END_OF_BAR. If no subtype is specified, PRIMARY must be the
-            default END_OF_BAR indication.
+            of bar stock as the indication for the endofbar event. The main or
+            most important location must be designated as the primary subtype
+            indication for the endofbar event. If no subtype is specified,
+            primary subtype must be the default endofbar event indication.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1657,7 +1658,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The position of a block of program code relative to the occurrence
-            of the last LINE_LABEL encountered in the control program.
+            of the last linelabel event encountered in the control program.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1717,6 +1718,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A reference to a radial type tool offset variable.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LENGTH'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to a length type tool offset variable.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1808,7 +1816,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='RANGE'>
         <xs:annotation>
           <xs:documentation>
-            Difference between the Maximum and Minimum value of a data item
+            Difference between the maximum and minimum value of a data item
             during the calculation period. Also represents Peak-to-Peak
             measurement in a waveform.
           </xs:documentation>
@@ -1898,7 +1906,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='COUNT'>
         <xs:annotation>
           <xs:documentation>
-            A counted event
+            A count of something.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2143,7 +2151,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='COUNT'>
         <xs:annotation>
           <xs:documentation>
-            A counted event
+            A count of something.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2545,11 +2553,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:union memberTypes='NativeUnitsTypeEnum UnitsExtType'/>
   </xs:simpleType>
-  <xs:simpleType name='CoordinateSystemType'>
+  <xs:simpleType name='CoordinateSystemEnumType'>
     <xs:annotation>
       <xs:documentation>
-        For measured values relative to a coordinate system like position
-        sample, the coordinate system being used may be reported.
+        The coordinate system to be used for the position
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -2676,8 +2683,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='HeaderType'>
     <xs:annotation>
       <xs:documentation>
-        The header section contains protocol related information as defined in
-        Section 6.5.1 of MTCPart1 of the MTConnect Standard.
+        An XML container in an mtconnect response document that provides
+        information from an agent defining version information, storage
+        capacity, and parameters associated with the data management within the
+        agent.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -2685,35 +2694,35 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='version' type='VersionType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The document version
+              The protocol version number.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='creationTime' type='CreationTimeType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The date and time the document was created
+              The time the response was created.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='testIndicator' type='TestIndicatorType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              Indicates that this was a test document
+              Optional flag that indicates the system is operating in test mode.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='instanceId' type='InstanceIdType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The unique instance identifier of this agent process
+              A number indicating which invocation of the agent. 
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='sender' type='SenderType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The sender of the message
+              The agent identification information. 
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -2732,15 +2741,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='MTConnectErrorType'>
     <xs:annotation>
       <xs:documentation>
-        The root node for MTConnect
+        An XML response document.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name='Header' type='HeaderType'>
         <xs:annotation>
           <xs:documentation>
-            The header section contains protocol related information as defined
-            in Section 6.5.1 of MTCPart1 of the MTConnect Standard.
+            An XML container in an mtconnect response document that provides
+            information from an agent defining version information, storage
+            capacity, and parameters associated with the data management within
+            the agent.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2748,14 +2759,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:element name='Error' type='ErrorType'>
           <xs:annotation>
             <xs:documentation>
-              Only for backward compatibility with 1.0
+              An error, XML element, occurs while interpreting a request for
+              information from a client software application or when an agent
+              experiences an error while publishing the response to a request
+              for information.
             </xs:documentation>
           </xs:annotation>
         </xs:element>
         <xs:element name='Errors' type='ErrorsType'>
           <xs:annotation>
             <xs:documentation>
-              A collection of errors
+              An XML container element in an mtconnecterrors response document
+              provided by an agent when an error is encountered associated with
+              a request for information from a client software application.
             </xs:documentation>
           </xs:annotation>
         </xs:element>
@@ -2765,14 +2781,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ErrorsType'>
     <xs:annotation>
       <xs:documentation>
-        A collection of errors
+        An XML container element in an mtconnecterrors response document
+        provided by an agent when an error is encountered associated with a
+        request for information from a client software application.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name='Error' type='ErrorType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            An error result
+            An error, XML element, occurs while interpreting a request for
+            information from a client software application or when an agent
+            experiences an error while publishing the response to a request for
+            information.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2789,7 +2810,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='ErrorCodeType'>
     <xs:annotation>
       <xs:documentation>
-        The error code
+        Provides a descriptive code that indicates the type of error that was
+        encountered by an agent.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -2869,7 +2891,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ErrorType'>
     <xs:annotation>
       <xs:documentation>
-        An error description
+        An error, XML element, occurs while interpreting a request for
+        information from a client software application or when an agent
+        experiences an error while publishing the response to a request for
+        information.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -2877,7 +2902,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='errorCode' type='ErrorCodeType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The error code
+              Provides a descriptive code that indicates the type of error that
+              was encountered by an agent.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>

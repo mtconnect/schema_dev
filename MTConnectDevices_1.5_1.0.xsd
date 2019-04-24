@@ -36,7 +36,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='MTConnectDevices' type='MTConnectDevicesType'>
     <xs:annotation>
       <xs:documentation>
-        XML response document.
+        An XML response document.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -473,7 +473,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The measurement of the feedrate for the axes, or a single axis,
-            associated with a path component a vector.
+            associated with a path component-a vector.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -665,7 +665,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='AVAILABILITY'>
         <xs:annotation>
           <xs:documentation>
-            Represents the agents ability to communicate with the data source.
+            Represents the agent&apos;s ability to communicate with the data
+            source.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -922,7 +923,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The value of a signal or calculation issued to adjust the feedrate
-            for the axes associated with a Path component that may represent a
+            for the axes associated with a path component that may represent a
             single axis or the coordinated movement of multiple axes.
           </xs:documentation>
         </xs:annotation>
@@ -998,7 +999,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='ROTARY_MODE'>
         <xs:annotation>
           <xs:documentation>
-            The current operating mode for a Rotary type axis.
+            The current operating mode for a rotary type axis.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1006,7 +1007,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The value of a command issued to adjust the programmed velocity for
-            a rotary type axis.This command represents a percentage change to
+            a rotary type axis. This command represents a percentage change to
             the velocity calculated by a logic or motion program or set by a
             switch for a rotary type axis.
           </xs:documentation>
@@ -1015,8 +1016,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='SERIAL_NUMBER'>
         <xs:annotation>
           <xs:documentation>
-            The serial number associated with a component, asset, or device. The
-            valid data value must be a text string.
+            The serial number associated with a component, asset
+            mtconnectassets, or device. The valid data value must be a text
+            string.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1040,7 +1042,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             DEPRECATED in Version 1.2.0. See toolassetid event. The identifier
-            of the tool currently in use for a given Path.
+            of the tool currently in use for a given path.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1328,13 +1330,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='LENGTH'>
-        <xs:annotation>
-          <xs:documentation>
-            The measurement of the length of an object.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value='STANDARD'>
         <xs:annotation>
           <xs:documentation>
@@ -1417,9 +1412,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:documentation>
             An indication of the state of an operator controlled interlock that
             can inhibit the ability to initiate an unclamp action of an
-            electronically controlled chuck. The valid data value must be ACTIVE
-            or INACTIVE. When MANUAL_UNCLAMP is ACTIVE, it is expected that a
-            chuck cannot be unclamped until MANUAL_UNCLAMP is set to INACTIVE. 
+            electronically controlled chuck. The valid data value must be active
+            value or inactive value. When manualunclamp subtype is active value,
+            it is expected that a chuck cannot be unclamped until manualunclamp
+            subtype is set to inactive value. 
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1440,8 +1436,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             lateral direction. The mechanism is represented by a composition
             type component. The position information indicates whether the
             composition element is positioned to the right, to the left, or is
-            in transition. The valid data value must be RIGHT, LEFT, or
-            TRANSITIONING.
+            in transition. The valid data value must be right value, left value,
+            or transitioning value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1452,7 +1448,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             mechanism is represented by a composition type component. The
             operating state indicates whether the state of the composition
             element is open, closed, or unlatched. The valid data value must be
-            OPEN, UNLATCHED, or CLOSED.
+            open value, unlatched value, or closed value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1462,7 +1458,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             An indication of the activation state of a mechanism represented by
             a composition type component.The activation state indicates whether
             the composition element is activated or not.The valid data value
-            must be ON or OFF.
+            must be on value or off value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1473,8 +1469,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             vertical direction. The mechanism is represented by a composition
             type component. The position information indicates whether the
             composition element is positioned to the top, to the bottom, or is
-            in transition. The valid data value must be UP, DOWN, or
-            TRANSITIONING.
+            in transition. The valid data value must be up value, down value, or
+            transitioning value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1483,9 +1479,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:documentation>
             A setting or operator selection used to execute a test mode to
             confirm the execution of machine functions. The valid data value
-            must be ON or OFF. When DRY_RUN is ON, the equipment performs all of
-            its normal functions, except no part or product is produced. If the
-            equipment has a spindle, spindle operation is suspended.
+            must be on value or off value. When dryrun subtype is on value, the
+            equipment performs all of its normal functions, except no part or
+            product is produced. If the equipment has a spindle, spindle
+            operation is suspended.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1493,9 +1490,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A setting or operator selection that changes the behavior of the
-            controller on a piece of equipment. The valid data value must be ON
-            or OFF. When MACHINE_AXIS_LOCK is ON, program execution continues
-            normally, but no equipment motion occurs 
+            controller on a piece of equipment. The valid data value must be on
+            value or off value. When machineaxislock subtype is on value,
+            program execution continues normally, but no equipment motion occurs
+            
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1503,13 +1501,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A setting or operator selection that changes the behavior of the
-            controller on a piece of equipment. The valid data value must be ON
-            or OFF.The program execution is stopped after a specific program
-            block is executed when OPTIONAL_STOP is ON. In the case of a G-Code
-            program, a program BLOCK containing a M01 code designates the
-            command for an OPTIONAL_STOP.EXECUTION must change to OPTIONAL_STOP
-            after a program block specifying an optional stop is executed and
-            the OPTIONAL_STOP selection is ON.
+            controller on a piece of equipment. The valid data value must be on
+            value or off value.The program execution is stopped after a specific
+            program block is executed when optionalstop subtype is on value. In
+            the case of a G-Code program, a program block event containing a M01
+            code designates the command for an optionalstop subtype. execution
+            event must change to OPTIONAL_STOP after a program block specifying
+            an optional stop is executed and the optionalstop subtype selection
+            is on value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1517,10 +1516,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A setting or operator selection that changes the behavior of the
-            controller on a piece of equipment. The valid data value must be ON
-            or OFF. Program execution is paused after each BLOCK of code is
-            executed when SINGLE_BLOCK is ON. When SINGLE_BLOCK is ON, EXECUTION
-            must change to INTERRUPTED after completion of each BLOCK of code. 
+            controller on a piece of equipment. The valid data value must be on
+            value or off value. Program execution is paused after each block
+            event of code is executed when singleblock subtype is on value. When
+            singleblock subtype is on value, execution event must change to
+            interrupted value after completion of each block event of code. 
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1528,11 +1528,12 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A setting or operator selection that changes the behavior of the
-            controller on a piece of equipment. The valid data value must be ON
-            or OFF. Program execution is paused when a command is executed
-            requesting a cutting tool to be changed. EXECUTION must change to
-            INTERRUPTED after completion of the command requesting a cutting
-            tool to be changed and TOOL_CHANGE_STOP is ON.
+            controller on a piece of equipment. The valid data value must be on
+            value or off value. Program execution is paused when a command is
+            executed requesting a cutting tool to be changed. execution event
+            must change to interrupted value after completion of the command
+            requesting a cutting tool to be changed and toolchangestop subtype
+            is on value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1547,8 +1548,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The rotational direction of a rotary motion using the right hand
-            rule convention.The valid data value must be CLOCKWISE or
-            COUNTER_CLOCKWISE.
+            rule convention.The valid data value must be clockwise value or
+            counterclockwise value.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1566,10 +1567,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Specific applications MAY reference one or more locations on a piece
-            of bar stock as the indication for the END_OF_BAR. The main or most
-            important location must be designated as the PRIMARY indication for
-            the END_OF_BAR. If no subtype is specified, PRIMARY must be the
-            default END_OF_BAR indication.
+            of bar stock as the indication for the endofbar event. The main or
+            most important location must be designated as the primary subtype
+            indication for the endofbar event. If no subtype is specified,
+            primary subtype must be the default endofbar event indication.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1658,7 +1659,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The position of a block of program code relative to the occurrence
-            of the last LINE_LABEL encountered in the control program.
+            of the last linelabel event encountered in the control program.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1718,6 +1719,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             A reference to a radial type tool offset variable.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LENGTH'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to a length type tool offset variable.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1809,7 +1817,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='RANGE'>
         <xs:annotation>
           <xs:documentation>
-            Difference between the Maximum and Minimum value of a data item
+            Difference between the maximum and minimum value of a data item
             during the calculation period. Also represents Peak-to-Peak
             measurement in a waveform.
           </xs:documentation>
@@ -1899,7 +1907,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='COUNT'>
         <xs:annotation>
           <xs:documentation>
-            A counted event
+            A count of something.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2144,7 +2152,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='COUNT'>
         <xs:annotation>
           <xs:documentation>
-            A counted event
+            A count of something.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2546,11 +2554,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:union memberTypes='NativeUnitsTypeEnum UnitsExtType'/>
   </xs:simpleType>
-  <xs:simpleType name='CoordinateSystemType'>
+  <xs:simpleType name='CoordinateSystemEnumType'>
     <xs:annotation>
       <xs:documentation>
-        For measured values relative to a coordinate system like position
-        sample, the coordinate system being used may be reported.
+        The coordinate system to be used for the position
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -2688,14 +2695,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AssetCountsType'>
     <xs:annotation>
       <xs:documentation>
-        The number of assets by type
+        The total number of mtconnect asset in anagent.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name='AssetCount' type='AssetCountType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            The number of assets for a given type
+            The total number of mtconnect asset in anagent.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2704,7 +2711,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AssetCountType'>
     <xs:annotation>
       <xs:documentation>
-        The count of assets for a certain type
+        The total number of mtconnect asset in anagent.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -2722,15 +2729,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='HeaderType'>
     <xs:annotation>
       <xs:documentation>
-        The header section contains protocol related information as defined in
-        Section 6.5.1 of MTCPart1 of the MTConnect Standard.
+        An XML container in an mtconnect response document that provides
+        information from an agent defining version information, storage
+        capacity, and parameters associated with the data management within the
+        agent.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name='AssetCounts' type='AssetCountsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            The asset statistics
+            The total number of mtconnect asset in anagent.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2738,35 +2747,35 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='version' type='VersionType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The document version
+          The protocol version number.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name='creationTime' type='CreationTimeType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The date and time the document was created
+          The time the response was created.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name='testIndicator' type='TestIndicatorType' use='optional'>
       <xs:annotation>
         <xs:documentation>
-          Indicates that this was a test document
+          Optional flag that indicates the system is operating in test mode.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name='instanceId' type='InstanceIdType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The unique instance identifier of this agent process
+          A number indicating which invocation of the agent. 
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name='sender' type='SenderType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The sender of the message
+          The agent identification information. 
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -2782,14 +2791,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='assetBufferSize' type='AssetBufferSizeType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The maximum number of assets
+          The maximum number of mtconnect asset that will be retained by the
+          agent.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name='assetCount' type='AssetCountAttrType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The number of assets we have
+          The total number of mtconnect asset in anagent.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -2797,15 +2807,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='MTConnectDevicesType'>
     <xs:annotation>
       <xs:documentation>
-        XML response document.
+        An XML response document.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name='Header' type='HeaderType'>
         <xs:annotation>
           <xs:documentation>
-            The header section contains protocol related information as defined
-            in Section 6.5.1 of MTCPart1 of the MTConnect Standard.
+            An XML container in an mtconnect response document that provides
+            information from an agent defining version information, storage
+            capacity, and parameters associated with the data management within
+            the agent.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -2889,7 +2901,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='DataItems' type='DataItemsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            XML container consisting of one or more types of dataitem XML
+            An XML container consisting of one or more types of dataitem XML
             elements.
           </xs:documentation>
         </xs:annotation>
@@ -2897,7 +2909,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Components' type='ComponentsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            XML container that consists of one or more types of component XML
+            An XML container that consists of one or more types of component XML
             elements. 
           </xs:documentation>
         </xs:annotation>
@@ -2905,7 +2917,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Compositions' type='CompositionsType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            XML container consisting of one or more types of composition XML
+            An XML container consisting of one or more types of composition XML
             elements.
           </xs:documentation>
         </xs:annotation>
@@ -2913,7 +2925,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='References' type='ReferencesType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            XML container consisting of one or more types of reference XML
+            An XML container consisting of one or more types of reference XML
             elements.
           </xs:documentation>
         </xs:annotation>
@@ -3072,7 +3084,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ComponentsType'>
     <xs:annotation>
       <xs:documentation>
-        XML container that consists of one or more types of component XML
+        An XML container that consists of one or more types of component XML
         elements. 
       </xs:documentation>
     </xs:annotation>
@@ -3092,7 +3104,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='iso841Class' type='Iso841ClassType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              DEPRECATED: The device&apos;s ISO-841 classification
+              DEPRECATED in MTConnect Version 1.1.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -3113,7 +3125,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='version' type='VersionType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The MTConnect Version this Device implements
+              The protocol version number.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -3132,8 +3144,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Redefined as a piece of equipment with the ability to be represented as
-        a Lower Level component of a parent Component element or as a
-        Composition element. See actuator type
+        a lower level component of a parent component element or as a
+        composition element. See actuator type
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3144,8 +3156,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         Redefined as a piece of equipment with the ability to be represented as
-        a Lower Level component of a parent Component element or as a
-        Composition element. See actuator type
+        a lower level component of a parent component element or as a
+        composition element. See actuator type
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -3467,7 +3479,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='StockType'>
     <xs:annotation>
       <xs:documentation>
-        Stock is an XML container that represents the information for the
+        stock is an XML container that represents the information for the
         material that is used in a manufacturing process and to which work is
         applied in a machine or piece of equipment to produce parts.
       </xs:documentation>
@@ -3479,7 +3491,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Stock' type='StockType' substitutionGroup='Materials'>
     <xs:annotation>
       <xs:documentation>
-        Stock is an XML container that represents the information for the
+        stock is an XML container that represents the information for the
         material that is used in a manufacturing process and to which work is
         applied in a machine or piece of equipment to produce parts.
       </xs:documentation>
@@ -3812,7 +3824,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CompositionsType'>
     <xs:annotation>
       <xs:documentation>
-        XML container consisting of one or more types of composition XML
+        An XML container consisting of one or more types of composition XML
         elements.
       </xs:documentation>
     </xs:annotation>
@@ -4209,7 +4221,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SensorConfigurationType'>
     <xs:annotation>
       <xs:documentation>
-        Calibration data for a sensor
+        An element that can contain descriptive content defining the
+        configuration information for sensor.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -4263,7 +4276,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='SensorConfiguration' type='SensorConfigurationType' substitutionGroup='AbstractConfiguration'>
     <xs:annotation>
       <xs:documentation>
-        Calibration data for a sensor
+        An element that can contain descriptive content defining the
+        configuration information for sensor.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4397,7 +4411,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='SpecificationType' mixed='true'>
+  <xs:complexType name='CapabilityType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
         A specification
@@ -4443,7 +4457,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Specification' type='SpecificationType' substitutionGroup='AbstractSpecification'>
+  <xs:element name='Capability' type='CapabilityType' substitutionGroup='AbstractSpecification'>
     <xs:annotation>
       <xs:documentation>
         A specification
@@ -4639,100 +4653,52 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='FrameOrientationType'>
+  <xs:simpleType name='MotionTypeEnumType'>
     <xs:annotation>
       <xs:documentation>
-        An orientation constraint
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ThreeSpaceValueType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name='FrameOffsetType'>
-    <xs:annotation>
-      <xs:documentation>
-        An orientation constraint
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ThreeSpaceValueType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:simpleType name='SpecificationFrameType'>
-    <xs:annotation>
-      <xs:documentation>
-        The relative frame
+        The types of motion
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='MACHINE'/>
-      <xs:enumeration value='WORLD'/>
-      <xs:enumeration value='PARENT'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='FunctionsType'>
-    <xs:annotation>
-      <xs:documentation>
-        Functions of an axis
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='AXIS'>
+      <xs:enumeration value='REVOLUTE'>
         <xs:annotation>
           <xs:documentation>
-            an axis
+            Rotates
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='JOINT'>
+      <xs:enumeration value='PRISMATIC'>
         <xs:annotation>
           <xs:documentation>
-            a joint
+            Linear motion
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='BASE'>
+      <xs:enumeration value='TWIST'>
         <xs:annotation>
           <xs:documentation>
-            a base
+            Twister
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='LOGICAL_AXIS'>
+      <xs:enumeration value='REVOLVE'>
         <xs:annotation>
           <xs:documentation>
-            a logical axis
+            Revolver
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name='FunctionType' mixed='true'>
+  <xs:complexType name='AxisOfMotionType'>
     <xs:annotation>
       <xs:documentation>
-        The axis functions
+        The axis motion types
       </xs:documentation>
     </xs:annotation>
-    <xs:complexContent>
+    <xs:simpleContent>
       <xs:extension base='AbstractSpecificationType'>
-        <xs:sequence>
-          <xs:element name='Offset' type='FrameOffsetType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                An offset
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Orientation' type='FrameOrientationType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                An orientation
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-        <xs:attribute name='type' type='FunctionsType' use='required'>
+        <xs:attribute name='type' type='MotionTypeEnumType' use='required'>
           <xs:annotation>
             <xs:documentation>
               The type of either a structural element or a dataitem being
@@ -4740,148 +4706,265 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name='referenceFrame' type='SpecificationFrameType' use='optional'>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='AxisOfMotion' type='AxisOfMotionType' substitutionGroup='AbstractSpecification'>
+    <xs:annotation>
+      <xs:documentation>
+        The axis motion types
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='CoordinateSystemTypeEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The type of coordinate system
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='WORLD'>
+        <xs:annotation>
+          <xs:documentation>
+            The world
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='BASE'>
+        <xs:annotation>
+          <xs:documentation>
+            The base of the manipulator chain
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='TOOL'>
+        <xs:annotation>
+          <xs:documentation>
+            The tool&apos;s coord
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='WORKPIECE'>
+        <xs:annotation>
+          <xs:documentation>
+            The workpiece
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OBJECT'>
+        <xs:annotation>
+          <xs:documentation>
+            The object
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='TASK'>
+        <xs:annotation>
+          <xs:documentation>
+            The current task
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MECHANICAL_INTERFACE'>
+        <xs:annotation>
+          <xs:documentation>
+            The last joint in the chain
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='GRIPPER'>
+        <xs:annotation>
+          <xs:documentation>
+            The gripper
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MOBILE_PLATFORM'>
+        <xs:annotation>
+          <xs:documentation>
+            The platform
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='JOINT'>
+        <xs:annotation>
+          <xs:documentation>
+            A given joint (kinematic should be true)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='IsKinematicType'>
+    <xs:annotation>
+      <xs:documentation>
+        Flag indicating if a coordinate system is part of a kinematic chain
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:boolean'/>
+  </xs:simpleType>
+  <xs:complexType name='CoordinateSystemType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        For measured values relative to a coordinate system like position
+        sample, the coordinate system being used may be reported.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AbstractSpecificationType'>
+        <xs:sequence>
+          <xs:choice minOccurs='1'>
+            <xs:element name='Location' type='LocationType'>
+              <xs:annotation>
+                <xs:documentation>
+                  The Pot or Spindle this tool currently resides in.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name='Transformation' type='TransformationType'>
+              <xs:annotation>
+                <xs:documentation>
+                  A six space trasformaton from the parent
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:choice>
+        </xs:sequence>
+        <xs:attribute name='id' type='IDType' use='required'>
           <xs:annotation>
             <xs:documentation>
+              The unique identifier for this element.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='kinematic' type='IsKinematicType' use='optional' default='false'>
+          <xs:annotation>
+            <xs:documentation>
+              Boolean flag indicating if this is a kinematic coordinate system
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='name' type='NameType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The name of an element or a piece of equipment.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='parent' type='IdRefType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The parent of the coordinate system
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='type' type='CoordinateSystemTypeEnumType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of either a structural element or a dataitem being
+              measured.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Function' type='FunctionType' substitutionGroup='AbstractSpecification'>
+  <xs:element name='CoordinateSystem' type='CoordinateSystemType' substitutionGroup='AbstractSpecification'>
     <xs:annotation>
       <xs:documentation>
-        The axis functions
+        For measured values relative to a coordinate system like position
+        sample, the coordinate system being used may be reported.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name='MotionsType'>
+  <xs:complexType name='LocationType'>
     <xs:annotation>
       <xs:documentation>
-        The axis motion
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='REVOLUTE'/>
-      <xs:enumeration value='PRISMATIC'/>
-      <xs:enumeration value='TWIST'/>
-      <xs:enumeration value='HINGE'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name='MotionType'>
-    <xs:annotation>
-      <xs:documentation>
-        The axis motion types
+        The Pot or Spindle this tool currently resides in.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:restriction base='AbstractSpecificationType'>
-        <xs:simpleType>
-          <xs:restriction base='MotionsType'/>
-        </xs:simpleType>
-      </xs:restriction>
+      <xs:extension base='ThreeSpaceValueType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='Motion' type='MotionType' substitutionGroup='AbstractSpecification'>
+  <xs:complexType name='TransformationType'>
     <xs:annotation>
       <xs:documentation>
-        The axis motion types
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:simpleType name='IdRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        A reference to an identifier
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:IDREF'/>
-  </xs:simpleType>
-  <xs:simpleType name='DeviceUuidType'>
-    <xs:annotation>
-      <xs:documentation>
-        The uuid this tool is associated with
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='UuidType'/>
-  </xs:simpleType>
-  <xs:complexType name='ReferencesType'>
-    <xs:annotation>
-      <xs:documentation>
-        XML container consisting of one or more types of reference XML elements.
+        An offset in space
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element ref='Reference' minOccurs='1' maxOccurs='unbounded'/>
+      <xs:element name='Translaton' type='ThreeSpaceValueType'>
+        <xs:annotation>
+          <xs:documentation>
+            An offset applied first
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Rotation' type='ThreeSpaceValueType'>
+        <xs:annotation>
+          <xs:documentation>
+            A quaternion transform applied second
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:simpleType name='RelationshipType'>
+  <xs:complexType name='RelationshipsType'>
     <xs:annotation>
       <xs:documentation>
-        relationships
+        A set of relationships
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AbstractConfigurationType'>
+        <xs:sequence>
+          <xs:element ref='Relationship' minOccurs='1' maxOccurs='unbounded'/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Relationships' type='RelationshipsType' substitutionGroup='AbstractConfiguration'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of relationships
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='AssociationEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The list of possible association types
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:enumeration value='PARENT'>
         <xs:annotation>
           <xs:documentation>
-            The reference is to a parent
+            The related entity is a parent
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='CHILD'>
         <xs:annotation>
           <xs:documentation>
-            The reference is to a child
+            The related entity is a child
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='PEER'>
         <xs:annotation>
           <xs:documentation>
-            The reference is to a peer
+            The related entity is a peer
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='SignificanceType'>
+  <xs:complexType name='RelationshipType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        The criticalities
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='REQUIRED'>
-        <xs:annotation>
-          <xs:documentation>
-            The realtion is required
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='OPTIONAL'>
-        <xs:annotation>
-          <xs:documentation>
-            The relation is optional
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CRITICAL'>
-        <xs:annotation>
-          <xs:documentation>
-            The relation is critical
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name='ReferenceType' abstract='true'>
-    <xs:annotation>
-      <xs:documentation>
-        reference is a pointer to information that is associated with another
-        structural element defined elsewhere in the XML document for a piece of
-        equipment.
+        A relationship between this component and something else
       </xs:documentation>
     </xs:annotation>
     <xs:attribute name='name' type='NameType' use='optional'>
@@ -4891,121 +4974,33 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name='significance' type='SignificanceType' use='optional' default='OPTIONAL'>
+    <xs:attribute name='association' type='AssociationEnumType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The criticality of the relationship
+          The assciation type
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>
-  <xs:element abstract='true' name='Reference' type='ReferenceType'>
+  <xs:element abstract='true' name='Relationship' type='RelationshipType'>
     <xs:annotation>
       <xs:documentation>
-        reference is a pointer to information that is associated with another
-        structural element defined elsewhere in the XML document for a piece of
-        equipment.
+        A relationship between this component and something else
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='LocalReferenceType'>
+  <xs:complexType name='DeviceRelationshipType'>
     <xs:annotation>
       <xs:documentation>
-        A reference to a data item or component
+        A relationship to a device
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base='ReferenceType'>
-        <xs:attribute name='idRef' type='IdRefType' use='required'>
+      <xs:extension base='RelationshipType'>
+        <xs:attribute name='deviceUuidRef' type='UuidType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              A pointer to the id attribute of an element that contains the
-              information to be associated with this XML element.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='LocalReference' type='LocalReferenceType' substitutionGroup='Reference'>
-    <xs:annotation>
-      <xs:documentation>
-        A reference to a data item or component
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='DataItemRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        dataitemref XML element is a pointer to a data entity associated with
-        another structural element defined elsewhere in the XML document for a
-        piece of equipment.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='LocalReferenceType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='DataItemRef' type='DataItemRefType' substitutionGroup='LocalReference'>
-    <xs:annotation>
-      <xs:documentation>
-        dataitemref XML element is a pointer to a data entity associated with
-        another structural element defined elsewhere in the XML document for a
-        piece of equipment.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ComponentRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        componentref XML element is a pointer to all of the information
-        associated with another structural element defined elsewhere in the XML
-        document for a piece of equipment. 
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='LocalReferenceType'>
-        <xs:attribute name='relation' type='RelationshipType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              The relationship to the other item
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='ComponentRef' type='ComponentRefType' substitutionGroup='LocalReference'>
-    <xs:annotation>
-      <xs:documentation>
-        componentref XML element is a pointer to all of the information
-        associated with another structural element defined elsewhere in the XML
-        document for a piece of equipment. 
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='DeviceRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        A data item reference
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='ReferenceType'>
-        <xs:attribute name='deviceUuid' type='DeviceUuidType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              The piece of equipments UUID that supplied this data. This is an
-              optional element references to the UUID attribute given in the
-              device element. This can be any series of numbers and letters as
-              defined by the XML type nmtoken.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='relation' type='RelationshipType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              The relationship to the other item
+              A reference to the device uuid
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -5026,10 +5021,137 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='DeviceRef' type='DeviceRefType' substitutionGroup='Reference'>
+  <xs:element name='DeviceRelationship' type='DeviceRelationshipType' substitutionGroup='Relationship'>
     <xs:annotation>
       <xs:documentation>
-        A data item reference
+        A relationship to a device
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ComponentRelationshipType'>
+    <xs:annotation>
+      <xs:documentation>
+        A relationship to a device
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='RelationshipType'>
+        <xs:attribute name='componentIdRef' type='IdRefType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              A reference to the device uuid
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ComponentRelationship' type='ComponentRelationshipType' substitutionGroup='Relationship'>
+    <xs:annotation>
+      <xs:documentation>
+        A relationship to a device
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='IdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to an identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
+  <xs:simpleType name='DeviceUuidRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        The uuid this tool is associated with
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='UuidType'/>
+  </xs:simpleType>
+  <xs:complexType name='ReferencesType'>
+    <xs:annotation>
+      <xs:documentation>
+        An XML container consisting of one or more types of reference XML
+        elements.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref='Reference' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='ReferenceType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        reference is a pointer to information that is associated with another
+        structural element defined elsewhere in the XML document for a piece of
+        equipment.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name='idRef' type='IdRefType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          A pointer to the id attribute of an element that contains the
+          information to be associated with this XML element.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='name' type='NameType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The name of an element or a piece of equipment.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element abstract='true' name='Reference' type='ReferenceType'>
+    <xs:annotation>
+      <xs:documentation>
+        reference is a pointer to information that is associated with another
+        structural element defined elsewhere in the XML document for a piece of
+        equipment.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='DataItemRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        dataitemref XML element is a pointer to a data entity associated with
+        another structural element defined elsewhere in the XML document for a
+        piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ReferenceType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='DataItemRef' type='DataItemRefType' substitutionGroup='Reference'>
+    <xs:annotation>
+      <xs:documentation>
+        dataitemref XML element is a pointer to a data entity associated with
+        another structural element defined elsewhere in the XML document for a
+        piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ComponentRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        componentref XML element is a pointer to all of the information
+        associated with another structural element defined elsewhere in the XML
+        document for a piece of equipment. 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ReferenceType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ComponentRef' type='ComponentRefType' substitutionGroup='Reference'>
+    <xs:annotation>
+      <xs:documentation>
+        componentref XML element is a pointer to all of the information
+        associated with another structural element defined elsewhere in the XML
+        document for a piece of equipment. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -5152,9 +5274,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         points or samples reported as a single value. representation is an
         optional attribute. representation will define a unique format for each
         set of data. representation for timeseries representation, discrete
-        representation, and value representation are defined below in Section
-        red 7.2.2.12. If representation is not specified, it MUST be determined
-        to be value representation.
+        representation, and value representation are defined in MTCPart2 Section
+        7.2.2.12. If representation is not specified, it MUST be determined to
+        be value representation.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
@@ -5211,7 +5333,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='DataItemsType'>
     <xs:annotation>
       <xs:documentation>
-        XML container consisting of one or more types of dataitem XML elements.
+        An XML container consisting of one or more types of dataitem XML
+        elements.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -5344,7 +5467,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name='coordinateSystem' type='CoordinateSystemType' use='optional'>
+    <xs:attribute name='coordinateSystem' type='CoordinateSystemEnumType' use='optional'>
       <xs:annotation>
         <xs:documentation>
           For measured values relative to a coordinate system like position
@@ -5375,9 +5498,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           points or samples reported as a single value. representation is an
           optional attribute. representation will define a unique format for
           each set of data. representation for timeseries representation,
-          discrete representation, and value representation are defined below in
-          Section red 7.2.2.12. If representation is not specified, it MUST be
-          determined to be value representation.
+          discrete representation, and value representation are defined in
+          MTCPart2 Section 7.2.2.12. If representation is not specified, it MUST
+          be determined to be value representation.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>

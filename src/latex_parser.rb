@@ -81,15 +81,20 @@ class LatexParser
       word
     end
   end
-  
-  def method_missing(m, *args, &block)
+
+  def entries(m)
     [m, m.to_s.downcase.to_sym].each do |s|
       return @indexes[s] if @indexes.include?(s)
       ms = singular(s.to_s).to_sym
       return @indexes[ms] if @indexes.include?(ms)
       ms = plural(s.to_s).to_sym
       return @indexes[ms] if @indexes.include?(ms)
-    end
+    end    
+  end
+  
+  def method_missing(m, *args, &block)
+    r = entries(m)
+    return r if r
 
     puts "Cannot resovle '#{m}', tried '#{plural(m.to_s)}' and '#{singular(m.to_s)}'"
     super
@@ -139,6 +144,10 @@ module Latex
       kys
     end
     memoize :keys
+
+    def <=>(other)
+      self.name <=> other.name
+    end
 
     def has_key?(key)
       keys.include?(key)

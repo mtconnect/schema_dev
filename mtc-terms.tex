@@ -24,7 +24,7 @@
   category=model,
   name={Actuator},
   kind={component},
-  description={Redefined as a piece of equipment with the ability to be represented as a Lower Level component of a parent Component element or as a Composition element. See \gls{actuator type}}
+  description={Redefined as a piece of equipment with the ability to be represented as a \gls{lower level} component of a parent \gls{component} element or as a \gls{composition} element. See \gls{actuator type}}
 }
 
 \newglossaryentry{actual subtype}
@@ -35,6 +35,38 @@
   kind={subtype},
   description={The measured value of the data item type given by a sensor or encoder.}
 }
+
+
+\newglossaryentry{errors}
+{
+  type=mtc,
+  category=model,
+  name= {Errors},
+  kind={element},
+  elements={\gls{error}},
+  description={An XML container element in an \gls{mtconnecterrors response document} provided by an \gls{agent} when an error is encountered associated with a \gls{request} for information from a client software application.}
+}
+
+\newglossaryentry{error}
+{
+  type=mtc,
+  category=model,
+  name= {Error},
+  kind={element},
+  attributes={\gls{errorcode}},
+  description={An \gls{error}, XML element, occurs while interpreting a \gls{request} for information from a client software application or when an \gls{agent} experiences an error while publishing the \gls{response} to a \gls{request} for information.}
+}
+
+\newglossaryentry{errorcode}
+{
+  type=mtc,
+  category=model,
+  name= {errorCode},
+  kind={attribute},
+  enumeration={\gls{assetnotfound value},\gls{internalerror value},\gls{invalidrequest value},\gls{invaliduri value},\gls{invalidxpath value},\gls{nodevice value},\gls{outofrange value},\gls{queryerror value},\gls{toomany value},\gls{unauthorized value},\gls{unsupported value}},
+  description={Provides a descriptive code that indicates the type of error that was encountered by an \gls{agent}.}
+}
+
 
 \newglossaryentry{auxiliaries}
 {
@@ -140,6 +172,34 @@
 }
 
 
+\newglossaryentry{nextsequence}
+{
+  type=mtc,
+  category=model,
+  name={nextSequence},
+  kind={attribute},
+  description={A number representing the sequence number of the piece of \gls{streaming data} that is the next piece of data to be retrieved from the buffer of the \gls{agent} that was not included in the \gls{response document} published by the \gls{agent}.}
+}
+
+\newglossaryentry{lastsequence}
+{
+  type=mtc,
+  category=model,
+  name={lastSequence},
+  kind={attribute},
+  description={A number representing the sequence number assigned to the last piece of \gls{streaming data} that was added to the buffer of the \gls{agent} immediately prior to the time that the \gls{agent} published the \gls{response document}.}
+}
+
+\newglossaryentry{firstsequence}
+{
+  type=mtc,
+  category=model,
+  name={firstSequence},
+  kind={attribute},
+  description={A number representing the sequence number assigned to the oldest piece of \gls{streaming data} stored in the buffer of the \gls{agent} immediately prior to the time that the \gls{agent} published the \gls{response document}.}
+}
+
+
 \newglossaryentry{calibrationdate}
 {
   type=mtc,
@@ -218,7 +278,7 @@
   name={Components},
   elements={\gls{device}},
   kind={element},
-  description={XML container that consists of one or more types of \gls{component} XML elements. } 
+  description={An XML container that consists of one or more types of \gls{component} XML elements. } 
 }
 
 
@@ -268,7 +328,7 @@
   type=mtc,
   category=model,
   name={ComponentStream},
-  description={An XML container type element that organizes data returned from an MTConnect Agent in response to a current or sample HTTP request.} 
+  description={An XML container type element that organizes data returned from an \gls{agent} in response to a current or sample HTTP request.} 
 }
 
 
@@ -290,7 +350,7 @@
   category=model,
   name={Compositions},
   kind={element},
-  description={XML container consisting of one or more types of \gls{composition} XML elements.},
+  description={An XML container consisting of one or more types of \gls{composition} XML elements.},
   elements={\gls{composition}}
 }
 
@@ -356,8 +416,18 @@
   type=mtc,
   category=model,
   name={current},
-  description={Used in the path portion of an HTTP Request Line, by a client software application, to initiate a \gls{current request} to an \gls{agent} to publish an \gls{mtconnectstream} document.}
+  description={Used in the path portion of an \gls{http request line}, by a client software application, to initiate a \gls{current request} to an \gls{agent} to publish an \glspl{mtconnectstream} document.}
 }
+
+\newglossaryentry{asset httprequest}
+{
+  type=mtc,
+  category=model,
+  name={asset},
+  plural={assets},
+  description={Used in the path portion of an \gls{http request line}, by a client software application, to initiate an \gls{asset request} to an \gls{agent} to publish an \gls{mtconnectassets} document.}
+}
+
 
 
 \newglossaryentry{dataitem}
@@ -378,7 +448,7 @@
   kind={element},
   elements={\gls{dataitem}},
   category=model,
-  description={XML container consisting of one or more types of \gls{dataitem} XML elements.}
+  description={An XML container consisting of one or more types of \gls{dataitem} XML elements.}
 }
 
 \newglossaryentry{dataitemid}
@@ -517,7 +587,8 @@
   type=mtc,
   category=model,
   name={Header},
-  description={The \gls{header} section contains protocol related information as defined in Section 6.5.1 of \citetitle{MTCPart1} of the MTConnect Standard.}
+  kind={element},
+  description={An XML container in an \gls{mtconnect response document} that provides information from an \gls{agent} defining version information, storage capacity, and parameters associated with the data management within the \gls{agent}.}
 }
 
 
@@ -705,7 +776,7 @@
   category=model,
   name={MTConnectDevice},
   plural={MTConnectDevices},
-  description={XML response document.}
+  description={An XML response document.}
 }
 
 
@@ -715,7 +786,15 @@
   category=model,
   name={MTConnectStream},
   plural={MTConnectStreams},
-  description={XML response document}
+  description={An XML response document}
+}
+
+\newglossaryentry{mtconnecterror}
+{
+  type=mtc,
+  category=model,
+  name={MTConnectError},
+  description={An XML response document.}
 }
 
 
@@ -845,7 +924,7 @@
   type=mtc,
   category=model,
   name={probe},
-  description={The form \gls{probe httprequest} is used to designate a \gls{probe request} in the path portion of an HTTP Request Line.}
+  description={The form \gls{probe httprequest} is used to designate a \gls{probe request} in the path portion of an \gls{http request line}.}
 }
 
 
@@ -853,7 +932,7 @@
 {
   type=mtc,
   name={Probe Request},
-  description={An \glstext{http} request to the \gls{agent} for returning metadata as an MTConnectDevices \glstext{xml} document}
+  description={An \glstext{http} request to the \gls{agent} for returning metadata as an \glspl{mtconnectdevice} \glstext{xml} document}
 }
 
 
@@ -872,7 +951,7 @@
   category=model,
   name={qualifier},
   kind={attribute},
-  description={\gls{qualifier} provides additional information regarding a Fault State associated with the measured value of a process variable.}
+  description={\gls{qualifier} provides additional information regarding a \gls{fault state} associated with the measured value of a process variable.}
 }
 
 
@@ -902,7 +981,7 @@
   name={References},
   kind={element},
   elements={\gls{reference}},
-  description={XML container consisting of one or more types of \gls{reference} XML elements.}
+  description={An XML container consisting of one or more types of \gls{reference} XML elements.}
 }
 
 
@@ -912,7 +991,7 @@
   category=model,
   name={representation},
   kind={attribute},
-  description={Description of a means to interpret data consisting of multiple data points or samples reported as a single value.  \newline \gls{representation} is an optional attribute.  \newline \gls{representation} will define a unique format for each set of data.  \newline \gls{representation} for \gls{timeseries representation}, \gls{discrete representation}, and \gls{value representation} are defined below in Section {\color{red} 7.2.2.12}.  \newline If \gls{representation} is not specified, it \MUST be determined to be \gls{value representation}.}
+  description={Description of a means to interpret data consisting of multiple data points or samples reported as a single value.  \newline \gls{representation} is an optional attribute.  \newline \gls{representation} will define a unique format for each set of data.  \newline \gls{representation} for \gls{timeseries representation}, \gls{discrete representation}, and \gls{value representation} are defined in \citetitle{MTCPart2} \textit{Section 7.2.2.12}.  \newline If \gls{representation} is not specified, it \MUST be determined to be \gls{value representation}.}
 }
 
 
@@ -931,7 +1010,7 @@
   type=mtc,
   category=model,
   name={resetTriggered},
-  description={For those \gls{dataitem} elements that report data that may be periodically reset to an initial value, \gls{resettriggered} identifies when a reported value has been reset and what has caused that reset to occur.  \newline resetTriggered is an optional attribute.  \newline \gls{resettriggered} \MUST only be provided for the specific occurrence of a Data Entity reported in the MTConnectStreams document when the reset occurred and \MUSTNOT be provided for any other occurrence of the Data Entity reported in a MTConnectStreams document.}
+  description={For those \gls{dataitem} elements that report data that may be periodically reset to an initial value, \gls{resettriggered} identifies when a reported value has been reset and what has caused that reset to occur.  \newline resetTriggered is an optional attribute.  \newline \gls{resettriggered} \MUST only be provided for the specific occurrence of a \gls{data entity} reported in the \glspl{mtconnectstream} document when the reset occurred and \MUSTNOT be provided for any other occurrence of the \gls{data entity} reported in a \glspl{mtconnectstream} document.}
 }
 
 
@@ -972,7 +1051,7 @@
   category=model,
   name={Stock},
   kind={materials,component},
-  description={Stock is an XML container that represents the information for the material that is used in a manufacturing process and to which work is applied in a machine or piece of equipment to produce parts.}
+  description={\gls{stock} is an XML container that represents the information for the material that is used in a manufacturing process and to which work is applied in a machine or piece of equipment to produce parts.}
 }
 
 
@@ -1038,7 +1117,7 @@
   type=mtc,
   category=model,
   name={sample},
-  description={Used in the path portion of an HTTP Request Line, by a client software application, to initiate a \gls{sample request} to an \gls{agent} to publish an \gls{mtconnectstream} document.}
+  description={Used in the path portion of an \gls{http request line}, by a client software application, to initiate a \gls{sample request} to an \gls{agent} to publish an \glspl{mtconnectstream} document.}
 }
 
 
@@ -1077,6 +1156,16 @@
   name={sampleRate},
   kind={attribute},
   description={The rate at which successive samples of a data item are recorded by a piece of equipment.}
+}
+
+\newglossaryentry{iso841class}
+{
+  type=mtc,
+  category=model,
+  name={iso841Class},
+  kind={attribute},
+  deprecated={true},
+  description={\DEPRECATED in MTConnect Version 1.1.}
 }
 
 
@@ -1132,6 +1221,7 @@
   type=mtc,
   name={SensorConfiguration},
   kind={configuration},
+  category=model,
   elements={\gls{firmwareversion},\gls{calibrationdate},\gls{nextcalibrationdate},\gls{calibrationinitials},\gls{channels}},
   description= {An element that can contain descriptive content defining the configuration information for \gls{sensor}.}
 }
@@ -1874,7 +1964,7 @@
   category=model,
   name={RANGE},
   kind={statistic},
-  description={Difference between the Maximum and Minimum value of a data item during the calculation period.  Also represents Peak-to-Peak measurement in a waveform.}
+  description={Difference between the \gls{maximum} and \gls{minimum} value of a data item during the calculation period.  Also represents Peak-to-Peak measurement in a waveform.}
 }
 
 
@@ -1933,6 +2023,7 @@
   description={The measurement of electrical current.},
   units=\cfont{\gls{ampere}},
   kind={type,sample},
+  subtype={\gls{alternating subtype}, \gls{direct subtype}, \gls{actual subtype}, \gls{target subtype}},
   facet={\gls{float}}
 }
 
@@ -1967,6 +2058,7 @@
   description={The measurement of angular position.},
   units=\cfont{\gls{degree}},
   kind={type,sample},
+  subtype={\gls{commanded subtype}, \gls{actual subtype}},
   facet={\gls{float}}
 }
 
@@ -2017,6 +2109,7 @@
   description={The measurement of the feedrate of a linear axis.},
   units=\cfont{\gls{millimeterpersecond}},
   kind={type,sample},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}, \gls{jog subtype}, \gls{programmed subtype}, \gls{rapid subtype}, \gls{override subtype}},
   facet={\gls{float}}
 }
 
@@ -2127,6 +2220,7 @@
   description={The measurement of the amount of time a piece of equipment or a sub-part of a piece of equipment has performed specific activities.},
   units=\cfont{\gls{second}},
   kind={type,sample},
+  subtype={\gls{loaded subtype}, \gls{working subtype}, \gls{operating subtype}, \gls{powered subtype}, \gls{delay subtype}},
   facet={\gls{float}}
 }
 
@@ -2187,7 +2281,7 @@
   category=model,
   name=\deprecated{GLOBAL\_POSITION},
   elementname=\deprecated{\cfont{GlobalPosition}},
-  description={DEPRECATED in Version 1.1},
+  description={\DEPRECATED in Version 1.1},
   deprecated={true},
   units={},
   kind={type,sample},
@@ -2203,12 +2297,13 @@
   elementname=\cfont{Length},
   description={The measurement of the length of an object.},
   units=\cfont{\gls{millimeter}},
-  kind={type,sample,subtype},
+  kind={type,sample},
+  subtype={\gls{standard subtype}, \gls{remaining subtype}, \gls{useable subtype}},
   facet={\gls{float}}
 }
 
 
-\newglossaryentry{standard length sample}
+\newglossaryentry{standard subtype}
 {
   type=mtc,
   category=model,
@@ -2220,7 +2315,7 @@
 }
 
 
-\newglossaryentry{useable length sample}
+\newglossaryentry{useable subtype}
 {
   type=mtc,
   category=model,
@@ -2238,7 +2333,7 @@
   category=model,
   name={LEVEL},
   elementname=\cfont{Level},
-  description={DEPRECATED in Version 1.2.  See \gls{filllevel sample}},
+  description={\DEPRECATED in Version 1.2.  See \gls{filllevel sample}},
   deprecated={true},
   units={},
   kind={type,sample},
@@ -2291,9 +2386,10 @@
   category=model,
   name={PATH\_FEEDRATE},
   elementname=\cfont{PathFeedrate},
-  description={The measurement of the feedrate for the axes, or a single axis, associated with a \glselementname{path} component a vector.},
+  description={The measurement of the feedrate for the axes, or a single axis, associated with a \gls{path} component-a vector.},
   units=\cfont{\gls{millimeterpersecond}},
   kind={type,sample},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}, \gls{jog subtype}, \gls{programmed subtype}, \gls{rapid subtype}, \gls{override subtype}},
   facet={\gls{float}}
 }
 
@@ -2310,11 +2406,12 @@
   description={A measured or calculated position of a control point associated with a \gls{controller} element, or \gls{path} element if provided, of a piece of equipment.},
   units=\cfont{\gls{millimeter3d}},
   kind={type,sample},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}, \gls{target subtype}, \gls{probe subtype}},
   facet={\gls{array3d}}
 }
 
 
-\newglossaryentry{probe pathposition sample}
+\newglossaryentry{probe subtype}
 {
   type=mtc,
   category=model,
@@ -2348,6 +2445,7 @@
   description={A measured or calculated position of a \gls{component} element as reported by a piece of equipment.},
   units=\cfont{\gls{millimeter}},
   kind={type,sample},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}, \gls{programmed subtype}, \gls{target subtype}},
   facet={\gls{float}}
 }
 
@@ -2387,6 +2485,7 @@
   description={The measurement of the amount of time a piece of equipment has performed different types of activities associated with the process being performed at that piece of equipment.},
   units=\cfont{\gls{second}},
   kind={type,sample},
+  subtype={\gls{process subtype}, \gls{delay subtype}},
   facet={\gls{float}}
 }
 
@@ -2427,6 +2526,7 @@
   description={The measurement of the rotational speed of a rotary axis.},
   units=\cfont{\gls{revolutionperminute}},
   kind={type,sample},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}, \gls{programmed subtype}, \gls{override subtype}},
   facet={\gls{float}}
 }
 
@@ -2441,6 +2541,7 @@
   description={The measurement of a sound level or sound pressure level relative to atmospheric pressure.},
   units=\cfont{\gls{decibel}},
   kind={type,sample},
+  subtype={\gls{noscale subtype}, \gls{ascale subtype}, \gls{bscale subtype}, \gls{cscale subtype}, \gls{dscale subtype}},
   facet={\gls{float}}
 }
 
@@ -2501,10 +2602,11 @@
   category=model,
   name={\deprecated{SPINDLE\_SPEED}},
   elementname=\deprecated{\cfont{SpindleSpeed}},
-  description={DEPRECATED in Version 1.2.  Replaced by \gls{rotaryvelocity sample}},
+  description={\DEPRECATED in Version 1.2.  Replaced by \gls{rotaryvelocity sample}},
   deprecated={true},
   units={},
   kind={type,sample},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}, \gls{override subtype}},
   facet={}
 }
 
@@ -2636,6 +2738,7 @@
   description={The measurement of electrical potential between two points.},
   units=\cfont{\gls{volt}},
   kind={type,sample},
+  subtype={\gls{alternating subtype}, \gls{direct subtype}, \gls{actual subtype}, \gls{target subtype}},
   facet={\gls{float}}
 }
 
@@ -2659,6 +2762,7 @@
   description={The measurement of power flowing through or dissipated by an electrical circuit or piece of equipment.},
   units=\cfont{\gls{watt}},
   kind={type,sample},
+  subtype={\gls{actual subtype}, \gls{target subtype}},
   facet={\gls{float}}
 }
 
@@ -2694,7 +2798,7 @@
   category=model,
   name=\deprecated{ALARM},
   elementname=\deprecated{\cfont{Alarm}},
-  description={DEPRECATED: Replaced with \gls{condition category} category data items in Version 1.1.0.},
+  description={\DEPRECATED: Replaced with \gls{condition category} category data items in Version 1.1.0.},
   deprecated={true},
   kind={type,event},
   facet={}
@@ -2707,7 +2811,7 @@
   category=model,
   name={AVAILABILITY},
   elementname=\cfont{Availability},
-  description={Represents the \gls{agent}s ability to communicate with the data source.},
+  description={Represents the \gls{agent}'s ability to communicate with the data source.},
   kind={type,event},
   facet={\gls{string}},
   enumeration={\gls{available value},\gls{unavailable value}}
@@ -2735,6 +2839,7 @@
   elementname=\cfont{AxisFeedrateOverride},
   description={The value of a signal or calculation issued to adjust the feedrate of an individual linear type axis.},
   kind={type,event},
+  subtype={\gls{jog subtype}, \gls{programmed subtype}, \gls{rapid subtype}},
   facet={\gls{float}}
 }
 
@@ -2798,17 +2903,18 @@
   elementname=\cfont{ChuckInterlock},
   description={An indication of the state of an interlock function or control logic state intended to prevent the associated \gls{chuck} component from being operated.},
   kind={type,event,condition},
+  subtype={\gls{manualunclamp subtype}},
   facet={\gls{string}},
   enumeration={\gls{active value},\gls{inactive value}}
 }
 
 
-\newglossaryentry{manualunclamp chuckinterlock event}
+\newglossaryentry{manualunclamp subtype}
 {
   type=mtc,
   category=model,
   name={MANUAL\_UNCLAMP},
-  description={An indication of the state of an operator controlled interlock that can inhibit the ability to initiate an unclamp action of an electronically controlled chuck.  The \gls{valid data value} \must be ACTIVE or INACTIVE. \newline When MANUAL\_UNCLAMP is ACTIVE, it is expected that a chuck cannot be unclamped until MANUAL\_UNCLAMP is set to INACTIVE. },
+  description={An indication of the state of an operator controlled interlock that can inhibit the ability to initiate an unclamp action of an electronically controlled chuck.  The \gls{valid data value} \must be \gls{active value} or \gls{inactive value}. \newline When \gls{manualunclamp subtype} is \gls{active value}, it is expected that a chuck cannot be unclamped until \gls{manualunclamp subtype} is set to \gls{inactive value}. },
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{active value},\gls{inactive value}}
@@ -2834,7 +2940,7 @@
   category=model,
   name=\deprecated{CODE},
   elementname=\deprecated{\cfont{Code}},
-  description={DEPRECATED in Version 1.1.},
+  description={\DEPRECATED in Version 1.1.},
   deprecated={true},
   kind={type,event},
   facet={}
@@ -2849,6 +2955,7 @@
   elementname=\cfont{CompositionState},
   description={An indication of the operating condition of a mechanism represented by a \gls{composition} type element.},
   kind={type,event},
+  subtype={\gls{action subtype}, \gls{lateral subtype}, \gls{motion subtype}, \gls{switched subtype}, \gls{vertical subtype}},
   facet={\gls{string}}
 }
 
@@ -2863,48 +2970,48 @@
 }
 
 
-\newglossaryentry{lateral compositionstate event}
+\newglossaryentry{lateral subtype}
 {
   type=mtc,
   category=model,
   name={LATERAL},
-  description={An indication of the position of a mechanism that may move in a lateral direction.   The mechanism is represented by a \gls{composition} type component. \newline The position information indicates whether the \gls{composition} element is positioned to the right, to the left, or is in transition.  \newline The \gls{valid data value} \must be RIGHT, LEFT, or TRANSITIONING.},
+  description={An indication of the position of a mechanism that may move in a lateral direction.   The mechanism is represented by a \gls{composition} type component. \newline The position information indicates whether the \gls{composition} element is positioned to the right, to the left, or is in transition.  \newline The \gls{valid data value} \must be \gls{right value}, \gls{left value}, or \gls{transitioning value}.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{right value},\gls{left value},\gls{transitioning value}}
 }
 
 
-\newglossaryentry{motion compositionstate event}
+\newglossaryentry{motion subtype}
 {
   type=mtc,
   category=model,
   name={MOTION},
-  description={An indication of the open or closed state of a mechanism.   The mechanism is represented by a \gls{composition} type component. \newline The operating state indicates whether the state of the \gls{composition} element is open, closed, or unlatched.   \newline The \gls{valid data value} \must be OPEN, UNLATCHED, or CLOSED.},
+  description={An indication of the open or closed state of a mechanism.   The mechanism is represented by a \gls{composition} type component. \newline The operating state indicates whether the state of the \gls{composition} element is open, closed, or unlatched.   \newline The \gls{valid data value} \must be \gls{open value}, \gls{unlatched value}, or \gls{closed value}.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{open value},\gls{closed value},\gls{unlatched value}}
 }
 
 
-\newglossaryentry{switched compositionstate event}
+\newglossaryentry{switched subtype}
 {
   type=mtc,
   category=model,
   name={SWITCHED},
-  description={An indication of the activation state of a mechanism represented by a \gls{composition} type component.The activation state indicates whether the \gls{composition} element is activated or not.The \gls{valid data value} \must be ON or OFF.},
+  description={An indication of the activation state of a mechanism represented by a \gls{composition} type component.The activation state indicates whether the \gls{composition} element is activated or not.The \gls{valid data value} \must be \gls{on value} or \gls{off value}.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
 }
 
 
-\newglossaryentry{vertical compositionstate event}
+\newglossaryentry{vertical subtype}
 {
   type=mtc,
   category=model,
   name={VERTICAL},
-  description={An indication of the position of a mechanism that may move in a vertical direction. The mechanism is represented by a \gls{composition} type component. \newline The position information indicates whether the \gls{composition} element is positioned to the top, to the bottom, or is in transition.  \newline The \gls{valid data value} \must be UP, DOWN, or TRANSITIONING.},
+  description={An indication of the position of a mechanism that may move in a vertical direction. The mechanism is represented by a \gls{composition} type component. \newline The position information indicates whether the \gls{composition} element is positioned to the top, to the bottom, or is in transition.  \newline The \gls{valid data value} \must be \gls{up value}, \gls{down value}, or \gls{transitioning value}.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{up value},\gls{down value},\gls{transitioning value}}
@@ -2932,65 +3039,66 @@
   elementname=\cfont{ControllerModeOverride},
   description={A setting or operator selection that changes the behavior of a piece of equipment.},
   kind={type,event},
+  subtype={\gls{dryrun subtype}, \gls{singleblock subtype}, \gls{machineaxislock subtype}, \gls{optionalstop subtype}, \gls{toolchangestop subtype}},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
 }
 
 
-\newglossaryentry{dryrun controllermodeoverride event}
+\newglossaryentry{dryrun subtype}
 {
   type=mtc,
   category=model,
   name={DRY\_RUN},
-  description={A setting or operator selection used to execute a test mode to confirm the execution of machine functions.  The \gls{valid data value} \must be ON or OFF. \newline When DRY\_RUN is ON, the equipment performs all of its normal functions, except no part or product is produced.  If the equipment has a spindle, spindle operation is suspended.},
+  description={A setting or operator selection used to execute a test mode to confirm the execution of machine functions.  The \gls{valid data value} \must be \gls{on value} or \gls{off value}. \newline When \gls{dryrun subtype} is \gls{on value}, the equipment performs all of its normal functions, except no part or product is produced.  If the equipment has a spindle, spindle operation is suspended.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
 }
 
 
-\newglossaryentry{machineaxislock controllermodeoverride event}
+\newglossaryentry{machineaxislock subtype}
 {
   type=mtc,
   category=model,
   name={MACHINE\_AXIS\_LOCK},
-  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be ON or OFF. \newline When MACHINE\_AXIS\_LOCK is ON, program execution continues normally, but no equipment motion occurs },
+  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be \gls{on value} or \gls{off value}. \newline When \gls{machineaxislock subtype} is \gls{on value}, program execution continues normally, but no equipment motion occurs },
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
 }
 
 
-\newglossaryentry{optionalstop controllermodeoverride event}
+\newglossaryentry{optionalstop subtype}
 {
   type=mtc,
   category=model,
   name={OPTIONAL\_STOP},
-  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be ON or OFF.The program execution is stopped after a specific program block is executed when OPTIONAL\_STOP is ON.    \newline In the case of a G-Code program, a program BLOCK containing a M01 code designates the command for an OPTIONAL\_STOP.EXECUTION \must change to OPTIONAL\_STOP after a program block specifying an optional stop is executed and the OPTIONAL\_STOP selection is ON.},
+  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be \gls{on value} or \gls{off value}.The program execution is stopped after a specific program block is executed when \gls{optionalstop subtype} is \gls{on value}.    \newline In the case of a G-Code program, a program \gls{block event} containing a M01 code designates the command for an \gls{optionalstop subtype}. \gls{execution event} \must change to OPTIONAL\_STOP after a program block specifying an optional stop is executed and the \gls{optionalstop subtype} selection is \gls{on value}.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
 }
 
 
-\newglossaryentry{singleblock controllermodeoverride event}
+\newglossaryentry{singleblock subtype}
 {
   type=mtc,
   category=model,
   name={SINGLE\_BLOCK},
-  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be ON or OFF. Program execution is paused after each BLOCK of code is executed when SINGLE\_BLOCK is ON.   \newline When SINGLE\_BLOCK is ON, EXECUTION \must change to INTERRUPTED after completion of each BLOCK of code. },
+  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be \gls{on value} or \gls{off value}. Program execution is paused after each \gls{block event} of code is executed when \gls{singleblock subtype} is \gls{on value}.   \newline When \gls{singleblock subtype} is \gls{on value}, \gls{execution event} \must change to \gls{interrupted value} after completion of each \gls{block event} of code. },
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
 }
 
 
-\newglossaryentry{toolchangestop controllermodeoverride event}
+\newglossaryentry{toolchangestop subtype}
 {
   type=mtc,
   category=model,
   name={TOOL\_CHANGE\_STOP},
-  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be ON or OFF. Program execution is paused when a command is executed requesting a cutting tool to be changed. EXECUTION \must change to INTERRUPTED after completion of the command requesting a cutting tool to be changed and TOOL\_CHANGE\_STOP is ON.},
+  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be \gls{on value} or \gls{off value}. Program execution is paused when a command is executed requesting a cutting tool to be changed. \gls{execution event} \must change to \gls{interrupted value} after completion of the command requesting a cutting tool to be changed and \gls{toolchangestop subtype} is \gls{on value}.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
@@ -3017,6 +3125,7 @@
   elementname=\cfont{Direction},
   description={The direction of motion.},
   kind={type,event,condition},
+  subtype={\gls{rotary subtype}, \gls{linear subtype}},
   facet={\gls{string}}
 }
 
@@ -3031,12 +3140,12 @@
 }
 
 
-\newglossaryentry{rotary direction event}
+\newglossaryentry{rotary subtype}
 {
   type=mtc,
   category=model,
   name={ROTARY},
-  description={The rotational direction of a rotary motion using the right hand rule convention.The \gls{valid data value} \must be CLOCKWISE or COUNTER\_CLOCKWISE.},
+  description={The rotational direction of a rotary motion using the right hand rule convention.The \gls{valid data value} \must be \gls{clockwise value} or \gls{counterclockwise value}.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{clockwise value},\gls{counterclockwise value}}
@@ -3077,6 +3186,7 @@
   elementname=\cfont{EndOfBar},
   description={An indication of whether the end of a piece of bar stock being feed by a bar feeder has been reached.},
   kind={type,event,condition},
+  subtype={\gls{primary subtype}, \gls{auxiliary subtype}},
   facet={\gls{string}},
   enumeration={\gls{yes value},\gls{no value}}
 }
@@ -3092,12 +3202,12 @@
 }
 
 
-\newglossaryentry{primary endofbar event}
+\newglossaryentry{primary subtype}
 {
   type=mtc,
   category=model,
   name={PRIMARY},
-  description={Specific applications MAY reference one or more locations on a piece of bar stock as the indication for the END\_OF\_BAR.  The main or most important location \must be designated as the PRIMARY indication for the END\_OF\_BAR.   \newline If no \gls{subtype} is specified, PRIMARY \must be the default END\_OF\_BAR indication.},
+  description={Specific applications \MAY reference one or more locations on a piece of bar stock as the indication for the \gls{endofbar event}.  The main or most important location \must be designated as the \gls{primary subtype} indication for the \gls{endofbar event}.   \newline If no \gls{subtype} is specified, \gls{primary subtype} \must be the default \gls{endofbar event} indication.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{yes value},\gls{no value}}
@@ -3112,6 +3222,7 @@
   elementname=\cfont{EquipmentMode},
   description={An indication that a piece of equipment, or a sub-part of a piece of equipment, is performing specific types of activities.},
   kind={type,event},
+  subtype={\gls{loaded subtype}, \gls{working subtype}, \gls{operating subtype}, \gls{powered subtype}, \gls{delay subtype}},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
 }
@@ -3192,6 +3303,7 @@
   elementname=\cfont{Hardness},
   description={The measurement of the hardness of a material.},
   kind={type,event},
+  subtype={\gls{rockwell subtype}, \gls{vickers subtype}, \gls{shore subtype}, \gls{brinell subtype}, \gls{leeb subtype}, \gls{mohs subtype}},
   facet={\gls{float}}
 }
 
@@ -3255,6 +3367,59 @@
   kind={subtype}
 }
 
+\newglossaryentry{path query}
+{
+  type=mtc,
+  category=model,
+  name={path},
+  description={An XPATH that defines specific information or a set of information to be included in an \gls{mtconnectstreams response document}.}
+}
+
+\newglossaryentry{heartbeat query}
+{
+  type=mtc,
+  category=model,
+  name={heartbeat},
+  description={Sets the time period for the heartbeat function in an \gls{agent}.}
+}
+
+
+\newglossaryentry{at query}
+{
+  type=mtc,
+  category=model,
+  name={at},
+  description={\glspl{request} that the \gls{mtconnect response document} \MUST include the current value for all \glspl{data entity} relative to the time that a specific sequence number was recorded.}
+}
+
+\newglossaryentry{from query}
+{
+  type=mtc,
+  category=model,
+  name={from},
+  description={The from parameter designates the sequence number of the first \gls{data entity} in the buffer of the \gls{agent} that \MUST be included in the \gls{response document}.}
+}
+
+
+
+\newglossaryentry{interval query}
+{
+  type=mtc,
+  category=model,
+  name={interval},
+  description={When a \gls{request} includes a Query with the interval parameter, an \gls{agent} \MUST respond to this \gls{request} by repeatedly publishing the required \gls{response document} at the time interval (period) defined by the value provided for the interval parameter.}
+}
+
+
+\newglossaryentry{assetid path}
+{
+  type=mtc,
+  category=model,
+  name={asset\_id},
+  description={Identifies the id attribute of an \gls{mtconnect asset} to be provided by an \gls{agent}.}
+}
+
+
 
 \newglossaryentry{interfacestate event}
 {
@@ -3275,9 +3440,10 @@
   category=model,
   name=\deprecated{LINE},
   elementname=\deprecated{\cfont{Line}},
-  description={DEPRECATED in Version 1.4.0.},
+  description={\DEPRECATED in Version 1.4.0.},
   deprecated={true},
   kind={type,event},
+  subtype={\gls{maximum value}, \gls{minimum value}},
   facet={}
 }
 
@@ -3303,6 +3469,7 @@
   elementname=\cfont{LineNumber},
   description={A reference to the position of a block of program code within a control program.},
   kind={type,event},
+  subtype={\gls{absolute subtype}, \gls{incremental subtype}},
   facet={\gls{integer}}
 }
 
@@ -3313,16 +3480,16 @@
   category=model,
   name={ABSOLUTE},
   description={The position of a block of program code relative to the beginning of the control program.},
-  kind={subtype}
+  kind={subtype,event}
 }
 
 
-\newglossaryentry{incremental linenumber event}
+\newglossaryentry{incremental subtype}
 {
   type=mtc,
   category=model,
   name={INCREMENTAL},
-  description={The position of a block of program code relative to the occurrence of the last LINE\_LABEL encountered in the control program.},
+  description={The position of a block of program code relative to the occurrence of the last \gls{linelabel event} encountered in the control program.},
   kind={subtype,event},
   facet={\gls{integer}}
 }
@@ -3386,6 +3553,7 @@
   representation=\cfont{PartCountDiscrete},
   description={The count of parts produced.},
   kind={type,event},
+  subtype={\gls{all subtype}, \gls{good subtype}, \gls{bad subtype}, \gls{target subtype}, \gls{remaining subtype}},
   facet={\gls{float}}
 }
 
@@ -3460,8 +3628,9 @@
   category=model,
   name={PATH\_FEEDRATE\_OVERRIDE},
   elementname=\cfont{PathFeedrateOverride},
-  description={The value of a signal or calculation issued to adjust the feedrate for the axes associated with a Path component that may represent a single axis or the coordinated movement of multiple axes.},
+  description={The value of a signal or calculation issued to adjust the feedrate for the axes associated with a \gls{path} component that may represent a single axis or the coordinated movement of multiple axes.},
   kind={type,event},
+  subtype={\gls{jog subtype}, \gls{programmed subtype}, \gls{rapid subtype}},
   facet={\gls{float}}
 }
 
@@ -3497,12 +3666,13 @@
   elementname=\cfont{PowerState},
   description={The indication of the status of the source of energy for a \gls{structural element} to allow it to perform its intended function or the state of an enabling signal providing permission for the \gls{structural element} to perform its functions.},
   kind={type,event},
+  subtype={\gls{line subtype}, \gls{control subtype}},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
 }
 
 
-\newglossaryentry{control powerstate event}
+\newglossaryentry{control subtype}
 {
   type=mtc,
   category=model,
@@ -3514,7 +3684,7 @@
 }
 
 
-\newglossaryentry{line powerstate event}
+\newglossaryentry{line subtype}
 {
   type=mtc,
   category=model,
@@ -3532,7 +3702,7 @@
   category=model,
   name=\deprecated{POWER\_STATUS},
   elementname=\deprecated{\cfont{PowerStatus}},
-  description={DEPRECATED in Version 1.1.0.},
+  description={\DEPRECATED in Version 1.1.0.},
   deprecated={true},
   kind={type,event},
   facet={}
@@ -3606,7 +3776,7 @@
   category=model,
   name={ROTARY\_MODE},
   elementname=\cfont{RotaryMode},
-  description={The current operating mode for a Rotary type axis.},
+  description={The current operating mode for a \gls{rotary} type axis.},
   kind={type,event},
   facet={\gls{string}},
   enumeration={\gls{spindle value},\gls{index value},\gls{contour value}}
@@ -3619,7 +3789,7 @@
   category=model,
   name={ROTARY\_VELOCITY\_OVERRIDE},
   elementname=\cfont{RotaryVelocityOverride},
-  description={The value of a command issued to adjust the programmed velocity for a \gls{rotary} type axis.This command represents a percentage change to the velocity calculated by a logic or motion program or set by a switch for a \gls{rotary} type axis.},
+  description={The value of a command issued to adjust the programmed velocity for a \gls{rotary} type axis. This command represents a percentage change to the velocity calculated by a logic or motion program or set by a switch for a \gls{rotary} type axis.},
   kind={type,event},
   facet={\gls{float}}
 }
@@ -3631,7 +3801,7 @@
   category=model,
   name={SERIAL\_NUMBER},
   elementname=\cfont{SerialNumber},
-  description={The serial number associated with a \gls{component}, \gls{asset}, or \gls{device}. The \gls{valid data value} \must be a text string.},
+  description={The serial number associated with a \gls{component}, \gls{asset mtconnectassets}, or \gls{device}. The \gls{valid data value} \must be a text string.},
   kind={type,event},
   facet={\gls{string}}
 }
@@ -3668,7 +3838,7 @@
   category=model,
   name={TOOL\_ID},
   elementname=\cfont{ToolId},
-  description={DEPRECATED in Version 1.2.0.   See \gls{toolassetid event}. \deprecated{The identifier of the tool currently in use for a given Path.}},
+  description={\DEPRECATED in Version 1.2.0.   See \gls{toolassetid event}. \deprecated{The identifier of the tool currently in use for a given \gls{path}.}},
   deprecated={true},
   kind={type,event},
   facet={}
@@ -3695,17 +3865,28 @@
   elementname=\cfont{ToolOffset},
   description={A reference to the tool offset variables applied to the active cutting tool associated with a \gls{path} in a \gls{controller} type component.},
   kind={type,event},
+  subtype={\gls{radial subtype}, \gls{length subtype}},
   facet={\gls{float}}
 }
 
 
 
-\newglossaryentry{radial tooloffset event}
+\newglossaryentry{radial subtype}
 {
   type=mtc,
   category=model,
   name={RADIAL},
   description={A reference to a radial type tool offset variable.},
+  kind={subtype,event},
+  facet={\gls{float}}
+}
+
+\newglossaryentry{length subtype}
+{
+  type=mtc,
+  category=model,
+  name={LENGTH},
+  description={A reference to a length type tool offset variable.},
   kind={subtype,event},
   facet={\gls{float}}
 }
@@ -3719,6 +3900,7 @@
   elementname=\cfont{User},
   description={The identifier of the person currently responsible for operating the piece of equipment.},
   kind={type,event},
+  subtype={\gls{operator subtype}, \gls{maintenance}, \gls{setup subtype}},
   facet={\gls{string}}
 }
 
@@ -3733,7 +3915,7 @@
 }
 
 
-\newglossaryentry{operator user event}
+\newglossaryentry{operator subtype}
 {
   type=mtc,
   category=model,
@@ -3744,7 +3926,7 @@
 }
 
 
-\newglossaryentry{setup user event}
+\newglossaryentry{setup subtype}
 {
   type=mtc,
   category=model,
@@ -4039,7 +4221,7 @@
   type=mtc,
   category=model,
   name={COUNT},
-  description={A counted event},
+  description={A count of something.},
   kind={units}
 }
 
@@ -4731,7 +4913,7 @@
   type=mtc,
   category=model,
   name={RIGHT},
-  description={The position of the Composition element is oriented to the right to the point of a positive confirmation.},
+  description={The position of the \gls{composition} element is oriented to the right to the point of a positive confirmation.},
   kind={enum}
 }
 
@@ -4741,7 +4923,7 @@
   type=mtc,
   category=model,
   name={LEFT},
-  description={The position of the Composition element is oriented to the left to the point of a positive confirmation.},
+  description={The position of the \gls{composition} element is oriented to the left to the point of a positive confirmation.},
   kind={enum}
 }
 
@@ -4751,7 +4933,7 @@
   type=mtc,
   category=model,
   name={TRANSITIONING},
-  description={It is in an intermediate position of the Composition element.},
+  description={It is in an intermediate position of the \gls{composition} element.},
   kind={enum}
 }
 
@@ -4851,7 +5033,7 @@
   type=mtc,
   category=model,
   name={CLOCKWISE},
-  description={A \gls{rotary direction event} component type rotating in a clockwise fashion using the right-hand rule.},
+  description={A \gls{rotary subtype} component type rotating in a clockwise fashion using the right-hand rule.},
   kind={enum}
 }
 
@@ -4861,7 +5043,7 @@
   type=mtc,
   category=model,
   name={COUNTER\_CLOCKWISE},
-  description={A \gls{rotary direction event} component type rotating in a counter clockwise fashion using the right-hand rule.},
+  description={A \gls{rotary subtype} component type rotating in a counter clockwise fashion using the right-hand rule.},
   kind={enum}
 }
 
@@ -4921,7 +5103,7 @@
   type=mtc,
   category=model,
   name={INTERRUPTED},
-  description={The action of a Component has been suspended due to an external signal.},
+  description={The action of a \gls{component} has been suspended due to an external signal.},
   kind={enum}
 }
 
@@ -4931,7 +5113,7 @@
   type=mtc,
   category=model,
   name={FEED\_HOLD},
-  description={Motion of a Component has been commanded to stop at its current position.},
+  description={Motion of a \gls{component} has been commanded to stop at its current position.},
   kind={enum}
 }
 
@@ -5106,13 +5288,127 @@
 }
 
 
+\newglossaryentry{assetnotfound value}
+{
+  type=mtc,
+  category=model,
+  name={ASSET\_NOT\_FOUND},
+  description={The \gls{request} for information specifies an \gls{mtconnect asset} that is not recognized by the \gls{agent}.},
+  kind={enum}
+}
+
+\newglossaryentry{internalerror value}
+{
+  type=mtc,
+  category=model,
+  name={INTERNAL\_ERROR},
+  description={The \gls{agent} experienced an error while attempting to published the requested information.},
+  kind={enum}
+}
+
+
+\newglossaryentry{invalidrequest value}
+{
+  type=mtc,
+  category=model,
+  name={INVALID\_REQUEST},
+  description={The \gls{request} contains information that was not recognized by the \gls{agent}.},
+  kind={enum}
+}
+
+
+\newglossaryentry{invaliduri value}
+{
+  type=mtc,
+  category=model,
+  name={INVALID\_URI},
+  description={The URI provided was incorrect.},
+  kind={enum}
+}
+
+\newglossaryentry{invalidxpath value}
+{
+  type=mtc,
+  category=model,
+  name={INVALID\_XPATH},
+  description={The XPATH identified in the \gls{request} for information could not be parsed correctly by the \gls{agent}.},
+  kind={enum}
+}
+
+\newglossaryentry{nodevice value}
+{
+  type=mtc,
+  category=model,
+  name={NO\_DEVICE},
+  description={The identity of the piece of equipment specified in the \gls{request} for information is not associated with the \gls{agent}.},
+  kind={enum}
+}
+
+\newglossaryentry{outofrange value}
+{
+  type=mtc,
+  category=model,
+  name={OUT\_OF\_RANGE},
+  description={The \gls{request} for information specifies Steaming Data that includes sequence number(s) for pieces of data that are beyond the end of the buffer.},
+  kind={enum}
+}
+
+
+\newglossaryentry{queryerror value}
+{
+  type=mtc,
+  category=model,
+  name={QUERY\_ERROR},
+  description={The \gls{agent} was unable to interpret the Query.  The Query parameters do not contain valid values or include an invalid parameter.},
+  kind={enum}
+}
+
+\newglossaryentry{toomany value}
+{
+  type=mtc,
+  category=model,
+  name={TOO\_MANY},
+  description={Steaming Data or Assets that includes more pieces of data than the \gls{agent} is capable of organizing.},
+  kind={enum}
+}
+
+\newglossaryentry{unauthorized value}
+{
+  type=mtc,
+  category=model,
+  name={UNAUTHORIZED},
+  description={The \gls{requester} does not have sufficient permissions to access the requested information.},
+  kind={enum}
+}
+
+\newglossaryentry{unsupported value}
+{
+  type=mtc,
+  category=model,
+  name={UNSUPPORTED},
+  description={A valid \gls{request} was provided, but the \gls{agent} does not support the feature or type of \gls{request}.},
+  kind={enum}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 \newglossaryentry{mtconnectasset}
 {
   type=mtc,
   category=model,
   name={MTConnectAsset},
   plural={MTConnectAssets},
-  description={XML response document}
+  description={An XML response document}
 }
 
 
@@ -5120,7 +5416,7 @@
 {
   type=mtc,
   name={Asset Information Model},
-  description={It associates each electronic MTConnectAssets document with a unique identifier and allows for some predefined mechanisms to find, create, request, updated, and delete these electronic documents in a way that provides for consistency across multiple pieces of equipment.}
+  description={It associates each electronic \glspl{mtconnectasset} document with a unique identifier and allows for some predefined mechanisms to find, create, request, updated, and delete these electronic documents in a way that provides for consistency across multiple pieces of equipment.}
 }
 
 
@@ -5133,59 +5429,67 @@
 }
 
 
-\newglossaryentry{version mtconnectassets}
+\newglossaryentry{version}
 {
   type=mtc,
   category=model,
   name={version},
-  description={The protocol version number. This is the \gls{major} and \gls{minor} version number of the MTConnect Standard being used. For example, if the version number of the Standard used is \cfont{10.21.33}, the \gls{version mtconnectassets} will be \cfont{10.21}.}
+  description={The protocol version number.}
 }
+
+\newglossaryentry{minor}
+{
+  type=mtc,
+  name={minor},
+  description={Identifier representing a specific set of functionalities defined by the MTConnect Standard.}
+}
+
 
 
 \newglossaryentry{major}
 {
   type=mtc,
   name={major},
-  description={major version}
+  description={Identifier representing a consistent set of functionalities defined by the MTConnect Standard. }
 }
 
-
-\newglossaryentry{minor}
+\newglossaryentry{revision}
 {
   type=mtc,
-  name={minor},
-  description={minor version}
+  name={revision},
+  description={A supplemental identifier representing only organizational or editorial changes to a \gls{minor} version document with no changes in the functionality described in that document.}
 }
 
 
-\newglossaryentry{creationtime mtconnectassets}
+
+\newglossaryentry{creationtime}
 {
   type=mtc,
   category=model,
   name={creationTime},
-  description={The time the response was created. }
+  description={The time the response was created.}
 }
 
 
-\newglossaryentry{testindicator mtconnectassets}
+\newglossaryentry{testindicator}
 {
   type=mtc,
   category=model,
   name={testIndicator},
-  description={Optional flag that indicates the system is operating in test mode. This data is only for testing and indicates that the data is simulated. }
+  description={Optional flag that indicates the system is operating in test mode.}
 }
 
 
-\newglossaryentry{instanceid mtconnectassets}
+\newglossaryentry{instanceid}
 {
   type=mtc,
   category=model,
   name={instanceId},
-  description={A number indicating which invocation of the \gls{agent}. This is used to differentiate between separate instances of the \gls{agent}. This value \MUST have a maximum value of $2^{64}-1$ and \MUST be stored in an unsigned 64-bit integer. }
+  description={A number indicating which invocation of the \gls{agent}. }
 }
 
 
-\newglossaryentry{sender mtconnectassets}
+\newglossaryentry{sender}
 {
   type=mtc,
   category=model,
@@ -5194,21 +5498,21 @@
 }
 
 
-\newglossaryentry{assetbuffersize mtconnectassets}
+\newglossaryentry{assetbuffersize}
 {
   type=mtc,
   category=model,
   name={assetBufferSize},
-  description={The maximum number of \glspl{mtconnect asset} that will be retained by the \gls{agent}. The \gls{assetbuffersize mtconnectassets} \MUST be an unsigned positive integer value with a maximum value of $2^{32}-1$. }
+  description={The maximum number of \glspl{mtconnect asset} that will be retained by the \gls{agent}.}
 }
 
 
-\newglossaryentry{assetcount mtconnectassets}
+\newglossaryentry{assetcount}
 {
   type=mtc,
   category=model,
   name={assetCount},
-  description={The total number of \glspl{mtconnect asset} in an\gls{agent}. This \MUST be an unsigned positive integer value with a maximum value of $2^{32}-1$. This value \MUSTNOT be greater than \gls{assetbuffersize mtconnectassets}.}
+  description={The total number of \glspl{mtconnect asset} in an\gls{agent}.}
 }
 
 
@@ -5225,7 +5529,7 @@
   type= mtc,
   category=model,
   name= {Assets},
-  description={XML container that consists of one or more types of \gls{asset mtconnectassets} XML elements. }
+  description={An XML container that consists of one or more types of \gls{asset mtconnectassets} XML elements. }
 }
 
 
@@ -5251,6 +5555,7 @@
 {
   type=mtc,
   name={asset buffer},
+  plural={assets buffer},
   description={A buffer or queue for \gls{assets mtconnectassets}.}
 }
 
@@ -5269,7 +5574,7 @@
   type=mtc,
   category=model,
   name={ASSET\_CHANGED},
-  elementname={AssetChanged},
+  elementname=\cfont{AssetChanged},
   description={The value of the \gls{cdata} for the event \MUST be the \gls{assetid} of the asset that has been added or changed. There will not be a separate message for new assets.},
   kind={type,event},
   facet={\gls{string}}
@@ -5281,7 +5586,7 @@
   type=mtc,
   category=model,
   name={ASSET\_REMOVED},
-  elementname={AssetRemoved},
+  elementname=\cfont{AssetRemoved},
   description={The value of the \gls{cdata} for the event \MUST be the \gls{assetid} of the asset that has been removed. The asset will still be visible if requested with the \gls{includeremoved} parameter as described in the protocol section. When assets are removed they are not moved to the beginning of the most recently modified list. },
   kind={type,event},
   facet={\gls{string}}
@@ -5315,16 +5620,8 @@
 }
 
 
-\newglossaryentry{assetid cuttingtool}
-{
-  type=mtc,
-  category=model,
-  name={assetId},
-  description={The unique identifier of the instance of this tool. This will be the same as the \gls{toolid cuttingtool} and \gls{serialnumber} in most cases. The \gls{assetid cuttingtool} \SHOULD be the combination of the \gls{toolid cuttingtool} and \gls{serialnumber} as in \gls{toolid cuttingtool}. \gls{serialnumber} or an equivalent implementation dependent identification scheme.}
-}
 
-
-\newglossaryentry{toolid cuttingtool}
+\newglossaryentry{toolid}
 {
   type=mtc,
   category=model,
@@ -5332,14 +5629,6 @@
   description={The identifier for a class of Cutting Tools. This is defined as an XML string type and is implementation dependent. }
 }
 
-
-\newglossaryentry{manufacturers cuttingtool}
-{
-  type=mtc,
-  category=model,
-  name={manufacturers},
-  description={An optional attribute referring to the manufacturer(s) of this Cutting Tool, for this element, this will reference the Tool Item and Adaptive Items specifically. }
-}
 
 
 \newglossaryentry{cuttingitem}
@@ -5481,7 +5770,7 @@
   type=mtc,
   category=model,
   name={CuttingToolArchetypeReference},
-  description={The content of this XML element is the \gls{assetid cuttingtool} of the \gls{cuttingtoolarchetype} document. It \MAY also contain a source attribute that gives the URL of the archetype data as well.}
+  description={The content of this XML element is the \gls{assetid} of the \gls{cuttingtoolarchetype} document. It \MAY also contain a source attribute that gives the URL of the archetype data as well.}
 }
 
 
@@ -5968,12 +6257,12 @@
 }
 
 
-\newglossaryentry{count cuttingitems}
+\newglossaryentry{count model}
 {
   type=mtc,
   category=model,
   name={count},
-  description={The number of Cutting Items. }
+  description={The total count of something.}
 }
 
 
@@ -5995,12 +6284,12 @@
 }
 
 
-\newglossaryentry{manufacturers cuttingitem}
+\newglossaryentry{manufacturers}
 {
   type=mtc,
   category=model,
   name={manufacturers},
-  description={The manufacturers of the Cutting Item. }
+  description={The manufacturers of the Cutting Item or Tool. }
 }
 
 
@@ -6288,6 +6577,55 @@
   kind={enum}
 }
 
+\newglossaryentry{true value}
+{
+  type=mtc,
+  category=model,
+  name={TRUE},
+  description={The \gls{agent} is functioning in a test mode.},
+  kind={enum}
+}
+
+\newglossaryentry{false value}
+{
+  type=mtc,
+  category=model,
+  name={FALSE},
+  description={The \gls{agent} is not functioning in a test mode.},
+  kind={enum}
+}
+
+\newglossaryentry{true removed}
+{
+  type=mtc,
+  category=model,
+  name={true},
+  description={Referring to the \gls{asset mtconnectassets}/s removed from the \gls{asset buffer}.},
+  kind={enum}
+}
+
+\newglossaryentry{false removed}
+{
+  type=mtc,
+  category=model,
+  name={false},
+  description={Referring to the \gls{asset mtconnectassets}/s in the \gls{asset buffer}.},
+  kind={enum}
+}
+
+\newglossaryentry{physical connection}
+{
+  type=mtc,
+  name={Physical Connection},
+  description={The network transmission technologies that physically interconnect an \gls{agent}.}
+}
+
+\newglossaryentry{transport protocol}
+{
+  type=mtc,
+  name={Transport Protocol},
+  description={A set of capabilities that provide the rules and procedures used to transport information between an \gls{agent} and a client software application through a \gls{physical connection}.}
+}
 
 \newglossaryentry{doorinterface}
 {
@@ -6526,6 +6864,14 @@
   facet={\gls{string}}
 }
 
+\newglossaryentry{elementname}
+{
+  type=mtc,
+  category=model,
+  name={ElementName},
+  description={\gls{element name} of a \gls{dataitem}.}
+}
+
 \longnewglossaryentry{abstract element}
 {
   name= {Abstract Element}
@@ -6544,7 +6890,7 @@
   name= {Adapter}
 }
 {
-  An optional piece of hardware or software that transforms information provided by a piece of equipment into a form that can be received by an MTConnect Agent.
+  An optional piece of hardware or software that transforms information provided by a piece of equipment into a form that can be received by an \gls{agent}.
 
   Appears in the documents in the following form: adapter.
 }
@@ -6557,8 +6903,9 @@
 {
   Refers to an MTConnect Agent. 
   
-  Software that collects data published from one or more piece(s) of equipment, organizes that data in a structured manner, and responds to requests for data from client software systems by providing a structured response in the form of a Response Document that is constructed using the semantic data models defined in the Standard. 
-  Appears in the documents in the following form: MTConnect Agent or Agent.
+  Software that collects data published from one or more piece(s) of equipment, organizes that data in a structured manner, and responds to requests for data from client software systems by providing a structured response in the form of a \gls{response document} that is constructed using the \glspl{semantic data model} defined in the Standard. 
+  
+  Appears in the documents in the following form: \gls{agent}.
 }
 
 
@@ -6569,7 +6916,7 @@
 {
   A set of methods to provide communications between software applications.
 
-  The API defined in the MTConnect Standard describes the methods for providing the Request/Response Information Exchange between an MTConnect Agent and client software applications.
+  The API defined in the MTConnect Standard describes the methods for providing the \gls{requestresponse} Information Exchange between an \gls{agent} and client software applications.
   
   Appears in the documents in the following forms: Application Programming Interface or API.
 }
@@ -6580,15 +6927,15 @@
   name={Archetype}
 }
 {
-  \ulheading{General Description of an MTConnect Asset}:
+  \ulheading{General Description of an \gls{mtconnect asset}}:
   
-  Archetype is a class of MTConnect Assets that provides the requirements, constraints, and common properties for a type of MTConnect Asset.
+  Archetype is a class of \glspl{mtconnect asset} that provides the requirements, constraints, and common properties for a type of \gls{mtconnect asset}.
 
   Appears in the documents in the following form: Archetype.
 
-  \ulheading{Used as an XML term describing an MTConnect Asset}:
+  \ulheading{Used as an XML term describing an \gls{mtconnect asset}}:
   
-  In an XML representation of the Assets Information Model, Archetype is an abstract element that is replaced by a specific type of Asset \gls{archetype mtconnectassets}. 
+  In an XML representation of the \glspl{asset information model}, \gls{archetype mtconnectassets} is an abstract element that is replaced by a specific type of \gls{asset} Archetype.
   
   Appears in the documents in the following form: \gls{archetype mtconnectassets}
 }
@@ -6602,6 +6949,14 @@
   description={Model of a domain concept.}
 }
 
+\newglossaryentry{part document}
+{
+  type=mtc,
+  name={Part},
+  description={Each Standard document is referred to as a \gls{part document} of the Standard.}
+}
+
+
 \longnewglossaryentry{asset}
 {
   name= {Asset},
@@ -6610,62 +6965,63 @@
 {
   \ulheading{General meaning}:
 
-  Typically referred to as an MTConnect Asset.
+  Typically referred to as an \gls{mtconnect asset}.
 
-  An MTConnect Asset is something that is used in the manufacturing process, but is not permanently associated with a single piece of equipment, can be removed from the piece of equipment without compromising its function, and can be associated with other pieces of equipment during its lifecycle.
+  An \gls{mtconnect asset} is something that is used in the manufacturing process, but is not permanently associated with a single piece of equipment, can be removed from the piece of equipment without compromising its function, and can be associated with other pieces of equipment during its lifecycle.
 
-  \ulheading{Used to identify a storage area in an MTConnect Agent}:
+  \ulheading{Used to identify a storage area in an \gls{agent}}:
 
   See description of Buffer.
 
-  \ulheading{Used as an Information Model}:
+  \ulheading{Used as an \gls{information model}}:
 
-  Used to describe an Information Model that contains the rules and terminology that describe information that may be included in electronic documents representing MTConnect Assets.
+  Used to describe an \gls{information model} that contains the rules and terminology that describe information that may be included in electronic documents representing \glspl{mtconnect asset}.
 
-  The Assets Information Model defines the structure for the Assets Response Document.
+  The \glspl{asset information model} defines the structure for the \glspl{asset response document}.
 
-  Individual Information Models describe the structure of the Asset Documents represent each type of MTConnect Asset. Appears in the documents in the following form: Assets Information Model or (asset type) Information Model.
+  Individual \glspl{information model} describe the structure of the \glspl{asset document} represent each type of \gls{mtconnect asset}. Appears in the documents in the following form: \glspl{asset information model} or (asset type) \gls{information model}.
   
-  \ulheading{Used when referring to an MTConnect Asset}:
+  \ulheading{Used when referring to an \gls{mtconnect asset}}:
 
-  Refers to the information related to an MTConnect Asset or a group of MTConnect Assets.
+  Refers to the information related to an \gls{mtconnect asset} or a group of \glspl{mtconnect asset}.
 
   Appears in the documents in the following form: \gls{asset} or \glspl{asset}.
 
   \ulheading{Used as an XML container or element}:
 
   \begin{itemize}
-      \item When used as an XML container that consists of one or more types of Asset XML elements.
+      \item When used as an XML container that consists of one or more types of \gls{asset mtconnectassets} XML elements.
       
-      Appears in the documents in the following form: Assets.
-      \item When used as an abstract XML element. It is replaced in the XML document by types of Asset elements representing individual Asset entities.
+      Appears in the documents in the following form: \glspl{asset mtconnectassets}.
+      
+      \item When used as an abstract XML element. It is replaced in the XML document by types of \gls{asset mtconnectassets} elements representing individual \gls{asset} entities.
       
       Appears in the documents in the following form: \gls{asset mtconnectassets}.
   \end{itemize}
 
-  \ulheading{Used to describe information stored in an MTConnect Agent}:
+  \ulheading{Used to describe information stored in an \gls{agent}}:
 
-  Identifies an electronic document published by a data source and stored in the assets buffer of an MTConnect Agent.
+  Identifies an electronic document published by a data source and stored in the \glspl{asset buffer} of an \gls{agent}.
   
-  Appears in the documents in the following form: Asset Document.
+  Appears in the documents in the following form: \gls{asset document}.
   
-  \ulheading{Used as an XML representation of an MTConnect Response document}:
+  \ulheading{Used as an XML representation of an \gls{mtconnect response document}}:
 
-  Identifies an electronic document encoded in XML and published by an MTConnect Agent in response to a Request for information from a client software application relating to MTConnect Assets.
+  Identifies an electronic document encoded in XML and published by an \gls{agent} in response to a \gls{request} for information from a client software application relating to \glspl{mtconnect asset}.
 
   Appears in the documents in the following form: \glspl{mtconnectasset}.
 
-  \ulheading{Used as an MTConnect Request}:
+  \ulheading{Used as an \gls{mtconnect request}}:
 
-  Represents a specific type of communications request between a client software application and an MTConnect Agent regarding MTConnect Assets.
+  Represents a specific type of communications request between a client software application and an \gls{agent} regarding \glspl{mtconnect asset}.
 
-  Appears in the documents in the following form: Asset Request.
+  Appears in the documents in the following form: \gls{asset request}.
 
-  \ulheading{Used as part of an HTTP Request}:
+  \ulheading{Used as part of an \gls{http request}}:
 
-  Used in the path portion of an HTTP Request Line, by a client software application, to initiate an Asset Request to an MTConnect Agent to publish an MTConnectAssets document.
+  Used in the path portion of an \gls{http request line}, by a client software application, to initiate an \gls{asset request} to an \gls{agent} to publish an \glspl{mtconnectasset} document.
 
-  Appears in the documents in the following form: asset.
+  Appears in the documents in the following form: \gls{asset mtconnectassets}.
 }
 
 
@@ -6686,9 +7042,9 @@
   name={Base Functional Structure}
 }
 {
-  A consistent set of functionalities defined by the MTConnect Standard. This functionality includes the protocol(s) used to communicate data to a client software application, the semantic data models defining how that data is organized into Response Documents, and the encoding of those Response Documents.
+  A consistent set of functionalities defined by the MTConnect Standard. This functionality includes the protocol(s) used to communicate data to a client software application, the \glspl{semantic data model} defining how that data is organized into \glspl{response document}, and the encoding of those \glspl{response document}.
 
-  Appears in the documents in the following form: Base Functional Structure.
+  Appears in the documents in the following form: \gls{base functional structure}.
 }
 
 \longnewglossaryentry{buffer}
@@ -6698,19 +7054,19 @@
 {
   \ulheading{General meaning}:
 
-  A section of an MTConnect Agent that provides storage for information published from pieces of equipment.
+  A section of an \gls{agent} that provides storage for information published from pieces of equipment.
 
-  \ulheading{Used relative to Streaming Data}:
+  \ulheading{Used relative to \gls{streaming data}}:
 
-  A section of an MTConnect Agent that provides storage for information relating to individual pieces of Streaming Data. 
+  A section of an \gls{agent} that provides storage for information relating to individual pieces of \gls{streaming data}. 
   
-  Appears in the documents in the following form: buffer.
+  Appears in the documents in the following form: \gls{buffer}.
 
-  \ulheading{Used relative to MTConnect Assets}:
+  \ulheading{Used relative to \glspl{mtconnect asset}}:
 
-  A section of an MTConnect Agent that provides storage for Asset Documents.
+  A section of an \gls{agent} that provides storage for \glspl{asset document}.
 
-  Appears in the documents in the following form: assets buffer.
+  Appears in the documents in the following form: \glspl{asset buffer}.
 }
 
 \longnewglossaryentry{cdata}
@@ -6724,9 +7080,9 @@
 
   CDATA is used to describe a value (text or data) published as part of an XML element.
 
-  For example, "This is some text" is the CDATA in the XML element:
+  For example, \cfont{"This is some text"} is the CDATA in the XML element:
   
-  <Message ...>This is some text</Message>
+  \tab \cfont{<Message ...>This is some text</Message>}
 
   Appears in the documents in the following form: CDATA
 }
@@ -6738,18 +7094,18 @@
   plural={Child Elements}
 }
 {
-  A portion of a data modeling structure that illustrates the relationship between an element and the higher-level Parent Element within which it is contained.
+  A portion of a data modeling structure that illustrates the relationship between an element and the higher-level \gls{parent element} within which it is contained.
   
-  Appears in the documents in the following form: Child Element.
+  Appears in the documents in the following form: \gls{child element}.
 }
 
 
 \longnewglossaryentry{client}
 {
-  name={client}
+  name={Client}
 }
 {
-  A process or set of processes that send Requests for information to an MTConnect Agent; e.g. software applications or a function that implements the Request portion of an Interface Interaction Model.
+  A process or set of processes that send \glspl{request} for information to an \gls{agent}; e.g. software applications or a function that implements the \gls{request} portion of an \gls{interface} \gls{interaction model}.
 
   Appears in the documents in the following form: client.
 }
@@ -6761,20 +7117,22 @@
 {
   \ulheading{General meaning}:
 
-  A Structural Element that represents a physical or logical part or subpart of a piece of equipment.
+  A \gls{structural element} that represents a physical or logical part or subpart of a piece of equipment.
 
-  Appears in the documents in the following form: Component.
+  Appears in the documents in the following form: \gls{component term}.
 
-  \ulheading{Used in Information Models}:
+  \ulheading{Used in \glspl{information model}}:
 
   A data modeling element used to organize the data being retrieved from a piece of equipment.
+  
   \begin{itemize}
-      \item When used as an XML container to organize Lower Level Component elements. 
+      \item When used as an XML container to organize \gls{lower level} \gls{component} elements. 
       
-      Appears in the documents in the following form: Components.
-      \item When used as an abstract XML element. Component is replaced in a data model by a type of Component element. Component is also an XML container used to organize Lower Level Component elements, Data Entities, or both.
+      Appears in the documents in the following form: \gls{components}.
       
-      Appears in the documents in the following form: Component.
+      \item When used as an abstract XML element. \gls{component} is replaced in a data model by a type of \gls{component term} element. \gls{component} is also an XML container used to organize \gls{lower level} \gls{component} elements, \glspl{data entity}, or both.
+      
+      Appears in the documents in the following form: \gls{component}.
   \end{itemize}
 }
 
@@ -6785,20 +7143,22 @@
 {
   \ulheading{General meaning}:
 
-  Data modeling elements that describe the lowest level basic structural or functional building blocks contained within a Component element.
+  Data modeling elements that describe the lowest level basic structural or functional building blocks contained within a \gls{component} element.
 
-  Appears in the documents in the following form: Composition Element
+  Appears in the documents in the following form: \gls{composition term}
 
-  \ulheading{Used in Information Models}:
+  \ulheading{Used in \glspl{information model}}:
 
   A data modeling element used to organize the data being retrieved from a piece of equipment.
+
   \begin{itemize}
-      \item When used as an XML container to organize Composition elements. 
+      \item When used as an XML container to organize \gls{composition} elements. 
       
-      Appears in the documents in the following form: Compositions
-      \item When used as an abstract XML element. Composition is replaced in a data model by a type of Composition Element. 
+      Appears in the documents in the following form: \gls{compositions}
       
-      Appears in the documents in the following form: Composition.
+      \item When used as an abstract XML element. \gls{composition} is replaced in a data model by a type of \gls{composition term} element. 
+      
+      Appears in the documents in the following form: \gls{composition}.
   \end{itemize}
 }
 
@@ -6810,29 +7170,29 @@
 {
 	\ulheading{General meaning}:
 
-	An indicator of the health of a piece of equipment or a Component and its ability to function.
+	An indicator of the health of a piece of equipment or a \gls{component term} and its ability to function.
 
 	\ulheading{Used as a modeling element}:
 
-	A data modeling element used to organize and communicate information relative to the health of a piece of equipment or Component.
+	A data modeling element used to organize and communicate information relative to the health of a piece of equipment or \gls{component term}.
 
-	Appears in the documents in the following form: Condition or as Condition Element(s).
+	Appears in the documents in the following form: \gls{condition term}.
 
-	\ulheading{Used in Information Models}:
+	\ulheading{Used in \glspl{information model}}:
 
-	An XML element used to represent Condition Elements.
+	An XML element used to represent \gls{condition term} elements.
 
     \begin{itemize}
-	\item When used as an XML container to organize Lower Level Condition elements.
+	\item When used as an XML container to organize \gls{lower level} \gls{condition} elements.
 
-	Appears in the documents in the following form: Condition.
+	Appears in the documents in the following form: \gls{conditions}.
 
-	\item When used as a Lower Level element, the form Condition is an abstract type XML element.  This Lower Level element is a Data Entity.  Condition is replaced in a data model by type of Condition element.
+	\item When used as a \gls{lower level} element, the form \gls{condition} is an abstract type XML element.  This \gls{lower level} element is a \gls{data entity}.  \gls{condition} is replaced in a data model by type of \gls{condition term} element.
 
-	Appears in the documents in the following form: Condition.
+	Appears in the documents in the following form: \gls{condition}.
 	\end{itemize}
 
-	Note: The form Condition is used to represent both above uses.
+	Note: The form \gls{condition} is used to represent both above uses.
 }
 
 
@@ -6842,9 +7202,9 @@
   plural={Controlled Vocabularies}
 }
 {
-	A restricted set of values that may be published as the Valid Data Value for a Data Entity.
+	A restricted set of values that may be published as the \gls{valid data value} for a \gls{data entity}.
 
-	Appears in the documents in the following form: Controlled Vocabulary.
+	Appears in the documents in the following form: \gls{controlled vocabulary}.
 }
 
 
@@ -6861,34 +7221,34 @@
 
 	Appears in the documents in the following form: current
 
-	\ulheading{Used in reference to an MTConnect Agent}:
+	\ulheading{Used in reference to an \gls{agent}}:
 
-	A reference to the most recent information available to an MTConnect Agent.
-
-	Appears in the documents in the following form: current.
-
-	\ulheading{Used as an MTConnect Request}:
-
-	A specific type of communications request between a client software application and an MTConnect Agent regarding Streaming Data.  
-
-	Appears in the documents in the following form: Current Request.
-
-	\ulheading{Used as part of an HTTP Request}:
-
-	Used in the path portion of an HTTP Request Line, by a client software application, to initiate a Current Request to an MTConnect Agent to publish an MTConnectStreams document.
+	A reference to the most recent information available to an \gls{agent}.
 
 	Appears in the documents in the following form: current.
+
+	\ulheading{Used as an \gls{mtconnect request}}:
+
+	A specific type of communications request between a client software application and an \gls{agent} regarding \gls{streaming data}.  
+
+	Appears in the documents in the following form: \gls{current request}.
+
+	\ulheading{Used as part of an \gls{http request}}:
+
+	Used in the path portion of an \gls{http request line}, by a client software application, to initiate a \gls{current request} to an \gls{agent} to publish an \glspl{mtconnectstream} document.
+
+	Appears in the documents in the following form: \gls{current httprequest}.
 }
 
 
 \longnewglossaryentry{data dictionary}
 {
-  name={Data Dictionary}
+  name={data dictionary}
 }
 {
-	Listing of standardized terms and definitions used in MTConnect Information Models.
+	Listing of standardized terms and definitions used in \glspl{mtconnect information model}.
 
-	Appears in the documents in the following form: data dictionary.
+	Appears in the documents in the following form: \gls{data dictionary}.
 }
 
 
@@ -6898,9 +7258,9 @@
   plural={Data Entities}
 }
 {
-	A primary data modeling element that represents all elements that either describe data items that may be reported by an MTConnect Agent or the data items that contain the actual data published by an Agent.
+	A primary data modeling element that represents all elements that either describe data items that may be reported by an \gls{agent} or the data items that contain the actual data published by an \gls{agent}.
 
-	Appears in the documents in the following form: Data Entity.
+	Appears in the documents in the following form: \gls{data entity}.
 }
 
 
@@ -6911,20 +7271,20 @@
 {
 	\ulheading{General meaning}:
 
-	Descriptive information or properties and characteristics associated with a Data Entity.
+	Descriptive information or properties and characteristics associated with a \gls{data entity}.
 
 	Appears in the documents in the following form: data item.
 
-	\ulheading{Used in an XML representation of a Data Entity}:
+	\ulheading{Used in an XML representation of a \gls{data entity}}:
 
     \begin{itemize}
-	\item When used as an XML container to organize DataItem elements.
+	\item When used as an XML container to organize \gls{dataitem} elements.
 
-	Appears in the documents in the following form: DataItems.
+	Appears in the documents in the following form: \gls{dataitems}.
 
-	\item When used to represent a specific Data Entity, the form DataItem is an XML element.  
+	\item When used to represent a specific \gls{data entity}, the form \gls{dataitem} is an XML element.  
 
-	Appears in the documents in the following form: DataItem.
+	Appears in the documents in the following form: \gls{dataitem}.
     \end{itemize}
 }
 
@@ -6934,7 +7294,7 @@
   name={Data Source}
 }
 {
-	Any piece of equipment that can produce data that is published to an MTConnect Agent.
+	Any piece of equipment that can produce data that is published to an \gls{agent}.
 
 	Appears in the documents in the following form: data source.
 }
@@ -6945,9 +7305,9 @@
   name={Data Streaming}
 }
 {
-	A method for an MTConnect Agent to provide a continuous stream of information in response to a single Request from a client software application.
+	A method for an \gls{agent} to provide a continuous stream of information in response to a single \gls{request} from a client software application.
 
-	Appears in the documents in the following form: Data Streaming.
+	Appears in the documents in the following form: \gls{data streaming}.
 }
 
 
@@ -6956,9 +7316,9 @@
   name={Deprecated}
 }
 {
-	An indication that specific content in an MTConnect Document is currently usable but is regarded as being obsolete or superseded.  It is recommended that deprecated content should be avoided.
+	An indication that specific content in an \gls{mtconnect document} is currently usable but is regarded as being obsolete or superseded. It is recommended that deprecated content should be avoided.
 
-	Appears in the documents in the following form: DEPRECATED.
+	Appears in the documents in the following form: \DEPRECATED.
 }
 
 
@@ -6967,9 +7327,9 @@
   name={Deprecation Warning}
 }
 {
-	An indicator that specific content in an MTConnect Document may be changed to DEPRECATED in a future release of the standard.
+	An indicator that specific content in an \gls{mtconnect document} may be changed to \DEPRECATED in a future release of the standard.
 
-	Appears in the documents in the following form: DEPRECATION WARNING.
+	Appears in the documents in the following form: \DEPRECATIONWARNING.
 }
 
 
@@ -6981,7 +7341,7 @@
 {
 	A set of rules and terms that describes the physical and logical configuration for a piece of equipment and the data that may be reported by that equipment.    
 
-	Appears in the documents in the following form: Devices Information Model.
+	Appears in the documents in the following form: \glspl{device information model}.
 }
 
 
@@ -6991,17 +7351,33 @@
 }
 {
 	A part of an information model representing a piece of equipment.  
-	\ulheading{Used in an XML representation of a Response Document}:
+	
+	\ulheading{Used in an XML representation of a \gls{response document}}:
 
     \begin{itemize}
-	\item When used as an XML container to organize Device elements.
+	\item When used as an XML container to organize \gls{device} elements.
 
-	Appears in the documents in the following form: Devices.
+	Appears in the documents in the following form: \gls{devices}.
 
-	\item When used as an XML container to represent a specific piece of equipment and is composed of a set of Structural Elements that organize and provide relevance to data published from that piece of equipment.
+	\item When used as an XML container to represent a specific piece of equipment and is composed of a set of \glspl{structural element} that organize and provide relevance to data published from that piece of equipment.
 
-	Appears in the documents in the following form: Device.
+	Appears in the documents in the following form: \gls{device}.
 	\end{itemize}
+}
+
+
+\newglossaryentry{mtconnect document}
+{
+  type=mtc,
+  name={MTConnect Document},
+  description={See \gls{document}.}
+}
+
+\newglossaryentry{mtconnect xml document}
+{
+  type=mtc,
+  name={MTConnect XML Document},
+  description={See \gls{document}.}
 }
 
 
@@ -7014,29 +7390,29 @@
 
 	A piece of written, printed, or electronic matter that provides information.
 
-	\ulheading{Used to represent an MTConnect Document}:
+	\ulheading{Used to represent an \gls{mtconnect document}}:
 
-	Refers to printed or electronic document(s) that represent a Part(s) of the MTConnect Standard.
+	Refers to printed or electronic document(s) that represent a \gls{part document}(s) of the MTConnect Standard.
 
-	Appears in the documents in the following form: MTConnect Document.
+	Appears in the documents in the following form: \gls{mtconnect document}.
 
-	\ulheading{Used to represent a specific representation of an MTConnect Document}:
+	\ulheading{Used to represent a specific representation of an \gls{mtconnect document}}:
 
-	Refers to electronic document(s) associated with an MTConnect Agent that are encoded using XML; Response Documents or Asset Documents.
+	Refers to electronic document(s) associated with an \gls{agent} that are encoded using XML; \glspl{response document} or \glspl{asset document}.
 
-	Appears in the documents in the following form: MTConnect XML Document.
+	Appears in the documents in the following form: \gls{mtconnect xml document}.
 
-	\ulheading{Used to describe types of information stored in an MTConnect Agent}:
+	\ulheading{Used to describe types of information stored in an \gls{agent}}:
 
-	In an implementation, the electronic documents that are published from a data source and stored by an MTConnect Agent.
+	In an implementation, the electronic documents that are published from a data source and stored by an \gls{agent}.
 
-	Appears in the documents in the following form: Asset Document.
+	Appears in the documents in the following form: \gls{asset document}.
 
-	\ulheading{Used to describe information published by an MTConnect Agent}:
+	\ulheading{Used to describe information published by an \gls{agent}}:
 
-	A document published by an MTConnect Agent based upon one of the semantic data models defined in the MTConnect Standard in response to a request from a client.  
+	A document published by an \gls{agent} based upon one of the \glspl{semantic data model} defined in the MTConnect Standard in response to a request from a client.  
 
-	Appears in the documents in the following form: Response Document.
+	Appears in the documents in the following form: \gls{response document}.
 }
 
 
@@ -7045,9 +7421,16 @@
   name={Document Body}
 }
 {
-	The portion of the content of an MTConnect Response Document that is defined by the relative MTConnect Information Model. The Document Body contains the Structural Elements and Data Entities reported in a Response Document.
+	The portion of the content of an \gls{mtconnect response document} that is defined by the relative \gls{mtconnect information model}. The \gls{document body} contains the \glspl{structural element} and \glspl{data entity} reported in a \gls{response document}.
 
-	Appears in the documents in the following form: Document Body.
+	Appears in the documents in the following form: \gls{document body}.
+}
+
+\newglossaryentry{header term}
+{
+  type=mtc,
+  name={Header},
+  description={See \gls{document header}}
 }
 
 
@@ -7056,9 +7439,9 @@
   name={Document Header}
 }
 {
-	The portion of the content of an MTConnect Response Document that provides information from an MTConnect Agent defining version information, storage capacity, protocol, and other information associated with the management of the data stored in or retrieved from the Agent.
+	The portion of the content of an \gls{mtconnect response document} that provides information from an \gls{agent} defining version information, storage capacity, protocol, and other information associated with the management of the data stored in or retrieved from the \gls{agent}.
 	
-	Appears in the documents in the following form: Document Header.
+	Appears in the documents in the following form: \gls{document header}.
 }
 
 
@@ -7070,12 +7453,14 @@
 {
 	Refers to an XML element.
 
-	An XML element is a logical portion of an XML document or schema that begins with a start-tag and ends with a corresponding end-tag.  
+	An XML element is a logical portion of an XML document or schema that begins with a \cfont{start-tag} and ends with a corresponding \cfont{end-tag}.  
 
-	The information provided between the start-tag and end-tag may contain attributes, other elements (sub-elements), and/or CDATA.
+	The information provided between the \cfont{start-tag} and \cfont{end-tag} may contain attributes, other elements (sub-elements), and/or CDATA.
 
-	Note:  Also, an XML element may consist of an empty-element tag.  Refer to Appendix B for more information on element tags.
-
+    \begin{note}
+	Note:  Also, an XML element may consist of an \cfont{empty-element tag}.  Refer to \apx{A} for more information on element tags.
+    \end{note}
+    
 	Appears in the documents in the following form: element.
 }
 
@@ -7086,15 +7471,15 @@
   plural={Element Names}
 }
 {
-	A descriptive identifier contained in both the start-tag and end-tag of an XML element that provides the name of the element.
+	A descriptive identifier contained in both the \cfont{start-tag} and \cfont{end-tag} of an XML element that provides the name of the element.
 
 	Appears in the documents in the following form: element name.
 
 	\ulheading{Used to describe the name for a specific XML element}:
 
-	Reference to the name provided in the start-tag, end-tag, or empty-element tag for an XML element.
+	Reference to the name provided in the \cfont{start-tag}, \cfont{end-tag}, or \cfont{empty-element tag} for an XML element.
 
-	Appears in the documents in the following form: Element Name.
+	Appears in the documents in the following form: \gls{element name}.
 }
 
 
@@ -7114,9 +7499,9 @@
   name={Error Information Model}
 }
 {
-	The rules and terminology that describes the Response Document returned by an MTConnect Agent when it encounters an error while interpreting a Request for information from a client software application or when an Agent experiences an error while publishing the Response to a Request for information.
+	The rules and terminology that describes the \gls{response document} returned by an \gls{agent} when it encounters an error while interpreting a \gls{request} for information from a client software application or when an \gls{agent} experiences an error while publishing the \gls{response} to a \gls{request} for information.
 
-	Appears in the documents in the following form: Error Information Model.
+	Appears in the documents in the following form: \gls{error information model}.
 }
 
 
@@ -7132,28 +7517,28 @@
 
 	Appears in the documents in the following form: event.
 
-	\ulheading{Used as a type of Data Entity}:
+	\ulheading{Used as a type of \gls{data entity}}:
 
 	An identification that represents a change in state of information associated with a piece of equipment or an occurrence of an action.  Event also provides a means to publish a message from a piece of equipment.
 
-	Appears in the documents in the following form: Event.
+	Appears in the documents in the following form: \gls{event term}.
 
-	\ulheading{Used as a category attribute for a Data Entity}:
+	\ulheading{Used as a \gls{category} attribute for a \gls{data entity}}:
 
-	Used as a value for the category attribute for an XML dataItem element.
+	Used as a value for the \gls{category} attribute for an XML \gls{dataitem} element.
 
-	Appears in the documents in the following form: EVENT.
+	Appears in the documents in the following form: \gls{event category}.
 
 	\ulheading{Used as an XML container or element}:
 
     \begin{itemize}
-	\item When used as an XML container that consists of one or more types of Event XML elements.
+	\item When used as an XML container that consists of one or more types of \gls{event} XML elements.
 
-	Appears in the documents in the following form: Events.
+	Appears in the documents in the following form: \gls{events}.
 
-	\item When used as an abstract XML element.  It is replaced in the XML document by types of Event elements.
+	\item When used as an abstract XML element.  It is replaced in the XML document by types of \gls{event} elements.
 
-	Appears in the documents in the following form: Event.
+	Appears in the documents in the following form: \gls{event}.
     \end{itemize}
 }
 
@@ -7163,7 +7548,7 @@
   name={Extensible}
 }
 {
-	The ability for an implementer to extend MTConnect Information Models by adding content not currently addressed in the MTConnect Standard.
+	The ability for an implementer to extend \glspl{mtconnect information model} by adding content not currently addressed in the MTConnect Standard.
 }
 
 
@@ -7173,28 +7558,28 @@
   plural={Fault States}
 }
 {
-	In the MTConnect Standard, a term that indicates the reported status of a Condition category Data Entity.   
+	In the MTConnect Standard, a term that indicates the reported status of a \gls{condition term} category \gls{data entity}.   
 
-	Appears in the documents in the following form: Fault State.
+	Appears in the documents in the following form: \gls{fault state}.
 }
 
 
 \longnewglossaryentry{heartbeat}
 {
-  name={Heartbeat}
+  name={heartbeat}
 }
 {
 	\ulheading{General meaning}:
 
-	A function that indicates to a client application that the communications connection to an MTConnect Agent is still viable during times when there is no new data available to report – often referred to as a "keep alive" message.
+	A function that indicates to a client application that the communications connection to an \gls{agent} is still viable during times when there is no new data available to report – often referred to as a "keep alive" message.
 
-	Appears in the documents in the following form: heartbeat.
+	Appears in the documents in the following form: \gls{heartbeat}.
 
-	\ulheading{When used as part of an HTTP Request}:
+	\ulheading{When used as part of an \gls{http request}}:
 
-	The form heartbeat is used as a parameter in the query portion of an HTTP Request Line.
+	The form \gls{heartbeat query} is used as a parameter in the query portion of an \gls{http request line}.
 
-	Appears in the documents in the following form: heartbeat.
+	Appears in the documents in the following form: \gls{heartbeat query}.
 }
 
 
@@ -7205,7 +7590,9 @@
 {
 	Hyper-Text Transport Protocol.  The protocol used by all web browsers and web applications.
 
+    \begin{note}
 	Note:  HTTP is an IETF standard and is defined in RFC 7230.  See https://tools.ietf.org/html/rfc7230 for more information.
+	\end{note}
 }
 
 
@@ -7214,9 +7601,9 @@
   name={HTTP Error Message}
 }
 {
-	In the MTConnect Standard, a response provided by an MTConnect Agent indicating that an HTTP Request is incorrectly formatted or identifies that the requested data is not available from the Agent.  
+	In the MTConnect Standard, a response provided by an \gls{agent} indicating that an \gls{http request} is incorrectly formatted or identifies that the requested data is not available from the \gls{agent}.  
 
-	Appears in the documents in the following form: HTTP Error Message.
+	Appears in the documents in the following form: \gls{http error message}.
 }
 
 
@@ -7225,9 +7612,9 @@
   name={HTTP Header}
 }
 {
-	In the MTConnect Standard, the content of the Header portion of either an HTTP Request from a client software application or an HTTP Response from an MTConnect Agent.
+	In the MTConnect Standard, the content of the \gls{header term} portion of either an \gls{http request} from a client software application or an \gls{http response} from an \gls{agent}.
 
-	Appears in the documents in the following form: HTTP Header.
+	Appears in the documents in the following form: \gls{http header}.
 }
 
 
@@ -7236,7 +7623,7 @@
   name={HTTP Method}
 }
 {
-	In the MTConnect Standard, a portion of a command in an HTTP Request that indicates the desired action to be performed on the identified resource; often referred to as verbs.
+	In the MTConnect Standard, a portion of a command in an \gls{http request} that indicates the desired action to be performed on the identified resource; often referred to as verbs.
 }
 
 
@@ -7245,9 +7632,9 @@
   name={HTTP Request}
 }
 {
-	In the MTConnect Standard, a communications command issued by a client software application to an MTConnect Agent requesting information defined in the HTTP Request Line.
+	In the MTConnect Standard, a communications command issued by a client software application to an \gls{agent} requesting information defined in the \gls{http request line}.
 
-	Appears in the documents in the following form: HTTP Request.
+	Appears in the documents in the following form: \gls{http request}.
 }
 
 
@@ -7256,9 +7643,9 @@
   name={HTTP Request Line}
 }
 {
-	In the MTConnect Standard, the first line of an HTTP Request describing a specific Response Document to be published by an MTConnect Agent.
+	In the MTConnect Standard, the first line of an \gls{http request} describing a specific \gls{response document} to be published by an \gls{agent}.
 
-	Appears in the documents in the following form: HTTP Request Line.
+	Appears in the documents in the following form: \gls{http request line}.
 }
 
 
@@ -7267,9 +7654,9 @@
   name={HTTP Response}
 }
 {
-	In the MTConnect Standard, the information published from an MTConnect Agent in reply to an HTTP Request.  An HTTP Response may be either a Response Document or an HTTP Error Message.
+	In the MTConnect Standard, the information published from an \gls{agent} in reply to an \gls{http request}.  An \gls{http response} may be either a \gls{response document} or an \gls{http error message}.
 
-	Appears in the documents in the following form: HTTP Response.
+	Appears in the documents in the following form: \gls{http response}.
 }
 
 
@@ -7278,9 +7665,9 @@
   name={HTTP Server}
 }
 {
-	In the MTConnect Standard, a software program that accepts HTTP Requests from client software applications and publishes HTTP Responses as a reply to those Requests.
+	In the MTConnect Standard, a software program that accepts \glspl{http request} from client software applications and publishes \glspl{http response} as a reply to those \glspl{request}.
 
-	Appears in the documents in the following form: HTTP Server.
+	Appears in the documents in the following form: \gls{http server}.
 }
 
 
@@ -7289,9 +7676,9 @@
   name={HTTP Status Code}
 }
 {
-	In the MTConnect Standard, a numeric code contained in an HTTP Response that defines a status category associated with the Response – either a success status or a category of an HTTP error.  
+	In the MTConnect Standard, a numeric code contained in an \gls{http response} that defines a status category associated with the \gls{response} – either a success status or a category of an HTTP error.  
 
-	Appears in the documents in the following form: HTTP Status Code.
+	Appears in the documents in the following form: \gls{http status code}.
 }
 
 
@@ -7308,9 +7695,9 @@
 
 	\ulheading{Used as an XML attribute}:
 
-	When used as an attribute for an XML element - Structural Element, Data Entity, or Asset.  id provides a unique identity for the element within an XML document.
+	When used as an attribute for an XML element - \gls{structural element}, \gls{data entity}, or \gls{asset}.  \gls{id} provides a unique identity for the element within an XML document.
 
-	Appears in the documents in the following form: id.
+	Appears in the documents in the following form: \gls{id}.
 }
 
 
@@ -7331,21 +7718,27 @@
 {
 	The rules, relationships, and terminology that are used to define how information is structured.
 
-	For example, an information model is used to define the structure for each MTConnect Response Document; the definition of each piece of information within those documents and the relationship between pieces of information.
+	For example, an information model is used to define the structure for each \gls{mtconnect response document}; the definition of each piece of information within those documents and the relationship between pieces of information.
 
-	Appears in the documents in the following form: Information Model.
+	Appears in the documents in the following form: \gls{information model}.
 }
 
+\newglossaryentry{mtconnect information model}
+{
+  type=mtc,
+  name={MTConnect Information Model},
+  description={See \gls{information model}}
+}
 
 \longnewglossaryentry{instance}
 {
-  name={Instance},
-  plural={Instances}
+  name={instance},
+  plural={instances}
 }
 {
-	Describes a set of Streaming Data in an MTConnect Agent.  Each time an Agent is restarted with an empty buffer, data placed in the buffer represents a new instance of the Agent.
+	Describes a set of \gls{streaming data} in an \gls{agent}.  Each time an \gls{agent} is restarted with an empty \gls{buffer}, data placed in the \gls{buffer} represents a new \gls{instance} of the \gls{agent}.
 
-	Appears in the documents in the following form: instance.
+	Appears in the documents in the following form: \gls{instance}.
 }
 
 
@@ -7356,7 +7749,7 @@
 {
 	The definition of information exchanged to support the interactions between pieces of equipment collaborating to complete a task.
 
-	Appears in the documents in the following form: Interaction Model.
+	Appears in the documents in the following form: \gls{interaction model}.
 }
 
 
@@ -7372,22 +7765,22 @@
 
 	Appears in the documents in the following form: interface.
 
-	\ulheading{Used as an Interaction Model}:
+	\ulheading{Used as an \gls{interaction model}}:
 
-	An Interaction Model that describes a method for inter-operations between pieces of equipment.
+	An \gls{interaction model} that describes a method for inter-operations between pieces of equipment.
 
-	Appears in the documents in the following form: Interface.
+	Appears in the documents in the following form: \gls{interface}.
 
 	\ulheading{Used as an XML container or element}:
 
     \begin{itemize}
-	\item When used as an XML container that consists of one or more types of Interface XML elements.
+	\item When used as an XML container that consists of one or more types of \gls{interface component} XML elements.
 
-	Appears in the documents in the following form: Interfaces.
+	Appears in the documents in the following form: \gls{interfaces component}.
 
-	\item When used as an abstract XML element.  It is replaced in the XML document by types of Interface elements.
+	\item When used as an abstract XML element.  It is replaced in the XML document by types of \gls{interface component} elements.
 
-	Appears in the documents in the following form: Interface.
+	Appears in the documents in the following form: \gls{interface component}.
 	\end{itemize}
 }
 
@@ -7403,23 +7796,31 @@
 
 	Appears in the documents in the following form: message.
 
-	\ulheading{Used relative to an MTConnect Agent}:
+	\ulheading{Used relative to an \gls{agent}}:
 
-	Describes the information that is exchanged between an MTConnect Agent and a client software application.  A Message may contain either a Request from a client software application or a Response from an MTConnect Agent.
+	Describes the information that is exchanged between an \gls{agent} and a client software application.  A \gls{message term} may contain either a \gls{request} from a client software application or a \gls{response} from an \gls{agent}.
 
-	Appears in the documents in the following form: Message.
+	Appears in the documents in the following form: \gls{message term}.
 
-	\ulheading{Used as a type of Data Entity}:
+	\ulheading{Used as a type of \gls{data entity}}:
 
-	Describes a type of Data Entity in the Devices Information Model that can contain any text string of information or native code to be transferred from a piece of equipment.
+	Describes a type of \gls{data entity} in the \glspl{device information model} that can contain any text string of information or native code to be transferred from a piece of equipment.
 
-	Appears in the documents in the following form: MESSAGE.
+	Appears in the documents in the following form: \gls{message event}.
 
 	\ulheading{Used as an Element Name}:
 
-	An Element Name for a Data Entity in the Streams Information Model that can contain any text string of information or native code to be transferred from a piece of equipment.
+	An \gls{element name} for a \gls{data entity} in the \gls{streams information model} that can contain any text string of information or native code to be transferred from a piece of equipment.
 
-	Appears in the documents in the following form:  Message.
+	Appears in the documents in the following form:  \glselementname{message event}.
+}
+
+
+\newglossaryentry{equipment metadata}
+{
+  type=mtc,
+  name={Equipment Metadata},
+  description={See \gls{metadata}}
 }
 
 
@@ -7430,9 +7831,9 @@
 {
 	Data that provides information about other data.
 
-	For example, Equipment Metadata defines both the Structural Elements that represent the physical and logical parts and sub-parts of each piece of equipment, the relationships between those parts and sub-parts, and the definitions of the Data Entities associated with that piece of equipment.
+	For example, \gls{equipment metadata} defines both the \glspl{structural element} that represent the physical and logical parts and sub-parts of each piece of equipment, the relationships between those parts and sub-parts, and the definitions of the \glspl{data entity} associated with that piece of equipment.
 
-	Appears in the documents in the following form: Metadata or Equipment Metadata.
+	Appears in the documents in the following form: \gls{metadata} or \gls{equipment metadata}.
 }
 
 
@@ -7441,18 +7842,26 @@
   name={MTConnect Agent}
 }
 {
-	See definition for Agent.
+	See definition for \gls{agent}.
 }
 
+
+\newglossaryentry{asset response document}
+{
+  type=mtc,
+  name={Asset Response Document},
+  plural={Assets Response Document},
+  description={See \gls{mtconnectassets response document}}
+}
 
 \longnewglossaryentry{mtconnectassets response document}
 {
   name={MTConnectAssets Response Document}
 }
 {
-	An electronic document published by an MTConnect Agent in response to a Request for information from a client software application relating to MTConnect Assets.
+	An electronic document published by an \gls{agent} in response to a \gls{request} for information from a client software application relating to \glspl{mtconnect asset}.
 
-	Appears in the documents in the following form: MTConnectAssets Response Document.
+	Appears in the documents in the following form: \gls{mtconnectassets response document}.
 }
 
 
@@ -7461,9 +7870,9 @@
   name={MTConnectDevices Response Document}
 }
 {
-	An electronic document published by an MTConnect Agent in response to a Request for information from a client software application that includes metadata for one or more pieces of equipment.
+	An electronic document published by an \gls{agent} in response to a \gls{request} for information from a client software application that includes \gls{metadata} for one or more pieces of equipment.
 
-	Appears in the documents in the following form: MTConnectDevices Response Document.
+	Appears in the documents in the following form: \gls{mtconnectdevices response document}.
 }
 
 
@@ -7472,9 +7881,9 @@
   name={MTConnectErrors Response Document}
 }
 {
-	An electronic document published by an MTConnect Agent whenever it encounters an error while interpreting a Request for information from a client software application or when an Agent experiences an error while publishing the Response to a Request for information.
+	An electronic document published by an \gls{agent} whenever it encounters an error while interpreting a \gls{request} for information from a client software application or when an \gls{agent} experiences an error while publishing the \gls{response} to a \gls{request} for information.
 
-	Appears in the documents in the following form: MTConnectErrors Response Document.
+	Appears in the documents in the following form: \gls{mtconnecterrors response document}.
 }
 
 
@@ -7483,9 +7892,9 @@
   name={MTConnect Request}
 }
 {
-	A communication request for information issued from a client software application to an MTConnect Agent.
+	A communication request for information issued from a client software application to an \gls{agent}.
 
-	Appears in the documents in the following form: MTConnect Request.
+	Appears in the documents in the following form: \gls{mtconnect request}.
 }
 
 
@@ -7494,9 +7903,9 @@
   name={MTConnectStreams Response Document}
 }
 {
-	An electronic document published by an MTConnect Agent in response to a Request for information from a client software application that includes Streaming Data from the Agent.
+	An electronic document published by an \gls{agent} in response to a \gls{request} for information from a client software application that includes \gls{streaming data} from the \gls{agent}.
 
-	Appears in the documents in the following form: MTConnectStreams Response Document.
+	Appears in the documents in the following form: \gls{mtconnectstreams response document}.
 }
 
 
@@ -7509,22 +7918,22 @@
 
 	Note: The identifier must start with a letter, an underscore "\_" or a colon.  The next character must be a letter, a number, or one of the following ".", "-", "\_", ":".  The identifier must not have any spaces or special characters.
 
-	Appears in the documents in the following form: NMTOKEN.
+	Appears in the documents in the following form: \gls{nmtoken}.
 }
 
 
 \longnewglossaryentry{parameter}
 {
-  name={Parameter}
+  name={parameter}
 }
 {
 	\ulheading{General Meaning}:
 
 	A variable that must be given a value during the execution of a program or a communications command.
 
-	\ulheading{When used as part of an HTTP Request}:
+	\ulheading{When used as part of an \gls{http request}}:
 
-	Represents the content (keys and associated values) provided in the Query portion of an HTTP Request Line that identifies specific information to be returned in a Response Document.
+	Represents the content (keys and associated values) provided in the \gls{query} portion of an \gls{http request line} that identifies specific information to be returned in a \gls{response document}.
 
 	Appears in the documents in the following form: parameter.
 }
@@ -7535,9 +7944,9 @@
   name={Parent Element}
 }
 {
-	An XML element used to organize Lower Level child elements that share a common relationship to the Parent Element.
+	An XML element used to organize \gls{lower level} child elements that share a common relationship to the \gls{parent element}.
 
-	Appears in the documents in the following form: Parent Element.
+	Appears in the documents in the following form: \gls{parent element}.
 }
 
 
@@ -7566,29 +7975,29 @@
 
 	Appears in the documents in the following form: probe. 
 
-	\item \ulheading{Used within a Data Entity}:
+	\item \ulheading{Used within a \gls{data entity}}:
 
-	The form PROBE is used to designate a subtype for the Data Entity PATH\_POSITION indicating a measurement position relating to a probe unit.
+	The form \gls{probe subtype} is used to designate a subtype for the \gls{data entity} \gls{pathposition sample} indicating a measurement position relating to a probe unit.
 
-	Appears in the documents in the following form: PROBE.
+	Appears in the documents in the following form: \gls{probe subtype}.
     \end{itemize}
 
-	\ulheading{General meaning for communications with an MTConnect Agent}:
+	\ulheading{General meaning for communications with an \gls{agent}}:
 
 	Probe is used to define a type of communication request. 
 
     \begin{itemize}
 	\item \ulheading{Used as a type of communication request}:
 
-	The form Probe Request represents a specific type of communications request between a client software application and an MTConnect Agent regarding metadata for one or more pieces of equipment.
+	The form \gls{probe request} represents a specific type of communications request between a client software application and an \gls{agent} regarding \gls{metadata} for one or more pieces of equipment.
 
-	Appears in the documents in the following form: Probe Request.
+	Appears in the documents in the following form: \gls{probe request}.
 
-	\item \ulheading{Used in an HTTP Request Line}:
+	\item \ulheading{Used in an \gls{http request line}}:
 
-	The form probe is used to designate a Probe Request in the <Path> portion of an HTTP Request Line.
+	The form \gls{probe httprequest} is used to designate a \gls{probe request} in the \cfont{<Path>} portion of an \gls{http request line}.
 
-	Appears in the documents in the following form: probe.
+	Appears in the documents in the following form: \gls{probe httprequest}.
     \end{itemize}
 }
 
@@ -7607,10 +8016,19 @@
   name={Publish/Subscribe}
 }
 {
-	In the MTConnect Standard, a communications messaging pattern that may be used to publish Streaming Data from an MTConnect Agent.  When a Publish/Subscribe communication method is established between a client software application and an MTConnect Agent, the Agent will repeatedly publish a specific MTConnectStreams document at a defined period.
+	In the MTConnect Standard, a communications messaging pattern that may be used to publish \gls{streaming data} from an \gls{agent}.  When a \gls{publishsubscribe} communication method is established between a client software application and an \gls{agent}, the \gls{agent} will repeatedly publish a specific \glspl{mtconnectstream} document at a defined period.
 
-	Appears in the documents in the following form: Publish/Subscribe.
+	Appears in the documents in the following form: \gls{publishsubscribe}.
 }
+
+\newglossaryentry{query http request}
+{
+  type=mtc,
+  category=model,
+  name={query},
+  description={See \gls{query}}
+}
+
 
 
 \longnewglossaryentry{query}
@@ -7622,24 +8040,24 @@
 
 	A portion of a request for information that more precisely defines the specific information to be published in response to the request. 
 
-	Appears in the documents in the following form: Query.
+	Appears in the documents in the following form: \gls{query}.
 
-	\ulheading{Used in an HTTP Request Line}:
+	\ulheading{Used in an \gls{http request line}}:
 
-	The form query includes a string of parameters that define filters used to refine the content of a Response Document published in response to an HTTP Request.
+	The form \gls{query http request} includes a string of parameters that define filters used to refine the content of a \gls{response document} published in response to an \gls{http request}.
 
-	Appears in the documents in the following form: query.
+	Appears in the documents in the following form: \gls{query http request}.
 }
 
 
-\longnewglossaryentry{requestresponse messaging structure}
+\longnewglossaryentry{requestresponse}
 {
-  name={Request /Response Messaging Structure}
+  name={Request/Response}
 }
 {
-	A communications pattern that supports the transfer of information between an MTConnect Agent and a client software application. In a Request/Response information exchange, a client software application requests specific information from an MTConnect Agent. An MTConnect Agent responds to the Request by publishing a Response Document.   
+	A communications pattern that supports the transfer of information between an \gls{agent} and a client software application. In a \gls{requestresponse} information exchange, a client software application requests specific information from an \gls{agent}. An \gls{agent} responds to the \gls{request} by publishing a \gls{response document}.   
 
-	Appears in the documents in the following form: Request/Response Messaging Structure.
+	Appears in the documents in the following form: \gls{requestresponse}.
 }
 
 
@@ -7648,9 +8066,16 @@
   name={Request}
 }
 {
-	A communications method where a client software application transmits a message to an MTConnect Agent.  That message instructs the Agent to respond with specific information.
+	A communications method where a client software application transmits a message to an \gls{agent}.  That message instructs the \gls{agent} to respond with specific information.
 
-	Appears in the documents in the following form: Request.
+	Appears in the documents in the following form: \gls{request}.
+}
+
+\newglossaryentry{asset request}
+{
+  type=mtc,
+  name={Asset Request},
+  description={See \gls{asset}.}
 }
 
 
@@ -7659,9 +8084,9 @@
   name={Requester}
 }
 {
-	An entity that initiates a Request for information in a communications exchange.
+	An entity that initiates a \gls{request} for information in a communications exchange.
 
-	Appears in the documents in the following form: Requester.
+	Appears in the documents in the following form: \gls{requester}.
 }
 
 
@@ -7670,9 +8095,9 @@
   name={Responder}
 }
 {
-	An entity that responds to a Request for information in a communications exchange.
+	An entity that responds to a \gls{request} for information in a communications exchange.
 
-	Appears in the documents in the following form: Responder.
+	Appears in the documents in the following form: \gls{responder}.
 }
 
 
@@ -7681,7 +8106,72 @@
   name={Response Document}
 }
 {
-	See definition of Document.
+	See \gls{document}.
+}
+
+\newglossaryentry{mtconnect response document}
+{
+  type=mtc,
+  name={MTConnect Response Document},
+  description={See \gls{response document}.}
+}
+
+\newglossaryentry{authority http request}
+{
+  type=mtc,
+  category=model,
+  name={authority},
+  description={The \gls{authority http request} portion consists of the DNS name or IP address associated with an \gls{agent}.}
+}
+
+\newglossaryentry{port http request}
+{
+  type=mtc,
+  category=model,
+  name={port},
+  description={The \gls{port http request} of the \gls{http request line}.}
+}
+
+\newglossaryentry{http messaging}
+{
+  type=mtc,
+  name={HTTP Messaging},
+  description={\gls{http messaging} is an interface for information exchange functionality.}
+}
+
+\newglossaryentry{http header field}
+{
+  type=mtc,
+  name={HTTP Header Field},
+  description={\glspl{http header field} are components of the header section of request and response messages in an HTTP transaction.}
+}
+
+\newglossaryentry{http body}
+{
+  type=mtc,
+  name={HTTP Body},
+  description={\gls{http body} is the data bytes transmitted in an HTTP transaction message immediately following the headers.}
+}
+
+\newglossaryentry{http request method}
+{
+  type=mtc,
+  name={HTTP Request Method},
+  description={It indicates the method to be performed on the resource identified by the given request URI.}
+}
+
+\newglossaryentry{http request url}
+{
+  type=mtc,
+  name={HTTP Request URL},
+  description={A request specifying the location and mechanism to retrieve a web resource.}
+}
+
+\newglossaryentry{http version}
+{
+  type=mtc,
+  name={HTTP Version},
+  description={Version of the HTTP protocol.}
 }
 
 
@@ -7701,11 +8191,24 @@
   name={Root Element}
 }
 {
-	The first Structural Element provided in a Response Document encoded using XML.  The Root Element is an XML container and is the Parent Element for all other XML elements in the document.  The Root Element appears immediately following the XML Declaration.
+	The first \gls{structural element} provided in a \gls{response document} encoded using XML.  The \gls{root element} is an XML container and is the \gls{parent element} for all other XML elements in the document.  The \gls{root element} appears immediately following the XML Declaration.
 
-	Appears in the documents in the following form: Root Element.
+	Appears in the documents in the following form: \gls{root element}.
 }
 
+\newglossaryentry{xml declaration}
+{
+  type=mtc,
+  name={XML Declaration},
+  description={It is a processing instruction that identifies the document as being XML.}
+}
+
+\newglossaryentry{namespace}
+{
+  type=mtc,
+  name={namespace},
+  description={\glspl{namespace} are used to organize code into logical groups.}
+}
 
 \longnewglossaryentry{sample term}
 {
@@ -7723,41 +8226,41 @@
 
 	Appears in the documents in the following form: sample.
 
-	\ulheading{Used as an MTConnect Request}:
+	\ulheading{Used as an \gls{mtconnect request}}:
 
-	When representing a specific type of communications request between a client software application and an MTConnect Agent regarding Streaming Data.  
+	When representing a specific type of communications request between a client software application and an \gls{agent} regarding \gls{streaming data}.  
 
-	Appears in the documents in the following form: Sample Request.
+	Appears in the documents in the following form: \gls{sample request}.
 
-	\ulheading{Used as part of an HTTP Request}:
+	\ulheading{Used as part of an \gls{http request}}:
 
-	Used in the path portion of an HTTP Request Line, by a client software application, to initiate a Sample Request to an MTConnect Agent to publish an MTConnectStreams document.
+	Used in the \gls{path query} portion of an \gls{http request line}, by a client software application, to initiate a \gls{sample request} to an \gls{agent} to publish an \glspl{mtconnectstream} document.
 
-	Appears in the documents in the following form: sample.
+	Appears in the documents in the following form: \gls{sample httprequest}.
 
-	\ulheading{Used to describe a Data Entity}:
+	\ulheading{Used to describe a \gls{data entity}}:
 
-	Used to define a specific type of Data Entity.  A Sample type Data Entity reports the value for a continuously variable or analog piece of information.
+	Used to define a specific type of \gls{data entity}.  A \gls{sample term} type \gls{data entity} reports the value for a continuously variable or analog piece of information.
 
-	Appears in the documents in the following form: Sample or Samples.
+	Appears in the documents in the following form: \gls{sample term} or \glspl{sample term}.
 
 	\ulheading{Used as an XML container or element}:
 
     \begin{itemize}
 	\item When used as an XML container that consists of one or more types of Sample XML elements.
 
-	Appears in the documents in the following form: Samples.
+	Appears in the documents in the following form: \gls{samples}.
 
-	\item When used as an abstract XML element.  It is replaced in the XML document by types of Sample elements representing individual Sample type of Data Entity.
+	\item When used as an abstract XML element.  It is replaced in the XML document by types of \gls{sample} elements representing individual \gls{sample term} type of \gls{data entity}.
 
-	Appears in the documents in the following form: Sample.
+	Appears in the documents in the following form: \gls{sample}.
     \end{itemize}
 }
 
 
 \longnewglossaryentry{schema}
 {
-  name={Schema}
+  name={schema}
 }
 {
 	\ulheading{General meaning}:
@@ -7766,26 +8269,32 @@
 
 	Appears in the documents in the following form: schema.
 
-	\ulheading{Used in association with an MTConnect Response Document}:
+	\ulheading{Used in association with an \gls{mtconnect response document}}:
 
-	Identifies a specific schema defined for an MTConnect Response Document.
+	Identifies a specific schema defined for an \gls{mtconnect response document}.
 
-	Appears in the documents in the following form: schema.
+	Appears in the documents in the following form: \gls{schema}.
 }
 
 
 \longnewglossaryentry{semantic data model}
 {
-  name={Semantic Data Model}
+  name={semantic data model}
 }
 {
 	A methodology for defining the structure and meaning for data in a specific logical way.  
 
 	It provides the rules for encoding electronic information such that it can be interpreted by a software system.  
 
-	Appears in the documents in the following form: semantic data model.
+	Appears in the documents in the following form: \gls{semantic data model}.
 }
 
+\newglossaryentry{data model}
+{
+  type=mtc,
+  name={Data Model},
+  description={A \gls{semantic data model}.}
+}
 
 \longnewglossaryentry{sequence number}
 {
@@ -7793,11 +8302,11 @@
   plural={sequence numbers}
 }
 {
-	The primary key identifier used to manage and locate a specific piece of Streaming Data in an MTConnect Agent.
+	The primary key identifier used to manage and locate a specific piece of \gls{streaming data} in an \gls{agent}.
 
-	Sequence number is a monotonically increasing number within an instance of an MTConnect Agent.
+	\gls{sequence number} is a monotonically increasing number within an instance of an \gls{agent}.
 
-	Appears in the documents in the following form: sequence number.
+	Appears in the documents in the following form: \gls{sequence number}.
 }
 
 
@@ -7810,7 +8319,7 @@
 
 	A document established by consensus that provides rules, guidelines, or characteristics for activities or their results (as defined in ISO/IEC Guide 2:2004).
 
-	Used when referring to the MTConnect Standard. 
+	\ulheading{Used when referring to the MTConnect Standard}: 
 
 	The MTConnect Standard is a standard that provides the definition and semantic data structure for information published by pieces of equipment.
 
@@ -7823,9 +8332,9 @@
   name={Streaming Data}
 }
 {
-	The values published by a piece of equipment for the Data Entities defined by the Equipment Metadata.
+	The values published by a piece of equipment for the \glspl{data entity} defined by the \gls{equipment metadata}.
 
-	Appears in the documents in the following form: Streaming Data.
+	Appears in the documents in the following form: \gls{streaming data}.
 }
 
 
@@ -7834,9 +8343,9 @@
   name={Streams Information Model}
 }
 {
-	The rules and terminology (semantic data model) that describes the Streaming Data returned by an MTConnect Agent from a piece of equipment in response to a Sample Request or a Current Request.
+	The rules and terminology (\gls{semantic data model}) that describes the \gls{streaming data} returned by an \gls{agent} from a piece of equipment in response to a \gls{sample request} or a \gls{current request}.
 
-	Appears in the documents in the following form: Streams Information Model.
+	Appears in the documents in the following form: \gls{streams information model}.
 }
 
 
@@ -7850,23 +8359,23 @@
 
 	An XML element that organizes information that represents the physical and logical parts and sub-parts of a piece of equipment.
 
-	Appears in the documents in the following form: Structural Element.
+	Appears in the documents in the following form: \gls{structural element}.
 
 	\ulheading{Used to indicate hierarchy of Components}:
 
 	When used to describe a primary physical or logical construct within a piece of equipment. 
 
-	Appears in the documents in the following form: Top Level Structural Element.
+	Appears in the documents in the following form: \gls{top level} \gls{structural element}.
 
-	When used to indicate a Child Element which provides additional detail describing the physical or logical structure of a Top Level Structural Element.
+	When used to indicate a \gls{child element} which provides additional detail describing the physical or logical structure of a \gls{top level} \gls{structural element}.
 
-	Appears in the documents in the following form: Lover Level Structural Element.
+	Appears in the documents in the following form: \gls{lower level} \gls{structural element}.
 }
 
 
 \longnewglossaryentry{subtype term}
 {
-  name={Subtype}
+  name={subtype}
 }
 {
 	\ulheading{General meaning}:
@@ -7877,17 +8386,17 @@
 
 	Appears in the documents in the following form: subtype.
 
-	\ulheading{Used as an attribute for a Data Entity}:
+	\ulheading{Used as an attribute for a \gls{data entity}}:
 
-	Used as an attribute that provides a sub-categorization for the type attribute for a piece of information.
+	Used as an attribute that provides a sub-categorization for the \gls{type} attribute for a piece of information.
 
-	Appears in the documents in the following form: subType.
+	Appears in the documents in the following form: \gls{subtype}.
 }
 
 
 \longnewglossaryentry{time stamp}
 {
-  name={Time Stamp}
+  name={time stamp}
 }
 {
 	\ulheading{General meaning}:
@@ -7898,15 +8407,15 @@
 
 	\ulheading{Used as an attribute for recorded or published data}:
 
-	An attribute that identifies the time associated with a Data Entity as stored in an MTConnect Agent.
+	An attribute that identifies the time associated with a \gls{data entity} as stored in an \gls{agent}.
 
-	Appears in the documents in the following form: timestamp.
+	Appears in the documents in the following form: \gls{timestamp}.
 }
 
 
 \longnewglossaryentry{type term}
 {
-  name={Type}
+  name={type}
 }
 {
 	\ulheading{General meaning}:
@@ -7917,11 +8426,11 @@
 
 	Appears in the documents in the following form: type.
 
-	\ulheading{Used as an attribute for a Data Entity}:
+	\ulheading{Used as an attribute for a \gls{data entity}}:
 
 	Used as an attribute that provides a categorization for piece of information that share common characteristics.
 
-	Appears in the documents in the following form: type.
+	Appears in the documents in the following form: \gls{type}.
 }
 
 
@@ -7968,7 +8477,7 @@
 
 	UTC/GMT is the primary time standard by which the world regulates clocks and time.
 
-	The time stamp for all information reported in an MTConnect Response document is provided in UTC/GMT format.
+	The time stamp for all information reported in an \gls{mtconnect response document} is provided in UTC/GMT format.
 }
 
 
@@ -7987,9 +8496,9 @@
 
 	\ulheading{Used as an attribute for an XML element}:
 
-	Used as an attribute that provides a unique identity for a piece of information reported by an MTConnect Agent.
+	Used as an attribute that provides a unique identity for a piece of information reported by an \gls{agent}.
 
-	Appears in the documents in the following form: uuid.
+	Appears in the documents in the following form: \gls{uuid}.
 }
 
 
@@ -7999,9 +8508,9 @@
   plural={Valid Data Values}
 }
 {
-	One or more acceptable values or constrained values that can be reported for a Data Entity.
+	One or more acceptable values or constrained values that can be reported for a \gls{data entity}.
 
-	Appears in the documents in the following form: Valid Data Value(s).
+	Appears in the documents in the following form: \gls{valid data value}(s).
 }
 
 
@@ -8018,6 +8527,15 @@
 }
 
 
+\newglossaryentry{warning value}
+{
+  type=mtc,
+  category=model,
+  name={WARNING},
+  description={See \gls{warning term}.}
+}
+
+
 \longnewglossaryentry{warning term}
 {
   name={WARNING}
@@ -8027,23 +8545,23 @@
 
 	A statement or action that indicates a possible danger, problem, or other unexpected situation.
 
-	\ulheading{Used relative to changes in an MTConnect Document}:
+	\ulheading{Used relative to changes in an \gls{mtconnect document}}:
 
-	Used to indicate that specific content in an MTConnect Document may be changed in a future release of the standard.
+	Used to indicate that specific content in an \gls{mtconnect document} may be changed in a future release of the standard.
 
-	Appears in the documents in the following form: WARNING.
+	Appears in the documents in the following form: \WARNING.
 
-	\ulheading{Used as a Valid Data Value for a Condition}:
+	\ulheading{Used as a \gls{valid data value} for a \gls{condition term}}:
 
-	Used as a Valid Data Value for a Condition type Data Entity.
+	Used as a \gls{valid data value} for a \gls{condition term} type \gls{data entity}.
 
-	Appears in the documents in the following form: WARNING.
+	Appears in the documents in the following form: \gls{warning value}.
 
-	\ulheading{Used as an Element Name for a Data Entity}:
+	\ulheading{Used as an \gls{element name} for a \gls{data entity}}:
 
-	Used as the Element Name for a Condition type Data Entity in an MTConnectStreams Response Document.
+	Used as the \gls{element name} for a \gls{condition term} type \gls{data entity} in an \gls{mtconnectstreams response document}.
 
-	Appears in the documents in the following form: Warning.
+	Appears in the documents in the following form: \gls{warning}.
 }
 
 
@@ -8069,7 +8587,7 @@
 {
 	In the MTConnect Standard, a type of XML element.
 
-	An XML container is used to organize other XML elements that are logically related to each other.   A container may have either Data Entities or other Structural Elements as Child Elements.
+	An XML container is used to organize other XML elements that are logically related to each other.   A container may have either \glspl{data entity} or other \glspl{structural element} as \glspl{child element}.
 }
 
 
@@ -8082,7 +8600,7 @@
 
 	An XML document is an instantiation of an XML schema.  It has a single root XML element, conforms to the XML specification, and is structured based upon a specific schema.
 
-	MTConnect Response Documents may be encoded as an XML document.
+	\glspl{mtconnect response document} may be encoded as an XML document.
 }
 
 
@@ -8113,6 +8631,14 @@
 
 
 
+\longnewglossaryentry{asset document}
+{
+  type = mtc,
+  name={Asset Document}
+}
+{
+	An electronic document published by an \gls{agent} in response to a \gls{request} for information from a client software application relating to Assets.
+}
 
 
 
