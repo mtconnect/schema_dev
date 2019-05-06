@@ -3046,7 +3046,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element ref='AbstractConfiguration' minOccurs='0' maxOccurs='1'/>
+      <xs:element ref='AbstractConfiguration' minOccurs='1' maxOccurs='unbounded'/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name='CommonComponentType'>
@@ -4411,7 +4411,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='CapabilityType' mixed='true'>
+  <xs:complexType name='SpecificationType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
         A specification
@@ -4457,10 +4457,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name='Capability' type='CapabilityType' substitutionGroup='AbstractSpecification'>
+  <xs:element name='Specification' type='SpecificationType' substitutionGroup='AbstractSpecification'>
     <xs:annotation>
       <xs:documentation>
         A specification
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='CapabilityType'>
+    <xs:annotation>
+      <xs:documentation>
+        A capability
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SpecificationType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Capability' type='CapabilityType' substitutionGroup='Specification'>
+    <xs:annotation>
+      <xs:documentation>
+        A capability
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4690,14 +4707,23 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name='AxisOfMotionType'>
+  <xs:complexType name='MotionType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
         The axis motion types
       </xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
+    <xs:complexContent>
       <xs:extension base='AbstractSpecificationType'>
+        <xs:sequence>
+          <xs:element name='Axis' type='ThreeSpaceValueType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The axis motion
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
         <xs:attribute name='type' type='MotionTypeEnumType' use='required'>
           <xs:annotation>
             <xs:documentation>
@@ -4707,9 +4733,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:simpleContent>
+    </xs:complexContent>
   </xs:complexType>
-  <xs:element name='AxisOfMotion' type='AxisOfMotionType' substitutionGroup='AbstractSpecification'>
+  <xs:element name='Motion' type='MotionType' substitutionGroup='AbstractSpecification'>
     <xs:annotation>
       <xs:documentation>
         The axis motion types
@@ -4793,6 +4819,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='MACHINE'>
+        <xs:annotation>
+          <xs:documentation>
+            For machine tools, the coordinate system in the work area
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='IsKinematicType'>
@@ -4821,13 +4854,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
                 </xs:documentation>
               </xs:annotation>
             </xs:element>
-            <xs:element name='Transformation' type='TransformationType'>
-              <xs:annotation>
-                <xs:documentation>
-                  A six space trasformaton from the parent
-                </xs:documentation>
-              </xs:annotation>
-            </xs:element>
+            <xs:sequence minOccurs='1'>
+              <xs:element name='Translation' type='ThreeSpaceValueType'>
+                <xs:annotation>
+                  <xs:documentation>
+                    An offset applied first
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name='Rotation' type='ThreeSpaceValueType'>
+                <xs:annotation>
+                  <xs:documentation>
+                    A angluar rotation applied second
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
           </xs:choice>
         </xs:sequence>
         <xs:attribute name='id' type='IDType' use='required'>
@@ -5219,6 +5261,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
+  <xs:simpleType name='CoordinateSystemIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The id reference for the coordinate system associated with this data
+        item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
   <xs:simpleType name='FilterValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -5472,6 +5523,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:documentation>
           For measured values relative to a coordinate system like position
           sample, the coordinate system being used may be reported.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='coordinateSystemId' type='CoordinateSystemIdType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The coordinate system reference to a particular coordinate system
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>

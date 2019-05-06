@@ -39,7 +39,7 @@ package :Component, 'Top Level Components Package' do
   type :ComponentConfiguration, 'The configuration data associated with this component. For example, sensors may use 1451.5 or TEDS' do
     mixed
     
-    member :Configuration,  'Configuration types', 0..1, :AbstractConfiguration
+    member :Configuration,  'Configuration types', 1..INF, :AbstractConfiguration
   end
     
   type :CommonComponent, "An abstract component that has an optional uuid", :Component do 

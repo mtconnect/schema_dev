@@ -2931,6 +2931,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
+  <xs:simpleType name='CoordinateSystemIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The id reference for the coordinate system associated with this data
+        item
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
   <xs:simpleType name='FilterValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -3184,6 +3193,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:documentation>
           For measured values relative to a coordinate system like position
           sample, the coordinate system being used may be reported.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='coordinateSystemId' type='CoordinateSystemIdType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The coordinate system reference to a particular coordinate system
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>

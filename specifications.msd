@@ -14,7 +14,7 @@ package :Specificaitons, 'Device and component specificaitons' do
     abstract
   end
   
-  type :Capability, 'A specification', :AbstractSpecification do
+  type :Specification, 'A specification', :AbstractSpecification do
     mixed
     member :Type, 'The type of measurement', :DataItemEnum
     member :CompositionId, 'The optional composition identifier', 0..1
@@ -22,6 +22,8 @@ package :Specificaitons, 'Device and component specificaitons' do
     member :Constraint, 'The set of constraints', 1..INF
     member :Units, 'The units', 0..1
   end
+
+  type :Capability, 'A capability', :Specification
 
   type :Constraint, 'an abstract constraint' do
     abstract
@@ -59,9 +61,10 @@ package :Specificaitons, 'Device and component specificaitons' do
     value :REVOLVE, 'Revolver'
   end  
   
-  type :AxisOfMotion, 'The axis motion types', :AbstractSpecification do
+  type :Motion, 'The axis motion types', :AbstractSpecification do
+    mixed
     member :Type, 'The motion type', :MotionTypeEnum
-    member :Value, 'The axis motion', :ThreeSpaceValue
+    member :Axis, 'The axis motion', 0..1, :ThreeSpaceValue
   end
 
 
@@ -76,6 +79,7 @@ package :Specificaitons, 'Device and component specificaitons' do
     value :GRIPPER, 'The gripper'
     value :MOBILE_PLATFORM, 'The platform'
     value :JOINT, 'A given joint (kinematic should be true)'
+    value :MACHINE, 'For machine tools, the coordinate system in the work area'
   end
 
   attr :IsKinematic, 'Flag indicating if a coordinate system is part of a kinematic chain', :boolean
@@ -90,7 +94,10 @@ package :Specificaitons, 'Device and component specificaitons' do
     member :Type, 'The coordinate system type', :CoordinateSystemTypeEnum
     choice do
       member :Location, 'The location (no parent)'
-      member :Transformation, 'A six space trasformaton from the parent'
+      set do 
+        member :Translation, 'An offset applied first', :ThreeSpaceValue
+        member :Rotation, 'A angluar rotation applied second', :ThreeSpaceValue
+      end
     end
   end
     

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectDevices xmlns="urn:mtconnect.org:MTConnectDevices:1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.5 ../MTConnectDevices_1.5.xsd">
+  <Header version="1.5" creationTime="2019-04-24T00:00:00Z" instanceId="1" sender="localhost" bufferSize="131111" assetBufferSize="1000" assetCount="0"/>
+  <Devices>
+    <Device id="q8114a720" uuid="873a24c0-49d9-0137-e2b2-0c85909298d9" name="ABB">
+      <Description manufacturer="ABB" model="IRB-2400" serialNumber="1">Taken from ROS URDF File: 
+        https://github.com/ros-industrial/abb/blob/kinetic-devel/abb_irb2400_support/urdf/irb2400.urdf
+      </Description>
+      <Configuration>
+        <Specifications>
+          <CoordinateSystem id="ld8e60fc0" type="WORLD">
+            <Location>0 0 0</Location>
+          </CoordinateSystem>
+        </Specifications>
+      </Configuration>
+      <Components>
+        <Axes id="u143a84f0">
+          <Configuration>
+            <Specifications>
+              <CoordinateSystem id="zf063c940" type="BASE" parent="ld8e60fc0" name="base">
+                <Translation>0 0 0</Translation>
+                <Rotation>0 0 0</Rotation>
+              </CoordinateSystem>
+            </Specifications>
+          </Configuration>
+          <Components>
+            <Rotary id="G6b1d2400" name="J1" nativeName="joint_1">
+              <Configuration>
+                <Specifications>
+                  <CoordinateSystem type="JOINT" id="D8ba159d0" kinematic="true" name="joint1" parent="zf063c940">
+                    <Translation>0 0 0</Translation>
+                    <Rotation>0 0 0</Rotation>
+                  </CoordinateSystem>
+                  <Motion type="REVOLUTE">
+                    <Axis>0 0 1</Axis>
+                  </Motion>
+                </Specifications>
+              </Configuration>
+              <DataItems>
+                <DataItem category="SAMPLE" id="u306f7300" type="ANGLE" subType="ACTUAL" units="DEGREE" coordinateSystemId="D8ba159d0"/>
+              </DataItems>
+            </Rotary>
+            <Rotary id="G51175220" name="J2" nativeName="joint_2">
+              <Configuration>
+                <Relationships>
+                  <ComponentRelationship componentIdRef="G6b1d2400" association="PARENT"/>
+                </Relationships>
+                <Specifications>
+                  <CoordinateSystem type="JOINT" id="i59fcff00" kinematic="true" name="joint2" parent="D8ba159d0">
+                    <Translation>100 0 615</Translation>
+                    <Rotation>0 0 0</Rotation>
+                  </CoordinateSystem>
+                  <Motion type="REVOLUTE">
+                    <Axis>0 1 0</Axis>
+                  </Motion>
+                </Specifications>
+              </Configuration>
+              <DataItems>
+                <DataItem category="SAMPLE" id="j6e4a1170" type="ANGLE" subType="ACTUAL" units="DEGREE"/>
+              </DataItems>
+            </Rotary>
+            <Rotary id="y3fcfdc20" name="J3" nativeName="joint_3">
+              <Configuration>
+                <Relationships>
+                  <ComponentRelationship componentIdRef="G51175220" association="PARENT"/>
+                </Relationships>
+                <Specifications>
+                  <CoordinateSystem type="JOINT" id="r458aeea0" kinematic="true" name="joint3" parent="i59fcff00">
+                    <Translation>0 0 705</Translation>
+                    <Rotation>0 0 0</Rotation>
+                  </CoordinateSystem>
+                  <Motion type="REVOLUTE">
+                    <Axis>0 1 0</Axis>
+                  </Motion>
+                </Specifications>
+              </Configuration>
+              <DataItems>
+                <DataItem category="SAMPLE" id="e4e7466a0" type="ANGLE" subType="ACTUAL" units="DEGREE"/>
+              </DataItems>
+            </Rotary>
+            <Rotary id="hb18d4e60" name="J4" nativeName="joint_4">
+              <Configuration>
+                <Relationships>
+                  <ComponentRelationship componentIdRef="y3fcfdc20" association="PARENT"/>
+                </Relationships>
+                <Specifications>
+                  <CoordinateSystem type="JOINT" id="Rb902a9b0" kinematic="true" name="joint4" parent="r458aeea0">
+                    <Translation>258 0 135</Translation>
+                    <Rotation>0 0 0</Rotation>
+                  </CoordinateSystem>
+                  <Motion type="REVOLUTE">
+                    <Axis>1 0 0</Axis>
+                  </Motion>
+                </Specifications>
+              </Configuration>
+              <DataItems>
+                <DataItem category="SAMPLE" id="Yd1b67cc0" type="ANGLE" subType="ACTUAL" units="DEGREE"/>
+              </DataItems>
+            </Rotary>
+            <Rotary id="vf9a97670" name="J5" nativeName="joint_5">
+              <Configuration>
+                <Relationships>
+                  <ComponentRelationship componentIdRef="hb18d4e60" association="PARENT"/>
+                </Relationships>
+                <Specifications>
+                  <CoordinateSystem type="JOINT" id="Ufdeb9190" kinematic="true" name="joint5" parent="Rb902a9b0">
+                    <Translation>497 0 0</Translation>
+                    <Rotation>0 0 0</Rotation>
+                  </CoordinateSystem>
+                  <Motion type="REVOLUTE">
+                    <Axis>0 1 0</Axis>
+                  </Motion>
+                </Specifications>
+              </Configuration>
+              <DataItems>
+                <DataItem category="SAMPLE" id="N02b97fd0" type="ANGLE" subType="ACTUAL" units="DEGREE"/>
+              </DataItems>
+            </Rotary>
+            <Rotary id="u3eb40f30" name="J6" nativeName="joint_6">
+              <Configuration>
+                <Relationships>
+                  <ComponentRelationship componentIdRef="vf9a97670" association="PARENT"/>
+                </Relationships>
+                <Specifications>
+                  <CoordinateSystem type="JOINT" id="I402af9b0" kinematic="true" name="joint6" parent="Ufdeb9190">
+                    <Translation>0 0 0</Translation>
+                    <Rotation>0 90 0</Rotation>
+                  </CoordinateSystem>
+                  <Motion type="REVOLUTE">
+                    <Axis>1 0 0</Axis>
+                  </Motion>
+                </Specifications>
+              </Configuration>
+              <DataItems>
+                <DataItem category="SAMPLE" id="z42ccdfa0" type="ANGLE" subType="ACTUAL" units="DEGREE"/>
+              </DataItems>
+            </Rotary>
+          </Components>
+        </Axes>
+        <Controller id="Q7f109020">
+          <Components>
+            <Path id="g7e29fd60"/>
+          </Components>
+        </Controller>
+      </Components>
+    </Device>
+  </Devices>
+</MTConnectDevices>

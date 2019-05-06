@@ -8,6 +8,7 @@ package :DataItems, 'Data Items Package' do
   attr :SourceComponentId, 'An idref to the component id', :IDREF
   attr :SourceDataItemId, 'An idref to the data item id', :IDREF
   attr :ComponentName, 'The name of a related component', :NMTOKEN
+  attr :CoordinateSystemId, 'The id reference for the coordinate system associated with this data item', :IDREF
   basic_type :FilterValue, 'The minimum limit on the change in a value', :float
   
   # Measurement types
@@ -49,6 +50,7 @@ package :DataItems, 'Data Items Package' do
     member :NativeScale, 'The units as expressed by the machine', 0..1
     member :Category, 'The category of the data item'
     member :CoordinateSystem, 'The coordinate system used for the positions', 0..1, :CoordinateSystemEnum
+    member :CoordinateSystemId, 'The coordinate system reference to a particular coordinate system', 0..1
     member :CompositionId, 'The optional composition identifier', 0..1
     member :SampleRate, 'Used as the default sample rate for waveforms', 0..1, :DataItemSampleRate
     member(:Representation, 'The data item\'s representation', 0..1) { self.default = :VALUE } 
