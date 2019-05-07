@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectDevices xmlns:m="urn:mtconnect.org:MTConnectDevices:1.5" xmlns="urn:mtconnect.org:MTConnectDevices:1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.5 /schemas/MTConnectDevices_1.5.xsd">
+  <Header creationTime="2019-05-07T00:54:12Z" sender="alyosha-232.hsd1.ca.comcast.net" instanceId="1557188989" version="1.5.0.8" assetBufferSize="1024" assetCount="0" bufferSize="131072"/>
+  <Devices>
+    <Device id="d" name="LinuxCNC" sampleInterval="10" uuid="000">
+      <Description manufacturer="NIST"/>
+      <DataItems>
+        <DataItem category="EVENT" id="avail" name="avail" type="AVAILABILITY"/>
+        <DataItem category="EVENT" id="d_asset_chg" type="ASSET_CHANGED"/>
+        <DataItem category="EVENT" id="d_asset_rem" type="ASSET_REMOVED"/>
+      </DataItems>
+      <Components>
+        <Axes id="axes" name="Axes">
+          <Components>
+            <Rotary id="c" name="C">
+              <DataItems>
+                <DataItem category="SAMPLE" id="c1" name="Sspeed" nativeUnits="REVOLUTION/MINUTE" subType="ACTUAL" type="ROTARY_VELOCITY" units="REVOLUTION/MINUTE">
+                  <Source>spindle_speed</Source>
+                </DataItem>
+                <DataItem category="EVENT" id="c2" name="Smode" type="ROTARY_MODE">
+                  <Constraints>
+                    <Value>SPINDLE</Value>
+                  </Constraints>
+                </DataItem>
+              </DataItems>
+            </Rotary>
+          </Components>
+        </Axes>
+        <Controller id="cont" name="Controller">
+          <Components>
+            <Path id="path1" name="path">
+              <DataItems>
+                <DataItem category="EVENT" id="v1" name="vars" representation="DATA_SET" type="VARIABLE"/>
+                <DataItem category="EVENT" discrete="true" id="v3" name="vars2" type="BLOCK"/>
+                <DataItem category="EVENT" id="p2" name="mode" type="CONTROLLER_MODE"/>
+                <DataItem category="EVENT" id="p3" name="line" type="LINE"/>
+                <DataItem category="EVENT" id="p4" name="program" type="PROGRAM"/>
+              </DataItems>
+            </Path>
+          </Components>
+        </Controller>
+        <Power id="power" name="power">
+          <DataItems>
+            <DataItem category="EVENT" id="pw1" name="power" type="POWER_STATUS"/>
+          </DataItems>
+        </Power>
+      </Components>
+    </Device>
+  </Devices>
+</MTConnectDevices>

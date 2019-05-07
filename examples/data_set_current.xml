@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/styles/Streams.xsl"?>
+<MTConnectStreams xmlns:m="urn:mtconnect.org:MTConnectStreams:1.5" xmlns="urn:mtconnect.org:MTConnectStreams:1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectStreams:1.5 /schemas/MTConnectStreams_1.5.xsd">
+  <Header creationTime="2019-05-07T00:31:53Z" sender="alyosha-232.hsd1.ca.comcast.net" instanceId="1557188989" version="1.5.0.8" bufferSize="131072" nextSequence="15" firstSequence="1" lastSequence="14"/>
+  <Streams>
+    <DeviceStream name="LinuxCNC" uuid="000">
+      <ComponentStream component="Rotary" name="C" componentId="c">
+        <Samples>
+          <RotaryVelocity dataItemId="c1" timestamp="2019-05-07T00:29:49.659679Z" name="Sspeed" sequence="2" subType="ACTUAL">UNAVAILABLE</RotaryVelocity>
+        </Samples>
+        <Events>
+          <RotaryMode dataItemId="c2" timestamp="2019-05-07T00:29:49.659679Z" name="Smode" sequence="3">SPINDLE</RotaryMode>
+        </Events>
+      </ComponentStream>
+      <ComponentStream component="Device" name="LinuxCNC" componentId="d">
+        <Events>
+          <Availability dataItemId="avail" timestamp="2019-05-07T00:29:49.659679Z" name="avail" sequence="1">UNAVAILABLE</Availability>
+          <AssetChanged dataItemId="d_asset_chg" timestamp="2019-05-07T00:29:49.659679Z" sequence="4">UNAVAILABLE</AssetChanged>
+          <AssetRemoved dataItemId="d_asset_rem" timestamp="2019-05-07T00:29:49.659679Z" sequence="5">UNAVAILABLE</AssetRemoved>
+        </Events>
+      </ComponentStream>
+      <ComponentStream component="Path" name="path" componentId="path1">
+        <Events>
+          <ControllerMode dataItemId="p2" timestamp="2019-05-07T00:29:49.659679Z" name="mode" sequence="6">UNAVAILABLE</ControllerMode>
+          <Line dataItemId="p3" timestamp="2019-05-07T00:29:49.659679Z" name="line" sequence="7">UNAVAILABLE</Line>
+          <Program dataItemId="p4" timestamp="2019-05-07T00:29:49.659679Z" name="program" sequence="8">UNAVAILABLE</Program>
+          <VariableDataSet dataItemId="v1" timestamp="2019-05-07T00:31:48.109854" name="vars" sequence="14" sampleCount="3">
+            <Entry key="a">1</Entry>
+            <Entry key="b">hello there Shaurabh</Entry>
+            <Entry key="c">horses and cows</Entry>
+          </VariableDataSet>
+          <Block dataItemId="v3" timestamp="2019-05-07T00:29:49.659679Z" name="vars2" sequence="11">UNAVAILABLE</Block>
+        </Events>
+      </ComponentStream>
+      <ComponentStream component="Power" name="power" componentId="power">
+        <Events>
+          <PowerStatus dataItemId="pw1" timestamp="2019-05-07T00:29:49.659679Z" name="power" sequence="9">UNAVAILABLE</PowerStatus>
+        </Events>
+      </ComponentStream>
+    </DeviceStream>
+  </Streams>
+</MTConnectStreams>
