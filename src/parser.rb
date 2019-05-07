@@ -482,6 +482,12 @@ class Schema
     def resolve
       @members.each { |m| m.resolve(self.name) }
     end
+
+    def value_member
+      members.each { |m| return m if m.is_value? }
+      nil
+    end
+    
   end
 
   class AttributeGroup < Element

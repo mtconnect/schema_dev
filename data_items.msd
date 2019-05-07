@@ -9,6 +9,8 @@ package :DataItems, 'Data Items Package' do
   attr :SourceDataItemId, 'An idref to the data item id', :IDREF
   attr :ComponentName, 'The name of a related component', :NMTOKEN
   attr :CoordinateSystemId, 'The id reference for the coordinate system associated with this data item', :IDREF
+  attr :Discrete, 'An discrete event', :boolean
+
   basic_type :FilterValue, 'The minimum limit on the change in a value', :float
   
   # Measurement types
@@ -25,6 +27,7 @@ package :DataItems, 'Data Items Package' do
     Glossary.representations.each do |e|
       value(e.name_property, e.description) if !e.kind_of?(:subtype)
     end
+    value :DATA_SET, 'A set of entries'
   end
 
   enum :DataItemFilterEnum, 'The type of filter' do
@@ -61,6 +64,7 @@ package :DataItems, 'Data Items Package' do
     member :Filters, 'Limits on the set of possible values', 0..1, :Filters
     element :InitialValue, 'The initial value for counters', 0..1, :DataItemNumericValue
     element :ResetTrigger, 'The event that triggers the resetting of this counter', 0..1, :DataItemResetValue
+    member(:Discrete, 'If this is a discrete event', 0..1) { self.default = 'false' }
   end
   
   type :DataItemConstraints, 'A set of limits for a data item' do

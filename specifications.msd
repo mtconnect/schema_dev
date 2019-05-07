@@ -17,6 +17,7 @@ package :Specificaitons, 'Device and component specificaitons' do
   type :Specification, 'A specification', :AbstractSpecification do
     mixed
     member :Type, 'The type of measurement', :DataItemEnum
+    member :SubType, 'The type of measurement', 0..1, :DataItemSubEnum
     member :CompositionId, 'The optional composition identifier', 0..1
     member :DataItemId, 'The optional data item identifier', 0..1, :SourceDataItemId
     member :Constraint, 'The set of constraints', 1..INF

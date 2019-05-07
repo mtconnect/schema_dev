@@ -1238,6 +1238,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='VARIABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            A user variable
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumType'>
@@ -4430,6 +4437,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
+        <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              A sub-categorization of the data item type.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name='compositionId' type='CompositionIdType' use='optional'>
           <xs:annotation>
             <xs:documentation>
@@ -5270,6 +5284,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:IDREF'/>
   </xs:simpleType>
+  <xs:simpleType name='DiscreteType'>
+    <xs:annotation>
+      <xs:documentation>
+        An discrete event
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:boolean'/>
+  </xs:simpleType>
   <xs:simpleType name='FilterValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -5350,6 +5372,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             The measured value of the sample data.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DATA_SET'>
+        <xs:annotation>
+          <xs:documentation>
+            A set of entries
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -5566,6 +5595,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:annotation>
         <xs:documentation>
           The number of significant digits in the reported value.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='discrete' type='DiscreteType' use='optional' default='false'>
+      <xs:annotation>
+        <xs:documentation>
+          If this is a discrete event
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>

@@ -60,6 +60,8 @@ package :common, 'Common attributes and elements for all schemas' do
     Glossary.types.each do |e|
       value(e.name_property, e.description)
     end
+
+    value :VARIABLE, 'A user variable'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
