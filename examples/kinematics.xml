@@ -11,6 +11,10 @@
           <CoordinateSystem id="ld8e60fc0" type="WORLD">
             <Location>0 0 0</Location>
           </CoordinateSystem>
+          <CoordinateSystem id="ld8e60fc1" type="MACHINE" name="machine" parent="ld8e60fc0">
+            <Translation>100 100 500</Translation>
+            <Rotation>180 0 0</Rotation>
+          </CoordinateSystem>
         </Specifications>
       </Configuration>
       <Components>
@@ -46,6 +50,8 @@
                   <ComponentRelationship componentIdRef="G6b1d2400" association="PARENT"/>
                 </Relationships>
                 <Specifications>
+                  <!-- Dynamic Coordinate System -->
+                  <CoordinateSystem id="ixxx" type="WORKPIECE" name="mypart" parent="D8ba159d0" />
                   <CoordinateSystem type="JOINT" id="i59fcff00" kinematic="true" name="joint2" parent="D8ba159d0">
                     <Translation>100 0 615</Translation>
                     <Rotation>0 0 0</Rotation>
@@ -56,13 +62,15 @@
                 </Specifications>
               </Configuration>
               <DataItems>
-                <DataItem category="SAMPLE" id="j6e4a1170" type="ANGLE" subType="ACTUAL" units="DEGREE"/>
+                <DataItem category="SAMPLE" id="j6e4a1170" type="ANGLE" subType="ACTUAL" units="DEGREE" coordinateSystemId="i59fcff00"/>
+                <DataItem id="aaa" type="TRANSLATION" category="SAMPLE" units="MILLIMETER_3D"  coordinateSystemId="ixxx"/>
               </DataItems>
             </Rotary>
             <Rotary id="y3fcfdc20" name="J3" nativeName="joint_3">
               <Configuration>
                 <Relationships>
                   <ComponentRelationship componentIdRef="G51175220" association="PARENT"/>
+                  <ComponentRelationship componentIdRef="G6b1d2400" association="PARENT"/>
                 </Relationships>
                 <Specifications>
                   <CoordinateSystem type="JOINT" id="r458aeea0" kinematic="true" name="joint3" parent="i59fcff00">
@@ -139,7 +147,17 @@
         </Axes>
         <Controller id="Q7f109020">
           <Components>
-            <Path id="g7e29fd60"/>
+            <Path id="g7e29fd60">
+              <DataItems>
+              <!-- Should this be according to the coord system name? -->
+                <DataItem id="coordinate" type="ACTIVE_COORDINATE_SYSTEM" category="EVENT"/>
+                <DataItem id="pathpos2" type="PATH_POSITION" category="SAMPLE" units="MILLIMETER_3D" coordinateSystem="ACTIVE"/>
+                <DataItem id="pathpos" type="PATH_POSITION" category="SAMPLE" units="MILLIMETER_3D" coordinateSystemId="ld8e60fc0"/>
+                <DataItem id="orient1" type="ORIENTATION" category="SAMPLE" units="DEGREE_3D" coordinateSystem="ACTIVE"/>
+                <DataItem id="orient2" type="ORIENTATION" category="SAMPLE" units="DEGREE_3D" coordinateSystemId="ld8e60fc0"/>
+              </DataItems>
+            </Path>
+            
           </Components>
         </Controller>
       </Components>

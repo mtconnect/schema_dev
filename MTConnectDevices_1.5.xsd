@@ -4665,7 +4665,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:complexType name='GearSpecificationType'>
+  <xs:complexType name='GearSpecificationType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
         A power transmission gearing, ratio given as CDATA
@@ -4673,6 +4673,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='ConstraintType'>
+        <xs:sequence>
+          <xs:element name='GearRatio' type='GearRatioType'>
+            <xs:annotation>
+              <xs:documentation>
+                The gear ratio
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
         <xs:attribute name='number' type='GearNumberType' use='required'>
           <xs:annotation>
             <xs:documentation>
@@ -4728,6 +4737,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
+  <xs:complexType name='MotionAxisType'>
+    <xs:annotation>
+      <xs:documentation>
+        The unit vector along which the motion occurs
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ThreeSpaceValueType'>
+        <xs:attribute name='coordinateSystemId' type='CoordinateSystemIdType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The identifier of the coordinate system that this motion is
+              relative to
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name='MotionType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
@@ -4737,7 +4765,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AbstractSpecificationType'>
         <xs:sequence>
-          <xs:element name='Axis' type='ThreeSpaceValueType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='Axis' type='MotionAxisType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 The axis motion
@@ -4750,6 +4778,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             <xs:documentation>
               The type of either a structural element or a dataitem being
               measured.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='actuation' type='ActuationTypeEnumType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The actuation method
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -4849,6 +4884,74 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='ActuationTypeEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The actuation of this component
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='DIRECT'>
+        <xs:annotation>
+          <xs:documentation>
+            The motion is directly controller
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DERIVATIVE'>
+        <xs:annotation>
+          <xs:documentation>
+            The motion is created by an unpowered linkage, can be a calculated
+            value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='VIRTUAL'>
+        <xs:annotation>
+          <xs:documentation>
+            The component provide a logical position
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='FIXED'>
+        <xs:annotation>
+          <xs:documentation>
+            The position is fixed in space, it does not move
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='GeometryTypeEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The geometry related to this coordinate system
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='CARTESIAN'>
+        <xs:annotation>
+          <xs:documentation>
+            The coordinate system uses cartesian coordinates
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='POLAR'>
+        <xs:annotation>
+          <xs:documentation>
+            The positions will be given in polar coordinates
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CYLINDRICAL'>
+        <xs:annotation>
+          <xs:documentation>
+            The positions are given in cylindrical coordinates
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name='IsKinematicType'>
     <xs:annotation>
       <xs:documentation>
@@ -4867,11 +4970,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AbstractSpecificationType'>
         <xs:sequence>
-          <xs:choice minOccurs='1'>
-            <xs:element name='Location' type='LocationType'>
+          <xs:choice minOccurs='0' maxOccurs='1'>
+            <xs:element name='Origin' type='OriginType'>
               <xs:annotation>
                 <xs:documentation>
-                  The Pot or Spindle this tool currently resides in.
+                  The location (no parent)
                 </xs:documentation>
               </xs:annotation>
             </xs:element>
@@ -4897,6 +5000,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:annotation>
             <xs:documentation>
               The unique identifier for this element.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='geometry' type='GeometryTypeEnumType' use='optional' default='CARTESIAN'>
+          <xs:annotation>
+            <xs:documentation>
+              The geometry used in this coordinate system
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -4940,10 +5050,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='LocationType'>
+  <xs:complexType name='OriginType'>
     <xs:annotation>
       <xs:documentation>
-        The Pot or Spindle this tool currently resides in.
+        A six space location in space
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
@@ -5024,12 +5134,102 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name='RelationshipTypeEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        Types of relationships
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='MASTER'>
+        <xs:annotation>
+          <xs:documentation>
+            a master
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SLAVE'>
+        <xs:annotation>
+          <xs:documentation>
+            a slave
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DeviceRelationshipTypeEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        device relationships
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='MASTER'>
+        <xs:annotation>
+          <xs:documentation>
+            a master
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SLAVE'>
+        <xs:annotation>
+          <xs:documentation>
+            a slave
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SYSTEM'>
+        <xs:annotation>
+          <xs:documentation>
+            a system
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='AUXILIARY'>
+        <xs:annotation>
+          <xs:documentation>
+            an auxiliary
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='CriticalityEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        The criticality
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='CRITICAL'>
+        <xs:annotation>
+          <xs:documentation>
+            critical
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='NON_CRITICAL'>
+        <xs:annotation>
+          <xs:documentation>
+            Not critical
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='RelationshipType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
         A relationship between this component and something else
       </xs:documentation>
     </xs:annotation>
+    <xs:attribute name='id' type='IDType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The unique identifier for this element.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name='name' type='NameType' use='optional'>
       <xs:annotation>
         <xs:documentation>
@@ -5041,6 +5241,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:annotation>
         <xs:documentation>
           The assciation type
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='criticality' type='CriticalityEnumType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          Criticality
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -5064,6 +5271,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:annotation>
             <xs:documentation>
               A reference to the device uuid
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='type' type='DeviceRelationshipTypeEnumType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of either a structural element or a dataitem being
+              measured.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -5099,6 +5314,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='RelationshipType'>
+        <xs:attribute name='type' type='RelationshipTypeEnumType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of either a structural element or a dataitem being
+              measured.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name='componentIdRef' type='IdRefType' use='required'>
           <xs:annotation>
             <xs:documentation>
