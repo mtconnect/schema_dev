@@ -134,8 +134,9 @@ module Latex
       properties.elements.map(&:value).compact.each do |k, v|
         kys[k.to_sym] = v
       end
-      if respond_to? :long_description
-        kys[:description] = long_description.value
+      if !kys.include?(:description) and respond_to? :long_description and
+        long_description.respond_to? :value
+        kys[:description] = long_description.value 
       end
       if kys.include?(:description) and kys.include?(:deprecated) and
             kys[:description] !~ /^DEPRECATED/
