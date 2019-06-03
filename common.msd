@@ -28,6 +28,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :SignificantDigitsValue, 'The number significant digits', :integer
   attr :CompositionId, 'The item\'s reference to the Device model composition', :NMTOKEN
   attr :DurationTime, 'A length of time in seconds', :float
+  attr :Removed, 'A flag indicating the item has been removed', :boolean
   
   attr :AssetId, 'The unique id of the asset'
   attr :AssetAttrType, 'An asset type'

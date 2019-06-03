@@ -1,6 +1,5 @@
 package :Assets, 'Mobile Assets' do
   attr :Source, 'A URI reference', :anyURI
-  attr :Removed, 'A flag indicating the item has been removed', :boolean
   
   type :AssetDescription, 'The description of an asset, can be free form text or elements' do
     mixed

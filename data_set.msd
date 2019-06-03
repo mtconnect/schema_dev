@@ -8,6 +8,7 @@ package :DataSet, 'DataSet Package' do
     mixed
     abstract
     member :Key, 'they key'
+    member :Removed, 'an indicatore that the entry has been removed', 0..1
   end
 
   type(:Variable, 'A PLC or CNC Variable', :Event) do

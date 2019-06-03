@@ -239,8 +239,8 @@ package :Tools, 'Cutting tools' do
     member :Type, 'One of time, part count, or wear', 1, :ToolLifeType
     member :CountDirection, 'The count up or count down', 1, :ToolLifeDirection
     member :Warning, 'Tool life warning level', 0..1, :ToolLifeValue
-    member :Limit, 'Maximum tool life', 1, :ToolLifeValue
-    member :Initial, 'The life when the tool is new', 1, :ToolLifeValue
+    member :Limit, 'Maximum tool life', 0..1, :ToolLifeValue
+    member :Initial, 'The life when the tool is new', 0..1, :ToolLifeValue
     member :Value, 'The current tool life', :ToolLifeValue
   end
   
