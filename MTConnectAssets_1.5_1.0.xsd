@@ -9414,14 +9414,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name='limit' type='ToolLifeValueType' use='required'>
+        <xs:attribute name='limit' type='ToolLifeValueType' use='optional'>
           <xs:annotation>
             <xs:documentation>
               The end of life limit for this tool.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name='initial' type='ToolLifeValueType' use='required'>
+        <xs:attribute name='initial' type='ToolLifeValueType' use='optional'>
           <xs:annotation>
             <xs:documentation>
               The initial life of the tool when it is new.
