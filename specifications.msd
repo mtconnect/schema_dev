@@ -24,8 +24,6 @@ package :Specificaitons, 'Device and component specificaitons' do
     member :Units, 'The units', 0..1
   end
 
-  type :Capability, 'A capability', :Specification
-
   type :SpecificationValue, 'an abstract value for a specification' do
     abstract
     mixed

@@ -56,7 +56,6 @@ package :Component, 'Top Level Components Package' do
     member :Iso841Class, 'DEPRECATED: The device\'s ISO-841 classification', 0..1
     member :Uuid, 'The components universally unique id. This can be composed of the manufactures id or name and the serial number.'
     member :Name, 'The Device name.'
-    member :Version, 'The MTConnect Version this Device implements', 0..1
   end
 
   Glossary.components.each do |component|

@@ -3137,13 +3137,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name='version' type='VersionType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              The protocol version number.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -4488,23 +4481,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         A specification
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='CapabilityType'>
-    <xs:annotation>
-      <xs:documentation>
-        A capability
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SpecificationType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Capability' type='CapabilityType' substitutionGroup='Specification'>
-    <xs:annotation>
-      <xs:documentation>
-        A capability
       </xs:documentation>
     </xs:annotation>
   </xs:element>
