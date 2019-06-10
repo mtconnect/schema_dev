@@ -4675,405 +4675,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name='MotionTypeEnumType'>
-    <xs:annotation>
-      <xs:documentation>
-        The types of motion
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='REVOLUTE'>
-        <xs:annotation>
-          <xs:documentation>
-            Rotates
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='PRISMATIC'>
-        <xs:annotation>
-          <xs:documentation>
-            Linear motion
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='TWIST'>
-        <xs:annotation>
-          <xs:documentation>
-            Twister
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='REVOLVE'>
-        <xs:annotation>
-          <xs:documentation>
-            Revolver
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name='MotionAxisType'>
-    <xs:annotation>
-      <xs:documentation>
-        The unit vector along which the motion occurs
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ThreeSpaceValueType'>
-        <xs:attribute name='coordinateSystemId' type='CoordinateSystemIdType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              The identifier of the coordinate system that this motion is
-              relative to
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name='MotionType' mixed='true'>
-    <xs:annotation>
-      <xs:documentation>
-        The axis motion types
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AbstractConfigurationType'>
-        <xs:sequence>
-          <xs:element name='Axis' type='MotionAxisType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The axis motion
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-        <xs:attribute name='type' type='MotionTypeEnumType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              The type of either a structural element or a dataitem being
-              measured.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='actuation' type='ActuationTypeEnumType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              The actuation method
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Motion' type='MotionType' substitutionGroup='AbstractConfiguration'>
-    <xs:annotation>
-      <xs:documentation>
-        The axis motion types
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:simpleType name='CoordinateSystemTypeEnumType'>
-    <xs:annotation>
-      <xs:documentation>
-        The type of coordinate system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='WORLD'>
-        <xs:annotation>
-          <xs:documentation>
-            The world
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='BASE'>
-        <xs:annotation>
-          <xs:documentation>
-            The base of the manipulator chain
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='TOOL'>
-        <xs:annotation>
-          <xs:documentation>
-            The tool&apos;s coord
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='WORKPIECE'>
-        <xs:annotation>
-          <xs:documentation>
-            The workpiece
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='OBJECT'>
-        <xs:annotation>
-          <xs:documentation>
-            The object
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='TASK'>
-        <xs:annotation>
-          <xs:documentation>
-            The current task
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MECHANICAL_INTERFACE'>
-        <xs:annotation>
-          <xs:documentation>
-            The last joint in the chain
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='GRIPPER'>
-        <xs:annotation>
-          <xs:documentation>
-            The gripper
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MOBILE_PLATFORM'>
-        <xs:annotation>
-          <xs:documentation>
-            The platform
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='JOINT'>
-        <xs:annotation>
-          <xs:documentation>
-            A given joint (kinematic should be true)
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MACHINE'>
-        <xs:annotation>
-          <xs:documentation>
-            For machine tools, the coordinate system in the work area
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='ActuationTypeEnumType'>
-    <xs:annotation>
-      <xs:documentation>
-        The actuation of this component
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='DIRECT'>
-        <xs:annotation>
-          <xs:documentation>
-            The motion is directly controller
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='DERIVATIVE'>
-        <xs:annotation>
-          <xs:documentation>
-            The motion is created by an unpowered linkage, can be a calculated
-            value
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='VIRTUAL'>
-        <xs:annotation>
-          <xs:documentation>
-            The component provide a logical position
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='FIXED'>
-        <xs:annotation>
-          <xs:documentation>
-            The position is fixed in space, it does not move
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='GeometryTypeEnumType'>
-    <xs:annotation>
-      <xs:documentation>
-        The geometry related to this coordinate system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='CARTESIAN'>
-        <xs:annotation>
-          <xs:documentation>
-            The coordinate system uses cartesian coordinates
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='POLAR'>
-        <xs:annotation>
-          <xs:documentation>
-            The positions will be given in polar coordinates
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CYLINDRICAL'>
-        <xs:annotation>
-          <xs:documentation>
-            The positions are given in cylindrical coordinates
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='IsKinematicType'>
-    <xs:annotation>
-      <xs:documentation>
-        Flag indicating if a coordinate system is part of a kinematic chain
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:boolean'/>
-  </xs:simpleType>
-  <xs:complexType name='CoordinateSystemsType' mixed='true'>
-    <xs:annotation>
-      <xs:documentation>
-        For measured values relative to a coordinate system like position
-        sample, the coordinate system being used may be reported.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AbstractConfigurationType'>
-        <xs:sequence>
-          <xs:element name='CoordinateSystem' type='CoordinateSystemType' minOccurs='1' maxOccurs='unbounded'>
-            <xs:annotation>
-              <xs:documentation>
-                For measured values relative to a coordinate system like
-                position sample, the coordinate system being used may be
-                reported.
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='CoordinateSystems' type='CoordinateSystemsType' substitutionGroup='AbstractConfiguration'>
-    <xs:annotation>
-      <xs:documentation>
-        For measured values relative to a coordinate system like position
-        sample, the coordinate system being used may be reported.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='CoordinateSystemType'>
-    <xs:annotation>
-      <xs:documentation>
-        For measured values relative to a coordinate system like position
-        sample, the coordinate system being used may be reported.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:choice minOccurs='0' maxOccurs='1'>
-      <xs:element name='Origin' type='OriginType'>
-        <xs:annotation>
-          <xs:documentation>
-            The location (no parent)
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:sequence minOccurs='1'>
-        <xs:element name='Translation' type='ThreeSpaceValueType'>
-          <xs:annotation>
-            <xs:documentation>
-              An offset applied first
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element name='Rotation' type='ThreeSpaceValueType'>
-          <xs:annotation>
-            <xs:documentation>
-              A angluar rotation applied second
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-      </xs:sequence>
-    </xs:choice>
-    <xs:attribute name='id' type='IDType' use='required'>
-      <xs:annotation>
-        <xs:documentation>
-          The unique identifier for this element.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='geometry' type='GeometryTypeEnumType' use='optional' default='CARTESIAN'>
-      <xs:annotation>
-        <xs:documentation>
-          The geometry used in this coordinate system
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='kinematic' type='IsKinematicType' use='optional' default='false'>
-      <xs:annotation>
-        <xs:documentation>
-          Boolean flag indicating if this is a kinematic coordinate system
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='name' type='NameType' use='optional'>
-      <xs:annotation>
-        <xs:documentation>
-          The name of an element or a piece of equipment.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='parent' type='IdRefType' use='optional'>
-      <xs:annotation>
-        <xs:documentation>
-          The parent of the coordinate system
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='type' type='CoordinateSystemTypeEnumType' use='required'>
-      <xs:annotation>
-        <xs:documentation>
-          The type of either a structural element or a dataitem being measured.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-  </xs:complexType>
-  <xs:complexType name='OriginType'>
-    <xs:annotation>
-      <xs:documentation>
-        A six space location in space
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ThreeSpaceValueType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name='TransformationType'>
-    <xs:annotation>
-      <xs:documentation>
-        An offset in space
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Translaton' type='ThreeSpaceValueType'>
-        <xs:annotation>
-          <xs:documentation>
-            An offset applied first
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Rotation' type='ThreeSpaceValueType'>
-        <xs:annotation>
-          <xs:documentation>
-            A quaternion transform applied second
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
   <xs:simpleType name='IdRefType'>
     <xs:annotation>
       <xs:documentation>
@@ -5081,14 +4682,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:IDREF'/>
-  </xs:simpleType>
-  <xs:simpleType name='DeviceUuidRefType'>
-    <xs:annotation>
-      <xs:documentation>
-        The uuid this tool is associated with
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='UuidType'/>
   </xs:simpleType>
   <xs:complexType name='ReferencesType'>
     <xs:annotation>
@@ -5197,7 +4790,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name='AssociationEnumType'>
+  <xs:simpleType name='RelationshipTypeEnumType'>
     <xs:annotation>
       <xs:documentation>
         The list of possible association types
@@ -5227,7 +4820,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='RelationshipTypeEnumType'>
+  <xs:simpleType name='AssociationEnumType'>
     <xs:annotation>
       <xs:documentation>
         Types of relationships
@@ -5250,7 +4843,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='DeviceRelationshipTypeEnumType'>
+  <xs:simpleType name='DeviceAssociationEnumType'>
     <xs:annotation>
       <xs:documentation>
         device relationships
@@ -5330,10 +4923,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name='association' type='AssociationEnumType' use='required'>
+    <xs:attribute name='type' type='RelationshipTypeEnumType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          The assciation type
+          The type of either a structural element or a dataitem being measured.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -5352,6 +4945,39 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='ComponentRelationshipType'>
+    <xs:annotation>
+      <xs:documentation>
+        A relationship to a device
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='RelationshipType'>
+        <xs:attribute name='association' type='AssociationEnumType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of relatiship
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='idRef' type='IdRefType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              A pointer to the id attribute of an element that contains the
+              information to be associated with this XML element.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ComponentRelationship' type='ComponentRelationshipType' substitutionGroup='Relationship'>
+    <xs:annotation>
+      <xs:documentation>
+        A relationship to a device
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='DeviceRelationshipType'>
     <xs:annotation>
       <xs:documentation>
@@ -5367,11 +4993,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name='type' type='DeviceRelationshipTypeEnumType' use='optional'>
+        <xs:attribute name='association' type='DeviceAssociationEnumType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The type of either a structural element or a dataitem being
-              measured.
+              The type of relatiship
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -5393,39 +5018,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:complexContent>
   </xs:complexType>
   <xs:element name='DeviceRelationship' type='DeviceRelationshipType' substitutionGroup='Relationship'>
-    <xs:annotation>
-      <xs:documentation>
-        A relationship to a device
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ComponentRelationshipType'>
-    <xs:annotation>
-      <xs:documentation>
-        A relationship to a device
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='RelationshipType'>
-        <xs:attribute name='type' type='RelationshipTypeEnumType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              The type of either a structural element or a dataitem being
-              measured.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='componentIdRef' type='IdRefType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              A reference to the device uuid
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='ComponentRelationship' type='ComponentRelationshipType' substitutionGroup='Relationship'>
     <xs:annotation>
       <xs:documentation>
         A relationship to a device
