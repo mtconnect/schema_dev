@@ -4,7 +4,7 @@
   type=mtc,
   category=model,
   name= {AbsTimeSeries},
-  description= {It is an abstract type element and will be replaced in the \glspl{mtconnectstream} document by the element name derived from the \gls{type} attribute defined for the associated \gls{dataitem} element defined in the \glspl{mtconnectdevice} document}
+  description= {It is an abstract type element and will be replaced in the \gls{mtconnectstreams} document by the element name derived from the \gls{type} attribute defined for the associated \gls{dataitem} element defined in the \gls{mtconnectdevices} document}
 }
 
 
@@ -257,7 +257,7 @@
   name={Channels},
   kind={element},
   elements={\gls{channel}},
-  description={When \gls{sensor} represents multiple \glspl{sensing element}, each \gls{sensing element} is represented by a \gls{channel} for the \gls{sensor}. \gls{channels} is an XML container used to organize information for the \glspl{sensing element}. }
+  description={When \gls{sensor} represents multiple \glspl{sensing element}, each \gls{sensing element} is represented by a \gls{channel} for the \gls{sensor}. \newline \gls{channels} is an XML container used to organize information for the \glspl{sensing element}. }
 }
 
 
@@ -327,7 +327,7 @@
   type=mtc,
   category=model,
   name={ComponentStream},
-  description={An XML container type element that organizes data returned from an \gls{agent} in response to a current or sample HTTP request.} 
+  description={An XML container type element that organizes data returned from an \gls{agent} in response to a \gls{current httprequest} or \gls{sample httprequest} HTTP request.} 
 }
 
 
@@ -359,7 +359,7 @@
   type=mtc,
   category=model,
   name={Condition},
-  description={An XML container type element that organizes the data reported in the \glspl{mtconnectstream} document for \gls{dataitem} elements defined in the \glspl{mtconnectdevice} document with a \gls{category} attribute of \gls{condition category}.}
+  description={An XML container type element that organizes the data reported in the \gls{mtconnectstreams} document for \gls{dataitem} elements defined in the \gls{mtconnectdevices} document with a \gls{category} attribute of \gls{condition category}.}
 }
 
 \newglossaryentry{condition}
@@ -367,7 +367,7 @@
   type=mtc,
   category=model,
   name={Condition},
-  description={An XML element which provides the information and data reported from a piece of equipment for those \gls{dataitem} elements defined with a \gls{category} attribute of \gls{condition category} in the \glspl{mtconnectdevice} document.}
+  description={An XML element which provides the information and data reported from a piece of equipment for those \gls{dataitem} elements defined with a \gls{category} attribute of \gls{condition category} in the \gls{mtconnectdevices} document.}
 }
 
 
@@ -406,7 +406,7 @@
 {
   type=mtc,
   name={Current Request},
-  description={An \glstext{http} request to the \gls{agent} for returning latest known values for the \gls{dataitem} as an \glspl{mtconnectstream} \glstext{xml} document}
+  description={An \glstext{http} request to the \gls{agent} for returning latest known values for the \gls{dataitem} as an \gls{mtconnectstreams} \glstext{xml} document}
 }
 
 
@@ -415,7 +415,7 @@
   type=mtc,
   category=model,
   name={current},
-  description={Used in the path portion of an \gls{http request line}, by a client software application, to initiate a \gls{current request} to an \gls{agent} to publish an \glspl{mtconnectstream} document.}
+  description={Used in the path portion of an \gls{http request line}, by a client software application, to initiate a \gls{current request} to an \gls{agent} to publish an \gls{mtconnectstreams} document.}
 }
 
 \newglossaryentry{asset httprequest}
@@ -434,11 +434,11 @@
   type=mtc,
   name={DataItem},
   kind={element},
-  attributes={\gls{name},\gls{id},\gls{type},\gls{subtype},\gls{statistic},\gls{units},\gls{nativeunits},\gls{nativescale},\gls{category},\gls{coordinatesystem},\gls{compositionid},\gls{samplerate},\gls{representation},\gls{significantdigits}},
+  attributes={\gls{name},\gls{id},\gls{type},\gls{subtype},\gls{statistic},\gls{units},\gls{nativeunits},\gls{nativescale},\gls{category},\gls{coordinatesystem},\gls{compositionid},\gls{samplerate},\gls{representation},\gls{significantdigits},\gls{discrete}},
   category=model,
-  description={\gls{data entity} describing a piece of information reported about a piece of equipment.}
+  description={\gls{data entity} describing a piece of information reported about a piece of equipment.},
+  elements={\gls{source}}
 }
-
 
 \newglossaryentry{dataitems}
 {
@@ -497,7 +497,7 @@
   type=mtc,
   category=model,
   name={Devices},
-  description={The first, or highest level, \gls{structural element} in a \glspl{mtconnectdevice} document.},
+  description={The first, or highest level, \gls{structural element} in a \gls{mtconnectdevices} document.},
   elements={\gls{device}},
   kind={element}
 }
@@ -508,7 +508,7 @@
   type=mtc,
   category=model,
   name={DeviceStream},
-  description={An XML container element provided in the \gls{streams} container in the \glspl{mtconnectstream} document.}
+  description={An XML container element provided in the \gls{streams} container in the \gls{mtconnectstreams} document.}
 }
 
 
@@ -517,11 +517,10 @@
 {
   type=mtc,
   category=model,
-  name={DISCRETE},
+  name={DISCRETE (\normalfont \DEPRECATED in \textit{Version 1.5})},
   kind={representation},
   description={A \gls{data entity} where each discrete occurrence of the data may have the same value as the previous occurrence of the data.}
 }
-
 
 \newglossaryentry{duration}
 {
@@ -538,7 +537,7 @@
   type=mtc,
   category=model,
   name={Event},
-  description={An XML element which provides the information and data reported from a piece of equipment for those \gls{dataitem} elements defined with a \gls{category} attribute of \gls{event category} in the \glspl{mtconnectdevice} document.}
+  description={An XML element which provides the information and data reported from a piece of equipment for those \gls{dataitem} elements defined with a \gls{category} attribute of \gls{event category} in the \gls{mtconnectdevices} document.}
 }
 
 
@@ -547,7 +546,7 @@
   type=mtc,
   category=model,
   name={Events},
-  description={An XML container type element that organizes the data reported in the \glspl{mtconnectstream} document for \gls{dataitem} elements defined in the \glspl{mtconnectdevice} document with a \gls{category} attribute of \gls{event category}.}
+  description={An XML container type element that organizes the data reported in the \gls{mtconnectstreams} document for \gls{dataitem} elements defined in the \gls{mtconnectdevices} document with a \gls{category} attribute of \gls{event category}.}
 }
 
 
@@ -596,18 +595,18 @@
   type=mtc,
   category=model,
   name={id},
-  description={The unique identifier for this element.}
+  description={The unique identifier for this element.},
+  kind={attribute}
 }
-
 
 \newglossaryentry{idref}
 {
   type=mtc,
   category=model,
   name={idRef},
-  description={A pointer to the \gls{id} attribute of an element that contains the information to be associated with this XML element.}
+  description={A pointer to the \gls{id} attribute of an element that contains the information to be associated with this XML element.},
+  kind={attribute}
 }
-
 
 \newglossaryentry{initialvalue}
 {
@@ -622,7 +621,7 @@
 \newglossaryentry{interfaces}
 {
   type=mtc,
-  name=interfaces,
+  name={interfaces},
   description={\citetitle{MTCPart5} provides an interaction model for coordinating activities between manufacturing devices}
 }
 
@@ -722,18 +721,10 @@
 }
 
 
-\newglossaryentry{mixes-in}
-{
-  type=mtc,
-  name={<<Mixes In>>},
-  description={A software architecture pattern represented as a \gls{stereotype} that combines the properties of one class with another. Similar to a sub-class, it allows for inheritance in single inheritance type systems.}
-}
-
-
 \newglossaryentry{modbus}
 {
   type=mtc,
-  name=MODBUS,
+  name={MODBUS},
   description={Modbus is a communication protocol developed by Modicon systems and is a method used for transmitting information over serial lines between electronic devices.}
 }
 
@@ -769,23 +760,21 @@
 }
 
 
-\newglossaryentry{mtconnectdevice}
+\newglossaryentry{mtconnectdevices}
 {
   type=mtc,
   category=model,
-  name={MTConnectDevice},
-  plural={MTConnectDevices},
-  description={An XML response document.}
+  name={MTConnectDevices},
+  description={It is the root XML element of an \gls{mtconnectdevices response document}.}
 }
 
 
-\newglossaryentry{mtconnectstream}
+\newglossaryentry{mtconnectstreams}
 {
   type=mtc,
   category=model,
-  name={MTConnectStream},
-  plural={MTConnectStreams},
-  description={An XML response document}
+  name={MTConnectStreams},
+  description={It is the root XML element of an \gls{mtconnectstreams response document}.}
 }
 
 \newglossaryentry{mtconnecterror}
@@ -793,7 +782,7 @@
   type=mtc,
   category=model,
   name={MTConnectError},
-  description={An XML response document.}
+  description={It is the root XML element of an \gls{mtconnecterrors response document}.}
 }
 
 
@@ -866,9 +855,10 @@
 
 \newglossaryentry{occurrence}
 {
-  name={Occurence},
+  type=mtc,
+  name={Occurrence},
   description={Occurrence defines the number of times the content defined in the tables \MAY be provided in the usage case specified},
-  plural={Occurences}
+  plural={Occurrences}
 }
 
 
@@ -884,7 +874,7 @@
 \newglossaryentry{ontology}
 {
   type=mtc,
-  name=ontology,
+  name={ontology},
   description={logical structure of the terms used to describe a domain of knowledge, including both the definitions of the applicable terms and their relationships ISO 20534:2018}
 }
 
@@ -931,7 +921,7 @@
 {
   type=mtc,
   name={Probe Request},
-  description={An \glstext{http} request to the \gls{agent} for returning metadata as an \glspl{mtconnectdevice} \glstext{xml} document}
+  description={An \glstext{http} request to the \gls{agent} for returning metadata as an \gls{mtconnectdevices} \glstext{xml} document}
 }
 
 
@@ -964,14 +954,23 @@
 
 \newglossaryentry{reference}
 {
-  type=mtc,
+  type={mtc},
   category=model,
   name={Reference},
   kind={element},
   attributes={\gls{idref},\gls{name}},
-  description={\gls{reference} is a pointer to information that is associated with another \gls{structural element} defined elsewhere in the XML document for a piece of equipment.}
+  description={\gls{reference} is a pointer to information that is associated with another \gls{structural element} defined elsewhere in the XML document for a piece of equipment.},
+  plural={References}
 }
 
+\newglossaryentry{reference term}
+{
+  type={mtc},
+  name={Reference},
+  plural={References},
+  kind={element},
+  description={\gls{reference} is a pointer to information that is associated with another \gls{structural element}.}
+}
 
 \newglossaryentry{references}
 {
@@ -990,9 +989,9 @@
   category=model,
   name={representation},
   kind={attribute},
-  description={Description of a means to interpret data consisting of multiple data points or samples reported as a single value.  \newline \gls{representation} is an optional attribute.  \newline \gls{representation} will define a unique format for each set of data.  \newline \gls{representation} for \gls{timeseries representation}, \gls{discrete representation}, and \gls{value representation} are defined in \citetitle{MTCPart2} \textit{Section 7.2.2.12}.  \newline If \gls{representation} is not specified, it \MUST be determined to be \gls{value representation}.}
+  description={Description of a means to interpret data consisting of multiple data points or samples reported as a single value.  \newline \gls{representation} is an optional attribute.  \newline \gls{representation} will define a unique format for each set of data.  \newline \gls{representation} for \gls{timeseries representation}, \gls{discrete representation}, and \gls{value representation} are defined in \citetitle{MTCPart2} \textit{Section 7.2.2.12}.  \newline If \gls{representation} is not specified, it \MUST be determined to be \gls{value representation}.},
+  representation={\gls{discrete representation},\gls{dataset}}
 }
-
 
 \newglossaryentry{resettrigger}
 {
@@ -1009,7 +1008,7 @@
   type=mtc,
   category=model,
   name={resetTriggered},
-  description={For those \gls{dataitem} elements that report data that may be periodically reset to an initial value, \gls{resettriggered} identifies when a reported value has been reset and what has caused that reset to occur.  \newline resetTriggered is an optional attribute.  \newline \gls{resettriggered} \MUST only be provided for the specific occurrence of a \gls{data entity} reported in the \glspl{mtconnectstream} document when the reset occurred and \MUSTNOT be provided for any other occurrence of the \gls{data entity} reported in a \glspl{mtconnectstream} document.}
+  description={For those \gls{dataitem} elements that report data that may be periodically reset to an initial value, \gls{resettriggered} identifies when a reported value has been reset and what has caused that reset to occur.  \newline resetTriggered is an optional attribute.  \newline \gls{resettriggered} \MUST only be provided for the specific occurrence of a \gls{data entity} reported in the \gls{mtconnectstreams} document when the reset occurred and \MUSTNOT be provided for any other occurrence of the \gls{data entity} reported in a \gls{mtconnectstreams} document.}
 }
 
 
@@ -1088,7 +1087,7 @@
   type=mtc,
   category=model,
   name={Sample},
-  description={An XML element that provides the information and data reported from a piece of equipment for those \gls{dataitem} elements defined with a \gls{category} attribute of \gls{sample category} in the \glspl{mtconnectdevice} document. }
+  description={An XML element that provides the information and data reported from a piece of equipment for those \gls{dataitem} elements defined with a \gls{category} attribute of \gls{sample category} in the \gls{mtconnectdevices} document. }
 }
 
 
@@ -1097,7 +1096,7 @@
   type=mtc,
   category=model,
   name={Samples},
-  description={An XML container type element that organizes the data reported in the \glspl{mtconnectstream} document for \gls{dataitem} elements defined in the \glspl{mtconnectdevice} document with a \gls{category} attribute of \gls{sample category}.}
+  description={An XML container type element that organizes the data reported in the \gls{mtconnectstreams} document for \gls{dataitem} elements defined in the \gls{mtconnectdevices} document with a \gls{category} attribute of \gls{sample category}.}
 }
 
 
@@ -1116,7 +1115,7 @@
   type=mtc,
   category=model,
   name={sample},
-  description={Used in the path portion of an \gls{http request line}, by a client software application, to initiate a \gls{sample request} to an \gls{agent} to publish an \glspl{mtconnectstream} document.}
+  description={Used in the path portion of an \gls{http request line}, by a client software application, to initiate a \gls{sample request} to an \gls{agent} to publish an \gls{mtconnectstreams} document.}
 }
 
 
@@ -1126,7 +1125,7 @@
   category=model,
   name={sampleCount},
   kind={attribute},
-  description={The number of readings reported in the data returned for the \gls{dataitem} element defined in the \glspl{mtconnectdevice} document that this \gls{sample} element represents.}
+  description={The number of readings reported in the data returned for the \gls{dataitem} element defined in the \gls{mtconnectdevices} document that this \gls{sample} element represents.}
 }
 
 
@@ -1255,14 +1254,6 @@
 }
 
 
-\newglossaryentry{slot}
-{
-  type=mtc,
-  name=Slot,
-  description={Slot is UML element which specifies that an instance has a value or values for a specific structural feature. UML specification also says that a slot gives the value or values of a structural feature of the instance. An instance can have one slot per structural feature of its classifiers, including inherited features.}
-}
-
-
 \newglossaryentry{station}
 {
   type=mtc,
@@ -1295,20 +1286,12 @@
 }
 
 
-\newglossaryentry{stereotype}
-{
-  type=mtc,
-  name=stereotype,
-  description={A profile class which defines how an existing metaclass may be extended as part of a profile. It enables the use of a platform or domain specific terminology or notation in place of, or in addition to, the ones used for the extended metaclass. A stereotype is denoted by <<[name]>>.}
-}
-
-
 \newglossaryentry{streams}
 {
   type=mtc,
   category=model,
   name={Streams},
-  description={The first, or highest, level XML container element in an \glspl{mtconnectstream} \gls{response} Document provided by an \gls{agent} in response to a \gls{sample httprequest} or \gls{current httprequest} HTTP \gls{request}.}
+  description={The first, or highest, level XML container element in an \gls{mtconnectstreams} \gls{response} Document provided by an \gls{agent} in response to a \gls{sample httprequest} or \gls{current httprequest} HTTP \gls{request}.}
 }
 
 
@@ -1913,7 +1896,7 @@
   category=model,
   name={KURTOSIS},
   kind={statistic},
-  description={A measure of the peakedness of a probability distribution; i.e., the shape of the distribution curve.}
+  description={A measure of the "peakedness" of a probability distribution; i.e., the shape of the distribution curve.}
 }
 
 
@@ -2282,7 +2265,7 @@
   elementname=\deprecated{\cfont{GlobalPosition}},
   description={\DEPRECATED in Version 1.1},
   deprecated={true},
-  kind={type,sample}
+  kind={type,sample},
   facet={\gls{float}}
 }
 
@@ -2329,11 +2312,10 @@
 {
   type=mtc,
   category=model,
-  name={LEVEL},
-  elementname=\cfont{Level},
+  name=\deprecated{LEVEL},
+  elementname=\deprecated{\cfont{Level}},
   description={\DEPRECATED in Version 1.2.  See \gls{filllevel sample}},
   deprecated={true},
-  units={},
   kind={type,sample},
   facet={}
 }
@@ -2490,7 +2472,7 @@
 
 
 
-\newglossaryentry{process processtimer sample}
+\newglossaryentry{process subtype}
 {
   type=mtc,
   category=model,
@@ -2602,7 +2584,7 @@
   elementname=\deprecated{\cfont{SpindleSpeed}},
   description={\DEPRECATED in Version 1.2.  Replaced by \gls{rotaryvelocity sample}},
   deprecated={true},
-  units={},
+  units={\gls{revolutionperminute}},
   kind={type,sample},
   subtype={\gls{actual subtype}, \gls{commanded subtype}, \gls{override subtype}},
   facet={}
@@ -2822,7 +2804,8 @@
   category=model,
   name={AXIS\_COUPLING},
   elementname=\cfont{AxisCoupling},
-  description={Describes the way the axes will be associated to each other. This is used in conjunction with \gls{coupledaxes event} to indicate the way they are interacting.},
+  description={Describes the way the axes will be associated to each other. 
+  \newline This is used in conjunction with \gls{coupledaxes event} to indicate the way they are interacting.},
   kind={type,event},
   facet={\gls{string}},
   enumeration={\gls{tandem value},\gls{synchronous value},\gls{master value},\gls{slave value}}
@@ -2912,7 +2895,7 @@
   type=mtc,
   category=model,
   name={MANUAL\_UNCLAMP},
-  description={An indication of the state of an operator controlled interlock that can inhibit the ability to initiate an unclamp action of an electronically controlled chuck.  The \gls{valid data value} \must be \gls{active value} or \gls{inactive value}. \newline When \gls{manualunclamp subtype} is \gls{active value}, it is expected that a chuck cannot be unclamped until \gls{manualunclamp subtype} is set to \gls{inactive value}. },
+  description={An indication of the state of an operator controlled interlock that can inhibit the ability to initiate an unclamp action of an electronically controlled chuck.\newline The \gls{valid data value} \must be \gls{active value} or \gls{inactive value}. \newline When \gls{manualunclamp subtype} is \gls{active value}, it is expected that a chuck cannot be unclamped until \gls{manualunclamp subtype} is set to \gls{inactive value}. },
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{active value},\gls{inactive value}}
@@ -2963,7 +2946,7 @@
   type=mtc,
   category=model,
   name={ACTION},
-  description={An indication of the operating state of a mechanism represented by a \gls{composition} type component.The operating state indicates whether the \gls{composition} element is activated or disabled. The \gls{valid data value} \must be \gls{active value} or \gls{inactive value}.},
+  description={An indication of the operating state of a mechanism represented by a \gls{composition} type component.\newline The operating state indicates whether the \gls{composition} element is activated or disabled. \newline The \gls{valid data value} \must be \gls{active value} or \gls{inactive value}.},
   kind={subtype}
 }
 
@@ -2997,7 +2980,7 @@
   type=mtc,
   category=model,
   name={SWITCHED},
-  description={An indication of the activation state of a mechanism represented by a \gls{composition} type component.The activation state indicates whether the \gls{composition} element is activated or not.The \gls{valid data value} \must be \gls{on value} or \gls{off value}.},
+  description={An indication of the activation state of a mechanism represented by a \gls{composition} type component.\newline The activation state indicates whether the \gls{composition} element is activated or not.\newline The \gls{valid data value} \must be \gls{on value} or \gls{off value}.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
@@ -3048,7 +3031,7 @@
   type=mtc,
   category=model,
   name={DRY\_RUN},
-  description={A setting or operator selection used to execute a test mode to confirm the execution of machine functions.  The \gls{valid data value} \must be \gls{on value} or \gls{off value}. \newline When \gls{dryrun subtype} is \gls{on value}, the equipment performs all of its normal functions, except no part or product is produced.  If the equipment has a spindle, spindle operation is suspended.},
+  description={A setting or operator selection used to execute a test mode to confirm the execution of machine functions. \newline The \gls{valid data value} \must be \gls{on value} or \gls{off value}. \newline When \gls{dryrun subtype} is \gls{on value}, the equipment performs all of its normal functions, except no part or product is produced.  If the equipment has a spindle, spindle operation is suspended.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
@@ -3060,7 +3043,7 @@
   type=mtc,
   category=model,
   name={MACHINE\_AXIS\_LOCK},
-  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be \gls{on value} or \gls{off value}. \newline When \gls{machineaxislock subtype} is \gls{on value}, program execution continues normally, but no equipment motion occurs },
+  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment. \newline The \gls{valid data value} \must be \gls{on value} or \gls{off value}. \newline When \gls{machineaxislock subtype} is \gls{on value}, program execution continues normally, but no equipment motion occurs },
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
@@ -3072,7 +3055,7 @@
   type=mtc,
   category=model,
   name={OPTIONAL\_STOP},
-  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be \gls{on value} or \gls{off value}.The program execution is stopped after a specific program block is executed when \gls{optionalstop subtype} is \gls{on value}.    \newline In the case of a G-Code program, a program \gls{block event} containing a M01 code designates the command for an \gls{optionalstop subtype}. \gls{execution event} \must change to OPTIONAL\_STOP after a program block specifying an optional stop is executed and the \gls{optionalstop subtype} selection is \gls{on value}.},
+  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment. \newline The \gls{valid data value} \must be \gls{on value} or \gls{off value}.\newline The program execution is stopped after a specific program block is executed when \gls{optionalstop subtype} is \gls{on value}.    \newline In the case of a G-Code program, a program \gls{block event} containing a M01 code designates the command for an \gls{optionalstop subtype}. \newline \gls{execution event} \must change to \gls{optionalstop subtype} after a program block specifying an optional stop is executed and the \gls{optionalstop subtype} selection is \gls{on value}.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
@@ -3084,7 +3067,7 @@
   type=mtc,
   category=model,
   name={SINGLE\_BLOCK},
-  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be \gls{on value} or \gls{off value}. Program execution is paused after each \gls{block event} of code is executed when \gls{singleblock subtype} is \gls{on value}.   \newline When \gls{singleblock subtype} is \gls{on value}, \gls{execution event} \must change to \gls{interrupted value} after completion of each \gls{block event} of code. },
+  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment. \newline The \gls{valid data value} \must be \gls{on value} or \gls{off value}.\newline Program execution is paused after each \gls{block event} of code is executed when \gls{singleblock subtype} is \gls{on value}.   \newline When \gls{singleblock subtype} is \gls{on value}, \gls{execution event} \must change to \gls{interrupted value} after completion of each \gls{block event} of code. },
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
@@ -3096,7 +3079,7 @@
   type=mtc,
   category=model,
   name={TOOL\_CHANGE\_STOP},
-  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment.  The \gls{valid data value} \must be \gls{on value} or \gls{off value}. Program execution is paused when a command is executed requesting a cutting tool to be changed. \gls{execution event} \must change to \gls{interrupted value} after completion of the command requesting a cutting tool to be changed and \gls{toolchangestop subtype} is \gls{on value}.},
+  description={A setting or operator selection that changes the behavior of the controller on a piece of equipment. \newline The \gls{valid data value} \must be \gls{on value} or \gls{off value}. \newline Program execution is paused when a command is executed requesting a cutting tool to be changed. \newline \gls{execution event} \must change to \gls{interrupted value} after completion of the command requesting a cutting tool to be changed and \gls{toolchangestop subtype} is \gls{on value}.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{on value},\gls{off value}}
@@ -3143,7 +3126,7 @@
   type=mtc,
   category=model,
   name={ROTARY},
-  description={The rotational direction of a rotary motion using the right hand rule convention.The \gls{valid data value} \must be \gls{clockwise value} or \gls{counterclockwise value}.},
+  description={The rotational direction of a rotary motion using the right hand rule convention.\newline The \gls{valid data value} \must be \gls{clockwise value} or \gls{counterclockwise value}.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{clockwise value},\gls{counterclockwise value}}
@@ -3205,7 +3188,7 @@
   type=mtc,
   category=model,
   name={PRIMARY},
-  description={Specific applications \MAY reference one or more locations on a piece of bar stock as the indication for the \gls{endofbar event}.  The main or most important location \must be designated as the \gls{primary subtype} indication for the \gls{endofbar event}.   \newline If no \gls{subtype} is specified, \gls{primary subtype} \must be the default \gls{endofbar event} indication.},
+  description={Specific applications \MAY reference one or more locations on a piece of bar stock as the indication for the \gls{endofbar event}. The main or most important location \must be designated as the \gls{primary subtype} indication for the \gls{endofbar event}.   \newline If no \gls{subtype} is specified, \gls{primary subtype} \must be the default \gls{endofbar event} indication.},
   kind={subtype,event},
   facet={\gls{string}},
   enumeration={\gls{yes value},\gls{no value}}
@@ -3370,7 +3353,7 @@
   type=mtc,
   category=model,
   name={path},
-  description={An XPATH that defines specific information or a set of information to be included in an \gls{mtconnectstreams response document}.}
+  description={An \gls{xpath} that defines specific information or a set of information to be included in an \gls{mtconnectstreams response document}.}
 }
 
 \newglossaryentry{heartbeat query}
@@ -3614,7 +3597,7 @@
   category=model,
   name={PART\_NUMBER},
   elementname=\cfont{PartNumber},
-  description={An identifier of a part or product moving through the manufacturing process.  The \gls{valid data value} \must be a text string. },
+  description={An identifier of a part or product moving through the manufacturing process. \newline The \gls{valid data value} \must be a text string. },
   kind={type,event},
   facet={\gls{string}}
 }
@@ -3725,7 +3708,7 @@
   category=model,
   name={PROGRAM\_COMMENT},
   elementname=\cfont{ProgramComment},
-  description={A comment or non-executable statement in the control program.The \gls{valid data value} \must be a text string.},
+  description={A comment or non-executable statement in the control program.\newline The \gls{valid data value} \must be a text string.},
   kind={type,event},
   facet={\gls{string}}
 }
@@ -3787,7 +3770,7 @@
   category=model,
   name={ROTARY\_VELOCITY\_OVERRIDE},
   elementname=\cfont{RotaryVelocityOverride},
-  description={The value of a command issued to adjust the programmed velocity for a \gls{rotary} type axis. This command represents a percentage change to the velocity calculated by a logic or motion program or set by a switch for a \gls{rotary} type axis.},
+  description={The value of a command issued to adjust the programmed velocity for a \gls{rotary} type axis.\newline This command represents a percentage change to the velocity calculated by a logic or motion program or set by a switch for a \gls{rotary} type axis.},
   kind={type,event},
   facet={\gls{float}}
 }
@@ -5121,7 +5104,7 @@
   type=mtc,
   category=model,
   name={OPTIONAL\_STOP},
-  description={The controller’s program has been intentionally stopped},
+  description={The controllers program has been intentionally stopped},
   kind={enum}
 }
 
@@ -5141,7 +5124,7 @@
   type=mtc,
   category=model,
   name={PROGRAM\_COMPLETED},
-  description={The execution of the controller’s program has been stopped by a command from within the program.},
+  description={The execution of the controllers program has been stopped by a command from within the program.},
   kind={enum}
 }
 
@@ -5329,7 +5312,7 @@
   type=mtc,
   category=model,
   name={INVALID\_XPATH},
-  description={The XPATH identified in the \gls{request} for information could not be parsed correctly by the \gls{agent}.},
+  description={The \gls{xpath} identified in the \gls{request} for information could not be parsed correctly by the \gls{agent}.},
   kind={enum}
 }
 
@@ -5400,13 +5383,12 @@
 
 
 
-\newglossaryentry{mtconnectasset}
+\newglossaryentry{mtconnectassets}
 {
   type=mtc,
   category=model,
-  name={MTConnectAsset},
-  plural={MTConnectAssets},
-  description={An XML response document}
+  name={MTConnectAssets},
+  description={It is the root XML element of an \gls{mtconnectassets response document}.}
 }
 
 
@@ -5414,7 +5396,7 @@
 {
   type=mtc,
   name={Asset Information Model},
-  description={It associates each electronic \glspl{mtconnectasset} document with a unique identifier and allows for some predefined mechanisms to find, create, request, updated, and delete these electronic documents in a way that provides for consistency across multiple pieces of equipment.}
+  description={It associates each electronic \gls{mtconnectassets} document with a unique identifier and allows for some predefined mechanisms to find, create, request, updated, and delete these electronic documents in a way that provides for consistency across multiple pieces of equipment.}
 }
 
 
@@ -5545,9 +5527,9 @@
   type=mtc,
   category=model,
   name={removed},
-  description={An indicator that the \gls{mtconnect asset} has been removed from the piece of equipment.}
+  description={An indicator that the \gls{mtconnect asset} has been removed from the piece of equipment.},
+  kind={attribute}
 }
-
 
 \newglossaryentry{asset buffer}
 {
@@ -5596,7 +5578,7 @@
   type=mtc,
   category=model,
   name={includeRemoved},
-  description={A flag to include removed \gls{assets mtconnectassets} while requesting an \gls{agent} for an \glspl{mtconnectstream} \gls{response document}.}
+  description={A flag to include removed \gls{assets mtconnectassets} while requesting an \gls{agent} for an \gls{mtconnectstreams} \gls{response document}.}
 }
 
 
@@ -6969,7 +6951,7 @@
 
   \ulheading{Used to identify a storage area in an \gls{agent}}:
 
-  See description of Buffer.
+  See description of \gls{buffer}.
 
   \ulheading{Used as an \gls{information model}}:
 
@@ -7007,7 +6989,7 @@
 
   Identifies an electronic document encoded in XML and published by an \gls{agent} in response to a \gls{request} for information from a client software application relating to \glspl{mtconnect asset}.
 
-  Appears in the documents in the following form: \glspl{mtconnectasset}.
+  Appears in the documents in the following form: \gls{mtconnectassets}.
 
   \ulheading{Used as an \gls{mtconnect request}}:
 
@@ -7017,9 +6999,9 @@
 
   \ulheading{Used as part of an \gls{http request}}:
 
-  Used in the path portion of an \gls{http request line}, by a client software application, to initiate an \gls{asset request} to an \gls{agent} to publish an \glspl{mtconnectasset} document.
+  Used in the path portion of an \gls{http request line}, by a client software application, to initiate an \gls{asset request} to an \gls{agent} to publish an \gls{mtconnectassets} document.
 
-  Appears in the documents in the following form: \gls{asset mtconnectassets}.
+  Appears in the documents in the following form: \gls{asset httprequest}.
 }
 
 
@@ -7069,20 +7051,20 @@
 
 \longnewglossaryentry{cdata}
 {
-  name={CDATA}
+  name={\normalfont CDATA}
 }
 {
   \ulheading{General meaning}:
 
   An abbreviation for Character Data.
 
-  CDATA is used to describe a value (text or data) published as part of an XML element.
+  \gls{cdata} is used to describe a value (text or data) published as part of an XML element.
 
-  For example, \cfont{"This is some text"} is the CDATA in the XML element:
+  For example, \cfont{"This is some text"} is the \gls{cdata} in the XML element:
   
   \tab \cfont{<Message ...>This is some text</Message>}
 
-  Appears in the documents in the following form: CDATA
+  Appears in the documents in the following form: \gls{cdata}
 }
 
 
@@ -7190,7 +7172,9 @@
 	Appears in the documents in the following form: \gls{condition}.
 	\end{itemize}
 
+	\begin{note}
 	Note: The form \gls{condition} is used to represent both above uses.
+	\end{note}
 }
 
 
@@ -7233,7 +7217,7 @@
 
 	\ulheading{Used as part of an \gls{http request}}:
 
-	Used in the path portion of an \gls{http request line}, by a client software application, to initiate a \gls{current request} to an \gls{agent} to publish an \glspl{mtconnectstream} document.
+	Used in the path portion of an \gls{http request line}, by a client software application, to initiate a \gls{current request} to an \gls{agent} to publish an \gls{mtconnectstreams} document.
 
 	Appears in the documents in the following form: \gls{current httprequest}.
 }
@@ -7333,7 +7317,7 @@
 
 \longnewglossaryentry{device information model}
 {
-  name={Device Information Model},
+  name={Devices Information Model},
   plural={Devices Information Model}
 }
 {
@@ -7569,7 +7553,7 @@
 {
 	\ulheading{General meaning}:
 
-	A function that indicates to a client application that the communications connection to an \gls{agent} is still viable during times when there is no new data available to report – often referred to as a "keep alive" message.
+	A function that indicates to a client application that the communications connection to an \gls{agent} is still viable during times when there is no new data available to report  often referred to as a "keep alive" message.
 
 	Appears in the documents in the following form: \gls{heartbeat}.
 
@@ -7583,13 +7567,13 @@
 
 \longnewglossaryentry{http}
 {
-  name={HTTP}
+  name={\normalfont HTTP}
 }
 {
 	Hyper-Text Transport Protocol.  The protocol used by all web browsers and web applications.
 
     \begin{note}
-	Note:  HTTP is an IETF standard and is defined in RFC 7230.  See https://tools.ietf.org/html/rfc7230 for more information.
+	Note:  HTTP is an IETF standard and is defined in RFC 7230. \\ See https://tools.ietf.org/html/rfc7230 for more information.
 	\end{note}
 }
 
@@ -7674,7 +7658,7 @@
   name={HTTP Status Code}
 }
 {
-	In the MTConnect Standard, a numeric code contained in an \gls{http response} that defines a status category associated with the \gls{response} – either a success status or a category of an HTTP error.  
+	In the MTConnect Standard, a numeric code contained in an \gls{http response} that defines a status category associated with the \gls{response}  either a success status or a category of an HTTP error.  
 
 	Appears in the documents in the following form: \gls{http status code}.
 }
@@ -7771,15 +7755,13 @@
 
 	\ulheading{Used as an XML container or element}:
 
-    \begin{itemize}
-	\item When used as an XML container that consists of one or more types of \gls{interface component} XML elements.
+	\tab - When used as an XML container that consists of one or more types of \gls{interface component} XML elements.
 
 	Appears in the documents in the following form: \gls{interfaces component}.
 
-	\item When used as an abstract XML element.  It is replaced in the XML document by types of \gls{interface component} elements.
+	\tab - When used as an abstract XML element.  It is replaced in the XML document by types of \gls{interface component} elements.
 
-	Appears in the documents in the following form: \gls{interface component}.
-	\end{itemize}
+	Appears in the documents in the following form: \gls{interface component}
 }
 
 
@@ -7909,12 +7891,14 @@
 
 \longnewglossaryentry{nmtoken}
 {
-  name={NMTOKEN}
+  name={\normalfont NMTOKEN}
 }
 {
 	The data type for XML identifiers.
 
+	\begin{note}
 	Note: The identifier must start with a letter, an underscore "\_" or a colon.  The next character must be a letter, a number, or one of the following ".", "-", "\_", ":".  The identifier must not have any spaces or special characters.
+	\end{note}
 
 	Appears in the documents in the following form: \gls{nmtoken}.
 }
@@ -7942,7 +7926,7 @@
   name={Parent Element}
 }
 {
-	An XML element used to organize \gls{lower level} child elements that share a common relationship to the \gls{parent element}.
+	AnXML element used to organize \gls{lower level} child elements that share a common relationship to the \gls{parent element}.
 
 	Appears in the documents in the following form: \gls{parent element}.
 }
@@ -8014,7 +7998,7 @@
   name={Publish/Subscribe}
 }
 {
-	In the MTConnect Standard, a communications messaging pattern that may be used to publish \gls{streaming data} from an \gls{agent}.  When a \gls{publishsubscribe} communication method is established between a client software application and an \gls{agent}, the \gls{agent} will repeatedly publish a specific \glspl{mtconnectstream} document at a defined period.
+	In the MTConnect Standard, a communications messaging pattern that may be used to publish \gls{streaming data} from an \gls{agent}.  When a \gls{publishsubscribe} communication method is established between a client software application and an \gls{agent}, the \gls{agent} will repeatedly publish a specific \gls{mtconnectstreams} document at a defined period.
 
 	Appears in the documents in the following form: \gls{publishsubscribe}.
 }
@@ -8175,7 +8159,7 @@
 
 \longnewglossaryentry{rest}
 {
-  name={REST}
+  name={\normalfont REST}
 }
 {
 	Stands for REpresentational State Transfer:  A software architecture where a client software application and server move through a series of state transitions based solely on the request from the client and the response from the server. 
@@ -8232,7 +8216,7 @@
 
 	\ulheading{Used as part of an \gls{http request}}:
 
-	Used in the \gls{path query} portion of an \gls{http request line}, by a client software application, to initiate a \gls{sample request} to an \gls{agent} to publish an \glspl{mtconnectstream} document.
+	Used in the \gls{path query} portion of an \gls{http request line}, by a client software application, to initiate a \gls{sample request} to an \gls{agent} to publish an \gls{mtconnectstreams} document.
 
 	Appears in the documents in the following form: \gls{sample httprequest}.
 
@@ -8434,7 +8418,7 @@
 
 \longnewglossaryentry{uri}
 {
-  name={URI}
+  name={\normalfont URI}
 }
 {
 	Stands for Universal Resource Identifier.  
@@ -8445,7 +8429,7 @@
 
 \longnewglossaryentry{url}
 {
-  name={URL},
+  name={\normalfont URL},
   kind={facet}
 }
 {
@@ -8457,7 +8441,7 @@
 
 \longnewglossaryentry{urn}
 {
-  name={URN}
+  name={\normalfont URN}
 }
 {
 	Stands for Uniform Resource Name.  
@@ -8468,7 +8452,7 @@
 
 \longnewglossaryentry{utcgmt}
 {
-  name={UTC/GMT}
+  name={\normalfont UTC/GMT}
 }
 {
 	Stands for Coordinated Universal Time/Greenwich Mean Time.  
@@ -8481,14 +8465,16 @@
 
 \longnewglossaryentry{uuid term}
 {
-  name={UUID}
+  name={\normalfont UUID}
 }
 {
 	\ulheading{General meaning}:
 
-	Stands for Universally Unique Identifier. (Can also be referred to as a GUID in some literature – Globally Unique Identifier).
+	Stands for Universally Unique Identifier. (Can also be referred to as a GUID in some literature  Globally Unique Identifier).
 
+	\begin{note}
 	Note:  Defined in RFC 4122 of the IETF.  See https://www.ietf.org/rfc/rfc4122.txt for more information.
+	\end{note}
 
 	Appears in the documents in the following form: UUID.
 
@@ -8514,7 +8500,7 @@
 
 \longnewglossaryentry{w3c}
 {
-  name={W3C}
+  name={\normalfont W3C}
 }
 {
 	Stands for World Wide Web Consortium.
@@ -8565,7 +8551,7 @@
 
 \longnewglossaryentry{xml}
 {
-  name={XML}
+  name={\normalfont XML}
 }
 {
 	Stands for EXtensible Markup Language. 
@@ -8613,31 +8599,915 @@
 
 \longnewglossaryentry{xpath}
 {
-  name={XPATH}
+  name={\normalfont XPath}
 }
 {
 	\ulheading{General meaning}:
 
-	XPATH is a command structure that describes a way for a software system to locate information in an XML document.  
+	\gls{xpath} is a command structure that describes a way for a software system to locate information in an XML document.  
 
-	XPATH uses an addressing syntax based on a path through the document's logical structure. 
+	\gls{xpath} uses an addressing syntax based on a path through the document's logical structure. 
 
-	See http://www.w3.org/TR/xpath for more information on XPATH.
+	See http://www.w3.org/TR/xpath for more information on \gls{xpath}.
 
-	Appears in the documents in the following form: XPATH.
+	Appears in the documents in the following form: \gls{xpath}.
 }
 
 
 
 \longnewglossaryentry{asset document}
 {
-  type = mtc,
+  type=mtc,
   name={Asset Document}
 }
 {
 	An electronic document published by an \gls{agent} in response to a \gls{request} for information from a client software application relating to Assets.
 }
 
+\newglossaryentry{any}
+{
+  type=mtc,
+  category=model,
+  name={any},
+  description={A placeholder for an XML element.}
+}
 
 
 
+
+\newglossaryentry{cubicmillimeter}
+{
+  type=mtc,
+  category=model,
+  name={CUBIC\_MILLIMETER},
+  description={Geometric volume in millimeters}
+}
+
+
+\newglossaryentry{cubicmillimeterpersecond}
+{
+  type=mtc,
+  category=model,
+  name={CUBIC\_MILLIMETER/SECOND},
+  description={Change of geometric volume per second}
+}
+
+
+\newglossaryentry{cubicmillimeterpersecondsquared}
+{
+  type=mtc,
+  category=model,
+  name={CUBIC\_MILLIMETER/SECOND$^2$},
+  description={Change in geometric volume per second squared}
+}
+
+
+\newglossaryentry{milligram}
+{
+  type=mtc,
+  category=model,
+  name={MILLIGRAM},
+  description={Milligram }
+}
+
+
+\newglossaryentry{milligrampercubicmillimeter}
+{
+  type=mtc,
+  category=model,
+  name={MILLIGRAM/CUBIC\_MILLIMETER},
+  description={Milligram per cubic millimeter  }
+}
+
+
+\newglossaryentry{milliliter}
+{
+  type=mtc,
+  category=model,
+  name={MILLILITER},
+  description={Milliliter  }
+}
+
+
+\newglossaryentry{deposition}
+{
+  type=mtc,
+  category=model,
+  name={Deposition},
+  description={\gls{deposition} is an XML container that represents the information for a system that manages the addition of material or state change of material being performed in an additive manufacturing process.  For example, this could describe the portion of a piece of equipment that manages a material extrusion process or a vat polymerization process.},
+  kind={component,auxiliaries}
+}
+
+
+\newglossaryentry{galvanomotor}
+{
+  type=mtc,
+  category=model,
+  name={GALVANOMOTOR},
+  description={An electromechanical actuator that produces deflection of a beam of light or energy in response to electric current through its coil in a magnetic field.},
+  kind={composition}
+}
+
+
+\newglossaryentry{vat}
+{
+  type=mtc,
+  category=model,
+  name={VAT},
+  description={A container for liquid or powdered materials},
+  kind={composition}
+}
+
+
+\newglossaryentry{table}
+{
+  type=mtc,
+  category=model,
+  name={TABLE},
+  description={A surface for holding an object or material},
+  kind={composition}
+}
+
+
+\newglossaryentry{exposureunit}
+{
+  type=mtc,
+  category=model,
+  name={EXPOSURE\_UNIT},
+  description={A mechanism for emitting a type of radiation},
+  kind={composition}
+}
+
+
+\newglossaryentry{reel}
+{
+  type=mtc,
+  category=model,
+  name={REEL},
+  description={A rotary storage unit for material},
+  kind={composition}
+}
+
+
+\newglossaryentry{spreader}
+{
+  type=mtc,
+  category=model,
+  name={SPREADER},
+  description={A mechanism for flattening or spreading materials},
+  kind={composition}
+}
+
+
+\newglossaryentry{extrusionunit}
+{
+  type=mtc,
+  category=model,
+  name={EXTRUSION\_UNIT},
+  description={A mechanism for dispensing liquid or powered materials},
+  kind={composition}
+}
+
+
+\newglossaryentry{volumespatial sample}
+{
+  type=mtc,
+  category=model,
+  name={VOLUME\_SPATIAL},
+  elementname=\cfont{VolumeSpatial},
+  description={The geometric volume of an object or container.},
+  units=\cfont{\gls{cubicmillimeter}},
+  kind={sample,type},
+  subtype={\gls{actual subtype}, \gls{consumed subtype}}
+}
+
+
+\newglossaryentry{consumed subtype}
+{
+  type=mtc,
+  category=model,
+  name={CONSUMED},
+  description={The amount of bulk material consumed from an object or container during a manufacturing process.},
+  units=\cfont{\gls{volumespatialsample}},
+  kind={subtype}
+}
+
+
+\newglossaryentry{volumefluid sample}
+{
+  type=mtc,
+  category=model,
+  name={VOLUME\_FLUID},
+  elementname=\cfont{VolumeFluid},
+  description={The fluid volume of an object or container.},
+  units=\cfont{\gls{milliliter}},
+  kind={sample,type},
+  subtype={\gls{actual subtype}, \gls{consumed subtype}}
+}
+
+
+\newglossaryentry{capacityspatial sample}
+{
+  type=mtc,
+  category=model,
+  name={CAPACITY\_SPATIAL},
+  elementname=\cfont{CapacitySpatial},
+  description={The geometric capacity of an object or container.},
+  units=\cfont{\gls{cubicmillimeter}},
+  kind={sample,type}
+}
+
+
+\newglossaryentry{capacityfluid sample}
+{
+  type=mtc,
+  category=model,
+  name={CAPACITY\_FLUID},
+  elementname=\cfont{CapacityFluid},
+  description={The fluid capacity of an object or container.},
+  units=\cfont{\gls{milliliter}},
+  kind={sample,type}
+}
+
+
+\newglossaryentry{density sample}
+{
+  type=mtc,
+  category=model,
+  name={DENSITY},
+  elementname=\cfont{Density},
+  description={The volumetric mass of a material per unit volume of that material.},
+  units=\cfont{\gls{milligrampercubicmillimeter}},
+  kind={sample,type}
+}
+
+
+\newglossaryentry{depositionvolume sample}
+{
+  type=mtc,
+  category=model,
+  name={DEPOSITION\_VOLUME},
+  elementname=\cfont{DepositionVolume},
+  description={The spatial volume of material to be deposited in an additive manufacturing process.},
+  units=\cfont{\gls{cubicmillimeter}},
+  kind={sample,type},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}}
+}
+
+
+\newglossaryentry{depositionratevolumetric sample}
+{
+  type=mtc,
+  category=model,
+  name={DEPOSITION\_RATE\_VOLUMETRIC},
+  elementname=\cfont{DepositionRateVolumetric},
+  description={The rate at which a spatial volume of material is deposited in an additive manufacturing process.},
+  units=\cfont{\gls{cubicmillimeterpersecond}},
+  kind={sample,type},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}}
+}
+
+
+\newglossaryentry{depositionaccelerationvolumetric sample}
+{
+  type=mtc,
+  category=model,
+  name={DEPOSITION\_ACCELERATION\_VOLUMETRIC},
+  elementname=\cfont{DepositionAccelerationVolumetric},
+  description={The rate of change in spatial volume of material deposited in an additive manufacturing process.},
+  units=\cfont{\gls{cubicmillimeterpersecondsquared}},
+  kind={sample,type},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}}
+}
+
+
+\newglossaryentry{depositionmass sample}
+{
+  type=mtc,
+  category=model,
+  name={DEPOSITION\_MASS},
+  elementname=\cfont{DepositionMass},
+  description={The mass of the material deposited in an additive manufacturing process.},
+  units=\cfont{\gls{milligram}},
+  kind={sample,type},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}}
+}
+
+
+\newglossaryentry{depositiondensity sample}
+{
+  type=mtc,
+  category=model,
+  name={DEPOSITION\_DENSITY},
+  elementname=\cfont{DepositionDensity},
+  description={The density of the material deposited in an additive manufacturing process per unit of volume.},
+  units=\cfont{\gls{milligrampercubicmillimeter}},
+  kind={sample,type},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}}
+}
+
+
+\newglossaryentry{processtime event}
+{
+  type=mtc,
+  category=model,
+  name={PROCESS\_TIME},
+  elementname=\cfont{ProcessTime},
+  description={The time and date associated with an activity or event.
+  \newline \gls{processtime event} \MUST be reported in ISO 8601 format.},
+  kind={event,type},
+  subtype={\gls{start subtype}, \gls{complete value}, \gls{targetcompletion subtype}}
+}
+
+
+\newglossaryentry{start subtype}
+{
+  type=mtc,
+  category=model,
+  name={START},
+  description={The time and date associated with the beginning of an activity or event.},
+  kind={subtype}
+}
+
+
+\newglossaryentry{targetcompletion subtype}
+{
+  type=mtc,
+  category=model,
+  name={TARGET\_COMPLETION},
+  description={The projected time and date associated with the end or completion of an activity or event.},
+  kind={subtype}
+}
+
+
+\newglossaryentry{datecode event}
+{
+  type=mtc,
+  category=model,
+  name={DATE\_CODE},
+  elementname=\cfont{DateCode},
+  description={The time and date code associated with a material or other physical item.
+  \newline \gls{datecode event} \MUST be reported in ISO 8601 format.},
+  kind={event,type},
+  subtype={\gls{manufacture subtype}, \gls{expiration subtype}, \gls{firstuse subtype}}
+}
+
+
+\newglossaryentry{manufacture subtype}
+{
+  type=mtc,
+  category=model,
+  name={MANUFACTURE},
+  description={The time and date code relating to the production of a material or other physical item.},
+  kind={subtype}
+}
+
+
+\newglossaryentry{expiration subtype}
+{
+  type=mtc,
+  category=model,
+  name={EXPIRATION},
+  description={The time and date code relating to the expiration or end of useful life for a material or other physical item.},
+  kind={subtype}
+}
+
+
+\newglossaryentry{firstuse subtype}
+{
+  type=mtc,
+  category=model,
+  name={FIRST\_USE},
+  description={The time and date code relating the first use of a material or other physical item.},
+  kind={subtype}
+}
+
+
+\newglossaryentry{materiallayer event}
+{
+  type=mtc,
+  category=model,
+  name={MATERIAL\_LAYER},
+  elementname=\cfont{MaterialLayer},
+  description={Identifies the layers of material applied to a part or product as part of an additive manufacturing process.
+  \newline The \gls{valid data value} \MUST be an integer.},
+  kind={event,type},
+  subtype={\gls{actual subtype}, \gls{target subtype}}
+}
+
+
+\newglossaryentry{waitstate event}
+{
+  type=mtc,
+  category=model,
+  name={WAIT\_STATE},
+  elementname=\cfont{WaitState},
+  description={An indication of the reason that \gls{execution event} is reporting a value of \gls{wait}.
+  \newline The \gls{valid data value} \MUST be \gls{poweringup}, \gls{poweringdown}, \gls{partload}, \gls{partunload}, \gls{toolload}, \gls{toolunload}, \gls{materialload event}, \gls{materialunload event}, \gls{secondaryprocess}, \gls{pausing}, or \gls{resuming}.},
+  kind={event,type}
+}
+
+
+\newglossaryentry{poweringup}
+{
+  type=mtc,
+  category=model,
+  name={POWERING\_UP},
+  description={ An indication that execution is waiting while the equipment is powering up and is not currently available to begin producing parts or products.}
+}
+
+
+\newglossaryentry{poweringdown}
+{
+  type=mtc,
+  category=model,
+  name={POWERING\_DOWN},
+  description={ An indication that the execution is waiting while the equipment is powering down but has not fully reached a stopped state.}
+}
+
+
+\newglossaryentry{partload}
+{
+  type=mtc,
+  category=model,
+  name={PART\_LOAD},
+  description={ An indication that the execution is waiting while one or more discrete workpieces are being loaded.}
+}
+
+
+\newglossaryentry{partunload}
+{
+  type=mtc,
+  category=model,
+  name={PART\_UNLOAD},
+  description={ An indication that the execution is waiting while one or more discrete workpieces are being unloaded.}
+}
+
+
+\newglossaryentry{toolload}
+{
+  type=mtc,
+  category=model,
+  name={TOOL\_LOAD},
+  description={ An indication that the execution is waiting while a tool or tooling is being loaded.}
+}
+
+
+\newglossaryentry{toolunload}
+{
+  type=mtc,
+  category=model,
+  name={TOOL\_UNLOAD},
+  description={ An indication that the execution is waiting while a tool or tooling is being unloaded.}
+}
+
+
+\newglossaryentry{secondaryprocess}
+{
+  type=mtc,
+  category=model,
+  name={SECONDARY\_PROCESS},
+  description={ An indication that the execution is waiting while another process is completed before the execution can resume.}
+}
+
+
+\newglossaryentry{pausing}
+{
+  type=mtc,
+  category=model,
+  name={PAUSING},
+  description={ An indication that the execution is waiting while the equipment is pausing but the piece of equipment has not yet reached a fully paused state.}
+}
+
+
+\newglossaryentry{resuming}
+{
+  type=mtc,
+  category=model,
+  name={RESUMING},
+  description={ An indication that the execution is waiting while the equipment is resuming the production cycle but has not yet resumed execution.}
+}
+
+
+\newglossaryentry{wait}
+{
+  type=mtc,
+  category=model,
+  name={WAIT},
+  description={  The execution of the controller's program is suspended while a secondary operation is executing or completing.  Execution will resume automatically once the secondary operation is completed.}
+}
+
+
+\newglossaryentry{endeffector}
+{
+  type=mtc,
+  category=model,
+  name={EndEffector},
+  description={\gls{endeffector} is an XML container that represents the information for those functions that form the last link segment of a robot. It is the part of the robot that interacts with the manufacturing process.},
+  kind={component,systems}
+}
+
+
+\newglossaryentry{partdetect event}
+{
+  type=mtc,
+  category=model,
+  name={PART\_DETECT},
+  elementname=\cfont{PartDetect},
+  description={An indication designating whether a part or work piece has been detected or is present.
+  \newline The \gls{valid data value} \MUST be \gls{present} or \gls{notpresent}.},
+  kind={event,type}
+}
+
+
+\newglossaryentry{present}
+{
+  type=mtc,
+  category=model,
+  name={PRESENT},
+  description={ if a part or work piece has been detected or is present.}
+}
+
+
+\newglossaryentry{notpresent}
+{
+  type=mtc,
+  category=model,
+  name={NOT\_PRESENT},
+  description={ if a part or work piece is not detected or is not present.}
+}
+
+
+\newglossaryentry{relationships}
+{
+  type=mtc,
+  category=model,
+  name={Relationships},
+  description={An XML container that organizes information defining the affiliation between pieces of equipment that function independently but together perform a manufacturing operation.  It may also define the affiliation between components within a piece of equipment.},
+  kind={element}
+}
+
+\newglossaryentry{relationship}
+{
+  type=mtc,
+  category=model,
+  name={Relationship},
+  description={An XML element that describes the association between two pieces of equipment that function independently but together perform a manufacturing operation. It may also be used to define the association between two components within a piece of equipment.}
+}
+
+
+\newglossaryentry{devicerelationship}
+{
+  type=mtc,
+  category=model,
+  name={DeviceRelationship},
+  description={It describes the association between two pieces of equipment that function independently but together perform a manufacturing operation.},
+  kind={relationship}
+}
+
+
+\newglossaryentry{componentrelationship}
+{
+  type=mtc,
+  category=model,
+  name={ComponentRelationship},
+  description={It describes the association between two components within a pieces of equipment that function independently but together perform a capability or service within a piece of equipment.},
+  kind={relationship}
+}
+
+
+\newglossaryentry{deviceuuid event}
+{
+  type=mtc,
+  category=model,
+  name={DEVICE\_UUID},
+  elementname=\cfont{DeviceUuid},
+  description={The identifier of another piece of equipment that is temporarily associated with a component of this piece of equipment to perform a particular function.
+  \newline The \gls{valid data value} \MUST be a NMTOKEN XML type.},
+  kind={event,type}
+}
+
+
+\newglossaryentry{parent}
+{
+  type=mtc,
+  category=model,
+  name={PARENT},
+  description={  This piece of equipment functions as a parent in the relationship with the associated piece of equipment.}
+}
+
+
+\newglossaryentry{child}
+{
+  type=mtc,
+  category=model,
+  name={CHILD},
+  description={  This piece of equipment functions as a child in the relationship with the associated piece of equipment.}
+}
+
+
+\newglossaryentry{peer}
+{
+  type=mtc,
+  category=model,
+  name={PEER},
+  description={  This piece of equipment functions as a peer which provides equal functionality and capabilities in the relationship with the associated piece of equipment.}
+}
+
+
+\newglossaryentry{critical}
+{
+  type=mtc,
+  category=model,
+  name={CRITICAL},
+  description={  The services or functions provided by the associated piece of equipment is required for the operation of this piece of equipment.}
+}
+
+
+\newglossaryentry{noncritical}
+{
+  type=mtc,
+  category=model,
+  name={NONCRITICAL},
+  description={  The services or functions provided by the associated piece of equipment is not required for the operation of this piece of equipment.}
+}
+
+
+\newglossaryentry{criticality}
+{
+  type=mtc,
+  category=model,
+  name={criticality},
+  description={Defines whether the services or functions provided by the associated piece of equipment is required for the operation of this piece of equipment.
+  \newline \gls{criticality} is an optional attribute.
+  \newline The value provided for \gls{criticality} \MUST be one of the following values:
+  \newline \tab \gls{critical}:  The services or functions provided by the associated piece of equipment is required for the operation of this piece of equipment.
+  \newline \tab \gls{noncritical}:  The services or functions provided by the associated piece of equipment is not required for the operation of this piece of equipment.},
+  kind={attribute}
+}
+
+
+\newglossaryentry{deviceuuidref}
+{
+  type=mtc,
+  category=model,
+  name={deviceUuidRef},
+  description={A reference to the associated piece of equipment.
+  \newline The value provided for \gls{deviceuuidref} \MUST be the value provided for the \gls{uuid} attribute of the \gls{device} element of the associated piece of equipment.
+  \newline \gls{deviceuuidref} is a required attribute.
+  \newline An NMTOKEN XML type.},
+  kind={attribute}
+}
+
+
+\newglossaryentry{role}
+{
+  type=mtc,
+  category=model,
+  name={role},
+  description={Defines the services or capabilities that the referenced piece of equipment provides relative to this piece of equipment.
+  \newline \gls{role} is an optional attribute.
+  \newline The value provided for \gls{role} \MUST be one of the following values:
+  \newline \tab \gls{system condition}:  The associated piece of equipment performs the functions of a System for this piece of equipment.  In MTConnect, System provide utility type services to support the operation of a piece of equipment and these services are required for the operation of a piece of equipment.
+  \newline \tab \gls{auxiliary subtype}:  The associated piece of equipment performs the functions as an Auxiliary for this piece of equipment.  In MTConnect, Auxiliary extends the capabilities of a piece of equipment, but is not required for the equipment to function.},
+  kind={attribute}
+}
+
+
+\newglossaryentry{xlink:href}
+{
+  type=mtc,
+  category=model,
+  name={xlink:href},
+  description={A URL identifying the \gls{agent} associated with the piece of equipment associated with this piece of equipment and the UUID identifying that specific piece of equipment.
+  \newline \gls{xlink:href} is an optional attribute.},
+  kind={attribute}
+}
+
+
+\newglossaryentry{key}
+{
+  name={key},
+  description={A unique identifier in a \gls{key-value pair} association.},
+  plural={keys},
+  kind={attribute}
+}
+
+\newglossaryentry{key-value pair}
+{
+  name={key-value pair},
+  description={An association between an identifier referred to as the \gls{key} and a value which taken together create a \gls{key-value pair}. When used in a set of \glspl{key-value pair} each \gls{key} is unique and will only have one value associated with it at any point in time.},
+  plural={key-value pairs}
+}
+
+
+\newglossaryentry{data set}
+{
+  name={Data Set},
+  description={A set of \glspl{key-value pair} where each entry is uniquely identified by the \gls{key}.},
+  plural={Data Sets}
+}
+
+
+\newglossaryentry{reset}
+{
+  name={reset},
+  description={A reset is associated with an occurrence of a \gls{data entity} indicated by the \\\gls{resettriggered} attribute. When a reset occurs, the accumulated value or statistic are reverted back to their initial value. A \gls{data entity} with a \gls{data set} representation removes all \glspl{key-value pair}, setting the \gls{data set} to an empty set.}
+}
+
+
+\newglossaryentry{hour}
+{
+  type=mtc,
+  category=model,
+  name={HOUR},
+  description={A measurement of time in hours}
+}
+
+
+\newglossaryentry{minute}
+{
+  type=mtc,
+  category=model,
+  name={MINUTE},
+  description={A measurement of time in minutes}
+}
+
+
+\newglossaryentry{discrete}
+{
+  type=mtc,
+  category=model,
+  name={discrete},
+  description={An indication signifying whether each value reported for the \gls{data entity} is significant and whether duplicate values are to be suppressed.
+  \newline The value defined \MUST be either \gls{true removed} or \gls{false removed} - an XML boolean type.
+  \newline \gls{true removed} indicates that each update to the \gls{data entity}'s value is significant and duplicate values \MUSTNOT be suppressed.
+  \newline \gls{false removed} indicates that duplicated values \MUST be suppressed.
+  \newline If a value is not defined for \gls{discrete}, the default value \MUST be \gls{false removed}.},
+  kind={attributes}
+}
+
+
+\newglossaryentry{dataset}
+{
+  type=mtc,
+  category=model,
+  name={DATA\_SET},
+  elementname=\cfont{DataSet},
+  description={The reported value(s) are represented as a set of \glspl{key-value pair}.
+  \newline Each reported value in the \gls{data set} \MUST have a unique key. },
+  kind={representation}
+}
+
+
+\newglossaryentry{cuttingspeed sample}
+{
+  type=mtc,
+  category=model,
+  name={CUTTING\_SPEED},
+  elementname=\cfont{CuttingSpeed},
+  description={ The speed difference (relative velocity) between the cutting mechanism and the surface of the workpiece it is operating on.},
+  units=\cfont{\gls{millimeterpersecond}},
+  kind={sample,type},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}, \gls{programmed subtype}}
+}
+
+
+\newglossaryentry{millimeterperrevolution}
+{
+  type=mtc,
+  category=model,
+  name={MILLIMETER/REVOLUTION},
+  description={Millimeters per revolution.},
+  kind={units}
+}
+
+
+\newglossaryentry{pathfeedrateperrevolution sample}
+{
+  type=mtc,
+  category=model,
+  name={PATH\_FEEDRATE\_PER\_REVOLUTION},
+  elementname=\cfont{PathFeedratePerRevolution},
+  description={The feedrate for the axes, or a single axis.},
+  units=\cfont{\gls{millimeterperrevolution}},
+  kind={sample,type},
+  subtype={\gls{actual subtype}, \gls{commanded subtype}, \gls{programmed subtype}}
+}
+
+
+\newglossaryentry{programnestlevel event}
+{
+  type=mtc,
+  category=model,
+  name={PROGRAM\_NEST\_LEVEL},
+  elementname=\cfont{ProgramNestLevel},
+  description={An indication of the nesting level within a control program that is associated with the code or instructions that is currently being executed.
+  \newline If an Initial Value is not defined, the nesting level associated with the highest or initial nesting level of the program \MUST default to zero (0).
+  \newline The value reported for \gls{programnestlevel event} \MUST be an integer.},
+  kind={event,type}
+}
+
+
+\newglossaryentry{schedule subtype}
+{
+  type=mtc,
+  category=model,
+  name={SCHEDULE},
+  description={The identity of a control program that is used to specify the order of execution of other programs.},
+  kind={subtype}
+}
+
+
+\newglossaryentry{main subtype}
+{
+  type=mtc,
+  category=model,
+  name={MAIN},
+  description={The identity of the primary logic or motion program currently being executed. It is the starting nest level in a call structure and may contain calls to sub programs.},
+  kind={subtype}
+}
+
+
+\newglossaryentry{programlocationtype event}
+{
+  type=mtc,
+  category=model,
+  name={PROGRAM\_LOCATION\_TYPE},
+  elementname=\cfont{ProgramLocationType},
+  description={Defines whether the logic or motion program defined by \gls{program event} is being executed from the local memory of the controller or from an outside source.
+  \newline The \gls{valid data value} \MUST be \gls{local} or \gls{external}.},
+  kind={event,type},
+  subtype={\gls{schedule subtype}, \gls{main subtype}, \gls{active value}}
+}
+
+
+\newglossaryentry{programlocation event}
+{
+  type=mtc,
+  category=model,
+  name={PROGRAM\_LOCATION},
+  elementname=\cfont{ProgramLocation},
+  description={The Uniform Resource Identifier (URI) for the source file associated with \gls{program event}.},
+  kind={event,type},
+  subtype={\gls{schedule subtype}, \gls{main subtype}, \gls{active value}}
+}
+
+
+\newglossaryentry{local}
+{
+  type=mtc,
+  category=model,
+  name={LOCAL},
+  description={ Managed by the controller.}
+}
+
+
+\newglossaryentry{external}
+{
+  type=mtc,
+  category=model,
+  name={EXTERNAL},
+  description={ Not managed by the controller.}
+}
+
+
+\newglossaryentry{toolgroup event}
+{
+  type=mtc,
+  category=model,
+  name={TOOL\_GROUP},
+  elementname=\cfont{ToolGroup},
+  description={An identifier for the tool group associated with a specific tool. Commonly used to designate spare tools.},
+  kind={event,type}
+}
+
+
+\newglossaryentry{variable event}
+{
+  type=mtc,
+  category=model,
+  name={VARIABLE},
+  elementname=\cfont{Variable},
+  description={ A data value whose meaning may change over time due to changes in the opertion of a piece of equipment or the process being executed on that piece of equipment.},
+  kind={event,type}
+}
+
+
+\newglossaryentry{entry}
+{
+  type=mtc,
+  category=model,
+  name={Entry},
+  description={A XML element representing a \gls{key-value pair} published as part of a \gls{data set}.},
+  kind={element}
+}
+
+\newglossaryentry{key model}
+{
+  type=mtc,
+  category=model,
+  name={key},
+  description={A unique identifier for each \gls{key-value pair}.},
+  kind={attribute}
+}

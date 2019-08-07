@@ -129,6 +129,16 @@ module Latex
     end
     memoize :name
 
+    def facet
+      if has_key?(:facet)
+        return keys[:facet]
+      elsif kind_of?(:sample)
+        return 'float'
+      else
+        return 'string'
+      end
+    end
+
     def keys
       kys = Hash.new
       properties.elements.map(&:value).compact.each do |k, v|

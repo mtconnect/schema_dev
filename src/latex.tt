@@ -112,7 +112,7 @@ grammar Latex
   end
 
   rule escaped
-    '\\' c:[%_&{}\#] {
+    '\\' c:[%_&{}\#\\] {
        def value
          c.text_value
        end
