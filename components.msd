@@ -106,6 +106,6 @@ package :Component, 'Top Level Components Package' do
 end
 
 load 'sensors'
-load 'specifications'
+#load 'specifications'
 load 'reference'
 load 'relationships'

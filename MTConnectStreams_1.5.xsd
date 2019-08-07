@@ -7401,12 +7401,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:annotation>
           </xs:element>
         </xs:sequence>
-        <xs:attribute name='sampleCount' type='CountValueType' use='required'>
+        <xs:attribute name='count' type='CountValueType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The number of readings reported in the data returned for the
-              dataitem element defined in the mtconnectdevice document that this
-              sample element represents.
+              A count of something.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>

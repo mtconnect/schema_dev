@@ -29,7 +29,7 @@ package :CoordinateSystems, 'Coordinate systems, kinematics and motion' do
     value :TASK, 'The current task'
     value :MECHANICAL_INTERFACE, 'The last joint in the chain'
     value :GRIPPER, 'The gripper'
-    value :MOBILE_PLATFORM, 'The platform'
+    value :PLATFORM, 'The platform'
     value :JOINT, 'A given joint (kinematic should be true)'
     value :MACHINE, 'For machine tools, the coordinate system in the work area'
   end

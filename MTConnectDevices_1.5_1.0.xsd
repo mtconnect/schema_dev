@@ -4360,321 +4360,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>
-  <xs:simpleType name='LimitValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The limit of a value
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:float'/>
-  </xs:simpleType>
-  <xs:simpleType name='PeakType'>
-    <xs:annotation>
-      <xs:documentation>
-        The peak value
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:float'/>
-  </xs:simpleType>
-  <xs:simpleType name='ConstraintValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The value of the constraint
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
-  <xs:complexType name='SpecificationsType'>
-    <xs:annotation>
-      <xs:documentation>
-        Calibration data for a sensor
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AbstractConfigurationType'>
-        <xs:sequence>
-          <xs:element ref='AbstractSpecification' minOccurs='1' maxOccurs='unbounded'/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Specifications' type='SpecificationsType' substitutionGroup='AbstractConfiguration'>
-    <xs:annotation>
-      <xs:documentation>
-        Calibration data for a sensor
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='AbstractSpecificationType' abstract='true' mixed='true'>
-    <xs:annotation>
-      <xs:documentation>
-        A specification
-      </xs:documentation>
-    </xs:annotation>
-  </xs:complexType>
-  <xs:element abstract='true' name='AbstractSpecification' type='AbstractSpecificationType'>
-    <xs:annotation>
-      <xs:documentation>
-        A specification
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='SpecificationType' mixed='true'>
-    <xs:annotation>
-      <xs:documentation>
-        A specification
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='AbstractSpecificationType'>
-        <xs:sequence>
-          <xs:element ref='SpecificationValue' minOccurs='1' maxOccurs='unbounded'/>
-        </xs:sequence>
-        <xs:attribute name='type' type='DataItemEnumType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              The type of either a structural element or a dataitem being
-              measured.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              A sub-categorization of the data item type.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='compositionId' type='CompositionIdType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              The identifier attribute of the composition element that the
-              reported data is most closely associated. 
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='dataItemIdRef' type='SourceDataItemIdType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              The optional data item identifier
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='units' type='UnitsType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              The unit of measurement for the reported value of the data item.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Specification' type='SpecificationType' substitutionGroup='AbstractSpecification'>
-    <xs:annotation>
-      <xs:documentation>
-        A specification
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='SpecificationValueType' abstract='true' mixed='true'>
-    <xs:annotation>
-      <xs:documentation>
-        an abstract value for a specification
-      </xs:documentation>
-    </xs:annotation>
-  </xs:complexType>
-  <xs:element abstract='true' name='SpecificationValue' type='SpecificationValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        an abstract value for a specification
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='ConstraintType'>
-    <xs:annotation>
-      <xs:documentation>
-        A constraint is used by a software application to evaluate the validity
-        of the reported data.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:restriction base='SpecificationValueType'>
-        <xs:simpleType>
-          <xs:restriction base='LimitValueType'/>
-        </xs:simpleType>
-      </xs:restriction>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Constraint' type='ConstraintType' substitutionGroup='SpecificationValue'>
-    <xs:annotation>
-      <xs:documentation>
-        A constraint is used by a software application to evaluate the validity
-        of the reported data.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='MaximumType'>
-    <xs:annotation>
-      <xs:documentation>
-        The upper limit of data reported for a data item.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ConstraintType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Maximum' type='MaximumType' substitutionGroup='Constraint'>
-    <xs:annotation>
-      <xs:documentation>
-        The upper limit of data reported for a data item.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='MinimumType'>
-    <xs:annotation>
-      <xs:documentation>
-        The lower limit of data reported for a data item.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ConstraintType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Minimum' type='MinimumType' substitutionGroup='Constraint'>
-    <xs:annotation>
-      <xs:documentation>
-        The lower limit of data reported for a data item.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='NominalType'>
-    <xs:annotation>
-      <xs:documentation>
-        The target or expected value for this data item.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ConstraintType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Nominal' type='NominalType' substitutionGroup='Constraint'>
-    <xs:annotation>
-      <xs:documentation>
-        The target or expected value for this data item.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='RatedType'>
-    <xs:annotation>
-      <xs:documentation>
-        The value of the constraint
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='ConstraintType'/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Rated' type='RatedType' substitutionGroup='Constraint'>
-    <xs:annotation>
-      <xs:documentation>
-        The value of the constraint
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='DutyCycleType' mixed='true'>
-    <xs:annotation>
-      <xs:documentation>
-        The duty cycle
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SpecificationValueType'>
-        <xs:sequence>
-          <xs:element name='Peak' type='LimitValueType'>
-            <xs:annotation>
-              <xs:documentation>
-                The peak value of the duty cycle
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='Value' type='LimitValueType'>
-            <xs:annotation>
-              <xs:documentation>
-                value represents a single data value that is expected to be
-                reported for a dataitem element. 
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-        <xs:attribute name='duration' type='DurationTimeType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              The time-period over which the data was collected.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='DutyCycle' type='DutyCycleType' substitutionGroup='SpecificationValue'>
-    <xs:annotation>
-      <xs:documentation>
-        The duty cycle
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:simpleType name='GearNumberType'>
-    <xs:annotation>
-      <xs:documentation>
-        The number of the gear
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:integer'/>
-  </xs:simpleType>
-  <xs:simpleType name='GearRatioType'>
-    <xs:annotation>
-      <xs:documentation>
-        The ratio for the gear
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:float'/>
-  </xs:simpleType>
-  <xs:complexType name='GearSpecificationType' mixed='true'>
-    <xs:annotation>
-      <xs:documentation>
-        A power transmission gearing, ratio given as CDATA
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='SpecificationValueType'>
-        <xs:sequence>
-          <xs:element name='GearRatio' type='GearRatioType'>
-            <xs:annotation>
-              <xs:documentation>
-                The gear ratio
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-        <xs:attribute name='number' type='GearNumberType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              A unique identifier that will only refer to a specific sensing
-              element.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='GearSpecification' type='GearSpecificationType' substitutionGroup='SpecificationValue'>
-    <xs:annotation>
-      <xs:documentation>
-        A power transmission gearing, ratio given as CDATA
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:simpleType name='IdRefType'>
     <xs:annotation>
       <xs:documentation>
@@ -4820,50 +4505,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='AssociationEnumType'>
-    <xs:annotation>
-      <xs:documentation>
-        Types of relationships
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='MASTER'>
-        <xs:annotation>
-          <xs:documentation>
-            a master
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='SLAVE'>
-        <xs:annotation>
-          <xs:documentation>
-            a slave
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='DeviceAssociationEnumType'>
+  <xs:simpleType name='DeviceRoleEnumType'>
     <xs:annotation>
       <xs:documentation>
         device relationships
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:enumeration value='MASTER'>
-        <xs:annotation>
-          <xs:documentation>
-            a master
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='SLAVE'>
-        <xs:annotation>
-          <xs:documentation>
-            a slave
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value='SYSTEM'>
         <xs:annotation>
           <xs:documentation>
@@ -4948,18 +4596,11 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ComponentRelationshipType'>
     <xs:annotation>
       <xs:documentation>
-        A relationship to a device
+        A relationship to a component
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='RelationshipType'>
-        <xs:attribute name='association' type='AssociationEnumType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              The type of relatiship
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
         <xs:attribute name='idRef' type='IdRefType' use='required'>
           <xs:annotation>
             <xs:documentation>
@@ -4974,7 +4615,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ComponentRelationship' type='ComponentRelationshipType' substitutionGroup='Relationship'>
     <xs:annotation>
       <xs:documentation>
-        A relationship to a device
+        A relationship to a component
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4993,7 +4634,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name='association' type='DeviceAssociationEnumType' use='optional'>
+        <xs:attribute name='role' type='DeviceRoleEnumType' use='optional'>
           <xs:annotation>
             <xs:documentation>
               The type of relatiship

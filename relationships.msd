@@ -10,12 +10,7 @@ package :Relationships, 'Relationship models' do
     value :PEER, 'The related entity is a peer'
   end
 
-  enum :AssociationEnum, 'Types of relationships' do
-    value :MASTER, 'a master'
-    value :SLAVE, 'a slave'
-  end
-
-  enum :DeviceAssociationEnum, 'device relationships', :AssociationEnum do
+  enum :DeviceRoleEnum, 'device relationships' do
     value :SYSTEM, 'a system'
     value :AUXILIARY, 'an auxiliary'
   end
@@ -34,14 +29,13 @@ package :Relationships, 'Relationship models' do
   end
 
   type :ComponentRelationship, 'A relationship to a component', :Relationship do
-    member :Association, 'The type of relatiship', 0..1, :AssociationEnum
     member :IdRef, 'A reference to the device uuid'
   end
 
   type :DeviceRelationship, 'A relationship to a device', :Relationship do
     member :DeviceUuidRef, 'A reference to the device uuid', :Uuid
-    member :Association, 'The type of relatiship', 0..1, :DeviceAssociationEnum
+    member :Role, 'The type of relatiship', 0..1, :DeviceRoleEnum
     attribute :href, 'Reference to the url of the related device', 0..1, :'xlink:href'
-    attribute(:'xlink:type', 'Type of href fixed at located', 0..1, :'xlink:type') { self.fixed = 'locator' }
+    attribute(:'xlink:type', 'Type of href fixed value locator', 0..1, :'xlink:type') { self.fixed = 'locator' }
   end
 end

@@ -28,7 +28,7 @@ package :DataSet, 'DataSet Package' do
     
     self.type "#{type.name}DataSet".to_sym, "DataSet of #{type.annotation}", :Event do
       mixed
-      attribute :SampleCount, 'The number of entries', :CountValue
+      attribute :Count, 'The number of entries', :CountValue
       member :Entry, 'The entries', 0..INF, "#{type.name}Entry".to_sym
     end
   end
