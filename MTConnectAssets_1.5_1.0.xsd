@@ -218,7 +218,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='AssetAttrType'>
+  <xs:simpleType name='AssetAttrTypeType'>
     <xs:annotation>
       <xs:documentation>
         An asset type
@@ -6439,7 +6439,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ProgramLocationType'>
+  <xs:complexType name='ProgramLocationTypeType'>
     <xs:annotation>
       <xs:documentation>
         Defines whether the logic or motion program defined by program event is
@@ -6451,7 +6451,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='StringEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ProgramLocationType' type='ProgramLocationType' substitutionGroup='StringEvent'>
+  <xs:element name='ProgramLocationType' type='ProgramLocationTypeType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
         Defines whether the logic or motion program defined by program event is
@@ -9374,7 +9374,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='ToolLifeType'>
+  <xs:simpleType name='ToolLifeTypeType'>
     <xs:annotation>
       <xs:documentation>
         The direction of tool life count
@@ -9404,7 +9404,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='LocationsType'>
+  <xs:simpleType name='LocationsTypeType'>
     <xs:annotation>
       <xs:documentation>
         The type of tool location
@@ -9825,7 +9825,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='LocationValueType'>
-        <xs:attribute name='type' type='LocationsType' use='required'>
+        <xs:attribute name='type' type='LocationsTypeType' use='required'>
           <xs:annotation>
             <xs:documentation>
               The type of either a structural element or a dataitem being
@@ -10340,7 +10340,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='ToolLifeValueType'>
-        <xs:attribute name='type' type='ToolLifeType' use='required'>
+        <xs:attribute name='type' type='ToolLifeTypeType' use='required'>
           <xs:annotation>
             <xs:documentation>
               The type of either a structural element or a dataitem being

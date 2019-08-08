@@ -24,7 +24,7 @@ module CamelName
   # Create the type name with optional leading mtc: if necessary.
   # Do not add Type if Type is already at the end of the name.
   def type_name(value, withNs)
-    value += 'Type' unless value =~ /Type(s)?$/o
+    value += 'Type' # unless value =~ /Type(s)?$/o
     value = "#{value}" if withNs
     value
   end

@@ -218,7 +218,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='AssetAttrType'>
+  <xs:simpleType name='AssetAttrTypeType'>
     <xs:annotation>
       <xs:documentation>
         An asset type
@@ -3001,7 +3001,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base='AssetCountValueType'>
-        <xs:attribute name='assetType' type='AssetAttrType' use='required'>
+        <xs:attribute name='assetType' type='AssetAttrTypeType' use='required'>
           <xs:annotation>
             <xs:documentation>
               The type of asset that was updated.
@@ -4173,7 +4173,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='CompositionEnumTypeEnum'>
+  <xs:simpleType name='CompositionEnumTypeTypeEnum'>
     <xs:annotation>
       <xs:documentation>
         The vocab for the type of composition
@@ -4500,13 +4500,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='CompositionEnumType'>
+  <xs:simpleType name='CompositionEnumTypeType'>
     <xs:annotation>
       <xs:documentation>
         The vocab for the type of composition
       </xs:documentation>
     </xs:annotation>
-    <xs:union memberTypes='CompositionEnumTypeEnum CompositionTypeExtType'/>
+    <xs:union memberTypes='CompositionEnumTypeTypeEnum CompositionTypeExtType'/>
   </xs:simpleType>
   <xs:complexType name='CompositionType'>
     <xs:annotation>
@@ -4545,7 +4545,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name='type' type='CompositionEnumType' use='required'>
+    <xs:attribute name='type' type='CompositionEnumTypeType' use='required'>
       <xs:annotation>
         <xs:documentation>
           The type of either a structural element or a dataitem being measured.

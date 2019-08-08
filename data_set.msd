@@ -11,16 +11,15 @@ package :DataSet, 'DataSet Package' do
     member :Removed, 'an indicatore that the entry has been removed', 0..1
   end
 
-  type(:Variable, 'A PLC or CNC Variable', :Event) do
-    member :Value, "the value for Variable", :StringEventValue
-  end
-
-  
   # Create data set events for non-state events
   %w{Variable}.each do |s| 
     type = self.schema.type(s.to_sym)
     vm = type.value_member
-    entry_type = (vm.type || :StringEventValue)
+    entry_type = if vm and vm.type
+                   vm.type
+                 else
+                   :StringEventValue
+                 end
 
     self.type "#{type.name}Entry".to_sym, "DataSet of #{type.annotation}", :Entry do
       member :Value, "Entry for #{type.name} data set", entry_type
@@ -32,5 +31,4 @@ package :DataSet, 'DataSet Package' do
       member :Entry, 'The entries', 0..INF, "#{type.name}Entry".to_sym
     end
   end
-
 end

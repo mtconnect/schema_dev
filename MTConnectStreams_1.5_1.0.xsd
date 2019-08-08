@@ -217,7 +217,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='AssetAttrType'>
+  <xs:simpleType name='AssetAttrTypeType'>
     <xs:annotation>
       <xs:documentation>
         An asset type
@@ -8028,7 +8028,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='ProgramLocationType'>
+  <xs:complexType name='ProgramLocationTypeType'>
     <xs:annotation>
       <xs:documentation>
         Defines whether the logic or motion program defined by program event is
@@ -8040,7 +8040,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='StringEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ProgramLocationType' type='ProgramLocationType' substitutionGroup='StringEvent'>
+  <xs:element name='ProgramLocationType' type='ProgramLocationTypeType' substitutionGroup='StringEvent'>
     <xs:annotation>
       <xs:documentation>
         Defines whether the logic or motion program defined by program event is
@@ -8275,31 +8275,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         A XML element representing a key-value pair published as part of a data
         set.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='VariableType'>
-    <xs:annotation>
-      <xs:documentation>
-         A data value whose meaning may change over time due to changes in the
-        opertion of a piece of equipment or the process being executed on that
-        piece of equipment.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:restriction base='EventType'>
-        <xs:simpleType>
-          <xs:restriction base='StringEventValueType'/>
-        </xs:simpleType>
-      </xs:restriction>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element name='Variable' type='VariableType' substitutionGroup='Event'>
-    <xs:annotation>
-      <xs:documentation>
-         A data value whose meaning may change over time due to changes in the
-        opertion of a piece of equipment or the process being executed on that
-        piece of equipment.
       </xs:documentation>
     </xs:annotation>
   </xs:element>

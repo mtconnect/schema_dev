@@ -217,7 +217,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='AssetAttrType'>
+  <xs:simpleType name='AssetAttrTypeType'>
     <xs:annotation>
       <xs:documentation>
         An asset type
