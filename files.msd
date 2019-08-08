@@ -76,7 +76,7 @@ package :Files, 'Files or Documents' do
   end
   
   type :FileLocation, 'XLink to file location' do
-    attribute :'xlink:href', 'Reference to the file', :'xlink:href'
+    attribute :'href', 'Reference to the file', :'xlink:href'
     attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
   end
   
