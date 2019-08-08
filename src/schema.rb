@@ -24,8 +24,7 @@ module CamelName
   # Create the type name with optional leading mtc: if necessary.
   # Do not add Type if Type is already at the end of the name.
   def type_name(value, withNs)
-    value = value.to_s + 'Type'
-    value
+    "#{value}Type"
   end
 
   def camel_name
@@ -37,15 +36,15 @@ module CamelName
   end
 
   def name_as_xsd_type(withNs = false)
-    type_name(@name.to_s, withNs)
+    type_name(@name, withNs)
   end
 
   def type_as_xsd_type(withNs = false)
-    type_name(@type.to_s, withNs)
+    type_name(@type, withNs)
   end
 
   def parent_as_xsd_type(withNs = false)
-    name = type_name(@parent.to_s, withNs)
+    name = type_name(@parent, withNs)
     par = @schema.type(@parent)
     name = "#{par.imported.namespace}:#{name}" if par.imported
     name
