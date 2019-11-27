@@ -1,9 +1,9 @@
 
-self.urn = 'urn:mtconnect.org:MTConnectError:1.5'
+self.urn = 'urn:mtconnect.org:MTConnectError:1.6'
 self.namespace = 'mt'
 self.top = :MTConnectError
 self.license = File.read('license.txt')
-self.version = '1.5'
+self.version = '1.6'
 
 load 'common'
 

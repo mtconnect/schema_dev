@@ -56,4 +56,4 @@ package :Specificaitons, 'Device and component specificaitons' do
 end
 
 
-# Pushed to 1.6: load 'coordinate_systems'
+load 'coordinate_systems'
