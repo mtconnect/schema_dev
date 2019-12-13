@@ -79,6 +79,10 @@ package :Events, 'Event Package' do
     end
     
   end
+
+  %w{AssetChanged AssetRemoved}.each do |s|
+    self.schema.type(s.to_sym).member(:AssetType, 'The type of asset', 0..1, :AssetAttrType)
+  end
       
   # Create discrete events for non-state events
   %w{PartCount ToolId ToolNumber ToolAssetId PalletId Message Block}.each do |s| 

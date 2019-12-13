@@ -1,4 +1,5 @@
 
+
 \newglossaryentry{abstimeseries}
 {
   type=mtc,
@@ -404,7 +405,6 @@
 
 \newglossaryentry{current request}
 {
-  type=mtc,
   name={Current Request},
   description={An \glstext{http} request to the \gls{agent} for returning latest known values for the \gls{dataitem} as an \gls{mtconnectstreams} \glstext{xml} document}
 }
@@ -621,6 +621,7 @@
 \newglossaryentry{interfaces}
 {
   type=mtc,
+  category=term,
   name={interfaces},
   description={\citetitle{MTCPart5} provides an interaction model for coordinating activities between manufacturing devices}
 }
@@ -658,6 +659,7 @@
 \newglossaryentry{lower camel case}
 {
   type=mtc,
+  category=term,
   name={Lower Camel Case},
   description={the first word is lowercase and the remaining words are capitalized and all spaces between words are removed.}
 }
@@ -665,9 +667,15 @@
 
 \newglossaryentry{lower level}
 {
-  type=mtc,
   name={Lower Level},
   description={A nested element that is below a higher level element.}
+}
+
+
+\newglossaryentry{higher level}
+{
+  name={Higher Level},
+  description={A nested element that is above a lower level element.}
 }
 
 
@@ -724,6 +732,7 @@
 \newglossaryentry{modbus}
 {
   type=mtc,
+  category=term,
   name={MODBUS},
   description={Modbus is a communication protocol developed by Modicon systems and is a method used for transmitting information over serial lines between electronic devices.}
 }
@@ -741,6 +750,7 @@
 \newglossaryentry{mtconnect}
 {
   type=mtc,
+  category=term,
   name={MTConnect},
   description={The name of the standard.}
 }
@@ -748,6 +758,7 @@
 \newglossaryentry{mtconnect standard}
 {
   type=mtc,
+  category=term,
   name={MTConnect Standard},
   description={The name of the standard.}
 }
@@ -755,6 +766,7 @@
 \newglossaryentry{mtconnect asset}
 {
   type=mtc,
+  category=term,
   name={MTConnect Asset},
   description={See \gls{asset}}
 }
@@ -856,6 +868,7 @@
 \newglossaryentry{occurrence}
 {
   type=mtc,
+  category=term,
   name={Occurrence},
   description={Occurrence defines the number of times the content defined in the tables \MAY be provided in the usage case specified},
   plural={Occurrences}
@@ -874,6 +887,7 @@
 \newglossaryentry{ontology}
 {
   type=mtc,
+  category=term,
   name={ontology},
   description={logical structure of the terms used to describe a domain of knowledge, including both the definitions of the applicable terms and their relationships ISO 20534:2018}
 }
@@ -882,6 +896,7 @@
 \newglossaryentry{pascal case}
 {
   type=mtc,
+  category=term,
   name={Pascal Case},
   description= {The first letter of each word is capitalized and the remaining letters are in lowercase. All space is removed between letters}
 }
@@ -920,6 +935,7 @@
 \newglossaryentry{probe request}
 {
   type=mtc,
+  category=term,
   name={Probe Request},
   description={An \glstext{http} request to the \gls{agent} for returning metadata as an \gls{mtconnectdevices} \glstext{xml} document}
 }
@@ -947,6 +963,7 @@
 \newglossaryentry{realization}
 {
   type=mtc,
+  category=term,
   name={Realization},
   description={Realization is a specialized abstraction relationship between two sets of model elements, one representing a specification (the supplier) and the other represents an implementation of the latter (the client). Realization can be used to model stepwise refinement, optimizations, transformations, templates, model synthesis, framework composition, etc.}
 }
@@ -966,6 +983,7 @@
 \newglossaryentry{reference term}
 {
   type={mtc},
+  category=term,
   name={Reference},
   plural={References},
   kind={element},
@@ -1067,6 +1085,7 @@
 \newglossaryentry{response}
 {
   type=mtc,
+  category=term,
   name={Response},
   description={A response \gls{interface} which responds to a \gls{request}.}
 }
@@ -1141,7 +1160,6 @@
 
 \newglossaryentry{sample request}
 {
-  type=mtc,
   name={Sample Request},
   description= {A request from the \gls{agent} for a stream of time series data.}
 }
@@ -1170,6 +1188,7 @@
 \newglossaryentry{sensing element}
 {
   type=mtc,
+  category=term,
   name={sensing element},
   description={A mechanism that provides a signal or measured value.},
   plural={sensing elements}
@@ -1179,6 +1198,7 @@
 \newglossaryentry{sensor element}
 {
   type=mtc,
+  category=term,
   name={sensor element},
   plural={sensor elements},
   description={A \gls{sensor element} provides a signal or measured value.}
@@ -1188,6 +1208,7 @@
 \newglossaryentry{sensor term}
 {
   type=mtc,
+  category=term,
   name={Sensor},
   plural={Sensors},
   description= {A \gls{sensor term} is typically comprised of two major components: a \gls{sensor unit} that provides signal processing, conversion, and communications and the \glspl{sensing element} that provides a signal or measured value.}
@@ -1208,6 +1229,7 @@
 \newglossaryentry{sensor unit}
 {
   type=mtc,
+  category=term,
   name={sensor unit},
   plural={sensor units},
   description= {A \gls{sensor unit} provides signal processing, conversion, and communications.}
@@ -1275,6 +1297,14 @@
   description={\gls{source} identifies the \gls{structural element} from which a measured value originates.}
 }
 
+\newglossaryentry{source attribute}
+{
+  type=mtc,
+  category=model,
+  name={source},
+  kind={attribute},
+  description={The URL of the \gls{cuttingtoolarchetype} Information Model.}
+}
 
 \newglossaryentry{statistic}
 {
@@ -1317,6 +1347,7 @@
 \newglossaryentry{time series}
 {
   type=mtc,
+  category=term,
   name={Time Series},
   description={A \gls{dataitem} representation of a contiguous vector of values supporting high frequency data rates}
 }
@@ -1343,7 +1374,6 @@
 
 \newglossaryentry{top level}
 {
-  type=mtc,
   name={Top Level},
   description={\glspl{structural element} that represent the most significant physical or logical functions of a piece of equipment.}
 }
@@ -1946,7 +1976,7 @@
   category=model,
   name={RANGE},
   kind={statistic},
-  description={Difference between the \gls{maximum} and \gls{minimum} value of a data item during the calculation period.  Also represents Peak-to-Peak measurement in a waveform.}
+  description={Difference between the maximum and minimum value of a data item during the calculation period.  Also represents Peak-to-Peak measurement in a waveform.}
 }
 
 
@@ -3847,7 +3877,7 @@
   description={A reference to the tool offset variables applied to the active cutting tool associated with a \gls{path} in a \gls{controller} type component.},
   kind={type,event},
   subtype={\gls{radial subtype}, \gls{length subtype}},
-  facet={\gls{float}}
+  facet={\gls{string}}
 }
 
 
@@ -3938,7 +3968,7 @@
   elementname=\cfont{WorkOffset},
   description={A reference to the offset variables for a work piece or part associated with a \gls{path} in a \gls{controller} type component.},
   kind={type,event},
-  facet={\gls{float}}
+  facet={\gls{string}}
 }
 
 
@@ -5395,6 +5425,7 @@
 \newglossaryentry{asset information model}
 {
   type=mtc,
+  category=term,
   name={Asset Information Model},
   description={It associates each electronic \gls{mtconnectassets} document with a unique identifier and allows for some predefined mechanisms to find, create, request, updated, and delete these electronic documents in a way that provides for consistency across multiple pieces of equipment.}
 }
@@ -5420,6 +5451,7 @@
 \newglossaryentry{minor}
 {
   type=mtc,
+  category=term,
   name={minor},
   description={Identifier representing a specific set of functionalities defined by the MTConnect Standard.}
 }
@@ -5429,6 +5461,7 @@
 \newglossaryentry{major}
 {
   type=mtc,
+  category=term,
   name={major},
   description={Identifier representing a consistent set of functionalities defined by the MTConnect Standard. }
 }
@@ -5436,6 +5469,7 @@
 \newglossaryentry{revision}
 {
   type=mtc,
+  category=term,
   name={revision},
   description={A supplemental identifier representing only organizational or editorial changes to a \gls{minor} version document with no changes in the functionality described in that document.}
 }
@@ -5534,6 +5568,7 @@
 \newglossaryentry{asset buffer}
 {
   type=mtc,
+  category=term,
   name={asset buffer},
   plural={assets buffer},
   description={A buffer or queue for \gls{assets mtconnectassets}.}
@@ -5750,7 +5785,7 @@
   type=mtc,
   category=model,
   name={CuttingToolArchetypeReference},
-  description={The content of this XML element is the \gls{assetid} of the \gls{cuttingtoolarchetype} document. It \MAY also contain a source attribute that gives the URL of the archetype data as well.}
+  description={The content of this XML element is the \gls{assetid} of the \gls{cuttingtoolarchetype} document. It \MAY also contain a \gls{source attribute} attribute that gives the URL of the archetype data as well.}
 }
 
 
@@ -6524,6 +6559,7 @@
 \newglossaryentry{publish}
 {
   type=mtc,
+  category=term,
   name={Publish},
   description={Sending of messages in a \gls{publishsubscribe} pattern.}
 }
@@ -6532,6 +6568,7 @@
 \newglossaryentry{subscribe}
 {
   type=mtc,
+  category=term,
   name={Subscribe},
   description={Receiving messages in a \gls{publishsubscribe} pattern.}
 }
@@ -6596,6 +6633,7 @@
 \newglossaryentry{physical connection}
 {
   type=mtc,
+  category=term,
   name={Physical Connection},
   description={The network transmission technologies that physically interconnect an \gls{agent}.}
 }
@@ -6603,6 +6641,7 @@
 \newglossaryentry{transport protocol}
 {
   type=mtc,
+  category=term,
   name={Transport Protocol},
   description={A set of capabilities that provide the rules and procedures used to transport information between an \gls{agent} and a client software application through a \gls{physical connection}.}
 }
@@ -6784,6 +6823,7 @@
 \newglossaryentry{integer}
 {
   type=mtc,
+  category=term,
   name={integer},
   description={Integer data type.},
   kind={facet}
@@ -6793,6 +6833,7 @@
 \newglossaryentry{string}
 {
   type=mtc,
+  category=term,
   name={string},
   description={String data type.},
   kind={facet}
@@ -6802,6 +6843,7 @@
 \newglossaryentry{float}
 {
   type=mtc,
+  category=term,
   name={float},
   description={Float data type.},
   kind={facet}
@@ -6811,6 +6853,7 @@
 \newglossaryentry{boolean}
 {
   type=mtc,
+  category=term,
   name={boolean},
   description={Boolean data type.},
   kind={facet}
@@ -6820,6 +6863,7 @@
 \newglossaryentry{datetime}
 {
   type=mtc,
+  category=term,
   name={datetime},
   description={DateTime (yyyy-mm-ddthh:mm:ss.ffff) data type.},
   kind={facet}
@@ -6829,6 +6873,7 @@
 \newglossaryentry{array3d}
 {
   type=mtc,
+  category=term,
   name={array3d},
   description={A three dimensional \gls{float} array.},
   kind={facet},
@@ -6838,6 +6883,7 @@
 \newglossaryentry{arraystring}
 {
   type=mtc,
+  category=term,
   name={arraystring},
   description={An array of \glspl{string}.},
   kind={facet},
@@ -6932,6 +6978,7 @@
 \newglossaryentry{part document}
 {
   type=mtc,
+  category=term,
   name={Part},
   description={Each Standard document is referred to as a \gls{part document} of the Standard.}
 }
@@ -7350,14 +7397,12 @@
 
 \newglossaryentry{mtconnect document}
 {
-  type=mtc,
   name={MTConnect Document},
   description={See \gls{document}.}
 }
 
 \newglossaryentry{mtconnect xml document}
 {
-  type=mtc,
   name={MTConnect XML Document},
   description={See \gls{document}.}
 }
@@ -7411,6 +7456,7 @@
 \newglossaryentry{header term}
 {
   type=mtc,
+  category=term,
   name={Header},
   description={See \gls{document header}}
 }
@@ -7708,6 +7754,7 @@
 \newglossaryentry{mtconnect information model}
 {
   type=mtc,
+  category=term,
   name={MTConnect Information Model},
   description={See \gls{information model}}
 }
@@ -7798,7 +7845,6 @@
 
 \newglossaryentry{equipment metadata}
 {
-  type=mtc,
   name={Equipment Metadata},
   description={See \gls{metadata}}
 }
@@ -7829,6 +7875,7 @@
 \newglossaryentry{asset response document}
 {
   type=mtc,
+  category=term,
   name={Asset Response Document},
   plural={Assets Response Document},
   description={See \gls{mtconnectassets response document}}
@@ -7926,7 +7973,7 @@
   name={Parent Element}
 }
 {
-	AnXML element used to organize \gls{lower level} child elements that share a common relationship to the \gls{parent element}.
+	An XML element used to organize \gls{lower level} child elements that share a common relationship to the \gls{parent element}.
 
 	Appears in the documents in the following form: \gls{parent element}.
 }
@@ -8056,6 +8103,7 @@
 \newglossaryentry{asset request}
 {
   type=mtc,
+  category=term,
   name={Asset Request},
   description={See \gls{asset}.}
 }
@@ -8094,6 +8142,7 @@
 \newglossaryentry{mtconnect response document}
 {
   type=mtc,
+  category=term,
   name={MTConnect Response Document},
   description={See \gls{response document}.}
 }
@@ -8117,6 +8166,7 @@
 \newglossaryentry{http messaging}
 {
   type=mtc,
+  category=term,
   name={HTTP Messaging},
   description={\gls{http messaging} is an interface for information exchange functionality.}
 }
@@ -8124,6 +8174,7 @@
 \newglossaryentry{http header field}
 {
   type=mtc,
+  category=term,
   name={HTTP Header Field},
   description={\glspl{http header field} are components of the header section of request and response messages in an HTTP transaction.}
 }
@@ -8131,6 +8182,7 @@
 \newglossaryentry{http body}
 {
   type=mtc,
+  category=term,
   name={HTTP Body},
   description={\gls{http body} is the data bytes transmitted in an HTTP transaction message immediately following the headers.}
 }
@@ -8138,6 +8190,7 @@
 \newglossaryentry{http request method}
 {
   type=mtc,
+  category=term,
   name={HTTP Request Method},
   description={It indicates the method to be performed on the resource identified by the given request URI.}
 }
@@ -8145,6 +8198,7 @@
 \newglossaryentry{http request url}
 {
   type=mtc,
+  category=term,
   name={HTTP Request URL},
   description={A request specifying the location and mechanism to retrieve a web resource.}
 }
@@ -8152,6 +8206,7 @@
 \newglossaryentry{http version}
 {
   type=mtc,
+  category=term,
   name={HTTP Version},
   description={Version of the HTTP protocol.}
 }
@@ -8181,6 +8236,7 @@
 \newglossaryentry{xml declaration}
 {
   type=mtc,
+  category=term,
   name={XML Declaration},
   description={It is a processing instruction that identifies the document as being XML.}
 }
@@ -8188,6 +8244,7 @@
 \newglossaryentry{namespace}
 {
   type=mtc,
+  category=term,
   name={namespace},
   description={\glspl{namespace} are used to organize code into logical groups.}
 }
@@ -8274,6 +8331,7 @@
 \newglossaryentry{data model}
 {
   type=mtc,
+  category=term,
   name={Data Model},
   description={A \gls{semantic data model}.}
 }
@@ -8554,7 +8612,7 @@
   name={\normalfont XML}
 }
 {
-	Stands for EXtensible Markup Language. 
+	Stands for eXtensible Markup Language. 
 
 	XML defines a set of rules for encoding documents that both a human-readable and machine-readable.
 
@@ -8617,7 +8675,6 @@
 
 \longnewglossaryentry{asset document}
 {
-  type=mtc,
   name={Asset Document}
 }
 {
@@ -8640,7 +8697,8 @@
   type=mtc,
   category=model,
   name={CUBIC\_MILLIMETER},
-  description={Geometric volume in millimeters}
+  description={Geometric volume in millimeters},
+  kind={units}
 }
 
 
@@ -8649,7 +8707,8 @@
   type=mtc,
   category=model,
   name={CUBIC\_MILLIMETER/SECOND},
-  description={Change of geometric volume per second}
+  description={Change of geometric volume per second},
+  kind={units}
 }
 
 
@@ -8658,7 +8717,8 @@
   type=mtc,
   category=model,
   name={CUBIC\_MILLIMETER/SECOND$^2$},
-  description={Change in geometric volume per second squared}
+  description={Change in geometric volume per second squared},
+  kind={units}
 }
 
 
@@ -8667,7 +8727,8 @@
   type=mtc,
   category=model,
   name={MILLIGRAM},
-  description={Milligram }
+  description={Milligram },
+  kind={units}
 }
 
 
@@ -8676,7 +8737,8 @@
   type=mtc,
   category=model,
   name={MILLIGRAM/CUBIC\_MILLIMETER},
-  description={Milligram per cubic millimeter  }
+  description={Milligram per cubic millimeter  },
+  kind={units}
 }
 
 
@@ -8685,7 +8747,8 @@
   type=mtc,
   category=model,
   name={MILLILITER},
-  description={Milliliter  }
+  description={Milliliter  },
+  kind={units}
 }
 
 
@@ -9103,7 +9166,7 @@
   type=mtc,
   category=model,
   name={EndEffector},
-  description={\gls{endeffector} is an XML container that represents the information for those functions that form the last link segment of a robot. It is the part of the robot that interacts with the manufacturing process.},
+  description={\gls{endeffector} is an XML container that represents the information for those functions that form the last link segment of a piece of equipment. It is the part of a piece of equipment that interacts with the manufacturing process.},
   kind={component,systems}
 }
 
@@ -9274,16 +9337,23 @@
 }
 
 
-\newglossaryentry{xlink:href}
+\newglossaryentry{href}
 {
   type=mtc,
   category=model,
-  name={xlink:href},
-  description={A URL identifying the \gls{agent} associated with the piece of equipment associated with this piece of equipment and the UUID identifying that specific piece of equipment.
-  \newline \gls{xlink:href} is an optional attribute.},
+  name={href},
+  description={A URI identifying the \gls{agent} that is publishing information for the associated piece of equipment. \gls{href} \MUST also include the UUID for that specific piece of equipment.},  
   kind={attribute}
 }
 
+\newglossaryentry{xlink:type}
+{
+  type=mtc,
+  category=model,
+  name={xlink:type},
+  description={The XLink \cfont{type} attribute \MUST have a fixed value of \cfont{locator} as defined in W3C XLink 1.1 https://www.w3.org/TR/xlink11/ \textit{section 5.4 Locator Attribute (href)}.},
+  kind={attribute}
+}
 
 \newglossaryentry{key}
 {
@@ -9330,7 +9400,8 @@
   type=mtc,
   category=model,
   name={MINUTE},
-  description={A measurement of time in minutes}
+  description={A measurement of time in minutes},
+  kind={nativeUnits}
 }
 
 
@@ -9499,7 +9570,7 @@
   type=mtc,
   category=model,
   name={Entry},
-  description={A XML element representing a \gls{key-value pair} published as part of a \gls{data set}.},
+  description={An XML element representing a \gls{key-value pair} published as part of a \gls{data set}.},
   kind={element}
 }
 
