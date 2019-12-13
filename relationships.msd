@@ -22,7 +22,7 @@ package :Relationships, 'Relationship models' do
 
   type :Relationship, 'A relationship between this component and something else' do
     abstract
-    member :Id, 'The coordinate system identifier', :ID
+    member :Id, 'The relationship identifier', :ID
     member :Name, 'The optional name of the relationship', 0..1
     member :Type, 'The assciation type', :RelationshipTypeEnum
     member :Criticality, 'Criticality', 0..1, :CriticalityEnum
