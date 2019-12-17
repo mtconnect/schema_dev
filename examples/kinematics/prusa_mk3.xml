@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectDevices xmlns="urn:mtconnect.org:MTConnectDevices:1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.6 ../../MTConnectDevices_1.6.xsd">
+	<Header version="1.5" creationTime="2019-04-24T00:00:00Z" instanceId="1" sender="localhost" bufferSize="131111" assetBufferSize="1000" assetCount="0"/>
+	<Devices>
+		<Device id="d29534c0" uuid="d29534c0-9f72-0137-1edc-644bf010023" name="mk3">
+			<Configuration>
+				<CoordinateSystems>
+					<CoordinateSystem id="platform1" type="PLATFORM" name="platform">
+						<Origin>0 0 0</Origin>
+					</CoordinateSystem>
+					<CoordinateSystem id="machine1" type="MACHINE" parentId="platform1" name="machine">
+						<Translation>62.91 240.0 72.21</Translation>
+						<Rotation>0 0 0</Rotation>
+					</CoordinateSystem>
+				</CoordinateSystems>
+			</Configuration>
+			<Components>
+				<Axes id="axes1">
+					<Configuration>
+						<CoordinateSystems>
+							<CoordinateSystem id="base1" type="BASE" parentId="platform1" name="Zframe">
+								<Translation>0 0 0</Translation>
+								<Rotation>0 0 0</Rotation>
+							</CoordinateSystem>
+							<CoordinateSystem id="base2" type="BASE" parentId="platform1" name="Yframe">
+								<Translation>0 0 0</Translation>
+								<Rotation>0 0 0</Rotation>
+							</CoordinateSystem>
+						</CoordinateSystems>
+					</Configuration>
+					<Components>
+						<Linear id="linearZ1" name="Z1">
+							<Configuration>
+								<CoordinateSystems>
+									<CoordinateSystem type="JOINT" id="z1" kinematic="true" name="Z1" parentId="base1">
+										<Translation>-62 0 0</Translation>
+										<Rotation>0 0 0</Rotation>
+									</CoordinateSystem>
+								</CoordinateSystems>
+								<Motion type="PRISMATIC" actuation="DIRECT">
+									<Axis coordinateSystemId="z1">0 0 1</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="zpm1" name="Zabs1" type="POSITION" coordinateSystemId="z1" units="MILLIMETER">
+									<Constraints>
+										<Minimum>0</Minimum>
+										<Maximum>240</Maximum>
+									</Constraints>
+									<InitialValue>0.1000</InitialValue>
+								</DataItem>
+								<DataItem id="zoff" type="x:POSITION_OFFSET" category="SAMPLE" units="MILLIMETER" coordinateSystemId="z1"/>
+							</DataItems>
+						</Linear>
+						<Linear id="linearZ2" name="Z2">
+							<Configuration>
+								<CoordinateSystems>
+									<CoordinateSystem type="JOINT" id="z2" kinematic="true" name="Z2" parentId="base1">
+										<Translation>302 0 0</Translation>
+										<Rotation>0 0 0</Rotation>
+									</CoordinateSystem>
+								</CoordinateSystems>
+								<Motion type="PRISMATIC" actuation="DIRECT">
+									<Axis coordinateSystemId="z2">0 0 1</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="zpm2" name="Zabs" type="POSITION" coordinateSystemId="z2" units="MILLIMETER">
+									<Constraints>
+										<Minimum>0</Minimum>
+										<Maximum>240</Maximum>
+									</Constraints>
+									<InitialValue>0.1000</InitialValue>
+								</DataItem>
+							</DataItems>
+						</Linear>
+						<Linear id="linearz0" name="Z">
+							<Configuration>
+								<Relationships>
+									<ComponentRelationship id="cr1" type="PARENT" idRef="linearZ1"/>
+									<ComponentRelationship id="cr2" type="PARENT" idRef="linearZ2"/>
+								</Relationships>
+								<Motion type="PRISMATIC" actuation="VIRTUAL">
+									<Axis coordinateSystemId="machine1">0 0 1</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="zpm0" name="Zabs" type="POSITION" coordinateSystemId="machine1" units="MILLIMETER">
+									<Constraints>
+										<Minimum>0</Minimum>
+										<Maximum>240</Maximum>
+									</Constraints>
+									<InitialValue>0.1000</InitialValue>
+								</DataItem>
+							</DataItems>
+						</Linear>
+						<Linear id="linearX" name="X">
+							<Configuration>
+								<CoordinateSystems>
+									<CoordinateSystem type="JOINT" id="x1" kinematic="true" name="X" parentId="z1">
+										<Translation>8.5 2 4</Translation>
+										<Rotation>0 0 0</Rotation>
+									</CoordinateSystem>
+								</CoordinateSystems>
+								<Motion type="PRISMATIC" actuation="DIRECT">
+									<Axis coordinateSystemId="x1">1 0 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="xpm" name="Xabs" type="POSITION" coordinateSystemId="x1" units="MILLIMETER">
+									<Constraints>
+										<Minimum>-10</Minimum>
+										<Maximum>240</Maximum>
+									</Constraints>
+								</DataItem>
+							</DataItems>
+						</Linear>
+						<Linear id="linearY" name="Y">
+							<Configuration>
+								<CoordinateSystems>
+									<CoordinateSystem type="JOINT" id="y1" kinematic="true" name="Y" parentId="base2">
+										<Translation>0 0 0</Translation>
+										<Rotation>0 0 0</Rotation>
+									</CoordinateSystem>
+								</CoordinateSystems>
+								<Motion type="PRISMATIC" actuation="DIRECT">
+									<Axis coordinateSystemId="y1">0 1 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="ypm" name="Yabs" type="POSITION" coordinateSystemId="y1" units="MILLIMETER">
+									<Constraints>
+										<Minimum>-10</Minimum>
+										<Maximum>240</Maximum>
+									</Constraints>
+								</DataItem>
+							</DataItems>
+						</Linear>
+					</Components>
+				</Axes>
+			</Components>
+		</Device>
+	</Devices>
+</MTConnectDevices>

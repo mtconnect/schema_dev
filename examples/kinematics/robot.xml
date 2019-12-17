@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectDevices xmlns="urn:mtconnect.org:MTConnectDevices:1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.6 ../../MTConnectDevices_1.6.xsd">
+	<Header version="1.5" creationTime="2019-04-24T00:00:00Z" instanceId="1" sender="localhost" bufferSize="131111" assetBufferSize="1000" assetCount="0"/>
+	<Devices>
+		<Device id="q8114a720" uuid="873a24c0-49d9-0137-e2b2-0c85909298d9" name="ABB">
+			<Description manufacturer="ABB" model="IRB-2400" serialNumber="1">Taken from ROS URDF File: 
+        https://github.com/ros-industrial/abb/blob/kinetic-devel/abb_irb2400_support/urdf/irb2400.urdf
+      </Description>
+			<Configuration>
+				<CoordinateSystems>
+					<CoordinateSystem id="world" type="WORLD">
+						<Location>0 0 0</Location>
+					</CoordinateSystem>
+				</CoordinateSystems>
+			</Configuration>
+			<Components>
+				<Axes id="u143a84f0">
+					<Configuration>
+						<CoordinateSystems>
+							<CoordinateSystem id="base" type="BASE" parentId="world" name="base">
+								<Translation>-305 -305 0</Translation>
+							</CoordinateSystem>
+						</CoordinateSystems>
+					</Configuration>
+					<Components>
+						<Rotary id="G6b1d2400" name="J1" nativeName="joint_1">
+							<Configuration>
+								<Motion id="j1m" coordinateSystemId="base" type="REVOLUTE" actuation="DIRECT" >
+									<Origin>
+										<Translation>0 0 180</Translation>
+									</Origin>
+									<Axis>0 0 1</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="u306f7300" type="ANGLE" subType="ACTUAL" units="DEGREE" coordinateSystemId="base"/>
+							</DataItems>
+						</Rotary>
+						<Linear id="link1" name="L1" nativeName="link_1">
+							<Configuration>
+								<Motion id="l1m" coordinateSystemId="base" type="PRISMATIC" actuation="FIXED" kinematicParentIdRef="j1m">
+									<Axis>0 0.23 1</Axis>
+								</Motion>
+								<Specifications>
+									<Specification type="LENGTH">
+										<Nominal>446.3462</Nominal>
+									</Specification>
+								</Specifications>
+							</Configuration>
+						</Linear>
+						<Rotary id="G51175220" name="J2" nativeName="joint_2">
+							<Configuration>
+								<Relationships>
+									<ComponentRelationship idRef="G6b1d2400" type="PARENT" id="cr1"/>
+								</Relationships>
+								<Motion id="j2m" type="REVOLUTE" actuation="DIRECT" kinematicParentIdRef="j1m" coordinateSystemId="base">
+									<Origin>
+										<Translation>0 100 435</Translation>
+									</Origin>
+									<Axis>0 1 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="j6e4a1170" type="ANGLE" subType="ACTUAL" units="DEGREE" coordinateSystemId="base"/>
+							</DataItems>
+						</Rotary>
+						<Rotary id="y3fcfdc20" name="J3" nativeName="joint_3">
+							<Configuration>
+								<Relationships>
+									<ComponentRelationship idRef="G51175220" type="PARENT" id="cr2"/>
+								</Relationships>
+								<Motion kinematicParentIdRef="j2m" type="REVOLUTE" actuation="DIRECT" id="j3m" coordinateSystemId="base">
+									<Origin>
+										<Translation>0 0 705</Translation>
+										<!-- J3 is rotated 90 degrees in the base coordinate system when at 0 --> 
+										<Rotation>90 0 0</Rotation>
+									</Origin>
+									<Axis>0 1 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="e4e7466a0" type="ANGLE" subType="ACTUAL" units="DEGREE"/>
+							</DataItems>
+						</Rotary>
+						<Rotary id="hb18d4e60" name="J4" nativeName="joint_4">
+							<Configuration>
+								<Relationships>
+									<ComponentRelationship idRef="y3fcfdc20" type="PARENT" id="cr3"/>
+								</Relationships>
+								<Motion id="j4m" type="REVOLUTE" actuation="DIRECT" kinematicParentIdRef="j3m" coordinateSystemId="base">
+									<Origin>
+										<Translation>0 605 135</Translation>
+										<Rotation>0 0 0</Rotation>
+									</Origin>
+									<Axis>0 1 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="Yd1b67cc0" type="ANGLE" subType="ACTUAL" units="DEGREE"/>
+							</DataItems>
+						</Rotary>
+						<Rotary id="vf9a97670" name="J5" nativeName="joint_5">
+							<Configuration>
+								<Relationships>
+									<ComponentRelationship idRef="hb18d4e60" type="PARENT" id="cr4"/>
+								</Relationships>
+								<Motion type="REVOLUTE" actuation="DIRECT" id="j5m" coordinateSystemId="base" kinematicParentIdRef="j4m">
+									<Origin>
+										<Translation>0 150 0</Translation>
+									</Origin>
+									<Axis>1 0 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="N02b97fd0" type="ANGLE" subType="ACTUAL" units="DEGREE" coordinateSystemId="base"/>
+							</DataItems>
+						</Rotary>
+						<Rotary id="u3eb40f30" name="J6" nativeName="joint_6">
+							<Configuration>
+								<Relationships>
+									<ComponentRelationship idRef="vf9a97670" type="PARENT" id="cr5"/>
+								</Relationships>
+								<CoordinateSystems>
+									<CoordinateSystem type="MECHANICAL_INTERFACE" id="interface" name="interface" parentId="j6m"/>
+								</CoordinateSystems>
+								<Motion type="REVOLUTE" actuation="DIRECT" coordinateSystemId="base" id="j6m" kinematicParentIdRef="j5m">
+									<Origin>
+										<Translation>0 85 0</Translation>
+										<!-- last Axis is facing downward in 0 position -->
+										<Rotation>90 0 0</Rotation>
+									</Origin>
+									<Axis>0 1 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="z42ccdfa0" type="ANGLE" subType="ACTUAL" units="DEGREE" coordinateSystemId="base"/>
+							</DataItems>
+						</Rotary>
+					</Components>
+				</Axes>
+				<Controller id="Q7f109020">
+					<Components>
+						<Path id="g7e29fd60"/>
+					</Components>
+				</Controller>
+			</Components>
+		</Device>
+	</Devices>
+</MTConnectDevices>

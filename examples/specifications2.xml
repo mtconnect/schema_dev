@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectDevices xmlns="urn:mtconnect.org:MTConnectDevices:1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.5 file:///Z:/projects/MTConnect/xml_schema/schema_1.5/MTConnectDevices_1.5.xsd">
+	<Header version="12" creationTime="2019-10-10T21:00:00Z" instanceId="1" sender="local" bufferSize="131" assetBufferSize="1000" assetCount="0"/>
+	<Devices>
+		<Device id="d" uuid="d" name="d">
+      <Configuration>
+        <Specifications>
+          <Specification type="MASS'" subType="ACTION">
+            <Minimum>100</Minimum>
+          </Specification>
+        </Specifications>
+      </Configuration>
+		</Device>
+	</Devices>
+</MTConnectDevices>

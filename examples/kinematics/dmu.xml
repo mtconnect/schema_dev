@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectDevices xmlns="urn:mtconnect.org:MTConnectDevices:1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.6 ../../MTConnectDevices_1.6.xsd">
+	<Header version="1.5" creationTime="2019-04-24T00:00:00Z" instanceId="1" sender="localhost" bufferSize="131111" assetBufferSize="1000" assetCount="0"/>
+	<Devices>
+		<Device id="pnc1" uuid="0000-0000-0000-0000" name="DMU50">
+			<Description manufacturer="DMU">6 axis machine with trunion</Description>
+			<Configuration>
+				<CoordinateSystems>
+					<CoordinateSystem id="world" type="WORLD">
+						<Location>0 0 0</Location>
+					</CoordinateSystem>
+					<CoordinateSystem id="base" type="BASE" parentId="world">
+						<Rotation>-88.73 0 -90</Rotation>
+					</CoordinateSystem>
+				</CoordinateSystems>
+			</Configuration>
+			<Components>
+				<Axes id="axes">
+					<Components>
+						<!-- Start of a new kinematic chain -->
+						<Rotary id="b" name="B">
+							<Configuration>
+								<Motion id="bm" coordinateSystemId="base" type="REVOLUTE" actuation="DIRECT">
+									<Origin>
+										<Translation>6.0 -16.0 801.0</Translation>
+										<Rotation>-90.0 0 0</Rotation>
+									</Origin>
+									<Axis>0 1 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem id="br" type="ANGLE" category="SAMPLE" units="DEGREE" coordinateSystemId="base"/>
+							</DataItems>
+						</Rotary>
+						<Link id="t" name="Trunion">
+							<Configuration>
+								<Motion id="tm" coordinateSystemId="base" type="PRISMATIC" actuation="FIXED" kinematicParentIdRef="bm">
+									<Origin>
+										<Translation>0 -405 785.5</Translation>
+										<Rotation>90 0 0</Rotation>
+									</Origin>
+								</Motion>
+							</Configuration>
+						</Link>
+						<Rotary id="a" name="A">
+							<Configuration>
+								<Motion id="am" coordinateSystemId="base" type="REVOLUTE" actuation="DIRECT" kinematicParentIdRef="tm">
+									<Origin>
+										<Translation>18.0 502.0 567.0</Translation>
+										<Rotation>180 0 0</Rotation>
+									</Origin>
+									<Axis>1 0 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem id="ar" type="ANGLE" category="SAMPLE" units="DEGREE"/>
+							</DataItems>
+						</Rotary>
+						<!-- Start of a new kinematic chain -->
+						<Linear id="x" name="X">
+							<Configuration>
+								<Motion id="xm" coordinateSystemId="base" type="PRISMATIC" actuation="DIRECT">
+									<Origin>
+										<Translation>-75 275 1275</Translation>
+										<Rotation>0 90 0</Rotation>
+									</Origin>
+									<Axis>1 0 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem id="xp" type="POSITION" category="SAMPLE" units="MILLIMETER"/>
+							</DataItems>
+						</Linear>
+						<Link id="s" name="Saddle">
+							<Configuration>
+								<Motion id="sm" coordinateSystemId="base" type="PRISMATIC" actuation="FIXED" kinematicParentIdRef="xm">
+									<Origin>
+										<Translation>27.5 537.7 1280</Translation>
+										<Rotation>-83.83 0 -90</Rotation>
+									</Origin>
+								</Motion>
+								<SolidModel href="http://example.com/saddle.stl"/>
+							</Configuration>
+						</Link>
+						<Linear id="y" name="Y">
+							<Configuration>
+								<Motion id="ym" coordinateSystemId="base" type="PRISMATIC" actuation="DIRECT" kinematicParentIdRef="s">
+									<Origin>
+										<Translation>27 494 1350.2</Translation>
+										<Rotation>-90 0 -180</Rotation>
+									</Origin>
+									<Axis>0 1 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem id="yp" type="POSITION" category="SAMPLE" units="MILLIMETER"/>
+							</DataItems>
+						</Linear>
+						<Link id="r" name="Ram">
+							<Configuration>
+								<Motion id="rm" coordinateSystemId="base" type="PRISMATIC" actuation="FIXED" kinematicParentIdRef="ym">
+									<Origin>
+										<Translation>39.4 498.3 1680</Translation>
+										<Rotation>90 0 -180</Rotation>
+									</Origin>
+								</Motion>
+							</Configuration>
+						</Link>
+						<Linear id="z" name="Z">
+							<Configuration>
+								<Motion id="zm" coordinateSystemId="base" type="PRISMATIC" actuation="DIRECT" kinematicParentIdRef="rm">
+									<Origin>
+										<Translation>24.0 4 1643</Translation>
+										<Rotation>180 0 -180</Rotation>
+									</Origin>
+									<Axis>0 0 1</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem id="zp" type="POSITION" category="SAMPLE" units="MILLIMETER"/>
+							</DataItems>
+						</Linear>
+					</Components>
+				</Axes>
+				<Systems id="sys">
+					<Components>
+						<Table id="table">
+							<Configuration>
+								<Motion id="tbm" coordinateSystemId="base" type="PRISMATIC" actuation="FIXED" kinematicParentIdRef="am">
+									<Origin>
+										<Translation>0 -520 678.5</Translation>
+										<Rotation>90 0 90</Rotation>
+									</Origin>
+								</Motion>
+							</Configuration>
+						</Table>
+						<EndEffector id="head">
+							<Configuration>
+								<Motion id="tlm" coordinateSystemId="base" type="PRISMATIC" actuation="FIXED" kinematicParentIdRef="zm">
+									<Origin>
+										<Translation>25 119.2 1589.0</Translation>
+										<Rotation>0 0 -90</Rotation>
+									</Origin>
+								</Motion>
+							</Configuration>
+						</EndEffector>
+					</Components>
+				</Systems>
+			</Components>
+		</Device>
+	</Devices>
+</MTConnectDevices>
+		

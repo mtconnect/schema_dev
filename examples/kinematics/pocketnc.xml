@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectDevices xmlns="urn:mtconnect.org:MTConnectDevices:1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.6 ../../MTConnectDevices_1.6.xsd">
+	<Header version="1.5" creationTime="2019-04-24T00:00:00Z" instanceId="1" sender="localhost" bufferSize="131111" assetBufferSize="1000" assetCount="0"/>
+	<Devices>
+		<Device id="pnc1" uuid="0000-0000-0000-0000" name="PocketNC">
+			<Configuration>
+				<CoordinateSystems>
+					<CoordinateSystem id="platform1" type="PLATFORM" name="platform">
+						<Location>0 0 0</Location>
+					</CoordinateSystem>
+					<CoordinateSystem id="machine1" type="MACHINE" parentId="platform1" name="machine">
+						<Translation>88.9 190.5 177.8</Translation>
+					</CoordinateSystem>
+				</CoordinateSystems>
+			</Configuration>
+			<Components>
+				<Axes id="axes1">
+					<Configuration>
+						<CoordinateSystems>
+							<CoordinateSystem id="base1" type="BASE" parentId="platform1" name="base">
+								<Translation>0 38.1 266.7</Translation>
+							</CoordinateSystem>
+						</CoordinateSystems>
+					</Configuration>
+					<Components>
+						<Linear id="linearX" name="X">
+							<Configuration>
+								<Motion id="x1" type="PRISMATIC" actuation="DIRECT" coordinateSystemId="base1" kinematic="true">
+									<Origin>
+										<Translation>215.9 50.8 101.6</Translation>
+									</Origin>
+									<Axis>1 0 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="xpm" name="Xabs" type="POSITION" coordinateSystemId="machine1" units="MILLIMETER">
+									<Constraints>
+										<Minimum>-44.4500</Minimum>
+										<Maximum>64.7700</Maximum>
+									</Constraints>
+									<InitialValue>64.77</InitialValue>
+								</DataItem>
+							</DataItems>
+						</Linear>
+						<Linear id="linearZ" name="Z">
+							<Configuration>
+								<Motion id="z1" type="PRISMATIC" actuation="DIRECT" coordinateSystemId="base1" parentId="x1">
+									<Origin>
+										<Translation>-11.43 63.5 0</Translation>
+									</Origin>
+									<Axis>0 0 1</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="zpm" name="Zabs" type="POSITION" coordinateSystemId="machine1" units="MILLIMETER">
+									<Constraints>
+										<Minimum>-87.63</Minimum>
+										<Maximum>2.5400</Maximum>
+									</Constraints>
+									<InitialValue>2.5400</InitialValue>
+								</DataItem>
+								<DataItem id="zoff" type="x:POSITION_OFFSET" category="SAMPLE" units="MILLIMETER" coordinateSystemId="machine1"/>
+							</DataItems>
+						</Linear>
+						<Rotary id="c" name="C">
+							<Configuration>
+								<Motion id="c1" type="REVOLUTE" actuation="DIRECT" kinematic="true" coordinateSystemId="base1" parentId="z1">
+									<Origin>
+										<Translation>50.8 38.1 0</Translation>
+									</Origin>
+									<Axis>0 0 1</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="cs" name="Srpm" subType="ACTUAL" type="ROTARY_VELOCITY" coordinateSystemId="machine1" units="REVOLUTION/MINUTE">
+									<Constraints>
+										<Maximum>10000</Maximum>
+									</Constraints>
+								</DataItem>
+							</DataItems>
+						</Rotary>
+						<Linear id="linearY" name="Y">
+							<Configuration>
+								<Motion type="PRISMATIC" actuation="DIRECT" id="y1" kinematic="true" parentId="base1" coordinateSystemId="base1">
+									<Origin>
+										<Translation>203.2 12.7 -63.5</Translation>
+									</Origin>
+									<Axis>0 -1 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="ypm" name="Yabs" type="POSITION" coordinateSystemId="machine1" units="MILLIMETER">
+									<Constraints>
+										<Minimum>-52.0700</Minimum>
+										<Maximum>74.9300</Maximum>
+									</Constraints>
+									<InitialValue>74.9300</InitialValue>
+								</DataItem>
+								<DataItem id="yoff" type="x:POSITION_OFFSET" category="SAMPLE" units="MILLIMETER" coordinateSystemId="y1"/>
+							</DataItems>
+						</Linear>
+						<Rotary id="rotaryA" name="A">
+							<Configuration>
+								<Motion type="REVOLUTE" actuation="DIRECT" id="a1" kinematic="true" parentId="y1" coordinateSystemId="base1">
+									<Origin>
+										<Translation>-38.1 64.77 -25.4</Translation>
+									</Origin>
+									<Axis>1 0 0</Axis>
+								</Motion>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="apm" type="ANGLE" coordinateSystemId="machine1" units="DEGREE">
+									<Constraints>
+										<Minimum>-5</Minimum>
+										<Maximum>95</Maximum>
+									</Constraints>
+									<InitialValue>0</InitialValue>
+								</DataItem>
+							</DataItems>
+						</Rotary>
+						<Rotary id="rotaryB" name="B">
+							<Configuration>
+								<Motion type="REVOLUTE" actuation="DIRECT" id="b1" kinematic="true" parentId="a1" coordinateSystemId="base1">
+									<Origin>
+										<Translation>-76.20 -21.97354 0</Translation>
+									</Origin>
+									<Axis>0 1 0</Axis>
+								</Motion>
+								<CoordinateSystems>
+									<CoordinateSystem type="WORKPIECE" id="b2" name="table" parentId="b1">
+										<Translation>0 0.8651 0</Translation>
+									</CoordinateSystem>
+								</CoordinateSystems>
+							</Configuration>
+							<DataItems>
+								<DataItem category="SAMPLE" id="bpm" type="ANGLE" coordinateSystemId="machine1" units="DEGREE">
+									<Constraints>
+										<Minimum>-99999</Minimum>
+										<Maximum>99999</Maximum>
+									</Constraints>
+									<InitialValue>0</InitialValue>
+								</DataItem>
+								<DataItem id="boff" type="x:ANGLE_OFFSET" category="SAMPLE" units="DEGREE" coordinateSystemId="b1"/>
+							</DataItems>
+						</Rotary>
+					</Components>
+				</Axes>
+				<Controller id="cont">
+					<Components>
+						<Path id="path">
+							<DataItems>
+								<DataItem id="ppos" type="PATH_POSITION" category="SAMPLE" units="MILLIMETER_3D" coordinateSystemId="machine1"/>
+							</DataItems>
+						</Path>
+					</Components>
+				</Controller>
+			</Components>
+		</Device>
+	</Devices>
+</MTConnectDevices>

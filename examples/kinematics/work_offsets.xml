@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectDevices xmlns="urn:mtconnect.org:MTConnectDevices:1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.6 ../../MTConnectDevices_1.6.xsd">
+	<Header version="1.6" creationTime="2019-04-24T00:00:00Z" instanceId="1" sender="localhost" bufferSize="131111" assetBufferSize="1000" assetCount="0"/>
+	<Devices>
+		<Device id="pnc1" uuid="0000-0000-0000-0000" name="MTC1">
+			<Description manufacturer="MTC">6 axis machine with trunion</Description>
+			<Configuration>
+				<CoordinateSystems>
+					<CoordinateSystem id="world" type="WORLD">
+						<Location>0 0 0</Location>
+					</CoordinateSystem>
+					<CoordinateSystem id="base" type="BASE" parentId="world">
+						<Rotation>-88.73 0 -90</Rotation>
+					</CoordinateSystem>
+					<CoordinateSystem id="machine" type="MACHINE" parentId="base">
+						<Translation>100 100 100</Translation>
+					</CoordinateSystem>
+				</CoordinateSystems>
+			</Configuration>
+			<Components>
+				<Controller id="c">
+					<Components>
+						<Path id="p1">
+							<Configuration>
+								<CoordinateSystems>
+									<CoordinateSystem id="work" type="WORKPIECE"/>
+								</CoordinateSystems>
+							</Configuration>
+							<DataItems>
+								<DataItem id="w1" type="x:TRANSLATION" subType="x:WORK" category="EVENT" representation="DATA_SET" coordinateSystemId="work" units="x:DEGREE_3D"/>
+								<DataItem id="r1" type="x:ROTATION" subType="x:WORK" category="EVENT" representation="DATA_SET" coordinateSystemId="work" units="MILLIMETER_3D"/>
+								<DataItem id="wo" type="WORK_OFFSET" category="EVENT"/>
+							</DataItems>
+						</Path>
+					</Components>
+				</Controller>
+			</Components>
+		</Device>
+	</Devices>
+</MTConnectDevices>

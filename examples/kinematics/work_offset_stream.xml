@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectStreams xmlns="urn:mtconnect.org:MTConnectStreams:1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectStreams:1.6 ../../MTConnectStreams_1.6.xsd">
+	<Header version="1.6" creationTime="2019-12-09T12:00:00Z" nextSequence="1" lastSequence="1" firstSequence="1" instanceId="1" sender="local" bufferSize="1024"/>
+	<Streams>
+		<DeviceStream name="MTC" uuid="0000-0000-0000-0000">
+			<ComponentStream componentId="p1" component="Path">
+				<Events>
+					<TranslationDataSet sequence="1" timestamp="2019-12-09T12:00:00Z" dataItemId="w1" count="2" subType="x:WORK">
+						<Entry key="G54">22.22 55.44 123.123</Entry>
+						<Entry key="G55">13.88 25.2 5.0</Entry>
+					</TranslationDataSet>
+					<RotationDataSet sequence="1" timestamp="2019-12-09T12:00:00Z" dataItemId="r1" count="2" subType="x:WORK">
+						<Entry key="G54">45 90 0</Entry>
+						<Entry key="G55">0 0 45</Entry>
+					</RotationDataSet>
+					<WorkOffset sequence="3" timestamp="2019-12-09T12:00:00Z" dataItemId="wo">G54</WorkOffset>
+				</Events>
+			</ComponentStream>
+		</DeviceStream>
+	</Streams>
+</MTConnectStreams>
