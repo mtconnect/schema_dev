@@ -85,7 +85,7 @@ package :Tools, 'Cutting tools' do
   type :CuttingTool, 'A cutting tool', :Asset do
     member :SerialNumber, 'The serial number of the asset'
     member :Manufacturers, 'The manufacturer of this asset', 0..1
-    member :CuttingToolId, 'The Identifier of the tool type'
+    member :ToolId, 'The Identifier of the tool type', :CuttingToolId
     
     at_least_one do 
       member :CuttingToolDefinition, 'DEPRECATED: Description of tool - now only in Archetype'
@@ -95,7 +95,7 @@ package :Tools, 'Cutting tools' do
   
   # Archetype 
   type :CuttingToolArchetype, 'A Archetypical cutting tool', :Asset do
-    member :CuttingToolId, 'The Identifier of the tool type'
+    member :ToolId, 'The Identifier of the tool type', :CuttingToolId
 
     at_least_one do 
       member :CuttingToolDefinition, 'Description of tool'

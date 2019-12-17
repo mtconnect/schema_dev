@@ -1084,7 +1084,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:sequence>
         <xs:attribute name='serialNumber' type='SerialNumberType' use='required'/>
         <xs:attribute name='manufacturers' type='ManufacturersType' use='optional'/>
-        <xs:attribute name='cuttingToolId' type='CuttingToolIdType' use='required'/>
+        <xs:attribute name='toolId' type='CuttingToolIdType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -1130,7 +1130,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:element>
           </xs:choice>
         </xs:sequence>
-        <xs:attribute name='cuttingToolId' type='CuttingToolIdType' use='required'/>
+        <xs:attribute name='toolId' type='CuttingToolIdType' use='required'/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
