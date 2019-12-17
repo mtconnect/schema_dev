@@ -81,7 +81,7 @@ package :Events, 'Event Package' do
   end
 
   %w{AssetChanged AssetRemoved}.each do |s|
-    self.schema.type(s.to_sym).member(:AssetType, 'The type of asset', 0..1, :AssetAttrType)
+    self.schema.type(s.to_sym).member(:AssetType, 'The type of asset', :AssetAttrType)
   end
       
   # Create discrete events for non-state events
