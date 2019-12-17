@@ -96,7 +96,7 @@ package :Tools, 'Cutting tools' do
   
   # Archetype 
   type :CuttingToolArchetype, 'A Archetypical cutting tool', :Asset do
-    member :toolId, 'The Identifier of the tool type', 0..1, :CuttingToolId
+    member :ToolId, 'The Identifier of the tool type', :CuttingToolId
     member :Description, 'The description of the cutting tool', 0..1, :AssetDescription
 
     at_least_one do 
