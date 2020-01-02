@@ -207,6 +207,10 @@ package :Samlpes, 'The samples' do
     member :Value, 'Length', :LengthValue
   end
 
+  type :EquipmentTimer, 'The flow', :Sample do
+    member :Value, 'flow', :FlowValue
+  end
+
   type :AbsTimeSeries, 'The abstract waveform', :Sample do
     abstract
     

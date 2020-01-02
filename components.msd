@@ -84,6 +84,7 @@ package :Component, 'Top Level Components Package' do
   type :Path, 'A path component', :CommonComponent
   type :Actuator, 'A component that causes motion', :CommonComponent
   type :Door, 'A door on the machine', :CommonComponent  
+  type :Auxiliaries, 'An XML container used to organize information for \gls{lower level} elements representing functional sub-systems that provide supplementary or extended capabilities for a piece of equipment, but they are not required for the basic operation of the equipment.', :CommonComponent  
 
   type :Compositions, "A collection of sub elements" do
     member :Composition, 'An assembly of a component', 1..INF

@@ -183,6 +183,8 @@ package :common, 'Common attributes and elements for all schemas' do
 
     value :USER, 'The user of the device or applicaiton'
     value :PART_NUMBER, 'An identifier of a part or product moving through the manufacturing process'
+
+    value :EQUIPMENT_TIMER, 'The measurement of the amount of time a piece of equipment or a sub-part of a piece of equipment has performed specific activities.'
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
