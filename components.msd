@@ -85,6 +85,9 @@ package :Component, 'Top Level Components Package' do
   type :Actuator, 'A component that causes motion', :CommonComponent
   type :Door, 'A door on the machine', :CommonComponent  
   type :Auxiliaries, 'An XML container used to organize information for \gls{lower level} elements representing functional sub-systems that provide supplementary or extended capabilities for a piece of equipment, but they are not required for the basic operation of the equipment.', :CommonComponent  
+  type :Loader, 'Loader is an XML container that represents the information for a unit comprised of all the parts involved in moving and distributing materials, parts, tooling, and other items to or from a piece of equipment.', :CommonComponent
+  type :WasteDisposal, 'WasteDisposal is an XML container that represents the information for a unit comprised of all the parts involved in removing manufacturing byproducts from a piece of equipment.', :CommonComponent
+  type :ToolingDelivery, 'ToolingDelivery is an XML container that represents the information for a unit involved in managing, positioning, storing, and delivering tooling within a piece of equipment', :CommonComponent
 
   type :Compositions, "A collection of sub elements" do
     member :Composition, 'An assembly of a component', 1..INF

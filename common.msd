@@ -253,6 +253,13 @@ package :common, 'Common attributes and elements for all schemas' do
     # For direction
     value :ROTARY, 'The rotational direction of a rotary device using the right hand rule convention'
     value :LINEAR, 'The direction of motion of a linear device'
+
+    # For 1.4 and equipment timer
+    value :LOADED, 'Measurement of the time that the sub-parts of a piece of equipment are under load. Example: For traditional machine tools, this is a measurement of the time that the cutting tool is assumed to be engaged with the part.'
+    value :WORKING, 'Measurement of the time that a piece of equipment is performing any activity – the equipment is active and performing a function under load or not. Example: For traditional machine tools, this includes LOADED, plus rapid moves, tool changes, etc.'
+    value :OPERATING, 'Measurement of the time that the major sub-parts of a piece of equipment are powered or performing any activity whether producing a part or product or not. Example: For traditional machine tools, this includes WORKING, plus idle time.'
+    value :POWERED, 'The measurement of time that primary power is applied to the piece of equipment and, as a minimum, the controller or logic portion of the piece of equipment is powered and functioning or components that are required to remain on are powered. Example: Heaters for an extrusion machine that are required to be powered even when the equipment is turned off.'
+    value :DELAY, 'Measurement of the time that a piece of equipment is waiting for an event or an action to occur.'
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
