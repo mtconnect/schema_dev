@@ -19,6 +19,7 @@ package :Events, 'Event Package' do
   basic_type(:AxesListValue, 'A space delimited list of values') { pattern 'UNAVAILABLE|[a-zA-Z][0-9]*( [a-zA-Z][0-9]*)*' }
   basic_type(:OverrideValue, 'The value for a percent override') { pattern float_value }
   basic_type :StringValue, 'A text value'
+  basic_type(:IntegerValue, 'A integer numeric value')  { pattern integer_value }
     
   enum :DirectionValue, 'Rotation Direction' do
     value :CLOCKWISE, 'Rotary clockwise rotation'
@@ -334,6 +335,10 @@ package :Events, 'Event Package' do
 
   type :LineLabel, 'An optional identifier for a BLOCK of code in a PROGRAM.', :Event do
     member :Value, 'The value for the line label', :StringValue
+  end
+
+  type :LineNumber, 'A reference to the position of a block of program code within a control program. The line number MAY represent either an absolute position starting with the first line of the program or an incremental position relative to the occurrence of the last LINE_LABEL.', :Event do
+    member :Value, 'The value for the line number', :IntegerValue
   end
 
   # Create discrete events for non-state events
