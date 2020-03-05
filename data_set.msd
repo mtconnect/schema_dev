@@ -2,12 +2,11 @@
 # coding: utf-8
 
 package :DataSet, 'DataSet Package' do
-  attr :Key, 'The key for adata set', :NMTOKEN
   
   type :Entry, 'An entry for a event with a data set representation' do
     mixed
     abstract
-    member :Key, 'they key'
+    member :Key, 'the key'
     member :Removed, 'an indicatore that the entry has been removed', 0..1
   end
 
@@ -32,3 +31,5 @@ package :DataSet, 'DataSet Package' do
     end
   end
 end
+
+

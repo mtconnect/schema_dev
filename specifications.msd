@@ -30,7 +30,6 @@ package :Specificaitons, 'Device and component specificaitons' do
   end
     
   type :Constraint, 'The limit of a constraint', :SpecificationValue do
-    abstract
     member :Value, 'The limit value', :LimitValue
   end
   

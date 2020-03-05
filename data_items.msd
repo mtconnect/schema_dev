@@ -11,6 +11,11 @@ package :DataItems, 'Data Items Package' do
   attr :CoordinateSystemId, 'The id reference for the coordinate system associated with this data item', :IDREF
   attr :Discrete, 'An discrete event', :boolean
 
+  type :DataItemDescription, 'The description of a data item, can be free form text or elements' do
+    mixed
+    member :any, 'Any elements', 0..INF
+  end  
+  
   basic_type :FilterValue, 'The minimum limit on the change in a value', :float
   
   # Measurement types
@@ -28,6 +33,7 @@ package :DataItems, 'Data Items Package' do
       value(e.name_property, e.description) if !e.kind_of?(:subtype)
     end
     value :DATA_SET, 'A set of entries'
+    value :TABLE, 'A tabular set of values'
   end
 
   enum :DataItemFilterEnum, 'The type of filter' do
@@ -65,6 +71,8 @@ package :DataItems, 'Data Items Package' do
     element :InitialValue, 'The initial value for counters', 0..1, :DataItemNumericValue
     element :ResetTrigger, 'The event that triggers the resetting of this counter', 0..1, :DataItemResetValue
     member(:Discrete, 'If this is a discrete event', 0..1) { self.default = 'false' }
+
+    member :Definition, 'The descriptive information about this data item', 0..1, :DataItemDefinition
   end
   
   type :DataItemConstraints, 'A set of limits for a data item' do
@@ -105,4 +113,33 @@ package :DataItems, 'Data Items Package' do
     member :Value, 'The source or channel for this data', :ItemSource
   end
 
+  type :DataItemDefinition, 'The DataItem Definition' do
+    member :Description, 'The description of the data item', 0..1, :DataItemDescription
+    member :EntryDefinitions, 'The aggergate of entry definitions', 0..1
+    member :CellDefinitions, 'The aggregate of cell definitions', 0..1
+  end
+
+  type :EntryDefinitions, 'The aggergation of EntryDefinition' do
+    member :EntryDefinition, 'An entry definition', 1..INF
+  end
+
+  type :EntryDefinition, 'The entry definition' do
+    member :Key, 'unique key'
+    member :Description, 'The description of the data item', 0..1, :DataItemDescription
+    member :Type, 'The type of measurement', 0..1, :DataItemEnum
+    member :Units, 'The units of the measurement', 0..1
+    member :CellDefinitions, 'Optional definitions for cells', 0..1
+  end
+
+  type :CellDefinitions, 'The aggergation of CellDefinition' do
+    member :CellDefinition, 'A cell definition', 1..INF
+  end
+
+  type :CellDefinition, 'The definition of a tabular cell' do
+    member :Key, 'unique key'
+    member :Description, 'The description of the data item', 0..1, :DataItemDescription
+    member :Type, 'The type of measurement', 0..1, :DataItemEnum
+    member :Units, 'The units of the measurement', 0..1
+  end
+  
 end

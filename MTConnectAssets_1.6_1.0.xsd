@@ -210,6 +210,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:boolean'/>
   </xs:simpleType>
+  <xs:simpleType name='KeyType'>
+    <xs:annotation>
+      <xs:documentation>
+        The key for adata set
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:NMTOKEN'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -2365,48 +2373,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='CUBIC_MILLIMETER'>
-        <xs:annotation>
-          <xs:documentation>
-            Geometric volume in millimeters
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CUBIC_MILLIMETER/SECOND'>
-        <xs:annotation>
-          <xs:documentation>
-            Change of geometric volume per second
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CUBIC_MILLIMETER/SECOND^2'>
-        <xs:annotation>
-          <xs:documentation>
-            Change in geometric volume per second squared
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MILLIGRAM'>
-        <xs:annotation>
-          <xs:documentation>
-            Milligram 
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MILLIGRAM/CUBIC_MILLIMETER'>
-        <xs:annotation>
-          <xs:documentation>
-            Milligram per cubic millimeter 
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MILLILITER'>
-        <xs:annotation>
-          <xs:documentation>
-            Milliliter 
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value='MILLIMETER/REVOLUTION'>
         <xs:annotation>
           <xs:documentation>
@@ -2659,48 +2625,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='CUBIC_MILLIMETER'>
-        <xs:annotation>
-          <xs:documentation>
-            Geometric volume in millimeters
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CUBIC_MILLIMETER/SECOND'>
-        <xs:annotation>
-          <xs:documentation>
-            Change of geometric volume per second
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CUBIC_MILLIMETER/SECOND^2'>
-        <xs:annotation>
-          <xs:documentation>
-            Change in geometric volume per second squared
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MILLIGRAM'>
-        <xs:annotation>
-          <xs:documentation>
-            Milligram 
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MILLIGRAM/CUBIC_MILLIMETER'>
-        <xs:annotation>
-          <xs:documentation>
-            Milligram per cubic millimeter 
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MILLILITER'>
-        <xs:annotation>
-          <xs:documentation>
-            Milliliter 
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value='MILLIMETER/REVOLUTION'>
         <xs:annotation>
           <xs:documentation>
@@ -2910,13 +2834,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Rotational velocity in revolution per second
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='MINUTE'>
-        <xs:annotation>
-          <xs:documentation>
-            A measurement of time in minutes
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3316,6 +3233,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:boolean'/>
   </xs:simpleType>
+  <xs:complexType name='DataItemDescriptionType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        The description of a data item, can be free form text or elements
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A placeholder for an XML element.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:any>
+    </xs:sequence>
+  </xs:complexType>
   <xs:simpleType name='FilterValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -3414,6 +3347,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='TABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            A tabular set of values
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemFilterEnumType'>
@@ -3509,6 +3449,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             regarding the meaning of the data that establishes an understanding
             of the time frame that the data represents so that the data may be
             correctly understood by a client software application.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Definition' type='DataItemDefinitionType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The descriptive information about this data item
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -3789,6 +3736,149 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='DataItemDefinitionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The DataItem Definition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Description' type='DataItemDescriptionType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            An XML element that can contain any descriptive content.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='EntryDefinitions' type='EntryDefinitionsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The aggergate of entry definitions
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='CellDefinitions' type='CellDefinitionsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            The aggregate of cell definitions
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='EntryDefinitionsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The aggergation of EntryDefinition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='EntryDefinition' type='EntryDefinitionType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            An entry definition
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='EntryDefinitionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The entry definition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Description' type='DataItemDescriptionType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            An XML element that can contain any descriptive content.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='CellDefinitions' type='CellDefinitionsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            Optional definitions for cells
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='key' type='KeyType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          unique key
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='type' type='DataItemEnumType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The type of either a structural element or a dataitem being measured.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='units' type='UnitsType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The unit of measurement for the reported value of the data item.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name='CellDefinitionsType'>
+    <xs:annotation>
+      <xs:documentation>
+        The aggergation of CellDefinition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='CellDefinition' type='CellDefinitionType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A cell definition
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='CellDefinitionType'>
+    <xs:annotation>
+      <xs:documentation>
+        The definition of a tabular cell
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Description' type='DataItemDescriptionType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            An XML element that can contain any descriptive content.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name='key' type='KeyType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          unique key
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='type' type='DataItemEnumType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The type of either a structural element or a dataitem being measured.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='units' type='UnitsType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The unit of measurement for the reported value of the data item.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:simpleType name='ResultValueType'>
     <xs:annotation>
@@ -6070,10 +6160,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='FloatEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='ToolOffset' type='ToolOffsetType' substitutionGroup='StringEvent'>
+  <xs:element name='ToolOffset' type='ToolOffsetType' substitutionGroup='FloatEvent'>
     <xs:annotation>
       <xs:documentation>
         A reference to the tool offset variables applied to the active cutting
@@ -6127,10 +6217,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='StringEventType'/>
+      <xs:extension base='FloatEventType'/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name='WorkOffset' type='WorkOffsetType' substitutionGroup='StringEvent'>
+  <xs:element name='WorkOffset' type='WorkOffsetType' substitutionGroup='FloatEvent'>
     <xs:annotation>
       <xs:documentation>
         A reference to the offset variables for a work piece or part associated
