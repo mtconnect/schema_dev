@@ -6516,6 +6516,29 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:attributeGroup name='DefinitionAttrsType'>
+    <xs:attribute name='key' type='KeyType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          unique key
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='type' type='DataItemEnumType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The type of either a structural element or a dataitem being measured.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='units' type='UnitsType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The unit of measurement for the reported value of the data item.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
   <xs:complexType name='EntryDefinitionType'>
     <xs:annotation>
       <xs:documentation>
@@ -6538,27 +6561,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='key' type='KeyType' use='required'>
-      <xs:annotation>
-        <xs:documentation>
-          unique key
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='type' type='DataItemEnumType' use='optional'>
-      <xs:annotation>
-        <xs:documentation>
-          The type of either a structural element or a dataitem being measured.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='units' type='UnitsType' use='optional'>
-      <xs:annotation>
-        <xs:documentation>
-          The unit of measurement for the reported value of the data item.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attributeGroup ref='DefinitionAttrsType'/>
   </xs:complexType>
   <xs:complexType name='CellDefinitionsType'>
     <xs:annotation>
@@ -6591,26 +6594,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name='key' type='KeyType' use='required'>
-      <xs:annotation>
-        <xs:documentation>
-          unique key
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='type' type='DataItemEnumType' use='optional'>
-      <xs:annotation>
-        <xs:documentation>
-          The type of either a structural element or a dataitem being measured.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='units' type='UnitsType' use='optional'>
-      <xs:annotation>
-        <xs:documentation>
-          The unit of measurement for the reported value of the data item.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attributeGroup ref='DefinitionAttrsType'/>
   </xs:complexType>
 </xs:schema>

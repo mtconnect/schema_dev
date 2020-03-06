@@ -123,11 +123,15 @@ package :DataItems, 'Data Items Package' do
     member :EntryDefinition, 'An entry definition', 1..INF
   end
 
-  type :EntryDefinition, 'The entry definition' do
+  attrs :DefinitionAttrs, 'The attributes for a definition' do
     member :Key, 'unique key'
-    member :Description, 'The description of the data item', 0..1, :DataItemDescription
     member :Type, 'The type of measurement', 0..1, :DataItemEnum
     member :Units, 'The units of the measurement', 0..1
+  end    
+
+  type :EntryDefinition, 'The entry definition' do
+    member :DefinitionAttrs, 'Attributes for the definition'
+    member :Description, 'The description of the data item', 0..1, :DataItemDescription
     member :CellDefinitions, 'Optional definitions for cells', 0..1
   end
 
@@ -136,10 +140,8 @@ package :DataItems, 'Data Items Package' do
   end
 
   type :CellDefinition, 'The definition of a tabular cell' do
-    member :Key, 'unique key'
+    member :DefinitionAttrs, 'Attributes for the definition'
     member :Description, 'The description of the data item', 0..1, :DataItemDescription
-    member :Type, 'The type of measurement', 0..1, :DataItemEnum
-    member :Units, 'The units of the measurement', 0..1
   end
   
 end
