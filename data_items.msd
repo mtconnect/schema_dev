@@ -126,6 +126,7 @@ package :DataItems, 'Data Items Package' do
   attrs :DefinitionAttrs, 'The attributes for a definition' do
     member :Key, 'unique key'
     member :Type, 'The type of measurement', 0..1, :DataItemEnum
+    member :SubType, 'The sub type for the measurement', 0..1, :DataItemSubEnum
     member :Units, 'The units of the measurement', 0..1
   end    
 

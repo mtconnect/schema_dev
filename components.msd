@@ -32,16 +32,6 @@ package :Component, 'Top Level Components Package' do
     member :any, 'The content of the description can text or XML elements', 0..INF
   end
   
-  type :AbstractConfiguration, 'Abstract configuration' do
-    abstract
-  end
-  
-  type :ComponentConfiguration, 'The configuration data associated with this component. For example, sensors may use 1451.5 or TEDS' do
-    mixed
-    
-    member :Configuration,  'Configuration types', 1..INF, :AbstractConfiguration
-  end
-    
   type :CommonComponent, "An abstract component that has an optional uuid", :Component do 
     member :Uuid, 'The component\'s universally unique id.', 0..1
     member :Name, 'The component\'s name', 0..1
@@ -95,7 +85,7 @@ package :Component, 'Top Level Components Package' do
       value(e.name_property, e.description) if !e.kind_of?(:subtype)
     end
   end
-  
+
   type :Composition, "An abstract element" do
     member :id, 'The data item identifier', :ID
     member :Uuid, 'The composition\'s universally unique id.', 0..1
@@ -105,7 +95,5 @@ package :Component, 'Top Level Components Package' do
   end  
 end
 
-load 'sensors'
-load 'specifications'
 load 'reference'
-load 'relationships'
+load 'configuration'

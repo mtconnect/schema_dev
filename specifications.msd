@@ -18,10 +18,12 @@ package :Specificaitons, 'Device and component specificaitons' do
     mixed
     member :Type, 'The type of measurement', :DataItemEnum
     member :SubType, 'The type of measurement', 0..1, :DataItemSubEnum
-    member :CompositionId, 'The optional composition identifier', 0..1
+    member :Name, 'The name of the spec', 0..1
     member :DataItemIdRef, 'The optional data item identifier', 0..1, :SourceDataItemId
-    member :SpecificationValue, 'The set of constraints', 1..INF
+    member :CompositionIdRef, 'The optional composition identifier', 0..1, :CompositionId
+    member :CoordinateSystemIdRef, 'The optional coordinate system identifier', 0..1
     member :Units, 'The units', 0..1
+    member :SpecificationValue, 'The set of constraints', 1..INF
   end
 
   type :SpecificationValue, 'an abstract value for a specification' do
@@ -36,24 +38,25 @@ package :Specificaitons, 'Device and component specificaitons' do
   type :Maximum, 'The maximum value', :Constraint  
   type :Minimum, 'The minimum value', :Constraint    
   type :Nominal, 'The nominal value', :Constraint
-  type :Rated, 'The value of the constraint', :Constraint
-  
-  type :DutyCycle, 'The duty cycle', :SpecificationValue do
-    mixed
-    member :Duration, 'The duration of the duty cycle', :DurationTime
-    member :Peak, 'The peak value of the duty cycle', :LimitValue
-    member :Value, 'The duty cycle', :LimitValue
-  end
 
-  attr :GearNumber, 'The number of the gear', :integer
-  basic_type :GearRatio, 'The ratio for the gear', :float
+  # possibly for 1.7
+#  type :Rated, 'The value of the constraint', :Constraint
+   
+#  type :DutyCycle, 'The duty cycle', :SpecificationValue do
+#    mixed
+#    member :Duration, 'The duration of the duty cycle', :DurationTime
+#    member :Peak, 'The peak value of the duty cycle', :LimitValue
+#    member :Value, 'The duty cycle', :LimitValue
+#  end
 
-  type :GearSpecification, 'A power transmission gearing, ratio given as CDATA', :SpecificationValue do
-    mixed
-    member :Number, 'The gear number', :GearNumber
-    member :GearRatio, 'The gear ratio'
-  end
+#  attr :GearNumber, 'The number of the gear', :integer
+#  basic_type :GearRatio, 'The ratio for the gear', :float
+
+#  type :GearSpecification, 'A power transmission gearing, ratio given as CDATA', :SpecificationValue do
+#    mixed
+#    member :Number, 'The gear number', :GearNumber
+#    member :GearRatio, 'The gear ratio'
+#  end
 end
 
 
-load 'coordinate_systems'
