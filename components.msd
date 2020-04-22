@@ -97,3 +97,6 @@ end
 
 load 'reference'
 load 'configuration'
+
+# To be removed when added to glossary.
+load 'structure'
