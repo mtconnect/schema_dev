@@ -22,12 +22,6 @@ package :Motion, 'Motion represents kinematics' do
     value :CYLINDRICAL, 'The positions are given in cylindrical coordinates'
   end
 
-  attr :IsKinematic, 'Flag indicating if a coordinate system is part of a kinematic chain', :boolean
-
-  type :Link, 'A linkage between two axes', :Axes
-  type :Table, 'A linkage between two axes', :CommonComponent
-
-
   type :MotionOrigin, 'A translation and rotation of a new origin of motion' do
     member :Translation, 'An offset applied first', 0..1, :ThreeSpaceValue
     member :Rotation, 'A angluar rotation applied second', 0..1, :ThreeSpaceValue
@@ -40,11 +34,14 @@ package :Motion, 'Motion represents kinematics' do
   type :Motion, 'The axis motion types', :AbstractConfiguration do
     mixed
     member :Id, 'The coordinate system identifier', :ID
-    member :KinematicParentIdRef, 'The parent of the coordinate system', 0..1, :IdRef
-    member :CoordinateSystemId, 'The identifier of the coordinate system that this motion is relative to'
+    member :ParentIdRef, 'The parent of the coordinate system', 0..1, :IdRef
+    member :CoordinateSystemIdRef, 'The identifier of the coordinate system that this motion is relative to'
     member :Type, 'The motion type', :MotionTypeEnum
     member :Actuation, 'The actuation method', :ActuationTypeEnum
-    member :Origin, 'The axis motion', 0..1, :MotionOrigin
     member :Axis, 'The axis motion', 0..1, :MotionAxis
+    choice(0..1) do
+      member :Origin, 'The location (no parent)'
+      member :Transformation, 'A rotation and translation'
+    end
   end
 end
