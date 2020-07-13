@@ -37,7 +37,7 @@ package :CoordinateSystems, 'Coordinate systems, kinematics and motion' do
   end
 
   type :Transformation, 'An offset in space' do
-    member :Translaton, 'An offset applied first', :ThreeSpaceValue
+    member :Translation, 'An offset applied first', :ThreeSpaceValue
     member :Rotation, 'A quaternion transform applied second', :ThreeSpaceValue
   end             
 end

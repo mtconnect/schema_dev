@@ -641,7 +641,7 @@
   type=mtc,
   category=model,
   name={Interfaces},
-  kind={component},
+  kind={component,interface},
   description={An XML container that organizes information used to coordinate actions and activities between pieces of equipment that communicate information between each other. }
 }
 
@@ -6644,6 +6644,7 @@
   type=mtc,
   category=model,
   name={DoorInterface},
+  kind={component,interface},
   description={\gls{doorinterface} provides the set of information used to coordinate the operations between two pieces of equipment, one of which controls the operation of a door. }
 }
 
@@ -6653,6 +6654,7 @@
   type=mtc,
   category=model,
   name={ChuckInterface},
+  kind={component,interface},
   description={\gls{chuckinterface} provides the set of information used to coordinate the operations between two pieces of equipment, one of which controls the operation of a chuck.  }
 }
 
@@ -6662,6 +6664,7 @@
   type=mtc,
   category=model,
   name={BarFeederInterface},
+  kind={component,interface},
   description={\gls{barfeederinterface} provides the set of information used to coordinate the operations between a Bar Feeder and another piece of equipment.  }
 }
 
@@ -6671,6 +6674,7 @@
   type=mtc,
   category=model,
   name={MaterialHandlerInterface},
+  kind={component,interface},
   description={\gls{materialhandlerinterface} provides the set of information used to coordinate the operations between a piece of equipment and another associated piece of equipment used to automatically handle various types of materials or services associated with the original piece of equipment. }
 }
 
@@ -6680,6 +6684,7 @@
   type=mtc,
   category=model,
   name={REQUEST},
+  kind={subtype},
   description={A subtype of an \gls{interface} \gls{dataitem} type to communicate a request. }
 }
 
@@ -6689,6 +6694,7 @@
   type=mtc,
   category=model,
   name={RESPONSE},
+  kind={subtype},
   description={A subtype of an \gls{interface} \gls{dataitem} type to communicate a response.}
 }
 
@@ -8691,6 +8697,7 @@
   category=model,
   name={CUBIC\_MILLIMETER},
   description={Geometric volume in millimeters}
+  kind={units}
 }
 
 
@@ -8700,6 +8707,7 @@
   category=model,
   name={CUBIC\_MILLIMETER/SECOND},
   description={Change of geometric volume per second}
+  kind={units}
 }
 
 
@@ -8709,6 +8717,7 @@
   category=model,
   name={CUBIC\_MILLIMETER/SECOND$^2$},
   description={Change in geometric volume per second squared}
+  kind={units}
 }
 
 
@@ -8727,6 +8736,7 @@
   category=model,
   name={MILLIGRAM/CUBIC\_MILLIMETER},
   description={Milligram per cubic millimeter  }
+  kind={units}
 }
 
 
@@ -9608,6 +9618,7 @@
   category=model,
   name={DEGREE\_3D},
   description={A space-delimited, floating-point representation of the angular rotation in degrees around the X, Y, and Z axes relative to a cartesian coordinate system respectively in order as A, B, and C. If any of the rotations is not known, it \MUST be zero (0).}
+  kind={units}
 }
 
 
