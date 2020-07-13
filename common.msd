@@ -30,6 +30,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :DurationTime, 'A length of time in seconds', :float
   attr :Removed, 'A flag indicating the item has been removed', :boolean
   attr :Key, 'The key for adata set', :NMTOKEN
+  attr :IdRef, 'A reference to an identifier', :IDREF
   
   attr :AssetId, 'The unique id of the asset'
   attr :AssetAttrType, 'An asset type'

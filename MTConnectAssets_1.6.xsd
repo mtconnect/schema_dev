@@ -218,6 +218,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
+  <xs:simpleType name='IdRefType'>
+    <xs:annotation>
+      <xs:documentation>
+        A reference to an identifier
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -3642,15 +3650,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
-  <xs:simpleType name='CoordinateSystemIdType'>
-    <xs:annotation>
-      <xs:documentation>
-        The id reference for the coordinate system associated with this data
-        item
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:IDREF'/>
-  </xs:simpleType>
   <xs:simpleType name='DiscreteType'>
     <xs:annotation>
       <xs:documentation>
@@ -3962,10 +3961,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name='coordinateSystemId' type='CoordinateSystemIdType' use='optional'>
+    <xs:attribute name='coordinateSystemIdRef' type='IdRefType' use='optional'>
       <xs:annotation>
         <xs:documentation>
-          The coordinate system reference to a particular coordinate system
+          References the coordinatesystem new for geometric specifications.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>

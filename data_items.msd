@@ -58,7 +58,7 @@ package :DataItems, 'Data Items Package' do
     member :NativeScale, 'The units as expressed by the machine', 0..1
     member :Category, 'The category of the data item'
     member :CoordinateSystem, 'The coordinate system used for the positions', 0..1, :CoordinateSystemEnum
-    member :CoordinateSystemIdRef, 'The coordinate system reference to a particular coordinate system', 0..1
+    member :CoordinateSystemIdRef, 'The coordinate system reference to a particular coordinate system', 0..1, :IdRef
     member :CompositionId, 'The optional composition identifier', 0..1
     member :SampleRate, 'Used as the default sample rate for waveforms', 0..1, :DataItemSampleRate
     member(:Representation, 'The data item\'s representation', 0..1) { self.default = :VALUE } 

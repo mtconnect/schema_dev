@@ -1,7 +1,4 @@
 package :CoordinateSystems, 'Coordinate systems, kinematics and motion' do
-  attr :CoordinateSystemIdRef, 'The reference to the coordinate system', :IDREF
-
-  
   enum :CoordinateSystemTypeEnum, 'The type of coordinate system' do
     value :WORLD, 'The world'
     value :BASE, 'The base of the manipulator chain'

@@ -21,7 +21,7 @@ package :Specificaitons, 'Device and component specificaitons' do
     member :Name, 'The name of the spec', 0..1
     member :DataItemIdRef, 'The optional data item identifier', 0..1, :SourceDataItemId
     member :CompositionIdRef, 'The optional composition identifier', 0..1, :CompositionId
-    member :CoordinateSystemIdRef, 'The optional coordinate system identifier', 0..1
+    member :CoordinateSystemIdRef, 'The optional coordinate system identifier', 0..1, :IdRef
     member :Units, 'The units', 0..1
     member :SpecificationValue, 'The set of constraints', 1..INF
   end

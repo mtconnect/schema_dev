@@ -1,6 +1,4 @@
 package :References, 'References between entities' do
-  # Data Item References for Streams
-  attr :IdRef, 'A reference to an identifier', :IDREF
 
   type :References, 'A list of references' do
     member :Reference, 'A reference to another part of the model', 1..INF
