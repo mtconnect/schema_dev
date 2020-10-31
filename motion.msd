@@ -3,33 +3,27 @@
 package :Motion, 'Motion represents kinematics' do
     # Motion 
   enum :MotionTypeEnum, 'The types of motion' do
-    value :REVOLUTE, 'Rotates'
-    value :PRISMATIC, 'Linear motion'
-    value :TWIST, 'Twister'
-    value :REVOLVE, 'Revolver'
+    value :REVOLUTE, 'Rotates around an axis with a fixed range of motion'
+    value :CONTINUOUS, 'Revolves around an axis with a continuous range of motion'
+    value :PRISMATIC, 'Sliding linear motion along an axis with a fixed range of motion'
+    value :FIXED, 'The axis does not move.'
   end
 
   enum :ActuationTypeEnum, 'The actuation of this component' do
-    value :DIRECT, 'The motion is directly controller'
-    value :DERIVATIVE, 'The motion is created by an unpowered linkage, can be a calculated value'
-    value :VIRTUAL, 'The component provide a logical position'
-    value :FIXED, 'The position is fixed in space, it does not move'
+    value :DIRECT, 'The movement is initiated by the component.'
+    value :VIRTUAL, 'The motion is computed and is used for expressing an imaginary movement.'
+    value :NONE, 'There is no actuation of this Axis.'
   end
 
-  enum :GeometryTypeEnum, 'The geometry related to this coordinate system' do
-    value :CARTESIAN, 'The coordinate system uses cartesian coordinates'
-    value :POLAR, 'The positions will be given in polar coordinates'
-    value :CYLINDRICAL, 'The positions are given in cylindrical coordinates'
-  end
-
-  type :MotionOrigin, 'A translation and rotation of a new origin of motion' do
-    member :Translation, 'An offset applied first', 0..1, :ThreeSpaceValue
-    member :Rotation, 'A angluar rotation applied second', 0..1, :ThreeSpaceValue
-  end
-  
   type :MotionAxis, 'The unit vector along which the motion occurs' do
     value 'The unit of motion', :ThreeSpaceValue    
   end
+
+  type :MotionDescription, 'The description of the motion' do
+    mixed
+    member :any, 'Any elements', 0..INF
+  end  
+  
   
   type :Motion, 'The axis motion types', :AbstractConfiguration do
     mixed
@@ -38,10 +32,11 @@ package :Motion, 'Motion represents kinematics' do
     member :CoordinateSystemIdRef, 'The identifier of the coordinate system that this motion is relative to'
     member :Type, 'The motion type', :MotionTypeEnum
     member :Actuation, 'The actuation method', :ActuationTypeEnum
-    member :Axis, 'The axis motion', 0..1, :MotionAxis
+    member :Description, 'The description of the motion', 0..1, :MotionDescription
     choice(0..1) do
       member :Origin, 'The location (no parent)'
       member :Transformation, 'A rotation and translation'
     end
+    member :Axis, 'The axis motion', 0..1, :MotionAxis
   end
 end

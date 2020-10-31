@@ -6186,28 +6186,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='REVOLUTE'>
         <xs:annotation>
           <xs:documentation>
-            Rotates
+            Rotates around an axis with a fixed range of motion
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CONTINUOUS'>
+        <xs:annotation>
+          <xs:documentation>
+            Revolves around an axis with a continuous range of motion
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='PRISMATIC'>
         <xs:annotation>
           <xs:documentation>
-            Linear motion
+            Sliding linear motion along an axis with a fixed range of motion
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='TWIST'>
+      <xs:enumeration value='FIXED'>
         <xs:annotation>
           <xs:documentation>
-            Twister
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='REVOLVE'>
-        <xs:annotation>
-          <xs:documentation>
-            Revolver
+            The axis does not move.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -6223,87 +6223,27 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='DIRECT'>
         <xs:annotation>
           <xs:documentation>
-            The motion is directly controller
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='DERIVATIVE'>
-        <xs:annotation>
-          <xs:documentation>
-            The motion is created by an unpowered linkage, can be a calculated
-            value
+            The movement is initiated by the component.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='VIRTUAL'>
         <xs:annotation>
           <xs:documentation>
-            The component provide a logical position
+            The motion is computed and is used for expressing an imaginary
+            movement.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='FIXED'>
+      <xs:enumeration value='NONE'>
         <xs:annotation>
           <xs:documentation>
-            The position is fixed in space, it does not move
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='GeometryTypeEnumType'>
-    <xs:annotation>
-      <xs:documentation>
-        The geometry related to this coordinate system
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='CARTESIAN'>
-        <xs:annotation>
-          <xs:documentation>
-            The coordinate system uses cartesian coordinates
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='POLAR'>
-        <xs:annotation>
-          <xs:documentation>
-            The positions will be given in polar coordinates
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='CYLINDRICAL'>
-        <xs:annotation>
-          <xs:documentation>
-            The positions are given in cylindrical coordinates
+            There is no actuation of this Axis.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name='MotionOriginType'>
-    <xs:annotation>
-      <xs:documentation>
-        A translation and rotation of a new origin of motion
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name='Translation' type='ThreeSpaceValueType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            An offset applied first
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name='Rotation' type='ThreeSpaceValueType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            A angluar rotation applied second
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name='MotionAxisType'>
     <xs:annotation>
       <xs:documentation>
@@ -6314,6 +6254,22 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:extension base='ThreeSpaceValueType'/>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:complexType name='MotionDescriptionType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        The description of the motion
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any processContents='lax' minOccurs='0' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A placeholder for an XML element.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:any>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name='MotionType' mixed='true'>
     <xs:annotation>
       <xs:documentation>
@@ -6323,10 +6279,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:complexContent>
       <xs:extension base='AbstractConfigurationType'>
         <xs:sequence>
-          <xs:element name='Axis' type='MotionAxisType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='Description' type='MotionDescriptionType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                The axis motion
+                An XML element that can contain any descriptive content.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -6349,6 +6305,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:annotation>
             </xs:element>
           </xs:choice>
+          <xs:element name='Axis' type='MotionAxisType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The axis motion
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
         </xs:sequence>
         <xs:attribute name='id' type='IDType' use='required'>
           <xs:annotation>
