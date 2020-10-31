@@ -62,6 +62,7 @@ package :Files, 'Files or Documents' do
   end
   
   basic_type :FileComment, 'The log entry'
+  basic_type :PublicKey, 'An X501 Public Key'
   type :File, 'The file version info', :AssetInstance do
     member :Size, 'The size in bytes', :FileSize
     member :VersionId, 'The version identifier'
@@ -72,6 +73,7 @@ package :Files, 'Files or Documents' do
     member :ApplicationType, 'The sub classification of this file', 0..1
     member :Location, 'The file location', :FileLocation
     member :Signature, 'The file\'s signature'  
+    member :PublicKey, 'The public key of the file owner', 0..1
     member :FileProperties, 'A set of file properties', 0..1
   end
   
