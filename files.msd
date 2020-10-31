@@ -8,7 +8,7 @@ package :Files, 'Files or Documents' do
   attr :FileName, 'The name of the file'
   
   basic_type(:ApplicationCategoryExt, 'An extension point for application category') do
-    pattern 'x:[A-Z_0-9]+'
+    pattern '[A-Za-z]+:[A-Z_0-9]+'
   end
   enum :ApplicationCategory, 'The category of application that will use this file' do
     extensible :ApplicationCategoryExt
@@ -23,7 +23,7 @@ package :Files, 'Files or Documents' do
   end
   
   basic_type(:ApplicationTypeExt, 'An extension point for application sub-category') do
-    pattern 'x:[A-Z_0-9]+'
+    pattern '[A-Za-z]+:[A-Z_0-9]+'
   end
   enum :ApplicationType, 'The type classification of a file' do
     extensible :ApplicationTypeExt

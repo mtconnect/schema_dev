@@ -93,11 +93,10 @@ package :Component, 'Top Level Components Package' do
     member :Name, 'The data item identifier', 0..1
     member :Type, 'The type of composition', :CompositionEnumType
     member :Description, 'The descriptive information about this sub element', 0..1, :ComponentDescription
+    member :Configuration, 'The configuration information about this component', 0..1, :ComponentConfiguration
   end  
 end
 
 load 'reference'
 load 'configuration'
 
-# To be removed when added to glossary.
-load 'structure'

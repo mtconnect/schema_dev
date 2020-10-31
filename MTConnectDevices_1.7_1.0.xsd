@@ -4898,6 +4898,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name='Configuration' type='ComponentConfigurationType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            An XML element that contains technical information about a piece of
+            equipment describing its physical layout or functional
+            characteristics.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name='id' type='IDType' use='required'>
       <xs:annotation>
@@ -6352,73 +6361,36 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name='StructureType'>
+  <xs:simpleType name='ModelIdRefType'>
     <xs:annotation>
       <xs:documentation>
-        A component to organize the structural components of the machine
+        A reference to another model
       </xs:documentation>
     </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='CommonComponentType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Structure' type='StructureType' substitutionGroup='CommonComponent'>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
+  <xs:simpleType name='ItemRefType'>
     <xs:annotation>
       <xs:documentation>
-        A component to organize the structural components of the machine
+        A reference to an item in a model
       </xs:documentation>
     </xs:annotation>
-  </xs:element>
-  <xs:complexType name='TableType'>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='SolidModelType'>
     <xs:annotation>
       <xs:documentation>
-        A surface for holding an object or material
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='StructureType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Table' type='TableType' substitutionGroup='Structure'>
-    <xs:annotation>
-      <xs:documentation>
-        A surface for holding an object or material
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='LinkType'>
-    <xs:annotation>
-      <xs:documentation>
-        A connection between two Rotary or Linear axes (Joints)
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base='StructureType'/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name='Link' type='LinkType' substitutionGroup='Structure'>
-    <xs:annotation>
-      <xs:documentation>
-        A connection between two Rotary or Linear axes (Joints)
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:complexType name='SolidModelType' mixed='true'>
-    <xs:annotation>
-      <xs:documentation>
-        The axis motion types
+        A SolidModel is a Configuration that references a file with the
+        three-dimensional geometry of the component or composition. The geometry
+        MAY have a transformation and a scale to position the component with
+        respect to the other components. A geometry file can contain a set of
+        assembled items, in this case, the SolidModel reference the id of the
+        assembly model file and the specific item within that file.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base='AbstractConfigurationType'>
         <xs:sequence>
-          <xs:element name='Scale' type='ThreeSpaceValueType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                A three space scaler
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
           <xs:element name='Transformation' type='TransformationType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
@@ -6428,7 +6400,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:element name='SolidModelScale' type='SolidModelScaleType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                Scaling vector for the model
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
         </xs:sequence>
+        <xs:attribute name='id' type='IDType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The unique identifier for this element.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='modelIdRef' type='ModelIdRefType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The associated model file if an item reference is used
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name='href' type='xlink:hrefType' use='required'>
           <xs:annotation>
             <xs:documentation>
@@ -6447,16 +6440,157 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
+        <xs:attribute name='itemRef' type='ItemRefType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The reference to the item within the model within the related
+              geometry. A modelIdRef MUST be given.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='mediaType' type='SolidModelMediaTypeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The format of the referenced document
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='coordinateSystemIdRef' type='CoordinateSystemIdRefType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              References the coordinatesystem new for geometric specifications.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name='SolidModel' type='SolidModelType' substitutionGroup='AbstractConfiguration'>
     <xs:annotation>
       <xs:documentation>
-        The axis motion types
+        A SolidModel is a Configuration that references a file with the
+        three-dimensional geometry of the component or composition. The geometry
+        MAY have a transformation and a scale to position the component with
+        respect to the other components. A geometry file can contain a set of
+        assembled items, in this case, the SolidModel reference the id of the
+        assembly model file and the specific item within that file.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='SolidModelScaleType'>
+    <xs:annotation>
+      <xs:documentation>
+        The unit vector to scale the model
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ThreeSpaceValueType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name='SolidModelMediaTypeExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for solid model media
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[A-Za-z]+:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='SolidModelMediaTypeTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        Solid model media types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='STEP'>
+        <xs:annotation>
+          <xs:documentation>
+            ISO 10303 STEP AP203 or AP242 format
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='STL'>
+        <xs:annotation>
+          <xs:documentation>
+            Stereolithography file format
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='GDML'>
+        <xs:annotation>
+          <xs:documentation>
+            Geometry Description Markup Language
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OBJ'>
+        <xs:annotation>
+          <xs:documentation>
+            Wavefront OBJ file format
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='COLLADA'>
+        <xs:annotation>
+          <xs:documentation>
+            ISO 17506
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='IGES'>
+        <xs:annotation>
+          <xs:documentation>
+            Initial Graphics Exchange Specification
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DXF'>
+        <xs:annotation>
+          <xs:documentation>
+            Drawing eXchange Format. Autodesk data interchange format
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='3DS'>
+        <xs:annotation>
+          <xs:documentation>
+            Autodesk file format
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DWG'>
+        <xs:annotation>
+          <xs:documentation>
+            Autodesk file format
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ACIS'>
+        <xs:annotation>
+          <xs:documentation>
+            Dassault file format
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PXT'>
+        <xs:annotation>
+          <xs:documentation>
+            Parasolid XT Siemens data interchange format
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='SolidModelMediaTypeType'>
+    <xs:annotation>
+      <xs:documentation>
+        Solid model media types
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='SolidModelMediaTypeTypeEnum SolidModelMediaTypeExtType'/>
+  </xs:simpleType>
   <xs:simpleType name='SampleIntervalType'>
     <xs:annotation>
       <xs:documentation>
