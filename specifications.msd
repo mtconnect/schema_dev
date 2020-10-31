@@ -2,7 +2,6 @@ package :Specificaitons, 'Device and component specificaitons' do
   basic_type :LimitValue, 'The limit of a value', :float
   attr :Peak, 'The peak value', :float
 
-  basic_type :ConstraintValue, 'The value of the constraint'
 
   # Specifications
   type :Specifications, 'Calibration data for a sensor', :AbstractConfiguration do
@@ -11,11 +10,8 @@ package :Specificaitons, 'Device and component specificaitons' do
 
   type :AbstractSpecification, 'A specification' do
     mixed
-    abstract
-  end
-  
-  type :Specification, 'A specification', :AbstractSpecification do
-    mixed
+    abstract 
+    member :Id, 'The identity of the Specificaiton', :ID
     member :Type, 'The type of measurement', :DataItemEnum
     member :SubType, 'The type of measurement', 0..1, :DataItemSubEnum
     member :Name, 'The name of the spec', 0..1
@@ -23,6 +19,10 @@ package :Specificaitons, 'Device and component specificaitons' do
     member :CompositionIdRef, 'The optional composition identifier', 0..1, :CompositionId
     member :CoordinateSystemIdRef, 'The optional coordinate system identifier', 0..1
     member :Units, 'The units', 0..1
+ end
+  
+  type :Specification, 'A specification', :AbstractSpecification do
+    mixed
     member :SpecificationValue, 'The set of constraints', 1..INF
   end
 
@@ -35,10 +35,48 @@ package :Specificaitons, 'Device and component specificaitons' do
     member :Value, 'The limit value', :LimitValue
   end
   
-  type :Maximum, 'The maximum value', :Constraint  
-  type :Minimum, 'The minimum value', :Constraint    
-  type :Nominal, 'The nominal value', :Constraint
+  type :Maximum, 'A numeric upper constraint.', :Constraint  
+  type :Minimum, 'A numeric lower constraint.', :Constraint    
+  type :Nominal, 'The ideal or desired value for a variable', :Constraint
+  type :UpperLimit, 'The upper conformance boundary for a variable', :Constraint
+  type :UpperWarning, 'The upper boundary indicating increased concern and supervision may be required', :Constraint
+  type :LowerWarning, 'The lower boundary indicating increased concern and supervision may be required', :Constraint
+  type :LowerLimit, 'The lower conformance boundary for a variable', :Constraint
 
+  type :ProcessSpecification, 'ProcessSpecification provides information used to assess the conformance of a variable to process requirements',
+       :AbstractSpecification do
+    mixed    
+    member :ControlLimits, "The control limits", 0..1
+    member :AlarmLimits, "The control limits", 0..1
+    member :SpecificationLimits, "The control limits", 0..1
+  end
+
+  type :ControlLimits, 'A set of limits used to indicate whether a process variable is stable and in control.', :SpecificationValue do
+    mixed
+    member :UpperLimit, 'upper limit'
+    member :UpperWarning, 'upper warning'
+    member :Nominal, 'nominal'
+    member :LowerWarning, 'lower warning'
+    member :LowerLimit, 'lower limit'
+  end
+
+  type :AlarmLimits, 'A set of limits used to trigger warning or alarm indicators', :SpecificationValue do
+    mixed
+    member :UpperLimit, 'upper limit'
+    member :UpperWarning, 'upper warning'
+    member :LowerWarning, 'lower warning'
+    member :LowerLimit, 'lower limit'
+  end
+  
+  type :SpecificationLimits, 'A set of limits used to trigger warning or alarm indicators', :SpecificationValue do
+    mixed
+    member :UpperLimit, 'upper limit'
+    member :Nominal, 'nominal'
+    member :LowerLimit, 'lower limit'
+  end
+
+
+  
   # possibly for 1.7
 #  type :Rated, 'The value of the constraint', :Constraint
    

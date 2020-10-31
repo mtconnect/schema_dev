@@ -7,6 +7,7 @@ package :DataItems, 'Data Items Package' do
   attr :DataItemNumericValue, 'The constrained value for this data item', :float
   attr :SourceComponentId, 'An idref to the component id', :IDREF
   attr :SourceDataItemId, 'An idref to the data item id', :IDREF
+  attr :ReferenceId, 'The item\'s reference to the data item or specificatiton', :IDREF
   attr :ComponentName, 'The name of a related component', :NMTOKEN
   attr :CoordinateSystemId, 'The id reference for the coordinate system associated with this data item', :IDREF
   attr :Discrete, 'An discrete event', :boolean
@@ -73,6 +74,7 @@ package :DataItems, 'Data Items Package' do
     member(:Discrete, 'If this is a discrete event', 0..1) { self.default = 'false' }
 
     member :Definition, 'The descriptive information about this data item', 0..1, :DataItemDefinition
+    member :Relationships, 'Organizes DataItemRelationship and SpecificationRelationship', 0..1, :DataItemRelationships
   end
   
   type :DataItemConstraints, 'A set of limits for a data item' do
@@ -144,5 +146,36 @@ package :DataItems, 'Data Items Package' do
     member :DefinitionAttrs, 'Attributes for the definition'
     member :Description, 'The description of the data item', 0..1, :DataItemDescription
   end
+
+  type :DataItemRelationships, 'Organizes DataItemRelationship and SpecificationRelationship' do
+    member :AbstractDataItemRelationship, 'A data item relationship', 1..INF
+  end
+
+  type :AbstractDataItemRelationship, 'Common base for data item relationship' do
+    abstract
+    member :Name, 'A descriptive name associated with this Relationship'
+    member :IdRef, 'A reference to the related DataItem id.', :ReferenceId
+  end
+
+  enum :DataItemRelationshipTypeEnum, 'How the data items are related' do
+    value :ATTACHMENT, 'A reference to a DataItem that associates the values with an external entity'
+    value :COORDINATE_SYSTEM, 'The referenced DataItem provides the id of the effective Coordinate System'
+    value :LIMIT, 'The referenced DataItem provides process limits.'
+    value :OBSERVATION, 'The referenced DataItem provides the observed values.'
+  end
+
+  type :DataItemRelationship, 'A Relationship providing a semantic reference to another DataItem described by the type property.',
+       :AbstractDataItemRelationship do
+    member :type, 'Specifies how the DataItem is related', :DataItemRelationshipTypeEnum
+  end
   
+  enum :SpecificationRelationshipTypeEnum, 'How the data items are related' do
+    value :LIMIT, 'The referenced DataItem provides process limits.'
+  end
+
+  type :SpecificationRelationship, 'A Relationship providing a semantic reference to a Specification described by the type and "idref" property.',
+       :AbstractDataItemRelationship do
+    member :type, 'Specifies how the Specification is related', :SpecificationRelationshipTypeEnum
+  end
+       
 end

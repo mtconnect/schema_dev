@@ -33,6 +33,7 @@ package :MTC, 'MTC Top Level Package' do
     member :AssetBufferSize, 'The maximum number of assets'
     member :AssetCount, 'The number of assets we have', :AssetCountAttr
     member :AssetCounts, 'The asset statistics', 0..1
+    member :DeviceMetaDataChangeTime, 'A timestamp in 8601 format of the last update of the Device information for any device'
   end
 
   type :MTConnectDevices, 'The root node for MTConnect' do

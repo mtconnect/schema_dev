@@ -27,7 +27,7 @@ package :Tools, 'Cutting tools' do
   attr :MaximumCount, 'A maximum count value', :integer
   attr :MeasurementCode, 'A application specific code'
   attr :Manufacturers, 'A comman delimited list of manufactures'
-  attr :TurretLocation, 'The turret for a lathe or machine tool'
+  attr :LocationRelation, 'A relationship', :NMTOKEN
   
   enum :DefinitionFormat, 'The format of the definition' do
     value :EXPRESS, 'The definition will be provided in EXPRESS format'
@@ -65,12 +65,16 @@ package :Tools, 'Cutting tools' do
   end
   
   enum :LocationsType, 'The type of tool location' do
-    value :POT, 'Pot location of tool'
-    value :STATION, 'The station on a turning machine'
-    value :CRIB, 'The crib location of the tool'
-    value :STANDBY, 'The tool is ready to be used'
-    value :SPINDLE, 'The spindle the tool currently resides in'
-    value :REJECT, 'The tool is in a reject pot location'
+    value :POT, 'A location in a tool magazine. updated'
+    value :STATION, 'A location in a turret, tool bar, or tool rack. updated'
+    value :CRIB, 'A location within a tool crib. updated'
+    value :SPINDLE, 'A location associated with a spindle'
+    value :TRANSFER_POT, 'A location for a tool awaiting transfer from a tool magazine to spindle or a turret'
+    value :RETURN_POT, 'A location for a tool removed from a spindle or turret and awaiting return to a tool magazine'
+    value :STAGING_POT, 'A location for a tool awaiting transfer to a tool magazine or turret from outside of the piece of equipment.'
+    value :REMOVAL_POT, 'A location for a tool removed from a tool magazine or turret awaiting transfer to a location outside of the piece of equipment.'
+    value :EXPIRED_POT, 'A location for a tool that is no longer useable and is awaiting removal from a tool magazine or turret.'
+    value :END_EFFECTOR, 'A location associated with an end effector'
   end
 
   type :CuttingToolDefinition, 'The description of an asset, can be freeform text or elemenrts' do
@@ -165,7 +169,11 @@ package :Tools, 'Cutting tools' do
     member :Type, 'The type of location', :LocationsType
     member :negativeOverlap, 'The additional locations occupied in at lower indexed values', 0..1, :Overlap
     member :positiveOverlap, 'The additional locations occupied in at higher indexed values', 0..1, :Overlap
-    member :Turret, 'The turret the tool is currently mounted in or on', 0..1, :TurretLocation
+    member :Turret, 'The turret associated with a tool', 0..1, :LocationRelation
+    member :ToolMagazine, 'The tool magazine associated with a tool', 0..1, :LocationRelation
+    member :ToolRack, 'The tool rack associated with a tool', 0..1, :LocationRelation
+    member :ToolBar, 'The tool bar associated with a tool', 0..1, :LocationRelation
+    member :AutomaticToolChanger, 'The automatic tool changer associated with a tool', 0..1, :LocationRelation
     member :Value, 'The location', :LocationValue
   end
   

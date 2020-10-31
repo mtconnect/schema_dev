@@ -30,6 +30,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :DurationTime, 'A length of time in seconds', :float
   attr :Removed, 'A flag indicating the item has been removed', :boolean
   attr :Key, 'The key for adata set', :NMTOKEN
+  attr :DeviceMetaDataChangeTime, 'A timestamp in 8601 format of the last update of the Device information for any device', :dateTime
   
   attr :AssetId, 'The unique id of the asset'
   attr :AssetAttrType, 'An asset type'

@@ -218,6 +218,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
+  <xs:simpleType name='DeviceMetaDataChangeTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A timestamp in 8601 format of the last update of the Device information
+        for any device
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:dateTime'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -3432,6 +3441,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name='deviceMetaDataChangeTime' type='DeviceMetaDataChangeTimeType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          A timestamp in 8601 format of the last update of the Device
+          information for any device
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name='MTConnectDevicesType'>
     <xs:annotation>
@@ -3721,6 +3738,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:annotation>
             <xs:documentation>
               The name of an element or a piece of equipment.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='mtConnectVersion' type='VersionType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The MTConnect version of the Devices Information Model used to
+              configure the information to be published for a piece of equipment
+              in an MTConnect Response Document
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -5212,14 +5238,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:float'/>
   </xs:simpleType>
-  <xs:simpleType name='ConstraintValueType'>
-    <xs:annotation>
-      <xs:documentation>
-        The value of the constraint
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'/>
-  </xs:simpleType>
   <xs:complexType name='SpecificationsType'>
     <xs:annotation>
       <xs:documentation>
@@ -5249,6 +5267,64 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         A specification
       </xs:documentation>
     </xs:annotation>
+    <xs:attribute name='id' type='IDType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The unique identifier for this element.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='type' type='DataItemEnumType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The type of either a structural element or a dataitem being measured.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          A sub-categorization of the data item type.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='name' type='NameType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The name of an element or a piece of equipment.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='dataItemIdRef' type='SourceDataItemIdType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          A reference to the id attribute of the dataitem associated with this
+          element.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='compositionIdRef' type='CompositionIdType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          A reference to the id attribute of the composition associated with
+          this element.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='coordinateSystemIdRef' type='CoordinateSystemIdRefType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          References the coordinatesystem new for geometric specifications.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='units' type='UnitsType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The unit of measurement for the reported value of the data item.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:element abstract='true' name='AbstractSpecification' type='AbstractSpecificationType'>
     <xs:annotation>
@@ -5269,58 +5345,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:sequence>
           <xs:element ref='SpecificationValue' minOccurs='1' maxOccurs='unbounded'/>
         </xs:sequence>
-        <xs:attribute name='type' type='DataItemEnumType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              The type of either a structural element or a dataitem being
-              measured.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='subType' type='DataItemSubEnumType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              A sub-categorization of the data item type.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='name' type='NameType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              The name of an element or a piece of equipment.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='dataItemIdRef' type='SourceDataItemIdType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              A reference to the id attribute of the dataitem associated with
-              this element.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='compositionIdRef' type='CompositionIdType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              A reference to the id attribute of the composition associated with
-              this element.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='coordinateSystemIdRef' type='CoordinateSystemIdRefType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              References the coordinatesystem new for geometric specifications.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='units' type='UnitsType' use='optional'>
-          <xs:annotation>
-            <xs:documentation>
-              The unit of measurement for the reported value of the data item.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -5417,6 +5441,267 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         The target or expected value for this data item.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='UpperLimitType'>
+    <xs:annotation>
+      <xs:documentation>
+        The upper conformance boundary for a variable
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='UpperLimit' type='UpperLimitType' substitutionGroup='Constraint'>
+    <xs:annotation>
+      <xs:documentation>
+        The upper conformance boundary for a variable
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='UpperWarningType'>
+    <xs:annotation>
+      <xs:documentation>
+        The upper boundary indicating increased concern and supervision may be
+        required
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='UpperWarning' type='UpperWarningType' substitutionGroup='Constraint'>
+    <xs:annotation>
+      <xs:documentation>
+        The upper boundary indicating increased concern and supervision may be
+        required
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LowerWarningType'>
+    <xs:annotation>
+      <xs:documentation>
+        The lower boundary indicating increased concern and supervision may be
+        required
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='LowerWarning' type='LowerWarningType' substitutionGroup='Constraint'>
+    <xs:annotation>
+      <xs:documentation>
+        The lower boundary indicating increased concern and supervision may be
+        required
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LowerLimitType'>
+    <xs:annotation>
+      <xs:documentation>
+        The lower conformance boundary for a variable
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='ConstraintType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name='LowerLimit' type='LowerLimitType' substitutionGroup='Constraint'>
+    <xs:annotation>
+      <xs:documentation>
+        The lower conformance boundary for a variable
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ProcessSpecificationType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        ProcessSpecification provides information used to assess the conformance
+        of a variable to process requirements
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AbstractSpecificationType'>
+        <xs:sequence>
+          <xs:element name='ControlLimits' type='ControlLimitsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The control limits
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='AlarmLimits' type='AlarmLimitsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The control limits
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='SpecificationLimits' type='SpecificationLimitsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The control limits
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ProcessSpecification' type='ProcessSpecificationType' substitutionGroup='AbstractSpecification'>
+    <xs:annotation>
+      <xs:documentation>
+        ProcessSpecification provides information used to assess the conformance
+        of a variable to process requirements
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ControlLimitsType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of limits used to indicate whether a process variable is stable
+        and in control.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SpecificationValueType'>
+        <xs:sequence>
+          <xs:element name='UpperLimit' type='UpperLimitType'>
+            <xs:annotation>
+              <xs:documentation>
+                upper limit
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='UpperWarning' type='UpperWarningType'>
+            <xs:annotation>
+              <xs:documentation>
+                upper warning
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Nominal' type='NominalType'>
+            <xs:annotation>
+              <xs:documentation>
+                The target or expected value for this data item.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='LowerWarning' type='LowerWarningType'>
+            <xs:annotation>
+              <xs:documentation>
+                lower warning
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='LowerLimit' type='LowerLimitType'>
+            <xs:annotation>
+              <xs:documentation>
+                lower limit
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ControlLimits' type='ControlLimitsType' substitutionGroup='SpecificationValue'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of limits used to indicate whether a process variable is stable
+        and in control.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AlarmLimitsType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of limits used to trigger warning or alarm indicators
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SpecificationValueType'>
+        <xs:sequence>
+          <xs:element name='UpperLimit' type='UpperLimitType'>
+            <xs:annotation>
+              <xs:documentation>
+                upper limit
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='UpperWarning' type='UpperWarningType'>
+            <xs:annotation>
+              <xs:documentation>
+                upper warning
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='LowerWarning' type='LowerWarningType'>
+            <xs:annotation>
+              <xs:documentation>
+                lower warning
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='LowerLimit' type='LowerLimitType'>
+            <xs:annotation>
+              <xs:documentation>
+                lower limit
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='AlarmLimits' type='AlarmLimitsType' substitutionGroup='SpecificationValue'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of limits used to trigger warning or alarm indicators
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='SpecificationLimitsType' mixed='true'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of limits used to trigger warning or alarm indicators
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SpecificationValueType'>
+        <xs:sequence>
+          <xs:element name='UpperLimit' type='UpperLimitType'>
+            <xs:annotation>
+              <xs:documentation>
+                upper limit
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Nominal' type='NominalType'>
+            <xs:annotation>
+              <xs:documentation>
+                The target or expected value for this data item.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='LowerLimit' type='LowerLimitType'>
+            <xs:annotation>
+              <xs:documentation>
+                lower limit
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='SpecificationLimits' type='SpecificationLimitsType' substitutionGroup='SpecificationValue'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of limits used to trigger warning or alarm indicators
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6265,6 +6550,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:IDREF'/>
   </xs:simpleType>
+  <xs:simpleType name='ReferenceIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The item&apos;s reference to the data item or specificatiton
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
   <xs:simpleType name='ComponentNameType'>
     <xs:annotation>
       <xs:documentation>
@@ -6515,6 +6808,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             The Definition defines the meaning of entry and Cell elements
             associated with the dataitem when the representation is either
             dataset or table.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Relationships' type='DataItemRelationshipsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            An XML container that organizes information defining the affiliation
+            between pieces of equipment that function independently but together
+            perform a manufacturing operation. It may also define the
+            affiliation between components within a piece of equipment.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -6929,4 +7232,154 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attributeGroup ref='DefinitionAttrsType'/>
   </xs:complexType>
+  <xs:complexType name='DataItemRelationshipsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Organizes DataItemRelationship and SpecificationRelationship
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref='AbstractDataItemRelationship' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='AbstractDataItemRelationshipType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        Common base for data item relationship
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name='name' type='NameType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The name of an element or a piece of equipment.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='idRef' type='ReferenceIdType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          A pointer to the id attribute of an element that contains the
+          information to be associated with this XML element.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element abstract='true' name='AbstractDataItemRelationship' type='AbstractDataItemRelationshipType'>
+    <xs:annotation>
+      <xs:documentation>
+        Common base for data item relationship
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='DataItemRelationshipTypeEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        How the data items are related
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ATTACHMENT'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to a DataItem that associates the values with an
+            external entity
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='COORDINATE_SYSTEM'>
+        <xs:annotation>
+          <xs:documentation>
+            The referenced DataItem provides the id of the effective Coordinate
+            System
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LIMIT'>
+        <xs:annotation>
+          <xs:documentation>
+            The referenced DataItem provides process limits.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OBSERVATION'>
+        <xs:annotation>
+          <xs:documentation>
+            The referenced DataItem provides the observed values.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='DataItemRelationshipType'>
+    <xs:annotation>
+      <xs:documentation>
+        A Relationship providing a semantic reference to another DataItem
+        described by the type property.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AbstractDataItemRelationshipType'>
+        <xs:attribute name='type' type='DataItemRelationshipTypeEnumType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of either a structural element or a dataitem being
+              measured.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='DataItemRelationship' type='DataItemRelationshipType' substitutionGroup='AbstractDataItemRelationship'>
+    <xs:annotation>
+      <xs:documentation>
+        A Relationship providing a semantic reference to another DataItem
+        described by the type property.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='SpecificationRelationshipTypeEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        How the data items are related
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='LIMIT'>
+        <xs:annotation>
+          <xs:documentation>
+            The referenced DataItem provides process limits.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='SpecificationRelationshipType'>
+    <xs:annotation>
+      <xs:documentation>
+        A Relationship providing a semantic reference to a Specification
+        described by the type and &quot;idref&quot; property.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AbstractDataItemRelationshipType'>
+        <xs:attribute name='type' type='SpecificationRelationshipTypeEnumType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of either a structural element or a dataitem being
+              measured.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='SpecificationRelationship' type='SpecificationRelationshipType' substitutionGroup='AbstractDataItemRelationship'>
+    <xs:annotation>
+      <xs:documentation>
+        A Relationship providing a semantic reference to a Specification
+        described by the type and &quot;idref&quot; property.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
 </xs:schema>

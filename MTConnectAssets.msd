@@ -19,6 +19,7 @@ package :MTC, 'MTC Top Level Package' do
     member :Sender, 'The sender of the message'
     member :AssetBufferSize, 'The maximum number of assets'
     member :AssetCount, 'The number of assets we have', :AssetCountAttr
+    member :DeviceMetaDataChangeTime, 'A timestamp in 8601 format of the last update of the Device information for any device'
   end
 
   type :MTConnectAssets, 'The root node for MTConnect' do
@@ -34,9 +35,9 @@ load 'events.msd'
 load 'samples.msd'
 load 'condition.msd'
 load 'tools.msd'
+load 'files.msd'
 
 # Deferred to 1.6
 #load 'process.msd'
 #load 'parts.msd'
 #load 'inspection.msd'
-#load 'files.msd'

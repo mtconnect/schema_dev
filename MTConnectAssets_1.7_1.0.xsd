@@ -218,6 +218,15 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
+  <xs:simpleType name='DeviceMetaDataChangeTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A timestamp in 8601 format of the last update of the Device information
+        for any device
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:dateTime'/>
+  </xs:simpleType>
   <xs:simpleType name='AssetIdType'>
     <xs:annotation>
       <xs:documentation>
@@ -3371,6 +3380,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
+        <xs:attribute name='deviceMetaDataChangeTime' type='DeviceMetaDataChangeTimeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              A timestamp in 8601 format of the last update of the Device
+              information for any device
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -3540,6 +3557,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:annotation>
       <xs:documentation>
         An idref to the data item id
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:IDREF'/>
+  </xs:simpleType>
+  <xs:simpleType name='ReferenceIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The item&apos;s reference to the data item or specificatiton
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:IDREF'/>
@@ -3794,6 +3819,16 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             The Definition defines the meaning of entry and Cell elements
             associated with the dataitem when the representation is either
             dataset or table.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name='Relationships' type='DataItemRelationshipsType' minOccurs='0' maxOccurs='1'>
+        <xs:annotation>
+          <xs:documentation>
+            An XML container that organizes information defining the affiliation
+            between pieces of equipment that function independently but together
+            perform a manufacturing operation. It may also define the
+            affiliation between components within a piece of equipment.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -4208,6 +4243,156 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
     <xs:attributeGroup ref='DefinitionAttrsType'/>
   </xs:complexType>
+  <xs:complexType name='DataItemRelationshipsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Organizes DataItemRelationship and SpecificationRelationship
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref='AbstractDataItemRelationship' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='AbstractDataItemRelationshipType' abstract='true'>
+    <xs:annotation>
+      <xs:documentation>
+        Common base for data item relationship
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name='name' type='NameType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The name of an element or a piece of equipment.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='idRef' type='ReferenceIdType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          A pointer to the id attribute of an element that contains the
+          information to be associated with this XML element.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element abstract='true' name='AbstractDataItemRelationship' type='AbstractDataItemRelationshipType'>
+    <xs:annotation>
+      <xs:documentation>
+        Common base for data item relationship
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='DataItemRelationshipTypeEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        How the data items are related
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ATTACHMENT'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to a DataItem that associates the values with an
+            external entity
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='COORDINATE_SYSTEM'>
+        <xs:annotation>
+          <xs:documentation>
+            The referenced DataItem provides the id of the effective Coordinate
+            System
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LIMIT'>
+        <xs:annotation>
+          <xs:documentation>
+            The referenced DataItem provides process limits.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OBSERVATION'>
+        <xs:annotation>
+          <xs:documentation>
+            The referenced DataItem provides the observed values.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='DataItemRelationshipType'>
+    <xs:annotation>
+      <xs:documentation>
+        A Relationship providing a semantic reference to another DataItem
+        described by the type property.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AbstractDataItemRelationshipType'>
+        <xs:attribute name='type' type='DataItemRelationshipTypeEnumType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of either a structural element or a dataitem being
+              measured.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='DataItemRelationship' type='DataItemRelationshipType' substitutionGroup='AbstractDataItemRelationship'>
+    <xs:annotation>
+      <xs:documentation>
+        A Relationship providing a semantic reference to another DataItem
+        described by the type property.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name='SpecificationRelationshipTypeEnumType'>
+    <xs:annotation>
+      <xs:documentation>
+        How the data items are related
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='LIMIT'>
+        <xs:annotation>
+          <xs:documentation>
+            The referenced DataItem provides process limits.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name='SpecificationRelationshipType'>
+    <xs:annotation>
+      <xs:documentation>
+        A Relationship providing a semantic reference to a Specification
+        described by the type and &quot;idref&quot; property.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AbstractDataItemRelationshipType'>
+        <xs:attribute name='type' type='SpecificationRelationshipTypeEnumType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The type of either a structural element or a dataitem being
+              measured.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='SpecificationRelationship' type='SpecificationRelationshipType' substitutionGroup='AbstractDataItemRelationship'>
+    <xs:annotation>
+      <xs:documentation>
+        A Relationship providing a semantic reference to a Specification
+        described by the type and &quot;idref&quot; property.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:simpleType name='ResultValueType'>
     <xs:annotation>
       <xs:documentation>
@@ -10305,13 +10490,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='TurretLocationType'>
+  <xs:simpleType name='LocationRelationType'>
     <xs:annotation>
       <xs:documentation>
-        The turret for a lathe or machine tool
+        A relationship
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base='xs:string'/>
+    <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
   <xs:simpleType name='DefinitionFormatType'>
     <xs:annotation>
@@ -10514,42 +10699,75 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='POT'>
         <xs:annotation>
           <xs:documentation>
-            Pot location of tool
+            A location in a tool magazine. updated
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='STATION'>
         <xs:annotation>
           <xs:documentation>
-            The station on a turning machine
+            A location in a turret, tool bar, or tool rack. updated
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='CRIB'>
         <xs:annotation>
           <xs:documentation>
-            The crib location of the tool
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value='STANDBY'>
-        <xs:annotation>
-          <xs:documentation>
-            The tool is ready to be used
+            A location within a tool crib. updated
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value='SPINDLE'>
         <xs:annotation>
           <xs:documentation>
-            The spindle the tool currently resides in
+            A location associated with a spindle
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='REJECT'>
+      <xs:enumeration value='TRANSFER_POT'>
         <xs:annotation>
           <xs:documentation>
-            The tool is in a reject pot location
+            A location for a tool awaiting transfer from a tool magazine to
+            spindle or a turret
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='RETURN_POT'>
+        <xs:annotation>
+          <xs:documentation>
+            A location for a tool removed from a spindle or turret and awaiting
+            return to a tool magazine
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='STAGING_POT'>
+        <xs:annotation>
+          <xs:documentation>
+            A location for a tool awaiting transfer to a tool magazine or turret
+            from outside of the piece of equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='REMOVAL_POT'>
+        <xs:annotation>
+          <xs:documentation>
+            A location for a tool removed from a tool magazine or turret
+            awaiting transfer to a location outside of the piece of equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='EXPIRED_POT'>
+        <xs:annotation>
+          <xs:documentation>
+            A location for a tool that is no longer useable and is awaiting
+            removal from a tool magazine or turret.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='END_EFFECTOR'>
+        <xs:annotation>
+          <xs:documentation>
+            A location associated with an end effector
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -10947,10 +11165,38 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name='turret' type='TurretLocationType' use='optional'>
+        <xs:attribute name='turret' type='LocationRelationType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The turret the tool is currently mounted in or on
+              The turret associated with a tool
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='toolMagazine' type='LocationRelationType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The tool magazine associated with a tool
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='toolRack' type='LocationRelationType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The tool rack associated with a tool
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='toolBar' type='LocationRelationType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The tool bar associated with a tool
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='automaticToolChanger' type='LocationRelationType' use='optional'>
+          <xs:annotation>
+            <xs:documentation>
+              The automatic tool changer associated with a tool
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -11913,5 +12159,527 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name='VersionIdType'>
+    <xs:annotation>
+      <xs:documentation>
+        The version of the file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='FileMimeTypeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The mime type of the file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='FileSizeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The size in bytes of the file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:integer'/>
+  </xs:simpleType>
+  <xs:simpleType name='FileNameType'>
+    <xs:annotation>
+      <xs:documentation>
+        The name of the file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='ApplicationCategoryExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for application category
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='x:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ApplicationCategoryTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The category of application that will use this file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='ASSEMBLY'>
+        <xs:annotation>
+          <xs:documentation>
+            Files regarding the fully assembled product
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DEVICE'>
+        <xs:annotation>
+          <xs:documentation>
+            Device related files
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='HANDLING'>
+        <xs:annotation>
+          <xs:documentation>
+            Files relating to the handling of material
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MAINTENANCE'>
+        <xs:annotation>
+          <xs:documentation>
+            File relating to equipment maintenance
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART'>
+        <xs:annotation>
+          <xs:documentation>
+            Files relating to a part
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS'>
+        <xs:annotation>
+          <xs:documentation>
+            Files related to the manufacturing process
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='INSPECTION'>
+        <xs:annotation>
+          <xs:documentation>
+            Files related to the quality inspection
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SETUP'>
+        <xs:annotation>
+          <xs:documentation>
+            Files related to the setup of a process
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ApplicationCategoryType'>
+    <xs:annotation>
+      <xs:documentation>
+        The category of application that will use this file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='ApplicationCategoryTypeEnum ApplicationCategoryExtType'/>
+  </xs:simpleType>
+  <xs:simpleType name='ApplicationTypeExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        An extension point for application sub-category
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='x:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ApplicationTypeTypeEnum'>
+    <xs:annotation>
+      <xs:documentation>
+        The type classification of a file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='DESIGN'>
+        <xs:annotation>
+          <xs:documentation>
+            Computer aided design files or drawings
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DATA'>
+        <xs:annotation>
+          <xs:documentation>
+            Generic data
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DOCUMENTATION'>
+        <xs:annotation>
+          <xs:documentation>
+            Documentation regarding a category of file
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='INSTRUCTIONS'>
+        <xs:annotation>
+          <xs:documentation>
+            User instructions regarding the execution of a task
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LOG'>
+        <xs:annotation>
+          <xs:documentation>
+            The data related to the history of a machine or process
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PRODUCTION_PROGRAM'>
+        <xs:annotation>
+          <xs:documentation>
+            Machine instructions to perform a process
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='ApplicationTypeType'>
+    <xs:annotation>
+      <xs:documentation>
+        The type classification of a file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes='ApplicationTypeTypeEnum ApplicationTypeExtType'/>
+  </xs:simpleType>
+  <xs:complexType name='AbstractFileType'>
+    <xs:annotation>
+      <xs:documentation>
+        Abstract model that all file types inherit from
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AssetType'>
+        <xs:sequence>
+          <xs:element name='FileProperties' type='FilePropertiesType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                A set of file properties
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='FileComments' type='FileCommentsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The Destination is a reference to the target Device for this
+                File
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name='name' type='FileNameType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The name of an element or a piece of equipment.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='mediaType' type='FileMimeTypeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The mime type of the file
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='applicationCategory' type='ApplicationCategoryType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The classification of this file
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='applicationType' type='ApplicationTypeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The sub classification of this file
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='AbstractFile' type='AbstractFileType' substitutionGroup='Asset'>
+    <xs:annotation>
+      <xs:documentation>
+        Abstract model that all file types inherit from
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FileArchetypeType'>
+    <xs:annotation>
+      <xs:documentation>
+        Common information regarding a file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AbstractFileType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='FileArchetype' type='FileArchetypeType' substitutionGroup='AbstractFile'>
+    <xs:annotation>
+      <xs:documentation>
+        Common information regarding a file
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FilePropertiesType'>
+    <xs:annotation>
+      <xs:documentation>
+        A set of associated properties
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='FileProperty' type='FilePropertyType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            A file property
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='FilePropertyValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        The value of a file property
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='FilePropertyType'>
+    <xs:annotation>
+      <xs:documentation>
+        A property of a file
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='FilePropertyValueType'>
+        <xs:attribute name='name' type='NameType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The name of an element or a piece of equipment.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name='FileStateType'>
+    <xs:annotation>
+      <xs:documentation>
+        File state
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:enumeration value='EXPERIMENTAL'>
+        <xs:annotation>
+          <xs:documentation>
+            used for processes other than production or otherwise defined.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PRODUCTION'>
+        <xs:annotation>
+          <xs:documentation>
+            used for production processes
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='REVISION'>
+        <xs:annotation>
+          <xs:documentation>
+            the content is modified from PRODUCTION or EXPERIMENTAL (Note: To
+            capture northbound changes. execution -&gt; prod engineering)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='PublicKeyType'>
+    <xs:annotation>
+      <xs:documentation>
+        An X501 Public Key
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:simpleType name='SignatureType'>
+    <xs:annotation>
+      <xs:documentation>
+        A secure hash
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='FileType'>
+    <xs:annotation>
+      <xs:documentation>
+        The file version info
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='AbstractFileType'>
+        <xs:sequence>
+          <xs:element name='FileLocation' type='FileLocationType'>
+            <xs:annotation>
+              <xs:documentation>
+                The file location
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Signature' type='SignatureType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                A secure hash of the file.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='PublicKey' type='PublicKeyType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The public key used to verify the signature
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='Destinations' type='FileDestinationsType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The Destination is a reference to the target Device for this
+                File
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name='size' type='FileSizeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The size in bytes
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='versionId' type='VersionIdType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The version identifier
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='state' type='FileStateType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The file state
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='File' type='FileType' substitutionGroup='AbstractFile'>
+    <xs:annotation>
+      <xs:documentation>
+        The file version info
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='FileLocationType'>
+    <xs:annotation>
+      <xs:documentation>
+        XLink to file location
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attribute name='href' type='xlink:hrefType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              A URI identifying the agent that is publishing information for the
+              associated piece of equipment. href MUST also include the UUID for
+              that specific piece of equipment.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute ref='xlink:type' use='optional' fixed='locator'>
+          <xs:annotation>
+            <xs:documentation>
+              The XLink type attribute MUST have a fixed value of locator as
+              defined in W3C XLink 1.1 https://www.w3.org/TR/xlink11/ section
+              5.4 Locator Attribute (href).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='FileDestinationsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Organizes file destinations
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='Destination' type='FileDestinationType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            The Destination is a reference to the target Device for this File
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name='FileDestinationType'>
+    <xs:annotation>
+      <xs:documentation>
+        The Destination is a reference to the target Device for this File
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='UuidType'/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name='FileCommentsType'>
+    <xs:annotation>
+      <xs:documentation>
+        Organizes file comments
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name='FileComment' type='FileCommentType' minOccurs='1' maxOccurs='unbounded'>
+        <xs:annotation>
+          <xs:documentation>
+            Organizes FileComments entities for Files
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name='CommentTextType'>
+    <xs:annotation>
+      <xs:documentation>
+        the text of the comment
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'/>
+  </xs:simpleType>
+  <xs:complexType name='FileCommentType'>
+    <xs:annotation>
+      <xs:documentation>
+        A remark or interpretation for human interpretation associated with a
+        File or FileArchitype.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base='CommentTextType'>
+        <xs:attribute name='timestamp' type='TimestampType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The most accurate time available to a piece of equipment that
+              represents the point in time that the data was reported.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 </xs:schema>
