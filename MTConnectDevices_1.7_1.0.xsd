@@ -7243,7 +7243,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:sequence>
   </xs:complexType>
   <xs:attributeGroup name='DefinitionAttrsType'>
-    <xs:attribute name='key' type='KeyType' use='required'>
+    <xs:attribute name='key' type='KeyType' use='optional'>
       <xs:annotation>
         <xs:documentation>
           unique key
@@ -7254,6 +7254,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:annotation>
         <xs:documentation>
           The type of either a structural element or a dataitem being measured.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='keyType' type='DataItemEnumType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          The type of measurement
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
