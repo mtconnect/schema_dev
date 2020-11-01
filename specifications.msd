@@ -9,8 +9,7 @@ package :Specificaitons, 'Device and component specificaitons' do
   end
 
   type :AbstractSpecification, 'A specification' do
-    mixed
-    abstract 
+    abstract
     member :Id, 'The identity of the Specificaiton', :ID
     member :Type, 'The type of measurement', :DataItemEnum
     member :SubType, 'The type of measurement', 0..1, :DataItemSubEnum
@@ -22,16 +21,22 @@ package :Specificaitons, 'Device and component specificaitons' do
  end
   
   type :Specification, 'A specification', :AbstractSpecification do
-    mixed
-    member :SpecificationValue, 'The set of constraints', 1..INF
+    member :Maximum, 'A numeric upper constraint.', 0..1
+    member :Minimum, 'A numeric lower constraint.', 0..1
+    member :Nominal, 'The ideal or desired value for a variable', 0..1
+    member :UpperLimit, 'The upper conformance boundary for a variable', 0..1
+    member :UpperWarning, 'The upper boundary indicating increased concern and supervision may be required', 0..1
+    member :LowerWarning, 'The lower boundary indicating increased concern and supervision may be required', 0..1
+    member :LowerLimit, 'The lower conformance boundary for a variable', 0..1
+
+    
+    member :ControlLimits, "The control limits", 0..1
+    member :AlarmLimits, "The control limits", 0..1
+    member :SpecificationLimits, "The control limits", 0..1
   end
 
-  type :SpecificationValue, 'an abstract value for a specification' do
+  type :Constraint, 'The limit of a constraint' do
     abstract
-    mixed
-  end
-    
-  type :Constraint, 'The limit of a constraint', :SpecificationValue do
     member :Value, 'The limit value', :LimitValue
   end
   
@@ -45,56 +50,31 @@ package :Specificaitons, 'Device and component specificaitons' do
 
   type :ProcessSpecification, 'ProcessSpecification provides information used to assess the conformance of a variable to process requirements',
        :AbstractSpecification do
-    mixed    
     member :ControlLimits, "The control limits", 0..1
     member :AlarmLimits, "The control limits", 0..1
     member :SpecificationLimits, "The control limits", 0..1
   end
 
-  type :ControlLimits, 'A set of limits used to indicate whether a process variable is stable and in control.', :SpecificationValue do
-    mixed
-    member :UpperLimit, 'upper limit'
-    member :UpperWarning, 'upper warning'
-    member :Nominal, 'nominal'
-    member :LowerWarning, 'lower warning'
-    member :LowerLimit, 'lower limit'
+  type :ControlLimits, 'A set of limits used to indicate whether a process variable is stable and in control.' do
+    member :UpperLimit, 'upper limit', 0..1
+    member :UpperWarning, 'upper warning', 0..1
+    member :Nominal, 'nominal', 0..1
+    member :LowerWarning, 'lower warning', 0..1
+    member :LowerLimit, 'lower limit', 0..1
   end
 
-  type :AlarmLimits, 'A set of limits used to trigger warning or alarm indicators', :SpecificationValue do
-    mixed
-    member :UpperLimit, 'upper limit'
-    member :UpperWarning, 'upper warning'
-    member :LowerWarning, 'lower warning'
-    member :LowerLimit, 'lower limit'
+  type :AlarmLimits, 'A set of limits used to trigger warning or alarm indicators' do
+    member :UpperLimit, 'upper limit', 0..1
+    member :UpperWarning, 'upper warning', 0..1
+    member :LowerWarning, 'lower warning', 0..1
+    member :LowerLimit, 'lower limit', 0..1
   end
   
-  type :SpecificationLimits, 'A set of limits used to trigger warning or alarm indicators', :SpecificationValue do
-    mixed
-    member :UpperLimit, 'upper limit'
-    member :Nominal, 'nominal'
-    member :LowerLimit, 'lower limit'
+  type :SpecificationLimits, 'A set of limits used to trigger warning or alarm indicators' do
+    member :UpperLimit, 'upper limit', 0..1
+    member :Nominal, 'nominal', 0..1
+    member :LowerLimit, 'lower limit', 0..1
   end
-
-
-  
-  # possibly for 1.7
-#  type :Rated, 'The value of the constraint', :Constraint
-   
-#  type :DutyCycle, 'The duty cycle', :SpecificationValue do
-#    mixed
-#    member :Duration, 'The duration of the duty cycle', :DurationTime
-#    member :Peak, 'The peak value of the duty cycle', :LimitValue
-#    member :Value, 'The duty cycle', :LimitValue
-#  end
-
-#  attr :GearNumber, 'The number of the gear', :integer
-#  basic_type :GearRatio, 'The ratio for the gear', :float
-
-#  type :GearSpecification, 'A power transmission gearing, ratio given as CDATA', :SpecificationValue do
-#    mixed
-#    member :Number, 'The gear number', :GearNumber
-#    member :GearRatio, 'The gear ratio'
-#  end
 end
 
 

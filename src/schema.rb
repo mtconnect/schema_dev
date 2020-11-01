@@ -277,7 +277,11 @@ class Schema
       end
 
       # Add the elements to the sequence.
-      sequence = REXML::Element.new('xs:sequence')
+      if @ordered
+        sequence = REXML::Element.new('xs:sequence')
+      else
+        sequence = REXML::Element.new('xs:all')
+      end
       @elems.each do |element|
         e = element.generate_xsd(@xsd_version)
         sequence << e if e

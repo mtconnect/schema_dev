@@ -6,6 +6,7 @@ package :DataSet, 'DataSet Package' do
   type :Entry, 'An entry for a event with a data set representation' do
     mixed
     abstract
+    ordered
     member :Key, 'the key'
     member :Removed, 'an indicatore that the entry has been removed', 0..1
   end
@@ -21,11 +22,13 @@ package :DataSet, 'DataSet Package' do
                  end
 
     self.type "#{type.name}Entry".to_sym, "DataSet of #{type.annotation}", :Entry do
+      ordered
       member :Value, "Entry for #{type.name} data set", entry_type
     end
     
     self.type "#{type.name}DataSet".to_sym, "DataSet of #{type.annotation}", :Event do
       mixed
+      ordered
       attribute :Count, 'The number of entries', :CountValue
       member :Entry, 'The entries', 0..INF, "#{type.name}Entry".to_sym
     end

@@ -3318,6 +3318,60 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:union memberTypes='DataItemResetValueTypeEnum DataItemResetValueExtType'/>
   </xs:simpleType>
+  <xs:attributeGroup name='HeaderAttributesType'>
+    <xs:attribute name='version' type='VersionType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The protocol version number.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='creationTime' type='CreationTimeType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The time the response was created.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='testIndicator' type='TestIndicatorType' use='optional'>
+      <xs:annotation>
+        <xs:documentation>
+          Optional flag that indicates the system is operating in test mode.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='instanceId' type='InstanceIdType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          A number indicating which invocation of the agent. 
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='sender' type='SenderType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          The agent identification information. 
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='bufferSize' type='BufferSizeType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          A value representing the maximum number of data entity that MAY be
+          retained in the agent that published the response document at any
+          point in time.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name='deviceMetaDataChangeTime' type='DeviceMetaDataChangeTimeType' use='required'>
+      <xs:annotation>
+        <xs:documentation>
+          A timestamp in 8601 format of the last update of the Device
+          information for any device
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
   <xs:complexType name='HeaderType'>
     <xs:annotation>
       <xs:documentation>
@@ -3432,7 +3486,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         request for information from a client software application.
       </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
+    <xs:all>
       <xs:element name='Error' type='ErrorType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
@@ -3443,7 +3497,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-    </xs:sequence>
+    </xs:all>
   </xs:complexType>
   <xs:simpleType name='ErrorDescriptionType'>
     <xs:annotation>

@@ -220,6 +220,7 @@ package :Tools, 'Cutting tools' do
   end
 
   type :AssemblyMeasurements, 'A collection of assembly measurements' do
+    ordered
     choice 1..INF do
       member :CommonMeasurement, 'Common measurements'
       member :AssemblyMeasurement, 'Assembly measurements'

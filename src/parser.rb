@@ -321,6 +321,7 @@ class Schema
       super(schema, name, annotation, parent)
       @name, @annotation, @parent = name, annotation, parent
       @polymorphic = @mixed = @force_element = @abstract = false
+      @ordered = false
       @members = []
       @children = []
       @schema.derived << @parent if @parent and @parent != :abstract
@@ -342,6 +343,10 @@ class Schema
     
     def mixed
       @mixed = true
+    end
+
+    def ordered
+      @ordered = true
     end
 
     def abstract?
@@ -418,10 +423,12 @@ class Schema
     end
 
     def choice(occurrence = 1, &block)
+      @ordered = true
       @members << Choice.new(@schema, occurrence, &block)
     end
     
     def at_least_one(occurrence = 1, &block)
+      @ordered = true
       c = Choice.new(@schema, occurrence, &block)
       m, mc = c.members, c.members.dup
       raise "at least one must have more than one member" unless mc.size > 1

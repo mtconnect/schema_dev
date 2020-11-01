@@ -27,6 +27,7 @@ package :Motion, 'Motion represents kinematics' do
   
   type :Motion, 'The axis motion types', :AbstractConfiguration do
     mixed
+    ordered
     member :Id, 'The coordinate system identifier', :ID
     member :ParentIdRef, 'The parent of the coordinate system', 0..1, :IdRef
     member :CoordinateSystemIdRef, 'The identifier of the coordinate system that this motion is relative to'
