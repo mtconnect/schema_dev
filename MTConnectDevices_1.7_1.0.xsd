@@ -303,7 +303,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+      <xs:pattern value='[a-ln-z][a-z]+:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemEnumEnum'>
@@ -1697,7 +1697,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+      <xs:pattern value='[a-ln-z][a-z]+:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemSubEnumEnum'>
@@ -2380,7 +2380,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+      <xs:pattern value='[a-ln-z][a-z]+:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemStatisticsEnum'>
@@ -2477,7 +2477,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+      <xs:pattern value='[a-ln-z][a-z]+:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='UnitsEnum'>
@@ -2747,7 +2747,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+      <xs:pattern value='[a-ln-z][a-z]+:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='NativeUnitsEnum'>
@@ -3248,7 +3248,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+      <xs:pattern value='[a-ln-z][a-z]+:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='DataItemResetValueEnum'>
@@ -3534,6 +3534,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:all>
+      <xs:element name='Agent' type='AgentType'>
+        <xs:annotation>
+          <xs:documentation>
+            The Agent Device
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name='Device' type='DeviceType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
@@ -3766,7 +3773,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name='mtConnectVersion' type='VersionType' use='optional'>
+        <xs:attribute name='mtconnectVersion' type='VersionType' use='optional'>
           <xs:annotation>
             <xs:documentation>
               The MTConnect version of the Devices Information Model used to
@@ -3783,6 +3790,25 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:documentation>
         The primary container element for each piece of equipment. device is
         organized within the devices container.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AgentType'>
+    <xs:annotation>
+      <xs:documentation>
+        The Agent Device is a Device representing the MTConnect Agent and all
+        its connected data sources.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='DeviceType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Agent' type='AgentType' substitutionGroup='Device'>
+    <xs:annotation>
+      <xs:documentation>
+        The Agent Device is a Device representing the MTConnect Agent and all
+        its connected data sources.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4563,7 +4589,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+      <xs:pattern value='[a-ln-z][a-z]+:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='CompositionEnumTypeEnum'>
@@ -6538,7 +6564,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
-      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+      <xs:pattern value='[a-ln-z][a-z]+:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='SolidModelMediaTypeEnum'>
