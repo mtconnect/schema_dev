@@ -6470,7 +6470,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name='SolidModelScale' type='SolidModelScaleType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='Scale' type='SolidModelScaleType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
                 Scaling vector for the model
@@ -6547,6 +6547,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name='ScaleValueType'>
+    <xs:annotation>
+      <xs:documentation>
+        A three dimensional value &apos;X Y Z&apos; or &apos;A B C&apos;
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='FloatListValueType'>
+      <xs:maxLength value='3'/>
+      <xs:minLength value='1'/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name='SolidModelScaleType'>
     <xs:annotation>
       <xs:documentation>
@@ -6554,7 +6565,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base='ThreeSpaceValueType'/>
+      <xs:extension base='ScaleValueType'/>
     </xs:simpleContent>
   </xs:complexType>
   <xs:simpleType name='SolidModelMediaTypeExtType'>
