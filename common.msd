@@ -49,16 +49,8 @@ package :common, 'Common attributes and elements for all schemas' do
   }
 
   basic_type :DescriptionText, 'A description'
-  basic_type(:DataItemExt, 'An extension point for data item types') do
-    pattern '[a-ln-z]:[A-Z_0-9]+'
-  end
-  
-  basic_type(:DataItemStatsExt, 'An extension point for data item statistics types') do
-    pattern '[a-ln-z]:[A-Z_0-9]+'
-  end
-  
   enum :DataItemEnum, 'The types of measurements available' do
-    extensible :DataItemExt
+    extensible
 
     Glossary.types.each do |e|
       value(e.name_property, e.description)
@@ -68,7 +60,7 @@ package :common, 'Common attributes and elements for all schemas' do
   end
 
   enum :DataItemSubEnum, 'The sub-types for a measurement' do
-    extensible :DataItemExt
+    extensible
 
     uniq = Set.new
     Glossary.subtypes.each do |e|
@@ -80,7 +72,7 @@ package :common, 'Common attributes and elements for all schemas' do
   end
   
   enum :DataItemStatistics, 'Statistical operations on data' do
-    extensible :DataItemStatsExt
+    extensible
 
     Glossary.statistics.each do |e|
       value(e.name_property, e.description)
@@ -88,12 +80,8 @@ package :common, 'Common attributes and elements for all schemas' do
   end
   
   # Common Units
-  basic_type(:UnitsExt, 'An extension point for data item types') do
-    pattern '[a-ln-z]:[A-Z_0-9]+'
-  end
-
   enum :Units, 'The units supported' do
-    extensible :UnitsExt
+    extensible
 
     Glossary.units.each do |e|
       value(e.name_property, e.description)
@@ -102,7 +90,7 @@ package :common, 'Common attributes and elements for all schemas' do
 
   enum :NativeUnits, 'The units supported for the source equipment that can be converted into MTC Units.', :Units do
     # Alternate types for the source system.
-    extensible :UnitsExt
+    extensible
 
     Glossary.nativeUnits.each do |e|
       value(e.name_property, e.description)
@@ -115,12 +103,8 @@ package :common, 'Common attributes and elements for all schemas' do
     end
   end
   
-  basic_type(:DataItemResetValueExt, 'An extension point for reset types') do
-    pattern '[a-ln-z]:[A-Z_0-9]+'
-  end
-  
   enum :DataItemResetValue, 'The reset intervals' do
-    extensible :DataItemResetValueExt
+    extensible
 
     Glossary.resetTriggers.each do |e|
       value(e.name_property, e.description)

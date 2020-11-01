@@ -76,11 +76,8 @@ package :Component, 'Top Level Components Package' do
     member :Composition, 'An assembly of a component', 1..INF
   end
 
-  basic_type(:CompositionTypeExt, 'An extension point for Composition') do
-    pattern '[a-ln-z]:[A-Z_0-9]+'
-  end
   enum :CompositionEnumType, 'The vocab for the type of composition' do
-    extensible :CompositionTypeExt
+    extensible
 
     Glossary.compositions.each do |e|
       value(e.name_property, e.description) if !e.kind_of?(:subtype)

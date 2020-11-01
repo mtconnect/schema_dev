@@ -295,27 +295,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
-  <xs:simpleType name='DataItemExtType'>
+  <xs:simpleType name='DataItemEnumExtType'>
     <xs:annotation>
       <xs:documentation>
-        An extension point for data item types
+        Extended tyoe for The types of measurements available
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='DataItemStatsExtType'>
-    <xs:annotation>
-      <xs:documentation>
-        An extension point for data item statistics types
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base='xs:string'>
-      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name='DataItemEnumTypeEnum'>
+  <xs:simpleType name='DataItemEnumEnum'>
     <xs:annotation>
       <xs:documentation>
         The types of measurements available
@@ -1697,9 +1687,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The types of measurements available
       </xs:documentation>
     </xs:annotation>
-    <xs:union memberTypes='DataItemEnumTypeEnum DataItemExtType'/>
+    <xs:union memberTypes='DataItemEnumEnum DataItemEnumExtType'/>
   </xs:simpleType>
-  <xs:simpleType name='DataItemSubEnumTypeEnum'>
+  <xs:simpleType name='DataItemSubEnumExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        Extended tyoe for The sub-types for a measurement
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemSubEnumEnum'>
     <xs:annotation>
       <xs:documentation>
         The sub-types for a measurement
@@ -2370,9 +2370,19 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The sub-types for a measurement
       </xs:documentation>
     </xs:annotation>
-    <xs:union memberTypes='DataItemSubEnumTypeEnum DataItemExtType'/>
+    <xs:union memberTypes='DataItemSubEnumEnum DataItemSubEnumExtType'/>
   </xs:simpleType>
-  <xs:simpleType name='DataItemStatisticsTypeEnum'>
+  <xs:simpleType name='DataItemStatisticsExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        Extended tyoe for Statistical operations on data
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='DataItemStatisticsEnum'>
     <xs:annotation>
       <xs:documentation>
         Statistical operations on data
@@ -2456,19 +2466,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         Statistical operations on data
       </xs:documentation>
     </xs:annotation>
-    <xs:union memberTypes='DataItemStatisticsTypeEnum DataItemStatsExtType'/>
+    <xs:union memberTypes='DataItemStatisticsEnum DataItemStatisticsExtType'/>
   </xs:simpleType>
   <xs:simpleType name='UnitsExtType'>
     <xs:annotation>
       <xs:documentation>
-        An extension point for data item types
+        Extended tyoe for The unit of measurement for the reported value of the
+        data item.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='UnitsTypeEnum'>
+  <xs:simpleType name='UnitsEnum'>
     <xs:annotation>
       <xs:documentation>
         The unit of measurement for the reported value of the data item.
@@ -2725,9 +2736,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The unit of measurement for the reported value of the data item.
       </xs:documentation>
     </xs:annotation>
-    <xs:union memberTypes='UnitsTypeEnum UnitsExtType'/>
+    <xs:union memberTypes='UnitsEnum UnitsExtType'/>
   </xs:simpleType>
-  <xs:simpleType name='NativeUnitsTypeEnum'>
+  <xs:simpleType name='NativeUnitsExtType'>
+    <xs:annotation>
+      <xs:documentation>
+        Extended tyoe for The native units of measurement for the reported value
+        of the data item.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='NativeUnitsEnum'>
     <xs:annotation>
       <xs:documentation>
         The native units of measurement for the reported value of the data item.
@@ -3189,7 +3211,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The native units of measurement for the reported value of the data item.
       </xs:documentation>
     </xs:annotation>
-    <xs:union memberTypes='NativeUnitsTypeEnum UnitsExtType'/>
+    <xs:union memberTypes='NativeUnitsEnum NativeUnitsExtType'/>
   </xs:simpleType>
   <xs:simpleType name='CoordinateSystemEnumType'>
     <xs:annotation>
@@ -3221,14 +3243,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:simpleType name='DataItemResetValueExtType'>
     <xs:annotation>
       <xs:documentation>
-        An extension point for reset types
+        Extended tyoe for The reset intervals
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base='xs:string'>
       <xs:pattern value='[a-ln-z]:[A-Z_0-9]+'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name='DataItemResetValueTypeEnum'>
+  <xs:simpleType name='DataItemResetValueEnum'>
     <xs:annotation>
       <xs:documentation>
         The reset intervals
@@ -3316,7 +3338,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         The reset intervals
       </xs:documentation>
     </xs:annotation>
-    <xs:union memberTypes='DataItemResetValueTypeEnum DataItemResetValueExtType'/>
+    <xs:union memberTypes='DataItemResetValueEnum DataItemResetValueExtType'/>
   </xs:simpleType>
   <xs:attributeGroup name='HeaderAttributesType'>
     <xs:attribute name='version' type='VersionType' use='required'>

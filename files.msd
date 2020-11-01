@@ -7,11 +7,8 @@ package :Files, 'Files or Documents' do
   attr :FileSize, 'The size in bytes of the file', :integer
   attr :FileName, 'The name of the file'
   
-  basic_type(:ApplicationCategoryExt, 'An extension point for application category') do
-    pattern '[A-Za-z]+:[A-Z_0-9]+'
-  end
   enum :ApplicationCategory, 'The category of application that will use this file' do
-    extensible :ApplicationCategoryExt
+    extensible
     value :ASSEMBLY, 'Files regarding the fully assembled product'
     value :DEVICE, 'Device related files'
     value :HANDLING, 'Files relating to the handling of material'
@@ -22,11 +19,8 @@ package :Files, 'Files or Documents' do
     value :SETUP, 'Files related to the setup of a process'
   end
   
-  basic_type(:ApplicationTypeExt, 'An extension point for application sub-category') do
-    pattern '[A-Za-z]+:[A-Z_0-9]+'
-  end
   enum :ApplicationType, 'The type classification of a file' do
-    extensible :ApplicationTypeExt
+    extensible
     value :DESIGN, 'Computer aided design files or drawings'
     value :DATA, 'Generic data'
     value :DOCUMENTATION, 'Documentation regarding a category of file'

@@ -617,7 +617,20 @@ class Schema
       elements = []
       
       ele_name = name_as_xsd_type
-      ele_name = "#{ele_name}Enum" if @extensible
+      if @extensible
+        extended_name = "#{@name}ExtType"
+        ele_name = "#{@name}Enum"
+
+        simple_type = REXML::Element.new('xs:simpleType')
+        simple_type.add_attribute('name', extended_name)
+        simple_type.add_element('xs:annotation').
+          add_element('xs:documentation').text = "Extended tyoe for #{annotation}"
+        simple_type.add_element('xs:restriction', 'base' => 'xs:string').
+          add_element('xs:pattern', 'value' => '[a-ln-z][a-z]+:[A-Z_0-9]+')
+        elements << simple_type
+      else
+        ele_name = name_as_xsd_type
+      end
       
       simple_type = REXML::Element.new('xs:simpleType')
       simple_type.add_attribute('name', ele_name)
@@ -649,14 +662,14 @@ class Schema
       elements << simple_type
 
       if @extensible
-        @schema.check_type(@extensible)
+        # @schema.check_type(@extensible)
         
         simple_type = REXML::Element.new('xs:simpleType')
         simple_type.add_attribute('name', name_as_xsd_type)
         simple_type.add_element('xs:annotation').
           add_element('xs:documentation').text = annotation
         
-        simple_type.add_element('xs:union', { 'memberTypes' => "#{ele_name} #{@extensible}Type" })
+        simple_type.add_element('xs:union', { 'memberTypes' => "#{ele_name} #{extended_name}" })
         elements << simple_type
       end
       

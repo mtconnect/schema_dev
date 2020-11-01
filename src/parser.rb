@@ -247,8 +247,8 @@ class Schema
       instance_eval &block
     end
 
-    def extensible(type)
-      @extensible = type
+    def extensible
+      @extensible = true
     end
 
     def value(name, annotation, &block)
