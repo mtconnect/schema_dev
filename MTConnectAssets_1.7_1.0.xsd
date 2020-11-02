@@ -12545,6 +12545,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:string'/>
   </xs:simpleType>
+  <xs:simpleType name='FileTimeType'>
+    <xs:annotation>
+      <xs:documentation>
+        A file time
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base='xs:dateTime'/>
+  </xs:simpleType>
   <xs:complexType name='FileType'>
     <xs:annotation>
       <xs:documentation>
@@ -12580,6 +12588,20 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               <xs:documentation>
                 The Destination is a reference to the target Device for this
                 File
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='CreationTime' type='FileTimeType'>
+            <xs:annotation>
+              <xs:documentation>
+                The time the response was created.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name='ModificationTime' type='FileTimeType' minOccurs='0' maxOccurs='1'>
+            <xs:annotation>
+              <xs:documentation>
+                The time the file was modified
               </xs:documentation>
             </xs:annotation>
           </xs:element>

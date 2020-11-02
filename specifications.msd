@@ -8,17 +8,24 @@ package :Specificaitons, 'Device and component specificaitons' do
     member :Specification, 'A Specification', 1..INF, :AbstractSpecification
   end
 
+  enum :OriginatorEnum, 'A reference to the creator of the Specification' do
+    extensible
+    value :MANUFACTURER, 'The manufacturer of a piece of equipment or component.'
+    value :USER, 'The owner or implementer of a piece of equipment or component.'
+  end
+
   type :AbstractSpecification, 'A specification' do
-    abstract
+    abstract    
     member :Id, 'The identity of the Specificaiton', :ID
     member :Type, 'The type of measurement', :DataItemEnum
+    member(:Originator, 'A reference to the creator of the Specification', 0..1, :OriginatorEnum) { self.default = 'MANUFACTURER' }
     member :SubType, 'The type of measurement', 0..1, :DataItemSubEnum
     member :Name, 'The name of the spec', 0..1
     member :DataItemIdRef, 'The optional data item identifier', 0..1, :SourceDataItemId
     member :CompositionIdRef, 'The optional composition identifier', 0..1, :CompositionId
     member :CoordinateSystemIdRef, 'The optional coordinate system identifier', 0..1
     member :Units, 'The units', 0..1
- end
+  end
   
   type :Specification, 'A specification', :AbstractSpecification do
     member :Maximum, 'A numeric upper constraint.', 0..1

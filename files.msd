@@ -62,6 +62,7 @@ package :Files, 'Files or Documents' do
   
   basic_type :PublicKey, 'An X501 Public Key'
   basic_type :Signature, 'A secure hash'
+  basic_type :FileTime, 'A file time', :dateTime
   type :File, 'The file version info', :AbstractFile do
     member :Size, 'The size in bytes', :FileSize
     member :VersionId, 'The version identifier'
@@ -70,6 +71,8 @@ package :Files, 'Files or Documents' do
     member :Signature, 'A secure hash of the file.', 0..1
     member :PublicKey, 'The public key used to verify the signature', 0..1
     member :Destinations, 'The Destination is a reference to the target Device for this File', 0..1, :FileDestinations
+    member :CreationTime, 'The time the file was coorected', :FileTime
+    member :ModificationTime, 'The time the file was modified', 0..1, :FileTime
   end
   
   type :FileLocation, 'XLink to file location' do
