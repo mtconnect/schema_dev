@@ -3377,15 +3377,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name='bufferSize' type='BufferSizeType' use='required'>
-      <xs:annotation>
-        <xs:documentation>
-          A value representing the maximum number of data entity that MAY be
-          retained in the agent that published the response document at any
-          point in time.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
     <xs:attribute name='deviceMetaDataChangeTime' type='DeviceMetaDataChangeTimeType' use='required'>
       <xs:annotation>
         <xs:documentation>

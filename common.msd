@@ -117,7 +117,6 @@ package :common, 'Common attributes and elements for all schemas' do
     member :TestIndicator, 'Indicates that this was a test document', 0..1
     member :InstanceId, 'The unique instance identifier of this agent process'
     member :Sender, 'The sender of the message'
-    member :BufferSize, 'The size of the agent\'s buffer.'    
     member :DeviceMetaDataChangeTime, 'A timestamp in 8601 format of the last update of the Device information for any device'
   end
       

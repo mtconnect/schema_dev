@@ -13,6 +13,7 @@ package :MTC, 'MTC Top Level Package' do
   type :Header, 'Message header for protocol information' do
     member :HeaderAttributes, 'Common Attributes'
     
+    member :BufferSize, 'The size of the agent\'s buffer.'    
     member :NextSequence, 'The next sequence number for subsequent requests', 1, :Sequence
     member :LastSequence, 'The last sequence number available from the agent', 1, :Sequence
     member :FirstSequence, 'The first sequence number available from the agent', 1, :Sequence

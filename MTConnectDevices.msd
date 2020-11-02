@@ -25,6 +25,8 @@ package :MTC, 'MTC Top Level Package' do
   
   type :Header, 'Message header for protocol information' do
     member :HeaderAttributes, 'Common Attributes'
+    
+    member :BufferSize, 'The size of the agent\'s buffer.'    
     member :AssetBufferSize, 'The maximum number of assets'
     member :AssetCount, 'The number of assets we have', :AssetCountAttr
     member :AssetCounts, 'The asset statistics', 0..1
