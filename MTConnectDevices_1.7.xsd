@@ -6432,7 +6432,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               </xs:annotation>
             </xs:element>
           </xs:choice>
-          <xs:element name='Axis' type='MotionAxisType' minOccurs='0' maxOccurs='1'>
+          <xs:element name='Axis' type='MotionAxisType'>
             <xs:annotation>
               <xs:documentation>
                 The axis motion

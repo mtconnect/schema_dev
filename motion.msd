@@ -38,6 +38,6 @@ package :Motion, 'Motion represents kinematics' do
       member :Origin, 'The location (no parent)'
       member :Transformation, 'A rotation and translation'
     end
-    member :Axis, 'The axis motion', 0..1, :MotionAxis
+    member :Axis, 'The axis motion', :MotionAxis
   end
 end
