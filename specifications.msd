@@ -35,11 +35,6 @@ package :Specificaitons, 'Device and component specificaitons' do
     member :UpperWarning, 'The upper boundary indicating increased concern and supervision may be required', 0..1
     member :LowerWarning, 'The lower boundary indicating increased concern and supervision may be required', 0..1
     member :LowerLimit, 'The lower conformance boundary for a variable', 0..1
-
-    
-    member :ControlLimits, "The control limits", 0..1
-    member :AlarmLimits, "The control limits", 0..1
-    member :SpecificationLimits, "The control limits", 0..1
   end
 
   type :Constraint, 'The limit of a constraint' do

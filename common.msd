@@ -30,7 +30,7 @@ package :common, 'Common attributes and elements for all schemas' do
   attr :DurationTime, 'A length of time in seconds', :float
   attr :Removed, 'A flag indicating the item has been removed', :boolean
   attr :Key, 'The key for adata set', :NMTOKEN
-  attr :DeviceMetaDataChangeTime, 'A timestamp in 8601 format of the last update of the Device information for any device', :dateTime
+  attr :DeviceModelChangeTime, 'A timestamp in 8601 format of the last update of the Device information for any device', :dateTime
   
   attr :AssetId, 'The unique id of the asset'
   attr :AssetAttrType, 'An asset type'
@@ -117,7 +117,7 @@ package :common, 'Common attributes and elements for all schemas' do
     member :TestIndicator, 'Indicates that this was a test document', 0..1
     member :InstanceId, 'The unique instance identifier of this agent process'
     member :Sender, 'The sender of the message'
-    member :DeviceMetaDataChangeTime, 'A timestamp in 8601 format of the last update of the Device information for any device'
+    member :DeviceModelChangeTime, 'A timestamp in 8601 format of the last update of the Device information for any device'
   end
       
   

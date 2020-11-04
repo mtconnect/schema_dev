@@ -217,7 +217,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
-  <xs:simpleType name='DeviceMetaDataChangeTimeType'>
+  <xs:simpleType name='DeviceModelChangeTimeType'>
     <xs:annotation>
       <xs:documentation>
         A timestamp in 8601 format of the last update of the Device information
@@ -3376,7 +3376,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name='deviceMetaDataChangeTime' type='DeviceMetaDataChangeTimeType' use='required'>
+    <xs:attribute name='deviceModelChangeTime' type='DeviceModelChangeTimeType' use='required'>
       <xs:annotation>
         <xs:documentation>
           A timestamp in 8601 format of the last update of the Device
@@ -3437,14 +3437,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
               A value representing the maximum number of data entity that MAY be
               retained in the agent that published the response document at any
               point in time.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name='deviceMetaDataChangeTime' type='DeviceMetaDataChangeTimeType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              A timestamp in 8601 format of the last update of the Device
-              information for any device
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>

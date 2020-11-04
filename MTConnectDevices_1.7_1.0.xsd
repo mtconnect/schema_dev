@@ -218,7 +218,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     </xs:annotation>
     <xs:restriction base='xs:NMTOKEN'/>
   </xs:simpleType>
-  <xs:simpleType name='DeviceMetaDataChangeTimeType'>
+  <xs:simpleType name='DeviceModelChangeTimeType'>
     <xs:annotation>
       <xs:documentation>
         A timestamp in 8601 format of the last update of the Device information
@@ -3377,7 +3377,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name='deviceMetaDataChangeTime' type='DeviceMetaDataChangeTimeType' use='required'>
+    <xs:attribute name='deviceModelChangeTime' type='DeviceModelChangeTimeType' use='required'>
       <xs:annotation>
         <xs:documentation>
           A timestamp in 8601 format of the last update of the Device
@@ -3397,40 +3397,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:maxExclusive value='4294967295'/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name='AssetCountsType'>
-    <xs:annotation>
-      <xs:documentation>
-        The total number of mtconnect asset in anagent.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:all>
-      <xs:element name='AssetCount' type='AssetCountType' minOccurs='1' maxOccurs='unbounded'>
-        <xs:annotation>
-          <xs:documentation>
-            The total number of mtconnect asset in anagent.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:all>
-  </xs:complexType>
-  <xs:complexType name='AssetCountType'>
-    <xs:annotation>
-      <xs:documentation>
-        The total number of mtconnect asset in anagent.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base='AssetCountValueType'>
-        <xs:attribute name='assetType' type='AssetAttrTypeType' use='required'>
-          <xs:annotation>
-            <xs:documentation>
-              The type of asset that was updated.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
   <xs:complexType name='HeaderType'>
     <xs:annotation>
       <xs:documentation>
@@ -3440,40 +3406,35 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         agent.
       </xs:documentation>
     </xs:annotation>
-    <xs:all>
-      <xs:element name='AssetCounts' type='AssetCountsType' minOccurs='0' maxOccurs='1'>
-        <xs:annotation>
-          <xs:documentation>
-            The total number of mtconnect asset in anagent.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:all>
-    <xs:attributeGroup ref='HeaderAttributesType'/>
-    <xs:attribute name='bufferSize' type='BufferSizeType' use='required'>
-      <xs:annotation>
-        <xs:documentation>
-          A value representing the maximum number of data entity that MAY be
-          retained in the agent that published the response document at any
-          point in time.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='assetBufferSize' type='AssetBufferSizeType' use='required'>
-      <xs:annotation>
-        <xs:documentation>
-          The maximum number of mtconnect asset that will be retained by the
-          agent.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name='assetCount' type='AssetCountAttrType' use='required'>
-      <xs:annotation>
-        <xs:documentation>
-          The total number of mtconnect asset in anagent.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:simpleContent>
+      <xs:extension base='xs:string'>
+        <xs:attributeGroup ref='HeaderAttributesType'/>
+        <xs:attribute name='bufferSize' type='BufferSizeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              A value representing the maximum number of data entity that MAY be
+              retained in the agent that published the response document at any
+              point in time.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='assetBufferSize' type='AssetBufferSizeType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The maximum number of mtconnect asset that will be retained by the
+              agent.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name='assetCount' type='AssetCountAttrType' use='required'>
+          <xs:annotation>
+            <xs:documentation>
+              The total number of mtconnect asset in anagent.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name='MTConnectDevicesType'>
     <xs:annotation>
@@ -5499,27 +5460,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             <xs:annotation>
               <xs:documentation>
                 The lower conformance boundary for a variable
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='ControlLimits' type='ControlLimitsType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The control limits
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='AlarmLimits' type='AlarmLimitsType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The control limits
-              </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name='SpecificationLimits' type='SpecificationLimitsType' minOccurs='0' maxOccurs='1'>
-            <xs:annotation>
-              <xs:documentation>
-                The control limits
               </xs:documentation>
             </xs:annotation>
           </xs:element>
