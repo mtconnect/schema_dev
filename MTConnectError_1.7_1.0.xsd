@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectError:1.6' xmlns:mt='urn:mtconnect.org:MTConnectError:1.6' targetNamespace='urn:mtconnect.org:MTConnectError:1.6' elementFormDefault='qualified' attributeFormDefault='unqualified'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectError:1.7' xmlns:mt='urn:mtconnect.org:MTConnectError:1.7' targetNamespace='urn:mtconnect.org:MTConnectError:1.7' elementFormDefault='qualified' attributeFormDefault='unqualified'>
   <xs:element name='MTConnectError' type='MTConnectErrorType'>
     <xs:annotation>
       <xs:documentation>
@@ -463,8 +463,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINEAR_FORCE'>
         <xs:annotation>
           <xs:documentation>
-            The measurement of the push or pull introduced by an actuator or
-            exerted on an object.
+            A force applied to a mass in one direction only.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1672,6 +1671,192 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='RATE_OF_PRESSURIZATION'>
+        <xs:annotation>
+          <xs:documentation>
+            The change of pressure per unit time.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SENSOR_ATTACHMENT'>
+        <xs:annotation>
+          <xs:documentation>
+            A sensorattachment event is an event defining an attachment between
+            a sensor and an entity.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DEVICE_ADDED'>
+        <xs:annotation>
+          <xs:documentation>
+            deviceadded event is an event that provides the uuid term of new
+            device added to an mtconnect agent.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DEVICE_REMOVED'>
+        <xs:annotation>
+          <xs:documentation>
+            deviceremoved event is an event that provides the uuid term of a
+            device removed from an mtconnect agent.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DEVICE_CHANGED'>
+        <xs:annotation>
+          <xs:documentation>
+            devicechanged event is an event that provides the uuid term of the
+            device whose metadata has changed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CONNECTION_STATUS'>
+        <xs:annotation>
+          <xs:documentation>
+            The status of the connection between an adapter and an agent.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ADAPTER_SOFTWARE_VERSION'>
+        <xs:annotation>
+          <xs:documentation>
+            The originator&apos;s software version of the adapter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ADAPTER_URI'>
+        <xs:annotation>
+          <xs:documentation>
+            The uri of the adapter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OBSERVATION_UPDATE_RATE'>
+        <xs:annotation>
+          <xs:documentation>
+            The average rate of change of values for data items in the MTConnect
+            streams. The average is computed over a rolling window defined by
+            the implementation.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ASSET_UPDATE_RATE'>
+        <xs:annotation>
+          <xs:documentation>
+            The average rate of change of values for assets in the MTConnect
+            streams. The average is computed over a rolling window defined by
+            the implementation.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MTCONNECT_VERSION'>
+        <xs:annotation>
+          <xs:documentation>
+            The reference version of the MTConnect Standard supported by the
+            adapter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DECELERATION'>
+        <xs:annotation>
+          <xs:documentation>
+            Negative rate of change of velocity.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ANGULAR_DECELERATION'>
+        <xs:annotation>
+          <xs:documentation>
+            Negative rate of change of angular velocity.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CONTROL_LIMIT'>
+        <xs:annotation>
+          <xs:documentation>
+            control limits term
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SPECIFICATION_LIMIT'>
+        <xs:annotation>
+          <xs:documentation>
+            specification limits term
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ALARM_LIMIT'>
+        <xs:annotation>
+          <xs:documentation>
+            alarm limits term
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_UNIQUE_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier given to a distinguishable, individual part. If no
+            subtype is specified, uuid subtype is default.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_KIND_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier given to link the individual occurrence to a class of
+            parts, typically distinguished by a particular part design. If no
+            subtype is specified, uuid subtype is default.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_GROUP_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier given to a collection of individual parts. If no subtype
+            is specified, uuid subtype is default.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_STATE'>
+        <xs:annotation>
+          <xs:documentation>
+            The condition of the part or process occurrence.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_KIND_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier given to link the individual occurrence to a class of
+            processes or process definition.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_AGGREGATE_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier given to link the individual occurrence to a group of
+            related occurrences, such as a process step in a process plan.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_OCCURRENCE_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier of a process being executed by the device.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_STATUS'>
+        <xs:annotation>
+          <xs:documentation>
+            State or condition of a part. If unique identifier is given, part
+            status is for that individual. If group identifier is given without
+            a unique identifier, then the status is assumed to be for the whole
+            group.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='VARIABLE'>
         <xs:annotation>
           <xs:documentation>
@@ -2204,13 +2389,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='COMPLETE'>
-        <xs:annotation>
-          <xs:documentation>
-            Completion of an action.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value='CONSUMED'>
         <xs:annotation>
           <xs:documentation>
@@ -2359,6 +2537,120 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Identifies whether the connection type is wireless. 
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='GAUGE'>
+        <xs:annotation>
+          <xs:documentation>
+            Gauge pressure is the pressure measured relative to the atmospheric
+            pressure.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='UUID'>
+        <xs:annotation>
+          <xs:documentation>
+            The globally unique identifier as specified in ISO 11578 or RFC
+            4122.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SERIAL_NUMBER'>
+        <xs:annotation>
+          <xs:documentation>
+            A serial number that uniquely identifies a specific part.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='RAW_MATERIAL'>
+        <xs:annotation>
+          <xs:documentation>
+            The unique identifier for a singular piece of material that is used
+            to make a single part.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_NUMBER'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier of a particular part design or model.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_FAMILY'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier given to a group of parts having similarities in
+            geometry, manufacturing process, and/or functions.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_NAME'>
+        <xs:annotation>
+          <xs:documentation>
+            A word or set of words by which a part is known, addressed, or
+            referred to.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LOT'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier that references a group of parts tracked as a lot.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='BATCH'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier that references a group of parts produced in a batch.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='HEAT_TREAT'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier used to reference a material heat number.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_NAME'>
+        <xs:annotation>
+          <xs:documentation>
+            A word or set of words by which a process being executed (process
+            occurrence) by the device is known, addressed, or referred to.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ISO_STEP_EXECUTABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to a ISO 10303 Executable.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_STEP'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier of the step in the process plan that this occurrence
+            corresponds to. Synonyms include &quot;operation id&quot;.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_PLAN'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier of the process plan that this occurrence belongs to.
+            Synonyms include &quot;routing id&quot;, &quot;job id&quot;.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ORDER_NUMBER'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier of the authorization of the process occurrence. Synonyms
+            include &quot;job id&quot;, &quot;work order&quot;.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2728,6 +3020,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='PASCAL/SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Pascal per second.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='COUNT/SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Count per second.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='UNIT_VECTOR_3D'>
+        <xs:annotation>
+          <xs:documentation>
+            A 3D Unit Vector. Space delimited list of three floating point
+            numbers.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='UnitsType'>
@@ -2995,6 +3309,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Gram per cubic meter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PASCAL/SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Pascal per second.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='COUNT/SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Count per second.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='UNIT_VECTOR_3D'>
+        <xs:annotation>
+          <xs:documentation>
+            A 3D Unit Vector. Space delimited list of three floating point
+            numbers.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3379,8 +3715,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='deviceModelChangeTime' type='DeviceModelChangeTimeType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          A timestamp in 8601 format of the last update of the Device
-          information for any device
+          A timestamp in 8601 format of the last update of the device
+          information for any device.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>

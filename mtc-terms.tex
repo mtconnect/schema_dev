@@ -340,7 +340,7 @@
   kind={element},
   attributes={\gls{id},\gls{uuid},\gls{name},\gls{type}},
   elements={\gls{description}},
-  description={An XML element used to describe the lowest level structural building blocks contained within a \gls{component} element.}
+  description={\gls{composition} is a functional part of a piece of equipment contained within a \gls{component} that \MUSTNOT be further decomposed into \gls{component}s or \gls{composition}s.}
 }
 
 
@@ -406,7 +406,7 @@
 \newglossaryentry{current request}
 {
   name={Current Request},
-  description={An \glstext{http} request to the \gls{agent} for returning latest known values for the \gls{dataitem} as an \gls{mtconnectstreams} \glstext{xml} document}
+  description={A \gls{current request} is a \gls{request} to an \gls{agent} to produce an \gls{mtconnectstreams response document} containing the \gls{observations information model} for a snapshot of the latest \glspl{observation} at the moment of the \gls{request} or at a given \gls{sequence number}.}
 }
 
 
@@ -765,10 +765,13 @@
 
 \newglossaryentry{mtconnect asset}
 {
-  type=mtc,
-  category=term,
   name={MTConnect Asset},
-  description={See \gls{asset}}
+  description={An \gls{mtconnect asset} is an \gls{asset} used by the manufacturing process to perform tasks.
+  \newline \begin{note}
+  Note 1 to entry: An \gls{mtconnect asset} relies upon an \gls{mtconnect device} to provide \glspl{observation} and information about itself and the \gls{mtconnect device} revises the information to reflect changes to the \gls{mtconnect asset} during their interaction. Examples of \glspl{mtconnect asset} are Cutting Tools, Part Information, Manufacturing Processes, Fixtures, and Files.
+  \newline Note 2 to entry: A singular \gls{assetid} uniquely identifies an \gls{mtconnect asset} throughout its lifecycle and is used to track and relate the \gls{mtconnect asset} to other \glspl{mtconnect device} and entities. 
+  \newline Note 3 to entry: \glspl{mtconnect asset} are temporally associated with a device and can be removed from the device without damage or alteration to its primary functions.
+  \end{note}}
 }
 
 
@@ -934,10 +937,8 @@
 
 \newglossaryentry{probe request}
 {
-  type=mtc,
-  category=term,
   name={Probe Request},
-  description={An \glstext{http} request to the \gls{agent} for returning metadata as an \gls{mtconnectdevices} \glstext{xml} document}
+  description={A \gls{probe request} is a \gls{request} to an \gls{agent} to produce an \gls{mtconnectdevices response document} containing the \gls{device information model}.}
 }
 
 
@@ -1158,7 +1159,7 @@
 \newglossaryentry{sample request}
 {
   name={Sample Request},
-  description= {A request from the \gls{agent} for a stream of time series data.}
+  description= {A \gls{sample request} is a \gls{request} to an \gls{agent} to produce an \gls{mtconnectstreams response document} containing the \gls{observations information model} for a set of time-stamped \glspl{observation} made by \glspl{component term}.}
 }
 
 
@@ -1184,8 +1185,6 @@
 
 \newglossaryentry{sensing element}
 {
-  type=mtc,
-  category=term,
   name={sensing element},
   description={A mechanism that provides a signal or measured value.},
   plural={sensing elements}
@@ -1194,8 +1193,6 @@
 
 \newglossaryentry{sensor element}
 {
-  type=mtc,
-  category=term,
   name={sensor element},
   plural={sensor elements},
   description={A \gls{sensor element} provides a signal or measured value.}
@@ -1204,11 +1201,9 @@
 
 \newglossaryentry{sensor term}
 {
-  type=mtc,
-  category=term,
   name={Sensor},
   plural={Sensors},
-  description= {A \gls{sensor term} is typically comprised of two major components: a \gls{sensor unit} that provides signal processing, conversion, and communications and the \glspl{sensing element} that provides a signal or measured value.}
+  description= {A \gls{sensing element} that responds to a physical stimulus and transmits a resulting signal.}
 }
 
 
@@ -1225,11 +1220,9 @@
 
 \newglossaryentry{sensor unit}
 {
-  type=mtc,
-  category=term,
   name={sensor unit},
   plural={sensor units},
-  description= {A \gls{sensor unit} provides signal processing, conversion, and communications.}
+  description= {An intelligent piece of equipment that manages the signals of one or more \glspl{sensing element} and provides the measured values.}
 }
 
 
@@ -1693,7 +1686,7 @@
   category=model,
   name={Pneumatic},
   kind={systems,component},
-  description={\gls{pneumatic} is an XML container that represents the information for a system comprised of all the parts involved in moving and distributing pressurized gas throughout the piece of equipment.}
+  description={\gls{pneumatic} is a system that uses compressed gasses to actuate components or do work within the piece of equipment.}
 }
 
 
@@ -2352,7 +2345,7 @@
   category=model,
   name={LINEAR\_FORCE},
   elementname=\cfont{LinearForce},
-  description={The measurement of the push or pull introduced by an actuator or exerted on an object.},
+  description={A \gls{force} applied to a mass in one direction only.},
   units=\cfont{\gls{newton}},
   kind={type,sample},
   facet={\gls{float}}
@@ -3619,8 +3612,8 @@
 {
   type=mtc,
   category=model,
-  name={PART\_NUMBER},
-  elementname=\cfont{PartNumber},
+  name=\deprecated{PART\_NUMBER},
+  elementname=\deprecated{\cfont{PartNumber}},
   description={An identifier of a part or product moving through the manufacturing process. \newline The \gls{valid data value} \must be a text string. },
   kind={type,event},
   facet={\gls{string}}
@@ -5951,7 +5944,7 @@
   type=mtc,
   category=model,
   name={POT},
-  description={The number of the pot in the tool handling system.}
+  description={A location in a tool magazine.}
 }
 
 
@@ -5960,7 +5953,7 @@
   type=mtc,
   category=model,
   name={STATION},
-  description={The tool location in a horizontal turning machine.}
+  description={A location in a turret, tool bar, or tool rack.}
 }
 
 
@@ -5969,7 +5962,7 @@
   type=mtc,
   category=model,
   name={CRIB},
-  description={The location with regard to a tool crib.}
+  description={A location within a tool crib.}
 }
 
 
@@ -6584,14 +6577,14 @@
   category=model,
   name={COMPLETE},
   description={Completion of an action.},
-  kind={enum,subtype}
+  kind={enum}
 }
 
 \newglossaryentry{true value}
 {
   type=mtc,
   category=model,
-  name={TRUE},
+  name={true},
   description={The \gls{agent} is functioning in a test mode.},
   kind={enum}
 }
@@ -6600,7 +6593,7 @@
 {
   type=mtc,
   category=model,
-  name={FALSE},
+  name={false},
   description={The \gls{agent} is not functioning in a test mode.},
   kind={enum}
 }
@@ -6968,80 +6961,20 @@
   description={Model of a domain concept.}
 }
 
-\newglossaryentry{part document}
-{
-  type=mtc,
-  category=term,
-  name={Part},
-  description={Each Standard document is referred to as a \gls{part document} of the Standard.}
-}
-
-
 \longnewglossaryentry{asset}
 {
   name= {Asset},
   plural= {Assets}
 }
 {
-  \ulheading{General meaning}:
-
-  Typically referred to as an \gls{mtconnect asset}.
-
-  An \gls{mtconnect asset} is something that is used in the manufacturing process, but is not permanently associated with a single piece of equipment, can be removed from the piece of equipment without compromising its function, and can be associated with other pieces of equipment during its lifecycle.
-
-  \ulheading{Used to identify a storage area in an \gls{agent}}:
-
-  See description of \gls{buffer}.
-
-  \ulheading{Used as an \gls{information model}}:
-
-  Used to describe an \gls{information model} that contains the rules and terminology that describe information that may be included in electronic documents representing \glspl{mtconnect asset}.
-
-  The \glspl{asset information model} defines the structure for the \glspl{asset response document}.
-
-  Individual \glspl{information model} describe the structure of the \glspl{asset document} represent each type of \gls{mtconnect asset}. Appears in the documents in the following form: \glspl{asset information model} or (asset type) \gls{information model}.
+  item, thing or entity that has potential or actual value to an organization \textit{Ref:ISO 55000:2014(en)}
   
-  \ulheading{Used when referring to an \gls{mtconnect asset}}:
-
-  Refers to the information related to an \gls{mtconnect asset} or a group of \glspl{mtconnect asset}.
-
-  Appears in the documents in the following form: \gls{asset} or \glspl{asset}.
-
-  \ulheading{Used as an XML container or element}:
-
-  \begin{itemize}
-      \item When used as an XML container that consists of one or more types of \gls{asset mtconnectassets} XML elements.
-      
-      Appears in the documents in the following form: \glspl{asset mtconnectassets}.
-      
-      \item When used as an abstract XML element. It is replaced in the XML document by types of \gls{asset mtconnectassets} elements representing individual \gls{asset} entities.
-      
-      Appears in the documents in the following form: \gls{asset mtconnectassets}.
-  \end{itemize}
-
-  \ulheading{Used to describe information stored in an \gls{agent}}:
-
-  Identifies an electronic document published by a data source and stored in the \glspl{asset buffer} of an \gls{agent}.
+  \begin{note}
+  Note 1 to entry: Value can be tangible or intangible, financial or non-financial, and includes consideration of risks and liabilities. It can be positive or negative at different stages of the asset life.
+  \newline Note 2 to entry: Physical assets usually refer to equipment, inventory and properties owned by the organization. Physical assets are the opposite of intangible assets, which are non-physical assets such as leases, brands, digital assets, use rights, licences, intellectual property rights, reputation or agreements.
+  \newline Note 3 to entry: A grouping of assets referred to as an asset system could also be considered as an asset.
   
-  Appears in the documents in the following form: \gls{asset document}.
-  
-  \ulheading{Used as an XML representation of an \gls{mtconnect response document}}:
-
-  Identifies an electronic document encoded in XML and published by an \gls{agent} in response to a \gls{request} for information from a client software application relating to \glspl{mtconnect asset}.
-
-  Appears in the documents in the following form: \gls{mtconnectassets}.
-
-  \ulheading{Used as an \gls{mtconnect request}}:
-
-  Represents a specific type of communications request between a client software application and an \gls{agent} regarding \glspl{mtconnect asset}.
-
-  Appears in the documents in the following form: \gls{asset request}.
-
-  \ulheading{Used as part of an \gls{http request}}:
-
-  Used in the path portion of an \gls{http request line}, by a client software application, to initiate an \gls{asset request} to an \gls{agent} to publish an \gls{mtconnectassets} document.
-
-  Appears in the documents in the following form: \gls{asset httprequest}.
+  \end{note}
 }
 
 
@@ -7188,33 +7121,7 @@
   name={Condition}
 }
 {
-	\ulheading{General meaning}:
-
-	An indicator of the health of a piece of equipment or a \gls{component term} and its ability to function.
-
-	\ulheading{Used as a modeling element}:
-
-	A data modeling element used to organize and communicate information relative to the health of a piece of equipment or \gls{component term}.
-
-	Appears in the documents in the following form: \gls{condition term}.
-
-	\ulheading{Used in \glspl{information model}}:
-
-	An XML element used to represent \gls{condition term} elements.
-
-    \begin{itemize}
-	\item When used as an XML container to organize \gls{lower level} \gls{condition} elements.
-
-	Appears in the documents in the following form: \gls{conditions}.
-
-	\item When used as a \gls{lower level} element, the form \gls{condition} is an abstract type XML element.  This \gls{lower level} element is a \gls{data entity}.  \gls{condition} is replaced in a data model by type of \gls{condition term} element.
-
-	Appears in the documents in the following form: \gls{condition}.
-	\end{itemize}
-
-	\begin{note}
-	Note: The form \gls{condition} is used to represent both above uses.
-	\end{note}
+	An indicator of the ability of a piece of equipment or \gls{component term} to function to specification.
 }
 
 
@@ -7227,39 +7134,6 @@
 	A restricted set of values that may be published as the \gls{valid data value} for a \gls{data entity}.
 
 	Appears in the documents in the following form: \gls{controlled vocabulary}.
-}
-
-
-\longnewglossaryentry{current term}
-{
-  name={Current}
-}
-{
-	\ulheading{General meaning}:
-
-	Meaning 1:  A term describing the most recent occurrence of something.
-
-	Meaning 2:  A term used to describe movement; e.g. electric current or air current.
-
-	Appears in the documents in the following form: current
-
-	\ulheading{Used in reference to an \gls{agent}}:
-
-	A reference to the most recent information available to an \gls{agent}.
-
-	Appears in the documents in the following form: current.
-
-	\ulheading{Used as an \gls{mtconnect request}}:
-
-	A specific type of communications request between a client software application and an \gls{agent} regarding \gls{streaming data}.  
-
-	Appears in the documents in the following form: \gls{current request}.
-
-	\ulheading{Used as part of an \gls{http request}}:
-
-	Used in the path portion of an \gls{http request line}, by a client software application, to initiate a \gls{current request} to an \gls{agent} to publish an \gls{mtconnectstreams} document.
-
-	Appears in the documents in the following form: \gls{current httprequest}.
 }
 
 
@@ -7367,72 +7241,19 @@
 }
 
 
-\longnewglossaryentry{device term}
+\longnewglossaryentry{mtconnect device}
 {
-  name={Device}
+  name={MTConnect Device}
 }
 {
-	A part of an information model representing a piece of equipment.  
-	
-	\ulheading{Used in an XML representation of a \gls{response document}}:
-
-    \begin{itemize}
-	\item When used as an XML container to organize \gls{device} elements.
-
-	Appears in the documents in the following form: \gls{devices}.
-
-	\item When used as an XML container to represent a specific piece of equipment and is composed of a set of \glspl{structural element} that organize and provide relevance to data published from that piece of equipment.
-
-	Appears in the documents in the following form: \gls{device}.
-	\end{itemize}
+	An \gls{mtconnect device} is a piece of equipment or a manufacturing system that produces \glspl{observation} about itself and/or publishes data using the \gls{mtconnect information model}.
 }
 
-
-\newglossaryentry{mtconnect document}
-{
-  name={MTConnect Document},
-  description={See \gls{document}.}
-}
 
 \newglossaryentry{mtconnect xml document}
 {
   name={MTConnect XML Document},
-  description={See \gls{document}.}
-}
-
-
-\longnewglossaryentry{document}
-{
-  name={Document}
-}
-{
-	\ulheading{General meaning}:
-
-	A piece of written, printed, or electronic matter that provides information.
-
-	\ulheading{Used to represent an \gls{mtconnect document}}:
-
-	Refers to printed or electronic document(s) that represent a \gls{part document}(s) of the MTConnect Standard.
-
-	Appears in the documents in the following form: \gls{mtconnect document}.
-
-	\ulheading{Used to represent a specific representation of an \gls{mtconnect document}}:
-
-	Refers to electronic document(s) associated with an \gls{agent} that are encoded using XML; \glspl{response document} or \glspl{asset document}.
-
-	Appears in the documents in the following form: \gls{mtconnect xml document}.
-
-	\ulheading{Used to describe types of information stored in an \gls{agent}}:
-
-	In an implementation, the electronic documents that are published from a data source and stored by an \gls{agent}.
-
-	Appears in the documents in the following form: \gls{asset document}.
-
-	\ulheading{Used to describe information published by an \gls{agent}}:
-
-	A document published by an \gls{agent} based upon one of the \glspl{semantic data model} defined in the MTConnect Standard in response to a request from a client.  
-
-	Appears in the documents in the following form: \gls{response document}.
+  description={See \gls{response document}.}
 }
 
 
@@ -7523,44 +7344,6 @@
 	The rules and terminology that describes the \gls{response document} returned by an \gls{agent} when it encounters an error while interpreting a \gls{request} for information from a client software application or when an \gls{agent} experiences an error while publishing the \gls{response} to a \gls{request} for information.
 
 	Appears in the documents in the following form: \gls{error information model}.
-}
-
-
-\longnewglossaryentry{event term}
-{
-  name={Event},
-  plural={Events}
-}
-{
-	\ulheading{General meaning}:
-
-	The occurrence of something that happens or takes place.
-
-	Appears in the documents in the following form: event.
-
-	\ulheading{Used as a type of \gls{data entity}}:
-
-	An identification that represents a change in state of information associated with a piece of equipment or an occurrence of an action.  Event also provides a means to publish a message from a piece of equipment.
-
-	Appears in the documents in the following form: \gls{event term}.
-
-	\ulheading{Used as a \gls{category} attribute for a \gls{data entity}}:
-
-	Used as a value for the \gls{category} attribute for an XML \gls{dataitem} element.
-
-	Appears in the documents in the following form: \gls{event category}.
-
-	\ulheading{Used as an XML container or element}:
-
-    \begin{itemize}
-	\item When used as an XML container that consists of one or more types of \gls{event} XML elements.
-
-	Appears in the documents in the following form: \gls{events}.
-
-	\item When used as an abstract XML element.  It is replaced in the XML document by types of \gls{event} elements.
-
-	Appears in the documents in the following form: \gls{event}.
-    \end{itemize}
 }
 
 
@@ -7746,8 +7529,6 @@
 
 \newglossaryentry{mtconnect information model}
 {
-  type=mtc,
-  category=term,
   name={MTConnect Information Model},
   description={See \gls{information model}}
 }
@@ -7769,9 +7550,7 @@
   name={Interaction Model}
 }
 {
-	The definition of information exchanged to support the interactions between pieces of equipment collaborating to complete a task.
-
-	Appears in the documents in the following form: \gls{interaction model}.
+	Defines how information is exchanged across an \gls{interface} between independent systems.
 }
 
 
@@ -7781,27 +7560,15 @@
   plural={Interfaces}
 }
 {
-	\ulheading{General meaning}:
+	The means by which communication is achieved between independent systems.
+}
 
-	The exchange of information between pieces of equipment and/or software systems.
-
-	Appears in the documents in the following form: interface.
-
-	\ulheading{Used as an \gls{interaction model}}:
-
-	An \gls{interaction model} that describes a method for inter-operations between pieces of equipment.
-
-	Appears in the documents in the following form: \gls{interface}.
-
-	\ulheading{Used as an XML container or element}:
-
-	\tab - When used as an XML container that consists of one or more types of \gls{interface component} XML elements.
-
-	Appears in the documents in the following form: \gls{interfaces component}.
-
-	\tab - When used as an abstract XML element.  It is replaced in the XML document by types of \gls{interface component} elements.
-
-	Appears in the documents in the following form: \gls{interface component}
+\longnewglossaryentry{mtconnect interface}
+{
+  name={MTConnect Interface}
+}
+{
+	An \gls{interaction model} for interoperability between pieces of equipment.
 }
 
 
@@ -7810,29 +7577,15 @@
   name={Message}
 }
 {
-	\ulheading{General meaning}:
+	A communication in writing, in speech, or by signals.
+}
 
-	The content of a communication process.
-
-	Appears in the documents in the following form: message.
-
-	\ulheading{Used relative to an \gls{agent}}:
-
-	Describes the information that is exchanged between an \gls{agent} and a client software application.  A \gls{message term} may contain either a \gls{request} from a client software application or a \gls{response} from an \gls{agent}.
-
-	Appears in the documents in the following form: \gls{message term}.
-
-	\ulheading{Used as a type of \gls{data entity}}:
-
-	Describes a type of \gls{data entity} in the \glspl{device information model} that can contain any text string of information or native code to be transferred from a piece of equipment.
-
-	Appears in the documents in the following form: \gls{message event}.
-
-	\ulheading{Used as an Element Name}:
-
-	An \gls{element name} for a \gls{data entity} in the \gls{streams information model} that can contain any text string of information or native code to be transferred from a piece of equipment.
-
-	Appears in the documents in the following form:  \glselementname{message event}.
+\longnewglossaryentry{http message}
+{
+  name={HTTP Message}
+}
+{
+	An \gls{http message} consists of requests from client to server and responses from server to client. \textit{Ref:IETF:RFC-2616}
 }
 
 
@@ -7879,9 +7632,7 @@
   name={MTConnectAssets Response Document}
 }
 {
-	An electronic document published by an \gls{agent} in response to a \gls{request} for information from a client software application relating to \glspl{mtconnect asset}.
-
-	Appears in the documents in the following form: \gls{mtconnectassets response document}.
+	A \gls{response document} published by an \gls{mtconnect agent} in response to a \gls{asset request}.
 }
 
 
@@ -7890,9 +7641,7 @@
   name={MTConnectDevices Response Document}
 }
 {
-	An electronic document published by an \gls{agent} in response to a \gls{request} for information from a client software application that includes \gls{metadata} for one or more pieces of equipment.
-
-	Appears in the documents in the following form: \gls{mtconnectdevices response document}.
+	A \gls{response document} published by an \gls{mtconnect agent} in response to a \gls{probe request}.
 }
 
 
@@ -7923,9 +7672,7 @@
   name={MTConnectStreams Response Document}
 }
 {
-	An electronic document published by an \gls{agent} in response to a \gls{request} for information from a client software application that includes \gls{streaming data} from the \gls{agent}.
-
-	Appears in the documents in the following form: \gls{mtconnectstreams response document}.
+	A \gls{response document} published by an \gls{mtconnect agent} in response to a \gls{current request} or a \gls{sample request}.
 }
 
 
@@ -7986,41 +7733,7 @@
   name={Probe}
 }
 {
-	\ulheading{General meaning of a physical entity}:
-
 	An instrument commonly used for measuring the physical geometrical characteristics of an object.
-
-    \begin{itemize}
-	\item \ulheading{Used to describe a measurement device}:
-
-	The form probe is used to define a measurement device that provides position information.
-
-	Appears in the documents in the following form: probe. 
-
-	\item \ulheading{Used within a \gls{data entity}}:
-
-	The form \gls{probe subtype} is used to designate a subtype for the \gls{data entity} \gls{pathposition sample} indicating a measurement position relating to a probe unit.
-
-	Appears in the documents in the following form: \gls{probe subtype}.
-    \end{itemize}
-
-	\ulheading{General meaning for communications with an \gls{agent}}:
-
-	Probe is used to define a type of communication request. 
-
-    \begin{itemize}
-	\item \ulheading{Used as a type of communication request}:
-
-	The form \gls{probe request} represents a specific type of communications request between a client software application and an \gls{agent} regarding \gls{metadata} for one or more pieces of equipment.
-
-	Appears in the documents in the following form: \gls{probe request}.
-
-	\item \ulheading{Used in an \gls{http request line}}:
-
-	The form \gls{probe httprequest} is used to designate a \gls{probe request} in the \cfont{<Path>} portion of an \gls{http request line}.
-
-	Appears in the documents in the following form: \gls{probe httprequest}.
-    \end{itemize}
 }
 
 
@@ -8129,7 +7842,7 @@
   name={Response Document}
 }
 {
-	See \gls{document}.
+	An electronic document published by an \gls{mtconnect agent} in response to a \gls{probe request}, \gls{current request}, \gls{sample request} or \gls{asset request}.
 }
 
 \newglossaryentry{mtconnect response document}
@@ -8554,11 +8267,9 @@
   name={\normalfont W3C}
 }
 {
-	Stands for World Wide Web Consortium.
-
-	W3C is an international community of organizations and the public work together to develop internet standards.  
-
-	W3C Standards are used as a guide within the MTConnect Standard.
+	The World Wide Web Consortium (W3C) is an international community that develops open standards to ensure the long-term growth of the Web. 
+	
+	See \textit{https://www.w3.org/}.
 }
 
 
@@ -10059,6 +9770,11 @@
   description={A quality, property, or characteristic that can be observed.}
 }
 
+\newglossaryentry{observations information model}
+{
+  name={Observations Information Model},
+  description={An \gls{information model} that describes the \gls{streaming data} reported by a piece of equipment.}
+}
 
 \newglossaryentry{coordinatesystem new}
 {
@@ -10287,4 +10003,1705 @@
   units=\cfont{\gls{percent}},
   kind={sample,type},
   subtype={\gls{actual subtype}, \gls{commanded subtype}}
+}
+
+\newglossaryentry{force}
+{
+  name={Force},
+  description={A push or pull on a mass which results in an acceleration.},
+  plural={Forces}
+}
+
+\newglossaryentry{process}
+{
+  type=mtc,
+  category=model,
+  name={Process},
+  kind={component},
+  description={\gls{process} \glspl{organize} information describing the manufacturing process being executed on a piece of equipment.}
+}
+
+\newglossaryentry{current}
+{
+  name={current},
+  description={occurring in or existing at the present time.}
+}
+
+\newglossaryentry{electric current}
+{
+  name={electric current},
+  description={The rate of flow of electric charge.}
+}
+
+\newglossaryentry{document}
+{
+  name={Document},
+  description={A piece of written, printed, or electronic matter that provides information or evidence that serves as an official record.}
+}
+
+\newglossaryentry{mtconnect document}
+{
+  name={MTConnect Document},
+  description={Printed or electronic document(s) that represent a Part(s) of the MTConnect Standard.}
+}
+
+\newglossaryentry{mtconnect event}
+{
+  name={MTConnect Event},
+  description={An \gls{mtconnect event} is an \gls{observation} of either a state or discrete value of the \gls{component term}. \gls{component term} states \SHOULD have a controlled vocabulary.}
+}
+
+
+\newglossaryentry{heating}
+{
+  type=mtc,
+  category=model,
+  name={Heating},
+  kind={systems,component},
+  description={\gls{heating} is a system used to deliver controlled amounts of heat to achieve a target temperature at a specified heating rate.}
+}
+
+\newglossaryentry{cooling}
+{
+  type=mtc,
+  category=model,
+  name={Cooling},
+  kind={systems,component},
+  description={\gls{Cooling} is a system used to to extract controlled amounts of heat to achieve a target temperature at a specified cooling rate.}
+}
+
+\newglossaryentry{coolingtower}
+{
+  type=mtc,
+  category=model,
+  name={COOLING\_TOWER},
+  elementname=\cfont{CoolingTower},
+  kind={composition},
+  description={A heat exchange system that uses a fluid to transfer heat to the atmosphere.}
+}
+
+\newglossaryentry{vacuum}
+{
+  type=mtc,
+  category=model,
+  name={Vacuum},
+  kind={systems,component},
+  description={\gls{vacuum} is a system that evacuates gases and liquids from an enclosed and sealed space to a controlled negative pressure or a molecular density below the prevailing atmospheric level.}
+}
+
+\newglossaryentry{pressure}
+{
+  type=mtc,
+  category=model,
+  name={Pressure},
+  kind={systems,component},
+  description={\gls{pressure} is a system that delivers compressed gas or fluid and controls the pressure and rate of pressure change to a desired target set-point.}
+}
+
+\newglossaryentry{rateofpressurization sample}
+{
+  type=mtc,
+  category=model,
+  name={RATE\_OF\_PRESSURIZATION},
+  elementname=\cfont{RateOfPressurization},
+  kind={sample,type},
+  description={The change of pressure per unit time.},
+  units=\cfont{\gls{pascalpersecond}}
+}
+
+\newglossaryentry{pascalpersecond}
+{
+  type=mtc,
+  category=model,
+  name={PASCAL/SECOND},
+  description={Pascal per second.},
+  kind={units}
+}
+
+\newglossaryentry{pascalperminute}
+{
+  type=mtc,
+  category=model,
+  name={PASCAL/MINUTE},
+  description={Pascal per minute.},
+  kind={nativeunits}
+}
+
+\newglossaryentry{bar}
+{
+  type=mtc,
+  category=model,
+  name={BAR},
+  description={Pressure in Bar.},
+  kind={nativeunits}
+}
+
+\newglossaryentry{torr}
+{
+  type=mtc,
+  category=model,
+  name={TORR},
+  description={Pressure in Torr.},
+  kind={nativeunits}
+}
+
+\newglossaryentry{millimetermercury}
+{
+  type=mtc,
+  category=model,
+  name={MILLIMETER\_MERCURY},
+  description={Pressure in Millimeter of Mercury (mmHg).},
+  kind={nativeunits}
+}
+
+\newglossaryentry{sensor data}
+{
+  name={Sensor Data},
+  description={The value of a physical quantity reported by a measuring instrument or controller as an \gls{observation}.}
+}
+
+\newglossaryentry{sensor configuration}
+{
+  name={Sensor Configuration},
+  description={Data in the \gls{mtconnectdevices response document} that provides the information required for maintenance and support of the \gls{sensor unit}.}
+}
+
+\newglossaryentry{attachment}
+{
+  name={Attachment},
+  description={The connection by which one thing is associated with another.}
+}
+
+\newglossaryentry{sensorattachment event}
+{
+  type=mtc,
+  category=model,
+  name={SENSOR\_ATTACHMENT},
+  elementname=\cfont{SensorAttachment},
+  kind={event,type},
+  description={A \glselementname{sensorattachment event} is an \gls{event} defining an \gls{attachment} between a sensor and an entity.}
+}
+
+
+\newglossaryentry{sensorid key}
+{
+  type=mtc,
+  category=model,
+  name={SENSOR\_ID},
+  kind={key},
+  description={The identity of a sensor used to observe some measurement of an item.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{keytype}
+{
+  type=mtc,
+  category=model,
+  name={keyType},
+  description={The \cfont{DataItem} \cfont{type} that defines the meaning of the \cfont{key term}.},
+  kind={attribute}
+}
+
+\newglossaryentry{gauge subtype}
+{
+  type=mtc,
+  category=model,
+  name={GAUGE},
+  description={Gauge pressure is the pressure measured relative to the atmospheric pressure.},
+  kind={subtype}
+}
+
+\newglossaryentry{agent device}
+{
+  type=mtc,
+  category=model,
+  name={Agent},
+  description={\gls{agent device} is a \gls{device} representing the \gls{mtconnect agent} and all its connected data sources.},
+  kind={element,device}
+}
+
+
+\newglossaryentry{adapters}
+{
+  type=mtc,
+  category=model,
+  name={Adapters},
+  description={\gls{adapters} is a \gls{component} that \glspl{organize} \gls{adapter component} \gls{component}s representing the connectivity state of the \gls{mtconnect agent}.},
+  elements={\gls{adapter component}},
+  kind={element}
+}
+
+\newglossaryentry{adapter component}
+{
+  type=mtc,
+  category=model,
+  name={Adapter},
+  description={\gls{adapter component} is a \gls{component} representing the connectivity state of a data source for the \gls{mtconnect agent}. It \MAY contain additional telemetry about the data source and source-specific information.},
+  kind={element,component}
+}
+
+\newglossaryentry{deviceadded event}
+{
+  type=mtc,
+  category=model,
+  name={DEVICE\_ADDED},
+  elementname=\cfont{DeviceAdded},
+  kind={event,type},
+  description={\glselementname{deviceadded event} is an \gls{event} that provides the \gls{uuid term} of new device added to an \gls{mtconnect agent}.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{deviceremoved event}
+{
+  type=mtc,
+  category=model,
+  name={DEVICE\_REMOVED},
+  elementname=\cfont{DeviceRemoved},
+  kind={event,type},
+  description={\glselementname{deviceremoved event} is an \gls{event} that provides the \gls{uuid term} of a device removed from an \gls{mtconnect agent}.},
+  facet={\gls{string}}
+}
+
+
+\newglossaryentry{devicechanged event}
+{
+  type=mtc,
+  category=model,
+  name={DEVICE\_CHANGED},
+  elementname=\cfont{DeviceChanged},
+  kind={event,type},
+  description={\glselementname{devicechanged event} is an \gls{event} that provides the \gls{uuid term} of the device whose \gls{metadata} has changed.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{connectionstatus event}
+{
+  type=mtc,
+  category=model,
+  name={CONNECTION\_STATUS},
+  elementname=\cfont{ConnectionStatus},
+  description={The status of the connection between an \gls{adapter} and an \gls{agent}.},
+  kind={type,event},
+  facet={\gls{string}},
+  enumeration={\gls{closed value},\gls{listen value},\gls{established value}}
+}
+
+\newglossaryentry{listen value}
+{
+  type=mtc,
+  category=model,
+  name={LISTEN},
+  description={represents the \gls{agent} waiting for a connection request from an \gls{adapter}.},
+  kind={enum}
+}
+
+\newglossaryentry{established value}
+{
+  type=mtc,
+  category=model,
+  name={ESTABLISHED},
+  description={represents an open connection. The normal state for the data transfer phase of the connection.},
+  kind={enum}
+}
+
+\newglossaryentry{adaptersoftwareversion event}
+{
+  type=mtc,
+  category=model,
+  name={ADAPTER\_SOFTWARE\_VERSION},
+  elementname=\cfont{AdapterSoftwareVersion},
+  kind={event,type},
+  description={The originator's software version of the \gls{adapter}.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{adapteruri event}
+{
+  type=mtc,
+  category=model,
+  name={ADAPTER\_URI},
+  elementname=\cfont{AdapterURI},
+  kind={event,type},
+  description={The \gls{uri} of the \gls{adapter}.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{observationupdaterate sample}
+{
+  type=mtc,
+  category=model,
+  name={OBSERVATION\_UPDATE\_RATE},
+  elementname=\cfont{ObservationUpdateRate},
+  kind={sample,type},
+  description={The average rate of change of values for data items in the MTConnect streams. The average is computed over a rolling window defined by the implementation.},
+  units={\gls{countpersecond}}
+}
+
+\newglossaryentry{assetupdaterate sample}
+{
+  type=mtc,
+  category=model,
+  name={ASSET\_UPDATE\_RATE},
+  elementname=\cfont{AssetUpdateRate},
+  kind={sample,type},
+  description={The average rate of change of values for assets in the MTConnect streams. The average is computed over a rolling window defined by the implementation.},
+  units={\gls{countpersecond}}
+}
+
+\newglossaryentry{countpersecond}
+{
+  type=mtc,
+  category=model,
+  name={COUNT/SECOND},
+  description={Count per second.},
+  kind={units}
+}
+
+\newglossaryentry{mtconnectversion event}
+{
+  type=mtc,
+  category=model,
+  name={MTCONNECT\_VERSION},
+  elementname=\cfont{MTConnectVersion},
+  kind={event,type},
+  description={The reference version of the MTConnect Standard supported by the \gls{adapter}.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{devicemodelchangetime}
+{
+  type=mtc,
+  category=model,
+  name={deviceModelChangeTime},
+  kind={attribute},
+  description={A timestamp in 8601 format of the last update of the \gls{device} information for any device.}
+}
+
+\newglossaryentry{to}
+{
+  type=mtc,
+  category=model,
+  name={to},
+  kind={attribute},
+  description={The \gls{to} parameter specifies the \gls{sequence number} of the \gls{observation} in the \gls{buffer} that will be the upper bound of the \glspl{observation} in the \gls{response document}.}
+}
+
+\newglossaryentry{mtconnectversion}
+{
+  type=mtc,
+  category=model,
+  name={mtconnectVersion},
+  kind={attribute},
+  description={The MTConnect version of the \gls{device information model} used to configure the information to be published for a piece of equipment in an \gls{mtconnect response document}.}
+}
+
+
+\newglossaryentry{dataitemrelationship}
+{
+  type=mtc,
+  category=model,
+  name={DataItemRelationship},
+  description={A \cfont{Relationship} providing a semantic reference to another \gls{dataitem} described by the \gls{type} property.},
+  kind={relationship}
+}
+
+\newglossaryentry{specificationrelationship}
+{
+  type=mtc,
+  category=model,
+  name={SpecificationRelationship},
+  description={A \cfont{Relationship} providing a semantic reference to a \gls{specification} described by the \gls{type} and \gls{idref} property.},
+  kind={relationship}
+}
+
+\newglossaryentry{attachment type}
+{
+  type=mtc,
+  category=model,
+  name={ATTACHMENT},
+  description={A reference to a \gls{dataitem} that associates the values with an external entity.}
+}
+
+\newglossaryentry{coordinatesystem type}
+{
+  type=mtc,
+  category=model,
+  name={COORDINATE\_SYSTEM},
+  description={The referenced \gls{dataitem} provides the \gls{id} of the effective Coordinate System.}
+}
+
+\newglossaryentry{limit type}
+{
+  type=mtc,
+  category=model,
+  name={LIMIT},
+  description={The referenced element provides process limits.}
+}
+
+\newglossaryentry{observation type}
+{
+  type=mtc,
+  category=model,
+  name={OBSERVATION},
+  description={The referenced \gls{dataitem} provides the observed values.}
+}
+
+\newglossaryentry{deceleration sample}
+{
+  type=mtc,
+  category=model,
+  name={DECELERATION},
+  elementname=\cfont{Deceleration},
+  description={Negative rate of change of velocity.},
+  units=\cfont{\gls{millimeterpersecondsquared}},
+  kind={type,sample}
+}
+
+\newglossaryentry{angulardeceleration sample}
+{
+  type=mtc,
+  category=model,
+  name={ANGULAR\_DECELERATION},
+  elementname=\cfont{AngularDeceleration},
+  description={Negative rate of change of angular velocity.},
+  units=\cfont{\gls{degreepersecondsquared}},
+  kind={type,sample}
+}
+
+\newglossaryentry{turret}
+{
+  type=mtc,
+  category=model,
+  name={turret},
+  kind={attribute},
+  description={The turret associated with a tool.}
+}
+
+\newglossaryentry{toolmagazine}
+{
+  type=mtc,
+  category=model,
+  name={toolMagazine},
+  kind={attribute},
+  description={The tool magazine associated with a tool.}
+}
+
+
+\newglossaryentry{toolbar}
+{
+  type=mtc,
+  category=model,
+  name={toolBar},
+  kind={attribute},
+  description={The tool bar associated with a tool.}
+}
+
+\newglossaryentry{toolrack}
+{
+  type=mtc,
+  category=model,
+  name={toolRack},
+  kind={attribute},
+  description={The tool rack associated with a tool.}
+}
+
+\newglossaryentry{automatictoolchanger}
+{
+  type=mtc,
+  category=model,
+  name={automaticToolChanger},
+  kind={attribute},
+  description={The automatic tool changer associated with a tool.}
+}
+
+\newglossaryentry{transferpot type}
+{
+  type=mtc,
+  category=model,
+  name={TRANSFER\_POT},
+  description={A location for a tool awaiting transfer from a tool magazine to spindle or a turret.}
+}
+
+\newglossaryentry{returnpot type}
+{
+  type=mtc,
+  category=model,
+  name={RETURN\_POT},
+  description={A location for a tool removed from a \gls{spindle} or turret and awaiting return to a tool magazine.}
+}
+
+\newglossaryentry{stagingpot type}
+{
+  type=mtc,
+  category=model,
+  name={STAGING\_POT},
+  description={A location for a tool awaiting transfer to a tool magazine or turret from outside of the piece of equipment.}
+}
+
+\newglossaryentry{removalpot type}
+{
+  type=mtc,
+  category=model,
+  name={REMOVAL\_POT},
+  description={A location for a tool removed from a tool magazine or turret awaiting transfer to a location outside of the piece of equipment.}
+}
+
+\newglossaryentry{expiredpot type}
+{
+  type=mtc,
+  category=model,
+  name={EXPIRED\_POT},
+  description={A location for a tool that is no longer useable and is awaiting removal from a tool magazine or turret.}
+}
+
+\newglossaryentry{endeffector type}
+{
+  type=mtc,
+  category=model,
+  name={END\_EFFECTOR},
+  description={A location associated with an end effector.}
+}
+
+\newglossaryentry{spindle}
+{
+  name={Spindle},
+  description={A mechanism that provides rotational capabilities to a piece of equipment. 
+  \newline Typically used for either work holding, materials or cutting tools.}
+}
+
+\newglossaryentry{automatictoolchanger component}
+{
+  type=mtc,
+  category=model,
+  name={AutomaticToolChanger},
+  description={A tool delivery mechanism that moves tools between a \gls{toolmagazine component} and a \gls{spindle} or a \gls{turret component}. An \gls{automatictoolchanger component} may also transfer tools between a location outside of a piece of equipment and a \gls{toolmagazine component} or \gls{turret component}.},
+  kind={component,toolingdelivery}
+}
+
+\newglossaryentry{toolmagazine component}
+{
+  type=mtc,
+  category=model,
+  name={ToolMagazine},
+  description={A tool storage mechanism that holds any number of tools. Tools are located in \gls{pot composition}s. \gls{pot composition}s are moved into position to transfer tools into or out of the \gls{toolmagazine component} by an \gls{automatictoolchanger component}.},
+  kind={component,toolingdelivery}
+}
+
+\newglossaryentry{turret component}
+{
+  type=mtc,
+  category=model,
+  name={Turret},
+  description={A tool mounting mechanism that holds any number of tools. Tools are located in \gls{station composition}s . Tools are positioned for use in the manufacturing process by rotating the \gls{turret component}.},
+  kind={component,toolingdelivery}
+}
+
+\newglossaryentry{gangtoolbar component}
+{
+  type=mtc,
+  category=model,
+  name={GangToolBar},
+  description={A tool mounting mechanism that holds any number of tools. Tools are located in \gls{station composition}s. Tools are positioned for use in the manufacturing process by linearly positioning the \gls{gangtoolbar component}.},
+  kind={component,toolingdelivery}
+}
+
+\newglossaryentry{toolrack component}
+{
+  type=mtc,
+  category=model,
+  name={ToolRack},
+  description={A linear or matrixed tool storage mechanism that holds any number of tools. Tools are located in \gls{station composition}s.},
+  kind={component,toolingdelivery}
+}
+
+\newglossaryentry{pot composition}
+{
+  type=mtc,
+  category=model,
+  name={POT},
+  description={A tool storage location associated with a \gls{toolmagazine component} or \gls{automatictoolchanger component}.},
+  kind={composition}
+}
+
+\newglossaryentry{station composition}
+{
+  type=mtc,
+  category=model,
+  name={STATION},
+  description={A storage or mounting location for a tool associated with a \gls{turret component}, \gls{gangtoolbar component}, or \gls{toolrack component}.},
+  kind={composition}
+}
+
+\newglossaryentry{transferarm composition}
+{
+  type=mtc,
+  category=model,
+  name={TRANSFER\_ARM},
+  description={A mechanism for physically moving a tool from one location to another.},
+  kind={composition}
+}
+
+\newglossaryentry{transferpot composition}
+{
+  type=mtc,
+  category=model,
+  name={TRANSFER\_POT},
+  description={A \gls{pot composition} for a tool awaiting transfer from a \gls{toolmagazine component} to \gls{spindle} or \gls{turret component}.},
+  kind={composition}
+}
+
+\newglossaryentry{returnpot composition}
+{
+  type=mtc,
+  category=model,
+  name={RETURN\_POT},
+  description={A \gls{pot composition} for a tool removed from \gls{spindle} or \gls{turret component} and awaiting for return to a \gls{toolmagazine component}.},
+  kind={composition}
+}
+
+\newglossaryentry{stagingpot composition}
+{
+  type=mtc,
+  category=model,
+  name={STAGING\_POT},
+  description={A \gls{pot composition} for a tool awaiting transfer to a \gls{toolmagazine component} or \gls{turret component} from outside of the piece of equipment.},
+  kind={composition}
+}
+
+\newglossaryentry{removalpot composition}
+{
+  type=mtc,
+  category=model,
+  name={REMOVAL\_POT},
+  description={A \gls{pot composition} for a tool to be removed from a \gls{toolmagazine component} or \gls{turret component} to a location outside of the piece of equipment.},
+  kind={composition}
+}
+
+\newglossaryentry{expiredpot composition}
+{
+  type=mtc,
+  category=model,
+  name={EXPIRED\_POT},
+  description={A \gls{pot composition} for a tool that is no longer useable for removal from a \gls{toolmagazine component} or \gls{turret component}.},
+  kind={composition}
+}
+
+\newglossaryentry{upperlimit key}
+{
+  type=mtc,
+  category=model,
+  name={UPPER\_LIMIT},
+  description={\glsdesc{upper limit term}},
+  kind={key}
+}
+
+\newglossaryentry{lowerlimit key}
+{
+  type=mtc,
+  category=model,
+  name={LOWER\_LIMIT},
+  description={\glsdesc{lower limit term}},
+  kind={key}
+}
+
+\newglossaryentry{nominal key}
+{
+  type=mtc,
+  category=model,
+  name={NOMINAL},
+  description={\glsdesc{nominal term}},
+  kind={key}
+}
+
+\newglossaryentry{upperwarning key}
+{
+  type=mtc,
+  category=model,
+  name={UPPER\_WARNING},
+  description={\glsdesc{upper warning term}},
+  kind={key}
+}
+
+\newglossaryentry{lowerwarning key}
+{
+  type=mtc,
+  category=model,
+  name={LOWER\_WARNING},
+  description={\glsdesc{lower warning term}},
+  kind={key}
+}
+
+\newglossaryentry{maximum term}
+{
+  name={maximum},
+  description={A numeric upper constraint.}
+}
+
+\newglossaryentry{upper limit term}
+{
+  name={upper limit},
+  description={The upper conformance boundary for a variable.
+  \newline Note: immediate concern or action may be required.}
+}
+
+\newglossaryentry{upper warning term}
+{
+  name={upper warning},
+  description={The upper boundary indicating increased concern and supervision may be required.}
+}
+
+\newglossaryentry{nominal term}
+{
+  name={nominal},
+  description={The ideal or desired value for a variable.}
+}
+
+\newglossaryentry{lower warning term}
+{
+  name={lower warning},
+  description={The lower boundary indicating increased concern and supervision may be required.}
+}
+
+\newglossaryentry{lower limit term}
+{
+  name={lower limit},
+  description={The lower conformance boundary for a variable.
+  \newline \begin{note}
+  Note: immediate concern or action may be required.
+  \end{note}}
+}
+
+\newglossaryentry{minimum term}
+{
+  name={minimum},
+  description={A numeric lower constraint.}
+}
+
+\newglossaryentry{control limits term}
+{
+  name={control limits},
+  description={A set of limits used to indicate whether a process variable is stable and in control.}
+}
+
+\newglossaryentry{specification limits term}
+{
+  name={specification limits},
+  description={A set of limits defining a range of values designating acceptable performance for a variable.}
+}
+
+\newglossaryentry{alarm limits term}
+{
+  name={alarm limits},
+  description={A set of limits used to trigger warning or alarm indicators.}
+}
+
+\newglossaryentry{controllimit event}
+{
+  type=mtc,
+  category=model,
+  name={CONTROL\_LIMIT},
+  elementname=\cfont{ControlLimit},
+  kind={event,type},
+  description={\glsdesc{control limits term}},
+  facet={\gls{float}}
+}
+
+\newglossaryentry{specificationlimit event}
+{
+  type=mtc,
+  category=model,
+  name={SPECIFICATION\_LIMIT},
+  elementname=\cfont{SpecificationLimit},
+  kind={event,type},
+  description={\glsdesc{specification limits term}},
+  facet={\gls{float}}
+}
+
+\newglossaryentry{alarmlimit event}
+{
+  type=mtc,
+  category=model,
+  name={ALARM\_LIMIT},
+  elementname=\cfont{AlarmLimit},
+  kind={event,type},
+  description={\glsdesc{alarm limits term}},
+  facet={\gls{float}}
+}
+
+\newglossaryentry{originator}
+{
+  type=mtc,
+  category=model,
+  name={originator},
+  kind={attribute},
+  description={A reference to the creator of the \gls{specification}.}
+}
+
+\newglossaryentry{processspecification}
+{
+  type=mtc,
+  category=model,
+  name={ProcessSpecification},
+  kind={specification},
+  description={\gls{processspecification} provides information used to assess the conformance of a variable to process requirements.}
+}
+
+\newglossaryentry{partoccurrence}
+{
+  type=mtc,
+  category=model,
+  name={PartOccurrence},
+  kind={process,component},
+  description={\gls{partoccurrence} \glspl{organize} information about a specific part as it exists at a specific place and time, such as a specific instance of a bracket at a specific timestamp.}
+}
+
+\newglossaryentry{part}
+{
+  name={Part},
+  description={\gls{part} is defined as a discrete item that has both defined and measurable physical characteristics including mass, material and features and is created by applying one or more manufacturing process steps to a workpiece.}
+}
+
+\newglossaryentry{partuniqueid event}
+{
+  type=mtc,
+  category=model,
+  name={PART\_UNIQUE\_ID},
+  elementname=\cfont{PartUniqueId},
+  kind={event,type},
+  subtype={\gls{uuid subtype},\gls{serialnumber subtype},\gls{rawmaterial subtype}},
+  description={Identifier given to a distinguishable, individual part. If no \gls{subtype} is specified, \gls{uuid subtype} is default.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{uuid subtype}
+{
+  type= mtc,
+  category=model,
+  name={UUID},
+  kind={subtype},
+  description={The globally unique identifier as specified in ISO 11578 or RFC 4122.}
+}
+
+\newglossaryentry{serialnumber subtype}
+{
+  type= mtc,
+  category=model,
+  name={SERIAL\_NUMBER},
+  kind={subtype},
+  description={A serial number that uniquely identifies a specific part.}
+}
+
+\newglossaryentry{rawmaterial subtype}
+{
+  type= mtc,
+  category=model,
+  name={RAW\_MATERIAL},
+  kind={subtype},
+  description={The unique identifier for a singular piece of material that is used to make a single part.}
+}
+
+
+\newglossaryentry{partkindid event}
+{
+  type=mtc,
+  category=model,
+  name={PART\_KIND\_ID},
+  elementname=\cfont{PartKindId},
+  kind={event,type},
+  subtype={\gls{uuid subtype},\gls{partnumber subtype},\gls{partfamily subtype},\gls{partname subtype}},
+  description={Identifier given to link the individual occurrence to a class of parts, typically distinguished by a particular part design. If no \gls{subtype} is specified, \gls{uuid subtype} is default.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{partnumber subtype}
+{
+  type= mtc,
+  category=model,
+  name={PART\_NUMBER},
+  kind={subtype},
+  description={Identifier of a particular part design or model.}
+}
+
+\newglossaryentry{partfamily subtype}
+{
+  type= mtc,
+  category=model,
+  name={PART\_FAMILY},
+  kind={subtype},
+  description={An identifier given to a group of parts having similarities in geometry, manufacturing process, and/or functions.}
+}
+
+\newglossaryentry{partname subtype}
+{
+  type= mtc,
+  category=model,
+  name={PART\_NAME},
+  kind={subtype},
+  description={A word or set of words by which a part is known, addressed, or referred to.}
+}
+
+\newglossaryentry{partgroupid event}
+{
+  type=mtc,
+  category=model,
+  name={PART\_GROUP\_ID},
+  elementname=\cfont{PartGroupId},
+  kind={event,type},
+  subtype={\gls{uuid subtype},\gls{lot subtype},\gls{batch subtype},\gls{rawmaterial subtype},\gls{heattreat subtype}},
+  description={Identifier given to a collection of individual parts. If no \gls{subtype} is specified, \gls{uuid subtype} is default.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{lot subtype}
+{
+  type= mtc,
+  category=model,
+  name={LOT},
+  kind={subtype},
+  description={An identifier that references a group of parts tracked as a lot.}
+}
+
+\newglossaryentry{batch subtype}
+{
+  type= mtc,
+  category=model,
+  name={BATCH},
+  kind={subtype},
+  description={An identifier that references a group of parts produced in a batch.}
+}
+
+\newglossaryentry{heattreat subtype}
+{
+  type= mtc,
+  category=model,
+  name={HEAT\_TREAT},
+  kind={subtype},
+  description={An identifier used to reference a material heat number.}
+}
+
+\newglossaryentry{processstate event}
+{
+  type=mtc,
+  category=model,
+  name={PROCESS\_STATE},
+  elementname=\cfont{ProcessState},
+  kind={event,type},
+  enumeration={\gls{raw value},\gls{inprocess value},\gls{rework value},\gls{onhold value},\gls{scrap value},\gls{complete value}},
+  description={The condition of the part or process occurrence.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{raw value}
+{
+  type=mtc,
+  category=model,
+  name={RAW},
+  description={This is a raw material process occurrence, prior to active execution or preparation of raw material for processing.},
+  kind={enum}
+}
+
+\newglossaryentry{rework value}
+{
+  type=mtc,
+  category=model,
+  name={REWORK},
+  description={Process occurrence for correcting defective, failed, or non-conforming items after inspection.},
+  kind={enum}
+}
+
+\newglossaryentry{inprocess value}
+{
+  type=mtc,
+  category=model,
+  name={IN\_PROCESS},
+  description={The process occurrence is actively executing.},
+  kind={enum}
+}
+
+\newglossaryentry{onhold value}
+{
+  type=mtc,
+  category=model,
+  name={ON\_HOLD},
+  description={The process occurrence is currently on hold.},
+  kind={enum}
+}
+
+\newglossaryentry{scrap value}
+{
+  type=mtc,
+  category=model,
+  name={SCRAP},
+  description={The target part has been scrapped and no further processes will be executed.},
+  kind={enum}
+}
+
+\newglossaryentry{processkindid event}
+{
+  type=mtc,
+  category=model,
+  name={PROCESS\_KIND\_ID},
+  elementname=\cfont{ProcessKindId},
+  kind={event,type},
+  subtype={\gls{uuid subtype},\gls{processname subtype},\gls{isostepexecutable subtype}},
+  description={Identifier given to link the individual occurrence to a class of processes or process definition.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{processname subtype}
+{
+  type= mtc,
+  category=model,
+  name={PROCESS\_NAME},
+  kind={subtype},
+  description={A word or set of words by which a process being executed (process occurrence) by the device is known, addressed, or referred to.}
+}
+
+\newglossaryentry{isostepexecutable subtype}
+{
+  type= mtc,
+  category=model,
+  name={ISO\_STEP\_EXECUTABLE},
+  kind={subtype},
+  description={A reference to a ISO 10303 Executable.}
+}
+
+\newglossaryentry{processaggregateid event}
+{
+  type=mtc,
+  category=model,
+  name={PROCESS\_AGGREGATE\_ID},
+  elementname=\cfont{ProcessAggregateId},
+  kind={event,type},
+  subtype={\gls{processstep subtype},\gls{processplan subtype},\gls{ordernumber subtype}},
+  description={Identifier given to link the individual occurrence to a group of related occurrences, such as a process step in a process plan.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{processstep subtype}
+{
+  type= mtc,
+  category=model,
+  name={PROCESS\_STEP},
+  kind={subtype},
+  description={Identifier of the step in the process plan that this occurrence corresponds to. Synonyms include "operation id".}
+}
+
+\newglossaryentry{processplan subtype}
+{
+  type= mtc,
+  category=model,
+  name={PROCESS\_PLAN},
+  kind={subtype},
+  description={Identifier of the process plan that this occurrence belongs to. Synonyms include "routing id", "job id".}
+}
+
+\newglossaryentry{ordernumber subtype}
+{
+  type= mtc,
+  category=model,
+  name={ORDER\_NUMBER},
+  kind={subtype},
+  description={Identifier of the authorization of the process occurrence. Synonyms include "job id", "work order".}
+}
+
+\newglossaryentry{processoccurrenceid event}
+{
+  type=mtc,
+  category=model,
+  name={PROCESS\_OCCURRENCE\_ID},
+  elementname=\cfont{ProcessOccurrenceId},
+  kind={event,type},
+  description={An identifier of a process being executed by the device.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{partstatus event}
+{
+  type=mtc,
+  category=model,
+  name={PART\_STATUS},
+  elementname=\cfont{PartStatus},
+  kind={event,type},
+  enumeration={\gls{pass value},\gls{fail value}},
+  description={State or condition of a part.
+  \newline If unique identifier is given, part status is for that individual. If group identifier is given without a unique identifier, then the status is assumed to be for the whole group.},
+  facet={\gls{string}}
+}
+
+\newglossaryentry{pass value}
+{
+  type=mtc,
+  category=model,
+  name={PASS},
+  description={The part does conform to given requirements.},
+  kind={enum}
+}
+
+\newglossaryentry{processoccurrence}
+{
+  type=mtc,
+  category=model,
+  name={ProcessOccurrence},
+  kind={process,component},
+  description={\gls{processoccurrence} \glspl{organize} information about the execution of a specific process that takes place at a specific place and time, such as a specific instance of part-milling occurring at a specific timestamp.}
+}
+
+\newglossaryentry{motion configuration}
+{
+  type=mtc,
+  category=model,
+  name={Motion},
+  kind={configuration},
+  description={\gls{motion configuration} defines the movement of the \gls{component} relative to a coordinate system. \gls{motion configuration} specifies the kinematic chain of the \gls{component}s.}
+}
+
+\newglossaryentry{actuation}
+{
+  type=mtc,
+  category=model,
+  name={actuation},
+  kind={attribute},
+  description={Describes if this \gls{component} is actuated directly or indirectly as a result of other motion.}
+}
+
+\newglossaryentry{axis configuration}
+{
+  type=mtc,
+  category=model,
+  name={Axis},
+  kind={configuration},
+  description={\gls{axis configuration} defines the axis along or around which the \gls{component} moves relative to a coordinate system.}
+}
+
+\newglossaryentry{unitvector3d}
+{
+  type=mtc,
+  category=model,
+  name={UNIT\_VECTOR\_3D},
+  description={A 3D Unit Vector. \newline Space delimited list of three floating point numbers.},
+  kind={units}
+}
+
+\newglossaryentry{revolute motion}
+{
+  type=mtc,
+  category=model,
+  name={REVOLUTE},
+  kind={motion},
+  description={Rotates around an axis with a fixed range of motion.}
+}
+
+\newglossaryentry{continuous motion}
+{
+  type=mtc,
+  category=model,
+  name={CONTINUOUS},
+  kind={motion},
+  description={Revolves around an axis with a continuous range of motion.}
+}
+
+\newglossaryentry{prismatic motion}
+{
+  type=mtc,
+  category=model,
+  name={PRISMATIC},
+  kind={motion},
+  description={Sliding linear motion along an axis with a fixed range of motion.}
+}
+
+\newglossaryentry{fixed motion}
+{
+  type=mtc,
+  category=model,
+  name={FIXED},
+  kind={motion},
+  description={The axis does not move.}
+}
+
+\newglossaryentry{direct actuation}
+{
+  type=mtc,
+  category=model,
+  name={DIRECT},
+  kind={actuation},
+  description={The movement is initiated by the \gls{component}.}
+}
+
+\newglossaryentry{virtual actuation}
+{
+  type=mtc,
+  category=model,
+  name={VIRTUAL},
+  kind={actuation},
+  description={The motion is computed and is used for expressing an imaginary movement.}
+}
+
+\newglossaryentry{solidmodel configuration}
+{
+  type=mtc,
+  category=model,
+  name={SolidModel},
+  kind={configuration},
+  description={A \gls{solidmodel configuration} is a \gls{configuration} that references a file with the three-dimensional geometry of the \gls{component} or \gls{composition}.}
+}
+
+\newglossaryentry{modelidref}
+{
+  type=mtc,
+  category=model,
+  name={modelIdRef},
+  kind={attribute},
+  description={The associated model file if an item reference is used.}
+}
+
+\newglossaryentry{itemref}
+{
+  type=mtc,
+  category=model,
+  name={itemRef},
+  kind={attribute},
+  description={The reference to the item within the model within the related geometry. A \gls{modelidref} \MUST be given.}
+}
+
+\newglossaryentry{mediatype}
+{
+  type=mtc,
+  category=model,
+  name={mediaType},
+  kind={attribute},
+  description={The format of the referenced document.}
+}
+
+\newglossaryentry{scale}
+{
+  type=mtc,
+  category=model,
+  name={Scale},
+  description={The \gls{solidmodel configuration} \gls{scale} is either a single multiplier applied to all three dimensions or a three space multiplier given in the X, Y, and Z dimensions in the corrdinate system used for the \gls{solidmodel configuration}.}
+}
+
+\newglossaryentry{structure}
+{
+  type=mtc,
+  category=model,
+  name={Structure},
+  kind={component},
+  description={\gls{structure} is a \gls{component} that \glspl{organize} the parts comprising the rigid bodies of the piece of equipment.}
+}
+
+
+\newglossaryentry{link}
+{
+  type=mtc,
+  category=model,
+  name={Link},
+  kind={structure,component},
+  description={\gls{link} is a structural \gls{component} providing a connection between \gls{component}s.}
+}
+
+
+\newglossaryentry{step mediatype}
+{
+  type=mtc,
+  category=model,
+  name={STEP},
+  kind={mediatype},
+  description={ISO 10303 STEP AP203 or AP242 format.}
+}
+
+\newglossaryentry{stl mediatype}
+{
+  type=mtc,
+  category=model,
+  name={STL},
+  kind={mediatype},
+  description={Stereolithography file format.}
+}
+
+\newglossaryentry{gdml mediatype}
+{
+  type=mtc,
+  category=model,
+  name={GDML},
+  kind={mediatype},
+  description={Geometry Description Markup Language.}
+}
+
+\newglossaryentry{obj mediatype}
+{
+  type=mtc,
+  category=model,
+  name={OBJ},
+  kind={mediatype},
+  description={Wavefront OBJ file format.}
+}
+
+\newglossaryentry{collada mediatype}
+{
+  type=mtc,
+  category=model,
+  name={COLLADA},
+  kind={mediatype},
+  description={ISO 17506.}
+}
+
+\newglossaryentry{iges mediatype}
+{
+  type=mtc,
+  category=model,
+  name={IGES},
+  kind={mediatype},
+  description={Initial Graphics Exchange Specification.}
+}
+
+\newglossaryentry{dxf mediatype}
+{
+  type=mtc,
+  category=model,
+  name={DXF},
+  kind={mediatype},
+  description={Drawing eXchange Format. Autodesk data interchange format.}
+}
+
+\newglossaryentry{3ds mediatype}
+{
+  type=mtc,
+  category=model,
+  name={3DS},
+  kind={mediatype},
+  description={Autodesk file format.}
+}
+
+\newglossaryentry{dwg mediatype}
+{
+  type=mtc,
+  category=model,
+  name={DWG},
+  kind={mediatype},
+  description={Autodesk file format.}
+}
+
+\newglossaryentry{acis mediatype}
+{
+  type=mtc,
+  category=model,
+  name={ACIS},
+  kind={mediatype},
+  description={Dassault file format.}
+}
+
+\newglossaryentry{pxt mediatype}
+{
+  type=mtc,
+  category=model,
+  name={PXT},
+  kind={mediatype},
+  description={Parasolid XT Siemens data interchange format.}
+}
+
+\newglossaryentry{abstractfile}
+{
+  type=mtc,
+  category=model,
+  name={AbstractFile},
+  kind={asset,abstract},
+  description={Abstract model that all file types inherit from.}
+}
+
+\newglossaryentry{applicationcategory}
+{
+  type=mtc,
+  category=model,
+  name={applicationCategory},
+  kind={attribute},
+  description={The category of application that will use this file.}
+}
+
+\newglossaryentry{applicationtype}
+{
+  type=mtc,
+  category=model,
+  name={applicationType},
+  kind={attribute},
+  description={The type of application that will use this file.}
+}
+
+\newglossaryentry{assembly type}
+{
+  type=mtc,
+  category=model,
+  name={ASSEMBLY},
+  kind={applicationcategory},
+  description={Files regarding the fully assembled product.}
+}
+
+\newglossaryentry{device type}
+{
+  type=mtc,
+  category=model,
+  name={DEVICE},
+  kind={applicationcategory},
+  description={Device related files.}
+}
+
+\newglossaryentry{handling type}
+{
+  type=mtc,
+  category=model,
+  name={HANDLING},
+  kind={applicationcategory},
+  description={Files relating to the handling of material.}
+}
+
+\newglossaryentry{part type}
+{
+  type=mtc,
+  category=model,
+  name={PART},
+  kind={applicationcategory},
+  description={Files relating to a part.}
+}
+
+\newglossaryentry{inspection type}
+{
+  type=mtc,
+  category=model,
+  name={INSPECTION},
+  kind={applicationcategory},
+  description={Files related to the quality inspection.}
+}
+
+\newglossaryentry{design type}
+{
+  type=mtc,
+  category=model,
+  name={DESIGN},
+  kind={applicationtype},
+  description={Computer aided design files or drawings.}
+}
+
+\newglossaryentry{data type}
+{
+  type=mtc,
+  category=model,
+  name={DATA},
+  kind={applicationtype},
+  description={Generic data.}
+}
+
+\newglossaryentry{documentation type}
+{
+  type=mtc,
+  category=model,
+  name={DOCUMENTATION},
+  kind={applicationtype},
+  description={Documentation regarding a category of file.}
+}
+
+\newglossaryentry{instructions type}
+{
+  type=mtc,
+  category=model,
+  name={INSTRUCTIONS},
+  kind={applicationtype},
+  description={User instructions regarding the execution of a task.}
+}
+
+\newglossaryentry{log type}
+{
+  type=mtc,
+  category=model,
+  name={LOG},
+  kind={applicationtype},
+  description={The data related to the history of a machine or process.}
+}
+
+\newglossaryentry{productionprogram type}
+{
+  type=mtc,
+  category=model,
+  name={PRODUCTION\_PROGRAM},
+  kind={applicationtype},
+  description={Machine instructions to perform a process.}
+}
+
+\newglossaryentry{filearchetype}
+{
+  type=mtc,
+  category=model,
+  name={FileArchetype},
+  kind={asset},
+  description={\gls{filearchetype} \gls{asset mtconnectassets} is an \gls{abstractfile} providing information common to all versions of a file.}
+}
+
+\newglossaryentry{file}
+{
+  type=mtc,
+  category=model,
+  name={File},
+  kind={asset},
+  description={The \gls{file} \gls{asset mtconnectassets} is an \gls{abstractfile} with information about the \gls{file} instance and its \gls{url}.}
+}
+
+\newglossaryentry{size}
+{
+  type=mtc,
+  category=model,
+  name={size},
+  kind={attribute},
+  description={The size of the file in bytes.}
+}
+
+\newglossaryentry{versionid}
+{
+  type=mtc,
+  category=model,
+  name={versionId},
+  kind={attribute},
+  description={The version identifier of the file.}
+}
+
+\newglossaryentry{state}
+{
+  type=mtc,
+  category=model,
+  name={state},
+  kind={attribute},
+  description={The state of the file.}
+}
+
+\newglossaryentry{signature}
+{
+  type=mtc,
+  category=model,
+  name={Signature},
+  kind={attribute},
+  description={A secure hash of the file.}
+}
+
+\newglossaryentry{publickey}
+{
+  type=mtc,
+  category=model,
+  name={PublicKey},
+  kind={attribute},
+  description={The public key used to verify the signature.}
+}
+
+\newglossaryentry{creationtime element}
+{
+  type=mtc,
+  category=model,
+  name={CreationTime},
+  kind={attribute},
+  description={The time the file was created.}
+}
+
+\newglossaryentry{modificationtime}
+{
+  type=mtc,
+  category=model,
+  name={ModificationTime},
+  kind={attribute},
+  description={The time the file was modified.}
+}
+
+\newglossaryentry{experimental value}
+{
+  type=mtc,
+  category=model,
+  name={EXPERIMENTAL},
+  kind={enum},
+  description={Used for processes other than production or otherwise defined.}
+}
+
+
+\newglossaryentry{revision value}
+{
+  type=mtc,
+  category=model,
+  name={REVISION},
+  kind={enum},
+  description={The content is modified from \cfont{PRODUCTION} or \cfont{EXPERIMENTAL}.}
+}
+
+\newglossaryentry{fileproperty}
+{
+  type=mtc,
+  category=model,
+  name={FileProperty},
+  description={A key-value pair providing additional metadata about a \cfont{File}.}
+}
+
+\newglossaryentry{filelocation}
+{
+  type=mtc,
+  category=model,
+  name={FileLocation},
+  description={The \gls{url} reference to the file location.}
+}
+
+\newglossaryentry{filecomment}
+{
+  type=mtc,
+  category=model,
+  name={FileComment},
+  description={A remark or interpretation for human interpretation associated with a\gls{file} or \gls{filearchetype}.}
+}
+
+\newglossaryentry{destination}
+{
+  type=mtc,
+  category=model,
+  name={Destination},
+  description={The \gls{destination} is a reference to the target \gls{device} for this \gls{file}.}
+}
+
+\newglossaryentry{fileproperties}
+{
+  type=mtc,
+  category=model,
+  name={FileProperties},
+  description={\cfont{FileProperties} \glspl{organize} one or more \cfont{FileProperty} entities for \cfont{File}s.}
+}
+
+\newglossaryentry{filecomments}
+{
+  type=mtc,
+  category=model,
+  name={FileComments},
+  description={\cfont{FileComments} \glspl{organize} one or more \cfont{FileComment} entities for \cfont{File}s.}
+}
+
+\newglossaryentry{destinations}
+{
+  type=mtc,
+  category=model,
+  name={Destinations},
+  description={\cfont{Destinations} \glspl{organize} one or more \cfont{Destination} elements.}
+}
+
+\newglossaryentry{controllimits specification}
+{
+  type=mtc,
+  category=model,
+  name={ControlLimits},
+  description={\glsdesc{control limits term}}
+}
+
+\newglossaryentry{specificationlimits specification}
+{
+  type=mtc,
+  category=model,
+  name={SpecificationLimits},
+  description={\glsdesc{specification limits term}}
+}
+
+\newglossaryentry{alarmlimits specification}
+{
+  type=mtc,
+  category=model,
+  name={AlarmLimits},
+  description={\glsdesc{alarm limits term}}
 }

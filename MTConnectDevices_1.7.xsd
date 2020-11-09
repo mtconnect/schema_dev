@@ -31,7 +31,7 @@ WHETHER UNDER CONTRACT, TORT, WARRANTY OR OTHERWISE, ARISING IN ANY WAY OUT OF
 THIS AGREEMENT, USE OR INABILITY TO USE MTCONNECT MATERIALS, WHETHER OR NOT
 SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
 -->
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectDevices:1.6' xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.6' targetNamespace='urn:mtconnect.org:MTConnectDevices:1.6' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' vc:minVersion='1.1' xmlns:xlink='http://www.w3.org/1999/xlink'>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='urn:mtconnect.org:MTConnectDevices:1.7' xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.7' targetNamespace='urn:mtconnect.org:MTConnectDevices:1.7' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' vc:minVersion='1.1' xmlns:xlink='http://www.w3.org/1999/xlink'>
   <xs:import namespace='http://www.w3.org/1999/xlink' schemaLocation='xlink.xsd'/>
   <xs:element name='MTConnectDevices' type='MTConnectDevicesType'>
     <xs:annotation>
@@ -464,8 +464,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='LINEAR_FORCE'>
         <xs:annotation>
           <xs:documentation>
-            The measurement of the push or pull introduced by an actuator or
-            exerted on an object.
+            A force applied to a mass in one direction only.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1673,6 +1672,192 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='RATE_OF_PRESSURIZATION'>
+        <xs:annotation>
+          <xs:documentation>
+            The change of pressure per unit time.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SENSOR_ATTACHMENT'>
+        <xs:annotation>
+          <xs:documentation>
+            A sensorattachment event is an event defining an attachment between
+            a sensor and an entity.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DEVICE_ADDED'>
+        <xs:annotation>
+          <xs:documentation>
+            deviceadded event is an event that provides the uuid term of new
+            device added to an mtconnect agent.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DEVICE_REMOVED'>
+        <xs:annotation>
+          <xs:documentation>
+            deviceremoved event is an event that provides the uuid term of a
+            device removed from an mtconnect agent.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DEVICE_CHANGED'>
+        <xs:annotation>
+          <xs:documentation>
+            devicechanged event is an event that provides the uuid term of the
+            device whose metadata has changed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CONNECTION_STATUS'>
+        <xs:annotation>
+          <xs:documentation>
+            The status of the connection between an adapter and an agent.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ADAPTER_SOFTWARE_VERSION'>
+        <xs:annotation>
+          <xs:documentation>
+            The originator&apos;s software version of the adapter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ADAPTER_URI'>
+        <xs:annotation>
+          <xs:documentation>
+            The uri of the adapter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='OBSERVATION_UPDATE_RATE'>
+        <xs:annotation>
+          <xs:documentation>
+            The average rate of change of values for data items in the MTConnect
+            streams. The average is computed over a rolling window defined by
+            the implementation.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ASSET_UPDATE_RATE'>
+        <xs:annotation>
+          <xs:documentation>
+            The average rate of change of values for assets in the MTConnect
+            streams. The average is computed over a rolling window defined by
+            the implementation.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='MTCONNECT_VERSION'>
+        <xs:annotation>
+          <xs:documentation>
+            The reference version of the MTConnect Standard supported by the
+            adapter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='DECELERATION'>
+        <xs:annotation>
+          <xs:documentation>
+            Negative rate of change of velocity.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ANGULAR_DECELERATION'>
+        <xs:annotation>
+          <xs:documentation>
+            Negative rate of change of angular velocity.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='CONTROL_LIMIT'>
+        <xs:annotation>
+          <xs:documentation>
+            control limits term
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SPECIFICATION_LIMIT'>
+        <xs:annotation>
+          <xs:documentation>
+            specification limits term
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ALARM_LIMIT'>
+        <xs:annotation>
+          <xs:documentation>
+            alarm limits term
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_UNIQUE_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier given to a distinguishable, individual part. If no
+            subtype is specified, uuid subtype is default.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_KIND_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier given to link the individual occurrence to a class of
+            parts, typically distinguished by a particular part design. If no
+            subtype is specified, uuid subtype is default.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_GROUP_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier given to a collection of individual parts. If no subtype
+            is specified, uuid subtype is default.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_STATE'>
+        <xs:annotation>
+          <xs:documentation>
+            The condition of the part or process occurrence.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_KIND_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier given to link the individual occurrence to a class of
+            processes or process definition.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_AGGREGATE_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier given to link the individual occurrence to a group of
+            related occurrences, such as a process step in a process plan.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_OCCURRENCE_ID'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier of a process being executed by the device.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_STATUS'>
+        <xs:annotation>
+          <xs:documentation>
+            State or condition of a part. If unique identifier is given, part
+            status is for that individual. If group identifier is given without
+            a unique identifier, then the status is assumed to be for the whole
+            group.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value='VARIABLE'>
         <xs:annotation>
           <xs:documentation>
@@ -2205,13 +2390,6 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value='COMPLETE'>
-        <xs:annotation>
-          <xs:documentation>
-            Completion of an action.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value='CONSUMED'>
         <xs:annotation>
           <xs:documentation>
@@ -2360,6 +2538,120 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Identifies whether the connection type is wireless. 
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='GAUGE'>
+        <xs:annotation>
+          <xs:documentation>
+            Gauge pressure is the pressure measured relative to the atmospheric
+            pressure.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='UUID'>
+        <xs:annotation>
+          <xs:documentation>
+            The globally unique identifier as specified in ISO 11578 or RFC
+            4122.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='SERIAL_NUMBER'>
+        <xs:annotation>
+          <xs:documentation>
+            A serial number that uniquely identifies a specific part.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='RAW_MATERIAL'>
+        <xs:annotation>
+          <xs:documentation>
+            The unique identifier for a singular piece of material that is used
+            to make a single part.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_NUMBER'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier of a particular part design or model.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_FAMILY'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier given to a group of parts having similarities in
+            geometry, manufacturing process, and/or functions.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PART_NAME'>
+        <xs:annotation>
+          <xs:documentation>
+            A word or set of words by which a part is known, addressed, or
+            referred to.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='LOT'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier that references a group of parts tracked as a lot.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='BATCH'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier that references a group of parts produced in a batch.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='HEAT_TREAT'>
+        <xs:annotation>
+          <xs:documentation>
+            An identifier used to reference a material heat number.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_NAME'>
+        <xs:annotation>
+          <xs:documentation>
+            A word or set of words by which a process being executed (process
+            occurrence) by the device is known, addressed, or referred to.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ISO_STEP_EXECUTABLE'>
+        <xs:annotation>
+          <xs:documentation>
+            A reference to a ISO 10303 Executable.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_STEP'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier of the step in the process plan that this occurrence
+            corresponds to. Synonyms include &quot;operation id&quot;.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PROCESS_PLAN'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier of the process plan that this occurrence belongs to.
+            Synonyms include &quot;routing id&quot;, &quot;job id&quot;.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ORDER_NUMBER'>
+        <xs:annotation>
+          <xs:documentation>
+            Identifier of the authorization of the process occurrence. Synonyms
+            include &quot;job id&quot;, &quot;work order&quot;.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2729,6 +3021,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='PASCAL/SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Pascal per second.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='COUNT/SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Count per second.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='UNIT_VECTOR_3D'>
+        <xs:annotation>
+          <xs:documentation>
+            A 3D Unit Vector. Space delimited list of three floating point
+            numbers.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='UnitsType'>
@@ -2996,6 +3310,28 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Gram per cubic meter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='PASCAL/SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Pascal per second.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='COUNT/SECOND'>
+        <xs:annotation>
+          <xs:documentation>
+            Count per second.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='UNIT_VECTOR_3D'>
+        <xs:annotation>
+          <xs:documentation>
+            A 3D Unit Vector. Space delimited list of three floating point
+            numbers.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3380,8 +3716,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='deviceModelChangeTime' type='DeviceModelChangeTimeType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          A timestamp in 8601 format of the last update of the Device
-          information for any device
+          A timestamp in 8601 format of the last update of the device
+          information for any device.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -3737,9 +4073,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='mtconnectVersion' type='VersionType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The MTConnect version of the Devices Information Model used to
+              The MTConnect version of the device information model used to
               configure the information to be published for a piece of equipment
-              in an MTConnect Response Document
+              in an mtconnect response document.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -3757,8 +4093,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AgentType'>
     <xs:annotation>
       <xs:documentation>
-        The Agent Device is a Device representing the MTConnect Agent and all
-        its connected data sources.
+        agent device is a device representing the mtconnect agent and all its
+        connected data sources.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3768,8 +4104,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Agent' type='AgentType' substitutionGroup='Device'>
     <xs:annotation>
       <xs:documentation>
-        The Agent Device is a Device representing the MTConnect Agent and all
-        its connected data sources.
+        agent device is a device representing the mtconnect agent and all its
+        connected data sources.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4291,9 +4627,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='PneumaticType'>
     <xs:annotation>
       <xs:documentation>
-        pneumatic is an XML container that represents the information for a
-        system comprised of all the parts involved in moving and distributing
-        pressurized gas throughout the piece of equipment.
+        pneumatic is a system that uses compressed gasses to actuate components
+        or do work within the piece of equipment.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -4303,9 +4638,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='Pneumatic' type='PneumaticType' substitutionGroup='Systems'>
     <xs:annotation>
       <xs:documentation>
-        pneumatic is an XML container that represents the information for a
-        system comprised of all the parts involved in moving and distributing
-        pressurized gas throughout the piece of equipment.
+        pneumatic is a system that uses compressed gasses to actuate components
+        or do work within the piece of equipment.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4525,6 +4859,293 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:complexType name='ProcessType'>
+    <xs:annotation>
+      <xs:documentation>
+        process organize information describing the manufacturing process being
+        executed on a piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Process' type='ProcessType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+        process organize information describing the manufacturing process being
+        executed on a piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='HeatingType'>
+    <xs:annotation>
+      <xs:documentation>
+        heating is a system used to deliver controlled amounts of heat to
+        achieve a target temperature at a specified heating rate.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemsType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Heating' type='HeatingType' substitutionGroup='Systems'>
+    <xs:annotation>
+      <xs:documentation>
+        heating is a system used to deliver controlled amounts of heat to
+        achieve a target temperature at a specified heating rate.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='CoolingType'>
+    <xs:annotation>
+      <xs:documentation>
+        Cooling is a system used to to extract controlled amounts of heat to
+        achieve a target temperature at a specified cooling rate.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemsType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Cooling' type='CoolingType' substitutionGroup='Systems'>
+    <xs:annotation>
+      <xs:documentation>
+        Cooling is a system used to to extract controlled amounts of heat to
+        achieve a target temperature at a specified cooling rate.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='VacuumType'>
+    <xs:annotation>
+      <xs:documentation>
+        vacuum is a system that evacuates gases and liquids from an enclosed and
+        sealed space to a controlled negative pressure or a molecular density
+        below the prevailing atmospheric level.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemsType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Vacuum' type='VacuumType' substitutionGroup='Systems'>
+    <xs:annotation>
+      <xs:documentation>
+        vacuum is a system that evacuates gases and liquids from an enclosed and
+        sealed space to a controlled negative pressure or a molecular density
+        below the prevailing atmospheric level.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PressureType'>
+    <xs:annotation>
+      <xs:documentation>
+        pressure is a system that delivers compressed gas or fluid and controls
+        the pressure and rate of pressure change to a desired target set-point.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='SystemsType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Pressure' type='PressureType' substitutionGroup='Systems'>
+    <xs:annotation>
+      <xs:documentation>
+        pressure is a system that delivers compressed gas or fluid and controls
+        the pressure and rate of pressure change to a desired target set-point.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AdapterType'>
+    <xs:annotation>
+      <xs:documentation>
+        adapter component is a component representing the connectivity state of
+        a data source for the mtconnect agent. It MAY contain additional
+        telemetry about the data source and source-specific information.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Adapter' type='AdapterType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+        adapter component is a component representing the connectivity state of
+        a data source for the mtconnect agent. It MAY contain additional
+        telemetry about the data source and source-specific information.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='AutomaticToolChangerType'>
+    <xs:annotation>
+      <xs:documentation>
+        The automatic tool changer associated with a tool.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='AutomaticToolChanger' type='AutomaticToolChangerType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+        The automatic tool changer associated with a tool.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ToolMagazineType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool magazine associated with a tool.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ToolMagazine' type='ToolMagazineType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool magazine associated with a tool.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='TurretType'>
+    <xs:annotation>
+      <xs:documentation>
+        The turret associated with a tool.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Turret' type='TurretType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+        The turret associated with a tool.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='GangToolBarType'>
+    <xs:annotation>
+      <xs:documentation>
+        A tool mounting mechanism that holds any number of tools. Tools are
+        located in station compositions. Tools are positioned for use in the
+        manufacturing process by linearly positioning the gangtoolbar component.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='GangToolBar' type='GangToolBarType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+        A tool mounting mechanism that holds any number of tools. Tools are
+        located in station compositions. Tools are positioned for use in the
+        manufacturing process by linearly positioning the gangtoolbar component.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ToolRackType'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool rack associated with a tool.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ToolRack' type='ToolRackType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+        The tool rack associated with a tool.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='PartOccurrenceType'>
+    <xs:annotation>
+      <xs:documentation>
+        partoccurrence organize information about a specific part as it exists
+        at a specific place and time, such as a specific instance of a bracket
+        at a specific timestamp.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ProcessType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='PartOccurrence' type='PartOccurrenceType' substitutionGroup='Process'>
+    <xs:annotation>
+      <xs:documentation>
+        partoccurrence organize information about a specific part as it exists
+        at a specific place and time, such as a specific instance of a bracket
+        at a specific timestamp.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='ProcessOccurrenceType'>
+    <xs:annotation>
+      <xs:documentation>
+        processoccurrence organize information about the execution of a specific
+        process that takes place at a specific place and time, such as a
+        specific instance of part-milling occurring at a specific timestamp.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='ProcessType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='ProcessOccurrence' type='ProcessOccurrenceType' substitutionGroup='Process'>
+    <xs:annotation>
+      <xs:documentation>
+        processoccurrence organize information about the execution of a specific
+        process that takes place at a specific place and time, such as a
+        specific instance of part-milling occurring at a specific timestamp.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='StructureType'>
+    <xs:annotation>
+      <xs:documentation>
+        structure is a component that organize the parts comprising the rigid
+        bodies of the piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='CommonComponentType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Structure' type='StructureType' substitutionGroup='CommonComponent'>
+    <xs:annotation>
+      <xs:documentation>
+        structure is a component that organize the parts comprising the rigid
+        bodies of the piece of equipment.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name='LinkType'>
+    <xs:annotation>
+      <xs:documentation>
+        link is a structural component providing a connection between
+        components.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base='StructureType'/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name='Link' type='LinkType' substitutionGroup='Structure'>
+    <xs:annotation>
+      <xs:documentation>
+        link is a structural component providing a connection between
+        components.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:complexType name='CompositionsType'>
     <xs:annotation>
       <xs:documentation>
@@ -4536,8 +5157,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Composition' type='CompositionType' minOccurs='1' maxOccurs='unbounded'>
         <xs:annotation>
           <xs:documentation>
-            An XML element used to describe the lowest level structural building
-            blocks contained within a component element.
+            composition is a functional part of a piece of equipment contained
+            within a component that MUSTNOT be further decomposed into
+            components or compositions.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -4885,6 +5507,80 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value='COOLING_TOWER'>
+        <xs:annotation>
+          <xs:documentation>
+            A heat exchange system that uses a fluid to transfer heat to the
+            atmosphere.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='POT'>
+        <xs:annotation>
+          <xs:documentation>
+            A tool storage location associated with a toolmagazine component or
+            automatictoolchanger component.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='STATION'>
+        <xs:annotation>
+          <xs:documentation>
+            A storage or mounting location for a tool associated with a turret
+            component, gangtoolbar component, or toolrack component.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='TRANSFER_ARM'>
+        <xs:annotation>
+          <xs:documentation>
+            A mechanism for physically moving a tool from one location to
+            another.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='TRANSFER_POT'>
+        <xs:annotation>
+          <xs:documentation>
+            A pot composition for a tool awaiting transfer from a toolmagazine
+            component to spindle or turret component.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='RETURN_POT'>
+        <xs:annotation>
+          <xs:documentation>
+            A pot composition for a tool removed from spindle or turret
+            component and awaiting for return to a toolmagazine component.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='STAGING_POT'>
+        <xs:annotation>
+          <xs:documentation>
+            A pot composition for a tool awaiting transfer to a toolmagazine
+            component or turret component from outside of the piece of
+            equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='REMOVAL_POT'>
+        <xs:annotation>
+          <xs:documentation>
+            A pot composition for a tool to be removed from a toolmagazine
+            component or turret component to a location outside of the piece of
+            equipment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='EXPIRED_POT'>
+        <xs:annotation>
+          <xs:documentation>
+            A pot composition for a tool that is no longer useable for removal
+            from a toolmagazine component or turret component.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name='CompositionEnumTypeType'>
@@ -4898,8 +5594,9 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='CompositionType'>
     <xs:annotation>
       <xs:documentation>
-        An XML element used to describe the lowest level structural building
-        blocks contained within a component element.
+        composition is a functional part of a piece of equipment contained
+        within a component that MUSTNOT be further decomposed into components or
+        compositions.
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -5353,7 +6050,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='originator' type='OriginatorEnumType' use='optional' default='MANUFACTURER'>
       <xs:annotation>
         <xs:documentation>
-          A reference to the creator of the Specification
+          A reference to the creator of the specification.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -5627,8 +6324,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='ProcessSpecificationType'>
     <xs:annotation>
       <xs:documentation>
-        ProcessSpecification provides information used to assess the conformance
-        of a variable to process requirements
+        processspecification provides information used to assess the conformance
+        of a variable to process requirements.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -5662,8 +6359,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='ProcessSpecification' type='ProcessSpecificationType' substitutionGroup='AbstractSpecification'>
     <xs:annotation>
       <xs:documentation>
-        ProcessSpecification provides information used to assess the conformance
-        of a variable to process requirements
+        processspecification provides information used to assess the conformance
+        of a variable to process requirements.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -6412,7 +7109,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='actuation' type='ActuationTypeEnumType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The actuation method
+              Describes if this component is actuated directly or indirectly as
+              a result of other motion.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -6468,7 +7166,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='Scale' type='SolidModelScaleType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                Scaling vector for the model
+                The solidmodel configuration scale is either a single multiplier
+                applied to all three dimensions or a three space multiplier
+                given in the X, Y, and Z dimensions in the corrdinate system
+                used for the solidmodel configuration.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -6483,7 +7184,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:attribute name='modelIdRef' type='ModelIdRefType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The associated model file if an item reference is used
+              The associated model file if an item reference is used.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -6509,14 +7210,14 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:annotation>
             <xs:documentation>
               The reference to the item within the model within the related
-              geometry. A modelIdRef MUST be given.
+              geometry. A modelidref MUST be given.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name='mediaType' type='SolidModelMediaTypeType' use='required'>
           <xs:annotation>
             <xs:documentation>
-              The format of the referenced document
+              The format of the referenced document.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
@@ -7336,7 +8037,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='keyType' type='DataItemEnumType' use='optional'>
       <xs:annotation>
         <xs:documentation>
-          The type of measurement
+          The DataItem type that defines the meaning of the key term.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -7415,7 +8116,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='DataItemRelationshipsType'>
     <xs:annotation>
       <xs:documentation>
-        Organizes DataItemRelationship and SpecificationRelationship
+        A Relationship providing a semantic reference to another dataitem
+        described by the type property.
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -7493,7 +8195,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='DataItemRelationshipType'>
     <xs:annotation>
       <xs:documentation>
-        A Relationship providing a semantic reference to another DataItem
+        A Relationship providing a semantic reference to another dataitem
         described by the type property.
       </xs:documentation>
     </xs:annotation>
@@ -7513,7 +8215,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='DataItemRelationship' type='DataItemRelationshipType' substitutionGroup='AbstractDataItemRelationship'>
     <xs:annotation>
       <xs:documentation>
-        A Relationship providing a semantic reference to another DataItem
+        A Relationship providing a semantic reference to another dataitem
         described by the type property.
       </xs:documentation>
     </xs:annotation>
@@ -7537,8 +8239,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='SpecificationRelationshipType'>
     <xs:annotation>
       <xs:documentation>
-        A Relationship providing a semantic reference to a Specification
-        described by the type and &quot;idref&quot; property.
+        A Relationship providing a semantic reference to a specification
+        described by the type and idref property.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -7557,8 +8259,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element name='SpecificationRelationship' type='SpecificationRelationshipType' substitutionGroup='AbstractDataItemRelationship'>
     <xs:annotation>
       <xs:documentation>
-        A Relationship providing a semantic reference to a Specification
-        described by the type and &quot;idref&quot; property.
+        A Relationship providing a semantic reference to a specification
+        described by the type and idref property.
       </xs:documentation>
     </xs:annotation>
   </xs:element>

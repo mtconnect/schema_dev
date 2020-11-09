@@ -1,9 +1,9 @@
 
-self.urn = 'urn:mtconnect.org:MTConnectDevices:1.6'
 self.namespace = 'mt'
 self.top = :MTConnectDevices
 self.license = File.read('license.txt')
 self.version = '1.7'
+self.urn = "urn:mtconnect.org:MTConnectDevices:#{self.version}"
 
 xsimport "xlink", 'http://www.w3.org/1999/xlink', 'xlink.xsd'
 
