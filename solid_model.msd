@@ -1,11 +1,11 @@
 package :SolidModel, 'Solid model eternal reference' do
 
-  attr :ModelIdRef, 'A reference to another model', :IDREF
+  attr :SolidModelIdRef, 'A reference to another model', :IDREF
   attr :ItemRef, 'A reference to an item in a model'
   
   type :SolidModel, 'A SolidModel is a Configuration that references a file with the three-dimensional geometry of the component or composition. The geometry MAY have a transformation and a scale to position the component with respect to the other components. A geometry file can contain a set of assembled items, in this case, the SolidModel reference the id of the assembly model file and the specific item within that file.', :AbstractConfiguration do
     member :Id, 'the unique identifier for this entity within the MTConnectDevices document', :ID
-    member :ModelIdRef, 'The associated model file if an item reference is used', 0..1
+    member :SolidModelIdRef, 'The associated model file if an item reference is used', 0..1
     attribute :'href', 'Reference to the file', 0..1, :'xlink:href'
     attribute(:'xlink:type', 'Type of href', 0..1, :'xlink:type') { self.fixed = 'locator' }
     member :ItemRef, 'The reference to the item within the model within the related geometry. A modelIdRef MUST be given.', 0..1

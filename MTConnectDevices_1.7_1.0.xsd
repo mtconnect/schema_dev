@@ -7117,7 +7117,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name='ModelIdRefType'>
+  <xs:simpleType name='SolidModelIdRefType'>
     <xs:annotation>
       <xs:documentation>
         A reference to another model
@@ -7174,10 +7174,10 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name='modelIdRef' type='ModelIdRefType' use='optional'>
+        <xs:attribute name='solidModelIdRef' type='SolidModelIdRefType' use='optional'>
           <xs:annotation>
             <xs:documentation>
-              The associated model file if an item reference is used.
+              The associated model file if an item reference is used
             </xs:documentation>
           </xs:annotation>
         </xs:attribute>
