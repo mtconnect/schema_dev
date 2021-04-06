@@ -2018,7 +2018,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MAIN'>
         <xs:annotation>
           <xs:documentation>
-            The identity of the primary logic or motion program currently being
+            Relating to the primary logic or motion program currently being
             executed.
           </xs:documentation>
         </xs:annotation>
@@ -2484,6 +2484,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Associated with the completion of an activity or event.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ACTIVE'>
+        <xs:annotation>
+          <xs:documentation>
+            Relating to logic or motion program currently executing.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>

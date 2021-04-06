@@ -2018,7 +2018,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MAIN'>
         <xs:annotation>
           <xs:documentation>
-            The identity of the primary logic or motion program currently being
+            Relating to the primary logic or motion program currently being
             executed.
           </xs:documentation>
         </xs:annotation>
@@ -2484,6 +2484,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Associated with the completion of an activity or event.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ACTIVE'>
+        <xs:annotation>
+          <xs:documentation>
+            Relating to logic or motion program currently executing.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3942,7 +3949,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='component' type='NameType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          a part of a device or other component.
+          A {{term(Structural Element)}} that represents a physical or logical
+          part or subpart of a piece of equipment.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
