@@ -2019,7 +2019,7 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:enumeration value='MAIN'>
         <xs:annotation>
           <xs:documentation>
-            The identity of the primary logic or motion program currently being
+            Relating to the primary logic or motion program currently being
             executed.
           </xs:documentation>
         </xs:annotation>
@@ -2485,6 +2485,13 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
         <xs:annotation>
           <xs:documentation>
             Associated with the completion of an activity or event.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value='ACTIVE'>
+        <xs:annotation>
+          <xs:documentation>
+            Relating to logic or motion program currently executing.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -3824,18 +3831,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:complexType name='AssetType' abstract='true'>
     <xs:annotation>
       <xs:documentation>
-        item, thing or entity that has potential or actual value to an
-        organization (3.1.13) * Note 1 to entry: Value can be tangible or
-        intangible, financial or non-financial, and includes consideration of
-        risks (3.1.21) and liabilities. It can be positive or negative at
-        different stages of the asset life (3.2.2). * Note 2 to entry: Physical
+        Item, thing or entity that has potential or actual value to an
+        organization. {{cite(ISO 55000:2014)}} * Note 1 to entry: Value can be
+        tangible or intangible, financial or non-financial, and includes
+        consideration of risks and liabilities. It can be positive or negative
+        at different stages of the asset life. * Note 2 to entry: Physical
         assets usually refer to equipment, inventory and properties owned by the
         organization. Physical assets are the opposite of intangible assets,
         which are non-physical assets such as leases, brands, digital assets,
         use rights, licences, intellectual property rights, reputation or
         agreements. * Note 3 to entry: A grouping of assets referred to as an
-        asset system (3.2.5) could also be considered as an asset. [ISO
-        55000:2014]
+        asset system could also be considered as an asset. 
       </xs:documentation>
     </xs:annotation>
     <xs:attribute name='assetId' type='AssetIdType' use='required'>
@@ -3872,18 +3878,17 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
   <xs:element abstract='true' name='Asset' type='AssetType'>
     <xs:annotation>
       <xs:documentation>
-        item, thing or entity that has potential or actual value to an
-        organization (3.1.13) * Note 1 to entry: Value can be tangible or
-        intangible, financial or non-financial, and includes consideration of
-        risks (3.1.21) and liabilities. It can be positive or negative at
-        different stages of the asset life (3.2.2). * Note 2 to entry: Physical
+        Item, thing or entity that has potential or actual value to an
+        organization. {{cite(ISO 55000:2014)}} * Note 1 to entry: Value can be
+        tangible or intangible, financial or non-financial, and includes
+        consideration of risks and liabilities. It can be positive or negative
+        at different stages of the asset life. * Note 2 to entry: Physical
         assets usually refer to equipment, inventory and properties owned by the
         organization. Physical assets are the opposite of intangible assets,
         which are non-physical assets such as leases, brands, digital assets,
         use rights, licences, intellectual property rights, reputation or
         agreements. * Note 3 to entry: A grouping of assets referred to as an
-        asset system (3.2.5) could also be considered as an asset. [ISO
-        55000:2014]
+        asset system could also be considered as an asset. 
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -4564,7 +4569,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Description' type='DataItemDescriptionType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            descriptive information about a component.
+            The {{block(Description)}} of the {{block(Definition)}}. See
+            {{block(Component)}} {{block(Description)}}.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -4650,7 +4656,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Description' type='DataItemDescriptionType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            descriptive information about a component.
+            The {{block(Description)}} of the {{block(Definition)}}. See
+            {{block(Component)}} {{block(Description)}}.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -4692,7 +4699,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Description' type='DataItemDescriptionType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            descriptive information about a component.
+            The {{block(Description)}} of the {{block(Definition)}}. See
+            {{block(Component)}} {{block(Description)}}.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -4984,7 +4992,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
     <xs:attribute name='component' type='NameType' use='required'>
       <xs:annotation>
         <xs:documentation>
-          a part of a device or other component.
+          A {{term(Structural Element)}} that represents a physical or logical
+          part or subpart of a piece of equipment.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -12035,7 +12044,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                descriptive information about a component.
+                The {{block(Description)}} of the {{block(Definition)}}. See
+                {{block(Component)}} {{block(Description)}}.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -12122,7 +12132,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
           <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
             <xs:annotation>
               <xs:documentation>
-                descriptive information about a component.
+                The {{block(Description)}} of the {{block(Definition)}}. See
+                {{block(Component)}} {{block(Description)}}.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -13377,7 +13388,8 @@ SUCH PARTY HAD ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
       <xs:element name='Description' type='AssetDescriptionType' minOccurs='0' maxOccurs='1'>
         <xs:annotation>
           <xs:documentation>
-            descriptive information about a component.
+            The {{block(Description)}} of the {{block(Definition)}}. See
+            {{block(Component)}} {{block(Description)}}.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
